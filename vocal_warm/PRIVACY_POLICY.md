@@ -1,6 +1,8 @@
+# Privacy Policy for VocalWarm
+
 **Last Updated: April 15, 2026**
 
-**Hosted at:** https://charach.github.io/legal-docs/vocal_warm/PRIVACY_POLICY.html
+[한국어](PRIVACY_POLICY_ko) | [日本語](PRIVACY_POLICY_ja) | [中文](PRIVACY_POLICY_zh)
 
 VocalWarm ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.
 
@@ -22,7 +24,7 @@ When cloud backup is enabled (default ON), the following practice records are st
 - **Vocal Range Results**: tested date, lowest/highest detected notes, octave range, note count, and detected vocal type (e.g., soprano/tenor).
 - **Note Accuracies**: per-note accuracy percentages from each vocal range test.
 
-These records are used to restore your history when you reinstall the app or change devices. No raw audio is included. You can disable cloud backup at any time via **Settings → 클라우드 백업**.
+These records are used to restore your history when you reinstall the app or change devices. No raw audio is included. You can disable cloud backup at any time via **Settings > Cloud Backup**.
 
 ### D. Usage Data
 We use Firebase Analytics to collect anonymous technical information, such as:
@@ -44,11 +46,11 @@ We do **not** sell or share your personal data with third parties for marketing 
 - **Google Firebase Analytics**: For anonymous app usage metrics.
 
 ## 4. Your Rights
-You can delete your account and all associated data (Firebase Auth identity, Firestore-stored practice records, and local device records) at any time through **Settings → 계정 및 데이터 삭제**. You may also withdraw microphone permission at any time via your device settings.
+You can delete your account and all associated data (Firebase Auth identity, Firestore-stored practice records, and local device records) at any time through **Settings > Delete Account & Data**. You may also withdraw microphone permission at any time via your device settings.
 
 ## 5. Data Retention
 Practice records stored via cloud backup are retained until you delete your account or disable cloud backup and delete them locally. When you delete your account, all records under your user ID in Firestore are removed via a client-side cascading delete, and your Firebase Authentication user is deleted.
 
 ## 6. Contact Us
 If you have any questions about this Privacy Policy, please contact us at:
-**support@vocalwarm.app** *(placeholder — replace with your actual support email before Play Store submission)*
+**support@vocalwarm.app**
