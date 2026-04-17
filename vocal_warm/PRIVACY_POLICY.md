@@ -1,8 +1,6 @@
-# Privacy Policy for VocalWarm
-
 **Last Updated: April 15, 2026**
 
-**Hosted at:** https://<your-github-username>.github.io/vocalwarm-privacy/ *(placeholder — replace with your actual GitHub Pages URL before Play Store submission)*
+**Hosted at:** https://charach.github.io/legal-docs/vocal_warm/PRIVACY_POLICY.html
 
 VocalWarm ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.
 
