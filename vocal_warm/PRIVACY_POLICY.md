@@ -53,4 +53,4 @@ Practice records stored via cloud backup are retained until you delete your acco
 
 ## 6. Contact Us
 If you have any questions about this Privacy Policy, please contact us at:
-**support@vocalwarm.app**
+**official@ttomstudio.com**

@@ -53,4 +53,4 @@ VocalWarm（以下简称"我们"）致力于保护您的隐私。本隐私政策
 
 ## 6. 联系我们
 如果您对本隐私政策有任何疑问，请通过以下方式联系我们：
-**support@vocalwarm.app**
+**official@ttomstudio.com**
