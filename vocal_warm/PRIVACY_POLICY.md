@@ -4,7 +4,7 @@
 
 [한국어](PRIVACY_POLICY_ko) | [日本語](PRIVACY_POLICY_ja) | [中文](PRIVACY_POLICY_zh)
 
-VocalWarm ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.
+VocalWarm is operated by **TtomStudio** ("we," "our," or "us") and is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.
 
 ## 1. Information We Collect
 

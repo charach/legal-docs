@@ -4,7 +4,7 @@
 
 [English](PRIVACY_POLICY) | [한국어](PRIVACY_POLICY_ko) | [日本語](PRIVACY_POLICY_ja)
 
-VocalWarm（以下简称"我们"）致力于保护您的隐私。本隐私政策说明了当您使用我们的移动应用程序时，我们如何收集、使用和保护您的信息。
+VocalWarm由**TtomStudio**（以下简称"我们"）运营，致力于保护您的隐私。本隐私政策说明了当您使用我们的移动应用程序时，我们如何收集、使用和保护您的信息。
 
 ## 1. 我们收集的信息
 
