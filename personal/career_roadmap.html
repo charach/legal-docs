@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>커리어 전환 로드맵 · 삼성전자 → AI Product Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --paper-2: #efeadf;
+    --card: #fbf9f4;
+    --ink: #23201b;
+    --ink-soft: #56514899;
+    --muted: #7a7365;
+    --line: #ddd6c7;
+    --line-strong: #c8bfab;
+    --accent: #9c3b2e;      /* terracotta */
+    --accent-soft: #b8674f;
+    --gold: #b08421;
+    --green: #4d6b3f;
+    --serif: "Noto Serif KR", "Newsreader", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.72;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(156,59,46,0.03), transparent 45%),
+      radial-gradient(circle at 100% 100%, rgba(176,132,33,0.035), transparent 40%);
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px 140px; }
+
+  /* ---- Masthead ---- */
+  header.masthead { padding: 72px 0 30px; text-align: center; }
+  .kicker {
+    font-family: var(--sans);
+    font-size: 11.5px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 22px;
+  }
+  header.masthead h1 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(30px, 6vw, 46px); line-height: 1.18;
+    margin: 0 0 20px; letter-spacing: -0.5px;
+  }
+  header.masthead h1 em { font-style: normal; color: var(--accent); }
+  .rule-ornament {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    color: var(--line-strong); margin: 26px 0;
+  }
+  .rule-ornament::before, .rule-ornament::after {
+    content: ""; height: 1px; width: 90px; background: var(--line-strong);
+  }
+  .rule-ornament span { font-size: 13px; color: var(--accent); }
+  .lede {
+    font-family: var(--serif); font-weight: 500;
+    font-size: 17px; line-height: 1.75; color: #443f36;
+    max-width: 620px; margin: 0 auto 14px;
+  }
+  .thesis {
+    display: inline-block; font-family: var(--sans); font-size: 13.5px;
+    color: var(--muted); border-top: 1px solid var(--line);
+    padding-top: 14px; margin-top: 6px;
+  }
+  .thesis b { color: var(--ink); font-weight: 700; }
+
+  /* ---- Sticky progress ---- */
+  .statusbar {
+    position: sticky; top: 0; z-index: 30;
+    background: rgba(246,243,236,0.86); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    padding: 11px 0; margin: 24px 0 8px;
+  }
+  .statusbar .inner {
+    max-width: 820px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .status-label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .status-label b { color: var(--accent); font-size: 15px; font-family: var(--serif); }
+  .track { flex: 1; height: 3px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .track > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .4s ease; }
+  .count { font-size: 12px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .reset {
+    background: none; border: none; color: var(--muted); cursor: pointer;
+    font-size: 11.5px; font-family: var(--sans); text-decoration: underline;
+    text-underline-offset: 3px; text-decoration-color: var(--line-strong);
+  }
+  .reset:hover { color: var(--accent); }
+
+  /* ---- Table of contents ---- */
+  nav.toc {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px;
+    margin: 20px 0 10px; font-size: 12.5px;
+  }
+  nav.toc a {
+    color: var(--muted); text-decoration: none; letter-spacing: 0.02em;
+    border-bottom: 1px solid transparent; padding-bottom: 2px;
+  }
+  nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ---- Phase ---- */
+  section.phase { margin-top: 60px; }
+  .phase-head { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; }
+  .phase-num {
+    font-family: var(--serif); font-weight: 700; font-size: 52px; line-height: 0.9;
+    color: var(--paper); -webkit-text-stroke: 1.4px var(--accent-soft);
+    letter-spacing: -2px; padding-top: 2px;
+  }
+  .phase-title h2 { font-family: var(--serif); font-weight: 700; font-size: 24px; margin: 0 0 3px; letter-spacing: -0.3px; }
+  .phase-title .when { font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .phase-title .desc { font-size: 14px; color: var(--muted); margin-top: 12px; max-width: 620px; }
+  .phase-title .desc b { color: var(--ink); }
+  .phase-rule { height: 2px; background: var(--ink); margin: 20px 0 8px; }
+
+  h3.block-title {
+    font-family: var(--sans); font-weight: 700; font-size: 12.5px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    margin: 30px 0 12px; display: flex; align-items: center; gap: 8px;
+  }
+  h3.block-title .star { color: var(--gold); -webkit-text-stroke: 0; }
+  h3.block-title.hot { color: var(--accent); }
+
+  /* ---- Checklist ---- */
+  ul.checklist { list-style: none; padding: 0; margin: 0; }
+  ul.checklist li {
+    display: grid; grid-template-columns: 26px 1fr; gap: 4px;
+    padding: 11px 0; border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  ul.checklist li:first-child { border-top: 1px solid var(--line); }
+  ul.checklist input[type=checkbox] {
+    appearance: none; -webkit-appearance: none;
+    width: 17px; height: 17px; margin: 4px 0 0; cursor: pointer;
+    border: 1.5px solid var(--line-strong); border-radius: 3px;
+    background: var(--card); position: relative; transition: .15s;
+  }
+  ul.checklist input[type=checkbox]:hover { border-color: var(--accent); }
+  ul.checklist input[type=checkbox]:checked { background: var(--accent); border-color: var(--accent); }
+  ul.checklist input[type=checkbox]:checked::after {
+    content: ""; position: absolute; left: 5px; top: 1.5px;
+    width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0;
+    transform: rotate(43deg);
+  }
+  ul.checklist label { cursor: pointer; }
+  ul.checklist label b { font-weight: 700; }
+  ul.checklist li.checked label { color: var(--ink-soft); }
+  ul.checklist li.checked label b { color: var(--ink-soft); }
+  ul.checklist li.checked label > .lead { text-decoration: line-through; text-decoration-color: var(--line-strong); }
+  .pass { display: block; font-size: 12.5px; color: var(--green); margin-top: 3px; }
+  .note { display: block; font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+  .tag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em;
+    padding: 1px 7px; border-radius: 3px; vertical-align: middle; margin-right: 6px;
+  }
+  .tag.rec { background: rgba(77,107,63,0.14); color: var(--green); }
+  .tag.ver { background: rgba(156,59,46,0.1); color: var(--accent); font-family: var(--serif); }
+
+  /* ---- Callout ---- */
+  .callout {
+    font-family: var(--serif); font-size: 14.5px; line-height: 1.7; color: #4a463c;
+    border-left: 3px solid var(--gold); padding: 4px 0 4px 18px; margin: 18px 0;
+  }
+  .callout b { color: var(--accent); font-weight: 600; }
+
+  /* ---- Tables ---- */
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 4px; font-size: 13.5px; }
+  th, td { text-align: left; padding: 9px 10px; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th { border-bottom: 2px solid var(--ink); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  tbody tr:hover { background: var(--paper-2); }
+  td .verdict { color: var(--green); font-weight: 500; }
+  td .warn { color: var(--accent); }
+  .stars { color: var(--gold); letter-spacing: 1px; white-space: nowrap; }
+
+  /* ---- Timeline ---- */
+  .timeline {
+    font-family: "Newsreader", ui-monospace, monospace; font-size: 13px; line-height: 1.9;
+    color: #4a463c; background: var(--card); border: 1px solid var(--line);
+    border-radius: 4px; padding: 22px 24px; overflow-x: auto; white-space: pre; margin-top: 8px;
+  }
+
+  footer {
+    text-align: center; margin-top: 72px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 12px; color: var(--muted); font-family: var(--serif); font-style: italic;
+  }
+
+  /* ---- Principle list ---- */
+  ul.principle { list-style: none; padding: 0; margin: 14px 0 4px; }
+  ul.principle li {
+    position: relative; padding: 6px 0 6px 22px; font-size: 14px; color: #443f36;
+    border-bottom: 1px solid var(--line);
+  }
+  ul.principle li:last-child { border-bottom: none; }
+  ul.principle li::before {
+    content: "—"; position: absolute; left: 0; color: var(--accent); font-weight: 700;
+  }
+  ul.principle b { font-weight: 700; color: var(--ink); }
+
+  /* ---- Company profiles ---- */
+  .tier-label {
+    font-family: var(--serif); font-weight: 600; font-size: 16px; color: var(--accent);
+    margin: 34px 0 6px; padding-bottom: 6px; border-bottom: 1.5px solid var(--line-strong);
+  }
+  .tier-label small { font-family: var(--sans); font-size: 12px; color: var(--muted); font-weight: 400; letter-spacing: 0.04em; }
+  article.company {
+    background: var(--card); border: 1px solid var(--line); border-radius: 5px;
+    padding: 18px 22px; margin: 14px 0;
+  }
+  .co-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+  .co-rank { font-family: var(--serif); font-size: 22px; color: var(--accent); font-weight: 700; }
+  .co-name { font-family: var(--serif); font-size: 19px; font-weight: 700; margin: 0; }
+  .co-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: var(--gold); }
+  dl.co-body { margin: 6px 0 0; display: grid; grid-template-columns: 120px 1fr; gap: 0; }
+  dl.co-body dt {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent-soft); padding: 9px 12px 9px 0; border-top: 1px solid var(--line);
+  }
+  dl.co-body dd {
+    margin: 0; font-size: 13.5px; color: #443f36; padding: 9px 0; border-top: 1px solid var(--line);
+    line-height: 1.65;
+  }
+  dl.co-body dd ul { margin: 0; padding-left: 16px; }
+  dl.co-body dd li { margin: 2px 0; }
+  dl.co-body dt.risk { color: #a8563f; }
+
+  @media (max-width: 560px) {
+    .phase-head { grid-template-columns: 1fr; gap: 4px; }
+    .phase-num { font-size: 40px; }
+    .statusbar .inner { gap: 10px; }
+    .status-label { font-size: 11px; }
+    dl.co-body { grid-template-columns: 1fr; }
+    dl.co-body dt { padding-bottom: 0; border-top: 1px solid var(--line); }
+    dl.co-body dd { border-top: none; padding-top: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="kicker">Career Transition · 2026 – 2027</div>
+    <h1>삼성전자에서<br><em>AI Product Engineer</em>로</h1>
+    <div class="rule-ornament"><span>❧</span></div>
+    <p class="lede">백엔드·인프라 기반 위에 LLM 시스템(RAG·에이전트·평가)을 설계부터 운영까지 끝낼 수 있는 엔지니어가 된다.</p>
+    <span class="thesis">이직 기준은 연차가 아니라 <b>"오퍼가 삼성 처우를 방어할 수 있을 때"</b></span>
+  </header>
+</div>
+
+<div class="statusbar">
+  <div class="inner">
+    <span class="status-label">진행 <b id="pct">0%</b></span>
+    <div class="track"><i id="fill"></i></div>
+    <span class="count" id="count">0 / 0</span>
+    <button class="reset" onclick="resetAll()">초기화</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <nav class="toc">
+    <a href="#p1">Ⅰ 모델 기초</a>
+    <a href="#p2">Ⅱ 딥 프로젝트</a>
+    <a href="#p3">Ⅲ 시장 진입</a>
+    <a href="#p4">Ⅳ 실전 지원</a>
+    <a href="#timeline">타임라인</a>
+    <a href="#companies">타겟 회사</a>
+    <a href="#reminder">리마인더</a>
+  </nav>
+
+  <!-- PHASE 1 -->
+  <section class="phase" id="p1">
+    <div class="phase-head">
+      <div class="phase-num">Ⅰ</div>
+      <div class="phase-title">
+        <div class="when">2026.08 – 2026.10 · 12주</div>
+        <h2>모델 레이어 기초</h2>
+        <p class="desc">"모델을 모른다"는 갭을 해소하고, 트랜스포머·학습 원리를 밑바닥부터 설명할 수 있는 상태를 만든다. 동시에 <b>"외부 강제 없이 꾸준히 하는 사람인가"</b>를 데이터로 검증한다.</p>
+      </div>
+    </div>
+    <div class="phase-rule"></div>
+
+    <h3 class="block-title">주간 시간 설계 · 주 5–6시간</h3>
+    <table>
+      <thead><tr><th>요일</th><th>시간</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td>토요일 오전</td><td>3h (고정 09–12시)</td><td>메인 학습 블록 — 강의 시청 + 코드 구현</td></tr>
+        <tr><td>평일 2회</td><td>각 1–1.5h</td><td>복습·재구현 (영상 안 보고 같은 코드 다시 짜기)</td></tr>
+      </tbody>
+    </table>
+    <p class="callout">토요일 블록은 <b>장소를 집 밖으로</b> — 카페·스터디카페. 평일이 무너져도 토요일만 지키면 실험은 유효하다. 토요일이 3주 연속 무너지면 그게 신호다.</p>
+
+    <h3 class="block-title">커리큘럼 · Karpathy "Zero to Hero" — 통과 기준을 체크</h3>
+    <ul class="checklist" data-group="p1-curriculum">
+      <li><input type="checkbox" id="c1"><label><span class="lead"><b>1–2주 · micrograd</b> — 역전파를 손으로 구현</span><span class="pass">통과 — 영상 없이 micrograd를 처음부터 재구현 가능</span></label></li>
+      <li><input type="checkbox" id="c2"><label><span class="lead"><b>3–5주 · makemore (1–3편)</b> — bigram → MLP 언어모델</span><span class="pass">통과 — loss가 왜 내려가는지, 하이퍼파라미터 역할을 말로 설명</span></label></li>
+      <li><input type="checkbox" id="c3"><label><span class="lead"><b>6–7주 · makemore (4–5편)</b> — BatchNorm, 수동 backprop</span><span class="pass">통과 — 활성화·그래디언트 분포를 보고 문제 진단 가능</span></label></li>
+      <li><input type="checkbox" id="c4"><label><span class="lead"><b>8–10주 · Let's build GPT</b> — 트랜스포머·어텐션 구현</span><span class="pass">통과 — attention 수식을 코드 없이 화이트보드에 그림</span></label></li>
+      <li><input type="checkbox" id="c5"><label><span class="lead"><b>11–12주 · Tokenizer</b> — BPE 토크나이저 구현</span><span class="pass">통과 — 한국어 토크나이징이 왜 어려운지 설명 가능</span></label></li>
+      <li><input type="checkbox" id="c6"><label><span class="lead">워밍업(선택) — 3Blue1Brown 신경망 시리즈 4편 (~1시간)</span></label></li>
+    </ul>
+    <p class="callout"><b>진도보다 통과 기준.</b> 1강에 3주 걸려도 무방하다. 목적은 완주가 아니라 "설명 가능한 상태".</p>
+
+    <h3 class="block-title">강제장치 실험 · 12주 후 판정</h3>
+    <ul class="checklist" data-group="p1-forcing">
+      <li><input type="checkbox" id="c7"><label><span class="lead">매주 일요일 저녁, 배운 것을 GitHub repo·블로그에 공개 기록 (3줄이라도)</span></label></li>
+    </ul>
+    <table>
+      <thead><tr><th>결과</th><th>판정</th></tr></thead>
+      <tbody>
+        <tr><td class="verdict">10주 이상 성공</td><td>혼자 가능. 대학원 불필요 확정 → Phase 2 진행</td></tr>
+        <tr><td>6–9주</td><td>절반 성공. Phase 2를 유료 스터디·커뮤니티와 병행</td></tr>
+        <tr><td class="warn">5주 이하</td><td>외부 강제 필요. 특수대학원·부트캠프 재검토 (LLM 실습 비중 큰 곳만)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="block-title">Phase 1 산출물</h3>
+    <ul class="checklist" data-group="p1-output">
+      <li><input type="checkbox" id="c8"><label><span class="lead">micrograd · makemore · nanoGPT 직접 구현 repo (본인 커밋 히스토리)</span></label></li>
+      <li><input type="checkbox" id="c9"><label><span class="lead">주간 학습 로그 10개 이상</span></label></li>
+      <li><input type="checkbox" id="c10"><label><span class="lead">"트랜스포머를 화이트보드로 설명하는 셀프 영상" 1개 (인터뷰 리허설의 씨앗)</span></label></li>
+    </ul>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="phase" id="p2">
+    <div class="phase-head">
+      <div class="phase-num">Ⅱ</div>
+      <div class="phase-title">
+        <div class="when">2026.11 – 2027.02 · 16주</div>
+        <h2>딥 프로젝트 하나</h2>
+        <p class="desc">프로젝트는 <b>딱 하나</b>. 프레임워크(LangChain·LlamaIndex) 없이 직접 구현한다. 각 컴포넌트를 화이트보드로 설명할 수 있을 때까지 다음으로 넘어가지 않는다.</p>
+      </div>
+    </div>
+    <div class="phase-rule"></div>
+
+    <h3 class="block-title">원칙</h3>
+    <ul class="principle">
+      <li>프로젝트는 <b>딱 하나</b>. 여러 개 벌리지 않는다.</li>
+      <li>Claude Code 등 AI 도구 사용 OK. 단 <b>철칙</b> — 각 컴포넌트를 화이트보드에 그려 남에게 설명할 수 있을 때까지 다음 컴포넌트로 넘어가지 않는다. AI가 짠 코드에서 비효율·오류를 최소 1개씩 직접 찾아 수정하고 커밋 메시지에 기록한다.</li>
+      <li>프레임워크(LangChain·LlamaIndex) <b>없이</b> 직접 구현. 이유 — 인터뷰에서 "LangChain 썼어요"는 0점, "리트리버를 직접 짜면서 X 때문에 Y로 설계했어요"는 만점.</li>
+    </ul>
+
+    <h3 class="block-title">프로젝트 주제 · 하나 선택</h3>
+    <ul class="checklist" data-group="p2-topic">
+      <li><input type="checkbox" id="c11"><label><span class="lead"><span class="tag rec">추천</span><b>한국어 사내규정·법령 QA 서비스</b> — 공개 법령 데이터 활용. B2B 스타트업(업스테이지 등) 지원 시 도메인이 정확히 겹침</span></label></li>
+      <li><input type="checkbox" id="c12"><label><span class="lead"><b>개인 지식베이스 에이전트</b> — 본인 노트·문서 기반. 데이터 준비가 쉬움, 대신 평가 설계가 어려움</span></label></li>
+      <li><input type="checkbox" id="c13"><label><span class="lead"><b>기술문서 검색+요약 서비스</b> — 오픈소스 docs 대상. 개발자 커뮤니티에 공개하면 실사용자 확보 가능</span></label></li>
+    </ul>
+
+    <h3 class="block-title">구현할 컴포넌트 · 전체 스택</h3>
+    <ul class="checklist" data-group="p2-components">
+      <li><input type="checkbox" id="c14"><label><span class="lead"><b>문서 파이프라인</b> — 파싱(PDF/HTML), 청킹 전략 (고정길이 vs 의미 단위 둘 다 구현·비교)</span></label></li>
+      <li><input type="checkbox" id="c15"><label><span class="lead"><b>임베딩</b> — 한국어 임베딩 모델 2–3개 비교, 선택 근거 문서화</span></label></li>
+      <li><input type="checkbox" id="c16"><label><span class="lead"><b>벡터 저장소</b> — pgvector 사용 + 인메모리 버전 직접 구현</span></label></li>
+      <li><input type="checkbox" id="c17"><label><span class="lead"><b>리트리버</b> — BM25 + Dense 하이브리드 직접 구현, 가중치 실험</span></label></li>
+      <li><input type="checkbox" id="c18"><label><span class="lead"><b>리랭커</b> — cross-encoder 리랭킹 전/후 성능 비교</span></label></li>
+      <li><input type="checkbox" id="c19"><label><span class="lead"><b>생성부</b> — 프롬프트 버전 관리, 컨텍스트 윈도우 관리, 근거 인용(citation)</span></label></li>
+      <li><input type="checkbox" id="c20"><label><span class="lead"><span class="tag ver">가장 중요</span><b>평가 파이프라인</b> — golden QA셋 50–100개 구축, faithfulness·relevance 메트릭, 컴포넌트 교체마다 점수 추적</span></label></li>
+      <li><input type="checkbox" id="c21"><label><span class="lead"><b>서빙</b> — FastAPI + 스트리밍 응답</span></label></li>
+      <li><input type="checkbox" id="c22"><label><span class="lead"><b>배포</b> — K8s (CKA/CKAD 실전 투입) + 모니터링(레이턴시·토큰 비용)</span></label></li>
+    </ul>
+
+    <h3 class="block-title">월별 마일스톤</h3>
+    <ul class="checklist" data-group="p2-milestone">
+      <li><input type="checkbox" id="c23"><label><span class="lead"><b>2026.11 · v0.1</b> — 데이터 파이프라인 + 임베딩 + 벡터저장. 검색만 됨</span></label></li>
+      <li><input type="checkbox" id="c24"><label><span class="lead"><b>2026.12 · v0.5</b> — 하이브리드 리트리버 + 생성부. E2E 답변</span></label></li>
+      <li><input type="checkbox" id="c25"><label><span class="lead"><b>2027.01 · v0.8</b> — 평가 파이프라인 + 리랭커. 개선을 숫자로 증명</span></label></li>
+      <li><input type="checkbox" id="c26"><label><span class="lead"><b>2027.02 · v1.0</b> — K8s 배포 + 모니터링 + README·아키텍처 문서. 공개</span></label></li>
+    </ul>
+
+    <h3 class="block-title">병행 항목 & 산출물</h3>
+    <ul class="checklist" data-group="p2-output">
+      <li><input type="checkbox" id="c27"><label><span class="lead">Kaggle LLM/RAG 대회 1개 참가 (12–1월) — 마감 강제성 + 상위 솔루션 3개 분석</span></label></li>
+      <li><input type="checkbox" id="c28"><label><span class="lead">회사 안에서 이력서용 숫자 수집 시작 (레이턴시·트래픽·설계 결정)</span></label></li>
+      <li><input type="checkbox" id="c29"><label><span class="lead">배포되어 실제 접속 가능한 서비스 1개</span></label></li>
+      <li><input type="checkbox" id="c30"><label><span class="lead">GitHub repo — 아키텍처 다이어그램 + "왜 이 설계인가" README</span></label></li>
+      <li><input type="checkbox" id="c31"><label><span class="lead">기술 블로그 3편 — ①청킹·임베딩 ②하이브리드 검색 ③평가 파이프라인</span></label></li>
+      <li><input type="checkbox" id="c32"><label><span class="lead">컴포넌트별 개선 전/후 평가 점수 표 (이력서에 그대로 들어갈 숫자)</span></label></li>
+    </ul>
+  </section>
+
+  <!-- PHASE 3 -->
+  <section class="phase" id="p3">
+    <div class="phase-head">
+      <div class="phase-num">Ⅲ</div>
+      <div class="phase-title">
+        <div class="when">2027.03 – 2027.06 · 16주</div>
+        <h2>시장 진입 준비</h2>
+        <p class="desc">이력서·코딩테스트·시스템 디자인·리퍼럴을 병렬로 굴린다. 서류 통과율의 1순위는 리퍼럴이다.</p>
+      </div>
+    </div>
+    <div class="phase-rule"></div>
+
+    <h3 class="block-title">3-1 · 경력기술서 재작성 (3월)</h3>
+    <ul class="checklist" data-group="p3-resume">
+      <li><input type="checkbox" id="c33"><label><span class="lead">"내가 결정한 것" 중심 재작성 — ❌"AX팀에서 AI 서비스 개발" → ✅"LLM 기반 X 기능의 서빙 백엔드 설계, p95 레이턴시 Ns 달성, 일 요청 N만 건 처리, 스트리밍 응답·폴백 로직 직접 설계"</span><span class="note">원칙 — 팀이 한 일이 아니라 <b style="color:var(--ink)">내가 결정한 것</b> 중심. 모델은 다른 팀이 만들었어도 "그 모델을 서비스로 만드는 과정의 설계 결정"은 나의 것.</span></label></li>
+      <li><input type="checkbox" id="c34"><label><span class="lead">영문 이력서 + LinkedIn 프로필 정비 (Tier 2·해외 옵션 대비)</span></label></li>
+    </ul>
+
+    <h3 class="block-title">3-2 · 코딩테스트 (3–6월, 주 4–5문제)</h3>
+    <ul class="checklist" data-group="p3-coding">
+      <li><input type="checkbox" id="c35"><label><span class="lead">프로그래머스 Lv2–3 + LeetCode Medium, 총 60–80문제</span></label></li>
+      <li><input type="checkbox" id="c36"><label><span class="lead">유형 — 구현·문자열, 그래프·BFS/DFS, 힙·우선순위큐, DP 기본</span><span class="note">8년차에게 코테는 통과만 하면 되는 관문 — 감각 회복이 목적</span></label></li>
+    </ul>
+
+    <h3 class="block-title hot">3-3 · 시스템 디자인 인터뷰 (4–6월) <span class="star">✦</span> 승부 라운드</h3>
+    <ul class="checklist" data-group="p3-sysdesign">
+      <li><input type="checkbox" id="c37"><label><span class="lead">일반 시스템 디자인 정리 (System Design Interview vol.1–2)</span></label></li>
+      <li><input type="checkbox" id="c38"><label><span class="lead">AI — "RAG 검색 서비스 설계" (Phase 2가 그대로 답안)</span></label></li>
+      <li><input type="checkbox" id="c39"><label><span class="lead">AI — "LLM 서빙 비용·레이턴시 최적화" (캐싱·배칭·라우팅)</span></label></li>
+      <li><input type="checkbox" id="c40"><label><span class="lead">AI — "AI 기능 품질 측정·개선" (eval 설계)</span></label></li>
+      <li><input type="checkbox" id="c41"><label><span class="lead">각 유형별 화이트보드 답안 만들어 소리 내어 연습 (셀프 영상 촬영)</span></label></li>
+    </ul>
+
+    <h3 class="block-title hot">3-4 · 리퍼럴 네트워크 (3월부터 상시) <span class="star">✦</span> 서류 통과율 1순위</h3>
+    <ul class="checklist" data-group="p3-referral">
+      <li><input type="checkbox" id="c42"><label><span class="lead">타겟 — 업스테이지·뤼튼·라이너·토스·당근 재직자 각 1명 이상</span></label></li>
+      <li><input type="checkbox" id="c43"><label><span class="lead">경로 ① LinkedIn 콜드 메시지 (짧게: 공통점 + 구체 질문 1개 + 커피챗 제안)</span></label></li>
+      <li><input type="checkbox" id="c44"><label><span class="lead">경로 ② 커뮤니티 오프라인 행사 — AI 밋업·컨퍼런스 (if(kakao), DEVIEW, 각사 테크 밋업)</span></label></li>
+      <li><input type="checkbox" id="c56"><label><span class="lead">경로 ③ 가짜연구소·모두의연구소 스터디 참여</span></label></li>
+      <li><input type="checkbox" id="c57"><label><span class="lead">목표 — 커피챗 5회 이상. 이직 얘기 먼저 꺼내지 말 것, 팀 분위기·기술스택 질문 중심</span><span class="note">리퍼럴은 관계에서 자연히 나온다.</span></label></li>
+    </ul>
+
+    <h3 class="block-title">3-5 · JD 역산 (상시)</h3>
+    <ul class="checklist" data-group="p3-jd">
+      <li><input type="checkbox" id="c45"><label><span class="lead">원티드·LinkedIn 타겟 JD 월 1회 수집 → 요구 키워드 표 정리 → 없는 키워드 발견 시 Phase 2에 소규모 보강</span><span class="note">부수 효과 — "석사 요구가 실제로 얼마나 있는지" 데이터로 확인되어 학위 불안이 정리된다.</span></label></li>
+    </ul>
+  </section>
+
+  <!-- PHASE 4 -->
+  <section class="phase" id="p4">
+    <div class="phase-head">
+      <div class="phase-num">Ⅳ</div>
+      <div class="phase-title">
+        <div class="when">2027.07 –</div>
+        <h2>실전 지원</h2>
+        <p class="desc">Tier 3로 감각을 회복한 뒤 Tier 1 본명 회사로 간다. 오퍼는 겹치게 조율한다.</p>
+      </div>
+    </div>
+    <div class="phase-rule"></div>
+
+    <h3 class="block-title">지원 순서 & 협상 전략</h3>
+    <ul class="checklist" data-group="p4-apply">
+      <li><input type="checkbox" id="c46"><label><span class="lead"><b>1차 (7–8월)</b> Tier 3 + 관심도 낮은 회사 2–3곳 — 인터뷰 감각 회복용</span></label></li>
+      <li><input type="checkbox" id="c47"><label><span class="lead"><b>2차 (9–10월)</b> Tier 1 본명 회사 — 1차 피드백·오퍼 들고 지원</span></label></li>
+      <li><input type="checkbox" id="c48"><label><span class="lead">오퍼 겹치기 — 프로세스 타임라인을 맞춰 오퍼가 비슷한 시기에 나오게 조율 (최종면접 일정을 회사에 요청해 조정 가능)</span></label></li>
+      <li><input type="checkbox" id="c49"><label><span class="lead">기준선 — 현재 삼성 총보상(기본급+성과급+복지 환산) 정확히 계산해두기</span></label></li>
+      <li><input type="checkbox" id="c50"><label><span class="lead">스타트업 오퍼 평가 — 현금 기준 삼성 대비 −10% 이내면 협상 여지, 스톡옵션은 0원으로 가정 (행사 가능성·세금 고려하면 보수적으로 보는 게 맞음)</span></label></li>
+      <li><input type="checkbox" id="c58"><label><span class="lead">Tier 3(토스·당근)는 삼성 이상 현금 오퍼가 실제로 가능한 곳 — 베이스라인 오퍼로 활용</span></label></li>
+      <li><input type="checkbox" id="c51"><label><span class="lead">첫 오퍼에 바로 수락하지 않기 ("검토 시간 1주"는 어느 회사든 표준)</span></label></li>
+      <li><input type="checkbox" id="c59"><label><span class="lead">퇴사는 오퍼레터(처우 명시 서면) 수령 후에만 + 삼성 성과급 지급 시기(연초 OPI 등) 확인 후 퇴사일 조율</span></label></li>
+    </ul>
+    <p class="callout">이직 실패 시 — 2027년에 처우를 못 맞추면 무리 말고 2028 상반기로 연기. Phase 2를 v2로 업그레이드하며 재도전. <b>"나쁜 오퍼로 탈출"이 최악의 수.</b></p>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="phase" id="timeline">
+    <div class="phase-head">
+      <div class="phase-num" style="-webkit-text-stroke-color: var(--gold);">◷</div>
+      <div class="phase-title"><h2>전체 타임라인</h2></div>
+    </div>
+    <div class="phase-rule"></div>
+    <div class="timeline">2026.08 ─┬─ Phase Ⅰ  Zero to Hero + 강제장치 실험 (12주)
+2026.10 ─┤     └ 판정: 혼자 가능? → 대학원 여부 최종 결정
+2026.11 ─┬─ Phase Ⅱ  RAG 딥 프로젝트 (16주) + Kaggle 1회
+2027.02 ─┤     └ v1.0 배포 + 블로그 3편
+2027.03 ─┬─ Phase Ⅲ  이력서·코테·시스템디자인·커피챗 (16주)
+2027.06 ─┤
+2027.07 ─┬─ Phase Ⅳ  Tier 3 워밍업 → Tier 1 본지원
+2027.4Q ─┴─ 오퍼 협상 & 이직 (미달 시 2028 상반기 연기)</div>
+  </section>
+
+  <!-- COMPANIES -->
+  <section class="phase" id="companies">
+    <div class="phase-head">
+      <div class="phase-num" style="-webkit-text-stroke-color: var(--gold);">★</div>
+      <div class="phase-title">
+        <h2>타겟 회사 & 준비 매핑</h2>
+        <p class="desc">채용 상황·처우·조직은 계속 바뀐다. 지원 시점(2027)에 각사 채용 페이지·JD·최근 뉴스로 반드시 재확인.</p>
+      </div>
+    </div>
+    <div class="phase-rule"></div>
+
+    <!-- Tier 1 -->
+    <div class="tier-label">Tier 1 — 국내 AI 네이티브 <small>본명 타겟</small></div>
+
+    <article class="company">
+      <div class="co-head"><span class="co-rank">①</span><h3 class="co-name">업스테이지 (Upstage)</h3><span class="co-badge">★ 최우선 추천</span></div>
+      <dl class="co-body">
+        <dt>무엇을 하나</dt><dd>자체 LLM '솔라(Solar)' 개발 + Document AI(OCR·파싱). 금융·법률·제조 등 B2B 특화 AI 솔루션. 2025년 약 1,000억 원 시리즈B, 미국 시장 진출 추진.</dd>
+        <dt>왜 나에게 맞나</dt><dd><ul><li>"해외로 나아가는 회사" + "모델 가까이에서 일하기" 조건을 동시에 충족하는 국내 거의 유일한 곳</li><li>B2B 엔터프라이즈 딜리버리 → 삼성에서의 대규모·엔터프라이즈 경험이 그대로 신뢰 자산</li><li>Document AI ↔ Samsung Notes·필기인식 경험이 도메인적으로 연결됨 (문서 이해라는 공통점)</li></ul></dd>
+        <dt>예상 포지션</dt><dd>AI Engineer (LLM Application), Backend Engineer (AI Platform), Solution Engineer</dd>
+        <dt>인터뷰 질문</dt><dd>RAG 파이프라인 설계 경험, 한국어 문서 처리 노하우, 고객사 요구를 기술로 푸는 사고방식, LLM 평가 방법론</dd>
+        <dt>준비 포인트</dt><dd>Phase 2 주제를 "한국어 법령·규정 QA"로 하면 도메인이 정확히 겹침. 솔라 모델을 프로젝트에서 실제로 써보고 사용기를 블로그로 남기면 강력한 신호.</dd>
+        <dt class="risk">리스크·체크</dt><dd>B2B 특성상 고객사 프로젝트(SI성 업무) 비중이 팀마다 다름 → 커피챗에서 "제품 조직 vs 딜리버리 조직" 구분을 반드시 확인.</dd>
+      </dl>
+    </article>
+
+    <article class="company">
+      <div class="co-head"><span class="co-rank">②</span><h3 class="co-name">뤼튼테크놀로지스 (Wrtn)</h3></div>
+      <dl class="co-body">
+        <dt>무엇을 하나</dt><dd>MAU 600만+ 국내 최대 B2C AI 서비스 + 기업용 AX 솔루션. 일본 등 해외 확장 중.</dd>
+        <dt>왜 나에게 맞나</dt><dd><ul><li>대규모 트래픽 B2C — 1.4억 사용자 Samsung Notes 경험이 직결되는 유일한 Tier 1</li><li>성장 속도가 빠른 조직 → "열정적인 팀" 조건에 가장 부합하는 문화로 알려짐</li></ul></dd>
+        <dt>예상 포지션</dt><dd>Backend Engineer, AI Service Engineer (모델 위에 서비스를 만드는 포지션 — 단, 여기서는 프롬프트·라우팅·평가 결정권이 엔지니어에게 있음)</dd>
+        <dt>인터뷰 질문</dt><dd>대규모 트래픽 처리, LLM 비용 최적화(B2C는 토큰 비용이 사활 문제), 멀티 모델 라우팅, 속도감 있는 실행 경험</dd>
+        <dt>준비 포인트</dt><dd>Phase 2에서 "토큰 비용 대시보드 + 모델 라우팅(싼 모델·비싼 모델 분기)"을 구현하면 뤼튼 인터뷰에 정확히 꽂힘.</dd>
+        <dt class="risk">리스크·체크</dt><dd>B2C 회사 특성상 시장 변동에 민감. 지원 시점에 최근 투자·실적 뉴스 확인 필수.</dd>
+      </dl>
+    </article>
+
+    <article class="company">
+      <div class="co-head"><span class="co-rank">③</span><h3 class="co-name">라이너 (Liner)</h3></div>
+      <dl class="co-body">
+        <dt>무엇을 하나</dt><dd>AI 검색·리서치 에이전트. 글로벌(특히 미국) 사용자 비중이 높은 것으로 알려진 서비스.</dd>
+        <dt>왜 나에게 맞나</dt><dd><ul><li>제품의 심장이 검색+RAG → Phase 2에서 채우는 갭과 정확히 동일한 기술</li><li>글로벌 매출 중심 → "해외 사업" 조건 충족, 영어 사용 환경</li></ul></dd>
+        <dt>예상 포지션</dt><dd>Search/Ranking Engineer, AI Engineer, Backend Engineer</dd>
+        <dt>인터뷰 질문</dt><dd>검색 품질 개선 방법론(리트리버·리랭커), 랭킹 평가 지표, 대규모 인덱싱</dd>
+        <dt>준비 포인트</dt><dd>Phase 2의 하이브리드 검색 + 리랭커 파트를 가장 깊게 파야 하는 타겟. 검색 평가(nDCG, MRR 개념)를 추가 학습해두면 좋음.</dd>
+        <dt class="risk">리스크·체크</dt><dd>조직 규모가 상대적으로 작아 처우 협상 폭 확인 필요.</dd>
+      </dl>
+    </article>
+
+    <article class="company">
+      <div class="co-head"><span class="co-rank">④</span><h3 class="co-name">프렌들리AI (FriendliAI)</h3></div>
+      <dl class="co-body">
+        <dt>무엇을 하나</dt><dd>LLM 서빙·추론 최적화 인프라 (GPU 효율화, 배칭). 글로벌 B2B.</dd>
+        <dt>왜 나에게 맞나</dt><dd><ul><li><b>시스템 역량(C++, 멀티스레딩, 저지연 DB)이 가장 직접적으로 팔리는 곳.</b> AI 지식보다 시스템 실력이 우위인 회사</li><li>기지국 미들웨어 경험(저지연·고신뢰)이 추론 서빙과 문제 구조가 유사</li></ul></dd>
+        <dt>예상 포지션</dt><dd>Systems Engineer, Inference Engineer, Backend Engineer</dd>
+        <dt>인터뷰 질문</dt><dd>C++·동시성, GPU·메모리 이해, 배칭·캐싱·스케줄링, 저지연 시스템 설계</dd>
+        <dt>준비 포인트</dt><dd>이 회사를 노린다면 Phase 1 이후 vLLM 코드베이스 분석 + 소규모 기여를 추가하는 게 최고의 준비. Kaggle보다 이게 낫다.</dd>
+        <dt class="risk">리스크·체크</dt><dd>서비스 개발보다 인프라 개발 — "프로덕트를 만들고 싶다"는 욕구와 맞는지 자문 필요. 다만 커리어 희소성은 이쪽이 최상.</dd>
+      </dl>
+    </article>
+
+    <article class="company">
+      <div class="co-head"><span class="co-rank">⑤</span><h3 class="co-name">트웰브랩스 (Twelve Labs)</h3><span class="co-badge">Tier 1.5</span></div>
+      <dl class="co-body">
+        <dt>무엇을 하나</dt><dd>영상 이해(Video Understanding) 파운데이션 모델. 시리즈A 약 5,000만 달러, 사실상 미국 지향 회사.</dd>
+        <dt>왜 나에게 맞나</dt><dd>"해외" 조건에 가장 부합. 글로벌 팀, 영어 환경.</dd>
+        <dt>예상 포지션</dt><dd>Backend/Platform Engineer (리서치 포지션은 논문 요구로 진입 불가, 플랫폼 쪽으로)</dd>
+        <dt>준비 포인트</dt><dd>영어 인터뷰 필수. Phase 3의 영문 이력서·영어 시스템 디자인 연습이 전제 조건.</dd>
+        <dt class="risk">리스크·체크</dt><dd>기술 허들과 영어 허들이 모두 높음 → 2027년보다 2028년 타겟이 현실적. Tier 1.5로 분류.</dd>
+      </dl>
+    </article>
+
+    <!-- Tier 2 -->
+    <div class="tier-label">Tier 2 — 글로벌 <small>도전 타겟, 처우 최상</small></div>
+
+    <article class="company">
+      <div class="co-head"><span class="co-rank">⑥</span><h3 class="co-name">몰로코 (Moloco)</h3></div>
+      <dl class="co-body">
+        <dt>무엇을 하나</dt><dd>ML 기반 애드테크, 한국계 미국 유니콘. 실리콘밸리 수준 처우로 유명.</dd>
+        <dt>왜 나에게 맞나</dt><dd>ML 인프라 + 대규모 시스템 — 시스템 역량이 통하는 구조. 한국 오피스 존재.</dd>
+        <dt class="risk">허들</dt><dd>코딩 인터뷰 난이도가 국내 최상위권(LeetCode Hard급), 영어 라운드 포함.</dd>
+        <dt>준비 포인트</dt><dd>여기를 진지하게 노리면 Phase 3 코테 준비를 LeetCode 중심 100문제+로 상향 조정 필요.</dd>
+        <dt>판단</dt><dd>처우는 확실히 삼성 초과. 단 "스타트업스러운 열정" 조건과는 결이 다를 수 있음(이미 큰 회사). 커피챗으로 팀 분위기 확인.</dd>
+      </dl>
+    </article>
+
+    <article class="company">
+      <div class="co-head"><span class="co-rank">⑦</span><h3 class="co-name">센드버드 (Sendbird)</h3></div>
+      <dl class="co-body">
+        <dt>무엇을 하나</dt><dd>채팅·메시징 API, 글로벌 B2B SaaS. 최근 AI 에이전트 방향으로 확장.</dd>
+        <dt>왜 나에게 맞나</dt><dd>SDK 개발 경험(S Pen SDK)이 정확히 겹침 — "개발자를 위한 제품을 만들어본 사람"은 희소함. 글로벌 매출 중심.</dd>
+        <dt>예상 포지션</dt><dd>Backend Engineer, SDK Engineer, AI Feature Engineer</dd>
+        <dt>준비 포인트</dt><dd>S Pen SDK 경험을 "개발자 경험(DX) 설계" 스토리로 재구성해두면 강력.</dd>
+      </dl>
+    </article>
+
+    <!-- Tier 3 -->
+    <div class="tier-label">Tier 3 — 베이스라인 <small>스타트업 문화 + 대기업급 처우</small></div>
+
+    <article class="company">
+      <div class="co-head"><span class="co-rank">⑧</span><h3 class="co-name">토스 (비바리퍼블리카)</h3></div>
+      <dl class="co-body">
+        <dt>왜 베이스라인</dt><dd>국내에서 "스타트업 속도 + 삼성급 이상 현금 보상"이 성립하는 대표적인 곳. AI 조직도 활발히 확장 중.</dd>
+        <dt>예상 포지션</dt><dd>Server Developer, ML Engineer (플랫폼), AI 서비스 개발</dd>
+        <dt>인터뷰 특징</dt><dd>코테 + 기술면접 + 컬처핏 비중이 큼. "왜 토스인가"에 대한 답과 오너십 사례를 구체적으로 준비.</dd>
+        <dt class="risk">체크포인트</dt><dd>업무 강도가 높기로 유명 — "열정적으로 일하고 싶다"는 성향과는 오히려 맞을 수 있으나, 워라밸 기대는 버려야 함.</dd>
+        <dt>활용법</dt><dd>1차 지원 그룹. 여기서 오퍼를 받으면 Tier 1 협상의 강력한 지렛대가 됨.</dd>
+      </dl>
+    </article>
+
+    <article class="company">
+      <div class="co-head"><span class="co-rank">⑨</span><h3 class="co-name">당근 (당근마켓)</h3></div>
+      <dl class="co-body">
+        <dt>왜 베이스라인</dt><dd>검색·추천·신뢰안전 등에 ML을 실제 대규모로 운영. 개발 문화 평판이 좋고 처우도 상위권.</dd>
+        <dt>예상 포지션</dt><dd>Server Engineer, ML Engineer (검색·추천), 플랫폼</dd>
+        <dt>준비 포인트</dt><dd>검색·추천 도메인이므로 라이너 준비(랭킹·리트리버)와 겹침 — 준비 효율이 좋음.</dd>
+        <dt class="risk">체크포인트</dt><dd>AI 네이티브 회사는 아님 — "LLM 중심으로 일하고 싶다"는 욕구가 얼마나 채워질지는 팀에 따라 다름. 지원 전 해당 팀의 기술 블로그 확인.</dd>
+      </dl>
+    </article>
+
+    <h3 class="block-title">회사별 준비 매핑 · 한눈에</h3>
+    <table>
+      <thead><tr><th>회사</th><th>Tier</th><th>결정적 준비물</th><th>난이도</th><th>궁합</th></tr></thead>
+      <tbody>
+        <tr><td>업스테이지</td><td>1</td><td>한국어 문서 QA + 평가 파이프라인</td><td>중상</td><td class="stars">★★★★★</td></tr>
+        <tr><td>뤼튼</td><td>1</td><td>비용 최적화·모델 라우팅 구현</td><td>중</td><td class="stars">★★★★☆</td></tr>
+        <tr><td>라이너</td><td>1</td><td>하이브리드 검색 + 리랭커 깊이</td><td>중상</td><td class="stars">★★★★☆</td></tr>
+        <tr><td>프렌들리AI</td><td>1</td><td>C++·vLLM 분석·기여</td><td>상</td><td class="stars">★★★★☆</td></tr>
+        <tr><td>트웰브랩스</td><td>1.5</td><td>영어 + 플랫폼 역량</td><td>최상</td><td class="stars">★★★☆☆</td></tr>
+        <tr><td>몰로코</td><td>2</td><td>LeetCode 상향 + 영어</td><td>최상</td><td class="stars">★★★☆☆</td></tr>
+        <tr><td>센드버드</td><td>2</td><td>SDK·DX 스토리 재구성</td><td>중상</td><td class="stars">★★★★☆</td></tr>
+        <tr><td>토스</td><td>3</td><td>코테 + 오너십 사례</td><td>중</td><td class="stars">★★★★☆</td></tr>
+        <tr><td>당근</td><td>3</td><td>검색·추천 기본기</td><td>중</td><td class="stars">★★★★☆</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="block-title">지원 포트폴리오 · 2027 권장</h3>
+    <ul class="checklist" data-group="companies-portfolio">
+      <li><input type="checkbox" id="c52"><label><span class="lead"><b>1차 워밍업 (7–8월)</b> 당근 or 중견 스타트업 2곳</span></label></li>
+      <li><input type="checkbox" id="c53"><label><span class="lead"><b>2차 본명 (9–10월)</b> 업스테이지 + 뤼튼 + 라이너 + 토스 (동시 진행, 타임라인 조율)</span></label></li>
+      <li><input type="checkbox" id="c54"><label><span class="lead">옵션 — 프렌들리AI(시스템 트랙), 센드버드</span></label></li>
+      <li><input type="checkbox" id="c55"><label><span class="lead">2028 이월 후보 — 트웰브랩스, 몰로코, 해외 리모트</span></label></li>
+    </ul>
+  </section>
+
+  <!-- REMINDER -->
+  <section class="phase" id="reminder">
+    <div class="phase-head">
+      <div class="phase-num">❦</div>
+      <div class="phase-title"><h2>마지막 리마인더</h2></div>
+    </div>
+    <div class="phase-rule"></div>
+    <p class="callout" style="border-color: var(--accent);">이 계획의 성패 <b>90%는 Phase 1의 주 5–6시간이 실제로 굴러가는가</b>에 달려 있다. 무기력이 습관 문제면 계획 그대로, 번아웃이면 분량을 절반으로 줄이고 기간을 늘려라.</p>
+    <p class="callout">회사 리스트는 2027년 지원 시점에 반드시 최신화. 스타트업은 1년이면 상황이 뒤집힌다.</p>
+    <p class="callout">특수대학원 결정은 2026년 10월 말(Phase 1 판정) 전까지 보류 — 그 전에 등록하지 않는다.</p>
+  </section>
+
+  <footer>진행 상태는 이 브라우저의 쿠키에 저장됩니다 · 로컬 전용, 서버 전송 없음</footer>
+</div>
+
+<script>
+(function () {
+  var COOKIE_KEY = "career_roadmap_v1";
+  var EXPIRE_DAYS = 730;
+
+  function setCookie(value) {
+    var d = new Date();
+    d.setTime(d.getTime() + EXPIRE_DAYS * 864e5);
+    document.cookie = COOKIE_KEY + "=" + encodeURIComponent(value) +
+      ";expires=" + d.toUTCString() + ";path=/;SameSite=Lax";
+  }
+  function getCookie() {
+    var m = document.cookie.match(new RegExp("(?:^|; )" + COOKIE_KEY + "=([^;]*)"));
+    return m ? decodeURIComponent(m[1]) : "";
+  }
+
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('ul.checklist input[type=checkbox]'));
+
+  function save() {
+    var checked = boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.id; });
+    setCookie(checked.join(","));
+  }
+  function updateProgress() {
+    var total = boxes.length;
+    var done = boxes.filter(function (b) { return b.checked; }).length;
+    var pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('fill').style.width = pct + "%";
+    document.getElementById('pct').textContent = pct + "%";
+    document.getElementById('count').textContent = done + " / " + total;
+  }
+  function styleRow(b) {
+    var li = b.closest('li');
+    if (li) li.classList.toggle('checked', b.checked);
+  }
+  function load() {
+    var saved = getCookie().split(",");
+    boxes.forEach(function (b) { b.checked = saved.indexOf(b.id) !== -1; styleRow(b); });
+    updateProgress();
+  }
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () { styleRow(b); save(); updateProgress(); });
+  });
+  window.resetAll = function () {
+    if (!confirm("모든 체크 상태를 초기화할까요?")) return;
+    boxes.forEach(function (b) { b.checked = false; styleRow(b); });
+    save(); updateProgress();
+  };
+  load();
+})();
+</script>
+</body>
+</html>
