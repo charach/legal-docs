@@ -404,11 +404,11 @@ const HOLIDAYS = {
 /* ---------- daily data ---------- */
 const D = [
   // week, phase, kind, tags, am, pm, note
-  ['2026-07-22','0주차 · 적응 시작','adapt','train',['strength','run'],'<b>근력 A</b> 40분 — 휴가 중이라 맨몸·밴드 변형으로 폼 익히기','<b>이지 러닝 30~40분</b> — 수영 대체, 심박 대화 가능 수준',''],
-  ['2026-07-23','0주차 · 적응 시작','adapt','train',['run','strength'],'이지 러닝 40분 — 심박 대화 가능 수준','<b>근력 B</b> 코어 + 스트레칭 25~30분 — 실내바이크 대체',''],
-  ['2026-07-24','0주차 · 적응 시작','adapt','rest',['rest'],'완전 휴식','완전 휴식 + 가벼운 스트레칭',''],
-  ['2026-07-25','0주차 · 적응 시작','adapt','train',['run','strength'],'<b>맨몸 서킷 30분</b>(스쿼트·런지·힙힌지·플랭크) + <b>이지 러닝/하이킹 40~50분</b> — 롱바이크 대체','폼롤러·스트레칭, 햄스트링 상태 기록','새벽·저녁 시간대로 더위 피하기. 자전거 복귀는 다음 주말 라이드부터.'],
-  ['2026-07-26','0주차 · 적응 시작','adapt','long',['long','run'],'<b>롱런 80분</b> 이지 페이스 — 더위 심하면 새벽 5~6시 출발','휴식 — 다음 주부터 정상 루틴 복귀',''],
+  ['2026-07-22','0주차 · 적응 시작','adapt','train',['run'],'<b>가벼운 조깅 20~30분</b> — 여행 첫날, 컨디션 보며 천천히 (생략해도 OK)','휴식 · 여행 즐기기',''],
+  ['2026-07-23','0주차 · 적응 시작','adapt','train',['run'],'<b>가벼운 조깅 30분</b> — 대화 가능 수준, 낯선 동네 구경 겸','휴식 · 여행 즐기기',''],
+  ['2026-07-24','0주차 · 적응 시작','adapt','rest',['rest'],'완전 휴식 (관광하며 많이 걷기 = 좋은 유산소)','휴식 · 여행 즐기기',''],
+  ['2026-07-25','0주차 · 적응 시작','adapt','train',['run'],'<b>가벼운 조깅 30~40분</b> — 더우면 짧게, 걷기 섞어도 OK','휴식 · 여행 즐기기',''],
+  ['2026-07-26','0주차 · 적응 시작','adapt','train',['run'],'<b>가벼운 조깅 30~40분</b> — 귀국일이면 생략 가능','휴식 — 다음 주(7/27)부터 정상 루틴 복귀',''],
 
   ['2026-07-27','1주차 · 적응','adapt','train',['strength','swim'],'근력 B 코어 25분 + 스트레칭','<b>수영 강습</b> ⭐',''],
   ['2026-07-28','1주차 · 적응','adapt','train',['run','bike'],'이지 러닝 45분','실내바이크 인터벌 — <b>4×5분 스윗스팟</b>(FTP 88~93%) / 회복 3분',''],
@@ -598,7 +598,7 @@ function openModal(ds){
   html += '<div class="m-title">'+(titleMap[kind]||'훈련일')+'</div>';
   html += '<span class="m-phase" style="background:'+ph.color+'">'+week+'</span>';
   if(goal) html += '<div class="m-goal">🎯 <b>주간 목표</b> · '+goal+'</div>';
-  if(VAC.has(ds)) html += '<div class="m-vac">🏖 <b>휴가 기간 (7/22~26)</b> · 수영·자전거 불가 — 러닝·맨몸 운동·스트레칭으로 대체합니다.</div>';
+  if(VAC.has(ds)) html += '<div class="m-vac">✈️ <b>일본 여행 (7/22~26)</b> · 아침에 가볍게 달리기만 — 부담 없이 컨디션 우선, 관광 걷기도 좋은 유산소. 정식 훈련은 7/27부터.</div>';
 
   html += '<div class="slot"><div class="ic am">🌅</div><div class="body"><div class="when">아침 · Morning</div><div class="txt">'+am+'</div></div></div>';
   html += '<div class="slot"><div class="ic pm">🌙</div><div class="body"><div class="when">저녁 · Evening</div><div class="txt">'+pm+'</div></div></div>';
