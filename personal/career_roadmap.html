@@ -267,6 +267,7 @@
 
 <div class="wrap">
   <nav class="toc">
+    <a href="#req">공고 요구사항</a>
     <a href="#p1">Ⅰ 모델 기초</a>
     <a href="#p2">Ⅱ 딥 프로젝트</a>
     <a href="#p3">Ⅲ 시장 진입</a>
@@ -275,6 +276,59 @@
     <a href="#companies">타겟 회사</a>
     <a href="#reminder">리마인더</a>
   </nav>
+
+  <!-- REQUIREMENTS -->
+  <section class="phase" id="req">
+    <div class="phase-head">
+      <div class="phase-num" style="-webkit-text-stroke-color: var(--gold);">▤</div>
+      <div class="phase-title">
+        <h2>공고에서 역산한 요구사항</h2>
+        <p class="desc">2026.07 기준 타겟 9개사 + 인접 스타트업의 <b>실제 채용 공고를 직접 열어</b> 뽑은 요구사항이다. 아래 표가 <b>이후 모든 Phase의 설계 근거</b> — 각 Step은 "하면 좋아서"가 아니라 "이 공고가 요구해서" 존재한다. 공고는 빠르게 바뀌므로 지원 시점(2027)에 각사 채용 페이지로 재확인.</p>
+      </div>
+    </div>
+    <div class="phase-rule"></div>
+
+    <p class="callout" style="border-color: var(--green);"><b style="color:var(--green)">학위 불안, 데이터로 종결.</b> 직접 열어본 개발·애플리케이션 트랙 공고에서 <b>석사를 필수로 요구한 곳은 0건</b>이다. 업스테이지 AI Agent Engineer는 명시적으로 <b>"학력 무관"</b>, 백엔드·플랫폼·Document AI·데이터 공고 모두 학위 요건 미기재. 석사가 필수인 것은 <b>전문연구요원(병역특례)·파운데이션 모델 리서치</b> 트랙(논문 실적 요구)뿐이다. 애플리케이션 트랙에서 학위는 요건이 아니라 실무 포트폴리오로 대체된다 — 즉 <b>Phase Ⅱ의 프로젝트가 곧 학위 대체재</b>.</p>
+
+    <h3 class="block-title hot">A. 애플리케이션 / 제품 트랙 — 1순위 타겟 <span class="star">✦</span></h3>
+    <p class="note" style="margin:-4px 0 10px">업스테이지·뤼튼·라이너·토스·당근 + 원티드 다수 공고 교차. 8년차 백엔드라는 본인 강점이 가장 잘 팔리는 트랙.</p>
+    <table>
+      <thead><tr><th>요구사항 (실조사)</th><th>어느 공고에 나오나</th><th>어느 Step이 채우나</th></tr></thead>
+      <tbody>
+        <tr><td><b>Python + 백엔드 API</b> (REST/gRPC)</td><td>거의 전 공고 필수 — 바운드포·워트·라이너 BE·토스·당근</td><td class="verdict">이미 보유 → 경력기술서 재구성 (Ⅲ-1)</td></tr>
+        <tr><td><b>대규모 트래픽·분산 시스템</b></td><td>토스(선착순 결제)·당근(2,100만 MAU)·라이너 최상위 강조</td><td class="verdict">이미 보유 → 숫자화 (Ⅲ-1)</td></tr>
+        <tr><td><b>RAG 파이프라인 구축</b></td><td>업스테이지 AI Agent·Senior <b>자격요건</b>, 바운드포·제논 필수, 라이너 BE</td><td>Phase Ⅱ 코어</td></tr>
+        <tr><td><b>Agent · Tool Use · Function Calling</b></td><td>업스테이지 AI Agent <b>자격요건</b>, 뤼튼 ML(Agent System), 라이너 ML(Agentic flow)</td><td class="warn">Phase Ⅱ <b>신규 보강</b></td></tr>
+        <tr><td><b>LangChain / LangGraph</b> 경험</td><td>업스테이지 <b>자격요건</b>, 제논·인터엑스 우대, 뤼튼 Studio</td><td class="warn">Phase Ⅱ <b>신규 보강</b></td></tr>
+        <tr><td><b>평가 / Evals 파이프라인</b></td><td>업스테이지 Senior("Evals")·AI Agent("평가"), 라이너 ML, 뤼튼 AI</td><td>Phase Ⅱ 최중요</td></tr>
+        <tr><td><b>벡터DB</b> (pgvector·Pinecone·Milvus)</td><td>인터엑스(Pinecone)·바운드포·토스(Milvus)</td><td>Phase Ⅱ</td></tr>
+        <tr><td><b>하이브리드/시맨틱 검색 · 랭킹</b></td><td>라이너 Search(Retrieval+Ranking)·당근 Search·뤼튼 Studio</td><td>Phase Ⅱ 리트리버·리랭커</td></tr>
+        <tr><td><b>관측성</b> (Langfuse·LangSmith)</td><td>뤼튼 Studio·제논 우대</td><td class="warn">Phase Ⅱ <b>신규 보강</b></td></tr>
+        <tr><td><b>Docker / Kubernetes</b></td><td>원티드랩·인터엑스·전 인프라 공고</td><td>Phase Ⅱ 배포 + CKA/CKAD</td></tr>
+        <tr><td>context engineering · 프롬프트</td><td>뤼튼 AI(자격요건)·다큐브·제논</td><td>Phase Ⅱ 생성부</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="block-title">B. 인프라 / 모델 서빙 트랙 — 본인 시스템 강점이 최고로 팔리는 옵션</h3>
+    <p class="note" style="margin:-4px 0 10px">프렌들리AI·토스 ML Platform. 기지국 미들웨어(저지연 C++)·기계학습 서빙 경험이 직접 무기가 되는 곳. AI 지식보다 시스템 실력이 우위.</p>
+    <table>
+      <thead><tr><th>요구사항 (실조사)</th><th>어느 공고에 나오나</th><th>본인 상태</th></tr></thead>
+      <tbody>
+        <tr><td><b>C++ · CUDA · GPU 커널</b> 최적화</td><td>프렌들리AI Inference Engine·GPU Kernel 자격요건(C++ 프로덕션·FP8/FP4 양자화)</td><td class="verdict">C++ 저지연 강점 → vLLM/커널 학습 필요</td></tr>
+        <tr><td><b>vLLM · SGLang · Triton · TensorRT-LLM</b> 서빙</td><td>토스 ML Platform 우대, 프렌들리AI(자체 엔진)</td><td class="warn">옵션 트랙 시 학습</td></tr>
+        <tr><td><b>저지연 분산 시스템</b></td><td>프렌들리AI(low-latency inference)·토스(JVM/하드웨어 레벨 성능)</td><td class="verdict">기지국 미들웨어 경험 직결</td></tr>
+        <tr><td>K8s GPU 스케줄링 · MLflow·Airflow·Kubeflow</td><td>토스 ML Platform 자격요건, 업스테이지 Platform(GPU 스케줄링), 인터엑스</td><td>CKA/CKAD + Phase Ⅱ 배포로 일부 커버</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="block-title">C. 전형(코테·인터뷰)에서 실제로 확인된 것</h3>
+    <ul class="principle">
+      <li><b>토스</b> — 계열사 공통 후 실로 선택. 경력·ML은 <b>라이브 코딩 테스트 또는 사전과제</b> + 직무 + <b>문화적합성 인터뷰</b> + 레퍼런스. "이력서에 RPS·SLA·복구시간 등 트래픽 지표 명시" 권장.</li>
+      <li><b>당근</b> — 화상 <b>라이브 코딩</b>이 표준. ML 직군은 여기에 <b>ML 기초 테스트 + ML 모델 설계 인터뷰</b>, 백엔드 일부는 <b>시스템 디자인 인터뷰</b> 추가. 별도 컬처핏 단계 존재.</li>
+      <li><b>몰로코</b> — 코딩 난이도 최상위(LeetCode Hard급) + 영어 라운드.</li>
+      <li><b>업스테이지·라이너·뤼튼</b> — 경력 커트라인 3년+ (본인 8년차, 경력은 충분). 갭은 연차가 아니라 <b>LLM/RAG/Agent 도메인 경험</b> 하나뿐 → Phase Ⅱ가 정확히 그 갭을 메운다.</li>
+    </ul>
+  </section>
 
   <!-- PHASE 1 -->
   <section class="phase" id="p1">
@@ -337,44 +391,48 @@
       <div class="phase-title">
         <div class="when">2026.11 – 2027.02 · 16주</div>
         <h2>딥 프로젝트 하나</h2>
-        <p class="desc">프로젝트는 <b>딱 하나</b>. 프레임워크(LangChain·LlamaIndex) 없이 직접 구현한다. 각 컴포넌트를 화이트보드로 설명할 수 있을 때까지 다음으로 넘어가지 않는다.</p>
+        <p class="desc">프로젝트는 <b>딱 하나</b> — 순수 RAG가 아니라 <b>법령·규정 QA "에이전트"</b>. 실제 공고가 RAG를 넘어 <b>Agent·Tool Use·Function Calling</b>을 자격요건으로 요구하기 때문(업스테이지 AI Agent, 뤼튼·라이너 ML). 각 컴포넌트를 <b>먼저 프레임워크 없이 직접 구현</b>해 원리를 손에 넣고, <b>그다음 LangGraph로 재구현</b>한다.</p>
       </div>
     </div>
     <div class="phase-rule"></div>
 
-    <h3 class="block-title">원칙</h3>
+    <h3 class="block-title">원칙 · 공고 근거로 교정</h3>
     <ul class="principle">
       <li>프로젝트는 <b>딱 하나</b>. 여러 개 벌리지 않는다.</li>
-      <li>Claude Code 등 AI 도구 사용 OK. 단 <b>철칙</b> — 각 컴포넌트를 화이트보드에 그려 남에게 설명할 수 있을 때까지 다음 컴포넌트로 넘어가지 않는다. AI가 짠 코드에서 비효율·오류를 최소 1개씩 직접 찾아 수정하고 커밋 메시지에 기록한다.</li>
-      <li>프레임워크(LangChain·LlamaIndex) <b>없이</b> 직접 구현. 이유 — 인터뷰에서 "LangChain 썼어요"는 0점, "리트리버를 직접 짜면서 X 때문에 Y로 설계했어요"는 만점.</li>
+      <li><b>먼저 직접 구현 → 그다음 LangGraph로 재구현</b>, 둘 다 한다. <span style="color:var(--accent)">기존 계획의 "LangChain 쓰면 0점"은 공고와 배치된다</span> — 업스테이지 AI Agent Engineer 자격요건에 <b>"LangChain, LangGraph 등 Agentic Workflow 프레임워크 경험"</b>, 제논·인터엑스·뤼튼도 우대로 명시. 정답은 <b>"직접 짜봐서 내부를 알고 + 프레임워크도 능숙"</b>이다. 인터뷰 만점 답변 = "리트리버를 직접 짜며 X 때문에 Y로 설계했고, 프로덕션은 LangGraph로 옮기며 트레이드오프를 이렇게 봤다".</li>
+      <li>Claude Code 등 AI 도구 사용 OK. 단 <b>철칙</b> — 각 컴포넌트를 화이트보드에 그려 남에게 설명할 수 있을 때까지 다음으로 넘어가지 않는다. AI가 짠 코드에서 비효율·오류를 최소 1개씩 직접 찾아 수정하고 커밋 메시지에 기록한다.</li>
     </ul>
 
     <h3 class="block-title">프로젝트 주제 · 하나 선택</h3>
     <ul class="checklist" data-group="p2-topic">
-      <li><input type="checkbox" id="c11"><label><span class="lead"><span class="tag rec">추천</span><b>한국어 사내규정·법령 QA 서비스</b> — 공개 법령 데이터 활용. B2B 스타트업(업스테이지 등) 지원 시 도메인이 정확히 겹침</span></label></li>
+      <li><input type="checkbox" id="c11"><label><span class="lead"><span class="tag rec">추천</span><b>한국어 법령·사내규정 QA 에이전트</b> — 공개 법령 데이터 활용. <b>업스테이지 AI Agent Engineer("문서 워크플로우 문제를 푸는 Agent 제품") + Document AI 도메인이 정확히 겹침.</b> RAG를 tool로 감싸고 법령 교차참조·요건 계산을 function calling으로 처리하면 "Agent 제품" 요구까지 한 번에 커버</span></label></li>
       <li><input type="checkbox" id="c12"><label><span class="lead"><b>개인 지식베이스 에이전트</b> — 본인 노트·문서 기반. 데이터 준비가 쉬움, 대신 평가 설계가 어려움</span></label></li>
       <li><input type="checkbox" id="c13"><label><span class="lead"><b>기술문서 검색+요약 서비스</b> — 오픈소스 docs 대상. 개발자 커뮤니티에 공개하면 실사용자 확보 가능</span></label></li>
     </ul>
 
-    <h3 class="block-title">구현할 컴포넌트 · 전체 스택</h3>
+    <h3 class="block-title">구현할 컴포넌트 · 각 항목 = 어느 공고 요구사항</h3>
+    <p class="note" style="margin:-4px 0 10px"><span class="tag ver" style="font-family:var(--sans)">→</span> 뒤 회사명은 그 컴포넌트를 <b>자격요건/우대로 실제 명시한 공고</b>다. 인터뷰에서 이 매핑을 그대로 근거로 쓴다.</p>
     <ul class="checklist" data-group="p2-components">
-      <li><input type="checkbox" id="c14"><label><span class="lead"><b>문서 파이프라인</b> — 파싱(PDF/HTML), 청킹 전략 (고정길이 vs 의미 단위 둘 다 구현·비교)</span></label></li>
-      <li><input type="checkbox" id="c15"><label><span class="lead"><b>임베딩</b> — 한국어 임베딩 모델 2–3개 비교, 선택 근거 문서화</span></label></li>
-      <li><input type="checkbox" id="c16"><label><span class="lead"><b>벡터 저장소</b> — pgvector 사용 + 인메모리 버전 직접 구현</span></label></li>
-      <li><input type="checkbox" id="c17"><label><span class="lead"><b>리트리버</b> — BM25 + Dense 하이브리드 직접 구현, 가중치 실험</span></label></li>
-      <li><input type="checkbox" id="c18"><label><span class="lead"><b>리랭커</b> — cross-encoder 리랭킹 전/후 성능 비교</span></label></li>
-      <li><input type="checkbox" id="c19"><label><span class="lead"><b>생성부</b> — 프롬프트 버전 관리, 컨텍스트 윈도우 관리, 근거 인용(citation)</span></label></li>
-      <li><input type="checkbox" id="c20"><label><span class="lead"><span class="tag ver">가장 중요</span><b>평가 파이프라인</b> — golden QA셋 50–100개 구축, faithfulness·relevance 메트릭, 컴포넌트 교체마다 점수 추적</span></label></li>
-      <li><input type="checkbox" id="c21"><label><span class="lead"><b>서빙</b> — FastAPI + 스트리밍 응답</span></label></li>
-      <li><input type="checkbox" id="c22"><label><span class="lead"><b>배포</b> — K8s (CKA/CKAD 실전 투입) + 모니터링(레이턴시·토큰 비용)</span></label></li>
+      <li><input type="checkbox" id="c14"><label><span class="lead"><b>문서 파이프라인</b> — 파싱(PDF/HTML), 청킹 전략 (고정길이 vs 의미 단위 둘 다 구현·비교)</span><span class="note">→ 업스테이지 Document AI(문서 레이아웃·멀티모달 문서 이해)</span></label></li>
+      <li><input type="checkbox" id="c15"><label><span class="lead"><b>임베딩</b> — 한국어 임베딩 모델 2–3개 비교, 선택 근거 문서화. 업스테이지 솔라 임베딩도 실측에 포함</span><span class="note">→ 공통 필수(벡터DB 계열)</span></label></li>
+      <li><input type="checkbox" id="c16"><label><span class="lead"><b>벡터 저장소</b> — pgvector 사용 + 인메모리 버전 직접 구현</span><span class="note">→ 인터엑스(Pinecone)·토스(Milvus)·바운드포</span></label></li>
+      <li><input type="checkbox" id="c17"><label><span class="lead"><b>리트리버</b> — BM25 + Dense 하이브리드 직접 구현, 가중치 실험. Elasticsearch로도 한 번 구성</span><span class="note">→ 라이너 Search(Retrieval 최적화, Elasticsearch)·당근 Search·뤼튼 Studio(hybrid search)</span></label></li>
+      <li><input type="checkbox" id="c18"><label><span class="lead"><b>리랭커</b> — cross-encoder 리랭킹 전/후 성능 비교. 검색 지표(nDCG·MRR) 직접 계산</span><span class="note">→ 라이너 Search(Ranking 최적화)·당근 Search(랭킹)</span></label></li>
+      <li><input type="checkbox" id="c19"><label><span class="lead"><b>생성부 · context engineering</b> — 프롬프트 버전 관리, 컨텍스트 윈도우 관리, 근거 인용(citation)</span><span class="note">→ 뤼튼 AI("context engineering" 자격요건)·다큐브·제논</span></label></li>
+      <li><input type="checkbox" id="c60"><label><span class="lead"><span class="tag ver">신규·핵심</span><b>에이전트 레이어</b> — 검색을 tool로 감싸고 <b>Tool Use·Function Calling</b>로 법령 교차참조·요건 계산·multi-step reasoning 구현. RAG를 "에이전트가 쓰는 도구"로 승격</span><span class="note">→ 업스테이지 AI Agent(RAG·Tool Use·Function Calling 자격요건)·뤼튼 ML(Agent System·Tool Learning)·라이너 ML(Agentic flow)</span></label></li>
+      <li><input type="checkbox" id="c20"><label><span class="lead"><span class="tag ver">가장 중요</span><b>평가 파이프라인 (Evals)</b> — golden QA셋 50–100개, faithfulness·relevance 메트릭 + <b>에이전트 궤적(trajectory) 평가</b>, 컴포넌트 교체마다 점수 추적</span><span class="note">→ 업스테이지 Senior("Evals")·AI Agent("평가")·라이너 ML(agentic flow 평가)·뤼튼 AI(모델 평가)</span></label></li>
+      <li><input type="checkbox" id="c61"><label><span class="lead"><span class="tag ver">신규</span><b>관측성</b> — Langfuse로 trace·토큰 비용·레이턴시 대시보드. 모델 라우팅(싼 모델↔비싼 모델 분기) 실험까지</span><span class="note">→ 뤼튼 Studio·제논(Langfuse/LangSmith 우대) · 뤼튼 B2C 비용 최적화 스토리</span></label></li>
+      <li><input type="checkbox" id="c21"><label><span class="lead"><b>서빙</b> — FastAPI + 스트리밍 응답</span><span class="note">→ 공통 필수(바운드포·인터엑스: Python·FastAPI)</span></label></li>
+      <li><input type="checkbox" id="c22"><label><span class="lead"><b>배포</b> — K8s (CKA/CKAD 실전 투입) + 모니터링(레이턴시·토큰 비용)</span><span class="note">→ 원티드랩·업스테이지 Platform(K8s·GPU 스케줄링)·전 인프라 공고</span></label></li>
+      <li><input type="checkbox" id="c62"><label><span class="lead"><span class="tag ver">신규</span><b>LangGraph 재구현</b> — 직접 짠 에이전트를 완성한 뒤 LangGraph로 옮겨 동일 기능 구성. "직접도 짜봤고 프레임워크도 능숙" 상태 확보</span><span class="note">→ 업스테이지·제논·인터엑스·뤼튼 Studio(LangChain/LangGraph 요건)</span></label></li>
     </ul>
 
     <h3 class="block-title">월별 마일스톤</h3>
     <ul class="checklist" data-group="p2-milestone">
-      <li><input type="checkbox" id="c23"><label><span class="lead"><b>2026.11 · v0.1</b> — 데이터 파이프라인 + 임베딩 + 벡터저장. 검색만 됨</span></label></li>
-      <li><input type="checkbox" id="c24"><label><span class="lead"><b>2026.12 · v0.5</b> — 하이브리드 리트리버 + 생성부. E2E 답변</span></label></li>
-      <li><input type="checkbox" id="c25"><label><span class="lead"><b>2027.01 · v0.8</b> — 평가 파이프라인 + 리랭커. 개선을 숫자로 증명</span></label></li>
-      <li><input type="checkbox" id="c26"><label><span class="lead"><b>2027.02 · v1.0</b> — K8s 배포 + 모니터링 + README·아키텍처 문서. 공개</span></label></li>
+      <li><input type="checkbox" id="c23"><label><span class="lead"><b>2026.11 · v0.1</b> — 데이터 파이프라인 + 임베딩 + 벡터저장 + 하이브리드 리트리버. 검색만 됨</span></label></li>
+      <li><input type="checkbox" id="c24"><label><span class="lead"><b>2026.12 · v0.5</b> — 생성부 + <b>에이전트 레이어(Tool Use·Function Calling)</b>. E2E로 "질문→도구 호출→근거 인용 답변"</span></label></li>
+      <li><input type="checkbox" id="c25"><label><span class="lead"><b>2027.01 · v0.8</b> — 평가 파이프라인 + 리랭커 + Langfuse. 개선을 숫자로 증명, 궤적·비용까지 추적</span></label></li>
+      <li><input type="checkbox" id="c26"><label><span class="lead"><b>2027.02 · v1.0</b> — <b>LangGraph 재구현</b> + K8s 배포 + 모니터링 + README·아키텍처 문서. 공개</span></label></li>
     </ul>
 
     <h3 class="block-title">병행 항목 & 산출물</h3>
@@ -383,8 +441,8 @@
       <li><input type="checkbox" id="c28"><label><span class="lead">회사 안에서 이력서용 숫자 수집 시작 (레이턴시·트래픽·설계 결정)</span></label></li>
       <li><input type="checkbox" id="c29"><label><span class="lead">배포되어 실제 접속 가능한 서비스 1개</span></label></li>
       <li><input type="checkbox" id="c30"><label><span class="lead">GitHub repo — 아키텍처 다이어그램 + "왜 이 설계인가" README</span></label></li>
-      <li><input type="checkbox" id="c31"><label><span class="lead">기술 블로그 3편 — ①청킹·임베딩 ②하이브리드 검색 ③평가 파이프라인</span></label></li>
-      <li><input type="checkbox" id="c32"><label><span class="lead">컴포넌트별 개선 전/후 평가 점수 표 (이력서에 그대로 들어갈 숫자)</span></label></li>
+      <li><input type="checkbox" id="c31"><label><span class="lead">기술 블로그 4편 — ①청킹·임베딩 ②하이브리드 검색·리랭킹(nDCG/MRR) ③에이전트·Tool Use ④평가·관측 파이프라인</span></label></li>
+      <li><input type="checkbox" id="c32"><label><span class="lead">컴포넌트별 개선 전/후 평가 점수 표 + 토큰 비용·레이턴시 표 (이력서·시스템디자인 답안에 그대로 들어갈 숫자)</span></label></li>
     </ul>
   </section>
 
@@ -400,24 +458,39 @@
     </div>
     <div class="phase-rule"></div>
 
-    <h3 class="block-title">3-1 · 경력기술서 재작성 (3월)</h3>
+    <h3 class="block-title">3-1 · 경력기술서 재작성 (3월) — 내 경력자산을 공고 요구사항에 매핑</h3>
+    <p class="note" style="margin:-4px 0 10px">먼저 아래 표로 <b>이미 가진 것 ↔ 공고가 원하는 것</b>을 붙인다. 8년차의 강점은 연차가 아니라 이 매핑이 만드는 <b>희소 조합</b>이다.</p>
+    <table>
+      <thead><tr><th>내 경력 자산</th><th>매칭되는 공고 요구사항</th><th>이 조합이 통하는 곳</th></tr></thead>
+      <tbody>
+        <tr><td>Samsung Notes 1.4억 사용자 백엔드</td><td>대규모 트래픽·분산 시스템 (토스·당근·라이너 최상위 강조)</td><td class="stars">토스·당근·뤼튼</td></tr>
+        <tr><td>기지국 미들웨어 (저지연·고신뢰 C++)</td><td>low-latency inference·GPU 커널·C++ 프로덕션 (프렌들리AI 자격요건)</td><td class="stars">프렌들리AI·토스 ML Platform</td></tr>
+        <tr><td>S Pen SDK — 개발자용 제품 개발</td><td>SDK·개발자 경험(DX) 설계 (센드버드)</td><td class="stars">센드버드</td></tr>
+        <tr><td>필기인식·문서 이해 도메인</td><td>Document AI·문서 워크플로우 (업스테이지 자격요건)</td><td class="stars">업스테이지</td></tr>
+        <tr><td>ML 서비스 서빙 경험(AX팀)</td><td>ML 모델 서빙·파이프라인 (업스테이지 Backend·토스 ML Backend)</td><td class="stars">업스테이지·토스</td></tr>
+      </tbody>
+    </table>
     <ul class="checklist" data-group="p3-resume">
       <li><input type="checkbox" id="c33"><label><span class="lead">"내가 결정한 것" 중심 재작성 — ❌"AX팀에서 AI 서비스 개발" → ✅"LLM 기반 X 기능의 서빙 백엔드 설계, p95 레이턴시 Ns 달성, 일 요청 N만 건 처리, 스트리밍 응답·폴백 로직 직접 설계"</span><span class="note">원칙 — 팀이 한 일이 아니라 <b style="color:var(--ink)">내가 결정한 것</b> 중심. 모델은 다른 팀이 만들었어도 "그 모델을 서비스로 만드는 과정의 설계 결정"은 나의 것.</span></label></li>
+      <li><input type="checkbox" id="c63"><label><span class="lead"><b>정량 지표를 이력서 상단에 못박기</b> — RPS·데이터량·SLA·p95 레이턴시·장애 복구시간. <span style="color:var(--accent)">토스는 "이력서에 트래픽 지표 명시"를 공고에서 대놓고 권장</span>한다</span></label></li>
       <li><input type="checkbox" id="c34"><label><span class="lead">영문 이력서 + LinkedIn 프로필 정비 (Tier 2·해외 옵션 대비)</span></label></li>
     </ul>
 
-    <h3 class="block-title">3-2 · 코딩테스트 (3–6월, 주 4–5문제)</h3>
+    <h3 class="block-title">3-2 · 코딩테스트 (3–6월, 주 4–5문제) — 회사별 실제 전형에 맞춤</h3>
     <ul class="checklist" data-group="p3-coding">
-      <li><input type="checkbox" id="c35"><label><span class="lead">프로그래머스 Lv2–3 + LeetCode Medium, 총 60–80문제</span></label></li>
+      <li><input type="checkbox" id="c35"><label><span class="lead">기본선 — 프로그래머스 Lv2–3 + LeetCode Medium, 총 60–80문제</span></label></li>
       <li><input type="checkbox" id="c36"><label><span class="lead">유형 — 구현·문자열, 그래프·BFS/DFS, 힙·우선순위큐, DP 기본</span><span class="note">8년차에게 코테는 통과만 하면 되는 관문 — 감각 회복이 목적</span></label></li>
+      <li><input type="checkbox" id="c64"><label><span class="lead"><b>라이브 코딩 대비</b> — 토스·당근은 온라인 시험이 아니라 <b>화상 라이브 코딩</b>이 표준. 손이 아니라 <b>말로 사고를 설명하며 푸는</b> 연습을 별도로. 셀프 녹화로 점검</span></label></li>
+      <li><input type="checkbox" id="c65"><label><span class="lead"><b>토스 사전과제</b> 대비 — 일부 실로는 알고리즘 대신 사전과제. Phase Ⅱ 프로젝트가 사실상 사전과제 포트폴리오가 됨</span></label></li>
+      <li><input type="checkbox" id="c66"><label><span class="lead"><b>몰로코 노릴 때만</b> — LeetCode Hard 중심 100문제+로 상향 + 영어 라운드. 안 노리면 이 항목은 스킵</span></label></li>
     </ul>
 
     <h3 class="block-title hot">3-3 · 시스템 디자인 인터뷰 (4–6월) <span class="star">✦</span> 승부 라운드</h3>
     <ul class="checklist" data-group="p3-sysdesign">
-      <li><input type="checkbox" id="c37"><label><span class="lead">일반 시스템 디자인 정리 (System Design Interview vol.1–2)</span></label></li>
-      <li><input type="checkbox" id="c38"><label><span class="lead">AI — "RAG 검색 서비스 설계" (Phase 2가 그대로 답안)</span></label></li>
-      <li><input type="checkbox" id="c39"><label><span class="lead">AI — "LLM 서빙 비용·레이턴시 최적화" (캐싱·배칭·라우팅)</span></label></li>
-      <li><input type="checkbox" id="c40"><label><span class="lead">AI — "AI 기능 품질 측정·개선" (eval 설계)</span></label></li>
+      <li><input type="checkbox" id="c37"><label><span class="lead">일반 시스템 디자인 정리 (System Design Interview vol.1–2) — <b>당근 백엔드·ML 직군은 실제로 시스템 디자인/ML 모델 설계 인터뷰가 별도 라운드</b></span></label></li>
+      <li><input type="checkbox" id="c38"><label><span class="lead">AI — "RAG <b>에이전트</b> 서비스 설계" (Phase 2가 그대로 답안) — 리트리버·Tool Use·Function Calling·근거 인용까지</span><span class="note">→ 업스테이지·라이너 ML·뤼튼 ML</span></label></li>
+      <li><input type="checkbox" id="c39"><label><span class="lead">AI — "LLM 서빙 비용·레이턴시 최적화" (캐싱·배칭·라우팅·vLLM/SGLang/Triton)</span><span class="note">→ 토스 ML Platform·프렌들리AI(저지연 추론). 기지국 미들웨어 저지연 경험을 여기서 꺼낸다</span></label></li>
+      <li><input type="checkbox" id="c40"><label><span class="lead">AI — "AI 기능 품질 측정·개선" (Evals 설계, faithfulness·에이전트 궤적 평가)</span><span class="note">→ 업스테이지 Senior·라이너 ML</span></label></li>
       <li><input type="checkbox" id="c41"><label><span class="lead">각 유형별 화이트보드 답안 만들어 소리 내어 연습 (셀프 영상 촬영)</span></label></li>
     </ul>
 
@@ -430,9 +503,9 @@
       <li><input type="checkbox" id="c57"><label><span class="lead">목표 — 커피챗 5회 이상. 이직 얘기 먼저 꺼내지 말 것, 팀 분위기·기술스택 질문 중심</span><span class="note">리퍼럴은 관계에서 자연히 나온다.</span></label></li>
     </ul>
 
-    <h3 class="block-title">3-5 · JD 역산 (상시)</h3>
+    <h3 class="block-title">3-5 · JD 역산 (상시) — <a href="#req" style="color:var(--accent)">공고 요구사항 표</a> 최신화</h3>
     <ul class="checklist" data-group="p3-jd">
-      <li><input type="checkbox" id="c45"><label><span class="lead">원티드·LinkedIn 타겟 JD 월 1회 수집 → 요구 키워드 표 정리 → 없는 키워드 발견 시 Phase 2에 소규모 보강</span><span class="note">부수 효과 — "석사 요구가 실제로 얼마나 있는지" 데이터로 확인되어 학위 불안이 정리된다.</span></label></li>
+      <li><input type="checkbox" id="c45"><label><span class="lead">맨 앞의 <b>공고 요구사항 표는 2026.07 스냅샷</b> — 2027 지원 시점에 원티드·각사 채용 페이지로 월 1회 재수집해 갱신. 새 키워드 발견 시 Phase 2에 소규모 보강</span><span class="note">이미 확인된 것 — 개발 트랙 석사 필수 0건. 학위 불안은 <a href="#req" style="color:var(--muted)">요구사항 섹션</a>에서 종결됨. 재확인만 하면 된다.</span></label></li>
     </ul>
   </section>
 
@@ -471,8 +544,8 @@
     <div class="phase-rule"></div>
     <div class="timeline">2026.08 ─┬─ Phase Ⅰ  Zero to Hero + 강제장치 실험 (12주)
 2026.10 ─┤     └ 판정: 혼자 가능? → 대학원 여부 최종 결정
-2026.11 ─┬─ Phase Ⅱ  RAG 딥 프로젝트 (16주) + Kaggle 1회
-2027.02 ─┤     └ v1.0 배포 + 블로그 3편
+2026.11 ─┬─ Phase Ⅱ  RAG 에이전트 딥 프로젝트 (16주) + Kaggle 1회
+2027.02 ─┤     └ v1.0 배포(LangGraph 재구현) + 블로그 4편
 2027.03 ─┬─ Phase Ⅲ  이력서·코테·시스템디자인·커피챗 (16주)
 2027.06 ─┤
 2027.07 ─┬─ Phase Ⅳ  Tier 3 워밍업 → Tier 1 본지원
@@ -498,9 +571,9 @@
       <dl class="co-body">
         <dt>무엇을 하나</dt><dd>자체 LLM '솔라(Solar)' 개발 + Document AI(OCR·파싱). 금융·법률·제조 등 B2B 특화 AI 솔루션. 2025년 약 1,000억 원 시리즈B, 미국 시장 진출 추진.</dd>
         <dt>왜 나에게 맞나</dt><dd><ul><li>"해외로 나아가는 회사" + "모델 가까이에서 일하기" 조건을 동시에 충족하는 국내 거의 유일한 곳</li><li>B2B 엔터프라이즈 딜리버리 → 삼성에서의 대규모·엔터프라이즈 경험이 그대로 신뢰 자산</li><li>Document AI ↔ Samsung Notes·필기인식 경험이 도메인적으로 연결됨 (문서 이해라는 공통점)</li></ul></dd>
-        <dt>예상 포지션</dt><dd>AI Engineer (LLM Application), Backend Engineer (AI Platform), Solution Engineer</dd>
-        <dt>인터뷰 질문</dt><dd>RAG 파이프라인 설계 경험, 한국어 문서 처리 노하우, 고객사 요구를 기술로 푸는 사고방식, LLM 평가 방법론</dd>
-        <dt>준비 포인트</dt><dd>Phase 2 주제를 "한국어 법령·규정 QA"로 하면 도메인이 정확히 겹침. 솔라 모델을 프로젝트에서 실제로 써보고 사용기를 블로그로 남기면 강력한 신호.</dd>
+        <dt>실제 공고</dt><dd><b>AI Agent Engineer</b>(학력 무관) · Software Engineer-Backend(Golang/Python/TS/Java, AWS/GCP, 5년+, ML 서빙) · Platform SW Engineer(K8s·Terraform·GPU 스케줄링) · Senior SWE(RAG·Agent·Evals·Document AI). <span class="verdict">개발 트랙 전부 학위 미요구, 석사는 전문연구요원 리서치 한정.</span></dd>
+        <dt>자격요건(실조사)</dt><dd>AI Agent Engineer 기준 — <b>RAG·Tool Use·Function Calling</b> 파이프라인 설계·튜닝, LLM 제품 <b>평가(Evaluation)</b> 전 과정 주도, Multi-step Reasoning, <b>LangChain·LangGraph</b> 경험. Phase Ⅱ의 에이전트·평가·LangGraph 컴포넌트가 정확히 이 목록.</dd>
+        <dt>준비 포인트</dt><dd>Phase 2 주제를 "한국어 법령·규정 QA <b>에이전트</b>"로 하면 AI Agent Engineer 공고와 문장 단위로 겹침. 솔라 LLM·업스테이지 임베딩을 실제로 써보고 사용기를 블로그로 남기면 강력한 신호.</dd>
         <dt class="risk">리스크·체크</dt><dd>B2B 특성상 고객사 프로젝트(SI성 업무) 비중이 팀마다 다름 → 커피챗에서 "제품 조직 vs 딜리버리 조직" 구분을 반드시 확인.</dd>
       </dl>
     </article>
@@ -510,9 +583,9 @@
       <dl class="co-body">
         <dt>무엇을 하나</dt><dd>MAU 600만+ 국내 최대 B2C AI 서비스 + 기업용 AX 솔루션. 일본 등 해외 확장 중.</dd>
         <dt>왜 나에게 맞나</dt><dd><ul><li>대규모 트래픽 B2C — 1.4억 사용자 Samsung Notes 경험이 직결되는 유일한 Tier 1</li><li>성장 속도가 빠른 조직 → "열정적인 팀" 조건에 가장 부합하는 문화로 알려짐</li></ul></dd>
-        <dt>예상 포지션</dt><dd>Backend Engineer, AI Service Engineer (모델 위에 서비스를 만드는 포지션 — 단, 여기서는 프롬프트·라우팅·평가 결정권이 엔지니어에게 있음)</dd>
-        <dt>인터뷰 질문</dt><dd>대규모 트래픽 처리, LLM 비용 최적화(B2C는 토큰 비용이 사활 문제), 멀티 모델 라우팅, 속도감 있는 실행 경험</dd>
-        <dt>준비 포인트</dt><dd>Phase 2에서 "토큰 비용 대시보드 + 모델 라우팅(싼 모델·비싼 모델 분기)"을 구현하면 뤼튼 인터뷰에 정확히 꽂힘.</dd>
+        <dt>실제 공고</dt><dd>Backend Engineer(Python·3년+, RAG·Agent·LLM 파인튜닝, <b>"0.2초 안에 99.9% 성공률"</b>) · AI Engineer(<b>context engineering</b> 자격요건, LLM 제품 E2E, 모델 테스트·평가) · AI Engineer Studio(<b>Python·FastAPI·Claude Agent SDK·LangChain·LangGraph</b>, Airflow·<b>Langfuse</b>·ElasticSearch hybrid search) · ML Engineer(Autonomous Agent·Tool Learning·RAG·IR)</dd>
+        <dt>자격요건(실조사)</dt><dd>대규모 트래픽(0.2s/99.9%), <b>Agent System·Tool Learning</b>, context engineering, hybrid/semantic search, Langfuse 관측. <span class="warn">토큰비용·모델라우팅은 공고 문구엔 없지만 B2C라 실무 필수(추정).</span></dd>
+        <dt>준비 포인트</dt><dd>Phase 2의 <b>에이전트 레이어 + Langfuse 관측 + 모델 라우팅 실험</b>이 뤼튼 3개 공고에 그대로 꽂힘. Claude Agent SDK로 에이전트를 한 번 짜보면 Studio 공고에 정확히 대응.</dd>
         <dt class="risk">리스크·체크</dt><dd>B2C 회사 특성상 시장 변동에 민감. 지원 시점에 최근 투자·실적 뉴스 확인 필수.</dd>
       </dl>
     </article>
@@ -522,9 +595,9 @@
       <dl class="co-body">
         <dt>무엇을 하나</dt><dd>AI 검색·리서치 에이전트. 글로벌(특히 미국) 사용자 비중이 높은 것으로 알려진 서비스.</dd>
         <dt>왜 나에게 맞나</dt><dd><ul><li>제품의 심장이 검색+RAG → Phase 2에서 채우는 갭과 정확히 동일한 기술</li><li>글로벌 매출 중심 → "해외 사업" 조건 충족, 영어 사용 환경</li></ul></dd>
-        <dt>예상 포지션</dt><dd>Search/Ranking Engineer, AI Engineer, Backend Engineer</dd>
-        <dt>인터뷰 질문</dt><dd>검색 품질 개선 방법론(리트리버·리랭커), 랭킹 평가 지표, 대규모 인덱싱</dd>
-        <dt>준비 포인트</dt><dd>Phase 2의 하이브리드 검색 + 리랭커 파트를 가장 깊게 파야 하는 타겟. 검색 평가(nDCG, MRR 개념)를 추가 학습해두면 좋음.</dd>
+        <dt>실제 공고</dt><dd><b>Search Engineer</b>(Elasticsearch·Lucene·Solr 3년+, <b>"LLM RAG Agent용 Retrieval·Ranking 최적화"</b>, 대규모 검색 트래픽 튜닝) · <b>ML Engineer</b>(AI 에이전트 시스템, <b>Agentic flow 설계 및 평가</b>, 검색·추천 도메인) · Backend Engineer(Kotlin/JVM·Python, 대규모 트래픽, RAG 인프라). <span class="warn">"Ranking Engineer/AI Engineer"라는 별도 직군은 없음 — 각각 Search/ML Engineer로 통합.</span></dd>
+        <dt>자격요건(실조사)</dt><dd>Elasticsearch 검색 운영 3년+, Retrieval·Ranking 최적화, agentic flow <b>평가</b>. 지표명(nDCG/MRR)은 공고에 명시 안 됨 → 오히려 내가 프로젝트에서 지표로 증명하면 차별화.</dd>
+        <dt>준비 포인트</dt><dd>Phase 2 리트리버·리랭커를 <b>Elasticsearch로도</b> 한 번 구성 + nDCG/MRR 직접 계산. 이 회사엔 "직접 짠 하이브리드 검색 + 정량 지표"가 가장 깊게 팔린다.</dd>
         <dt class="risk">리스크·체크</dt><dd>조직 규모가 상대적으로 작아 처우 협상 폭 확인 필요.</dd>
       </dl>
     </article>
@@ -534,9 +607,9 @@
       <dl class="co-body">
         <dt>무엇을 하나</dt><dd>LLM 서빙·추론 최적화 인프라 (GPU 효율화, 배칭). 글로벌 B2B.</dd>
         <dt>왜 나에게 맞나</dt><dd><ul><li><b>시스템 역량(C++, 멀티스레딩, 저지연 DB)이 가장 직접적으로 팔리는 곳.</b> AI 지식보다 시스템 실력이 우위인 회사</li><li>기지국 미들웨어 경험(저지연·고신뢰)이 추론 서빙과 문제 구조가 유사</li></ul></dd>
-        <dt>예상 포지션</dt><dd>Systems Engineer, Inference Engineer, Backend Engineer</dd>
-        <dt>인터뷰 질문</dt><dd>C++·동시성, GPU·메모리 이해, 배칭·캐싱·스케줄링, 저지연 시스템 설계</dd>
-        <dt>준비 포인트</dt><dd>이 회사를 노린다면 Phase 1 이후 vLLM 코드베이스 분석 + 소규모 기여를 추가하는 게 최고의 준비. Kaggle보다 이게 낫다.</dd>
+        <dt>실제 공고</dt><dd>SW Engineer-AI Inference Engine(SF, <b>C++·Python·CUDA</b>, GPU 커널·컴파일러·memory planning·kernel fusion, 5년+) · SW Engineer-GPU Kernel(<b>CUDA/ROCm·HIP</b>, GEMM·attention 커널, <b>FP8/FP4 양자화</b>, C++·저수준 어셈블리) · <b>Senior Backend(Seoul)</b>(Python·FastAPI, REST/gRPC/GraphQL, PostgreSQL·ClickHouse, K8s·OpenTelemetry, 5년+)</dd>
+        <dt>자격요건(실조사)</dt><dd>커널 트랙 — C++ 프로덕션·GPU 아키텍처(warps/메모리 계층)·프로파일링. <b>Seoul 백엔드 트랙은 CUDA 없이 Python/FastAPI + 분산 시스템 + LLM 서빙 지식</b>으로 진입 가능 — 본인에게 더 현실적인 문.</dd>
+        <dt>준비 포인트</dt><dd>커널 트랙을 노리면 Phase 1 이후 <b>vLLM 코드베이스 분석 + 소규모 기여</b>가 최고의 준비(Kaggle보다 낫다). 기지국 미들웨어 저지연 C++ 경험이 여기서 서사가 됨. 백엔드 트랙이면 Phase 2 서빙·배포로 충분.</dd>
         <dt class="risk">리스크·체크</dt><dd>서비스 개발보다 인프라 개발 — "프로덕트를 만들고 싶다"는 욕구와 맞는지 자문 필요. 다만 커리어 희소성은 이쪽이 최상.</dd>
       </dl>
     </article>
@@ -583,8 +656,8 @@
       <div class="co-head"><span class="co-rank">⑧</span><h3 class="co-name">토스 (비바리퍼블리카)</h3></div>
       <dl class="co-body">
         <dt>왜 베이스라인</dt><dd>국내에서 "스타트업 속도 + 삼성급 이상 현금 보상"이 성립하는 대표적인 곳. AI 조직도 활발히 확장 중.</dd>
-        <dt>예상 포지션</dt><dd>Server Developer, ML Engineer (플랫폼), AI 서비스 개발</dd>
-        <dt>인터뷰 특징</dt><dd>코테 + 기술면접 + 컬처핏 비중이 큼. "왜 토스인가"에 대한 답과 오너십 사례를 구체적으로 준비.</dd>
+        <dt>실제 공고</dt><dd>Server Developer(Kotlin·Java·Spring, 선착순 결제·정산 등 대규모 트래픽) · <b>ML Backend Engineer(토스뱅크)</b> — <span class="verdict">"ML 경험은 불필요, AI/ML에 대한 강한 관심과 의지"</span>가 명시. 서버 설계·운영 역량이 본체, 8년차 백엔드에게 <b>가장 문턱 낮은 AI 진입로</b> · ML Engineer(ML Platform) — <b>vLLM·SGLang·Triton·TensorRT-LLM 서빙, LLMOps(LLM Gateway·Vector DB), MLflow·Airflow·Kubeflow, GPU 클러스터</b></dd>
+        <dt>전형(실조사)</dt><dd>계열사 공통 후 실로 선택. 경력·ML은 <b>라이브 코딩 또는 사전과제</b> + 직무 + <b>문화적합성 인터뷰</b> + 레퍼런스. "왜 토스인가" + 오너십 사례, 이력서에 트래픽 지표 명시.</dd>
         <dt class="risk">체크포인트</dt><dd>업무 강도가 높기로 유명 — "열정적으로 일하고 싶다"는 성향과는 오히려 맞을 수 있으나, 워라밸 기대는 버려야 함.</dd>
         <dt>활용법</dt><dd>1차 지원 그룹. 여기서 오퍼를 받으면 Tier 1 협상의 강력한 지렛대가 됨.</dd>
       </dl>
@@ -594,9 +667,9 @@
       <div class="co-head"><span class="co-rank">⑨</span><h3 class="co-name">당근 (당근마켓)</h3></div>
       <dl class="co-body">
         <dt>왜 베이스라인</dt><dd>검색·추천·신뢰안전 등에 ML을 실제 대규모로 운영. 개발 문화 평판이 좋고 처우도 상위권.</dd>
-        <dt>예상 포지션</dt><dd>Server Engineer, ML Engineer (검색·추천), 플랫폼</dd>
-        <dt>준비 포인트</dt><dd>검색·추천 도메인이므로 라이너 준비(랭킹·리트리버)와 겹침 — 준비 효율이 좋음.</dd>
-        <dt class="risk">체크포인트</dt><dd>AI 네이티브 회사는 아님 — "LLM 중심으로 일하고 싶다"는 욕구가 얼마나 채워질지는 팀에 따라 다름. 지원 전 해당 팀의 기술 블로그 확인.</dd>
+        <dt>실제 공고</dt><dd>Backend(<b>Go·gRPC</b> 또는 Kotlin·Spring, 2,100만 MAU 인증·MSA 분산, 3년+) · ML Engineer-Search(NLP·그래프·랭킹, Python ML 파이프라인, A/B) · ML-피드/광고 추천(<b>"LLM 활용 개인화 추천"</b>, BigQuery·Kubeflow·TFX). AI 네이티브는 아니지만 추천·광고에 LLM 접목 중.</dd>
+        <dt>전형(실조사)</dt><dd>화상 <b>라이브 코딩</b>이 표준. ML 직군은 <b>ML 기초 테스트 + ML 모델 설계 인터뷰</b>, 백엔드 일부는 <b>시스템 디자인 인터뷰</b> 추가 + 별도 컬처핏. 3개월 수습.</dd>
+        <dt>준비 포인트</dt><dd>검색·추천 도메인이라 라이너 준비(랭킹·리트리버)와 겹침 — 효율 좋음. Go+gRPC는 본인에게 새로울 수 있으니 지원 전 소규모 학습.</dd>
       </dl>
     </article>
 
@@ -604,9 +677,9 @@
     <table>
       <thead><tr><th>회사</th><th>Tier</th><th>결정적 준비물</th><th>난이도</th><th>궁합</th></tr></thead>
       <tbody>
-        <tr><td>업스테이지</td><td>1</td><td>한국어 문서 QA + 평가 파이프라인</td><td>중상</td><td class="stars">★★★★★</td></tr>
-        <tr><td>뤼튼</td><td>1</td><td>비용 최적화·모델 라우팅 구현</td><td>중</td><td class="stars">★★★★☆</td></tr>
-        <tr><td>라이너</td><td>1</td><td>하이브리드 검색 + 리랭커 깊이</td><td>중상</td><td class="stars">★★★★☆</td></tr>
+        <tr><td>업스테이지</td><td>1</td><td>법령 QA <b>에이전트</b> + Evals + LangGraph (Tool Use·Function Calling)</td><td>중상</td><td class="stars">★★★★★</td></tr>
+        <tr><td>뤼튼</td><td>1</td><td>에이전트 + Langfuse 관측 + 모델 라우팅 (context eng.)</td><td>중</td><td class="stars">★★★★☆</td></tr>
+        <tr><td>라이너</td><td>1</td><td>하이브리드 검색 + 리랭커 (Elasticsearch·nDCG/MRR) + agentic 평가</td><td>중상</td><td class="stars">★★★★☆</td></tr>
         <tr><td>프렌들리AI</td><td>1</td><td>C++·vLLM 분석·기여</td><td>상</td><td class="stars">★★★★☆</td></tr>
         <tr><td>트웰브랩스</td><td>1.5</td><td>영어 + 플랫폼 역량</td><td>최상</td><td class="stars">★★★☆☆</td></tr>
         <tr><td>몰로코</td><td>2</td><td>LeetCode 상향 + 영어</td><td>최상</td><td class="stars">★★★☆☆</td></tr>
