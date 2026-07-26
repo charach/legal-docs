@@ -32,43 +32,53 @@
     font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased;
     min-height: 100vh;
     background:
-      radial-gradient(1200px 600px at 100% -10%, rgba(14,165,233,.10), transparent 60%),
-      radial-gradient(900px 500px at -10% 20%, rgba(20,184,166,.08), transparent 55%),
+      radial-gradient(1200px 600px at 100% -10%, rgba(14,165,233,.12), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(20,184,166,.09), transparent 55%),
+      radial-gradient(700px 500px at 50% 120%, rgba(139,92,246,.06), transparent 60%),
       var(--bg);
     background-attachment: fixed;
   }
   .wrap { max-width: 720px; margin: 0 auto; padding: 0 18px calc(80px + env(safe-area-inset-bottom)); }
 
-  header.hero { padding: 56px 0 26px; text-align: center; }
+  header.hero { padding: 54px 0 24px; text-align: center; }
   .kicker {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase;
     color: var(--sky-deep); font-weight: 700;
-    background: rgba(14,165,233,.10); padding: 6px 14px; border-radius: 999px; margin-bottom: 16px;
+    background: rgba(14,165,233,.10); padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
+    animation: rise .5s .02s both;
   }
-  header.hero h1 { font-weight: 900; font-size: clamp(28px, 7vw, 44px); margin: 0 0 8px; letter-spacing: -.5px; }
-  header.hero p { color: var(--ink-soft); margin: 0; font-size: 14px; }
+  header.hero h1 { font-weight: 900; font-size: clamp(28px, 7vw, 44px); margin: 0 0 10px; letter-spacing: -.5px; animation: rise .5s .06s both; }
+  header.hero h1 .wave { display: inline-block; transform-origin: 70% 80%; animation: wave 2.4s ease .8s 2; }
+  header.hero .datechip {
+    display: inline-flex; align-items: center; gap: 7px; color: var(--ink-soft); font-size: 13px; font-weight: 500;
+    animation: rise .5s .1s both;
+  }
+  header.hero .datechip .d { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
 
-  .cards { display: grid; gap: 14px; margin-top: 8px; }
+  .cards { display: grid; gap: 15px; margin-top: 10px; }
 
   a.card {
     display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit;
-    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
-    padding: 20px; box-shadow: var(--shadow);
-    transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    padding: 20px 22px; box-shadow: var(--shadow);
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
     position: relative; overflow: hidden;
+    animation: rise .55s both;
   }
+  a.card:nth-of-type(1) { animation-delay: .14s; }
+  a.card:nth-of-type(2) { animation-delay: .22s; }
   a.card::before {
     content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
     background: var(--accent, var(--sky));
   }
   a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--line-strong); }
-  a.card:active { transform: translateY(-1px); }
+  a.card:active { transform: translateY(-1px) scale(.995); }
 
   a.card .ic {
-    flex: none; width: 58px; height: 58px; border-radius: 15px;
-    display: flex; align-items: center; justify-content: center; font-size: 28px;
-    background: var(--ic-bg, #e6f3fb);
+    flex: none; width: 60px; height: 60px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center; font-size: 29px;
+    background: var(--ic-bg, #e6f3fb); box-shadow: 0 4px 12px rgba(15,39,64,.06);
   }
   a.card .body { min-width: 0; flex: 1; }
   a.card .tag {
@@ -78,15 +88,43 @@
   }
   a.card h2 { font-size: 18px; font-weight: 800; margin: 0 0 4px; letter-spacing: -.3px; line-height: 1.3; }
   a.card p { margin: 0; font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
-  a.card .arrow { flex: none; color: var(--muted); font-size: 22px; transition: transform .14s ease, color .14s ease; }
+
+  /* live D-day chip */
+  a.card .dday {
+    position: absolute; top: 14px; right: 16px;
+    font-size: 12px; font-weight: 700; color: var(--accent, var(--sky-deep));
+    background: var(--ic-bg, #e6f3fb); padding: 4px 11px; border-radius: 999px;
+    letter-spacing: .02em; line-height: 1.2; white-space: nowrap;
+  }
+  a.card .dday b { font-weight: 900; font-size: 13.5px; }
+  a.card .dday.soon { color: var(--muted); background: #eef3f7; }
+  a.card .dday.done { color: #b45309; background: #fef3c7; }
+
+  /* progress meta */
+  a.card .meta { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+  a.card .bar { flex: 1; height: 6px; border-radius: 999px; background: #e9f0f6; overflow: hidden; }
+  a.card .bar > i {
+    display: block; height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--accent, var(--sky)), var(--teal));
+    border-radius: 999px; transition: width .9s cubic-bezier(.22,1,.36,1);
+  }
+  a.card .meta-txt { font-size: 11.5px; font-weight: 700; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  a.card .meta-txt b { color: var(--accent, var(--sky-deep)); }
+
+  a.card .arrow { flex: none; color: var(--muted); font-size: 22px; transition: transform .16s ease, color .16s ease; align-self: center; }
   a.card:hover .arrow { transform: translateX(4px); color: var(--accent, var(--sky-deep)); }
 
-  .foot { text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; }
+  .foot { text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; animation: rise .5s .32s both; }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes wave { 0%,60%,100%{ transform: rotate(0); } 15%{ transform: rotate(16deg); } 30%{ transform: rotate(-8deg); } 45%{ transform: rotate(12deg); } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
 
   @media (max-width: 480px) {
-    a.card { padding: 16px; gap: 13px; }
-    a.card .ic { width: 50px; height: 50px; font-size: 24px; border-radius: 13px; }
-    a.card h2 { font-size: 16px; }
+    header.hero { padding: 40px 0 20px; }
+    a.card { padding: 16px 18px; gap: 14px; }
+    a.card .ic { width: 52px; height: 52px; font-size: 25px; border-radius: 14px; }
+    a.card h2 { font-size: 16px; padding-right: 56px; }
     a.card .arrow { display: none; }
   }
 </style>
@@ -95,29 +133,35 @@
 <div class="wrap">
   <header class="hero">
     <span class="kicker">🗂 Personal</span>
-    <h1>개인 페이지</h1>
-    <p>보고 싶은 페이지를 선택하세요</p>
+    <h1><span id="greet">개인 페이지</span> <span class="wave">👋</span></h1>
+    <span class="datechip"><span class="d"></span><span id="today">–</span></span>
   </header>
 
   <div class="cards">
 
-    <a class="card" href="exercise.html" style="--accent:#0ea5e9;--ic-bg:#e0f2fe">
+    <a class="card" href="exercise.html" data-start="2026-07-22" data-race="2026-10-04" style="--accent:#0ea5e9;--ic-bg:#e0f2fe">
       <span class="ic">🏊‍♂️</span>
       <span class="body">
         <span class="tag">Training</span>
         <h2>2026 구례 아이언맨 훈련 캘린더</h2>
-        <p>74일 일자별 훈련 · 매일 클릭하면 아침·저녁 운동 팝업 (7/22 ~ 10/4)</p>
+        <p>74일 일자별 훈련 · 매일 아침·저녁 운동 팝업 (7/22 ~ 10/4)</p>
+        <span class="meta">
+          <span class="bar"><i></i></span>
+          <span class="meta-txt"><b class="prog">–</b> 완료</span>
+        </span>
       </span>
+      <span class="dday">–</span>
       <span class="arrow">→</span>
     </a>
 
-    <a class="card" href="career_roadmap.html" style="--accent:#8b5cf6;--ic-bg:#ede9fe">
+    <a class="card" href="career_roadmap.html" data-start="2026-08-01" data-goal="2027-12-31" style="--accent:#8b5cf6;--ic-bg:#ede9fe">
       <span class="ic">🚀</span>
       <span class="body">
         <span class="tag">Career</span>
         <h2>커리어 전환 로드맵</h2>
-        <p>삼성전자 → AI Product Engineer 단계별 전환 계획</p>
+        <p>삼성전자 → AI Product Engineer · Ⅰ–Ⅳ 단계 (2026–2027)</p>
       </span>
+      <span class="dday">–</span>
       <span class="arrow">→</span>
     </a>
 
@@ -125,5 +169,57 @@
 
   <p class="foot">🔒 개인용 · 검색 비노출</p>
 </div>
+
+<script>
+(function(){
+  var today = new Date(); today.setHours(0,0,0,0);
+  function d(s){ return new Date(s+'T00:00:00'); }
+  function days(a,b){ return Math.round((b-a)/86400000); }
+
+  /* greeting + date */
+  var h = new Date().getHours();
+  var g = h<6 ? '새벽이에요' : h<12 ? '좋은 아침이에요' : h<18 ? '좋은 오후예요' : '좋은 저녁이에요';
+  document.getElementById('greet').textContent = g;
+  var wd = ['일','월','화','수','목','금','토'][today.getDay()];
+  document.getElementById('today').textContent =
+    (today.getMonth()+1)+'월 '+today.getDate()+'일 ('+wd+')';
+
+  /* per-card live status */
+  document.querySelectorAll('a.card').forEach(function(card){
+    var chip = card.querySelector('.dday');
+    var bar  = card.querySelector('.bar > i');
+    var prog = card.querySelector('.prog');
+    var startS = card.dataset.start, raceS = card.dataset.race, goalS = card.dataset.goal;
+    var start = startS ? d(startS) : null;
+
+    // not started yet → countdown to start
+    if(start && today < start){
+      chip.innerHTML = 'D–<b>'+days(today,start)+'</b> 시작';
+      chip.classList.add('soon');
+      if(prog) prog.textContent = '시작 전';
+      return;
+    }
+
+    var end = raceS ? d(raceS) : (goalS ? d(goalS) : null);
+    if(end){
+      var dd = days(today, end);
+      if(raceS){
+        chip.innerHTML = dd>0 ? 'D–<b>'+dd+'</b>' : (dd===0 ? '<b>D-DAY</b>' : '<b>완주 🎉</b>');
+        if(dd<0) chip.classList.add('done');
+      } else {
+        chip.innerHTML = '진행 중';
+        chip.classList.add('soon');
+      }
+      if(start && bar){
+        var total = days(start, end);
+        var done = Math.min(Math.max(days(start, today),0), total);
+        var pct = Math.round(done/total*100);
+        requestAnimationFrame(function(){ bar.style.width = pct+'%'; });
+        if(prog) prog.textContent = pct+'%';
+      }
+    }
+  });
+})();
+</script>
 </body>
 </html>

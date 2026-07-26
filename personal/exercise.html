@@ -185,13 +185,27 @@
   @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
   .modal {
     background: var(--card); width: 100%; max-width: 520px;
-    border-radius: 22px 22px 0 0; padding: 22px 20px calc(24px + env(safe-area-inset-bottom));
+    border-radius: 24px 24px 0 0; padding: 8px 20px calc(24px + env(safe-area-inset-bottom));
     box-shadow: 0 -10px 40px rgba(9,30,52,.25);
-    animation: slideup .24s cubic-bezier(.22,1,.36,1);
-    max-height: 88vh; overflow-y: auto;
+    animation: slideup .26s cubic-bezier(.22,1,.36,1);
+    max-height: 90vh; overflow-y: auto; overscroll-behavior: contain;
+    transition: transform .26s cubic-bezier(.22,1,.36,1);
+    will-change: transform; touch-action: pan-y;
   }
-  @keyframes slideup { from { transform: translateY(30px); } to { transform: translateY(0); } }
-  .modal .grabber { width: 40px; height: 4px; border-radius: 999px; background: var(--line-strong); margin: 0 auto 16px; }
+  .modal.dragging { transition: none; animation: none; }
+  @keyframes slideup { from { transform: translateY(40px); } to { transform: translateY(0); } }
+  .modal .grabber {
+    position: sticky; top: 0; z-index: 2;
+    width: 100%; padding: 12px 0 10px; margin: 0 auto 6px;
+    display: flex; justify-content: center; cursor: grab;
+    background: linear-gradient(180deg, var(--card) 70%, transparent);
+  }
+  .modal .grabber::before {
+    content: ""; width: 44px; height: 5px; border-radius: 999px;
+    background: var(--line-strong); transition: background .15s, width .15s;
+  }
+  .modal.dragging .grabber { cursor: grabbing; }
+  .modal.dragging .grabber::before { background: var(--sky); width: 54px; }
   .modal .m-date { font-size: 12px; font-weight: 700; color: var(--sky-deep); letter-spacing: .04em; }
   .modal .m-title { font-size: 22px; font-weight: 900; margin: 4px 0 2px; letter-spacing: -.4px; }
   .modal .m-phase {
@@ -204,16 +218,19 @@
   }
   .modal .m-goal b { color: var(--ink); }
   .slot {
-    display: flex; gap: 12px; padding: 14px 2px; border-top: 1px solid var(--line);
+    display: flex; gap: 12px; padding: 13px; margin-top: 10px;
+    border: 1px solid var(--line); border-radius: 14px;
+    background: linear-gradient(180deg, #fcfeff, #f6fbfe);
   }
-  .slot:first-of-type { border-top: 1px solid var(--line); }
+  .slot.am { background: linear-gradient(135deg,#fffbf0,#fff6e0); border-color:#f6e6c0; }
+  .slot.pm { background: linear-gradient(135deg,#f3f8ff,#e9f2ff); border-color:#d4e4f7; }
   .slot .ic {
-    flex: none; width: 40px; height: 40px; border-radius: 11px;
-    display: flex; align-items: center; justify-content: center; font-size: 19px;
-    background: var(--bg-2);
+    flex: none; width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+    background: var(--bg-2); box-shadow: 0 2px 6px rgba(15,39,64,.06);
   }
-  .slot .ic.am { background: linear-gradient(135deg,#fef3c7,#fde68a); }
-  .slot .ic.pm { background: linear-gradient(135deg,#dbeafe,#bfdbfe); }
+  .slot .ic.am { background: linear-gradient(135deg,#fde68a,#fcd34d); }
+  .slot .ic.pm { background: linear-gradient(135deg,#bfdbfe,#93c5fd); }
   .slot .body .when { font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
   .slot .body .txt { font-size: 14px; line-height: 1.55; margin-top: 2px; color: var(--ink); }
   .slot .body .txt b { color: var(--sky-deep); }
@@ -603,8 +620,8 @@ function openModal(ds){
   if(goal) html += '<div class="m-goal">🎯 <b>주간 목표</b> · '+goal+'</div>';
   if(VAC.has(ds)) html += '<div class="m-vac">✈️ <b>일본 여행 (7/22~26)</b> · 가벼운 러닝(1시간+ 가능) + 맨몸 운동 위주. 수영·자전거는 쉬고 부담 없이 컨디션 우선, 관광 걷기도 좋은 유산소. 정식 훈련은 7/27부터.</div>';
 
-  html += '<div class="slot"><div class="ic am">🌅</div><div class="body"><div class="when">아침 · Morning</div><div class="txt">'+am+'</div></div></div>';
-  html += '<div class="slot"><div class="ic pm">🌙</div><div class="body"><div class="when">저녁 · Evening</div><div class="txt">'+pm+'</div></div></div>';
+  html += '<div class="slot am"><div class="ic am">🌅</div><div class="body"><div class="when">아침 · Morning</div><div class="txt">'+am+'</div></div></div>';
+  html += '<div class="slot pm"><div class="ic pm">🌙</div><div class="body"><div class="when">저녁 · Evening</div><div class="txt">'+pm+'</div></div></div>';
 
   const stxt = am + ' ' + pm;
   if(/근력\s*A/.test(stxt)) html += strengthBox('A');
@@ -628,6 +645,53 @@ function strengthBox(key){
   '</div>';
 }
 function closeModal(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
+
+/* ---------- drag-to-dismiss (mobile bottom sheet) ---------- */
+(function(){
+  const modal = document.getElementById('modal');
+  let startY = 0, lastY = 0, dragging = false, canDrag = false;
+  const DISMISS = 110;
+
+  function down(e){
+    const t = e.touches ? e.touches[0] : e;
+    startY = lastY = t.clientY;
+    dragging = true;
+    canDrag = modal.scrollTop <= 0;   // pull-to-dismiss only from the top
+    modal.classList.add('dragging');
+  }
+  function move(e){
+    if(!dragging) return;
+    const t = e.touches ? e.touches[0] : e;
+    const dy = t.clientY - startY;
+    lastY = t.clientY;
+    if(dy > 0 && canDrag){
+      if(e.cancelable) e.preventDefault();
+      modal.style.transform = 'translateY(' + dy + 'px)';
+      overlay.style.background = 'rgba(9,30,52,' + Math.max(0, 0.55 - dy/800) + ')';
+    } else if(dy <= 0){
+      modal.style.transform = '';
+      overlay.style.background = '';
+    }
+  }
+  function up(){
+    if(!dragging) return;
+    dragging = false;
+    modal.classList.remove('dragging');
+    const dy = lastY - startY;
+    if(dy > DISMISS && canDrag){
+      modal.style.transform = 'translateY(100%)';
+      overlay.style.background = 'rgba(9,30,52,0)';
+      setTimeout(function(){ closeModal(); modal.style.transform=''; overlay.style.background=''; }, 220);
+    } else {
+      modal.style.transform = '';
+      overlay.style.background = '';
+    }
+  }
+  modal.addEventListener('touchstart', down, {passive:true});
+  modal.addEventListener('touchmove', move, {passive:false});
+  modal.addEventListener('touchend', up);
+  modal.addEventListener('touchcancel', up);
+})();
 
 document.getElementById('closeBtn').addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if(e.target===overlay) closeModal(); });
