@@ -101,18 +101,6 @@
   .lg { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--ink-soft); }
   .lg .dot { width: 11px; height: 11px; border-radius: 50%; flex: none; }
 
-  /* ---------- Toolbar ---------- */
-  .toolbar { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 14px 0 6px; flex-wrap: wrap; }
-  .btn {
-    appearance: none; border: 1px solid var(--line-strong); background: var(--card);
-    color: var(--sky-deep); font-family: inherit; font-weight: 700; font-size: 13px;
-    padding: 9px 16px; border-radius: 999px; cursor: pointer; box-shadow: var(--shadow);
-    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
-  }
-  .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
-  .btn:active { transform: translateY(0); }
-  .btn.primary { background: linear-gradient(135deg, var(--sky), var(--sky-deep)); color: #fff; border-color: transparent; }
-
   /* ---------- Calendar ---------- */
   .month { margin: 26px 0 8px; }
   .month-head {
@@ -270,7 +258,9 @@
     margin-top: 18px; width: 100%; text-align: center;
     background: var(--ink); color: #fff; border: none; border-radius: 12px;
     padding: 13px; font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer;
+    touch-action: manipulation; position: relative; z-index: 3;
   }
+  .m-close:active { background: #1c3d5e; }
 
   /* ---------- Footer note ---------- */
   .foot { text-align: center; color: var(--muted); font-size: 12px; margin: 40px 0 0; line-height: 1.7; }
@@ -324,10 +314,6 @@
   </div>
 
   <div class="legend" id="legend"></div>
-
-  <div class="toolbar">
-    <button class="btn primary" id="todayBtn">📍 오늘 운동 보기</button>
-  </div>
 
   <div id="calendar"></div>
 
@@ -632,6 +618,10 @@ function openModal(ds){
   html += '<div class="m-tags">'+tags.map(t=>'<span class="m-tag" style="background:'+CAT[t].color+'">'+CAT[t].emoji+' '+CAT[t].label+'</span>').join('')+'</div>';
 
   mc.innerHTML = html;
+  const modalEl = document.getElementById('modal');
+  modalEl.style.transform = '';       // 이전 드래그 잔여 상태 초기화
+  overlay.style.background = '';
+  modalEl.scrollTop = 0;
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -649,42 +639,50 @@ function closeModal(){ overlay.classList.remove('open'); document.body.style.ove
 /* ---------- drag-to-dismiss (mobile bottom sheet) ---------- */
 (function(){
   const modal = document.getElementById('modal');
-  let startY = 0, lastY = 0, dragging = false, canDrag = false;
-  const DISMISS = 110;
+  const DISMISS = 110;   // 이만큼 내리면 닫힘
+  const SLOP = 10;       // 탭과 드래그를 구분하는 여유 거리
+  let startY = 0, dy = 0, tracking = false, dragging = false, canDrag = false;
 
+  function reset(){
+    modal.style.transform = '';
+    overlay.style.background = '';
+  }
   function down(e){
+    tracking = false; dragging = false; dy = 0;
+    // 버튼·링크 위에서 시작한 터치는 드래그로 가로채지 않는다 (닫기 버튼 탭 보호)
+    if(e.target.closest('button, a, input, textarea, select')) return;
     const t = e.touches ? e.touches[0] : e;
-    startY = lastY = t.clientY;
-    dragging = true;
+    startY = t.clientY;
+    tracking = true;
     canDrag = modal.scrollTop <= 0;   // pull-to-dismiss only from the top
-    modal.classList.add('dragging');
   }
   function move(e){
-    if(!dragging) return;
+    if(!tracking) return;
     const t = e.touches ? e.touches[0] : e;
-    const dy = t.clientY - startY;
-    lastY = t.clientY;
-    if(dy > 0 && canDrag){
-      if(e.cancelable) e.preventDefault();
-      modal.style.transform = 'translateY(' + dy + 'px)';
-      overlay.style.background = 'rgba(9,30,52,' + Math.max(0, 0.55 - dy/800) + ')';
-    } else if(dy <= 0){
-      modal.style.transform = '';
-      overlay.style.background = '';
+    dy = t.clientY - startY;
+    if(!dragging){
+      // SLOP 이전에는 preventDefault 하지 않음 → 탭이 click 으로 정상 변환됨
+      if(!canDrag || dy <= SLOP) return;
+      dragging = true;
+      modal.classList.add('dragging');
     }
+    if(e.cancelable) e.preventDefault();
+    const off = Math.max(0, dy - SLOP);
+    modal.style.transform = 'translateY(' + off + 'px)';
+    overlay.style.background = 'rgba(9,30,52,' + Math.max(0, 0.55 - off/800) + ')';
   }
   function up(){
-    if(!dragging) return;
+    if(!tracking) return;
+    tracking = false;
+    if(!dragging) return;             // 단순 탭 → 아무 동작도 하지 않음
     dragging = false;
     modal.classList.remove('dragging');
-    const dy = lastY - startY;
-    if(dy > DISMISS && canDrag){
+    if(dy - SLOP > DISMISS){
       modal.style.transform = 'translateY(100%)';
       overlay.style.background = 'rgba(9,30,52,0)';
-      setTimeout(function(){ closeModal(); modal.style.transform=''; overlay.style.background=''; }, 220);
+      setTimeout(function(){ closeModal(); reset(); }, 220);
     } else {
-      modal.style.transform = '';
-      overlay.style.background = '';
+      reset();
     }
   }
   modal.addEventListener('touchstart', down, {passive:true});
@@ -708,7 +706,6 @@ function goToday(){
   const el = document.querySelector('.cell.today') || document.querySelector('[data-date="'+ds+'"]');
   if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
 }
-document.getElementById('todayBtn').addEventListener('click', goToday);
 document.getElementById('fab').addEventListener('click', goToday);
 
 /* hide fab while modal open */
