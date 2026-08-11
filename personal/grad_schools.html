@@ -126,7 +126,7 @@
     box-shadow: var(--shadow); overflow: hidden;
   }
   .scroller { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1480px; font-size: 13px; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1700px; font-size: 13px; }
   thead th {
     position: sticky; top: 0; z-index: 3;
     background: #eef6fc; color: var(--ink); font-weight: 800; font-size: 11.5px;
@@ -184,6 +184,10 @@
   .fillbar { width: 62px; height: 5px; background:#eef2f6; border-radius: 999px; overflow: hidden; margin-top: 4px; }
   .fillbar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--sky), var(--teal)); }
 
+  .apply { display:inline-block; font-size:12px; font-weight:800; white-space:nowrap;
+    padding:3px 9px; border-radius:999px; background:#f1f5f9; color:#64748b; }
+  .apply.ok { background:#dcfce7; color:#15803d; }
+  .applyref { display:block; font-size:10.5px; color:var(--muted); margin-top:4px; max-width:235px; line-height:1.45; }
   .clamp { max-width: 250px; font-size: 12px; color: var(--ink-soft); line-height: 1.5;
     display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .clamp.note { max-width: 300px; }
@@ -371,6 +375,9 @@
       <li><b>학비 출처는 두 가지</b>입니다. ① 대학알리미 2025 공시(학기당 수업료) ② 각 학교 공식 등록금 공지·모집요강. ②로 확인된 곳(연세대·고려대·한양대 AI융합·서강대·이화여대·아주대 IT융합·평택대·방송통신대)은 <b>입학금까지 총액에 포함</b>했고, 비고에 근거를 적었습니다.</li>
       <li>아직 학비를 못 채운 곳은 <b>5곳(성균관대 데이터사이언스융합·건국대 정보통신·한국공학대·인천대·한양대 ERICA)</b>입니다. 공지·모집요강·대학알리미 어디에도 금액이 없고 학사시스템 고지서나 행정실 문의로만 확인되는 경우라, 추정치를 넣는 대신 “확인 필요”로 남겼습니다. 각 행의 비고에 문의처를 적어뒀습니다.</li>
       <li>출처: <a href="http://phdkim.net/gradinfo/school/list?type=%ED%8A%B9%EC%88%98%EB%8C%80%ED%95%99%EC%9B%90&amp;category=%EA%B3%B5%ED%95%99" target="_blank" rel="noopener">김박사넷 대학원 정보(대학알리미 기반)</a> · <a href="https://www.academyinfo.go.kr" target="_blank" rel="noopener">대학알리미</a> · <a href="https://datapoint.tistory.com/28" target="_blank" rel="noopener">datapoint 블로그</a> · 각 대학원 공식 모집요강 · 각 해외 프로그램 공식 홈페이지</li>
+      <li>🗓 <b>원서접수 일정</b>은 5개 학교(한양대·고려대·연세대·숭실대·국민대)만 공식 요강에서 확정 일정을 확인했고 <span style="color:#15803d;font-weight:700">초록 배지</span>로 표시했습니다.
+      나머지는 국내 특수대학원 <b>일반 주기(전기 10~11월 접수 → 3월 입학 / 후기 4~5월 접수 → 9월 입학)</b> 기준 추정이니 반드시 학교 공지를 확인하세요.
+      2027학년도 전기 요강은 보통 <b>9월경</b> 공고됩니다.</li>
       <li>기준 시점: <b id="asof">–</b> · 지원 전 반드시 공식 모집요강 원문을 확인하세요.</li>
     </ul>
   </div>
@@ -397,255 +404,255 @@
 const RAW = [
 /* ── 서울 · AI 특화 특수대학원 ─────────────────────── */
 {s:"한양대학교", g:"인공지능융합대학원", m:"인공지능시스템학과", mdesc:"AI Systems",
- c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:8637000, adm:1030000, cr:7.05, fr:105, qt:40,
+ c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:8637000, adm:1030000, cr:7.05, fr:105, qt:40, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 5/6~5/15 · 서류 ~5/18 · 면접 6/13 · 발표 6/26 · 등록 7/6~8 · 전형료 7만원",
  site:"https://gsai.hanyang.ac.kr/", tags:["ai"],
  req:"4년제 학사 (전공 무관) · 서류(자기소개서·학업계획서) + 면접 · 재직증명서 제출 권장 · 영어/수학 시험 없음",
  note:"2025 경쟁률 7.05:1로 국내 특수대학원 최상위. 3년 연속 상승(5.68→6.15→7.05)이라 준비 없이 넣으면 위험. 국내 최초 ON/OFF 하이브리드 운영이라 야근 잦은 직장인에게 가장 유리. 2024 졸업생 취업률 100%(21명 중 20명). <b>2026학년도 공식 등록금: 입학금 1,030,000원 + 수업료 8,637,000원/학기(2.6% 인상)</b> — 대학알리미 공시값이 아니라 학교 공지 기준."},
 
 {s:"고려대학교", g:"SW·AI융합대학원", m:"인공지능융합학과 (AAI)", mdesc:"AI Convergence",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7718000, adm:1234000, cr:3.39, fr:87.7, qt:125,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7718000, adm:1234000, cr:3.39, fr:87.7, qt:125, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 3/31~4/9 · 서류 ~4/10 · 구술 5/9 · 발표 6/4",
  site:"https://gscit.korea.ac.kr/", tags:["ai"],
  req:"4년제 학사 또는 취득예정 (타 전공 지원 가능) · 서류전형 + 구술시험(면접) · GRE/영어시험 없음",
  note:"학기당 772만원 × 5학기 = <b>총 3,982만원(입학금 포함)</b>으로 국내 표에서 최상위권 학비. 안암캠퍼스. 재학생 304명 규모로 네트워크가 넓고, 빅데이터·SW보안 학과와 과목 교차 수강 가능. 총원율 87.7%로 정원을 다 채우지 못함 → 겉보기 경쟁률(3.39)보다 실제 문턱은 낮음."},
 
 {s:"고려대학교", g:"SW·AI융합대학원", m:"빅데이터융합학과 (BDC)", mdesc:"Big Data Convergence",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7718000, adm:1234000, cr:3.39, fr:87.7, qt:168,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7718000, adm:1234000, cr:3.39, fr:87.7, qt:168, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 3/31~4/9 · 서류 ~4/10 · 구술 5/9 · 발표 6/4",
  site:"https://gscit.korea.ac.kr/", tags:["data"],
  req:"4년제 학사 또는 취득예정 (타 전공 지원 가능) · 서류전형 + 구술시험(면접)",
  note:"학과 정원 168명으로 SW·AI융합대학원 내 최대 규모 = 상대적으로 붙기 쉬운 라인. 데이터 엔지니어링·분석 실무 중심 커리큘럼."},
 
 {s:"고려대학교", g:"SW·AI융합대학원", m:"소프트웨어보안학과 (SWS)", mdesc:"Software Security",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7718000, adm:1234000, cr:3.39, fr:87.7, qt:55,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7718000, adm:1234000, cr:3.39, fr:87.7, qt:55, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 3/31~4/9 · 서류 ~4/10 · 구술 5/9 · 발표 6/4",
  site:"https://gscit.korea.ac.kr/", tags:["cs"],
  req:"4년제 학사 또는 취득예정 (타 전공 지원 가능) · 서류전형 + 구술시험(면접)",
  note:"정원 55명으로 세 학과 중 가장 작음. 보안 커리어를 노리는 게 아니라면 AAI/BDC가 목적에 더 맞음."},
 
 {s:"연세대학교", g:"인공지능융합대학원", m:"인공지능컴퓨팅전공", mdesc:"AI Computing",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:3.07, fr:58.6, qt:35,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:3.07, fr:58.6, qt:35, apply:"2026.10~11 (학교 공식)", applyRef:"학교 공식 안내: 전기 10~11월 / 후기 4~5월 · 1단계 서류 + 2단계 구술(온라인 불가) · 전형료 8.5만원",
  site:"https://gcomputing.yonsei.ac.kr/", tags:["ai"],
  req:"4년제 학사 (학부 전공 무관) · 서류 + 면접 · 입학금 별도 약 120만원",
  note:"2025년 3월 신설. 지원자 215명 / 경쟁률 3.07:1이었지만 총원율 58.6% — 정원 70명 중 41명만 등록했다는 뜻이라 실제 합격 가능성은 숫자보다 훨씬 높았음. 평일(월·화·목) 야간, 신촌. 다만 <b>학기당 1,038만원 × 4학기 + 입학금 = 총 4,272만원</b>으로 이 표의 국내 프로그램 중 가장 비쌈."},
 
 {s:"연세대학교", g:"인공지능융합대학원", m:"컴퓨터·소프트웨어전공", mdesc:"Computer & Software",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:3.07, fr:58.6, qt:35,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:3.07, fr:58.6, qt:35, apply:"2026.10~11 (학교 공식)", applyRef:"학교 공식 안내: 전기 10~11월 / 후기 4~5월 · 1단계 서류 + 2단계 구술(온라인 불가) · 전형료 8.5만원",
  site:"https://gcomputing.yonsei.ac.kr/", tags:["cs"],
  req:"4년제 학사 (학부 전공 무관) · 서류 + 면접",
  note:"AI컴퓨팅전공과 동일 대학원·동일 학비. 순수 CS 기초(시스템·SW공학)를 다지고 싶다면 이쪽."},
 
 {s:"연세대학교", g:"공학대학원", m:"인공지능전공", mdesc:"Artificial Intelligence",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:2.84, fr:98.8, qt:71,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:2.84, fr:98.8, qt:71, apply:"2026.10~11 (학교 공식)", applyRef:"학교 공식 안내: 전기 10~11월 / 후기 4~5월 · 1단계 서류 + 2단계 구술(온라인 불가) · 전형료 8.5만원",
  site:"https://eyonsei.yonsei.ac.kr/", tags:["ai"],
  req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
  note:"신설된 인공지능융합대학원과 달리 역사가 길고 총원율 98.8%로 정원이 거의 다 참 → 그만큼 안정적으로 운영됨. 재학생 605명 규모. 산업공학·정보산업관리 등 타 전공 과목 병행 수강 가능."},
 
 {s:"연세대학교", g:"공학대학원", m:"컴퓨터소프트웨어전공", mdesc:"Computer Software",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:2.84, fr:98.8, qt:60,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:2.84, fr:98.8, qt:60, apply:"2026.10~11 (학교 공식)", applyRef:"학교 공식 안내: 전기 10~11월 / 후기 4~5월 · 1단계 서류 + 2단계 구술(온라인 불가) · 전형료 8.5만원",
  site:"https://eyonsei.yonsei.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접",
  note:"AI 전공보다 SW 엔지니어링 비중이 큼. 학비는 동일."},
 
 {s:"성균관대학교", g:"정보통신대학원", m:"빅데이터학과", mdesc:"Big Data",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7001000, cr:4.02, fr:82, qt:185,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7001000, cr:4.02, fr:82, qt:185, apply:"2026.10~11 예상",
  site:"https://gsic.skku.edu/", tags:["data"],
  req:"4년제 학사 또는 동등 학력 · 서류 + 면접 · 재직증명서",
  note:"경쟁률 4.02:1로 높은 편이지만 총원율은 82%라 정원 미달. 정원 185명으로 규모가 커서 실질 진입은 생각보다 열려 있음. 학기당 700만원 × 5학기 = 총 3,501만원. 2024 취업률 93.9%, 서울 종로 인문사회캠퍼스 야간."},
 
 {s:"성균관대학교", g:"정보통신대학원", m:"정보보호학과", mdesc:"Information Security",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7001000, cr:4.02, fr:82, qt:65,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7001000, cr:4.02, fr:82, qt:65, apply:"2026.10~11 예상",
  site:"https://gsic.skku.edu/", tags:["cs"],
  req:"4년제 학사 또는 동등 학력 · 서류 + 면접",
  note:"보안 특화. AI/데이터가 목표라면 빅데이터학과가 맞음."},
 
 {s:"성균관대학교", g:"소프트웨어융합대학원", m:"데이터사이언스융합학과", mdesc:"Data Science (일반대학원)",
- c:"한국", r:"서울", t:"일반", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null,
+ c:"한국", r:"서울", t:"일반", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null, apply:"2026.10~11 예상",
  site:"https://skb.skku.edu/ads/", tags:["data"],
  req:"4년제 학사 · 재직자 대상 · 서류 + 면접 · 자세한 요건은 대학원 입학홈페이지 확인",
  note:"⭐ 특수대학원이 아니라 일반대학원 소속이라 학위 명칭이 '일반대학원 석사' — 이후 박사 진학이나 학위 인식 면에서 유리. 2025학년도까지 평일 야간 + 토요일 운영이었으나 2026학년도부터 토요일 수업 폐지, 평일 야간(18~21시)으로 일원화. 등록금·경쟁률 미공시라 학과 문의(031-290-5928) 필요."},
 
 {s:"서강대학교", g:"AI·SW대학원", m:"인공지능전공", mdesc:"Artificial Intelligence",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null, apply:"2026.10~11 예상",
  site:"https://gsinfo.sogang.ac.kr/", tags:["ai"],
  req:"4년제 학사 · 서류 + 면접 · 입시요강 PDF는 대학원 홈페이지에서 다운로드 (문의 02-705-8685)",
  note:"⭐ 총원율 61.4% — 2025년 86명만 등록했고 정원을 크게 못 채웠음. 서울 상위권 중 실질 진입 난이도가 가장 낮은 축. 재학생 415명으로 규모는 큼. 주말 수업 없이 평일 야간만 운영. <b>학교 공지(2026-1학기) 기준 수업료 6,406,000원 + 원우회비 150,000원 = 학기당 6,556,000원</b>이며, 표의 총액에는 수업료만 반영했습니다(원우회비 5학기 75만원 별도)."},
 
 {s:"서강대학교", g:"AI·SW대학원", m:"데이터사이언스전공", mdesc:"Data Science",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null, apply:"2026.10~11 예상",
  site:"https://gsinfo.sogang.ac.kr/", tags:["data"],
  req:"4년제 학사 · 서류 + 면접",
  note:"AI전공과 동일 대학원. 통계·분석 중심으로 접근하고 싶다면 이쪽."},
 
 {s:"서강대학교", g:"AI·SW대학원", m:"소프트웨어공학·컴퓨터시스템전공", mdesc:"SW Eng. & Computer Systems",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null, apply:"2026.10~11 예상",
  site:"https://gsinfo.sogang.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접",
  note:"비전공자가 CS 기초부터 다지기에 가장 무난한 트랙."},
 
 {s:"서강대학교", g:"AI·SW대학원", m:"보안·블록체인전공", mdesc:"Security & Blockchain",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null, apply:"2026.10~11 예상",
  site:"https://gsinfo.sogang.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접",
  note:"보안 특화 트랙."},
 
 {s:"숭실대학교", g:"정보과학대학원", m:"인공지능학과", mdesc:"Artificial Intelligence",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:53,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:53, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/13~5/7 · 면접 5/15(19시) · 발표 5/20 · 등록 7/7~9 · 전형료 7만원",
  site:"https://itmba.ssu.ac.kr/", tags:["ai"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접 · 재직증명서",
  note:"⭐ 가성비 1순위. 학기당 515만원으로 서울 사립 중 최저 수준, 5학기 기준 총 2,575만원. 2026학년도부터 등록학기가 5학기 → <b>4학기로 단축될 예정</b>이라 실부담은 2,060만원까지 내려갈 수 있음. 총원율 100%(정원 완전 충족)이라 학사 운영이 안정적. 상도동 캠퍼스 야간. 학교 네임밸류는 SKY 대비 낮음."},
 
 {s:"숭실대학교", g:"정보과학대학원", m:"소프트웨어공학과", mdesc:"Software Engineering",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:48,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:48, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/13~5/7 · 면접 5/15(19시) · 발표 5/20 · 등록 7/7~9 · 전형료 7만원",
  site:"https://itmba.ssu.ac.kr/", tags:["cs"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접",
  note:"정원 48명. 개발 실무 → 아키텍처/설계로 넓히려는 사람에게 적합."},
 
 {s:"숭실대학교", g:"정보과학대학원", m:"정보보안학과", mdesc:"Information Security",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:47,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:47, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/13~5/7 · 면접 5/15(19시) · 발표 5/20 · 등록 7/7~9 · 전형료 7만원",
  site:"https://itmba.ssu.ac.kr/", tags:["cs"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접",
  note:"숭실대 정보보안은 업계 인지도가 있는 편."},
 
 {s:"숭실대학교", g:"정보과학대학원", m:"AI미디어학과", mdesc:"AI Media",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:5,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:5, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/13~5/7 · 면접 5/15(19시) · 발표 5/20 · 등록 7/7~9 · 전형료 7만원",
  site:"https://itmba.ssu.ac.kr/", tags:["ai"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접",
  note:"정원 5명으로 매우 작음. 생성형 AI·미디어 콘텐츠 쪽 관심이 아니면 인공지능학과가 나음."},
 
 {s:"숭실대학교", g:"정보과학대학원", m:"IT경영학과", mdesc:"IT Management",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:26,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:26, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/13~5/7 · 면접 5/15(19시) · 발표 5/20 · 등록 7/7~9 · 전형료 7만원",
  site:"https://itmba.ssu.ac.kr/", tags:["data"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접",
  note:"기술보다 IT 기획·PM 커리어를 노린다면 고려. 순수 AI 역량 강화 목적이면 부적합."},
 
-{s:"국민대학교", g:"소프트웨어융합대학원", m:"인공지능전공", mdesc:"Artificial Intelligence",
- c:"한국", r:"서울", t:"특수", mo:"온라인", tm:3, ty:6346000, cr:1.87, fr:111.1, qt:48,
+{s:"국민대학교", g:"소프트웨어융합대학원", m:"인공지능전공", mdesc:"Artificial Intelligence (오프라인)",
+ c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:6472000, adm:1029000, cr:1.87, fr:111.1, qt:48, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/29~5/14 · 서류 ~5/15 · 면접 5/23 · 발표 6/11 · 등록 6/30~7/3",
  site:"https://swgs.kookmin.ac.kr/", tags:["ai","online"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접 · 별도 필기시험 없음 (문의 02-910-4772)",
- note:"⭐ 가장 빠르고 싼 국내 옵션. 1.5년(3학기) 초단기 과정 + 전면 온라인 운영. 3학기만 다니면 되므로 총 1,904만원 — 서울 사립 중 총액 최저. 총원율 111.1%로 정원 초과 모집 — 인기 있지만 경쟁률은 1.87:1로 낮음. 단기간·저비용으로 '석사 학위'가 필요한 경우 최적, 깊은 연구 경험은 기대하기 어려움."},
+ note:"⚠️ <b>2026 공식 모집요강 기준 수업연한이 2년(4학기)</b>이며 수업료 6,472,000원 + 입학금 1,029,000원 → 총 2,692만원. (일부 블로그에 도는 ‘1.5년·3학기’ 정보는 옛 자료로 확인됨.) 평일 비대면 + 토요일 대면 운영. 총원율 111.1%로 정원 초과 모집이라 경쟁률 1.87:1 대비 진입은 수월. 전형은 서류 40점 + 면접 60점."},
 
-{s:"국민대학교", g:"소프트웨어융합대학원", m:"인공지능응용전공", mdesc:"AI Application (온라인)",
- c:"한국", r:"서울", t:"특수", mo:"온라인", tm:3, ty:6346000, cr:1.87, fr:111.1, qt:51,
+{s:"국민대학교", g:"소프트웨어융합대학원", m:"인공지능응용전공", mdesc:"AI Application (100% 온라인)",
+ c:"한국", r:"서울", t:"특수", mo:"온라인", tm:4, ty:6472000, adm:514000, cr:1.87, fr:111.1, qt:51, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/29~5/14 · 서류 ~5/15 · 면접 5/23 · 발표 6/11 · 등록 6/30~7/3",
  site:"https://swgs.kookmin.ac.kr/", tags:["ai","online"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접",
- note:"100% 온라인 + 토요일 중심 운영. 정원 51명으로 가장 큼. 도메인에 AI를 '적용'하는 실무형 커리큘럼."},
+ note:"⭐ <b>100% 비대면 — 면접까지 Zoom으로 진행</b>하는 유일한 국내 옵션이라 수도권 밖·출장 잦은 경우에 강함. 입학금이 오프라인(1,029천원)의 절반인 514천원이라 총액도 51만원 저렴. 정원 51명으로 학과 중 최대. 단, 수업연한이 공식 요강에 명시되지 않아 4학기로 계산했으니 지원 전 확인 필요(02-910-6642)."},
 
-{s:"국민대학교", g:"소프트웨어융합대학원", m:"소프트웨어전공", mdesc:"Software",
- c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:3, ty:6346000, cr:1.87, fr:111.1, qt:27,
+{s:"국민대학교", g:"소프트웨어융합대학원", m:"소프트웨어전공", mdesc:"Software (오프라인)",
+ c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:6472000, adm:1029000, cr:1.87, fr:111.1, qt:27, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/29~5/14 · 서류 ~5/15 · 면접 5/23 · 발표 6/11 · 등록 6/30~7/3",
  site:"https://swgs.kookmin.ac.kr/", tags:["cs"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접",
- note:"평일 비대면 + 토요일 대면 혼합. 정원 27명."},
+ note:"평일 비대면 + 토요일 대면 혼합. 정원 27명으로 가장 작음. AI가 아니라 SW 엔지니어링 중심."},
 
 {s:"이화여자대학교", g:"데이터사이언스대학원", m:"데이터사이언스학과", mdesc:"Data Science",
- c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:6916000, adm:1090000, cr:null, fr:null, qt:null,
+ c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:6916000, adm:1090000, cr:null, fr:null, qt:null, apply:"2026.10~11 예상",
  site:"https://gsds.ewha.ac.kr/", tags:["data"],
  req:"4년제 학사 · ⚠️ 여성만 지원 가능 · 서류 + 면접 (문의 02-3277-2182)",
  note:"2022년 3월 개원한 신생 대학원. 토요일 대면 + 평일 비대면 운영으로 직장 병행 설계가 잘 되어 있음. <b>학교 공지 기준 입학금 1,090,000원 + 수업료 6,916,000원/학기</b>(2024-2 신입생 기준이라 현재는 소폭 인상됐을 수 있음). 경쟁률·총원율은 여전히 미공시. 남성 지원 불가."},
 
 {s:"한양대학교", g:"공학대학원", m:"전기·전자·컴퓨터공학과", mdesc:"Electrical, Electronic & Computer Eng.",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:6933000, cr:null, fr:null, qt:235,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:6933000, cr:null, fr:null, qt:235, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 5/6~5/15 · 서류 ~5/18 · 면접 6/13 · 발표 6/26 · 등록 7/6~8 · 전형료 7만원",
  site:"https://www.hanyang.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접 · 재직 경력 요구 (공학대학원 특성)",
  note:"정원 235명으로 매우 큼 → 진입 문턱이 낮은 편. 총 학비 2,773만원. 다만 AI 특화 커리큘럼은 인공지능융합대학원 쪽이 훨씬 강함. 경쟁률·총원율 미공시. 2024 취업률 95%."},
 
 {s:"고려대학교", g:"공학대학원", m:"전기전자컴퓨터공학과", mdesc:"Electrical, Electronic & Computer Eng.",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:7718000, adm:1234000, cr:1.69, fr:70.6, qt:67,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:7718000, adm:1234000, cr:1.69, fr:70.6, qt:67, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 3/31~4/9 · 서류 ~4/10 · 구술 5/9 · 발표 6/4",
  site:"https://www.korea.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
  note:"경쟁률 1.69:1 · 총원율 70.6%로 SW·AI융합대학원(3.39:1)보다 훨씬 들어가기 쉬움. 같은 '고려대 석사'지만 AI 커리큘럼 밀도는 낮음. 2024 취업률 100%."},
 
 {s:"서울시립대학교", g:"과학기술대학원", m:"컴퓨터과학부", mdesc:"Computer Science",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:3676000, cr:2.52, fr:105.8, qt:45,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:3676000, cr:2.52, fr:105.8, qt:45, apply:"2026.10~11 예상",
  site:"https://www.uos.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접",
  note:"⭐ 공립이라 학비가 압도적으로 쌈 — 학기당 368만원, 총 1,470만원. 총원율 105.8%로 정원 초과 충원될 만큼 인기. 경쟁률 2.52:1. 서울 동대문구, 야간. 가성비 기준 서울권 최상위권."},
 
 {s:"서울시립대학교", g:"과학기술대학원", m:"전자전기컴퓨터공학과", mdesc:"Electronics, Electrical & Computer Eng.",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:3676000, cr:2.52, fr:105.8, qt:34,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:3676000, cr:2.52, fr:105.8, qt:34, apply:"2026.10~11 예상",
  site:"https://www.uos.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접",
  note:"컴퓨터과학부와 동일 학비. 하드웨어/신호처리 비중이 큼."},
 
 {s:"서울과학기술대학교", g:"산업대학원", m:"빅데이터AI경영정보전공", mdesc:"Big Data & AI Management Info.",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:2808000, cr:4.97, fr:95, qt:20,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:2808000, cr:4.97, fr:95, qt:20, apply:"2026.10~11 예상",
  site:"https://gsi.seoultech.ac.kr/", tags:["data"],
  req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
  note:"⭐ 국내 최저가 — 학기당 281만원, 총 학비 약 1,123만원. 대신 경쟁률 4.97:1로 표에서 가장 높은 축(가성비 소문 때문). 국립, 노원구 공릉동 야간. 계열이 '인문사회(경영정보)'라 순수 공학 석사 학위를 원하면 확인 필요."},
 
 {s:"광운대학교", g:"스마트융합대학원", m:"정보융합시스템 (정보시스템학과)", mdesc:"Information Convergence Systems",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:5704000, cr:0.78, fr:58, qt:53,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:5704000, cr:0.78, fr:58, qt:53, apply:"2026.10~11 예상",
  site:"https://compro.kw.ac.kr/", tags:["cs","data"],
  req:"4년제 학사 · 서류 + 면접 · 필기시험 없음",
  note:"⭐ 경쟁률 0.78:1 — 지원자가 정원보다 적은 미달 상태. 총원율 58%. 표 안에서 진입 난이도가 사실상 가장 낮은 서울권 옵션. 총 학비 2,282만원. 학교 네임밸류가 우선순위가 아니고 '일단 석사 학위 + 커리큘럼'이 목적이면 현실적 후보."},
 
 {s:"건국대학교", g:"정보통신대학원", m:"인공지능전공 등 5개 전공", mdesc:"AI · 정보보안 · 블록체인 · IoT · 메타버스융합",
- c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null,
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null, apply:"2026.10~11 예상",
  site:"https://www.konkuk.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접 · 상세 요강은 학교 문의",
  note:"학교 홈페이지 확인 결과 <b>정보보안·블록체인·사물인터넷·인공지능·메타버스융합 5개 전공</b> 운영. ⚠️ 등록금은 공지·요강 어디에도 금액이 없고 학사시스템 고지서로만 확인 가능 — 행정실(02-450-3261) 문의 필요. 경쟁률·총원율도 미공시."},
 
 /* ── 수도권 ──────────────────────────────────── */
 {s:"인하대학교", g:"공학대학원", m:"인공지능융합전공", mdesc:"AI Convergence",
- c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:16,
+ c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:16, apply:"2026.10~11 예상",
  site:"https://engrad.inha.ac.kr/", tags:["ai"],
  req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
  note:"경쟁률 1.36:1로 낮고 총원율 85.4%. 총 학비 2,414만원. 인천/부천 거주·근무라면 통학 최적. 장학금 규모가 커서(연 8.8억) 실부담이 더 낮아질 수 있음. 2024 취업률 95.3%."},
 
 {s:"인하대학교", g:"공학대학원", m:"빅데이터전공", mdesc:"Big Data",
- c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:11,
+ c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:11, apply:"2026.10~11 예상",
  site:"https://engrad.inha.ac.kr/", tags:["data"],
  req:"4년제 학사 · 서류 + 면접",
  note:"정원 11명으로 소수 정예. AI융합전공과 학비 동일."},
 
 {s:"인하대학교", g:"공학대학원", m:"전기전자컴퓨터공학과", mdesc:"Electrical, Electronic & Computer Eng.",
- c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:41,
+ c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:41, apply:"2026.10~11 예상",
  site:"https://engrad.inha.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접",
  note:"정원 41명으로 학과 중 가장 큼."},
 
 {s:"아주대학교", g:"정보통신대학원", m:"정보통신공학과", mdesc:"Information & Communication Eng.",
- c:"한국", r:"경기", t:"특수", mo:"하이브리드", tm:4, ty:6150000, cr:1.29, fr:91.8, qt:366,
+ c:"한국", r:"경기", t:"특수", mo:"하이브리드", tm:4, ty:6150000, cr:1.29, fr:91.8, qt:366, apply:"2026.10~11 예상",
  site:"https://ict.ajou.ac.kr/", tags:["cs","ai"],
  req:"4년제 학사 · 서류 + 면접 · 재직증명서",
  note:"⭐ 재학생 670명 · 정원 366명으로 국내 최대급 규모 → 붙기 쉬움(경쟁률 1.29:1). 총 학비 2,460만원. 온·오프 혼합 수업 옵션이 있어 수원·화성권 근무자에게 유리. 장학금 연 22억 규모. 2024 취업률 95.1%."},
 
 {s:"아주대학교", g:"공학대학원", m:"산업데이터시스템전공", mdesc:"Industrial Data Systems",
- c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:5600000, cr:1.24, fr:123.3, qt:28,
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:5600000, cr:1.24, fr:123.3, qt:28, apply:"2026.10~11 예상",
  site:"https://www.ajou.ac.kr/", tags:["data"],
  req:"4년제 학사 · 서류 + 면접",
  note:"총원율 123.3% — 정원보다 훨씬 많이 뽑음. 경쟁률 1.24:1로 진입 쉬움. 데이터 + 산업공학(운영 최적화) 성격이라 순수 AI/ML과는 결이 다름."},
 
 {s:"아주대학교", g:"IT융합대학원", m:"IT융합 계열", mdesc:"IT Convergence",
- c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:5727000, adm:650000, cr:1.51, fr:100, qt:39,
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:5727000, adm:650000, cr:1.51, fr:100, qt:39, apply:"2026.10~11 예상",
  site:"https://www.ajou.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접 · 상세 요강은 학교 문의",
  note:"총원율 100%. <b>학교 공지 기준 입학금 650,000원 + 수업료 5,727,000원/학기</b>(2025학년도 1학기부터 3.0% 인상). 같은 학교 정보통신대학원(학기 615만원·정원 366명)과 성격이 겹치므로 함께 비교할 것."},
 
 {s:"한국공학대학교", g:"산업기술경영대학원", m:"IT·데이터 계열", mdesc:"IT & Data",
- c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:1.2, fr:85, qt:40,
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:1.2, fr:85, qt:40, apply:"2026.10~11 예상",
  site:"https://www.tukorea.ac.kr/", tags:["data"],
  req:"4년제 학사 · 서류 + 면접 · 재직자 중심",
  note:"시흥/안산 산업단지 배후 대학원이라 제조·엔지니어링 직군 재직자가 많음. 경쟁률 1.2:1로 낮음. 모집요강상 <b>입학금 700,000원</b>이고 특수대학원 수업료는 400만원대 초반으로 표기돼 있으나 ⚠️ PDF 숫자 일부가 판독되지 않아 총액 집계에서 제외했습니다(교학팀 031-8041-1000). 공무원·공공기관 재직자 등록금 30~70% 감면, 가족회사 재직자 20% 감면 장학금 있음."},
 
 {s:"인천대학교", g:"정보기술대학원", m:"정보기술 계열 (3개 전공)", mdesc:"Information Technology",
- c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null,
+ c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null, apply:"2026.10~11 예상",
  site:"https://www.inu.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접 · 상세 요강은 학교 문의",
  note:"국립대라 학비는 낮을 가능성이 높지만 전 항목 미공시. 인천 거주자라면 인하대와 비교 검토."},
 
 {s:"평택대학교", g:"AI융합대학원", m:"AI융합학과", mdesc:"AI Convergence",
- c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:4379000, adm:840000, cr:0.64, fr:57.1, qt:14,
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:4379000, adm:840000, cr:0.64, fr:57.1, qt:14, apply:"2026.10~11 예상",
  site:"https://www.ptu.ac.kr/", tags:["ai"],
  req:"4년제 학사 · 서류 + 면접",
  note:"경쟁률 0.64:1(미달), 총원율 57.1%. 정원 14명 소규모. ⭐ <b>모집요강상 전 재학생 수업료 30% 기본 감면</b>(장학금 신청서 없이도 적용)이라 실부담은 학기 약 307만원 · 총 1,310만원 수준으로 내려감. 표의 총액은 감면 전 정가 기준. 평택·안성권 근무자에게 현실적인 선택지."},
 
 {s:"한양대학교(ERICA)", g:"융합산업대학원", m:"IT·데이터 계열", mdesc:"Convergence Industry",
- c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:1.29, fr:88.9, qt:135,
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:1.29, fr:88.9, qt:135, apply:"2026.10~11 예상",
  site:"https://www.hanyang.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접",
  note:"안산 ERICA 캠퍼스. 정원 135명으로 크고 경쟁률 1.29:1. '한양대 석사' 학위지만 서울캠퍼스와는 구분됨. 등록금 미공시."},
 
 /* ── 온라인 · 국립 ──────────────────────────── */
 {s:"한국방송통신대학교", g:"대학원", m:"통계·데이터과학과", mdesc:"Statistics & Data Science",
- c:"한국", r:"온라인", t:"특수", mo:"온라인", tm:5, ty:1303000, adm:177000, cr:2.0, fr:null, qt:null,
+ c:"한국", r:"온라인", t:"특수", mo:"온라인", tm:5, ty:1303000, adm:177000, cr:2.0, fr:null, qt:null, apply:"2026.10~11 예상",
  site:"https://bsgrad.knou.ac.kr/", tags:["data","online"],
  req:"4년제 학사 또는 동등 학력 · 서류 + 면접 · 별도 필기시험 없음 (문의 02-3668-4347)",
  note:"⭐ <b>입학금 177,000원 + 수업료 1,303,000원/학기 → 5학기 전부 다녀도 총 669만원.</b> 2위인 서울과기대(1,123만원)의 절반, 연세대(4,272만원)의 1/6로 압도적 국내 최저. 100% 비대면이라 출장·야근·지방 근무 어떤 상황에서도 유지 가능. 대신 네임밸류와 네트워킹·연구 경험은 기대하기 어려움. 경쟁률 약 2:1."}
@@ -658,8 +665,9 @@ const RAW = [
 const DATA = RAW.map((d,i) => {
   const tot = d.tot != null ? d.tot
             : (d.ty != null && d.tm ? d.ty * d.tm + (d.adm || 0) : null);
-  return Object.assign({}, d, { id:i, tot,
-    _search: [d.s,d.g,d.m,d.mdesc,d.r,d.t,d.mo,d.req,d.note,(d.tags||[]).join(" ")].join(" ").toLowerCase() });
+  const apply = d.apply || "2026.10~11 예상";
+  return Object.assign({}, d, { id:i, tot, apply,
+    _search: [d.s,d.g,d.m,d.mdesc,d.r,d.t,d.mo,apply,d.applyRef,d.req,d.note,(d.tags||[]).join(" ")].join(" ").toLowerCase() });
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -709,6 +717,7 @@ const COLS = [
   {k:"comp",   t:"경쟁률",      sort:"comp"},
   {k:"fill",   t:"총원율",      sort:"fill"},
   {k:"quota",  t:"모집인원",    sort:"quota"},
+  {k:"apply",  t:"원서접수 (다음 회차)", sort:null},
   {k:"req",    t:"입학 시 필요한 것", sort:null},
   {k:"site",   t:"학교 사이트", sort:null},
   {k:"note",   t:"비고",        sort:null}
@@ -796,6 +805,7 @@ function render(rows){
             ? `<span class="num">${d.fr}%</span><span class="fillbar"><i style="width:${Math.min(d.fr,100)}%"></i></span>`
             : '<span class="na">미공시</span>'}</td>
       <td class="num">${d.qt!=null ? d.qt+"명" : '<span class="na">–</span>'}</td>
+      <td><span class="apply${d.applyRef?" ok":""}">${esc(d.apply)}</span>${d.applyRef?`<span class="applyref">${esc(d.applyRef)}</span>`:""}</td>
       <td><div class="clamp">${esc(d.req)}</div></td>
       <td><a class="sitelink" href="${esc(d.site)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">바로가기 ↗</a></td>
       <td><div class="clamp note">${(d.note||"").replace(/<b>|<\/b>/g,"")}</div></td>
@@ -815,6 +825,7 @@ function render(rows){
         <span class="pill p-mode">${esc(d.mo)}</span>
         <span class="pill p-mode">${esc(d.r)}</span>
         ${d.tm?`<span class="pill p-mode">${d.tm}학기</span>`:""}
+        <span class="apply${d.applyRef?" ok":""}">🗓 ${esc(d.apply)}</span>
       </div>
       <div class="kv">
         <div><div class="k">총 학비</div><div class="v" style="color:${color}">${d.tot!=null?esc(won(d.tot)):"–"}</div></div>
@@ -854,6 +865,7 @@ function openSheet(id){
       <div class="box"><div class="k">총원율</div><div class="v">${d.fr!=null?d.fr+"<small>%</small>":"미공시"}</div></div>
       <div class="box"><div class="k">모집인원</div><div class="v">${d.qt!=null?d.qt+"<small>명</small>":"–"}</div></div>
     </div>
+    <div class="sec"><h4>🗓 원서접수 일정</h4><p><b>다음 회차: ${esc(d.apply)}</b><br><span style="font-size:12.5px">${d.applyRef?esc(d.applyRef):"이 학교의 확정 일정은 아직 확인하지 못했습니다. 국내 특수대학원 일반 주기(전기 10~11월 접수 · 후기 4~5월 접수) 기준 추정입니다."}</span></p></div>
     <div class="sec"><h4>✅ 입학 시 필요한 것</h4><p>${esc(d.req)}</p></div>
     <div class="sec"><h4>💬 비고 · 의견</h4><p>${d.note||""}</p></div>
     <a class="gobtn" href="${esc(d.site)}" target="_blank" rel="noopener">학교 사이트 열기 ↗</a>
