@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0ea5e9">
-<title>직장인 대학원 정리 · AI / 데이터 / 컴퓨터 석사</title>
+<title>직장인 특수대학원 정리 · AI / 데이터 / 컴퓨터 석사</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -126,7 +126,7 @@
     box-shadow: var(--shadow); overflow: hidden;
   }
   .scroller { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1660px; font-size: 13px; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1480px; font-size: 13px; }
   thead th {
     position: sticky; top: 0; z-index: 3;
     background: #eef6fc; color: var(--ink); font-weight: 800; font-size: 11.5px;
@@ -168,8 +168,6 @@
   .p-전문 { background:#fce7f3; color:#be185d; }
   .p-온라인 { background:#d1fae5; color:#047857; }
   .p-mode { background:#f1f5f9; color:#475569; }
-  .p-lang { background:#fef3c7; color:#b45309; }
-  .p-lang.en { background:#e0e7ff; color:#4338ca; }
 
   .money { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .money .orig { display: block; font-size: 11px; font-weight: 600; color: var(--muted); }
@@ -287,7 +285,7 @@
     <a class="backlink" href="index.html">← 개인 페이지</a>
     <div><span class="kicker">🎓 Grad School</span></div>
     <h1>직장인을 위한 대학원 정리<br>AI · 데이터분석 · 컴퓨터공학 석사</h1>
-    <p class="sub">국내 야간·주말 특수대학원과 <b>6개국 영어 수업 온라인 석사</b>를 한 표에 모았습니다. 국내 학비·경쟁률·총원율은 <b>대학알리미 2025년 공시</b>, 해외는 각 학교 공식 자료 기준입니다. 행을 누르면 상세 정보가 열리고, <b>🌏 영어 수업</b> 칩으로 해외 프로그램만 볼 수 있습니다.</p>
+    <p class="sub">직장 다니면서 다닐 수 있는 <b>국내 야간·주말·온라인 대학원</b>을 한 표에 모았습니다. 학비·경쟁률·총원율은 <b>대학알리미 2025년 공시</b>와 각 대학원 공식 자료 기준이며, 행을 누르면 입학 요건과 비고 전문이 열립니다.</p>
   </header>
 
   <div class="stats" id="stats"></div>
@@ -301,18 +299,17 @@
     </div>
 
     <div class="filters">
-      <div class="f"><label>나라</label><select id="fCountry"></select></div>
       <div class="f"><label>지역</label><select id="fRegion"></select></div>
       <div class="f"><label>대학원 유형</label><select id="fType"></select></div>
       <div class="f"><label>수업 형태</label><select id="fMode"></select></div>
-      <div class="f"><label>수업 언어</label><select id="fLang"></select></div>
       <div class="f"><label>총 학비</label><select id="fCost">
         <option value="">전체</option>
         <option value="0-1500">~ 1,500만원</option>
-        <option value="1500-2500">1,500 ~ 2,500만원</option>
-        <option value="2500-3500">2,500 ~ 3,500만원</option>
-        <option value="3500-4500">3,500 ~ 4,500만원</option>
-        <option value="4500-99999">4,500만원 이상</option>
+        <option value="1500-2000">1,500 ~ 2,000만원</option>
+        <option value="2000-2500">2,000 ~ 2,500만원</option>
+        <option value="2500-3000">2,500 ~ 3,000만원</option>
+        <option value="3000-3500">3,000 ~ 3,500만원</option>
+        <option value="3500-99999">3,500만원 이상</option>
       </select></div>
       <div class="f"><label>경쟁률</label><select id="fComp">
         <option value="">전체</option>
@@ -337,7 +334,6 @@
         <button class="chip" data-preset="ai">🤖 AI 전공만</button>
         <button class="chip" data-preset="data">📊 데이터 전공만</button>
         <button class="chip" data-preset="online">💻 100% 온라인</button>
-        <button class="chip" data-preset="en">🌏 영어 수업</button>
         <button class="chip" data-preset="seoul">🏙 서울권</button>
         <button class="chip" data-preset="cheap">💰 2,500만원 이하</button>
         <button class="chip" data-preset="easy">🟢 경쟁률 2:1 미만</button>
@@ -371,9 +367,8 @@
       <li><b>연세대·고려대</b>는 위 공식 명세표의 2025학년도 금액과 입학금을 그대로 썼고, 나머지 학교는 대학알리미 공시값(2024년 기준)이라 실제 고지액이 3~5% 높을 수 있습니다.</li>
       <li><b>경쟁률 / 총원율(충원률)</b>은 <b>대학원 단위 2025학년도 공시값</b>입니다. 학과 단위 경쟁률은 대부분 비공개라, 같은 대학원 소속 학과는 같은 값을 공유합니다. 총원율 100% 미만 = 정원 미달(들어가기 상대적으로 쉬움).</li>
       <li><b>“미공시”</b>는 학교가 대학알리미에 자료를 제출하지 않은 항목입니다. 없는 게 아니라 확인이 필요하다는 뜻입니다.</li>
-      <li>해외 학비는 <b>USD 1,390 · GBP 1,780 · EUR 1,530 · AUD 910 · HKD 178 · SGD 1,080 · INR 16.5원</b> 환산 기준입니다. 환율과 학교별 연간 인상률(보통 3~8%)에 따라 달라집니다.</li>
-      <li>⭐ <b>한국 거주 기준으로 실제 다닐 수 있는 것만 실었습니다.</b> 해외 프로그램은 전부 영어 수업 + 100% 온라인이며, 현지 대면 출석이 필요한 과정(홍콩 HKU·싱가포르 NUS-ISS 등)은 제외했습니다. 국내는 통학 가능한 야간·주말·온라인 과정만 담았습니다.</li>
-      <li>학비가 <b>“확인 필요”</b>인 항목(서강대·이화여대·Goldsmiths 등)은 공식 자료에 금액이 없거나 출처가 상충해 집계에서 뺐습니다. 후보에서 제외한 게 아니라 직접 문의가 필요하다는 뜻입니다.</li>
+      <li>⭐ <b>직장을 유지하면서 다닐 수 있는 과정만 실었습니다</b> — 야간·주말·온라인 운영이 확인된 국내 대학원입니다. 주간 전일제 과정은 제외했습니다.</li>
+      <li>학비가 <b>“확인 필요”</b>인 항목(서강대·이화여대·건국대 등)은 학교가 대학알리미에 금액을 제출하지 않아 집계에서 뺐습니다. 후보에서 제외한 게 아니라 직접 문의가 필요하다는 뜻입니다.</li>
       <li>출처: <a href="http://phdkim.net/gradinfo/school/list?type=%ED%8A%B9%EC%88%98%EB%8C%80%ED%95%99%EC%9B%90&amp;category=%EA%B3%B5%ED%95%99" target="_blank" rel="noopener">김박사넷 대학원 정보(대학알리미 기반)</a> · <a href="https://www.academyinfo.go.kr" target="_blank" rel="noopener">대학알리미</a> · <a href="https://datapoint.tistory.com/28" target="_blank" rel="noopener">datapoint 블로그</a> · 각 대학원 공식 모집요강 · 각 해외 프로그램 공식 홈페이지</li>
       <li>기준 시점: <b id="asof">–</b> · 지원 전 반드시 공식 모집요강 원문을 확인하세요.</li>
     </ul>
@@ -385,12 +380,6 @@
 <div class="mask" id="mask"><div class="sheet" id="sheet"></div></div>
 
 <script>
-/* ══════════════════════════════════════════════════════════
-   환율 (2026-08 기준 근사) — USD 1,390 / GBP 1,780 / EUR 1,530
-   AUD 910 / HKD 178 / INR 16.5 / SGD 1,080
-   ══════════════════════════════════════════════════════════ */
-const FX = { USD: 1390, GBP: 1780, EUR: 1530, AUD: 910, HKD: 178, INR: 16.5, SGD: 1080 };
-
 /* ══════════════════════════════════════════════════════════
    데이터
    ty  : ★ 학기당 등록금(수업료, 원) | null = 미공시
@@ -658,163 +647,8 @@ const RAW = [
  c:"한국", r:"온라인", t:"특수", mo:"온라인", tm:5, ty:null, cr:2.0, fr:null, qt:null,
  site:"https://bsgrad.knou.ac.kr/", tags:["data","online"],
  req:"4년제 학사 또는 동등 학력 · 서류 + 면접 · 별도 필기시험 없음 (문의 02-3668-4347)",
- note:"⭐ 국립 원격대학원으로 학비가 국내 최저 수준(학기당 100만원 이하 대). 100% 비대면이라 출장·야근·지방 근무 어떤 상황에서도 유지 가능. 대신 네임밸류와 네트워킹은 기대하기 어렵고, 2.5년(5학기) 소요. 경쟁률 약 2:1."},
+ note:"⭐ 국립 원격대학원으로 학비가 국내 최저 수준(학기당 100만원 이하 대). 100% 비대면이라 출장·야근·지방 근무 어떤 상황에서도 유지 가능. 대신 네임밸류와 네트워킹은 기대하기 어렵고, 2.5년(5학기) 소요. 경쟁률 약 2:1."}
 
-/* ══════════ 해외 온라인 석사 ══════════ */
-{s:"Georgia Tech", g:"College of Computing", m:"OMSCS — MS in Computer Science", mdesc:"온라인 컴퓨터과학 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:9730000, origCost:"약 $7,000", cr:null, fr:null, qt:null,
- site:"https://omscs.gatech.edu/", tags:["cs","ai","online"],
- req:"4년제 학사(CS 전공 아니어도 가능, GPA 3.0 권장) · GRE 불필요 · 추천서 3장 · 영어권 학위 아니면 TOEFL · 자기소개서(Statement of Purpose)",
- note:"⭐⭐ 학비 대비 가성비는 전 세계 최고. 30학점 × $225 + 학기당 수수료 = <b>총 973만원</b>. 고려대 SW·AI융합대학원(3,982만원)의 1/4 값. 재학생 1만 명 이상으로 세계 최대 온라인 CS 석사이며 오프라인과 동일한 졸업장이 나옴. 합격률은 60%대로 진입은 쉬우나 <b>이수 난이도가 매우 높아 중도 포기율이 높음</b> — 학기당 1과목 페이스로 최대 6년까지 가능. Machine Learning / Computing Systems / Interactive Intelligence 등 특화 트랙 선택."},
-
-{s:"Georgia Tech", g:"Computing · Business · Engineering", m:"OMSA — MS in Analytics", mdesc:"온라인 분석학 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:17160000, origCost:"$12,348 (비거주자)", cr:null, fr:null, qt:null,
- site:"https://pe.gatech.edu/degrees/analytics", tags:["data","online"],
- req:"학사 GPA 3.0 이상 · 선수과목: 확률·통계, Python 프로그래밍, 미적분, 기초 선형대수 · 추천서 3장 · GRE/GMAT 선택 · 가을 지원 마감 2/1(최종 3/15)",
- note:"데이터 분석/데이터 사이언스가 목표라면 OMSCS보다 이쪽이 직결. 36학점, 24~36개월. Computing·Scheller Business·Engineering 3개 단과대 공동 학위라 비즈니스 분석 관점도 함께 배움. 미국 데이터사이언스 프로그램 랭킹 top-5."},
-
-{s:"UT Austin", g:"Computer & Data Science Online", m:"MSCSO — MS in Computer Science", mdesc:"온라인 컴퓨터과학 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:5, ty:null, tot:13900000, origCost:"$10,000 + fees", cr:null, fr:null, qt:null,
- site:"https://cdso.utexas.edu/mscs", tags:["cs","online"],
- req:"관련 분야 4년제 학사 · 누적 GPA 3.0 이상 · GRE 불필요 · 비관련 전공은 코스워크/경력으로 배경 증명 · 가을(우선 3/15, 최종 4/15) / 봄(우선 8/1, 최종 9/1)",
- note:"30학점(필수 3과목 + 선택 7과목). 이론 CS(알고리즘·시스템)가 탄탄한 편. 미국 CS 랭킹 top-10 학교 학위를 1,390만원에 취득 가능 — 국내 서울권 특수대학원 대부분보다 쌈. 오프라인 대학원과 동일 학위."},
-
-{s:"UT Austin", g:"Computer & Data Science Online", m:"MSDSO — MS in Data Science", mdesc:"온라인 데이터사이언스 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:5, ty:null, tot:13900000, origCost:"$10,000 + fees", cr:null, fr:null, qt:null,
- site:"https://cdso.utexas.edu/msds", tags:["data","online"],
- req:"관련 분야 4년제 학사 · 누적 GPA 3.0 이상 · GRE 불필요 · 통계/프로그래밍 배경 증명",
- note:"데이터 분석 커리어 전환에 가장 무난한 해외 온라인 옵션. 30학점, 1.5~3년. 학비 대비 학교 브랜드가 가장 좋은 조합 중 하나."},
-
-{s:"UT Austin", g:"Computer & Data Science Online", m:"MSAI — MS in Artificial Intelligence", mdesc:"온라인 인공지능 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:5, ty:null, tot:13900000, origCost:"$10,000 + fees", cr:null, fr:null, qt:null,
- site:"https://cdso.utexas.edu/msai", tags:["ai","online"],
- req:"관련 분야 4년제 학사 · 누적 GPA 3.0 이상 · GRE 불필요 · AI 비관련 전공은 코스워크/경력으로 배경 증명 · 입학위원회 개별 심사",
- note:"⭐ AI 전용 학위. 30학점(필수 3학점 + 선택 27학점), 1.5~3년 권장. 학위명에 'Artificial Intelligence'가 그대로 박히는 몇 안 되는 저비용 옵션(1,390만원)이라 커리어 전환 시그널이 명확함."},
-
-{s:"UIUC", g:"Siebel School of Computing & Data Science", m:"Online MCS / MCS-DS", mdesc:"온라인 컴퓨터과학 석사(데이터사이언스 트랙)",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:34560000, origCost:"$24,864 (비거주 $777/학점)", cr:null, fr:null, qt:null,
- site:"https://siebelschool.illinois.edu/academics/graduate/professional-mcs/online-master-computer-science", tags:["cs","data","online"],
- req:"4년제 학사 · GRE 불필요 · CS 배경 권장(비전공은 선수 이수 필요할 수 있음) · Coursera 플랫폼 기반",
- note:"32학점 논문 없는 코스워크 학위. 학비가 OMSCS의 3~4배라 가성비는 떨어지지만 UIUC CS는 미국 top-5. MCS-DS는 데이터사이언스 특화 트랙. 학기 단위 pay-as-you-go라 쉬어갈 수 있음."},
-
-{s:"CU Boulder", g:"College of Engineering (Coursera)", m:"MS-DS — MS in Data Science", mdesc:"온라인 데이터사이언스 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:21890000, origCost:"$15,750 ($525/학점 × 30)", cr:null, fr:null, qt:null,
- site:"https://www.colorado.edu/program/data-science/", tags:["data","online"],
- req:"⭐ 지원서·성적증명서·추천서 불필요 — Pathway 과목 3개(통계 또는 CS 트랙)를 GPA 3.0 이상으로 이수하면 자동 입학 (성과 기반 입학)",
- note:"⭐⭐ 학부 성적이나 전공이 약해서 지원 자체가 부담스러운 경우 최적. 입학 심사가 사실상 없고, 실제 수업을 들어 성적으로 증명하는 구조. 8주 텀 · pay-as-you-go라 부담이 분산됨. 거주지 무관 동일 학비. 다만 학교 브랜드는 미국 중상위권."},
-
-{s:"CU Boulder", g:"College of Engineering (Coursera)", m:"MS-CS — MS in Computer Science", mdesc:"온라인 컴퓨터과학 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:21890000, origCost:"약 $15,750", cr:null, fr:null, qt:null,
- site:"https://www.coursera.org/degrees/ms-computer-science-boulder", tags:["cs","online"],
- req:"성과 기반 입학 (Pathway 과목 이수 후 GPA 요건 충족) · 지원서 불필요",
- note:"MS-DS와 동일한 입학 구조의 CS 버전. 데이터 분석보다 소프트웨어/시스템 쪽을 원하면 이쪽."},
-
-{s:"UPenn", g:"School of Engineering & Applied Science", m:"MCIT Online", mdesc:"온라인 컴퓨터·정보기술 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:41700000, origCost:"약 $30,000 (과목당 약 $3,000, 추정)", cr:null, fr:null, qt:null,
- site:"https://online.seas.upenn.edu/", tags:["cs","online"],
- req:"4년제 학사 · ⭐ CS 비전공자 전용 프로그램 (CS 배경 불필요) · GRE 불필요 · 온라인 지원",
- note:"⭐ 아이비리그 학위 중 유일하게 '컴퓨터 비전공자'를 명시적으로 대상으로 설계된 온라인 석사. 10과목(핵심 6 + 선택 4). 식품공학처럼 전혀 다른 배경에서 CS로 전환하는 케이스에 정확히 맞음. 다만 학비가 4,170만원으로 높고(연세대 AI융합대학원과 비슷), 정확한 현재 과목당 단가는 홈페이지 확인 필요."},
-
-{s:"Univ. of Michigan", g:"School of Information", m:"MADS — MS in Applied Data Science", mdesc:"온라인 응용데이터사이언스 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:58740000, origCost:"약 $42,262 (비거주, 34학점)", cr:null, fr:null, qt:null,
- site:"https://www.si.umich.edu/programs/master-applied-data-science", tags:["data","online"],
- req:"4년제 학사 · GRE 불필요 · 지원료 면제 · Python·통계 기초 권장",
- note:"실무 프로젝트 중심의 데이터사이언스 학위. 미시간대 브랜드는 강하지만 학비가 5,874만원으로 표 최상위권. 연세대 인공지능융합대학원(4,272만원)보다 1.4배 비싸므로, 해외 브랜드가 커리어에 확실히 필요한 경우에만 합리적."},
-
-{s:"Johns Hopkins", g:"Engineering for Professionals", m:"MS in Artificial Intelligence", mdesc:"온라인 인공지능 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:8, ty:null, tot:69500000, origCost:"약 $50,000 (과목당 약 $5,000, 추정)", cr:null, fr:null, qt:null,
- site:"https://ep.jhu.edu/programs/artificial-intelligence/", tags:["ai","online"],
- req:"4년제 학사(공학/수학/CS 배경) · 선수과목(선형대수·확률·프로그래밍) 요구 · 5년 내 10과목(30학점) 이수",
- note:"JHU 응용물리연구소(APL)와 공동 개발한 커리큘럼으로 방산·국방 AI 색채가 강함. 재학생의 78%가 회사 학비 지원으로 다님 — 회사 지원 없이는 비용 정당화가 어려움. 정확한 학비는 학기별 공지 확인 필요."},
-
-{s:"University of Bath", g:"Bath Online", m:"MSc Artificial Intelligence", mdesc:"온라인 인공지능 석사",
- c:"영국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:23130000, origCost:"£12,996 (10학점 단위당 £722)", cr:null, fr:null, qt:null,
- site:"https://online.bath.ac.uk/online-courses/msc-artificial-intelligence", tags:["ai","online"],
- req:"학사 2:1 등급(한국 기준 대략 GPA 3.0~3.3) 또는 동등 · ⭐ 비기술 배경은 General(Contextual) 트랙으로 지원 가능 · IELTS 6.5 수준",
- note:"⭐ 두 트랙(Technical / General) 구조라 <b>비전공자도 정식 루트로 들어갈 수 있음</b>. 27개월 파트타임, 모듈 단위로 나눠 내는 방식이라 목돈 부담이 없음. 총 2,313만원으로 국내 서울권 특수대학원 평균보다 쌈. 영국 CS 랭킹 상위권. 2026년 9월 입학까지 현재 학비 적용, 이후 연 최대 8% 인상 가능."},
-
-{s:"University of Essex", g:"Essex Online", m:"MSc Artificial Intelligence", mdesc:"온라인 인공지능 석사",
- c:"영국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:23230000, origCost:"약 £13,049 (24개월 전체)", cr:null, fr:null, qt:null,
- site:"https://online.essex.ac.uk/courses/msc-artificial-intelligence/", tags:["ai","online"],
- req:"학사 학위 + 관련 경력 · ⭐ 학위가 없어도 실무 경력으로 지원 가능한 경로 존재 · IELTS 6.0 수준 · 연중 여러 차례 입학",
- note:"100% 온라인 · 무시험 · 월 단위 분납 가능. 입학 문턱이 표 전체에서 가장 낮은 축. 다만 Essex는 영국 중위권 대학이라 브랜드 프리미엄은 크지 않음 — '학위 취득'과 '유연성'이 최우선일 때 선택."},
-
-{s:"Imperial College London", g:"Faculty of Natural Sciences", m:"MSc Machine Learning and Data Science", mdesc:"온라인 머신러닝·데이터사이언스 석사",
- c:"영국", r:"온라인", t:"온라인", mo:"온라인", tm:4, ty:null, tot:63550000, origCost:"£17,850/년 × 2년 = £35,700", cr:null, fr:null, qt:null,
- site:"https://www.imperial.ac.uk/study/courses/postgraduate-taught/machine-learning-data-science/", tags:["ai","data","online"],
- req:"학사 2:1 이상 · ⭐ 수학·통계·프로그래밍 배경 강하게 요구 (미적분·선형대수·확률론) · IELTS 6.5+ · 24개월 파트타임",
- note:"세계 top-10 대학의 온라인 학위. 표 안에서 <b>브랜드는 최상위, 학비도 최상위(6,355만원)</b>, 학문적 난이도도 최상위. 수학 기초가 탄탄하지 않으면 완주가 어려움. 회사 지원이 없다면 현실적인 선택지는 아님."},
-
-{s:"Arizona State University", g:"ASU Online", m:"MCS — Master of Computer Science", mdesc:"온라인 컴퓨터과학 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:5, ty:null, tot:null, origCost:"확인 필요 (학점당 과금)", cr:null, fr:null, qt:null,
- site:"https://asuonline.asu.edu/online-degree-programs/graduate/computer-science-mcs/", tags:["cs","online"],
- req:"4년제 학사 · GPA 3.0 이상 · CS 선수과목 요구 · 30학점 + 포트폴리오",
- note:"⚠️ 학비가 공식 페이지에서 명확히 확인되지 않아 표에서 제외했습니다(1-844-353-7953 문의). ASU는 온라인 교육 규모가 크고 학비가 중간대라, OMSCS·UT Austin이 떨어졌을 때의 대안 정도로 검토."},
-
-/* ══════════ 🇩🇪 독일 ══════════ */
-{s:"IU International University", g:"IU Online (Fernstudium)", m:"M.Sc. Artificial Intelligence", mdesc:"온라인 인공지능 석사",
- c:"독일", r:"온라인", t:"온라인", mo:"온라인", tm:4, ty:null, tot:21640000, origCost:"약 €14,143 (24개월 · 월 €589 분납)", cr:null, fr:null, qt:null,
- site:"https://www.iu.org/master/artificial-intelligence/", tags:["ai","online"],
- req:"학사 학위(180 ECTS, CS 관련) · 영어 IELTS 6.5 수준 · GRE 불필요 · 매월 수시 입학 · 사전 경력/학점 인정 시 ECTS당 €30 할인",
- note:"독일 최대 사립대학의 100% 온라인 학위. <b>월 €589 분납</b>이라 목돈이 필요 없고 입학이 매월 열려 시작 시점이 자유로움. 12·24·36개월 중 속도를 골라 학비가 달라짐. 다만 IU는 응용과학대학(Fachhochschule)이라 연구 중심 학교는 아니고, 캠퍼스 과정(쾰른 €20,000)과 온라인 과정 학비가 다르니 온라인 트랙 금액을 재확인할 것."},
-
-{s:"IU International University", g:"IU Online (Fernstudium)", m:"M.Sc. Data Science", mdesc:"온라인 데이터사이언스 석사",
- c:"독일", r:"온라인", t:"온라인", mo:"온라인", tm:4, ty:null, tot:21640000, origCost:"약 €14,143 (24개월 · 월 €589 분납)", cr:null, fr:null, qt:null,
- site:"https://www.iu.org/master/data-science/", tags:["data","online"],
- req:"학사 학위(180 ECTS) · 영어 IELTS 6.5 수준 · GRE 불필요 · 매월 수시 입학",
- note:"AI 전공과 동일 구조·동일 학비의 데이터사이언스 버전. EU 인증 120 ECTS 학위라 향후 유럽 취업·이주를 염두에 둔다면 미국 온라인 학위보다 유리할 수 있음."},
-
-/* ══════════ 🇮🇳 인도 ══════════ */
-{s:"BITS Pilani", g:"WILP (Work Integrated Learning)", m:"M.Tech Data Science & Engineering", mdesc:"재직자 전용 데이터사이언스 공학석사",
- c:"인도", r:"온라인", t:"온라인", mo:"온라인", tm:4, ty:null, tot:5520000, origCost:"₹334,400 (1학기 ₹98,600 + 2~4학기 각 ₹78,600)", cr:null, fr:null, qt:null,
- site:"https://bits-pilani-wilp.ac.in/m-tech/cluster/data-science-and-engineering.php", tags:["data","online"],
- req:"⭐ 재직 중인 직장인만 지원 가능 · 학사(B.E/B.Tech/M.Sc/MCA) 60% 이상 · 프로그래밍·수학 기초 · GATE 시험 불필요 · 영어 수업",
- note:"⭐⭐ <b>이 표 전체에서 학비 최저 — 총 552만원.</b> OMSCS(973만원)의 절반 수준. 주말 라이브 강의 32시간/과목 + 녹화 제공이라 한국 시간대에서도 병행 가능하고 무이자 할부도 됨. BITS Pilani는 인도 사립 공대 최상위권(IIT 다음 급)이지만 <b>한국 채용시장 인지도는 낮으므로</b> 학위 브랜드가 아니라 지식·학위 요건 충족이 목적일 때 합리적. Analytics&Algorithms / Systems&Infrastructure 두 트랙. ⚠️ 수업은 온라인이지만 <b>과정 중 인도 캠퍼스 방문 2회</b>가 요구되므로 항공·휴가 일정을 감안할 것."},
-
-{s:"BITS Pilani", g:"WILP (Work Integrated Learning)", m:"M.Tech Artificial Intelligence & ML", mdesc:"재직자 전용 AI·머신러닝 공학석사",
- c:"인도", r:"온라인", t:"온라인", mo:"온라인", tm:4, ty:null, tot:5520000, origCost:"약 ₹317,000~334,400", cr:null, fr:null, qt:null,
- site:"https://bits-pilani-wilp.ac.in/", tags:["ai","online"],
- req:"⭐ 재직 중인 직장인만 지원 가능 · 학사 60% 이상 · GATE 불필요 · UGC 인가 2년 4학기 · 영어 수업",
- note:"데이터사이언스 트랙과 동일 구조의 AI/ML 버전. 학과별로 학비가 소폭 달라(₹3.17~3.34 lakh) 지원 전 확인 필요. ⚠️ 데이터사이언스 트랙과 마찬가지로 <b>인도 캠퍼스 방문 2회</b>가 요구됨."},
-
-/* ══════════ 🇦🇺 호주 ══════════ */
-{s:"UNSW Sydney", g:"UNSW Online", m:"Master of Data Science", mdesc:"온라인 데이터사이언스 석사",
- c:"호주", r:"온라인", t:"온라인", mo:"온라인", tm:8, ty:null, tot:56880000, origCost:"AUD 62,500 (과목당 AUD 5,130)", cr:null, fr:null, qt:null,
- site:"https://studyonline.unsw.edu.au/online-programs/master-data-science", tags:["data","online"],
- req:"관련 분야 학사 · 영어 성적 · 유학생은 등록 시 AUD 1,000 보증금 · 과목 단위 등록(pay-per-course)",
- note:"호주 Go8(8대 명문) 학위를 100% 온라인으로. 다만 <b>총 5,688만원으로 상위권 학비</b> — 같은 온라인인 UT Austin(1,390만원)의 4배라 비용 대비 명분을 찾기 어려움. 호주 이민·현지 취업이 목적이 아니면 우선순위는 낮음. 과목당 결제라 중도 중단 시 손실은 적음."},
-
-{s:"UNSW Sydney", g:"UNSW Online", m:"Master of Analytics", mdesc:"온라인 분석학 석사",
- c:"호주", r:"온라인", t:"온라인", mo:"온라인", tm:8, ty:null, tot:56880000, origCost:"AUD 62,500 (과목당 AUD 5,130)", cr:null, fr:null, qt:null,
- site:"https://studyonline.unsw.edu.au/online-programs/master-analytics", tags:["data","online"],
- req:"관련 분야 학사 · 영어 성적 · 과목 단위 등록",
- note:"Data Science 과정과 동일 학비. 기술 구현보다 비즈니스 의사결정·분석 리더십 쪽에 가까움."},
-
-/* ══════════ 🇬🇧 영국 (추가) ══════════ */
-{s:"University of Liverpool", g:"Liverpool Online", m:"MSc Artificial Intelligence", mdesc:"온라인 인공지능 석사",
- c:"영국", r:"온라인", t:"온라인", mo:"온라인", tm:5, ty:null, tot:30030000, origCost:"£16,868 (30개월 전체 · 교재·재응시 포함)", cr:null, fr:null, qt:null,
- site:"https://online.liverpool.ac.uk/programmes/msc-artificial-intelligence/", tags:["ai","online"],
- req:"관련 분야 학사(2:1 수준) · 영어 성적 · 프로그래밍 기초 · 30개월 파트타임 · 연중 다회 입학",
- note:"⭐ <b>학비에 교재비·평가비·재응시비가 전부 포함</b>이라 추가 지출이 없음. 러셀그룹 소속이고 온라인 학위 운영 경력이 김. 다만 총 3,003만원으로 Bath(2,313만원)·Essex(2,323만원)보다 비싸므로 러셀그룹 타이틀에 그만한 값을 매길지가 선택 기준."},
-
-{s:"Goldsmiths, University of London", g:"Goldsmiths Online", m:"MSc Artificial Intelligence and Machine Learning", mdesc:"온라인 AI·머신러닝 석사",
- c:"영국", r:"온라인", t:"온라인", mo:"온라인", tm:4, ty:null, tot:null, origCost:"확인 필요 (£14,822~20,460/년 자료 상충)", cr:null, fr:null, qt:null,
- site:"https://www.gold.ac.uk/distancelearning/data-science/", tags:["ai","data","online"],
- req:"학사 학위 · ⭐ 비전공자도 기초부터 시작하도록 설계됨 · 2년 파트타임 · 영어 성적",
- note:"⚠️ 출처마다 학비가 £14,822/년과 £20,460/년으로 엇갈려 집계에서 제외했습니다. 골드스미스는 <b>비전공자를 기초부터 끌어올리는 커리큘럼</b>이 특징. 지원 전 학교에 총액을 직접 확인할 것."},
-
-/* ══════════ 🇺🇸 미국 (추가) ══════════ */
-{s:"Georgia Tech", g:"College of Computing", m:"OMS Cybersecurity", mdesc:"온라인 사이버보안 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:16410000, origCost:"약 $11,808 ($369/학점 × 32학점)", cr:null, fr:null, qt:null,
- site:"https://pe.gatech.edu/degrees/cybersecurity", tags:["cs","online"],
- req:"학사 학위(GPA 3.0 권장) · GRE 불필요 · 추천서 · Information Security / Cyber-Physical Systems / Policy 트랙 선택",
- note:"OMSCS와 같은 조지아텍 온라인 학위 계열. 총 1,641만원으로 OMSCS(973만원)보다 비싸지만 여전히 저렴. 보안 커리어가 목표가 아니라면 OMSCS·OMSA가 맞음."},
-
-{s:"Western Governors University", g:"College of IT", m:"MS Data Analytics", mdesc:"역량기반 온라인 데이터분석 석사",
- c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:2, ty:null, tot:12690000, origCost:"$4,565 / 6개월 학기 × 2학기 ≈ $9,130", cr:null, fr:null, qt:null,
- site:"https://www.wgu.edu/online-it-degrees/data-analytics-masters-program.html", tags:["data","online"],
- req:"학사 학위 · GRE·추천서 불필요 · 상시 입학(매월 1일) · 총 11과목",
- note:"⭐ <b>역량기반(competency-based) 학위 — 6개월 정액제라 빨리 끝낼수록 싸짐.</b> 실력이 이미 있으면 1~2학기(약 1,269만원)에 졸업 가능. 미국 비영리 온라인 대학으로 지역인증(NWCCU)을 받았지만 <b>연구 대학이 아니라 학문적 명성은 낮음</b> — 박사 진학이나 간판이 목적이면 부적합하고, 실무 스킬 + 학위 요건 충족이 목적일 때만 유효."}
 ];
 
 /* ══════════════════════════════════════════════════════════
@@ -823,9 +657,8 @@ const RAW = [
 const DATA = RAW.map((d,i) => {
   const tot = d.tot != null ? d.tot
             : (d.ty != null && d.tm ? d.ty * d.tm + (d.adm || 0) : null);
-  const lang = d.lang || (d.c === "한국" ? "한국어" : "영어");
-  return Object.assign({}, d, { id:i, tot, lang,
-    _search: [d.s,d.g,d.m,d.mdesc,d.c,d.r,d.t,d.mo,lang,d.req,d.note,(d.tags||[]).join(" ")].join(" ").toLowerCase() });
+  return Object.assign({}, d, { id:i, tot,
+    _search: [d.s,d.g,d.m,d.mdesc,d.r,d.t,d.mo,d.req,d.note,(d.tags||[]).join(" ")].join(" ").toLowerCase() });
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -836,7 +669,6 @@ const won = v => v == null ? null : (v/10000 >= 10000
   ? (v/100000000).toFixed(2).replace(/\.?0+$/,'') + "억원"
   : Math.round(v/10000).toLocaleString() + "만원");
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const flag = c => ({한국:"🇰🇷", 미국:"🇺🇸", 영국:"🇬🇧"}[c] || "🌐");
 
 function compLevel(cr){
   if (cr == null) return {cls:"lv-none", txt:"미공시"};
@@ -854,11 +686,9 @@ function fillSelect(el, label, values){
     values.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
 }
 const uniq = k => [...new Set(DATA.map(d => d[k]))].filter(Boolean).sort((a,b)=>a.localeCompare(b,'ko'));
-fillSelect($("#fCountry"), "나라", uniq("c"));
 fillSelect($("#fRegion"),  "지역", uniq("r"));
 fillSelect($("#fType"),    "유형", uniq("t"));
 fillSelect($("#fMode"),    "수업", uniq("mo"));
-fillSelect($("#fLang"),    "언어", uniq("lang"));
 
 /* ══════════════════════════════════════════════════════════
    상태
@@ -870,10 +700,8 @@ const COLS = [
   {k:"school", t:"학교",        sort:"school", cls:"c-school"},
   {k:"grad",   t:"대학원",      sort:null},
   {k:"major",  t:"학과 (전공)", sort:null},
-  {k:"loc",    t:"나라 · 지역", sort:null},
   {k:"type",   t:"유형",        sort:null},
   {k:"mode",   t:"수업",        sort:null},
-  {k:"lang",   t:"언어",        sort:null},
   {k:"cost",   t:"총 학비",     sort:"cost"},
   {k:"year",   t:"학기당 등록금", sort:"year"},
   {k:"term",   t:"학기",        sort:"term"},
@@ -902,28 +730,24 @@ function inRange(v, str){
 
 function apply(){
   const q  = $("#q").value.trim().toLowerCase();
-  const fc = $("#fCountry").value, fr = $("#fRegion").value,
-        ft = $("#fType").value,    fm = $("#fMode").value,
-        fl = $("#fLang").value,
-        fcost = $("#fCost").value, fcomp = $("#fComp").value;
+  const fr = $("#fRegion").value, ft = $("#fType").value,
+        fm = $("#fMode").value,     fcost = $("#fCost").value,
+        fcomp = $("#fComp").value;
 
-  [["#fCountry",fc],["#fRegion",fr],["#fType",ft],["#fMode",fm],["#fLang",fl],["#fCost",fcost],["#fComp",fcomp]]
+  [["#fRegion",fr],["#fType",ft],["#fMode",fm],["#fCost",fcost],["#fComp",fcomp]]
     .forEach(([sel,v]) => $(sel).classList.toggle("on", !!v));
 
   let rows = DATA.filter(d => {
     if (q && !d._search.includes(q)) return false;
-    if (fc && d.c !== fc) return false;
     if (fr && d.r !== fr) return false;
     if (ft && d.t !== ft) return false;
     if (fm && d.mo !== fm) return false;
-    if (fl && d.lang !== fl) return false;
     if (fcost && !inRange(d.tot == null ? null : d.tot/10000, fcost)) return false;
     if (fcomp && !inRange(d.cr, fcomp)) return false;
     // 퀵 필터 칩
     if (preset === "ai"    && !(d.tags||[]).includes("ai"))     return false;
     if (preset === "data"  && !(d.tags||[]).includes("data"))   return false;
     if (preset === "online" && d.mo !== "온라인")               return false;
-    if (preset === "en"    && d.lang !== "영어")                return false;
     if (preset === "seoul" && d.r !== "서울")                   return false;
     if (preset === "cheap" && !(d.tot != null && d.tot <= 25000000)) return false;
     if (preset === "easy"  && !(d.cr != null && d.cr < 2))      return false;
@@ -958,13 +782,11 @@ function render(rows){
   $("#tbody").innerHTML = rows.map(d => {
     const cl = compLevel(d.cr);
     return `<tr data-id="${d.id}">
-      <td class="c-school"><span class="sname">${esc(d.s)}</span><span class="sflag">${flag(d.c)} ${esc(d.c)}</span></td>
+      <td class="c-school"><span class="sname">${esc(d.s)}</span><span class="sflag">${esc(d.r)}</span></td>
       <td class="gname">${esc(d.g)}</td>
       <td><span class="major">${esc(d.m)}<span class="mdesc">${esc(d.mdesc||"")}</span></span></td>
-      <td class="gname">${esc(d.c)} · ${esc(d.r)}</td>
       <td><span class="pill p-${esc(d.t)}">${esc(d.t)}</span></td>
       <td><span class="pill p-mode">${esc(d.mo)}</span></td>
-      <td><span class="pill p-lang${d.lang==="영어"?" en":""}">${esc(d.lang)}</span></td>
       <td class="money">${d.tot!=null ? esc(won(d.tot)) + (d.origCost?`<span class="orig">${esc(d.origCost)}</span>`:"") : '<span class="na">확인 필요</span>'}</td>
       <td class="money">${d.ty!=null ? esc(won(d.ty)) : '<span class="na">미공시</span>'}</td>
       <td class="num">${d.tm ? d.tm+"학기" : '<span class="na">–</span>'}</td>
@@ -981,16 +803,16 @@ function render(rows){
 
   $("#cards").innerHTML = rows.map(d => {
     const cl = compLevel(d.cr);
-    const color = d.c === "한국" ? "#0ea5e9" : (d.c === "미국" ? "#8b5cf6" : "#14b8a6");
+    const color = d.r === "서울" ? "#0ea5e9" : (d.r === "온라인" ? "#10b981" : "#8b5cf6");
     return `<div class="mcard" data-id="${d.id}" style="--c:${color}">
       <div class="top">
-        <div><span class="sn">${flag(d.c)} ${esc(d.s)} · ${esc(d.g)}</span></div>
+        <div><span class="sn">${esc(d.s)} · ${esc(d.g)}</span></div>
         <span class="pill p-${esc(d.t)}">${esc(d.t)}</span>
       </div>
       <h3>${esc(d.m)}</h3>
       <div class="tags">
         <span class="pill p-mode">${esc(d.mo)}</span>
-        <span class="pill p-lang${d.lang==="영어"?" en":""}">${esc(d.lang)}</span>
+        <span class="pill p-mode">${esc(d.r)}</span>
         ${d.tm?`<span class="pill p-mode">${d.tm}학기</span>`:""}
       </div>
       <div class="kv">
@@ -1013,15 +835,14 @@ function openSheet(id){
     <div class="shead">
       <div>
         <h2>${esc(d.m)}</h2>
-        <p class="ssub">${flag(d.c)} ${esc(d.s)} · ${esc(d.g)}${d.mdesc?` · ${esc(d.mdesc)}`:""}</p>
+        <p class="ssub">${esc(d.s)} · ${esc(d.g)}${d.mdesc?` · ${esc(d.mdesc)}`:""}</p>
       </div>
       <button class="xbtn" id="closeX" aria-label="닫기">✕</button>
     </div>
     <div class="tagrow">
       <span class="pill p-${esc(d.t)}">${esc(d.t)}대학원</span>
       <span class="pill p-mode">${esc(d.mo)}</span>
-      <span class="pill p-mode">${esc(d.c)} · ${esc(d.r)}</span>
-      <span class="pill p-lang${d.lang==="영어"?" en":""}">${esc(d.lang)} 수업</span>
+      <span class="pill p-mode">${esc(d.r)}</span>
       ${d.tm?`<span class="pill p-mode">${d.tm}학기</span>`:""}
     </div>
     <div class="grid">
@@ -1045,7 +866,7 @@ function closeSheet(){ $("#mask").classList.remove("show"); document.body.style.
 /* ══════════════════════════════════════════════════════════
    이벤트
    ══════════════════════════════════════════════════════════ */
-["q","fCountry","fRegion","fType","fMode","fLang","fCost","fComp"].forEach(id => {
+["q","fRegion","fType","fMode","fCost","fComp"].forEach(id => {
   $("#"+id).addEventListener("input", apply);
 });
 $("#fSort").addEventListener("change", e => {
@@ -1081,7 +902,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet()
 
 $("#reset").addEventListener("click", () => {
   $("#q").value = "";
-  ["fCountry","fRegion","fType","fMode","fLang","fCost","fComp"].forEach(id => $("#"+id).value = "");
+  ["fRegion","fType","fMode","fCost","fComp"].forEach(id => $("#"+id).value = "");
   document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
   preset = null;
   $("#fSort").value = "cost-asc"; sortKey = "cost"; sortDir = "asc";
@@ -1106,15 +927,14 @@ document.querySelectorAll(".chip").forEach(chip => {
 
 /* 요약 통계 */
 (function(){
-  const kr = DATA.filter(d => d.c === "한국");
-  const ov = DATA.filter(d => d.c !== "한국");
-  const costs = DATA.filter(d => d.tot != null).map(d => d.tot);
+  const seoul = DATA.filter(d => d.r === "서울");
+  const etc   = DATA.filter(d => d.r !== "서울");
   const cheapest = DATA.filter(d => d.tot != null).sort((a,b)=>a.tot-b.tot)[0];
   const easiest  = DATA.filter(d => d.cr != null).sort((a,b)=>a.cr-b.cr)[0];
   const hardest  = DATA.filter(d => d.cr != null).sort((a,b)=>b.cr-a.cr)[0];
   $("#stats").innerHTML = `
     <div class="stat" style="--c:#0284c7"><div class="lab">전체 프로그램</div><div class="val">${DATA.length}<small>개</small></div></div>
-    <div class="stat" style="--c:#14b8a6"><div class="lab">국내 / 해외</div><div class="val">${kr.length} <small>/</small> ${ov.length}</div><div class="lab">${new Set(DATA.map(d=>d.c)).size}개국</div></div>
+    <div class="stat" style="--c:#14b8a6"><div class="lab">서울 / 그 외</div><div class="val">${seoul.length} <small>/</small> ${etc.length}</div><div class="lab">${new Set(DATA.map(d=>d.s)).size}개 대학</div></div>
     <div class="stat" style="--c:#10b981"><div class="lab">최저 총 학비</div><div class="val">${won(cheapest.tot)}</div><div class="lab">${cheapest.s}</div></div>
     <div class="stat" style="--c:#f59e0b"><div class="lab">경쟁률 최저</div><div class="val">${easiest.cr.toFixed(2)}:1</div><div class="lab">${easiest.s}</div></div>
     <div class="stat" style="--c:#f43f5e"><div class="lab">경쟁률 최고</div><div class="val">${hardest.cr.toFixed(2)}:1</div><div class="lab">${hardest.s}</div></div>
