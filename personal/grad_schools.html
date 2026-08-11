@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0ea5e9">
+<title>직장인 대학원 정리 · AI / 데이터 / 컴퓨터 석사</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f8fc;
+    --card: #ffffff;
+    --ink: #0f2740;
+    --ink-soft: #486079;
+    --muted: #8aa0b5;
+    --line: #dfeaf3;
+    --line-strong: #c7dcec;
+    --sky: #0ea5e9;
+    --sky-deep: #0284c7;
+    --teal: #14b8a6;
+    --violet: #8b5cf6;
+    --amber: #f59e0b;
+    --rose: #f43f5e;
+    --green: #10b981;
+    --sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --shadow: 0 1px 2px rgba(15,39,64,.05), 0 8px 24px rgba(15,39,64,.06);
+    --shadow-lg: 0 14px 44px rgba(2,132,199,.18), 0 4px 12px rgba(15,39,64,.10);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--ink); font-family: var(--sans);
+    font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    background:
+      radial-gradient(1200px 600px at 100% -10%, rgba(14,165,233,.12), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(20,184,166,.09), transparent 55%),
+      radial-gradient(700px 500px at 50% 120%, rgba(139,92,246,.06), transparent 60%),
+      var(--bg);
+    background-attachment: fixed;
+  }
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 16px calc(70px + env(safe-area-inset-bottom)); }
+
+  /* ── header ─────────────────────────────── */
+  header.hero { padding: 40px 0 18px; }
+  .backlink {
+    display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    color: var(--ink-soft); font-size: 13px; font-weight: 600; margin-bottom: 16px;
+    padding: 6px 12px; background: rgba(255,255,255,.7); border: 1px solid var(--line);
+    border-radius: 999px; transition: .15s;
+  }
+  .backlink:hover { color: var(--sky-deep); border-color: var(--line-strong); }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--sky-deep); font-weight: 700;
+    background: rgba(14,165,233,.10); padding: 6px 14px; border-radius: 999px; margin-bottom: 14px;
+  }
+  header.hero h1 { font-weight: 900; font-size: clamp(25px, 5.2vw, 38px); margin: 0 0 10px; letter-spacing: -.6px; line-height: 1.25; }
+  header.hero p.sub { margin: 0; color: var(--ink-soft); font-size: 14px; max-width: 760px; }
+
+  /* ── stats ──────────────────────────────── */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; margin: 22px 0 6px; }
+  .stat {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 14px 16px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+  }
+  .stat::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background: var(--c, var(--sky)); }
+  .stat .lab { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
+  .stat .val { font-size: 22px; font-weight: 900; color: var(--c, var(--sky-deep)); letter-spacing: -.5px; font-variant-numeric: tabular-nums; line-height: 1.25; }
+  .stat .val small { font-size: 12px; font-weight: 700; }
+
+  /* ── filters ────────────────────────────── */
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    padding: 16px; box-shadow: var(--shadow); margin: 18px 0 14px;
+  }
+  .searchrow { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .searchbox { position: relative; flex: 1; }
+  .searchbox svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+  .searchbox input {
+    width: 100%; border: 1.5px solid var(--line-strong); border-radius: 12px;
+    padding: 11px 14px 11px 40px; font-size: 14.5px; font-family: var(--sans); color: var(--ink);
+    background: #fbfdff; outline: none; transition: .15s;
+  }
+  .searchbox input:focus { border-color: var(--sky); background: #fff; box-shadow: 0 0 0 3px rgba(14,165,233,.12); }
+  .searchbox input::placeholder { color: var(--muted); }
+
+  .filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px,1fr)); gap: 10px; }
+  .f { display: flex; flex-direction: column; gap: 5px; }
+  .f label { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; padding-left: 2px; }
+  .f select {
+    appearance: none; -webkit-appearance: none;
+    border: 1.5px solid var(--line-strong); border-radius: 11px; padding: 9px 30px 9px 12px;
+    font-size: 13.5px; font-family: var(--sans); font-weight: 600; color: var(--ink);
+    background: #fbfdff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%238aa0b5' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+    outline: none; cursor: pointer; transition: .15s;
+  }
+  .f select:focus { border-color: var(--sky); box-shadow: 0 0 0 3px rgba(14,165,233,.12); }
+  .f select.on { border-color: var(--sky); background-color: #eaf7fe; color: var(--sky-deep); }
+
+  .actionrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .count { font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+  .count b { color: var(--sky-deep); font-size: 16px; font-variant-numeric: tabular-nums; }
+  .btn {
+    border: 1.5px solid var(--line-strong); background: #fff; color: var(--ink-soft);
+    border-radius: 999px; padding: 7px 15px; font-size: 12.5px; font-weight: 700;
+    font-family: var(--sans); cursor: pointer; transition: .15s;
+  }
+  .btn:hover { border-color: var(--sky); color: var(--sky-deep); }
+  .chips { display: flex; gap: 7px; flex-wrap: wrap; }
+  .chip {
+    border: 1.5px solid var(--line); background: #fff; color: var(--ink-soft);
+    border-radius: 999px; padding: 6px 13px; font-size: 12.5px; font-weight: 700;
+    font-family: var(--sans); cursor: pointer; transition: .15s; white-space: nowrap;
+  }
+  .chip:hover { border-color: var(--line-strong); }
+  .chip.on { background: var(--sky-deep); border-color: var(--sky-deep); color: #fff; }
+
+  /* ── table ──────────────────────────────── */
+  .tablebox {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .scroller { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1560px; font-size: 13px; }
+  thead th {
+    position: sticky; top: 0; z-index: 3;
+    background: #eef6fc; color: var(--ink); font-weight: 800; font-size: 11.5px;
+    letter-spacing: .03em; text-align: left; padding: 12px 12px; white-space: nowrap;
+    border-bottom: 1.5px solid var(--line-strong); cursor: pointer; user-select: none;
+  }
+  thead th:hover { background: #e3f1fb; color: var(--sky-deep); }
+  thead th .ar { color: var(--muted); font-size: 10px; margin-left: 3px; }
+  thead th.act .ar { color: var(--sky-deep); }
+  thead th.nosort { cursor: default; }
+  thead th.nosort:hover { background: #eef6fc; color: var(--ink); }
+
+  tbody td { padding: 11px 12px; border-bottom: 1px solid #eef4f9; vertical-align: top; }
+  tbody tr { transition: background .12s; cursor: pointer; }
+  tbody tr:hover { background: #f7fcff; }
+  tbody tr.open { background: #f0f9ff; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  th.c-school, td.c-school {
+    position: sticky; left: 0; z-index: 2; background: var(--card);
+    border-right: 1px solid var(--line); min-width: 132px;
+  }
+  thead th.c-school { z-index: 4; background: #eef6fc; }
+  tbody tr:hover td.c-school { background: #f7fcff; }
+  tbody tr.open td.c-school { background: #f0f9ff; }
+
+  .sname { font-weight: 800; font-size: 13.5px; letter-spacing: -.2px; display: block; }
+  .sflag { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .gname { color: var(--ink-soft); font-size: 12.5px; }
+  .major { font-weight: 700; color: var(--ink); }
+  .major .mdesc { display: block; font-weight: 500; font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+
+  .pill {
+    display: inline-block; font-size: 11px; font-weight: 800; padding: 2.5px 9px;
+    border-radius: 999px; white-space: nowrap; letter-spacing: -.1px;
+  }
+  .p-특수 { background:#e0f2fe; color:#0369a1; }
+  .p-일반 { background:#ede9fe; color:#6d28d9; }
+  .p-전문 { background:#fce7f3; color:#be185d; }
+  .p-온라인 { background:#d1fae5; color:#047857; }
+  .p-mode { background:#f1f5f9; color:#475569; }
+
+  .money { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .money .orig { display: block; font-size: 11px; font-weight: 600; color: var(--muted); }
+  .num { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+  .na { color: var(--muted); font-weight: 600; font-size: 12px; }
+
+  .rate { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+  .lv-easy   { color: #047857; } .lv-easy   .dot { background:#10b981; }
+  .lv-mid    { color: #b45309; } .lv-mid    .dot { background:#f59e0b; }
+  .lv-hard   { color: #be123c; } .lv-hard   .dot { background:#f43f5e; }
+  .lv-none   { color: var(--muted); } .lv-none .dot { background:#cbd5e1; }
+
+  .fillbar { width: 62px; height: 5px; background:#eef2f6; border-radius: 999px; overflow: hidden; margin-top: 4px; }
+  .fillbar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--sky), var(--teal)); }
+
+  .clamp { max-width: 250px; font-size: 12px; color: var(--ink-soft); line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .clamp.note { max-width: 300px; }
+
+  .sitelink {
+    display: inline-flex; align-items: center; gap: 4px; text-decoration: none;
+    color: var(--sky-deep); font-weight: 700; font-size: 12px; white-space: nowrap;
+    padding: 4px 10px; border: 1px solid var(--line-strong); border-radius: 999px; background:#fbfdff;
+    transition: .15s;
+  }
+  .sitelink:hover { background: var(--sky-deep); color:#fff; border-color: var(--sky-deep); }
+
+  .empty { padding: 60px 20px; text-align: center; color: var(--muted); }
+  .empty .big { font-size: 40px; margin-bottom: 10px; }
+
+  /* ── mobile cards ───────────────────────── */
+  .cards { display: none; }
+  .mcard {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 15px 16px; box-shadow: var(--shadow); margin-bottom: 11px; position: relative; overflow: hidden;
+  }
+  .mcard::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background: var(--c, var(--sky)); }
+  .mcard .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .mcard .sn { font-size: 12px; font-weight: 700; color: var(--muted); }
+  .mcard h3 { margin: 2px 0 8px; font-size: 15.5px; font-weight: 800; letter-spacing: -.3px; line-height: 1.35; }
+  .mcard .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 11px; }
+  .mcard .kv { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; padding-top: 11px; border-top: 1px dashed var(--line); }
+  .mcard .kv > div { text-align: center; }
+  .mcard .kv .k { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
+  .mcard .kv .v { font-size: 14px; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -.3px; }
+
+  /* ── modal ──────────────────────────────── */
+  .mask {
+    position: fixed; inset: 0; background: rgba(15,39,64,.5); backdrop-filter: blur(3px);
+    z-index: 50; display: none; align-items: flex-end; justify-content: center;
+  }
+  .mask.show { display: flex; }
+  .sheet {
+    background: #fff; width: 100%; max-width: 620px; max-height: 88vh; overflow-y: auto;
+    border-radius: 24px 24px 0 0; padding: 8px 22px calc(28px + env(safe-area-inset-bottom));
+    box-shadow: 0 -12px 44px rgba(15,39,64,.25); animation: up .28s cubic-bezier(.22,1,.36,1);
+  }
+  @media (min-width: 640px) {
+    .mask { align-items: center; }
+    .sheet { border-radius: 24px; padding-bottom: 28px; animation: pop .24s cubic-bezier(.22,1,.36,1); }
+  }
+  @keyframes up { from { transform: translateY(100%); } to { transform: none; } }
+  @keyframes pop { from { opacity:0; transform: scale(.96) translateY(10px); } to { opacity:1; transform:none; } }
+  .grab { width: 40px; height: 4px; background: var(--line-strong); border-radius: 999px; margin: 8px auto 14px; }
+  .sheet .shead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 4px; }
+  .sheet h2 { margin: 0; font-size: 19px; font-weight: 900; letter-spacing: -.4px; line-height: 1.35; }
+  .sheet .ssub { color: var(--ink-soft); font-size: 13px; margin: 3px 0 14px; }
+  .xbtn {
+    flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line);
+    background: #f5f9fc; color: var(--ink-soft); font-size: 18px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: .15s;
+  }
+  .xbtn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .sheet .tagrow { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .sheet .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(110px,1fr)); gap: 9px; margin-bottom: 16px; }
+  .sheet .box { background:#f6fafd; border:1px solid var(--line); border-radius: 13px; padding: 11px 12px; }
+  .sheet .box .k { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing:.05em; }
+  .sheet .box .v { font-size: 16px; font-weight: 900; letter-spacing:-.4px; font-variant-numeric: tabular-nums; }
+  .sheet .box .v small { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); }
+  .sec { margin-bottom: 15px; }
+  .sec h4 { margin: 0 0 6px; font-size: 12px; font-weight: 800; color: var(--sky-deep); letter-spacing:.05em; }
+  .sec p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; }
+  .sec ul { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+  .gobtn {
+    display: flex; align-items: center; justify-content: center; gap: 7px; text-decoration: none;
+    background: linear-gradient(135deg, var(--sky), var(--sky-deep)); color: #fff;
+    padding: 13px; border-radius: 14px; font-weight: 800; font-size: 14.5px;
+    box-shadow: 0 6px 18px rgba(2,132,199,.3);
+  }
+
+  /* ── footnote ───────────────────────────── */
+  .notes { margin-top: 22px; background: rgba(255,255,255,.72); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+  .notes h3 { margin: 0 0 10px; font-size: 13px; font-weight: 800; color: var(--ink); letter-spacing:.02em; }
+  .notes ul { margin: 0; padding-left: 18px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.8; }
+  .notes a { color: var(--sky-deep); }
+  .foot { text-align: center; color: var(--muted); font-size: 12px; margin-top: 26px; }
+
+  @media (max-width: 900px) {
+    .tablebox { display: none; }
+    .cards { display: block; }
+    .wrap { padding-left: 14px; padding-right: 14px; }
+    header.hero { padding: 28px 0 14px; }
+    .panel { padding: 14px; border-radius: 18px; }
+    .filters { grid-template-columns: 1fr 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <a class="backlink" href="index.html">← 개인 페이지</a>
+    <div><span class="kicker">🎓 Grad School</span></div>
+    <h1>직장인을 위한 대학원 정리<br>AI · 데이터분석 · 컴퓨터공학 석사</h1>
+    <p class="sub">국내 야간·주말 특수대학원 + 해외 온라인 석사를 한 표에 모았습니다. 학비·경쟁률·총원율은 <b>대학알리미 2025년 공시</b>와 각 학교 공식 자료 기준이며, 행을 누르면 상세 정보가 열립니다.</p>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="panel">
+    <div class="searchrow">
+      <div class="searchbox">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.8"/><path d="M11 11l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input id="q" type="search" placeholder="학교 · 학과 · 키워드 검색 (예: 인공지능, 온라인, 야간)" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="f"><label>나라</label><select id="fCountry"></select></div>
+      <div class="f"><label>지역</label><select id="fRegion"></select></div>
+      <div class="f"><label>대학원 유형</label><select id="fType"></select></div>
+      <div class="f"><label>수업 형태</label><select id="fMode"></select></div>
+      <div class="f"><label>총 학비</label><select id="fCost">
+        <option value="">전체</option>
+        <option value="0-1500">~ 1,500만원</option>
+        <option value="1500-2500">1,500 ~ 2,500만원</option>
+        <option value="2500-3500">2,500 ~ 3,500만원</option>
+        <option value="3500-4500">3,500 ~ 4,500만원</option>
+        <option value="4500-99999">4,500만원 이상</option>
+      </select></div>
+      <div class="f"><label>경쟁률</label><select id="fComp">
+        <option value="">전체</option>
+        <option value="0-1">미달 (1:1 미만) 🟢</option>
+        <option value="0-2">2:1 미만</option>
+        <option value="2-4">2 ~ 4:1</option>
+        <option value="4-99">4:1 이상 🔴</option>
+      </select></div>
+      <div class="f"><label>정렬</label><select id="fSort">
+        <option value="cost-asc">총 학비 낮은 순</option>
+        <option value="cost-desc">총 학비 높은 순</option>
+        <option value="comp-asc">경쟁률 낮은 순</option>
+        <option value="comp-desc">경쟁률 높은 순</option>
+        <option value="fill-desc">총원율 높은 순</option>
+        <option value="fill-asc">총원율 낮은 순</option>
+        <option value="school">학교 이름 순</option>
+      </select></div>
+    </div>
+
+    <div class="actionrow">
+      <div class="chips">
+        <button class="chip" data-preset="ai">🤖 AI 전공만</button>
+        <button class="chip" data-preset="data">📊 데이터 전공만</button>
+        <button class="chip" data-preset="online">💻 100% 온라인</button>
+        <button class="chip" data-preset="seoul">🏙 서울권</button>
+        <button class="chip" data-preset="cheap">💰 2,500만원 이하</button>
+        <button class="chip" data-preset="easy">🟢 경쟁률 2:1 미만</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span class="count"><b id="cnt">0</b>개 프로그램</span>
+        <button class="btn" id="reset">초기화</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tablebox">
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr id="thead"></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="emptyD" style="display:none"><div class="big">🔍</div>조건에 맞는 프로그램이 없어요.</div>
+  </div>
+
+  <div class="cards" id="cards"></div>
+  <div class="empty" id="emptyM" style="display:none"><div class="big">🔍</div>조건에 맞는 프로그램이 없어요.</div>
+
+  <div class="notes">
+    <h3>📌 데이터 읽는 법 &amp; 출처</h3>
+    <ul>
+      <li><b>총 학비</b> = <b>학기당 등록금 × 총 학기 수 (+ 입학금)</b>입니다. 대학알리미 공시 '등록금'은 연간이 아니라 <b>학기당 수업료</b>라는 점을 <a href="https://www.yonsei.ac.kr/sites/dev_sc/down/2025_fee3.pdf" target="_blank" rel="noopener">연세대 2025 등록금 명세표</a>(인공지능융합대학원 학기당 10,380,000원)와 <a href="https://www.korea.ac.kr/sites/ko/files/2025_Registration_fee(etc)_re.pdf" target="_blank" rel="noopener">고려대 2025 등록금 일람표</a>(SW·AI융합대학원 7,718천원)로 교차 검증했습니다. 교재비·기타 납입금은 제외.</li>
+      <li><b>연세대·고려대</b>는 위 공식 명세표의 2025학년도 금액과 입학금을 그대로 썼고, 나머지 학교는 대학알리미 공시값(2024년 기준)이라 실제 고지액이 3~5% 높을 수 있습니다.</li>
+      <li><b>경쟁률 / 총원율(충원률)</b>은 <b>대학원 단위 2025학년도 공시값</b>입니다. 학과 단위 경쟁률은 대부분 비공개라, 같은 대학원 소속 학과는 같은 값을 공유합니다. 총원율 100% 미만 = 정원 미달(들어가기 상대적으로 쉬움).</li>
+      <li><b>“미공시”</b>는 학교가 대학알리미에 자료를 제출하지 않은 항목입니다. 없는 게 아니라 확인이 필요하다는 뜻입니다.</li>
+      <li>해외 학비는 <b>USD 1,390원 / GBP 1,780원</b> 환산 기준입니다. 환율·연간 인상률에 따라 달라집니다.</li>
+      <li>출처: <a href="http://phdkim.net/gradinfo/school/list?type=%ED%8A%B9%EC%88%98%EB%8C%80%ED%95%99%EC%9B%90&amp;category=%EA%B3%B5%ED%95%99" target="_blank" rel="noopener">김박사넷 대학원 정보(대학알리미 기반)</a> · <a href="https://www.academyinfo.go.kr" target="_blank" rel="noopener">대학알리미</a> · <a href="https://datapoint.tistory.com/28" target="_blank" rel="noopener">datapoint 블로그</a> · 각 대학원 공식 모집요강 · 각 해외 프로그램 공식 홈페이지</li>
+      <li>기준 시점: <b id="asof">–</b> · 지원 전 반드시 공식 모집요강 원문을 확인하세요.</li>
+    </ul>
+  </div>
+
+  <p class="foot">🔒 개인용 · 검색 비노출</p>
+</div>
+
+<div class="mask" id="mask"><div class="sheet" id="sheet"></div></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   환율 (2026-08 기준 근사)
+   ══════════════════════════════════════════════════════════ */
+const FX = { USD: 1390, GBP: 1780 };
+
+/* ══════════════════════════════════════════════════════════
+   데이터
+   ty  : ★ 학기당 등록금(수업료, 원) | null = 미공시
+         └ 대학알리미 공시 '등록금'은 연간이 아니라 학기당 수업료.
+           연세대 2025 등록금명세표(인공지능융합대학원 학기당 10,380,000)와
+           고려대 2025 등록금일람표(SW·AI융합대학원 7,718천원)로 교차 검증함.
+   adm : 입학금(원, 1회) | null = 미확인
+   tm  : 총 학기 수
+   tot : 총 학비(원). 국내는 ty*tm + adm, 해외는 직접 입력
+   cr  : 경쟁률 | null = 미공시
+   fr  : 총원율(충원률, %) | null = 미공시
+   qt  : 모집(입학)정원
+   ══════════════════════════════════════════════════════════ */
+const RAW = [
+/* ── 서울 · AI 특화 특수대학원 ─────────────────────── */
+{s:"한양대학교", g:"인공지능융합대학원", m:"인공지능시스템학과", mdesc:"AI Systems",
+ c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:8419000, cr:7.05, fr:105, qt:40,
+ site:"https://gsai.hanyang.ac.kr/", tags:["ai"],
+ req:"4년제 학사 (전공 무관) · 서류(자기소개서·학업계획서) + 면접 · 재직증명서 제출 권장 · 영어/수학 시험 없음",
+ note:"2025 경쟁률 7.05:1로 국내 특수대학원 최상위. 3년 연속 상승(5.68→6.15→7.05)이라 준비 없이 넣으면 위험. 국내 최초 ON/OFF 하이브리드 운영이라 야근 잦은 직장인에게 가장 유리. 2024 졸업생 취업률 100%(21명 중 20명)."},
+
+{s:"고려대학교", g:"SW·AI융합대학원", m:"인공지능융합학과 (AAI)", mdesc:"AI Convergence",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7718000, adm:1234000, cr:3.39, fr:87.7, qt:125,
+ site:"https://gscit.korea.ac.kr/", tags:["ai"],
+ req:"4년제 학사 또는 취득예정 (타 전공 지원 가능) · 서류전형 + 구술시험(면접) · GRE/영어시험 없음",
+ note:"학기당 772만원 × 5학기 = <b>총 3,982만원(입학금 포함)</b>으로 국내 표에서 최상위권 학비. 안암캠퍼스. 재학생 304명 규모로 네트워크가 넓고, 빅데이터·SW보안 학과와 과목 교차 수강 가능. 총원율 87.7%로 정원을 다 채우지 못함 → 겉보기 경쟁률(3.39)보다 실제 문턱은 낮음."},
+
+{s:"고려대학교", g:"SW·AI융합대학원", m:"빅데이터융합학과 (BDC)", mdesc:"Big Data Convergence",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7718000, adm:1234000, cr:3.39, fr:87.7, qt:168,
+ site:"https://gscit.korea.ac.kr/", tags:["data"],
+ req:"4년제 학사 또는 취득예정 (타 전공 지원 가능) · 서류전형 + 구술시험(면접)",
+ note:"학과 정원 168명으로 SW·AI융합대학원 내 최대 규모 = 상대적으로 붙기 쉬운 라인. 데이터 엔지니어링·분석 실무 중심 커리큘럼."},
+
+{s:"고려대학교", g:"SW·AI융합대학원", m:"소프트웨어보안학과 (SWS)", mdesc:"Software Security",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7718000, adm:1234000, cr:3.39, fr:87.7, qt:55,
+ site:"https://gscit.korea.ac.kr/", tags:["cs"],
+ req:"4년제 학사 또는 취득예정 (타 전공 지원 가능) · 서류전형 + 구술시험(면접)",
+ note:"정원 55명으로 세 학과 중 가장 작음. 보안 커리어를 노리는 게 아니라면 AAI/BDC가 목적에 더 맞음."},
+
+{s:"연세대학교", g:"인공지능융합대학원", m:"인공지능컴퓨팅전공", mdesc:"AI Computing",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:3.07, fr:58.6, qt:35,
+ site:"https://gcomputing.yonsei.ac.kr/", tags:["ai"],
+ req:"4년제 학사 (학부 전공 무관) · 서류 + 면접 · 입학금 별도 약 120만원",
+ note:"2025년 3월 신설. 지원자 215명 / 경쟁률 3.07:1이었지만 총원율 58.6% — 정원 70명 중 41명만 등록했다는 뜻이라 실제 합격 가능성은 숫자보다 훨씬 높았음. 평일(월·화·목) 야간, 신촌. 다만 <b>학기당 1,038만원 × 4학기 + 입학금 = 총 4,272만원</b>으로 이 표의 국내 프로그램 중 가장 비쌈."},
+
+{s:"연세대학교", g:"인공지능융합대학원", m:"컴퓨터·소프트웨어전공", mdesc:"Computer & Software",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:3.07, fr:58.6, qt:35,
+ site:"https://gcomputing.yonsei.ac.kr/", tags:["cs"],
+ req:"4년제 학사 (학부 전공 무관) · 서류 + 면접",
+ note:"AI컴퓨팅전공과 동일 대학원·동일 학비. 순수 CS 기초(시스템·SW공학)를 다지고 싶다면 이쪽."},
+
+{s:"연세대학교", g:"공학대학원", m:"인공지능전공", mdesc:"Artificial Intelligence",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:2.84, fr:98.8, qt:71,
+ site:"https://eyonsei.yonsei.ac.kr/", tags:["ai"],
+ req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
+ note:"신설된 인공지능융합대학원과 달리 역사가 길고 총원율 98.8%로 정원이 거의 다 참 → 그만큼 안정적으로 운영됨. 재학생 605명 규모. 산업공학·정보산업관리 등 타 전공 과목 병행 수강 가능."},
+
+{s:"연세대학교", g:"공학대학원", m:"컴퓨터소프트웨어전공", mdesc:"Computer Software",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:10380000, adm:1195000, cr:2.84, fr:98.8, qt:60,
+ site:"https://eyonsei.yonsei.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"AI 전공보다 SW 엔지니어링 비중이 큼. 학비는 동일."},
+
+{s:"성균관대학교", g:"정보통신대학원", m:"빅데이터학과", mdesc:"Big Data",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7001000, cr:4.02, fr:82, qt:185,
+ site:"https://gsic.skku.edu/", tags:["data"],
+ req:"4년제 학사 또는 동등 학력 · 서류 + 면접 · 재직증명서",
+ note:"경쟁률 4.02:1로 높은 편이지만 총원율은 82%라 정원 미달. 정원 185명으로 규모가 커서 실질 진입은 생각보다 열려 있음. 학기당 700만원 × 5학기 = 총 3,501만원. 2024 취업률 93.9%, 서울 종로 인문사회캠퍼스 야간."},
+
+{s:"성균관대학교", g:"정보통신대학원", m:"정보보호학과", mdesc:"Information Security",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:7001000, cr:4.02, fr:82, qt:65,
+ site:"https://gsic.skku.edu/", tags:["cs"],
+ req:"4년제 학사 또는 동등 학력 · 서류 + 면접",
+ note:"보안 특화. AI/데이터가 목표라면 빅데이터학과가 맞음."},
+
+{s:"성균관대학교", g:"소프트웨어융합대학원", m:"데이터사이언스융합학과", mdesc:"Data Science (일반대학원)",
+ c:"한국", r:"서울", t:"일반", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null,
+ site:"https://skb.skku.edu/ads/", tags:["data"],
+ req:"4년제 학사 · 재직자 대상 · 서류 + 면접 · 자세한 요건은 대학원 입학홈페이지 확인",
+ note:"⭐ 특수대학원이 아니라 일반대학원 소속이라 학위 명칭이 '일반대학원 석사' — 이후 박사 진학이나 학위 인식 면에서 유리. 2025학년도까지 평일 야간 + 토요일 운영이었으나 2026학년도부터 토요일 수업 폐지, 평일 야간(18~21시)으로 일원화. 등록금·경쟁률 미공시라 학과 문의(031-290-5928) 필요."},
+
+{s:"서강대학교", g:"AI·SW대학원", m:"인공지능전공", mdesc:"Artificial Intelligence",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:null, cr:1.83, fr:61.4, qt:null,
+ site:"https://gsinfo.sogang.ac.kr/", tags:["ai"],
+ req:"4년제 학사 · 서류 + 면접 · 입시요강 PDF는 대학원 홈페이지에서 다운로드 (문의 02-705-8685)",
+ note:"⭐ 총원율 61.4% — 2025년 86명만 등록했고 정원을 크게 못 채웠음. 서울 상위권 중 실질 진입 난이도가 가장 낮은 축. 재학생 415명으로 규모는 큼. 주말 수업 없이 평일 야간만 운영. 등록금이 공시되지 않아 반드시 직접 확인 필요."},
+
+{s:"서강대학교", g:"AI·SW대학원", m:"데이터사이언스전공", mdesc:"Data Science",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:null, cr:1.83, fr:61.4, qt:null,
+ site:"https://gsinfo.sogang.ac.kr/", tags:["data"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"AI전공과 동일 대학원. 통계·분석 중심으로 접근하고 싶다면 이쪽."},
+
+{s:"서강대학교", g:"AI·SW대학원", m:"소프트웨어공학·컴퓨터시스템전공", mdesc:"SW Eng. & Computer Systems",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:null, cr:1.83, fr:61.4, qt:null,
+ site:"https://gsinfo.sogang.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"비전공자가 CS 기초부터 다지기에 가장 무난한 트랙."},
+
+{s:"서강대학교", g:"AI·SW대학원", m:"보안·블록체인전공", mdesc:"Security & Blockchain",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:null, cr:1.83, fr:61.4, qt:null,
+ site:"https://gsinfo.sogang.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"보안 특화 트랙."},
+
+{s:"숭실대학교", g:"정보과학대학원", m:"인공지능학과", mdesc:"Artificial Intelligence",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:53,
+ site:"https://itmba.ssu.ac.kr/", tags:["ai"],
+ req:"4년제 학사 또는 취득예정 · 서류 + 면접 · 재직증명서",
+ note:"⭐ 가성비 1순위. 학기당 515만원으로 서울 사립 중 최저 수준, 5학기 기준 총 2,575만원. 2026학년도부터 등록학기가 5학기 → <b>4학기로 단축될 예정</b>이라 실부담은 2,060만원까지 내려갈 수 있음. 총원율 100%(정원 완전 충족)이라 학사 운영이 안정적. 상도동 캠퍼스 야간. 학교 네임밸류는 SKY 대비 낮음."},
+
+{s:"숭실대학교", g:"정보과학대학원", m:"소프트웨어공학과", mdesc:"Software Engineering",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:48,
+ site:"https://itmba.ssu.ac.kr/", tags:["cs"],
+ req:"4년제 학사 또는 취득예정 · 서류 + 면접",
+ note:"정원 48명. 개발 실무 → 아키텍처/설계로 넓히려는 사람에게 적합."},
+
+{s:"숭실대학교", g:"정보과학대학원", m:"정보보안학과", mdesc:"Information Security",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:47,
+ site:"https://itmba.ssu.ac.kr/", tags:["cs"],
+ req:"4년제 학사 또는 취득예정 · 서류 + 면접",
+ note:"숭실대 정보보안은 업계 인지도가 있는 편."},
+
+{s:"숭실대학교", g:"정보과학대학원", m:"AI미디어학과", mdesc:"AI Media",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:5,
+ site:"https://itmba.ssu.ac.kr/", tags:["ai"],
+ req:"4년제 학사 또는 취득예정 · 서류 + 면접",
+ note:"정원 5명으로 매우 작음. 생성형 AI·미디어 콘텐츠 쪽 관심이 아니면 인공지능학과가 나음."},
+
+{s:"숭실대학교", g:"정보과학대학원", m:"IT경영학과", mdesc:"IT Management",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:26,
+ site:"https://itmba.ssu.ac.kr/", tags:["data"],
+ req:"4년제 학사 또는 취득예정 · 서류 + 면접",
+ note:"기술보다 IT 기획·PM 커리어를 노린다면 고려. 순수 AI 역량 강화 목적이면 부적합."},
+
+{s:"국민대학교", g:"소프트웨어융합대학원", m:"인공지능전공", mdesc:"Artificial Intelligence",
+ c:"한국", r:"서울", t:"특수", mo:"온라인", tm:3, ty:6346000, cr:1.87, fr:111.1, qt:48,
+ site:"https://swgs.kookmin.ac.kr/", tags:["ai","online"],
+ req:"4년제 학사 또는 취득예정 · 서류 + 면접 · 별도 필기시험 없음 (문의 02-910-4772)",
+ note:"⭐ 가장 빠르고 싼 국내 옵션. 1.5년(3학기) 초단기 과정 + 전면 온라인 운영. 3학기만 다니면 되므로 총 1,904만원 — 서울 사립 중 총액 최저. 총원율 111.1%로 정원 초과 모집 — 인기 있지만 경쟁률은 1.87:1로 낮음. 단기간·저비용으로 '석사 학위'가 필요한 경우 최적, 깊은 연구 경험은 기대하기 어려움."},
+
+{s:"국민대학교", g:"소프트웨어융합대학원", m:"인공지능응용전공", mdesc:"AI Application (온라인)",
+ c:"한국", r:"서울", t:"특수", mo:"온라인", tm:3, ty:6346000, cr:1.87, fr:111.1, qt:51,
+ site:"https://swgs.kookmin.ac.kr/", tags:["ai","online"],
+ req:"4년제 학사 또는 취득예정 · 서류 + 면접",
+ note:"100% 온라인 + 토요일 중심 운영. 정원 51명으로 가장 큼. 도메인에 AI를 '적용'하는 실무형 커리큘럼."},
+
+{s:"국민대학교", g:"소프트웨어융합대학원", m:"소프트웨어전공", mdesc:"Software",
+ c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:3, ty:6346000, cr:1.87, fr:111.1, qt:27,
+ site:"https://swgs.kookmin.ac.kr/", tags:["cs"],
+ req:"4년제 학사 또는 취득예정 · 서류 + 면접",
+ note:"평일 비대면 + 토요일 대면 혼합. 정원 27명."},
+
+{s:"이화여자대학교", g:"데이터사이언스대학원", m:"데이터사이언스학과", mdesc:"Data Science",
+ c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:null, cr:null, fr:null, qt:null,
+ site:"https://gsds.ewha.ac.kr/", tags:["data"],
+ req:"4년제 학사 · ⚠️ 여성만 지원 가능 · 서류 + 면접 (문의 02-3277-2182)",
+ note:"2022년 3월 개원한 신생 대학원. 토요일 대면 + 평일 비대면 운영으로 직장 병행 설계가 잘 되어 있음. 다만 등록금·경쟁률·총원율 모두 대학알리미 미공시라 직접 문의 필요. 남성 지원 불가."},
+
+{s:"한양대학교", g:"공학대학원", m:"전기·전자·컴퓨터공학과", mdesc:"Electrical, Electronic & Computer Eng.",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:6933000, cr:null, fr:null, qt:235,
+ site:"https://www.hanyang.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접 · 재직 경력 요구 (공학대학원 특성)",
+ note:"정원 235명으로 매우 큼 → 진입 문턱이 낮은 편. 총 학비 2,773만원. 다만 AI 특화 커리큘럼은 인공지능융합대학원 쪽이 훨씬 강함. 경쟁률·총원율 미공시. 2024 취업률 95%."},
+
+{s:"고려대학교", g:"공학대학원", m:"전기전자컴퓨터공학과", mdesc:"Electrical, Electronic & Computer Eng.",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:7718000, adm:1234000, cr:1.69, fr:70.6, qt:67,
+ site:"https://www.korea.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
+ note:"경쟁률 1.69:1 · 총원율 70.6%로 SW·AI융합대학원(3.39:1)보다 훨씬 들어가기 쉬움. 같은 '고려대 석사'지만 AI 커리큘럼 밀도는 낮음. 2024 취업률 100%."},
+
+{s:"서울시립대학교", g:"과학기술대학원", m:"컴퓨터과학부", mdesc:"Computer Science",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:3676000, cr:2.52, fr:105.8, qt:45,
+ site:"https://www.uos.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"⭐ 공립이라 학비가 압도적으로 쌈 — 학기당 368만원, 총 1,470만원. 총원율 105.8%로 정원 초과 충원될 만큼 인기. 경쟁률 2.52:1. 서울 동대문구, 야간. 가성비 기준 서울권 최상위권."},
+
+{s:"서울시립대학교", g:"과학기술대학원", m:"전자전기컴퓨터공학과", mdesc:"Electronics, Electrical & Computer Eng.",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:3676000, cr:2.52, fr:105.8, qt:34,
+ site:"https://www.uos.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"컴퓨터과학부와 동일 학비. 하드웨어/신호처리 비중이 큼."},
+
+{s:"서울과학기술대학교", g:"산업대학원", m:"빅데이터AI경영정보전공", mdesc:"Big Data & AI Management Info.",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:2808000, cr:4.97, fr:95, qt:20,
+ site:"https://gsi.seoultech.ac.kr/", tags:["data"],
+ req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
+ note:"⭐ 국내 최저가 — 학기당 281만원, 총 학비 약 1,123만원. 대신 경쟁률 4.97:1로 표에서 가장 높은 축(가성비 소문 때문). 국립, 노원구 공릉동 야간. 계열이 '인문사회(경영정보)'라 순수 공학 석사 학위를 원하면 확인 필요."},
+
+{s:"광운대학교", g:"스마트융합대학원", m:"정보융합시스템 (정보시스템학과)", mdesc:"Information Convergence Systems",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:5704000, cr:0.78, fr:58, qt:53,
+ site:"https://compro.kw.ac.kr/", tags:["cs","data"],
+ req:"4년제 학사 · 서류 + 면접 · 필기시험 없음",
+ note:"⭐ 경쟁률 0.78:1 — 지원자가 정원보다 적은 미달 상태. 총원율 58%. 표 안에서 진입 난이도가 사실상 가장 낮은 서울권 옵션. 총 학비 2,282만원. 학교 네임밸류가 우선순위가 아니고 '일단 석사 학위 + 커리큘럼'이 목적이면 현실적 후보."},
+
+{s:"건국대학교", g:"정보통신대학원", m:"정보통신 계열 (3개 전공)", mdesc:"Information & Communication",
+ c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null,
+ site:"https://www.konkuk.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접 · 상세 요강은 학교 문의",
+ note:"대학알리미에 등록금·경쟁률·총원율 모두 미공시. 후보군에는 넣되 정보 확인이 선행되어야 함."},
+
+/* ── 수도권 ──────────────────────────────────── */
+{s:"인하대학교", g:"공학대학원", m:"인공지능융합전공", mdesc:"AI Convergence",
+ c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:16,
+ site:"https://engrad.inha.ac.kr/", tags:["ai"],
+ req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
+ note:"경쟁률 1.36:1로 낮고 총원율 85.4%. 총 학비 2,414만원. 인천/부천 거주·근무라면 통학 최적. 장학금 규모가 커서(연 8.8억) 실부담이 더 낮아질 수 있음. 2024 취업률 95.3%."},
+
+{s:"인하대학교", g:"공학대학원", m:"빅데이터전공", mdesc:"Big Data",
+ c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:11,
+ site:"https://engrad.inha.ac.kr/", tags:["data"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"정원 11명으로 소수 정예. AI융합전공과 학비 동일."},
+
+{s:"인하대학교", g:"공학대학원", m:"전기전자컴퓨터공학과", mdesc:"Electrical, Electronic & Computer Eng.",
+ c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:41,
+ site:"https://engrad.inha.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"정원 41명으로 학과 중 가장 큼."},
+
+{s:"아주대학교", g:"정보통신대학원", m:"정보통신공학과", mdesc:"Information & Communication Eng.",
+ c:"한국", r:"경기", t:"특수", mo:"하이브리드", tm:4, ty:6150000, cr:1.29, fr:91.8, qt:366,
+ site:"https://ict.ajou.ac.kr/", tags:["cs","ai"],
+ req:"4년제 학사 · 서류 + 면접 · 재직증명서",
+ note:"⭐ 재학생 670명 · 정원 366명으로 국내 최대급 규모 → 붙기 쉬움(경쟁률 1.29:1). 총 학비 2,460만원. 온·오프 혼합 수업 옵션이 있어 수원·화성권 근무자에게 유리. 장학금 연 22억 규모. 2024 취업률 95.1%."},
+
+{s:"아주대학교", g:"공학대학원", m:"산업데이터시스템전공", mdesc:"Industrial Data Systems",
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:5600000, cr:1.24, fr:123.3, qt:28,
+ site:"https://www.ajou.ac.kr/", tags:["data"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"총원율 123.3% — 정원보다 훨씬 많이 뽑음. 경쟁률 1.24:1로 진입 쉬움. 데이터 + 산업공학(운영 최적화) 성격이라 순수 AI/ML과는 결이 다름."},
+
+{s:"아주대학교", g:"IT융합대학원", m:"IT융합 계열", mdesc:"IT Convergence",
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:1.51, fr:100, qt:39,
+ site:"https://www.ajou.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접 · 상세 요강은 학교 문의",
+ note:"총원율 100%. 등록금 미공시. 정보통신대학원과 중복 검토 대상."},
+
+{s:"한국공학대학교", g:"산업기술경영대학원", m:"IT·데이터 계열", mdesc:"IT & Data",
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:1.2, fr:85, qt:40,
+ site:"https://www.tukorea.ac.kr/", tags:["data"],
+ req:"4년제 학사 · 서류 + 면접 · 재직자 중심",
+ note:"시흥/안산 산업단지 배후 대학원이라 제조·엔지니어링 직군 재직자가 많음. 경쟁률 1.2:1로 낮음. 등록금 미공시."},
+
+{s:"인천대학교", g:"정보기술대학원", m:"정보기술 계열 (3개 전공)", mdesc:"Information Technology",
+ c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null,
+ site:"https://www.inu.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접 · 상세 요강은 학교 문의",
+ note:"국립대라 학비는 낮을 가능성이 높지만 전 항목 미공시. 인천 거주자라면 인하대와 비교 검토."},
+
+{s:"평택대학교", g:"AI융합대학원", m:"AI융합학과", mdesc:"AI Convergence",
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:0.64, fr:57.1, qt:14,
+ site:"https://www.ptu.ac.kr/", tags:["ai"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"경쟁률 0.64:1(미달), 총원율 57.1%. 정원 14명 소규모. 평택·안성권 근무자용 최후 옵션 성격."},
+
+{s:"한양대학교(ERICA)", g:"융합산업대학원", m:"IT·데이터 계열", mdesc:"Convergence Industry",
+ c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:1.29, fr:88.9, qt:135,
+ site:"https://www.hanyang.ac.kr/", tags:["cs"],
+ req:"4년제 학사 · 서류 + 면접",
+ note:"안산 ERICA 캠퍼스. 정원 135명으로 크고 경쟁률 1.29:1. '한양대 석사' 학위지만 서울캠퍼스와는 구분됨. 등록금 미공시."},
+
+/* ── 온라인 · 국립 ──────────────────────────── */
+{s:"한국방송통신대학교", g:"대학원", m:"통계·데이터과학과", mdesc:"Statistics & Data Science",
+ c:"한국", r:"온라인", t:"특수", mo:"온라인", tm:5, ty:null, cr:2.0, fr:null, qt:null,
+ site:"https://bsgrad.knou.ac.kr/", tags:["data","online"],
+ req:"4년제 학사 또는 동등 학력 · 서류 + 면접 · 별도 필기시험 없음 (문의 02-3668-4347)",
+ note:"⭐ 국립 원격대학원으로 학비가 국내 최저 수준(학기당 100만원 이하 대). 100% 비대면이라 출장·야근·지방 근무 어떤 상황에서도 유지 가능. 대신 네임밸류와 네트워킹은 기대하기 어렵고, 2.5년(5학기) 소요. 경쟁률 약 2:1."},
+
+/* ══════════ 해외 온라인 석사 ══════════ */
+{s:"Georgia Tech", g:"College of Computing", m:"OMSCS — MS in Computer Science", mdesc:"온라인 컴퓨터과학 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:9730000, origCost:"약 $7,000", cr:null, fr:null, qt:null,
+ site:"https://omscs.gatech.edu/", tags:["cs","ai","online"],
+ req:"4년제 학사(CS 전공 아니어도 가능, GPA 3.0 권장) · GRE 불필요 · 추천서 3장 · 영어권 학위 아니면 TOEFL · 자기소개서(Statement of Purpose)",
+ note:"⭐⭐ 학비 대비 가성비는 전 세계 최고. 30학점 × $225 + 학기당 수수료 = <b>총 973만원</b>. 고려대 SW·AI융합대학원(3,982만원)의 1/4 값. 재학생 1만 명 이상으로 세계 최대 온라인 CS 석사이며 오프라인과 동일한 졸업장이 나옴. 합격률은 60%대로 진입은 쉬우나 <b>이수 난이도가 매우 높아 중도 포기율이 높음</b> — 학기당 1과목 페이스로 최대 6년까지 가능. Machine Learning / Computing Systems / Interactive Intelligence 등 특화 트랙 선택."},
+
+{s:"Georgia Tech", g:"Computing · Business · Engineering", m:"OMSA — MS in Analytics", mdesc:"온라인 분석학 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:17160000, origCost:"$12,348 (비거주자)", cr:null, fr:null, qt:null,
+ site:"https://pe.gatech.edu/degrees/analytics", tags:["data","online"],
+ req:"학사 GPA 3.0 이상 · 선수과목: 확률·통계, Python 프로그래밍, 미적분, 기초 선형대수 · 추천서 3장 · GRE/GMAT 선택 · 가을 지원 마감 2/1(최종 3/15)",
+ note:"데이터 분석/데이터 사이언스가 목표라면 OMSCS보다 이쪽이 직결. 36학점, 24~36개월. Computing·Scheller Business·Engineering 3개 단과대 공동 학위라 비즈니스 분석 관점도 함께 배움. 미국 데이터사이언스 프로그램 랭킹 top-5."},
+
+{s:"UT Austin", g:"Computer & Data Science Online", m:"MSCSO — MS in Computer Science", mdesc:"온라인 컴퓨터과학 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:5, ty:null, tot:13900000, origCost:"$10,000 + fees", cr:null, fr:null, qt:null,
+ site:"https://cdso.utexas.edu/mscs", tags:["cs","online"],
+ req:"관련 분야 4년제 학사 · 누적 GPA 3.0 이상 · GRE 불필요 · 비관련 전공은 코스워크/경력으로 배경 증명 · 가을(우선 3/15, 최종 4/15) / 봄(우선 8/1, 최종 9/1)",
+ note:"30학점(필수 3과목 + 선택 7과목). 이론 CS(알고리즘·시스템)가 탄탄한 편. 미국 CS 랭킹 top-10 학교 학위를 1,390만원에 취득 가능 — 국내 서울권 특수대학원 대부분보다 쌈. 오프라인 대학원과 동일 학위."},
+
+{s:"UT Austin", g:"Computer & Data Science Online", m:"MSDSO — MS in Data Science", mdesc:"온라인 데이터사이언스 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:5, ty:null, tot:13900000, origCost:"$10,000 + fees", cr:null, fr:null, qt:null,
+ site:"https://cdso.utexas.edu/msds", tags:["data","online"],
+ req:"관련 분야 4년제 학사 · 누적 GPA 3.0 이상 · GRE 불필요 · 통계/프로그래밍 배경 증명",
+ note:"데이터 분석 커리어 전환에 가장 무난한 해외 온라인 옵션. 30학점, 1.5~3년. 학비 대비 학교 브랜드가 가장 좋은 조합 중 하나."},
+
+{s:"UT Austin", g:"Computer & Data Science Online", m:"MSAI — MS in Artificial Intelligence", mdesc:"온라인 인공지능 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:5, ty:null, tot:13900000, origCost:"$10,000 + fees", cr:null, fr:null, qt:null,
+ site:"https://cdso.utexas.edu/msai", tags:["ai","online"],
+ req:"관련 분야 4년제 학사 · 누적 GPA 3.0 이상 · GRE 불필요 · AI 비관련 전공은 코스워크/경력으로 배경 증명 · 입학위원회 개별 심사",
+ note:"⭐ AI 전용 학위. 30학점(필수 3학점 + 선택 27학점), 1.5~3년 권장. 학위명에 'Artificial Intelligence'가 그대로 박히는 몇 안 되는 저비용 옵션(1,390만원)이라 커리어 전환 시그널이 명확함."},
+
+{s:"UIUC", g:"Siebel School of Computing & Data Science", m:"Online MCS / MCS-DS", mdesc:"온라인 컴퓨터과학 석사(데이터사이언스 트랙)",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:34560000, origCost:"$24,864 (비거주 $777/학점)", cr:null, fr:null, qt:null,
+ site:"https://siebelschool.illinois.edu/academics/graduate/professional-mcs/online-master-computer-science", tags:["cs","data","online"],
+ req:"4년제 학사 · GRE 불필요 · CS 배경 권장(비전공은 선수 이수 필요할 수 있음) · Coursera 플랫폼 기반",
+ note:"32학점 논문 없는 코스워크 학위. 학비가 OMSCS의 3~4배라 가성비는 떨어지지만 UIUC CS는 미국 top-5. MCS-DS는 데이터사이언스 특화 트랙. 학기 단위 pay-as-you-go라 쉬어갈 수 있음."},
+
+{s:"CU Boulder", g:"College of Engineering (Coursera)", m:"MS-DS — MS in Data Science", mdesc:"온라인 데이터사이언스 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:21890000, origCost:"$15,750 ($525/학점 × 30)", cr:null, fr:null, qt:null,
+ site:"https://www.colorado.edu/program/data-science/", tags:["data","online"],
+ req:"⭐ 지원서·성적증명서·추천서 불필요 — Pathway 과목 3개(통계 또는 CS 트랙)를 GPA 3.0 이상으로 이수하면 자동 입학 (성과 기반 입학)",
+ note:"⭐⭐ 학부 성적이나 전공이 약해서 지원 자체가 부담스러운 경우 최적. 입학 심사가 사실상 없고, 실제 수업을 들어 성적으로 증명하는 구조. 8주 텀 · pay-as-you-go라 부담이 분산됨. 거주지 무관 동일 학비. 다만 학교 브랜드는 미국 중상위권."},
+
+{s:"CU Boulder", g:"College of Engineering (Coursera)", m:"MS-CS — MS in Computer Science", mdesc:"온라인 컴퓨터과학 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:21890000, origCost:"약 $15,750", cr:null, fr:null, qt:null,
+ site:"https://www.coursera.org/degrees/ms-computer-science-boulder", tags:["cs","online"],
+ req:"성과 기반 입학 (Pathway 과목 이수 후 GPA 요건 충족) · 지원서 불필요",
+ note:"MS-DS와 동일한 입학 구조의 CS 버전. 데이터 분석보다 소프트웨어/시스템 쪽을 원하면 이쪽."},
+
+{s:"UPenn", g:"School of Engineering & Applied Science", m:"MCIT Online", mdesc:"온라인 컴퓨터·정보기술 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:41700000, origCost:"약 $30,000 (과목당 약 $3,000, 추정)", cr:null, fr:null, qt:null,
+ site:"https://online.seas.upenn.edu/", tags:["cs","online"],
+ req:"4년제 학사 · ⭐ CS 비전공자 전용 프로그램 (CS 배경 불필요) · GRE 불필요 · 온라인 지원",
+ note:"⭐ 아이비리그 학위 중 유일하게 '컴퓨터 비전공자'를 명시적으로 대상으로 설계된 온라인 석사. 10과목(핵심 6 + 선택 4). 식품공학처럼 전혀 다른 배경에서 CS로 전환하는 케이스에 정확히 맞음. 다만 학비가 4,170만원으로 높고(연세대 AI융합대학원과 비슷), 정확한 현재 과목당 단가는 홈페이지 확인 필요."},
+
+{s:"Univ. of Michigan", g:"School of Information", m:"MADS — MS in Applied Data Science", mdesc:"온라인 응용데이터사이언스 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:58740000, origCost:"약 $42,262 (비거주, 34학점)", cr:null, fr:null, qt:null,
+ site:"https://www.si.umich.edu/programs/master-applied-data-science", tags:["data","online"],
+ req:"4년제 학사 · GRE 불필요 · 지원료 면제 · Python·통계 기초 권장",
+ note:"실무 프로젝트 중심의 데이터사이언스 학위. 미시간대 브랜드는 강하지만 학비가 5,874만원으로 표 최상위권. 연세대 인공지능융합대학원(4,272만원)보다 1.4배 비싸므로, 해외 브랜드가 커리어에 확실히 필요한 경우에만 합리적."},
+
+{s:"Johns Hopkins", g:"Engineering for Professionals", m:"MS in Artificial Intelligence", mdesc:"온라인 인공지능 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:8, ty:null, tot:69500000, origCost:"약 $50,000 (과목당 약 $5,000, 추정)", cr:null, fr:null, qt:null,
+ site:"https://ep.jhu.edu/programs/artificial-intelligence/", tags:["ai","online"],
+ req:"4년제 학사(공학/수학/CS 배경) · 선수과목(선형대수·확률·프로그래밍) 요구 · 5년 내 10과목(30학점) 이수",
+ note:"JHU 응용물리연구소(APL)와 공동 개발한 커리큘럼으로 방산·국방 AI 색채가 강함. 재학생의 78%가 회사 학비 지원으로 다님 — 회사 지원 없이는 비용 정당화가 어려움. 정확한 학비는 학기별 공지 확인 필요."},
+
+{s:"University of Bath", g:"Bath Online", m:"MSc Artificial Intelligence", mdesc:"온라인 인공지능 석사",
+ c:"영국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:23130000, origCost:"£12,996 (10학점 단위당 £722)", cr:null, fr:null, qt:null,
+ site:"https://online.bath.ac.uk/online-courses/msc-artificial-intelligence", tags:["ai","online"],
+ req:"학사 2:1 등급(한국 기준 대략 GPA 3.0~3.3) 또는 동등 · ⭐ 비기술 배경은 General(Contextual) 트랙으로 지원 가능 · IELTS 6.5 수준",
+ note:"⭐ 두 트랙(Technical / General) 구조라 <b>비전공자도 정식 루트로 들어갈 수 있음</b>. 27개월 파트타임, 모듈 단위로 나눠 내는 방식이라 목돈 부담이 없음. 총 2,313만원으로 국내 서울권 특수대학원 평균보다 쌈. 영국 CS 랭킹 상위권. 2026년 9월 입학까지 현재 학비 적용, 이후 연 최대 8% 인상 가능."},
+
+{s:"University of Essex", g:"Essex Online", m:"MSc Artificial Intelligence", mdesc:"온라인 인공지능 석사",
+ c:"영국", r:"온라인", t:"온라인", mo:"온라인", tm:6, ty:null, tot:23230000, origCost:"약 £13,049 (24개월 전체)", cr:null, fr:null, qt:null,
+ site:"https://online.essex.ac.uk/courses/msc-artificial-intelligence/", tags:["ai","online"],
+ req:"학사 학위 + 관련 경력 · ⭐ 학위가 없어도 실무 경력으로 지원 가능한 경로 존재 · IELTS 6.0 수준 · 연중 여러 차례 입학",
+ note:"100% 온라인 · 무시험 · 월 단위 분납 가능. 입학 문턱이 표 전체에서 가장 낮은 축. 다만 Essex는 영국 중위권 대학이라 브랜드 프리미엄은 크지 않음 — '학위 취득'과 '유연성'이 최우선일 때 선택."},
+
+{s:"Imperial College London", g:"Faculty of Natural Sciences", m:"MSc Machine Learning and Data Science", mdesc:"온라인 머신러닝·데이터사이언스 석사",
+ c:"영국", r:"온라인", t:"온라인", mo:"온라인", tm:4, ty:null, tot:63550000, origCost:"£17,850/년 × 2년 = £35,700", cr:null, fr:null, qt:null,
+ site:"https://www.imperial.ac.uk/study/courses/postgraduate-taught/machine-learning-data-science/", tags:["ai","data","online"],
+ req:"학사 2:1 이상 · ⭐ 수학·통계·프로그래밍 배경 강하게 요구 (미적분·선형대수·확률론) · IELTS 6.5+ · 24개월 파트타임",
+ note:"세계 top-10 대학의 온라인 학위. 표 안에서 <b>브랜드는 최상위, 학비도 최상위(6,355만원)</b>, 학문적 난이도도 최상위. 수학 기초가 탄탄하지 않으면 완주가 어려움. 회사 지원이 없다면 현실적인 선택지는 아님."},
+
+{s:"Arizona State University", g:"ASU Online", m:"MCS — Master of Computer Science", mdesc:"온라인 컴퓨터과학 석사",
+ c:"미국", r:"온라인", t:"온라인", mo:"온라인", tm:5, ty:null, tot:null, origCost:"확인 필요 (학점당 과금)", cr:null, fr:null, qt:null,
+ site:"https://asuonline.asu.edu/online-degree-programs/graduate/computer-science-mcs/", tags:["cs","online"],
+ req:"4년제 학사 · GPA 3.0 이상 · CS 선수과목 요구 · 30학점 + 포트폴리오",
+ note:"⚠️ 학비가 공식 페이지에서 명확히 확인되지 않아 표에서 제외했습니다(1-844-353-7953 문의). ASU는 온라인 교육 규모가 크고 학비가 중간대라, OMSCS·UT Austin이 떨어졌을 때의 대안 정도로 검토."}
+];
+
+/* ══════════════════════════════════════════════════════════
+   파생값 계산
+   ══════════════════════════════════════════════════════════ */
+const DATA = RAW.map((d,i) => {
+  const tot = d.tot != null ? d.tot
+            : (d.ty != null && d.tm ? d.ty * d.tm + (d.adm || 0) : null);
+  return Object.assign({}, d, { id:i, tot,
+    _search: [d.s,d.g,d.m,d.mdesc,d.c,d.r,d.t,d.mo,d.req,d.note,(d.tags||[]).join(" ")].join(" ").toLowerCase() });
+});
+
+/* ══════════════════════════════════════════════════════════
+   유틸
+   ══════════════════════════════════════════════════════════ */
+const $ = s => document.querySelector(s);
+const won = v => v == null ? null : (v/10000 >= 10000
+  ? (v/100000000).toFixed(2).replace(/\.?0+$/,'') + "억원"
+  : Math.round(v/10000).toLocaleString() + "만원");
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const flag = c => ({한국:"🇰🇷", 미국:"🇺🇸", 영국:"🇬🇧"}[c] || "🌐");
+
+function compLevel(cr){
+  if (cr == null) return {cls:"lv-none", txt:"미공시"};
+  if (cr < 1)  return {cls:"lv-easy", txt:cr.toFixed(2)+":1"};
+  if (cr < 2)  return {cls:"lv-easy", txt:cr.toFixed(2)+":1"};
+  if (cr < 4)  return {cls:"lv-mid",  txt:cr.toFixed(2)+":1"};
+  return {cls:"lv-hard", txt:cr.toFixed(2)+":1"};
+}
+
+/* ══════════════════════════════════════════════════════════
+   필터 옵션 채우기
+   ══════════════════════════════════════════════════════════ */
+function fillSelect(el, label, values){
+  el.innerHTML = '<option value="">전체</option>' +
+    values.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
+}
+const uniq = k => [...new Set(DATA.map(d => d[k]))].filter(Boolean).sort((a,b)=>a.localeCompare(b,'ko'));
+fillSelect($("#fCountry"), "나라", uniq("c"));
+fillSelect($("#fRegion"),  "지역", uniq("r"));
+fillSelect($("#fType"),    "유형", uniq("t"));
+fillSelect($("#fMode"),    "수업", uniq("mo"));
+
+/* ══════════════════════════════════════════════════════════
+   상태
+   ══════════════════════════════════════════════════════════ */
+let sortKey = "cost", sortDir = "asc";
+let preset = null;   // 퀵 필터 칩 (ai / data / online / seoul / cheap / easy)
+
+const COLS = [
+  {k:"school", t:"학교",        sort:"school", cls:"c-school"},
+  {k:"grad",   t:"대학원",      sort:null},
+  {k:"major",  t:"학과 (전공)", sort:null},
+  {k:"loc",    t:"나라 · 지역", sort:null},
+  {k:"type",   t:"유형",        sort:null},
+  {k:"mode",   t:"수업",        sort:null},
+  {k:"cost",   t:"총 학비",     sort:"cost"},
+  {k:"year",   t:"학기당 등록금", sort:"year"},
+  {k:"term",   t:"학기",        sort:"term"},
+  {k:"comp",   t:"경쟁률",      sort:"comp"},
+  {k:"fill",   t:"총원율",      sort:"fill"},
+  {k:"quota",  t:"모집인원",    sort:"quota"},
+  {k:"req",    t:"입학 시 필요한 것", sort:null},
+  {k:"site",   t:"학교 사이트", sort:null},
+  {k:"note",   t:"비고",        sort:null}
+];
+
+$("#thead").innerHTML = COLS.map(c => {
+  const active = c.sort && c.sort === sortKey;
+  return `<th class="${c.cls||""} ${c.sort?"":"nosort"} ${active?"act":""}" data-sort="${c.sort||""}">${c.t}${c.sort?`<span class="ar">${active?(sortDir==="asc"?"▲":"▼"):"⇅"}</span>`:""}</th>`;
+}).join("");
+
+/* ══════════════════════════════════════════════════════════
+   필터 + 정렬
+   ══════════════════════════════════════════════════════════ */
+function inRange(v, str){
+  if (!str) return true;
+  if (v == null) return false;
+  const [a,b] = str.split("-").map(Number);
+  return v >= a && v < b;
+}
+
+function apply(){
+  const q  = $("#q").value.trim().toLowerCase();
+  const fc = $("#fCountry").value, fr = $("#fRegion").value,
+        ft = $("#fType").value,    fm = $("#fMode").value,
+        fcost = $("#fCost").value, fcomp = $("#fComp").value;
+
+  [["#fCountry",fc],["#fRegion",fr],["#fType",ft],["#fMode",fm],["#fCost",fcost],["#fComp",fcomp]]
+    .forEach(([sel,v]) => $(sel).classList.toggle("on", !!v));
+
+  let rows = DATA.filter(d => {
+    if (q && !d._search.includes(q)) return false;
+    if (fc && d.c !== fc) return false;
+    if (fr && d.r !== fr) return false;
+    if (ft && d.t !== ft) return false;
+    if (fm && d.mo !== fm) return false;
+    if (fcost && !inRange(d.tot == null ? null : d.tot/10000, fcost)) return false;
+    if (fcomp && !inRange(d.cr, fcomp)) return false;
+    // 퀵 필터 칩
+    if (preset === "ai"    && !(d.tags||[]).includes("ai"))     return false;
+    if (preset === "data"  && !(d.tags||[]).includes("data"))   return false;
+    if (preset === "online" && d.mo !== "온라인")               return false;
+    if (preset === "seoul" && d.r !== "서울")                   return false;
+    if (preset === "cheap" && !(d.tot != null && d.tot <= 25000000)) return false;
+    if (preset === "easy"  && !(d.cr != null && d.cr < 2))      return false;
+    return true;
+  });
+
+  const get = d => ({ cost:d.tot, year:d.ty, term:d.tm, comp:d.cr, fill:d.fr, quota:d.qt, school:d.s }[sortKey]);
+  rows.sort((a,b) => {
+    if (sortKey === "school") {
+      const r = a.s.localeCompare(b.s,'ko') || a.m.localeCompare(b.m,'ko');
+      return sortDir === "asc" ? r : -r;
+    }
+    const av = get(a), bv = get(b);
+    if (av == null && bv == null) return 0;
+    if (av == null) return 1;     // 미공시는 항상 뒤로
+    if (bv == null) return -1;
+    return sortDir === "asc" ? av - bv : bv - av;
+  });
+
+  render(rows);
+  $("#cnt").textContent = rows.length;
+}
+
+/* ══════════════════════════════════════════════════════════
+   렌더
+   ══════════════════════════════════════════════════════════ */
+function render(rows){
+  const empty = rows.length === 0;
+  $("#emptyD").style.display = empty ? "block" : "none";
+  $("#emptyM").style.display = empty ? "block" : "none";
+
+  $("#tbody").innerHTML = rows.map(d => {
+    const cl = compLevel(d.cr);
+    return `<tr data-id="${d.id}">
+      <td class="c-school"><span class="sname">${esc(d.s)}</span><span class="sflag">${flag(d.c)} ${esc(d.c)}</span></td>
+      <td class="gname">${esc(d.g)}</td>
+      <td><span class="major">${esc(d.m)}<span class="mdesc">${esc(d.mdesc||"")}</span></span></td>
+      <td class="gname">${esc(d.c)} · ${esc(d.r)}</td>
+      <td><span class="pill p-${esc(d.t)}">${esc(d.t)}</span></td>
+      <td><span class="pill p-mode">${esc(d.mo)}</span></td>
+      <td class="money">${d.tot!=null ? esc(won(d.tot)) + (d.origCost?`<span class="orig">${esc(d.origCost)}</span>`:"") : '<span class="na">확인 필요</span>'}</td>
+      <td class="money">${d.ty!=null ? esc(won(d.ty)) : '<span class="na">미공시</span>'}</td>
+      <td class="num">${d.tm ? d.tm+"학기" : '<span class="na">–</span>'}</td>
+      <td><span class="rate ${cl.cls}"><span class="dot"></span>${cl.txt}</span></td>
+      <td>${d.fr!=null
+            ? `<span class="num">${d.fr}%</span><span class="fillbar"><i style="width:${Math.min(d.fr,100)}%"></i></span>`
+            : '<span class="na">미공시</span>'}</td>
+      <td class="num">${d.qt!=null ? d.qt+"명" : '<span class="na">–</span>'}</td>
+      <td><div class="clamp">${esc(d.req)}</div></td>
+      <td><a class="sitelink" href="${esc(d.site)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">바로가기 ↗</a></td>
+      <td><div class="clamp note">${(d.note||"").replace(/<b>|<\/b>/g,"")}</div></td>
+    </tr>`;
+  }).join("");
+
+  $("#cards").innerHTML = rows.map(d => {
+    const cl = compLevel(d.cr);
+    const color = d.c === "한국" ? "#0ea5e9" : (d.c === "미국" ? "#8b5cf6" : "#14b8a6");
+    return `<div class="mcard" data-id="${d.id}" style="--c:${color}">
+      <div class="top">
+        <div><span class="sn">${flag(d.c)} ${esc(d.s)} · ${esc(d.g)}</span></div>
+        <span class="pill p-${esc(d.t)}">${esc(d.t)}</span>
+      </div>
+      <h3>${esc(d.m)}</h3>
+      <div class="tags">
+        <span class="pill p-mode">${esc(d.mo)}</span>
+        <span class="pill p-mode">${esc(d.r)}</span>
+        ${d.tm?`<span class="pill p-mode">${d.tm}학기</span>`:""}
+      </div>
+      <div class="kv">
+        <div><div class="k">총 학비</div><div class="v" style="color:${color}">${d.tot!=null?esc(won(d.tot)):"–"}</div></div>
+        <div><div class="k">경쟁률</div><div class="v ${cl.cls}">${cl.txt}</div></div>
+        <div><div class="k">총원율</div><div class="v">${d.fr!=null?d.fr+"%":"–"}</div></div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* ══════════════════════════════════════════════════════════
+   상세 시트
+   ══════════════════════════════════════════════════════════ */
+function openSheet(id){
+  const d = DATA.find(x => x.id === +id); if (!d) return;
+  const cl = compLevel(d.cr);
+  $("#sheet").innerHTML = `
+    <div class="grab"></div>
+    <div class="shead">
+      <div>
+        <h2>${esc(d.m)}</h2>
+        <p class="ssub">${flag(d.c)} ${esc(d.s)} · ${esc(d.g)}${d.mdesc?` · ${esc(d.mdesc)}`:""}</p>
+      </div>
+      <button class="xbtn" id="closeX" aria-label="닫기">✕</button>
+    </div>
+    <div class="tagrow">
+      <span class="pill p-${esc(d.t)}">${esc(d.t)}대학원</span>
+      <span class="pill p-mode">${esc(d.mo)}</span>
+      <span class="pill p-mode">${esc(d.c)} · ${esc(d.r)}</span>
+      ${d.tm?`<span class="pill p-mode">${d.tm}학기</span>`:""}
+    </div>
+    <div class="grid">
+      <div class="box"><div class="k">총 학비</div><div class="v">${d.tot!=null?esc(won(d.tot)):"확인 필요"}</div>${d.origCost?`<div class="k" style="margin-top:2px">${esc(d.origCost)}</div>`:""}</div>
+      <div class="box"><div class="k">학기당 등록금</div><div class="v">${d.ty!=null?esc(won(d.ty)):"미공시"}</div></div>
+      <div class="box"><div class="k">입학금</div><div class="v">${d.adm!=null?esc(won(d.adm)):"–"}</div></div>
+      <div class="box"><div class="k">경쟁률</div><div class="v ${cl.cls}">${cl.txt}</div></div>
+      <div class="box"><div class="k">총원율</div><div class="v">${d.fr!=null?d.fr+"<small>%</small>":"미공시"}</div></div>
+      <div class="box"><div class="k">모집인원</div><div class="v">${d.qt!=null?d.qt+"<small>명</small>":"–"}</div></div>
+    </div>
+    <div class="sec"><h4>✅ 입학 시 필요한 것</h4><p>${esc(d.req)}</p></div>
+    <div class="sec"><h4>💬 비고 · 의견</h4><p>${d.note||""}</p></div>
+    <a class="gobtn" href="${esc(d.site)}" target="_blank" rel="noopener">학교 사이트 열기 ↗</a>
+  `;
+  $("#mask").classList.add("show");
+  document.body.style.overflow = "hidden";
+  $("#closeX").onclick = closeSheet;
+}
+function closeSheet(){ $("#mask").classList.remove("show"); document.body.style.overflow = ""; }
+
+/* ══════════════════════════════════════════════════════════
+   이벤트
+   ══════════════════════════════════════════════════════════ */
+["q","fCountry","fRegion","fType","fMode","fCost","fComp"].forEach(id => {
+  $("#"+id).addEventListener("input", apply);
+});
+$("#fSort").addEventListener("change", e => {
+  const [k,dir] = e.target.value.split("-");
+  sortKey = k; sortDir = dir || "asc";
+  refreshHead(); apply();
+});
+function refreshHead(){
+  document.querySelectorAll("#thead th").forEach(th => {
+    const s = th.dataset.sort; if (!s) return;
+    const act = s === sortKey;
+    th.classList.toggle("act", act);
+    const ar = th.querySelector(".ar");
+    if (ar) ar.textContent = act ? (sortDir === "asc" ? "▲" : "▼") : "⇅";
+  });
+}
+$("#thead").addEventListener("click", e => {
+  const th = e.target.closest("th"); if (!th || !th.dataset.sort) return;
+  const s = th.dataset.sort;
+  if (sortKey === s) sortDir = sortDir === "asc" ? "desc" : "asc";
+  else { sortKey = s; sortDir = (s === "cost" || s === "year" || s === "comp") ? "asc" : "desc"; }
+  $("#fSort").value = `${sortKey}-${sortDir}`;
+  refreshHead(); apply();
+});
+$("#tbody").addEventListener("click", e => {
+  const tr = e.target.closest("tr"); if (tr) openSheet(tr.dataset.id);
+});
+$("#cards").addEventListener("click", e => {
+  const c = e.target.closest(".mcard"); if (c) openSheet(c.dataset.id);
+});
+$("#mask").addEventListener("click", e => { if (e.target.id === "mask") closeSheet(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
+
+$("#reset").addEventListener("click", () => {
+  $("#q").value = "";
+  ["fCountry","fRegion","fType","fMode","fCost","fComp"].forEach(id => $("#"+id).value = "");
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+  preset = null;
+  $("#fSort").value = "cost-asc"; sortKey = "cost"; sortDir = "asc";
+  refreshHead(); apply();
+});
+
+document.querySelectorAll(".chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    const p = chip.dataset.preset, was = chip.classList.contains("on");
+    document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+    preset = was ? null : p;
+    if (preset) chip.classList.add("on");
+    apply();
+  });
+});
+
+/* 기준 시점 */
+(function(){
+  const t = new Date();
+  $("#asof").textContent = `${t.getFullYear()}년 ${t.getMonth()+1}월 ${t.getDate()}일 조사`;
+})();
+
+/* 요약 통계 */
+(function(){
+  const kr = DATA.filter(d => d.c === "한국");
+  const ov = DATA.filter(d => d.c !== "한국");
+  const costs = DATA.filter(d => d.tot != null).map(d => d.tot);
+  const cheapest = DATA.filter(d => d.tot != null).sort((a,b)=>a.tot-b.tot)[0];
+  const easiest  = DATA.filter(d => d.cr != null).sort((a,b)=>a.cr-b.cr)[0];
+  const hardest  = DATA.filter(d => d.cr != null).sort((a,b)=>b.cr-a.cr)[0];
+  $("#stats").innerHTML = `
+    <div class="stat" style="--c:#0284c7"><div class="lab">전체 프로그램</div><div class="val">${DATA.length}<small>개</small></div></div>
+    <div class="stat" style="--c:#14b8a6"><div class="lab">국내 / 해외</div><div class="val">${kr.length} <small>/</small> ${ov.length}</div></div>
+    <div class="stat" style="--c:#10b981"><div class="lab">최저 총 학비</div><div class="val">${won(cheapest.tot)}</div><div class="lab">${cheapest.s}</div></div>
+    <div class="stat" style="--c:#f59e0b"><div class="lab">경쟁률 최저</div><div class="val">${easiest.cr.toFixed(2)}:1</div><div class="lab">${easiest.s}</div></div>
+    <div class="stat" style="--c:#f43f5e"><div class="lab">경쟁률 최고</div><div class="val">${hardest.cr.toFixed(2)}:1</div><div class="lab">${hardest.s}</div></div>
+  `;
+})();
+
+apply();
+</script>
+</body>
+</html>
