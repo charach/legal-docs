@@ -33,5 +33,40 @@
     "h": 150,
     "alt": "그로밋이 창가에 기대 쉬고 있는 장면",
     "src": "https://media.giphy.com/media/3o7TKxlnJmurWJwrOE/200w.gif"
+  },
+  "study": {
+    "id": "CpdIanyaF0olpAALZB",
+    "w": 200,
+    "h": 136,
+    "alt": "그로밋이 식탁에 앉아 책을 펴 놓고 읽는 장면",
+    "src": "https://media.giphy.com/media/CpdIanyaF0olpAALZB/200w.gif"
+  },
+  "goal": {
+    "id": "yiNKyqrKi54kWLfttV",
+    "w": 200,
+    "h": 136,
+    "alt": "그로밋이 정원에서 고개를 들어 올려다보는 장면",
+    "src": "https://media.giphy.com/media/yiNKyqrKi54kWLfttV/200w.gif"
+  },
+  "dday": {
+    "id": "ijHlFQ7TirI7bqPTKB",
+    "w": 200,
+    "h": 136,
+    "alt": "그로밋이 정원에서 정원 요정과 마주 서 있는 장면",
+    "src": "https://media.giphy.com/media/ijHlFQ7TirI7bqPTKB/200w.gif"
+  },
+  "wait": {
+    "id": "9VmGX8OLnMYUz8QPSW",
+    "w": 200,
+    "h": 136,
+    "alt": "그로밋이 안락의자에 팔짱을 끼고 앉아 있는 장면",
+    "src": "https://media.giphy.com/media/9VmGX8OLnMYUz8QPSW/200w.gif"
+  },
+  "cheer": {
+    "id": "wCuPw6hMlYM1TkJIS7",
+    "w": 200,
+    "h": 136,
+    "alt": "월레스가 두 팔을 들고 활짝 웃으며 반기는 장면",
+    "src": "https://media.giphy.com/media/wCuPw6hMlYM1TkJIS7/200w.gif"
   }
 }

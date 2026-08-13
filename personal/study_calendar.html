@@ -191,10 +191,13 @@
   function paintGromit(state){
     var box = el('gromitbox');
     if (!GROMIT || !box) return;
-    var pick = { rest:'window', done:'done', work:'work', none:'hello' }[state] || 'work';
-    var g = GROMIT[pick];
+    var pick = { rest:'window', done:'done', work:'work', none:'hello',
+                 goal:'goal', dday:'dday' }[state] || 'work';
+    var g = GROMIT[pick] || GROMIT.work;
+    if (!g) return;
     var cap = { rest:'오늘은 그로밋도 쉰다.', done:'오늘 몫은 끝났다.',
-                work:'묵묵히 오늘 선로를 깐다.', none:'계획 밖의 날.' }[state] || '';
+                work:'묵묵히 오늘 선로를 깐다.', none:'계획 밖의 날.',
+                goal:'여기까지 오기로 한 날.', dday:'오늘은 피하지 않는 날.' }[state] || '';
     box.innerHTML = '<img class="gromit" src="'+g.src+'" width="'+g.w+'" height="'+g.h+
       '" alt="'+g.alt+'" loading="lazy" decoding="async" style="aspect-ratio:'+g.w+'/'+g.h+'">' +
       '<figcaption>'+cap+'</figcaption>';
@@ -224,6 +227,13 @@
   function weekOf(d){ var s=iso(d); for (var i=0;i<P.weeks.length;i++){ var w=P.weeks[i]; if (s>=w.from && s<=w.to) return w; } return null; }
   function phaseOf(w){ return w ? (P.phases.filter(function(p){ return p.id===w.phase; })[0]||null) : null; }
   function anchorsOn(d){ var s=iso(d); return P.anchors.filter(function(a){ return a.date===s; }); }
+
+  // 마감·면접 같은 hard 앵커가 있는 날은 진도 상태보다 그 사실이 먼저다.
+  function anchorState(t){
+    var a = t.anchors || [];
+    function has(k){ return a.some(function(x){ return x.kind===k; }); }
+    return has('hard') ? 'dday' : has('goal') ? 'goal' : null;
+  }
 
   function tasksFor(d){
     var w = weekOf(d);
@@ -259,9 +269,9 @@
     el('anchors').innerHTML = t.anchors.map(function(a){
       return '<p class="anchor-line">'+esc(a.label)+'</p>'; }).join('');
 
-    if (t.none) { el('taskbox').innerHTML = ''; paintGromit('none'); return; }
+    if (t.none) { el('taskbox').innerHTML = ''; paintGromit(anchorState(t) || 'none'); return; }
     if (t.rest) {
-      paintGromit('rest');
+      paintGromit(anchorState(t) || 'rest');
       el('taskbox').innerHTML = '<div class="restday"><div class="h">쉬는 날</div>' +
         '<div class="p">밀린 것이 있으면 30분만. 없으면 아무것도 하지 않는다.</div></div>';
       return;
@@ -269,7 +279,7 @@
 
     var n = t.items.filter(function(i){ return isDone(i.id); }).length;
     var pct = t.items.length ? Math.round(n/t.items.length*100) : 0;
-    paintGromit(n === t.items.length ? 'done' : 'work');
+    paintGromit(anchorState(t) || (n === t.items.length ? 'done' : 'work'));
     el('taskbox').innerHTML = '<ul class="tasks">' + t.items.map(function(it){
       var on = isDone(it.id);
       return '<li'+(on?' class="done"':'')+'><input class="chk" type="checkbox" data-id="'+esc(it.id)+'"'+(on?' checked':'')+'>' +
