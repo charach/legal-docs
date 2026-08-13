@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#e11d48">
+<title>국내 AI 대학원 면접 전략 · 질문은행</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fdf5f7;
+    --card: #ffffff;
+    --ink: #2a1a22;
+    --ink-soft: #6b5560;
+    --muted: #a08b95;
+    --line: #f2e4e9;
+    --line-strong: #e6cfd7;
+    --rose: #e11d48;
+    --rose-deep: #be123c;
+    --rose-soft: #fff1f4;
+    --plum: #9333ea;
+    --sky: #0284c7;
+    --teal: #0d9488;
+    --amber: #d97706;
+    --green: #16a34a;
+    --slate: #64748b;
+    --sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --shadow: 0 1px 2px rgba(42,26,34,.05), 0 8px 24px rgba(190,18,60,.06);
+    --shadow-lg: 0 14px 44px rgba(225,29,72,.16), 0 4px 12px rgba(42,26,34,.10);
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--ink); font-family: var(--sans);
+    font-size: 15px; line-height: 1.68; -webkit-font-smoothing: antialiased;
+    background:
+      radial-gradient(1100px 560px at 100% -10%, rgba(225,29,72,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 12%, rgba(147,51,234,.06), transparent 55%),
+      var(--paper);
+    background-attachment: fixed;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 18px calc(120px + env(safe-area-inset-bottom)); }
+  .wrap.top { padding-bottom: 0; }
+
+  /* ---------- Hero ---------- */
+  header.hero { padding: 46px 0 16px; text-align: center; }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--rose-deep); font-weight: 700;
+    background: rgba(225,29,72,.09); padding: 6px 14px; border-radius: 999px; margin-bottom: 16px;
+  }
+  header.hero h1 { font-weight: 900; font-size: clamp(25px, 5.6vw, 40px); line-height: 1.2; margin: 0 0 12px; letter-spacing: -.5px; }
+  header.hero h1 em { font-style: normal; background: linear-gradient(120deg, var(--rose), var(--plum)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  header.hero p.sub { color: var(--ink-soft); margin: 0 auto; max-width: 600px; font-size: 14.5px; }
+
+  .dbar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; max-width: 620px; margin: 22px auto 4px; }
+  .dcell { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 13px 6px; box-shadow: var(--shadow); text-align: center; }
+  .dcell .n { font-weight: 900; font-size: clamp(17px, 4.6vw, 25px); line-height: 1;
+    background: linear-gradient(135deg, var(--rose), var(--plum)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .dcell .l { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+
+  /* ---------- Sticky progress ---------- */
+  .statusbar { position: sticky; top: 0; z-index: 30; background: rgba(253,245,247,.92); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line); padding: 9px 0; margin: 18px 0 6px; }
+  .statusbar .inner { max-width: 900px; margin: 0 auto; padding: 0 18px; display: flex; align-items: center; gap: 12px; }
+  .status-label { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .status-label b { color: var(--rose-deep); font-size: 15px; }
+  .track { flex: 1; height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; min-width: 40px; }
+  .track > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--rose), var(--plum)); border-radius: 999px; transition: width .5s ease; }
+  .count { font-size: 11.5px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .btn-drill { background: linear-gradient(120deg, var(--rose), #f43f5e); color: #fff; border: none; border-radius: 999px;
+    padding: 6px 15px; font-size: 12px; font-weight: 800; font-family: var(--sans); cursor: pointer; white-space: nowrap;
+    box-shadow: 0 3px 10px rgba(225,29,72,.28); transition: transform .14s ease, box-shadow .14s ease; }
+  .btn-drill:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(225,29,72,.34); }
+  .reset { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 11px; font-family: var(--sans); text-decoration: underline; text-underline-offset: 3px; }
+  .reset:hover { color: var(--rose-deep); }
+
+  /* ---------- TOC ---------- */
+  nav.toc { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin: 16px 0 4px; font-size: 12.5px; }
+  nav.toc a { color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  nav.toc a:hover { color: var(--rose-deep); border-color: var(--rose); }
+
+  /* ---------- Section ---------- */
+  section.sec { margin-top: 42px; scroll-margin-top: 64px; }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .sec-head .no { flex: none; width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 14px; color: #fff; background: linear-gradient(135deg, var(--rose), var(--plum)); box-shadow: 0 4px 10px rgba(225,29,72,.26); }
+  .sec-head h2 { font-size: 20px; font-weight: 900; margin: 0; letter-spacing: -.3px; }
+  .sec-sub { color: var(--muted); font-size: 13px; margin: 0 0 14px 42px; }
+  .sec-rule { height: 2px; background: linear-gradient(90deg, var(--line-strong), transparent); margin: 8px 0 16px; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); margin: 12px 0; }
+  .callout { font-size: 13.5px; line-height: 1.62; color: #4a3a42; border-left: 3px solid var(--amber);
+    background: linear-gradient(180deg, #fffdf5, #fff8e8); padding: 11px 14px; border-radius: 0 12px 12px 0; margin: 14px 0; }
+  .callout.info { border-color: var(--sky); background: linear-gradient(180deg,#f5fbff,#e9f5fd); }
+  .callout.warn { border-color: var(--rose); background: linear-gradient(180deg,#fff5f8,#ffeaf0); }
+  .callout b { color: var(--rose-deep); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em;
+    background: #f6eef1; padding: 1px 5px; border-radius: 5px; color: var(--rose-deep); }
+
+  /* ---------- School cards ---------- */
+  .sch { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); margin: 12px 0; overflow: hidden; }
+  .sch > summary { list-style: none; cursor: pointer; padding: 15px 17px; display: flex; align-items: flex-start; gap: 12px; }
+  .sch > summary::-webkit-details-marker { display: none; }
+  .sch > summary::after { content: "▾"; margin-left: auto; color: var(--muted); font-size: 13px; transition: transform .2s ease; flex: none; padding-top: 2px; }
+  .sch[open] > summary::after { transform: rotate(180deg); }
+  .sch .sbadge { flex: none; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 15px; color: #fff; background: linear-gradient(135deg, var(--slate), #94a3b8); }
+  .sch.t-special .sbadge { background: linear-gradient(135deg, var(--rose), #fb7185); }
+  .sch.t-general .sbadge { background: linear-gradient(135deg, var(--plum), #c084fc); }
+  .sch .sname { font-weight: 900; font-size: 15.5px; letter-spacing: -.2px; }
+  .sch .sprog { font-size: 12.5px; color: var(--ink-soft); margin-top: 1px; }
+  .sch .schips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+  .sbody { padding: 0 17px 16px; border-top: 1px solid var(--line); margin-top: 2px; }
+  .kv { display: grid; grid-template-columns: 76px 1fr; gap: 4px 10px; font-size: 13.2px; margin: 12px 0 0; }
+  .kv dt { color: var(--rose-deep); font-weight: 800; font-size: 11.5px; padding-top: 3px; letter-spacing: .02em; }
+  .kv dd { margin: 0; line-height: 1.55; }
+  .blocklab { font-size: 11.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin: 15px 0 5px; }
+  ul.plain { margin: 5px 0; padding-left: 2px; list-style: none; }
+  ul.plain li { position: relative; padding: 6px 0 6px 20px; font-size: 13.4px; border-top: 1px solid var(--line); line-height: 1.55; }
+  ul.plain li:first-child { border-top: none; }
+  ul.plain li::before { content: "→"; position: absolute; left: 0; color: var(--rose); font-weight: 800; }
+  ul.plain.quote li::before { content: "🎤"; font-size: 11px; top: 7px; }
+  ul.plain b { font-weight: 800; }
+
+  .chip { display: inline-block; font-size: 10.5px; font-weight: 800; padding: 2px 9px; border-radius: 999px; white-space: nowrap; line-height: 1.6; }
+  .chip.track-s { background: rgba(225,29,72,.10); color: var(--rose-deep); }
+  .chip.track-g { background: rgba(147,51,234,.10); color: #7e22ce; }
+  .chip.cf-후기확인 { background: rgba(22,163,74,.12); color: var(--green); }
+  .chip.cf-부분확인 { background: rgba(217,119,6,.14); color: var(--amber); }
+  .chip.cf-약함 { background: rgba(100,116,139,.14); color: var(--slate); }
+  .chip.cf-미확인 { background: rgba(100,116,139,.14); color: var(--slate); }
+  .chip.ghost { background: #f6eef1; color: var(--ink-soft); font-weight: 700; }
+
+  /* ---------- Strategy ---------- */
+  .pillar { border: 1px solid var(--line); border-left: 3px solid var(--rose); border-radius: 0 14px 14px 0;
+    background: var(--card); box-shadow: var(--shadow); margin: 11px 0; padding: 14px 16px; }
+  .pillar .pt { font-weight: 900; font-size: 14.5px; letter-spacing: -.2px; display: flex; gap: 9px; align-items: baseline; }
+  .pillar .pt .pn { color: var(--rose); font-size: 12px; font-weight: 900; flex: none; }
+  .pillar .pb { font-size: 13.6px; color: #40323a; margin-top: 5px; line-height: 1.65; }
+  .pillar .pe { margin-top: 9px; display: flex; flex-direction: column; gap: 4px; }
+  .pillar .pe span { font-size: 11.8px; color: var(--muted); padding-left: 15px; position: relative; line-height: 1.5; }
+  .pillar .pe span::before { content: "·"; position: absolute; left: 4px; font-weight: 900; color: var(--line-strong); }
+
+  .timeline { margin: 8px 0 4px; padding-left: 6px; }
+  .tl { position: relative; padding: 0 0 15px 26px; border-left: 2px solid var(--line-strong); }
+  .tl:last-child { border-left-color: transparent; padding-bottom: 2px; }
+  .tl::before { content: ""; position: absolute; left: -7px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--card); border: 2.5px solid var(--rose); }
+  .tl .when { font-size: 12px; font-weight: 800; color: var(--rose-deep); }
+  .tl .what { font-size: 13.8px; margin-top: 1px; }
+
+  .wins { display: grid; gap: 9px; }
+  .win { background: linear-gradient(120deg, #fff7f9, #fff); border: 1px solid var(--line); border-radius: 13px; padding: 12px 14px;
+    font-size: 13.4px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .win .wn { flex: none; width: 22px; height: 22px; border-radius: 7px; background: var(--rose); color: #fff;
+    font-size: 11.5px; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+
+  .dress { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 9px; margin-top: 6px; }
+  .dress div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; font-size: 13px; box-shadow: var(--shadow); }
+  .dress div b { display: block; font-size: 11px; color: var(--rose-deep); letter-spacing: .03em; margin-bottom: 3px; text-transform: uppercase; }
+
+  /* ---------- Filters ---------- */
+  .filters { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 13px 15px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .frow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .frow + .frow { margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--line); }
+  .flab { font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); width: 46px; flex: none; }
+  .fchip { font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--line-strong);
+    background: var(--card); color: var(--ink-soft); cursor: pointer; font-family: var(--sans); transition: .14s; line-height: 1.5; }
+  .fchip:hover { border-color: var(--rose); color: var(--rose-deep); }
+  .fchip.on { background: var(--accent, var(--rose)); border-color: var(--accent, var(--rose)); color: #fff; }
+  .fchip .fc-n { opacity: .65; font-weight: 800; margin-left: 3px; font-size: 10.5px; }
+  #search { flex: 1; min-width: 160px; border: 1px solid var(--line-strong); border-radius: 999px; padding: 7px 14px;
+    font-size: 13px; font-family: var(--sans); color: var(--ink); background: #fdfbfc; outline: none; }
+  #search:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(225,29,72,.10); }
+  .fmeta { font-size: 12px; color: var(--muted); margin: 0 0 10px 2px; font-variant-numeric: tabular-nums; }
+  .fmeta b { color: var(--rose-deep); font-weight: 900; }
+
+  /* ---------- Question list ---------- */
+  .qgroup { margin-top: 18px; }
+  .qgh { display: flex; align-items: center; gap: 9px; margin: 0 2px 7px; }
+  .qgh .cdot { width: 12px; height: 12px; border-radius: 4px; flex: none; }
+  .qgh .ct { font-weight: 900; font-size: 14.5px; }
+  .qgh .cn { font-size: 11.5px; color: var(--muted); font-weight: 700; }
+  .qgh .cnote { font-size: 11.5px; color: var(--muted); margin-left: auto; text-align: right; }
+  .qlist { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
+  .q { border-top: 1px solid var(--line); }
+  .q:first-child { border-top: none; }
+  .qtop { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 12px 14px; align-items: start; }
+  .qtop input[type=checkbox] { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; margin: 3px 0 0; cursor: pointer;
+    border: 1.5px solid var(--line-strong); border-radius: 999px; background: var(--card); position: relative; transition: .15s; flex: none; }
+  .qtop input[type=checkbox]:hover { border-color: var(--green); }
+  .qtop input[type=checkbox]:checked { background: var(--green); border-color: var(--green); }
+  .qtop input[type=checkbox]:checked::after { content: ""; position: absolute; left: 5.5px; top: 1.5px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(43deg); }
+  .qmeta { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+  .qtext { margin: 0; font-size: 14px; line-height: 1.55; font-weight: 500; cursor: pointer; }
+  .q.done .qtext { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line-strong); }
+  .qbody { padding: 0 14px 13px 46px; display: none; }
+  .q.open .qbody { display: block; }
+  .qkey { font-size: 13.3px; line-height: 1.62; background: linear-gradient(180deg,#fff8fa,#fff2f5);
+    border-left: 3px solid var(--rose); border-radius: 0 11px 11px 0; padding: 10px 13px; color: #3d2f36; }
+  .qkey b.lb { display: block; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--rose); margin-bottom: 3px; }
+  .qfollow { margin-top: 8px; font-size: 12.6px; color: var(--ink-soft); }
+  .qfollow b { font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 3px; }
+  .qfollow span { display: block; padding-left: 14px; position: relative; line-height: 1.55; }
+  .qfollow span::before { content: "↳"; position: absolute; left: 0; color: var(--line-strong); font-weight: 800; }
+  .qsrc { margin-top: 8px; font-size: 11.5px; color: var(--muted); }
+  .qsrc a { color: var(--rose); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+  .qsrc a:hover { color: var(--rose-deep); }
+
+  .tag-real { background: rgba(225,29,72,.12); color: var(--rose-deep); }
+  .tag-doc  { background: rgba(217,119,6,.15); color: var(--amber); }
+  .tag-bank { background: rgba(2,132,199,.11); color: var(--sky); }
+  .tag-derived { background: rgba(100,116,139,.13); color: var(--slate); }
+  .pri-3 { background: rgba(225,29,72,.12); color: var(--rose-deep); }
+  .pri-2 { background: rgba(13,148,136,.12); color: var(--teal); }
+  .pri-1 { background: #f2f0f1; color: var(--muted); }
+  .chip.sc { background: #f4eef7; color: #7e22ce; }
+
+  .empty { text-align: center; color: var(--muted); font-size: 13.5px; padding: 40px 10px; }
+
+  /* ---------- Drill modal ---------- */
+  .drill { position: fixed; inset: 0; z-index: 100; background: rgba(42,26,34,.55); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center; padding: 18px; }
+  .drill.on { display: flex; }
+  .dcard { background: var(--card); border-radius: 22px; max-width: 560px; width: 100%; padding: 24px 22px 20px;
+    box-shadow: var(--shadow-lg); max-height: 88vh; overflow-y: auto; animation: pop .2s ease; }
+  @keyframes pop { from { opacity: 0; transform: scale(.96) translateY(8px); } to { opacity: 1; transform: none; } }
+  .dhead { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+  .dhead .dprog { font-size: 11.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .dhead .dx { margin-left: auto; background: none; border: none; font-size: 20px; color: var(--muted); cursor: pointer; line-height: 1; padding: 0 4px; }
+  .dhead .dx:hover { color: var(--rose); }
+  .dq { font-size: 17px; font-weight: 800; line-height: 1.5; letter-spacing: -.2px; margin: 0 0 4px; }
+  .dmeta { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+  .dkey { font-size: 13.6px; line-height: 1.65; background: linear-gradient(180deg,#fff8fa,#fff2f5); border-left: 3px solid var(--rose);
+    border-radius: 0 11px 11px 0; padding: 12px 14px; color: #3d2f36; margin-bottom: 14px; display: none; }
+  .dkey.on { display: block; }
+  .dkey b.lb { display: block; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--rose); margin-bottom: 3px; }
+  .dbtns { display: flex; gap: 8px; }
+  .dbtn { flex: 1; border: none; border-radius: 12px; padding: 11px; font-size: 13.5px; font-weight: 800; font-family: var(--sans); cursor: pointer; transition: .14s; }
+  .dbtn.ghost { background: #f6eef1; color: var(--ink-soft); }
+  .dbtn.ghost:hover { background: #efe2e7; }
+  .dbtn.main { background: linear-gradient(120deg, var(--rose), #f43f5e); color: #fff; box-shadow: 0 4px 12px rgba(225,29,72,.26); }
+  .dbtn.main:hover { transform: translateY(-1px); }
+  .dtimer { font-size: 12px; font-weight: 800; color: var(--rose-deep); font-variant-numeric: tabular-nums;
+    background: var(--rose-soft); padding: 3px 10px; border-radius: 999px; }
+
+  /* ---------- Sources / gaps ---------- */
+  .srclist { display: grid; gap: 7px; }
+  .srcrow { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 13px; box-shadow: var(--shadow);
+    display: flex; gap: 10px; align-items: baseline; font-size: 13px; }
+  .srcrow .sid { font-size: 10.5px; font-weight: 900; color: #fff; background: var(--muted); border-radius: 5px; padding: 1px 6px; flex: none; }
+  .srcrow.k-후기 .sid { background: var(--rose); }
+  .srcrow.k-공식 .sid { background: var(--green); }
+  .srcrow.k-기출자료 .sid { background: var(--amber); }
+  .srcrow.k-질문은행 .sid { background: var(--sky); }
+  .srcrow a { color: var(--ink); text-decoration: none; font-weight: 600; }
+  .srcrow a:hover { color: var(--rose-deep); }
+  .srcrow .sau { color: var(--muted); font-size: 11.5px; }
+
+  .gap { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 0 12px 12px 0;
+    padding: 11px 14px; margin: 8px 0; box-shadow: var(--shadow); font-size: 13.2px; }
+  .gap b { color: var(--amber); }
+  .gap .ga { color: var(--ink-soft); font-size: 12.5px; margin-top: 3px; display: block; }
+
+  .foot { text-align: center; color: var(--muted); font-size: 12px; margin-top: 44px; line-height: 1.7; }
+  a.back { display: inline-block; margin-top: 14px; color: var(--rose); text-decoration: none; font-weight: 700; font-size: 13px; }
+
+  @media (max-width: 560px) {
+    .dbar { grid-template-columns: repeat(2, 1fr); }
+    .sec-sub { margin-left: 0; }
+    .flab { width: 100%; }
+    .kv { grid-template-columns: 1fr; gap: 1px 0; }
+    .kv dt { padding-top: 8px; }
+    .qbody { padding-left: 14px; }
+    .statusbar .inner { gap: 9px; }
+    .count { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="wrap top">
+  <header class="hero">
+    <span class="kicker">🎤 면접 전략 · 국내 AI 대학원</span>
+    <h1>실제 면접에서<br>무엇을 <em>물었나</em></h1>
+    <p class="sub">한양대 · 국민대 · 성균관대 · 서강대 · 연세대 · 고려대 등 <b>실제 면접 후기와 기출 자료</b>를 모아 만든 질문은행과 전략. 학교별 면접 방식이 어떻게 다른지부터 확인하고, 우선순위대로 연습한다.</p>
+    <div class="dbar">
+      <div class="dcell"><div class="n" id="st-q">–</div><div class="l">수집 질문</div></div>
+      <div class="dcell"><div class="n" id="st-real">–</div><div class="l">실제 확인 문항</div></div>
+      <div class="dcell"><div class="n" id="st-sch">–</div><div class="l">학교·과정</div></div>
+      <div class="dcell"><div class="n" id="st-dday">–</div><div class="l">면접까지 (추정)</div></div>
+    </div>
+  </header>
+</div>
+
+<div class="statusbar">
+  <div class="inner">
+    <span class="status-label">숙달 <b id="pct">0%</b></span>
+    <div class="track"><i id="fill"></i></div>
+    <span class="count" id="count">0 / 0</span>
+    <button class="btn-drill" id="drillBtn">🎲 모의 연습</button>
+    <button class="reset" id="resetBtn">초기화</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <nav class="toc">
+    <a href="#s1">학교별 면접 실태</a>
+    <a href="#s2">전략</a>
+    <a href="#s3">질문은행</a>
+    <a href="#s4">타임라인</a>
+    <a href="#s5">함정</a>
+    <a href="#s6">확인 필요</a>
+    <a href="#s7">출처</a>
+  </nav>
+
+  <div id="loading" class="empty">데이터를 불러오는 중…</div>
+  <div id="loaderr" style="display:none">
+    <p class="callout warn">⚠️ <b>interview_bank.json을 불러오지 못했습니다.</b> 브라우저에서 파일을 직접 열면(<code>file://</code>) 보안 정책 때문에 JSON을 못 읽습니다. 같은 폴더에서 <code>python3 -m http.server</code> 를 실행한 뒤 <code>http://localhost:8000/interview_prep.html</code> 로 여세요. (GitHub Pages에 올라가면 그냥 동작합니다.)</p>
+  </div>
+
+  <main id="app" style="display:none">
+
+    <!-- 1. 학교별 -->
+    <section class="sec" id="s1">
+      <div class="sec-head"><span class="no">1</span><h2>학교별 면접 실태</h2></div>
+      <p class="sec-sub">같은 "AI 대학원"이라도 <b>일반대학원과 특수대학원의 면접은 완전히 다른 시험</b>이다. 내 지원 유형부터 고르고 읽을 것.</p>
+      <div class="sec-rule"></div>
+      <p class="callout warn" id="warnbox"></p>
+      <div id="schools"></div>
+    </section>
+
+    <!-- 2. 전략 -->
+    <section class="sec" id="s2">
+      <div class="sec-head"><span class="no">2</span><h2>면접 전략</h2></div>
+      <p class="sec-sub" id="thesis"></p>
+      <div class="sec-rule"></div>
+      <div id="pillars"></div>
+
+      <div class="blocklab" style="margin-top:22px">⚡ 시간이 없다면 이것부터</div>
+      <div class="wins" id="wins"></div>
+
+      <div class="blocklab" style="margin-top:22px">👔 복장</div>
+      <div class="dress" id="dress"></div>
+    </section>
+
+    <!-- 3. 질문은행 -->
+    <section class="sec" id="s3">
+      <div class="sec-head"><span class="no">3</span><h2>질문은행</h2></div>
+      <p class="sec-sub">질문을 눌러 <b>핵심 답변</b>을 펼치고, 자기 말로 30초~1분 설명할 수 있으면 왼쪽 동그라미를 체크. 진행률은 자동 저장된다.</p>
+      <div class="sec-rule"></div>
+
+      <div class="filters">
+        <div class="frow">
+          <span class="flab">검색</span>
+          <input id="search" type="search" placeholder="질문·키워드로 검색 (예: 과적합, 지원동기, 이진탐색)" autocomplete="off">
+        </div>
+        <div class="frow">
+          <span class="flab">우선</span>
+          <div class="frow" id="f-pri" style="gap:6px;flex:1"></div>
+        </div>
+        <div class="frow">
+          <span class="flab">근거</span>
+          <div class="frow" id="f-tag" style="gap:6px;flex:1"></div>
+        </div>
+        <div class="frow">
+          <span class="flab">분야</span>
+          <div class="frow" id="f-cat" style="gap:6px;flex:1"></div>
+        </div>
+        <div class="frow">
+          <span class="flab">보기</span>
+          <button class="fchip" id="f-hide">✅ 완료 숨기기</button>
+          <button class="fchip" id="f-expand">📖 답변 모두 펼치기</button>
+          <button class="fchip" id="f-clear">↺ 필터 초기화</button>
+        </div>
+      </div>
+
+      <p class="fmeta" id="fmeta"></p>
+      <div id="questions"></div>
+    </section>
+
+    <!-- 4. 타임라인 -->
+    <section class="sec" id="s4">
+      <div class="sec-head"><span class="no">4</span><h2>D-30 준비 타임라인</h2></div>
+      <div class="sec-rule"></div>
+      <div class="card"><div class="timeline" id="timeline"></div></div>
+    </section>
+
+    <!-- 5. 함정 -->
+    <section class="sec" id="s5">
+      <div class="sec-head"><span class="no">5</span><h2>흔한 함정</h2></div>
+      <div class="sec-rule"></div>
+      <div class="card"><ul class="plain" id="pitfalls"></ul></div>
+    </section>
+
+    <!-- 6. 확인 필요 -->
+    <section class="sec" id="s6">
+      <div class="sec-head"><span class="no">6</span><h2>아직 확인 못 한 것</h2></div>
+      <p class="sec-sub">공개된 후기를 찾지 못했거나 공식 미공개인 항목. <b>추측으로 채우지 않고 비워 뒀다.</b></p>
+      <div class="sec-rule"></div>
+      <div id="gaps"></div>
+    </section>
+
+    <!-- 7. 출처 -->
+    <section class="sec" id="s7">
+      <div class="sec-head"><span class="no">7</span><h2>출처</h2></div>
+      <p class="sec-sub">모든 질문에는 어디서 왔는지가 붙어 있다. 후기·기출·공식 안내를 구분해서 볼 것.</p>
+      <div class="sec-rule"></div>
+      <div class="srclist" id="sources"></div>
+    </section>
+
+    <p class="foot">
+      🔒 개인용 · 검색 비노출<br>
+      데이터 원본: <code>interview_bank.json</code> · 후기 기반 수집본이므로 <b>"반드시 이게 나온다"가 아니라 "이 정도면 안전하다"</b>는 대비용<br>
+      <a class="back" href="index.html">← 개인 페이지로</a>
+    </p>
+  </main>
+</div>
+
+<!-- Drill modal -->
+<div class="drill" id="drill">
+  <div class="dcard">
+    <div class="dhead">
+      <span class="dprog" id="dprog">1 / 5</span>
+      <span class="dtimer" id="dtimer">0:00</span>
+      <button class="dx" id="dclose">✕</button>
+    </div>
+    <div class="dmeta" id="dmeta"></div>
+    <p class="dq" id="dq"></p>
+    <div class="dkey" id="dkey"></div>
+    <div class="dbtns">
+      <button class="dbtn ghost" id="dreveal">핵심 보기</button>
+      <button class="dbtn main" id="dnext">다음 →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORE = 'aiInterviewPrep.v1';
+  var INTERVIEW_DATE = '2026-12-05';   // 직전 회차 기준 추정 (한양대 12월 초 토요일)
+  var D = null, done = {}, catMap = {}, srcMap = {};
+  var filter = { pri: {3:true,2:true,1:true}, tag: {real:true,doc:true,bank:true,derived:true}, cat: {}, q: '', hideDone: false };
+
+  /* ---------- helpers ---------- */
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function fmt(s){ return esc(s).replace(/`([^`]+)`/g, '<code>$1</code>'); }
+  function el(id){ return document.getElementById(id); }
+  function load(){ try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e){ return {}; } }
+  function save(){ try { localStorage.setItem(STORE, JSON.stringify(done)); } catch(e){} }
+
+  var PRI = { 3: {label:'필수', color:'#e11d48'}, 2: {label:'권장', color:'#0d9488'}, 1: {label:'여유', color:'#a08b95'} };
+  var TAG = {
+    real:    {label:'🎤 실제후기', color:'#e11d48', desc:'후기 글에서 실제로 받았다고 확인된 질문'},
+    doc:     {label:'📄 기출자료', color:'#d97706', desc:'기출·면접자료에 문항으로 실린 질문'},
+    bank:    {label:'⭐ 빈출은행', color:'#0284c7', desc:'합격자·스터디 정리 빈출 질문'},
+    derived: {label:'🧩 파생예상', color:'#64748b', desc:'후기 패턴에서 파생한 예상 질문'}
+  };
+
+  /* ---------- boot ---------- */
+  fetch('interview_bank.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(json){ D = json; init(); })
+    .catch(function(){ el('loading').style.display='none'; el('loaderr').style.display='block'; });
+
+  function init(){
+    done = load();
+    D.categories.forEach(function(c){ catMap[c.id] = c; filter.cat[c.id] = true; });
+    D.sources.forEach(function(s){ srcMap[s.id] = s; });
+
+    el('loading').style.display = 'none';
+    el('app').style.display = 'block';
+
+    renderStats();
+    renderSchools();
+    renderStrategy();
+    renderFilters();
+    renderQuestions();
+    renderTimeline();
+    renderPitfalls();
+    renderGaps();
+    renderSources();
+    updateProgress();
+    bind();
+  }
+
+  /* ---------- stats ---------- */
+  function renderStats(){
+    var real = D.questions.filter(function(q){ return q.tag==='real' || q.tag==='doc'; }).length;
+    el('st-q').textContent = D.questions.length;
+    el('st-real').textContent = real;
+    el('st-sch').textContent = D.schools.length;
+    var today = new Date(); today.setHours(0,0,0,0);
+    var iv = new Date(INTERVIEW_DATE + 'T00:00:00');
+    var dd = Math.round((iv - today) / 86400000);
+    el('st-dday').textContent = dd > 0 ? 'D–' + dd : (dd === 0 ? 'D-DAY' : '종료');
+    el('warnbox').innerHTML = '⚠️ ' + fmt(D.meta.honesty_note[1]) + ' 아래 카드의 <b>확인도 배지</b>를 꼭 함께 보라.';
+  }
+
+  /* ---------- schools ---------- */
+  function renderSchools(){
+    el('schools').innerHTML = D.schools.map(function(s){
+      var special = /특수/.test(s.track);
+      var base = s.name.replace(/대학교|\(.*\)/g,'').trim();
+      var latin = /^[A-Za-z]+$/.test(base);
+      var initial = latin ? base : base.slice(0,2);
+      var f = s.format || {};
+      var rows = [
+        ['방식', f.style], ['일시', f.when], ['장소', f.where], ['대상', f.who],
+        ['진행', f.flow], ['준비물', f.bring], ['기준', f.basis], ['비고', f.notes]
+      ].filter(function(r){ return r[1]; });
+
+      var html = '<details class="sch ' + (special?'t-special':'t-general') + '">';
+      html += '<summary><span class="sbadge"' + (latin ? ' style="font-size:11px;letter-spacing:-.3px"' : '') + '>' + esc(initial) + '</span><span>' +
+              '<span class="sname">' + esc(s.name) + '</span>' +
+              '<div class="sprog">' + esc(s.program) + '</div>' +
+              '<div class="schips">' +
+                '<span class="chip ' + (special?'track-s':'track-g') + '">' + esc(s.track) + '</span>' +
+                '<span class="chip cf-' + esc(s.confidence) + '">확인도 · ' + esc(s.confidence) + '</span>' +
+                (s.asked_real ? '<span class="chip ghost">실제질문 ' + s.asked_real.length + '</span>' : '') +
+                (s.asked_doc ? '<span class="chip ghost">기출 ' + s.asked_doc.length + '</span>' : '') +
+              '</div></span></summary>';
+
+      html += '<div class="sbody">';
+      if (rows.length) {
+        html += '<dl class="kv">' + rows.map(function(r){
+          return '<dt>' + esc(r[0]) + '</dt><dd>' + fmt(r[1]) + '</dd>'; }).join('') + '</dl>';
+      }
+      if (s.atmosphere) html += '<div class="blocklab">분위기 · 무게중심</div><p style="margin:0;font-size:13.4px;line-height:1.6">' + fmt(s.atmosphere) + (s.weight ? ' <span style="color:var(--muted)">/ ' + fmt(s.weight) + '</span>' : '') + '</p>';
+      if (s.asked_real) html += '<div class="blocklab">실제로 나온 질문</div><ul class="plain quote">' + s.asked_real.map(function(q){ return '<li>' + fmt(q) + '</li>'; }).join('') + '</ul>';
+      if (s.asked_doc)  html += '<div class="blocklab">기출 자료 수록 문항</div><ul class="plain">' + s.asked_doc.map(function(q){ return '<li>' + fmt(q) + '</li>'; }).join('') + '</ul>';
+      if (s.tips)       html += '<div class="blocklab">팁</div><ul class="plain">' + s.tips.map(function(t){ return '<li>' + fmt(t) + '</li>'; }).join('') + '</ul>';
+      if (s.watch_out)  html += '<p class="callout warn" style="margin-bottom:4px">🚨 ' + fmt(s.watch_out) + '</p>';
+      if (s.todo)       html += '<p class="callout" style="margin-bottom:4px">📌 ' + fmt(s.todo) + '</p>';
+      if (s.contact)    html += '<p style="font-size:12.5px;color:var(--muted);margin:10px 0 0">문의 · ' + fmt(s.contact) + '</p>';
+      if (s.sources && s.sources.length) html += '<p class="qsrc" style="margin-top:10px">출처 ' + srcLinks(s.sources) + '</p>';
+      html += '</div></details>';
+      return html;
+    }).join('');
+  }
+
+  function srcLinks(ids){
+    return ids.map(function(id){
+      var s = srcMap[id]; if(!s) return '';
+      return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener" title="' + esc(s.title) + '">' + esc(s.author) + '</a>';
+    }).filter(Boolean).join(' · ');
+  }
+
+  /* ---------- strategy ---------- */
+  function renderStrategy(){
+    el('thesis').innerHTML = fmt(D.strategy.core_thesis);
+    el('pillars').innerHTML = D.strategy.pillars.map(function(p, i){
+      return '<div class="pillar">' +
+        '<div class="pt"><span class="pn">' + (i+1).toString().padStart(2,'0') + '</span><span>' + fmt(p.title) + '</span></div>' +
+        '<div class="pb">' + fmt(p.body) + '</div>' +
+        (p.evidence ? '<div class="pe">' + p.evidence.map(function(e){ return '<span>' + fmt(e) + '</span>'; }).join('') + '</div>' : '') +
+      '</div>';
+    }).join('');
+
+    el('wins').innerHTML = D.strategy.quick_wins.map(function(w, i){
+      return '<div class="win"><span class="wn">' + (i+1) + '</span><span>' + fmt(w) + '</span></div>'; }).join('');
+
+    el('dress').innerHTML = Object.keys(D.strategy.dress_code).map(function(k){
+      return '<div><b>' + esc(k) + '</b>' + fmt(D.strategy.dress_code[k]) + '</div>'; }).join('');
+  }
+
+  function renderTimeline(){
+    el('timeline').innerHTML = D.strategy.timeline.map(function(t){
+      return '<div class="tl"><div class="when">' + esc(t.when) + '</div><div class="what">' + fmt(t.do) + '</div></div>'; }).join('');
+  }
+  function renderPitfalls(){
+    el('pitfalls').innerHTML = D.strategy.pitfalls.map(function(p){ return '<li>' + fmt(p) + '</li>'; }).join('');
+  }
+  function renderGaps(){
+    el('gaps').innerHTML = D.gaps.map(function(g){
+      return '<div class="gap"><b>' + esc(g.school) + '</b> — ' + fmt(g.issue) +
+             '<span class="ga">→ ' + fmt(g.action) + '</span></div>'; }).join('');
+  }
+  function renderSources(){
+    el('sources').innerHTML = D.sources.map(function(s){
+      return '<div class="srcrow k-' + esc(s.kind) + '"><span class="sid">' + esc(s.kind) + '</span><span>' +
+        '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) + '</a> ' +
+        '<span class="sau">· ' + esc(s.author) + ' · ' + esc(s.school) + '</span></span></div>'; }).join('');
+  }
+
+  /* ---------- filters ---------- */
+  function countBy(fn){ return D.questions.filter(fn).length; }
+
+  function renderFilters(){
+    el('f-pri').innerHTML = [3,2,1].map(function(p){
+      return '<button class="fchip on" data-pri="' + p + '" style="--accent:' + PRI[p].color + '">' +
+        PRI[p].label + '<span class="fc-n">' + countBy(function(q){ return q.priority===p; }) + '</span></button>'; }).join('');
+
+    el('f-tag').innerHTML = Object.keys(TAG).map(function(t){
+      return '<button class="fchip on" data-tag="' + t + '" title="' + esc(TAG[t].desc) + '" style="--accent:' + TAG[t].color + '">' +
+        TAG[t].label + '<span class="fc-n">' + countBy(function(q){ return q.tag===t; }) + '</span></button>'; }).join('');
+
+    el('f-cat').innerHTML = D.categories.map(function(c){
+      return '<button class="fchip on" data-cat="' + c.id + '" style="--accent:' + c.color + '">' +
+        c.emoji + ' ' + esc(c.name) + '<span class="fc-n">' + countBy(function(q){ return q.cat===c.id; }) + '</span></button>'; }).join('');
+  }
+
+  function match(q){
+    if (!filter.pri[q.priority]) return false;
+    if (!filter.tag[q.tag]) return false;
+    if (!filter.cat[q.cat]) return false;
+    if (filter.hideDone && done[q.id]) return false;
+    if (filter.q) {
+      var hay = (q.q + ' ' + (q.key||'') + ' ' + (q.schools||[]).join(' ') + ' ' + (catMap[q.cat]||{}).name + ' ' + (q.follow||[]).join(' ')).toLowerCase();
+      if (hay.indexOf(filter.q) === -1) return false;
+    }
+    return true;
+  }
+
+  /* ---------- questions ---------- */
+  function renderQuestions(){
+    var list = D.questions.filter(match);
+    el('fmeta').innerHTML = '<b>' + list.length + '</b>문항 표시 중 · 전체 ' + D.questions.length + ' · 완료 ' +
+      list.filter(function(q){ return done[q.id]; }).length;
+
+    if (!list.length) { el('questions').innerHTML = '<p class="empty">조건에 맞는 질문이 없다. 필터를 풀어보자.</p>'; return; }
+
+    var groups = {};
+    list.forEach(function(q){ (groups[q.cat] = groups[q.cat] || []).push(q); });
+
+    el('questions').innerHTML = D.categories.filter(function(c){ return groups[c.id]; }).map(function(c){
+      var qs = groups[c.id];
+      return '<div class="qgroup">' +
+        '<div class="qgh"><span class="cdot" style="background:' + c.color + '"></span>' +
+          '<span class="ct">' + c.emoji + ' ' + esc(c.name) + '</span>' +
+          '<span class="cn">' + qs.length + '문항</span>' +
+          '<span class="cnote">' + esc(c.note) + '</span></div>' +
+        '<div class="qlist">' + qs.map(qHTML).join('') + '</div></div>';
+    }).join('');
+  }
+
+  function qHTML(q){
+    var isDone = !!done[q.id];
+    var chips = '<span class="chip tag-' + q.tag + '">' + TAG[q.tag].label + '</span>' +
+                '<span class="chip pri-' + q.priority + '">' + PRI[q.priority].label + '</span>' +
+                (q.schools||[]).map(function(s){ return '<span class="chip sc">' + esc(s) + '</span>'; }).join('');
+
+    var body = '<div class="qbody">' +
+      (q.key ? '<div class="qkey"><b class="lb">핵심 답변</b>' + fmt(q.key) + '</div>' : '') +
+      (q.follow && q.follow.length ? '<div class="qfollow"><b>예상 꼬리질문</b>' +
+        q.follow.map(function(f){ return '<span>' + fmt(f) + '</span>'; }).join('') + '</div>' : '') +
+      (q.src && q.src.length ? '<div class="qsrc">출처 ' + srcLinks(q.src) + '</div>' : '') +
+    '</div>';
+
+    return '<div class="q' + (isDone?' done':'') + '" data-id="' + q.id + '">' +
+      '<div class="qtop">' +
+        '<input type="checkbox" ' + (isDone?'checked':'') + ' aria-label="숙달 체크">' +
+        '<div><div class="qmeta">' + chips + '</div><p class="qtext">' + fmt(q.q) + '</p></div>' +
+      '</div>' + body + '</div>';
+  }
+
+  function updateProgress(){
+    var total = D.questions.length;
+    var n = D.questions.filter(function(q){ return done[q.id]; }).length;
+    var pct = total ? Math.round(n/total*100) : 0;
+    el('pct').textContent = pct + '%';
+    el('count').textContent = n + ' / ' + total;
+    el('fill').style.width = pct + '%';
+  }
+
+  /* ---------- events ---------- */
+  function bind(){
+    // question toggle + check
+    el('questions').addEventListener('click', function(e){
+      var card = e.target.closest('.q'); if (!card) return;
+      if (e.target.matches('input[type=checkbox]')) {
+        var id = card.dataset.id;
+        if (e.target.checked) done[id] = 1; else delete done[id];
+        card.classList.toggle('done', e.target.checked);
+        save(); updateProgress();
+        el('fmeta').innerHTML = el('fmeta').innerHTML.replace(/완료 \d+/, '완료 ' +
+          D.questions.filter(match).filter(function(q){ return done[q.id]; }).length);
+        if (filter.hideDone) renderQuestions();
+        return;
+      }
+      if (e.target.closest('a')) return;
+      card.classList.toggle('open');
+    });
+
+    // filter chips
+    ['f-pri','f-tag','f-cat'].forEach(function(box){
+      el(box).addEventListener('click', function(e){
+        var b = e.target.closest('.fchip'); if (!b) return;
+        b.classList.toggle('on');
+        var on = b.classList.contains('on');
+        if (b.dataset.pri) filter.pri[+b.dataset.pri] = on;
+        if (b.dataset.tag) filter.tag[b.dataset.tag] = on;
+        if (b.dataset.cat) filter.cat[b.dataset.cat] = on;
+        renderQuestions();
+      });
+    });
+
+    var t;
+    el('search').addEventListener('input', function(e){
+      clearTimeout(t); var v = e.target.value.trim().toLowerCase();
+      t = setTimeout(function(){ filter.q = v; renderQuestions(); }, 160);
+    });
+
+    el('f-hide').addEventListener('click', function(){
+      filter.hideDone = !filter.hideDone;
+      this.classList.toggle('on', filter.hideDone);
+      renderQuestions();
+    });
+
+    el('f-expand').addEventListener('click', function(){
+      var cards = el('questions').querySelectorAll('.q');
+      var anyClosed = Array.prototype.some.call(cards, function(c){ return !c.classList.contains('open'); });
+      Array.prototype.forEach.call(cards, function(c){ c.classList.toggle('open', anyClosed); });
+      this.classList.toggle('on', anyClosed);
+    });
+
+    el('f-clear').addEventListener('click', function(){
+      [3,2,1].forEach(function(p){ filter.pri[p] = true; });
+      Object.keys(TAG).forEach(function(k){ filter.tag[k] = true; });
+      D.categories.forEach(function(c){ filter.cat[c.id] = true; });
+      filter.q = ''; filter.hideDone = false;
+      el('search').value = '';
+      el('f-hide').classList.remove('on');
+      document.querySelectorAll('#f-pri .fchip, #f-tag .fchip, #f-cat .fchip').forEach(function(b){ b.classList.add('on'); });
+      renderQuestions();
+    });
+
+    el('resetBtn').addEventListener('click', function(){
+      if (!confirm('체크한 숙달 기록을 모두 지울까요?')) return;
+      done = {}; save(); updateProgress(); renderQuestions();
+    });
+
+    bindDrill();
+  }
+
+  /* ---------- drill mode ---------- */
+  var drill = { queue: [], i: 0, timer: null, sec: 0 };
+
+  function bindDrill(){
+    el('drillBtn').addEventListener('click', startDrill);
+    el('dclose').addEventListener('click', stopDrill);
+    el('dreveal').addEventListener('click', function(){ el('dkey').classList.add('on'); });
+    el('dnext').addEventListener('click', nextDrill);
+    el('drill').addEventListener('click', function(e){ if (e.target === this) stopDrill(); });
+    document.addEventListener('keydown', function(e){
+      if (!el('drill').classList.contains('on')) return;
+      if (e.key === 'Escape') stopDrill();
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault();
+        if (el('dkey').classList.contains('on')) nextDrill(); else el('dkey').classList.add('on'); }
+    });
+  }
+
+  function startDrill(){
+    var pool = D.questions.filter(match);
+    if (!pool.length) { alert('현재 필터에 해당하는 질문이 없습니다.'); return; }
+    // 우선순위 가중 셔플: 필수 3배, 권장 2배, 여유 1배
+    var weighted = [];
+    pool.forEach(function(q){ for (var i=0;i<q.priority;i++) weighted.push(q); });
+    var picked = [], seen = {};
+    while (picked.length < Math.min(5, pool.length) && weighted.length) {
+      var idx = Math.floor(Math.random() * weighted.length);
+      var q = weighted[idx];
+      weighted.splice(idx, 1);
+      if (seen[q.id]) continue;
+      seen[q.id] = 1; picked.push(q);
+    }
+    drill.queue = picked; drill.i = 0;
+    el('drill').classList.add('on');
+    showDrill();
+  }
+
+  function showDrill(){
+    var q = drill.queue[drill.i];
+    var c = catMap[q.cat] || {};
+    el('dprog').textContent = (drill.i + 1) + ' / ' + drill.queue.length;
+    el('dmeta').innerHTML = '<span class="chip" style="background:' + (c.color||'#999') + '1f;color:' + (c.color||'#999') + '">' +
+        (c.emoji||'') + ' ' + esc(c.name||'') + '</span>' +
+      '<span class="chip tag-' + q.tag + '">' + TAG[q.tag].label + '</span>' +
+      '<span class="chip pri-' + q.priority + '">' + PRI[q.priority].label + '</span>' +
+      (q.schools||[]).map(function(s){ return '<span class="chip sc">' + esc(s) + '</span>'; }).join('');
+    el('dq').innerHTML = fmt(q.q);
+    el('dkey').innerHTML = '<b class="lb">핵심 답변</b>' + fmt(q.key || '(정리된 답변 없음 — 직접 만들어 볼 것)');
+    el('dkey').classList.remove('on');
+    el('dnext').textContent = (drill.i === drill.queue.length - 1) ? '끝내기' : '다음 →';
+    resetTimer();
+  }
+
+  function nextDrill(){
+    if (drill.i >= drill.queue.length - 1) { stopDrill(); return; }
+    drill.i++; showDrill();
+  }
+
+  function stopDrill(){
+    el('drill').classList.remove('on');
+    clearInterval(drill.timer); drill.timer = null;
+  }
+
+  function resetTimer(){
+    clearInterval(drill.timer); drill.sec = 0; paintTimer();
+    drill.timer = setInterval(function(){ drill.sec++; paintTimer(); }, 1000);
+  }
+  function paintTimer(){
+    var m = Math.floor(drill.sec/60), s = drill.sec % 60;
+    el('dtimer').textContent = m + ':' + (s<10?'0':'') + s;
+  }
+
+})();
+</script>
+</body>
+</html>
