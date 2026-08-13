@@ -1,0 +1,23 @@
+{
+ "name": "오늘 할 일 · 학습 달력",
+ "short_name": "오늘",
+ "start_url": "./study_calendar.html",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#f2faf8",
+ "theme_color": "#0f766e",
+ "icons": [
+  {
+   "src": "icons/calendar-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/calendar-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}

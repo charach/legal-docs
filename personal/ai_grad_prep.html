@@ -4,7 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#6366f1">
+<!-- pwa -->
+<meta name="theme-color" content="#4f46e5">
+<link rel="apple-touch-icon" href="icons/roadmap-180.png">
+<link rel="icon" type="image/png" sizes="180x180" href="icons/roadmap-180.png">
+<link rel="manifest" href="roadmap.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="로드맵">
+<!-- /pwa -->
+
 <title>국내 AI 대학원 석사 입시 — 학습 로드맵</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,6 +159,23 @@
   .k-todo { background: rgba(245,158,11,.16); color: #b45309; }
   ul.checklist li.checked label .txt { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line-strong); }
 
+  /* shortlist */
+  .tier { margin: 16px 0; }
+  .tierh { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .tierh .tb { font-size: 11px; font-weight: 900; color: #fff; padding: 3px 12px; border-radius: 999px; flex: none; }
+  .tierh .tw { font-size: 12.5px; color: var(--muted); }
+  .sc { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 0 14px 14px 0;
+    padding: 13px 15px; margin: 8px 0; box-shadow: var(--shadow); }
+  .sc .sch { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 3px; }
+  .sc .ss { font-weight: 900; font-size: 15px; letter-spacing: -.2px; }
+  .sc .sm { font-size: 12.5px; color: var(--ink-soft); }
+  .sc .smode { font-size: 10px; font-weight: 900; padding: 1px 8px; border-radius: 999px; background: #eeecf8; color: var(--muted); }
+  .sc .smode.hy { background: rgba(20,184,166,.14); color: #0f766e; }
+  .sc .sstat { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+  .sc .sstat b { color: var(--c); font-weight: 900; }
+  .sc .spro, .sc .scon, .sc .sint { font-size: 12.8px; line-height: 1.55; padding: 3px 0 3px 22px; text-indent: -22px; }
+  .sc .spro { color: #2f4a3a; } .sc .scon { color: #7a5a3a; } .sc .sint { color: var(--ink-soft); }
+
   .rtbl { width: 100%; border-collapse: collapse; font-size: 13px; }
   .rtbl th, .rtbl td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
   .rtbl thead th { border-bottom: 2px solid var(--line-strong); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
@@ -228,10 +255,10 @@
     <a href="#s2">왜 이 순서인가</a>
     <a href="#s3">로드맵</a>
     <a href="#s4">강의·자료</a>
-    <a href="#s5">학업계획서</a>
-    <a href="#s6">지원 전략</a>
-    <a href="#s7">합격 후</a>
-    <a href="#s8">함정</a>
+    <a href="#s6">학업계획서</a>
+    <a href="#s7">지원 전략</a>
+    <a href="#s8">합격 후</a>
+    <a href="#s9">함정</a>
   </nav>
 
   <div id="loading" class="empty">데이터를 불러오는 중…</div>
@@ -293,7 +320,20 @@
 
     <!-- 5 -->
     <section class="sec" id="s5">
-      <div class="sec-head"><span class="no">5</span><h2>학업계획서 · 식품공학 × AI</h2></div>
+      <div class="sec-head"><span class="no">5</span><h2>지원 후보 6곳</h2></div>
+      <p class="sec-sub" id="sl-sub"></p>
+      <div class="sec-rule"></div>
+      <div id="shortlist"></div>
+      <p class="callout" id="sl-fee"></p>
+      <div class="card">
+        <div style="font-weight:800;font-size:13px;color:var(--indigo-deep);margin-bottom:4px">뺀 곳과 이유</div>
+        <ul class="plain" id="sl-drop"></ul>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="sec" id="s6">
+      <div class="sec-head"><span class="no">6</span><h2>학업계획서 · 식품공학 × AI</h2></div>
       <p class="sec-sub">비전공은 약점이 아니라 <b>"도메인을 가진 융합형 지원자"</b>라는 차별화 포인트다.</p>
       <div class="sec-rule"></div>
       <div class="card">
@@ -316,8 +356,8 @@
     </section>
 
     <!-- 6 -->
-    <section class="sec" id="s6">
-      <div class="sec-head"><span class="no">6</span><h2>지원 전략 (학교 무관 공통)</h2></div>
+    <section class="sec" id="s7">
+      <div class="sec-head"><span class="no">7</span><h2>지원 전략 (학교 무관 공통)</h2></div>
       <p class="sec-sub">특수대학원 후기에서 반복적으로 확인된 것만. 학교별 세부는 <a href="interview_prep.html" style="color:var(--indigo-deep)">면접 페이지</a>에.</p>
       <div class="sec-rule"></div>
       <div class="card">
@@ -334,16 +374,16 @@
     </section>
 
     <!-- 7 -->
-    <section class="sec" id="s7">
-      <div class="sec-head"><span class="no">7</span><h2>합격 후 — 진짜 기초</h2></div>
+    <section class="sec" id="s8">
+      <div class="sec-head"><span class="no">8</span><h2>합격 후 — 진짜 기초</h2></div>
       <p class="sec-sub">확인된 면접 질문이 <b>0개</b>인 영역. 지금 하면 시간만 녹고, 입학하면 첫 학기부터 필요하다.</p>
       <div class="sec-rule"></div>
       <div class="card"><div class="timeline" id="post"></div></div>
     </section>
 
     <!-- 8 -->
-    <section class="sec" id="s8">
-      <div class="sec-head"><span class="no">8</span><h2>흔한 함정</h2></div>
+    <section class="sec" id="s9">
+      <div class="sec-head"><span class="no">9</span><h2>흔한 함정</h2></div>
       <div class="sec-rule"></div>
       <div class="card"><ul class="plain" id="pitfalls"></ul></div>
       <div class="prin" id="prin" style="margin-top:14px"></div>
@@ -386,7 +426,7 @@
     try { done = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e){ done = {}; }
     el('loading').style.display='none';
     el('app').style.display='block';
-    renderHero(); renderEvidence(); renderPhases(); renderRes(); renderPost(); renderMisc();
+    renderHero(); renderEvidence(); renderPhases(); renderShortlist(); renderRes(); renderPost(); renderMisc();
     updateProgress();
     el('resetBtn').addEventListener('click', function(){
       if(!confirm('체크한 진행 기록을 모두 지울까요?')) return;
@@ -515,6 +555,34 @@
     el('fill').style.width = pct+'%';
   }
 
+  /* ---- 지원 후보 ---- */
+  function renderShortlist(){
+    var S = P.shortlist;
+    el('sl-sub').innerHTML = '42곳 → AI·데이터 계열 24곳 → <b>' + S.criteria.join(' · ') + '</b> 3축으로 6곳. ' +
+      '<span style="color:var(--ink-soft)">통학 기준: ' + esc(S.commute) + '</span>';
+    el('shortlist').innerHTML = S.tiers.map(function(t){
+      var h = '<div class="tier"><div class="tierh"><span class="tb" style="background:'+t.color+'">'+esc(t.label)+'</span>' +
+              '<span class="tw">'+fmt(t.why)+'</span></div>';
+      h += t.items.map(function(x){
+        var stat = [];
+        if (x.cr) stat.push('경쟁률 <b>'+x.cr+':1</b>');
+        if (x.qt) stat.push('정원 '+x.qt+'명');
+        stat.push(x.tm+'학기'); stat.push(esc(x.tot));
+        return '<div class="sc" style="--c:'+t.color+'">' +
+          '<div class="sch"><span class="ss">'+esc(x.s)+'</span><span class="sm">'+esc(x.m)+'</span>' +
+          '<span class="smode'+(/하이브리드|온라인/.test(x.mode)?' hy':'')+'">'+esc(x.mode)+'</span></div>' +
+          '<div class="sstat">'+stat.join(' · ')+'</div>' +
+          '<div class="spro">👍 '+fmt(x.pro)+'</div>' +
+          '<div class="scon">⚠️ '+fmt(x.con)+'</div>' +
+          '<div class="sint">🎤 '+fmt(x.intel)+'</div></div>';
+      }).join('');
+      return h + '</div>';
+    }).join('');
+    el('sl-fee').innerHTML = '💳 ' + fmt(S.fee_note);
+    el('sl-drop').innerHTML = S.dropped.map(function(x){
+      return '<li><b>'+esc(x.s)+'</b> — '+fmt(x.why)+'</li>'; }).join('');
+  }
+
   /* ---- 자료 ---- */
   function renderRes(){
     el('res').innerHTML = P.resources.map(function(r){
@@ -539,5 +607,22 @@
   }
 })();
 </script>
+
+<a class="fab-today" href="study_calendar.html" aria-label="오늘 할 일">
+  <span class="fi">📅</span><span class="ft">오늘 할 일</span>
+</a>
+<style>
+.fab-today{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:90;
+ display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+ background:linear-gradient(135deg,#14b8a6,#0f766e);color:#fff;font-weight:800;font-size:13.5px;
+ font-family:"Noto Sans KR",-apple-system,sans-serif;padding:12px 18px;border-radius:999px;
+ box-shadow:0 6px 20px rgba(15,118,110,.34),0 2px 6px rgba(0,0,0,.10);
+ transition:transform .15s ease,box-shadow .15s ease}
+.fab-today:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(15,118,110,.40)}
+.fab-today:active{transform:translateY(0) scale(.97)}
+.fab-today .fi{font-size:17px;line-height:1}
+@media(max-width:480px){.fab-today{padding:13px 15px}.fab-today .ft{display:none}}
+@media(prefers-reduced-motion:reduce){.fab-today{transition:none}}
+</style>
 </body>
 </html>

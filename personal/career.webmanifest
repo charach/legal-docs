@@ -1,0 +1,23 @@
+{
+ "name": "커리어 전환 로드맵",
+ "short_name": "커리어",
+ "start_url": "./career_roadmap.html",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#f6f3ec",
+ "theme_color": "#7c3aed",
+ "icons": [
+  {
+   "src": "icons/career-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/career-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}

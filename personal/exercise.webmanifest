@@ -1,0 +1,23 @@
+{
+ "name": "아이언맨 훈련 캘린더",
+ "short_name": "훈련",
+ "start_url": "./exercise.html",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#f2f8fc",
+ "theme_color": "#0284c7",
+ "icons": [
+  {
+   "src": "icons/exercise-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/exercise-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}

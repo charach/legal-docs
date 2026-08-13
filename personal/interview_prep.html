@@ -4,7 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#e11d48">
+<!-- pwa -->
+<meta name="theme-color" content="#be123c">
+<link rel="apple-touch-icon" href="icons/interview-180.png">
+<link rel="icon" type="image/png" sizes="180x180" href="icons/interview-180.png">
+<link rel="manifest" href="interview.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="면접">
+<!-- /pwa -->
+
 <title>국내 AI 대학원 면접 전략 · 질문은행</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -815,5 +825,22 @@
 
 })();
 </script>
+
+<a class="fab-today" href="study_calendar.html" aria-label="오늘 할 일">
+  <span class="fi">📅</span><span class="ft">오늘 할 일</span>
+</a>
+<style>
+.fab-today{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:90;
+ display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+ background:linear-gradient(135deg,#14b8a6,#0f766e);color:#fff;font-weight:800;font-size:13.5px;
+ font-family:"Noto Sans KR",-apple-system,sans-serif;padding:12px 18px;border-radius:999px;
+ box-shadow:0 6px 20px rgba(15,118,110,.34),0 2px 6px rgba(0,0,0,.10);
+ transition:transform .15s ease,box-shadow .15s ease}
+.fab-today:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(15,118,110,.40)}
+.fab-today:active{transform:translateY(0) scale(.97)}
+.fab-today .fi{font-size:17px;line-height:1}
+@media(max-width:480px){.fab-today{padding:13px 15px}.fab-today .ft{display:none}}
+@media(prefers-reduced-motion:reduce){.fab-today{transition:none}}
+</style>
 </body>
 </html>
