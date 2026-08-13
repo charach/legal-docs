@@ -1,8 +1,8 @@
 {
  "name": "커리어 전환 로드맵",
  "short_name": "커리어",
- "start_url": "./career_roadmap.html",
- "scope": "./",
+ "start_url": "../career_roadmap.html",
+ "scope": "../",
  "display": "standalone",
  "orientation": "portrait",
  "background_color": "#f6f3ec",

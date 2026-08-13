@@ -6,9 +6,9 @@
 <meta name="robots" content="noindex, nofollow">
 <!-- pwa -->
 <meta name="theme-color" content="#be123c">
-<link rel="apple-touch-icon" href="icons/interview-180.png">
-<link rel="icon" type="image/png" sizes="180x180" href="icons/interview-180.png">
-<link rel="manifest" href="interview.webmanifest">
+<link rel="apple-touch-icon" href="assets/icons/interview-180.png">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/icons/interview-180.png">
+<link rel="manifest" href="assets/interview.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -427,7 +427,7 @@
 
     <p class="foot">
       🔒 개인용 · 검색 비노출<br>
-      데이터 원본: <code>interview_bank.json</code> · 후기 기반 수집본이므로 <b>"반드시 이게 나온다"가 아니라 "이 정도면 안전하다"</b>는 대비용<br>
+      데이터 원본: <code>data/interview_bank.json</code> · 후기 기반 수집본이므로 <b>"반드시 이게 나온다"가 아니라 "이 정도면 안전하다"</b>는 대비용<br>
       <a class="back" href="index.html">← 개인 페이지로</a>
     </p>
   </main>
@@ -477,7 +477,7 @@
   };
 
   /* ---------- boot ---------- */
-  fetch('interview_bank.json', {cache:'no-store'})
+  fetch('data/interview_bank.json', {cache:'no-store'})
     .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(json){ D = json; init(); })
     .catch(function(){ el('loading').style.display='none'; el('loaderr').style.display='block'; });

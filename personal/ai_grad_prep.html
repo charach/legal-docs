@@ -6,9 +6,9 @@
 <meta name="robots" content="noindex, nofollow">
 <!-- pwa -->
 <meta name="theme-color" content="#4f46e5">
-<link rel="apple-touch-icon" href="icons/roadmap-180.png">
-<link rel="icon" type="image/png" sizes="180x180" href="icons/roadmap-180.png">
-<link rel="manifest" href="roadmap.webmanifest">
+<link rel="apple-touch-icon" href="assets/icons/roadmap-180.png">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/icons/roadmap-180.png">
+<link rel="manifest" href="assets/roadmap.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -393,7 +393,7 @@
 
     <p class="foot">
       🔒 개인용 · 검색 비노출<br>
-      데이터 원본: <code>study_plan.json</code> · <code>interview_bank.json</code><br>
+      데이터 원본: <code>data/study_plan.json</code> · <code>data/interview_bank.json</code><br>
       일정은 <b>직전 회차 기반 추정</b> — 학교별 공식 요강으로 반드시 재확인
     </p>
   </main>
@@ -417,8 +417,8 @@
   function md(s){ var x=d(s); return (x.getMonth()+1)+'/'+x.getDate(); }
 
   Promise.all([
-    fetch('study_plan.json',{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); }),
-    fetch('interview_bank.json',{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    fetch('data/study_plan.json',{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); }),
+    fetch('data/interview_bank.json',{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
   ]).then(function(a){ P=a[0]; B=a[1]; init(); })
     .catch(function(){ el('loading').style.display='none'; el('loaderr').style.display='block'; });
 

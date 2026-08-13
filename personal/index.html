@@ -6,9 +6,9 @@
 <meta name="robots" content="noindex, nofollow">
 <!-- pwa -->
 <meta name="theme-color" content="#0f2740">
-<link rel="apple-touch-icon" href="icons/home-180.png">
-<link rel="icon" type="image/png" sizes="180x180" href="icons/home-180.png">
-<link rel="manifest" href="home.webmanifest">
+<link rel="apple-touch-icon" href="assets/icons/home-180.png">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/icons/home-180.png">
+<link rel="manifest" href="assets/home.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -68,6 +68,22 @@
 
   .cards { display: grid; gap: 15px; margin-top: 10px; }
 
+  /* ---- 그룹 ---- */
+  .grp { margin-top: 26px; animation: rise .5s both; }
+  .grp:nth-of-type(1) { animation-delay: .12s; }
+  .grp:nth-of-type(2) { animation-delay: .18s; }
+  .grp:nth-of-type(3) { animation-delay: .24s; }
+  .grph { display: flex; align-items: center; gap: 8px; margin: 0 4px 11px; }
+  .grph .ge { font-size: 15px; line-height: 1; }
+  .grph .gt { font-weight: 900; font-size: 15px; letter-spacing: -.2px; color: var(--g); }
+  .grph .gs { font-size: 11.5px; color: var(--muted); }
+  .grph .gn { margin-left: auto; font-size: 10.5px; font-weight: 900; color: var(--g);
+    background: color-mix(in srgb, var(--g) 12%, transparent); padding: 1px 9px; border-radius: 999px; }
+  .grph::after { content: none; }
+  .grp .cards { gap: 12px; margin-top: 0; }
+  .grp a.card { animation: none; }
+
+
   a.card {
     display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit;
     background: var(--card); border: 1px solid var(--line); border-radius: 20px;
@@ -76,8 +92,6 @@
     position: relative; overflow: hidden;
     animation: rise .55s both;
   }
-  a.card:nth-of-type(1) { animation-delay: .14s; }
-  a.card:nth-of-type(2) { animation-delay: .22s; }
   a.card::before {
     content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
     background: var(--accent, var(--sky));
@@ -155,49 +169,39 @@
     <span class="datechip"><span class="d"></span><span id="today">–</span></span>
   </header>
 
-  <div class="cards">
-
-    <a class="card" href="exercise.html" data-start="2026-07-22" data-race="2026-10-04" style="--accent:#0ea5e9;--ic-bg:#e0f2fe">
-      <span class="ic">🏊‍♂️</span>
+  <section class="grp g-both" style="--g:#8b5cf6">
+    <div class="grph"><span class="ge">👫</span><span class="gt">함께</span><span class="gs">같이 보는 것</span><span class="gn">1</span></div>
+    <div class="cards">
+    <a class="card" href="grad_schools.html" style="--accent:#f59e0b;--ic-bg:#fef3c7">
+      <span class="ic">🏛</span>
       <span class="body">
-        <span class="tag">Training</span><span class="who me">🧑 본인</span>
-        <h2>2026 구례 아이언맨 훈련 캘린더</h2>
-        <p>74일 일자별 훈련 · 매일 아침·저녁 운동 팝업 (7/22 ~ 10/4)</p>
-        <span class="meta">
-          <span class="bar"><i></i></span>
-          <span class="meta-txt"><b class="prog">–</b> 완료</span>
-        </span>
+        <span class="tag">Research</span>
+        <h2>직장인 특수대학원 정리 (AI·데이터·CS)</h2>
+        <p>국내 야간·주말·온라인 대학원 42개 · 학비/경쟁률/총원율 비교표</p>
       </span>
-      <span class="dday">–</span>
+      <span class="dday">42개</span>
       <span class="arrow">→</span>
     </a>
+    </div>
+  </section>
 
-    <a class="card" href="career_roadmap.html" data-start="2026-08-01" data-goal="2027-12-31" style="--accent:#8b5cf6;--ic-bg:#ede9fe">
-      <span class="ic">🚀</span>
-      <span class="body">
-        <span class="tag">Career</span><span class="who me">🧑 본인</span>
-        <h2>커리어 전환 로드맵</h2>
-        <p>삼성전자 → AI Product Engineer · Ⅰ–Ⅳ 단계 (2026–2027)</p>
-      </span>
-      <span class="dday">–</span>
-      <span class="arrow">→</span>
-    </a>
-
+  <section class="grp g-wife" style="--g:#e11d48">
+    <div class="grph"><span class="ge">👩</span><span class="gt">아내</span><span class="gs">대학원 입시 · 매일 여기부터</span><span class="gn">3</span></div>
+    <div class="cards">
     <a class="card" href="study_calendar.html" data-start="2026-08-13" data-race="2026-12-05" style="--accent:#0d9488;--ic-bg:#ccfbf1">
       <span class="ic">📅</span>
       <span class="body">
-        <span class="tag">Today</span><span class="who wife">👩 아내</span>
+        <span class="tag">Today</span>
         <h2>오늘 할 일 · 학습 달력</h2>
         <p>날짜별 학습 리듬 + 월간 달력 · 주 8시간 기준 (매일 여기부터)</p>
       </span>
       <span class="dday">–</span>
       <span class="arrow">→</span>
     </a>
-
     <a class="card" href="ai_grad_prep.html" data-start="2026-08-13" data-race="2026-12-05" style="--accent:#6366f1;--ic-bg:#e0e7ff">
       <span class="ic">🎓</span>
       <span class="body">
-        <span class="tag">Admission</span><span class="who wife">👩 아내</span>
+        <span class="tag">Admission</span>
         <h2>국내 AI 대학원 석사 입시 로드맵</h2>
         <p>식품공학 석사 → AI 전환 · 「밑바닥 1」 기반 16주 최단경로 (2027-1 입학 목표)</p>
         <span class="meta">
@@ -208,30 +212,48 @@
       <span class="dday">–</span>
       <span class="arrow">→</span>
     </a>
-
     <a class="card" href="interview_prep.html" data-start="2026-08-13" data-race="2026-12-05" style="--accent:#e11d48;--ic-bg:#ffe4e6">
       <span class="ic">🎤</span>
       <span class="body">
-        <span class="tag">Interview</span><span class="who wife">👩 아내</span>
+        <span class="tag">Interview</span>
         <h2>국내 AI 대학원 면접 전략 · 질문은행</h2>
         <p>실제 면접 후기 기반 201문항 · 학교별 면접 방식 비교 + 모의 연습</p>
       </span>
       <span class="dday">–</span>
       <span class="arrow">→</span>
     </a>
+    </div>
+  </section>
 
-    <a class="card" href="grad_schools.html" style="--accent:#f59e0b;--ic-bg:#fef3c7">
-      <span class="ic">🏛</span>
+  <section class="grp g-me" style="--g:#0ea5e9">
+    <div class="grph"><span class="ge">🧑</span><span class="gt">남편</span><span class="gs">훈련 · 커리어</span><span class="gn">2</span></div>
+    <div class="cards">
+    <a class="card" href="exercise.html" data-start="2026-07-22" data-race="2026-10-04" style="--accent:#0ea5e9;--ic-bg:#e0f2fe">
+      <span class="ic">🏊‍♂️</span>
       <span class="body">
-        <span class="tag">Research</span><span class="who both">👫 함께</span>
-        <h2>직장인 특수대학원 정리 (AI·데이터·CS)</h2>
-        <p>국내 야간·주말·온라인 대학원 42개 · 학비/경쟁률/총원율 비교표</p>
+        <span class="tag">Training</span>
+        <h2>2026 구례 아이언맨 훈련 캘린더</h2>
+        <p>74일 일자별 훈련 · 매일 아침·저녁 운동 팝업 (7/22 ~ 10/4)</p>
+        <span class="meta">
+          <span class="bar"><i></i></span>
+          <span class="meta-txt"><b class="prog">–</b> 완료</span>
+        </span>
       </span>
-      <span class="dday">42개</span>
+      <span class="dday">–</span>
       <span class="arrow">→</span>
     </a>
-
-  </div>
+    <a class="card" href="career_roadmap.html" data-start="2026-08-01" data-goal="2027-12-31" style="--accent:#8b5cf6;--ic-bg:#ede9fe">
+      <span class="ic">🚀</span>
+      <span class="body">
+        <span class="tag">Career</span>
+        <h2>커리어 전환 로드맵</h2>
+        <p>삼성전자 → AI Product Engineer · Ⅰ–Ⅳ 단계 (2026–2027)</p>
+      </span>
+      <span class="dday">–</span>
+      <span class="arrow">→</span>
+    </a>
+    </div>
+  </section>
 
   <p class="foot">🔒 개인용 · 검색 비노출</p>
 </div>

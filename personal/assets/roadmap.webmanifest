@@ -1,8 +1,8 @@
 {
  "name": "AI 대학원 학습 로드맵",
  "short_name": "로드맵",
- "start_url": "./ai_grad_prep.html",
- "scope": "./",
+ "start_url": "../ai_grad_prep.html",
+ "scope": "../",
  "display": "standalone",
  "orientation": "portrait",
  "background_color": "#f5f4fb",

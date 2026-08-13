@@ -6,9 +6,9 @@
 <meta name="robots" content="noindex, nofollow">
 <!-- pwa -->
 <meta name="theme-color" content="#0f766e">
-<link rel="apple-touch-icon" href="icons/calendar-180.png">
-<link rel="icon" type="image/png" sizes="180x180" href="icons/calendar-180.png">
-<link rel="manifest" href="calendar.webmanifest">
+<link rel="apple-touch-icon" href="assets/icons/calendar-180.png">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/icons/calendar-180.png">
+<link rel="manifest" href="assets/calendar.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -189,7 +189,7 @@
 
     <p class="foot">
       🔒 개인용 · 검색 비노출 · 체크는 브라우저에 자동 저장<br>
-      데이터 원본: <code>study_plan.json</code>
+      데이터 원본: <code>data/study_plan.json</code>
     </p>
   </main>
 </div>
@@ -214,7 +214,7 @@
   function saveDone(){ try{ localStorage.setItem(STORE, JSON.stringify(done)); }catch(e){} }
   function saveDaily(){ try{ localStorage.setItem(DAYSTORE, JSON.stringify(daily)); }catch(e){} }
 
-  fetch('study_plan.json',{cache:'no-store'})
+  fetch('data/study_plan.json',{cache:'no-store'})
     .then(function(r){ if(!r.ok) throw 0; return r.json(); })
     .then(function(j){ P=j; init(); })
     .catch(function(){ el('loading').style.display='none'; el('loaderr').style.display='block'; });
