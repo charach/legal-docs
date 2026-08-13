@@ -1,0 +1,37 @@
+{
+  "hello": {
+    "id": "YFXJ1oh91Mpf0zTKKW",
+    "w": 200,
+    "h": 136,
+    "alt": "그로밋이 정면을 바라보는 장면",
+    "src": "https://media.giphy.com/media/YFXJ1oh91Mpf0zTKKW/200w.gif"
+  },
+  "work": {
+    "id": "3oz8xtBx06mcZWoNJm",
+    "w": 200,
+    "h": 150,
+    "alt": "그로밋이 달리는 기차 앞에 선로를 깔고 있는 장면",
+    "src": "https://media.giphy.com/media/3oz8xtBx06mcZWoNJm/200w.gif"
+  },
+  "done": {
+    "id": "l0Exgm0hM67Z9KjyU",
+    "w": 200,
+    "h": 112,
+    "alt": "그로밋이 신나게 무언가를 쏘아 올리는 장면",
+    "src": "https://media.giphy.com/media/l0Exgm0hM67Z9KjyU/200w.gif"
+  },
+  "ready": {
+    "id": "3o7TKAXViDOET1cwI8",
+    "w": 200,
+    "h": 120,
+    "alt": "월레스와 그로밋이 출동 준비를 하는 장면",
+    "src": "https://media.giphy.com/media/3o7TKAXViDOET1cwI8/200w.gif"
+  },
+  "window": {
+    "id": "3o7TKxlnJmurWJwrOE",
+    "w": 200,
+    "h": 150,
+    "alt": "그로밋이 창가에 기대 쉬고 있는 장면",
+    "src": "https://media.giphy.com/media/3o7TKxlnJmurWJwrOE/200w.gif"
+  }
+}

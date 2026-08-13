@@ -100,6 +100,9 @@
   .dbtns { display: flex; gap: 10px; }
   .dbtns .btn { flex: 1; }
 
+  .closing { display: flex; gap: 26px; align-items: flex-start; margin-top: 40px;
+    padding-top: 28px; border-top: 1px solid var(--line); }
+  .closing .note { flex: 1; font-size: 14px; color: var(--ink-2); line-height: 1.7; }
   .gap { border-bottom: 1px solid var(--line); padding: 16px 0; font-size: 15px; line-height: 1.7; }
   .gap:first-child { border-top: 1px solid var(--line); }
   .gap .a { display: block; color: var(--ink-2); font-size: 14px; margin-top: 2px; }
@@ -119,6 +122,7 @@
     details.sch > summary { grid-template-columns: 1fr; gap: 8px; }
     details.sch .right { text-align: left; }
     details.sch .right .cf { display: inline; margin-left: 8px; }
+    .closing { flex-direction: column; gap: 18px; }
   }
 </style>
 </head>
@@ -199,6 +203,13 @@
         <div style="margin-top:34px">
           <div class="eyebrow" style="margin-bottom:12px">복장</div>
           <div class="dl" id="dress"></div>
+        </div>
+        <div class="closing">
+          <figure class="gromit-box" style="margin:0"><img class="gromit" src="https://media.giphy.com/media/YFXJ1oh91Mpf0zTKKW/200w.gif" width="200" height="136" alt="그로밋이 정면을 바라보는 장면" loading="lazy" decoding="async" style="aspect-ratio:200/136">
+            <figcaption>표정 하나로 설명할 수 있으면 그게 제일 좋다.</figcaption>
+          </figure>
+          <p class="note">면접관은 정답보다 사고 과정을 본다. 모르면 아는 데서 출발해
+          소리 내어 풀어 가는 편이 침묵보다 언제나 낫다.</p>
         </div>
       </div>
     </div>
@@ -306,6 +317,7 @@
     <div class="dmeta" id="dmeta"></div>
     <p class="dq" id="dq"></p>
     <div class="dkey" id="dkey"></div>
+    <div id="dgromit"></div>
     <div class="dbtns">
       <button class="btn btn-ghost" id="dreveal">핵심 보기</button>
       <button class="btn" id="dnext">다음</button>
@@ -595,6 +607,9 @@
     el('dkey').innerHTML = '<span class="k">핵심 답변</span>'+fmt(q.key || '정리된 답변이 없다. 직접 만들어 볼 것.');
     el('dkey').classList.remove('on');
     el('dnext').textContent = (drill.i === drill.queue.length-1) ? '끝내기' : '다음';
+    var last = document.getElementById('dgromit');
+    if (last) last.innerHTML = (drill.i === drill.queue.length-1)
+      ? '<figure class="gromit-box" style="margin:18px 0 0"><img class=\"gromit\" src=\"https://media.giphy.com/media/l0Exgm0hM67Z9KjyU/200w.gif\" width=\"200\" height=\"112\" alt=\"그로밋이 신나게 무언가를 쏘아 올리는 장면\" loading=\"lazy\" decoding=\"async\" style=\"aspect-ratio:200/112\"><figcaption>마지막 한 문항.</figcaption></figure>' : '';
     resetTimer();
   }
   function nextDrill(){ if (drill.i >= drill.queue.length-1) { stopDrill(); return; } drill.i++; showDrill(); }

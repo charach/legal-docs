@@ -36,6 +36,8 @@
   .tasks-foot { display: flex; align-items: center; gap: 16px; margin-top: 20px; font-size: 13px; color: var(--ink-2); }
   .tasks-foot .meter { flex: 1; }
 
+  .dayrow { display: flex; gap: 30px; align-items: flex-start; }
+  .dayrow > .col { flex: 1; min-width: 0; }
   .restday { padding: 40px 0 44px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .restday .h { font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 6px; }
   .restday .p { font-size: 15px; color: var(--ink-2); }
@@ -84,6 +86,8 @@
     .countdown { grid-template-columns: 1fr; }
     .countdown > div { padding: 16px 0; }
     .calhead .m { min-width: 0; font-size: 17px; flex: 1; }
+    .dayrow { flex-direction: column-reverse; gap: 20px; }
+    .dayrow > .gromit-box { width: 132px; }
     .cal button.day { min-height: 56px; }
   }
 </style>
@@ -119,7 +123,10 @@
       </div>
       <p class="focus" id="focus"></p>
       <div id="anchors"></div>
-      <div id="taskbox"></div>
+      <div class="dayrow">
+        <div class="col" id="taskbox"></div>
+        <figure class="gromit-box" id="gromitbox" style="margin:0"></figure>
+      </div>
     </div>
   </div>
 </header>
@@ -179,10 +186,26 @@
   function pd(s){ return new Date(s+'T00:00:00'); }
   function span(a,b){ return Math.round((b-a)/86400000); }
 
-  fetch('data/study_plan.json',{cache:'no-store'})
-    .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-    .then(function(j){ P=j; init(); })
+  var GROMIT = null;
+
+  function paintGromit(state){
+    var box = el('gromitbox');
+    if (!GROMIT || !box) return;
+    var pick = { rest:'window', done:'done', work:'work', none:'hello' }[state] || 'work';
+    var g = GROMIT[pick];
+    var cap = { rest:'오늘은 그로밋도 쉰다.', done:'오늘 몫은 끝났다.',
+                work:'묵묵히 오늘 선로를 깐다.', none:'계획 밖의 날.' }[state] || '';
+    box.innerHTML = '<img class="gromit" src="'+g.src+'" width="'+g.w+'" height="'+g.h+
+      '" alt="'+g.alt+'" loading="lazy" decoding="async" style="aspect-ratio:'+g.w+'/'+g.h+'">' +
+      '<figcaption>'+cap+'</figcaption>';
+  }
+
+  Promise.all([
+    fetch('data/study_plan.json',{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); }),
+    fetch('data/gromit.json',{cache:'no-store'}).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; })
+  ]).then(function(a){ P=a[0]; GROMIT=a[1]; init(); })
     .catch(function(){ el('loading').style.display='none'; el('loaderr').style.display='block'; });
+
 
   function init(){
     try { done = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e){ done={}; }
@@ -236,8 +259,9 @@
     el('anchors').innerHTML = t.anchors.map(function(a){
       return '<p class="anchor-line">'+esc(a.label)+'</p>'; }).join('');
 
-    if (t.none) { el('taskbox').innerHTML = ''; return; }
+    if (t.none) { el('taskbox').innerHTML = ''; paintGromit('none'); return; }
     if (t.rest) {
+      paintGromit('rest');
       el('taskbox').innerHTML = '<div class="restday"><div class="h">쉬는 날</div>' +
         '<div class="p">밀린 것이 있으면 30분만. 없으면 아무것도 하지 않는다.</div></div>';
       return;
@@ -245,6 +269,7 @@
 
     var n = t.items.filter(function(i){ return isDone(i.id); }).length;
     var pct = t.items.length ? Math.round(n/t.items.length*100) : 0;
+    paintGromit(n === t.items.length ? 'done' : 'work');
     el('taskbox').innerHTML = '<ul class="tasks">' + t.items.map(function(it){
       var on = isDone(it.id);
       return '<li'+(on?' class="done"':'')+'><input class="chk" type="checkbox" data-id="'+esc(it.id)+'"'+(on?' checked':'')+'>' +
