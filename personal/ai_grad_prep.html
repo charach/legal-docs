@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#6366f1">
-<title>한양대 인공지능융합대학원 석사 입시 준비</title>
+<title>국내 AI 대학원 석사 입시 — 학습 로드맵</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #f5f4fb;
-    --paper-2: #ecebf8;
     --card: #ffffff;
     --ink: #241f35;
     --ink-soft: #5b5470;
@@ -21,14 +20,13 @@
     --line-strong: #d5cfec;
     --indigo: #6366f1;
     --indigo-deep: #4f46e5;
-    --violet: #7c3aed;
     --grape: #a855f7;
     --sky: #0ea5e9;
     --teal: #14b8a6;
     --amber: #f59e0b;
     --pink: #ec4899;
-    --gold: #d97706;
     --green: #16a34a;
+    --slate: #64748b;
     --sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --shadow: 0 1px 2px rgba(36,31,53,.05), 0 8px 24px rgba(79,70,229,.07);
     --shadow-lg: 0 14px 44px rgba(99,102,241,.20), 0 4px 12px rgba(36,31,53,.10);
@@ -40,53 +38,45 @@
     margin: 0; color: var(--ink); font-family: var(--sans);
     font-size: 15px; line-height: 1.68; -webkit-font-smoothing: antialiased;
     background:
-      radial-gradient(1100px 560px at 100% -10%, rgba(124,58,237,.10), transparent 60%),
+      radial-gradient(1100px 560px at 100% -10%, rgba(168,85,247,.10), transparent 60%),
       radial-gradient(900px 500px at -10% 12%, rgba(14,165,233,.07), transparent 55%),
       var(--paper);
     background-attachment: fixed;
   }
-  .wrap { max-width: 840px; margin: 0 auto; padding: 0 18px calc(120px + env(safe-area-inset-bottom)); }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 18px calc(120px + env(safe-area-inset-bottom)); }
+  .wrap.top { padding-bottom: 0; }
 
-  /* ---------- Hero ---------- */
-  header.hero { padding: 46px 0 20px; text-align: center; }
-  .kicker {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
-    color: var(--indigo-deep); font-weight: 700;
-    background: rgba(99,102,241,.10); padding: 6px 14px; border-radius: 999px; margin-bottom: 16px;
-  }
+  header.hero { padding: 46px 0 16px; text-align: center; }
+  .kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--indigo-deep); font-weight: 700; background: rgba(99,102,241,.10); padding: 6px 14px; border-radius: 999px; margin-bottom: 16px; }
   header.hero h1 { font-weight: 900; font-size: clamp(25px, 5.6vw, 40px); line-height: 1.2; margin: 0 0 12px; letter-spacing: -.5px; }
   header.hero h1 em { font-style: normal; background: linear-gradient(120deg, var(--indigo), var(--grape)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  header.hero p.sub { color: var(--ink-soft); margin: 0 auto; max-width: 560px; font-size: 14.5px; }
+  header.hero p.sub { color: var(--ink-soft); margin: 0 auto; max-width: 600px; font-size: 14.5px; }
 
-  .dbar {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-    max-width: 520px; margin: 22px auto 4px;
-  }
-  .dcell { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 13px 8px; box-shadow: var(--shadow); text-align: center; }
-  .dcell .n { font-weight: 900; font-size: clamp(18px, 5vw, 26px); line-height: 1; color: var(--indigo-deep);
+  .dbar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; max-width: 620px; margin: 22px auto 4px; }
+  .dcell { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 13px 6px; box-shadow: var(--shadow); text-align: center; }
+  .dcell .n { font-weight: 900; font-size: clamp(17px, 4.6vw, 25px); line-height: 1;
     background: linear-gradient(135deg, var(--indigo), var(--grape)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .dcell .l { font-size: 10.5px; color: var(--muted); margin-top: 6px; letter-spacing: .01em; }
+  .dcell .l { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
 
-  /* ---------- Sticky progress ---------- */
-  .statusbar { position: sticky; top: 0; z-index: 30; background: rgba(245,244,251,.9); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line); padding: 10px 0; margin: 18px 0 6px; }
-  .statusbar .inner { max-width: 840px; margin: 0 auto; padding: 0 18px; display: flex; align-items: center; gap: 14px; }
-  .status-label { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .statusbar { position: sticky; top: 0; z-index: 30; background: rgba(245,244,251,.92); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line); padding: 9px 0; margin: 18px 0 6px; }
+  .statusbar .inner { max-width: 880px; margin: 0 auto; padding: 0 18px; display: flex; align-items: center; gap: 12px; }
+  .status-label { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
   .status-label b { color: var(--indigo-deep); font-size: 15px; }
-  .track { flex: 1; height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .track { flex: 1; height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; min-width: 40px; }
   .track > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--indigo), var(--grape)); border-radius: 999px; transition: width .5s ease; }
   .count { font-size: 11.5px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .gobtn { background: linear-gradient(120deg, var(--indigo), var(--grape)); color: #fff; border: none; border-radius: 999px;
+    padding: 6px 14px; font-size: 12px; font-weight: 800; font-family: var(--sans); cursor: pointer; white-space: nowrap; text-decoration: none;
+    box-shadow: 0 3px 10px rgba(99,102,241,.28); }
   .reset { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 11px; font-family: var(--sans); text-decoration: underline; text-underline-offset: 3px; }
-  .reset:hover { color: var(--indigo-deep); }
 
-  /* ---------- TOC ---------- */
   nav.toc { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin: 16px 0 4px; font-size: 12.5px; }
   nav.toc a { color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
   nav.toc a:hover { color: var(--indigo-deep); border-color: var(--indigo); }
 
-  /* ---------- Section ---------- */
-  section.sec { margin-top: 40px; scroll-margin-top: 64px; }
+  section.sec { margin-top: 42px; scroll-margin-top: 64px; }
   .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
   .sec-head .no { flex: none; width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
     font-weight: 900; font-size: 14px; color: #fff; background: linear-gradient(135deg, var(--indigo), var(--grape)); box-shadow: 0 4px 10px rgba(99,102,241,.28); }
@@ -94,12 +84,11 @@
   .sec-sub { color: var(--muted); font-size: 13px; margin: 0 0 14px 42px; }
   .sec-rule { height: 2px; background: linear-gradient(90deg, var(--line-strong), transparent); margin: 8px 0 16px; }
 
-  /* ---------- Cards ---------- */
   .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); margin: 12px 0; }
   .fact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .fact { background: var(--card); border: 1px solid var(--line); border-radius: 13px; padding: 13px 14px; box-shadow: var(--shadow); }
   .fact .k { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--indigo); margin-bottom: 3px; }
-  .fact .v { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.5; }
+  .fact .v { font-size: 14px; font-weight: 500; line-height: 1.5; }
   .fact .v b { font-weight: 800; }
 
   .callout { font-size: 13.5px; line-height: 1.62; color: #46405c; border-left: 3px solid var(--amber);
@@ -108,108 +97,116 @@
   .callout.warn { border-color: var(--pink); background: linear-gradient(180deg,#fff5fa,#ffeef6); }
   .callout b { color: var(--indigo-deep); }
   .callout.warn b { color: var(--pink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; background: #efeefa; padding: 1px 5px; border-radius: 5px; color: var(--indigo-deep); }
 
-  /* ---------- Timeline ---------- */
-  .timeline { position: relative; margin: 8px 0 4px; padding-left: 6px; }
-  .tl { position: relative; padding: 0 0 16px 26px; border-left: 2px solid var(--line-strong); }
-  .tl:last-child { border-left-color: transparent; padding-bottom: 2px; }
-  .tl::before { content: ""; position: absolute; left: -7px; top: 2px; width: 12px; height: 12px; border-radius: 50%;
-    background: var(--card); border: 2.5px solid var(--indigo); }
-  .tl.hot::before { background: var(--indigo); box-shadow: 0 0 0 4px rgba(99,102,241,.18); }
-  .tl .when { font-size: 12px; font-weight: 800; color: var(--indigo-deep); letter-spacing: .02em; }
-  .tl .what { font-size: 14px; margin-top: 1px; }
-  .tl .what b { font-weight: 800; }
-  .tl .note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  /* evidence bars */
+  .evid { display: grid; gap: 6px; margin-top: 4px; }
+  .erow { display: grid; grid-template-columns: 140px 1fr 30px; gap: 9px; align-items: center; font-size: 12.5px; }
+  .erow .eb { height: 16px; border-radius: 5px; background: #eeecf8; overflow: hidden; }
+  .erow .eb > i { display: block; height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--indigo), var(--grape)); transition: width .7s cubic-bezier(.22,1,.36,1); width: 0; }
+  .erow .en { text-align: right; font-weight: 800; color: var(--indigo-deep); font-variant-numeric: tabular-nums; }
+  .erow.dim .eb > i { background: linear-gradient(90deg, #cbd5e1, #e2e8f0); }
+  .erow.dim .en { color: var(--muted); }
 
-  /* ---------- Roadmap month ---------- */
-  .month { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin: 12px 0; background: var(--card); box-shadow: var(--shadow); }
-  .month > .mh { display: flex; align-items: center; gap: 12px; padding: 14px 16px; color: #fff; }
-  .month.m8 > .mh { background: linear-gradient(120deg,#6366f1,#818cf8); }
-  .month.m9 > .mh { background: linear-gradient(120deg,#0ea5e9,#38bdf8); }
-  .month.m10 > .mh { background: linear-gradient(120deg,#14b8a6,#2dd4bf); }
-  .month.m11 > .mh { background: linear-gradient(120deg,#d97706,#f59e0b); }
-  .month > .mh .mm { font-size: 22px; font-weight: 900; line-height: 1; }
-  .month > .mh .mt { font-weight: 800; font-size: 15px; }
-  .month > .mh .mg { font-size: 12px; opacity: .92; margin-top: 2px; font-weight: 500; }
-  .month .mb { padding: 6px 16px 12px; }
+  /* phase */
+  .phase { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin: 14px 0; background: var(--card); box-shadow: var(--shadow); }
+  .phase > .ph { display: flex; align-items: flex-start; gap: 13px; padding: 15px 17px; color: #fff; }
+  .phase > .ph .pn { font-size: 22px; font-weight: 900; line-height: 1; opacity: .9; flex: none; width: 26px; }
+  .phase > .ph .pt { font-weight: 900; font-size: 16px; letter-spacing: -.2px; }
+  .phase > .ph .ps { font-size: 12.5px; opacity: .93; margin-top: 1px; font-weight: 500; }
+  .phase > .ph .pd { margin-left: auto; font-size: 11.5px; font-weight: 800; background: rgba(255,255,255,.22); padding: 3px 10px; border-radius: 999px; white-space: nowrap; flex: none; }
+  .phase .pbody { padding: 14px 17px 16px; }
+  .pmeta { display: grid; grid-template-columns: 52px 1fr; gap: 5px 10px; font-size: 13.3px; margin-bottom: 12px; }
+  .pmeta dt { font-size: 10.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--indigo); padding-top: 4px; }
+  .pmeta dd { margin: 0; line-height: 1.58; }
+  .pout { background: linear-gradient(180deg,#f7f7ff,#f1f0fd); border-left: 3px solid var(--indigo); border-radius: 0 11px 11px 0;
+    padding: 9px 13px; font-size: 13px; margin-bottom: 12px; }
+  .pout b { color: var(--indigo-deep); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 2px; }
 
-  ul.checklist { list-style: none; padding: 0; margin: 4px 0; }
-  ul.checklist li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; padding: 9px 0; border-top: 1px solid var(--line); }
-  ul.checklist li:first-child { border-top: none; }
-  ul.checklist input[type=checkbox] { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; margin: 2px 0 0; cursor: pointer;
+  .wk { border-top: 1px solid var(--line); padding: 11px 0 3px; }
+  .wk:first-of-type { border-top: none; }
+  .wkh { display: flex; align-items: baseline; gap: 9px; margin-bottom: 5px; flex-wrap: wrap; }
+  .wkh .wid { font-size: 10.5px; font-weight: 900; color: #fff; background: var(--muted); border-radius: 5px; padding: 1px 7px; }
+  .wk.now .wkh .wid { background: var(--indigo); box-shadow: 0 0 0 3px rgba(99,102,241,.16); }
+  .wk.past .wkh .wid { background: #cfcadf; }
+  .wkh .wf { font-weight: 800; font-size: 13.8px; }
+  .wkh .wd { font-size: 11.5px; color: var(--muted); margin-left: auto; }
+  .wk.now { background: linear-gradient(180deg, #f7f6ff, transparent); border-radius: 10px; padding-left: 10px; padding-right: 10px; margin: 0 -10px; }
+  .nowtag { font-size: 10px; font-weight: 900; color: #fff; background: var(--indigo); padding: 1px 7px; border-radius: 999px; }
+
+  ul.checklist { list-style: none; padding: 0; margin: 2px 0 4px; }
+  ul.checklist li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; align-items: start; padding: 6px 0; }
+  ul.checklist input[type=checkbox] { appearance: none; -webkit-appearance: none; width: 17px; height: 17px; margin: 3px 0 0; cursor: pointer;
     border: 1.5px solid var(--line-strong); border-radius: 5px; background: var(--card); position: relative; transition: .15s; flex: none; }
   ul.checklist input[type=checkbox]:hover { border-color: var(--indigo); }
   ul.checklist input[type=checkbox]:checked { background: var(--indigo); border-color: var(--indigo); }
-  ul.checklist input[type=checkbox]:checked::after { content: ""; position: absolute; left: 5.5px; top: 1.5px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(43deg); }
-  ul.checklist label { cursor: pointer; font-size: 13.5px; line-height: 1.5; }
-  ul.checklist label b { font-weight: 800; }
-  ul.checklist li.checked label { color: var(--muted); }
-  ul.checklist li.checked label b { color: var(--muted); }
-  ul.checklist li.checked label .lead { text-decoration: line-through; text-decoration-color: var(--line-strong); }
-  .src { display: inline-block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
-  .src a { color: var(--indigo); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
-  .src a:hover { color: var(--indigo-deep); }
+  ul.checklist input[type=checkbox]:checked::after { content: ""; position: absolute; left: 5px; top: 1px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(43deg); }
+  ul.checklist label { cursor: pointer; font-size: 13.2px; line-height: 1.5; }
+  ul.checklist label .kind { font-size: 10px; font-weight: 900; letter-spacing: .04em; padding: 1px 6px; border-radius: 999px; margin-right: 6px; vertical-align: 1px; }
+  .k-lesson { background: rgba(99,102,241,.12); color: var(--indigo-deep); }
+  .k-practice { background: rgba(20,184,166,.14); color: #0f766e; }
+  .k-review { background: rgba(236,72,153,.12); color: var(--pink); }
+  .k-todo { background: rgba(245,158,11,.16); color: #b45309; }
+  ul.checklist li.checked label .txt { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line-strong); }
 
-  /* ---------- Resource table ---------- */
-  .rtbl { width: 100%; border-collapse: collapse; font-size: 13px; margin: 4px 0; }
+  .rtbl { width: 100%; border-collapse: collapse; font-size: 13px; }
   .rtbl th, .rtbl td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
   .rtbl thead th { border-bottom: 2px solid var(--line-strong); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
   .rtbl td a { color: var(--indigo); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--line-strong); }
-  .rtbl td a:hover { color: var(--indigo-deep); }
-  .pill { display: inline-block; font-size: 10.5px; font-weight: 800; padding: 1px 8px; border-radius: 999px; }
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 800; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
   .pill.free { background: rgba(22,163,74,.12); color: var(--green); }
-  .pill.paid { background: rgba(217,119,6,.14); color: var(--gold); }
+  .pill.paid { background: rgba(217,119,6,.14); color: #b45309; }
+  .pill.cert { background: rgba(99,102,241,.12); color: var(--indigo-deep); }
+  .pill.now { background: rgba(236,72,153,.13); color: var(--pink); }
   .tbl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-  /* ---------- Question bank ---------- */
-  .qcat { margin-top: 16px; }
-  .qcat > .qh { display: flex; align-items: center; gap: 9px; margin: 0 2px 6px; }
-  .qcat > .qh .cdot { width: 12px; height: 12px; border-radius: 4px; flex: none; }
-  .qcat > .qh .ct { font-weight: 800; font-size: 14.5px; }
-  .qcat > .qh .cn { font-size: 11.5px; color: var(--muted); font-weight: 600; }
-  .qlist { list-style: none; padding: 0; margin: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
-  .qlist li { display: grid; grid-template-columns: 22px 1fr; gap: 9px; align-items: start; padding: 11px 14px; border-top: 1px solid var(--line); }
-  .qlist li:first-child { border-top: none; }
-  .qlist input[type=checkbox] { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; margin: 1px 0 0; cursor: pointer;
-    border: 1.5px solid var(--line-strong); border-radius: 999px; background: var(--card); position: relative; transition: .15s; flex: none; }
-  .qlist input[type=checkbox]:checked { background: var(--green); border-color: var(--green); }
-  .qlist input[type=checkbox]:checked::after { content: ""; position: absolute; left: 5.5px; top: 1.5px; width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(43deg); }
-  .qlist label { cursor: pointer; font-size: 13.5px; line-height: 1.5; }
-  .qlist li.checked label .qq { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line-strong); }
-  .qtag { display: inline-block; font-size: 10px; font-weight: 800; padding: 0 6px; border-radius: 999px; margin-left: 6px; vertical-align: middle; white-space: nowrap; }
-  .qtag.real { background: rgba(236,72,153,.13); color: var(--pink); }
-  .qtag.freq { background: rgba(99,102,241,.12); color: var(--indigo-deep); }
-  .qlegend { font-size: 12px; color: var(--muted); margin: 2px 2px 10px; display: flex; gap: 14px; flex-wrap: wrap; }
-  .qlegend b { font-weight: 800; }
-
-  ul.plain { margin: 6px 0; padding-left: 4px; list-style: none; }
-  ul.plain li { position: relative; padding: 6px 0 6px 20px; font-size: 13.5px; border-top: 1px solid var(--line); }
+  ul.plain { margin: 6px 0; padding-left: 2px; list-style: none; }
+  ul.plain li { position: relative; padding: 6px 0 6px 20px; font-size: 13.5px; border-top: 1px solid var(--line); line-height: 1.55; }
   ul.plain li:first-child { border-top: none; }
   ul.plain li::before { content: "→"; position: absolute; left: 0; color: var(--indigo); font-weight: 800; }
   ul.plain b { font-weight: 800; }
 
-  .foot { text-align: center; color: var(--muted); font-size: 12px; margin-top: 44px; line-height: 1.7; }
-  .foot b { color: var(--ink-soft); }
-  a.back { display: inline-block; margin-top: 14px; color: var(--indigo); text-decoration: none; font-weight: 700; font-size: 13px; }
+  .prin { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+  .prin div { background: var(--card); border: 1px solid var(--line); border-radius: 13px; padding: 12px 14px; box-shadow: var(--shadow); font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); }
+  .prin div b { display: block; font-size: 13.5px; color: var(--ink); margin-bottom: 3px; }
 
-  @media (max-width: 520px) {
+  .timeline { margin: 8px 0 4px; padding-left: 6px; }
+  .tl { position: relative; padding: 0 0 15px 26px; border-left: 2px solid var(--line-strong); }
+  .tl:last-child { border-left-color: transparent; padding-bottom: 2px; }
+  .tl::before { content: ""; position: absolute; left: -7px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--card); border: 2.5px solid var(--indigo); }
+  .tl.hot::before { background: var(--indigo); box-shadow: 0 0 0 4px rgba(99,102,241,.18); }
+  .tl.done::before { border-color: #cfcadf; }
+  .tl .when { font-size: 12px; font-weight: 800; color: var(--indigo-deep); }
+  .tl.done .when { color: var(--muted); }
+  .tl .what { font-size: 13.8px; margin-top: 1px; }
+
+  .foot { text-align: center; color: var(--muted); font-size: 12px; margin-top: 44px; line-height: 1.7; }
+  a.back { display: inline-block; margin-top: 14px; color: var(--indigo); text-decoration: none; font-weight: 700; font-size: 13px; }
+  .empty { text-align: center; color: var(--muted); font-size: 13.5px; padding: 40px 10px; }
+
+  @media (max-width: 560px) {
     .fact-grid { grid-template-columns: 1fr; }
-    .dbar { gap: 7px; }
-    header.hero h1 br { display: none; }
+    .dbar { grid-template-columns: repeat(2, 1fr); }
     .sec-sub { margin-left: 0; }
+    .erow { grid-template-columns: 108px 1fr 26px; font-size: 11.5px; }
+    .pmeta { grid-template-columns: 1fr; gap: 0; }
+    .pmeta dt { padding-top: 8px; }
+    .count { display: none; }
   }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
-<div class="wrap">
 
+<div class="wrap top">
   <header class="hero">
-    <span class="kicker">🎓 대학원 입시 · 2026 하반기</span>
-    <h1>식품공학에서 <em>AI</em>로<br>한양대 인공지능융합대학원 석사 준비</h1>
-    <p class="sub">노베이스에서 시작해 <b>2027년 3월 입학</b>을 목표로 — 4개월(8~11월) 학습 로드맵과 실제 면접 사례 기반 대비.</p>
+    <span class="kicker">🎓 2027학년도 1학기 입학 목표</span>
+    <h1>식품공학에서 <em>AI</em>로<br>국내 AI 대학원 석사 준비</h1>
+    <p class="sub">특정 학교로 좁히지 않고 <b>국내 AI·데이터 계열 특수대학원(야간) 복수 지원</b> 전제. 강의는 <b>한국어만</b>, 주 8시간으로 지킬 수 있는 최단경로.</p>
     <div class="dbar">
-      <div class="dcell"><div class="n" id="d-interview">–</div><div class="l">면접까지 (추정)</div></div>
-      <div class="dcell"><div class="n" id="d-apply">–</div><div class="l">원서접수까지 (추정)</div></div>
+      <div class="dcell"><div class="n" id="d-now">–</div><div class="l">현재 단계</div></div>
+      <div class="dcell"><div class="n" id="d-apply">–</div><div class="l">원서접수까지</div></div>
+      <div class="dcell"><div class="n" id="d-interview">–</div><div class="l">면접까지</div></div>
       <div class="dcell"><div class="n" id="d-enter">–</div><div class="l">입학까지</div></div>
     </div>
   </header>
@@ -217,329 +214,329 @@
 
 <div class="statusbar">
   <div class="inner">
-    <span class="status-label">준비 <b id="pct">0%</b></span>
+    <span class="status-label">진행 <b id="pct">0%</b></span>
     <div class="track"><i id="fill"></i></div>
     <span class="count" id="count">0 / 0</span>
-    <button class="reset" onclick="resetAll()">초기화</button>
+    <a class="gobtn" href="study_calendar.html">📅 오늘 할 일</a>
+    <button class="reset" id="resetBtn">초기화</button>
   </div>
 </div>
 
 <div class="wrap">
   <nav class="toc">
     <a href="#s1">한눈에</a>
-    <a href="#s2">입시 일정</a>
-    <a href="#s3">4개월 로드맵</a>
+    <a href="#s2">왜 이 순서인가</a>
+    <a href="#s3">로드맵</a>
     <a href="#s4">강의·자료</a>
-    <a href="#s5">면접 질문은행</a>
-    <a href="#s6">면접 전략</a>
-    <a href="#s7">학업계획서</a>
-    <a href="#s8">리마인더</a>
+    <a href="#s5">학업계획서</a>
+    <a href="#s6">지원 전략</a>
+    <a href="#s7">합격 후</a>
+    <a href="#s8">함정</a>
   </nav>
 
-  <!-- 1. 한눈에 -->
-  <section class="sec" id="s1">
-    <div class="sec-head"><span class="no">1</span><h2>한눈에</h2></div>
-    <p class="sec-sub">특수대학원(야간)이라 <b>전공무관·직장 병행</b>이 가능하다. 겁먹을 필요 없는 구조부터 확인.</p>
-    <div class="sec-rule"></div>
-    <div class="fact-grid">
-      <div class="fact"><div class="k">목표</div><div class="v"><b>2027학년도 1학기</b> 입학 (2027.03)</div></div>
-      <div class="fact"><div class="k">지원 자격</div><div class="v"><b>전공 무관</b> · 학사 학위(예정 포함). 식품공학 학·석사 → 지원 가능 ✓</div></div>
-      <div class="fact"><div class="k">전형</div><div class="v"><b>서류 + 면접</b> (2단계)</div></div>
-      <div class="fact"><div class="k">제출 서류</div><div class="v">입학원서 · 졸업/성적증명 · <b>학업계획서</b> <span style="color:var(--muted)">(자소서·추천서 불요)</span></div></div>
-      <div class="fact"><div class="k">학과 · 과정</div><div class="v">인공지능시스템학과 (단일) · 석사 <b>4학기 / 30학점</b></div></div>
-      <div class="fact"><div class="k">수업</div><div class="v"><b>야간 18:30~21:30</b> · 온라인+오프라인 병행(≈8:2)</div></div>
-      <div class="fact"><div class="k">주임교수</div><div class="v">윤기중 <span style="color:var(--muted)">(기계학습·그래프 ML·기하 딥러닝)</span></div></div>
-      <div class="fact"><div class="k">등록금(2026 기준)</div><div class="v">입학금 103만 · 수업료 약 864만 · 연구비 84만 <span style="color:var(--pink)">※학기/연 표기 확인 필요</span></div></div>
-    </div>
-    <p class="callout warn">⚠️ <b>중요 —</b> 웹에 도는 "교수 3:1 면접, 자료구조·머신러닝 전공질문" 후기는 대부분 <b>일반대학원(주간·연구중심)</b> 것이고, 이 <b>특수대학원(야간)의 면접 세부 방식(개별/그룹·시간·발표)은 공식 미공개</b>다. 아래 질문은행은 "이 정도 개념을 설명할 수 있으면 안전"이라는 대비용이지 "반드시 이게 나온다"가 아니다. 특수대학원은 <b>서류·학업계획서 비중이 크고 면접 압박은 낮은 편</b>.</p>
-  </section>
+  <div id="loading" class="empty">데이터를 불러오는 중…</div>
+  <div id="loaderr" style="display:none">
+    <p class="callout warn">⚠️ <b>JSON을 불러오지 못했습니다.</b> 파일을 직접 열면(<code>file://</code>) 보안 정책 때문에 못 읽습니다. 같은 폴더에서 <code>python3 -m http.server</code> 실행 후 <code>http://localhost:8000/ai_grad_prep.html</code> 로 여세요. GitHub Pages에서는 정상 동작합니다.</p>
+  </div>
 
-  <!-- 2. 입시 일정 -->
-  <section class="sec" id="s2">
-    <div class="sec-head"><span class="no">2</span><h2>입시 일정</h2></div>
-    <p class="sec-sub">2027 전기(2026 하반기) 요강은 아직 미공개. 아래는 <b>직전 회차(2026 전기) 실제 일정 기반 추정</b>.</p>
-    <div class="sec-rule"></div>
-    <div class="card">
-      <div class="timeline">
-        <div class="tl"><div class="when">2026.08 – 11</div><div class="what"><b>학습 & 학업계획서 준비</b></div><div class="note">아래 4개월 로드맵이 이 구간</div></div>
-        <div class="tl hot"><div class="when">2026.11 초·중순 (추정)</div><div class="what"><b>원서 접수</b> (약 2주)</div><div class="note">직전 회차: 2025.11.03~11.20</div></div>
-        <div class="tl"><div class="when">2026.11 중순 (추정)</div><div class="what">서류 제출 마감 — 학업계획서 포함</div></div>
-        <div class="tl hot"><div class="when">2026.12 초 토요일 (추정)</div><div class="what"><b>면접</b></div><div class="note">직전 회차: 2025.12.06(토)</div></div>
-        <div class="tl"><div class="when">2026.12 중순 (추정)</div><div class="what">합격자 발표</div><div class="note">직전 회차: 2025.12.19(금) 16:00</div></div>
-        <div class="tl"><div class="when">2027.02 초</div><div class="what">예치금·등록금 납부</div></div>
-        <div class="tl"><div class="when">2027.03</div><div class="what"><b>🎉 입학</b></div></div>
+  <main id="app" style="display:none">
+
+    <!-- 1 -->
+    <section class="sec" id="s1">
+      <div class="sec-head"><span class="no">1</span><h2>한눈에</h2></div>
+      <p class="sec-sub">특수대학원(야간)은 <b>전공무관·직장 병행</b>이 전제인 구조다. 겁먹을 이유가 없다.</p>
+      <div class="sec-rule"></div>
+      <div class="fact-grid">
+        <div class="fact"><div class="k">목표</div><div class="v"><b>2027학년도 1학기</b> 입학 (2027.03)</div></div>
+        <div class="fact"><div class="k">지원 범위</div><div class="v"><b>국내 AI·데이터 계열 특수대학원 5~6곳</b> 복수 지원 <span style="color:var(--muted)">(학교는 10월에 확정)</span></div></div>
+        <div class="fact"><div class="k">지원 자격</div><div class="v"><b>전공 무관</b> · 학사 이상. 식품공학 학·석사 → 지원 가능 ✓</div></div>
+        <div class="fact"><div class="k">전형</div><div class="v"><b>서류 + 면접</b> 2단계가 일반적</div></div>
+        <div class="fact"><div class="k">핵심 서류</div><div class="v"><b>학업계획서</b> · 졸업/성적증명 · 경력증명 <span style="color:var(--muted)">(학교별 상이)</span></div></div>
+        <div class="fact"><div class="k">학습량</div><div class="v">주 <b>8시간 12분</b> <span style="color:var(--muted)">(평일 1h×3 + 40분 + 주말 4.5h)</span></div></div>
+        <div class="fact"><div class="k">현재 진행</div><div class="v"><b>「밑바닥부터 시작하는 딥러닝 1」</b> 읽는 중 <span style="color:var(--pink)">→ 8/30 완주 목표</span></div></div>
+        <div class="fact"><div class="k">강의 조건</div><div class="v"><b>한국어만</b> · 국내 플랫폼 우선 <span style="color:var(--muted)">(영어 강의 제외)</span></div></div>
       </div>
-      <p class="callout info" style="margin-bottom:4px">📌 정확한 일정·요강은 <b>2026년 하반기 공지</b>를 반드시 확인 — <a href="https://gsai.hanyang.ac.kr/front/admissionguide/application/recruitment" style="color:var(--indigo-deep)">모집요강</a> · <a href="https://gsai.hanyang.ac.kr/front/bach/schedule/entranceSchedule" style="color:var(--indigo-deep)">입시일정</a> (gsai.hanyang.ac.kr). 등록금 학기/연 여부는 행정팀(02-2220-0237)에 확인.</p>
-    </div>
-  </section>
+      <p class="callout info" id="principle"></p>
+    </section>
 
-  <!-- 3. 로드맵 -->
-  <section class="sec" id="s3">
-    <div class="sec-head"><span class="no">3</span><h2>4개월 학습 로드맵</h2></div>
-    <p class="sec-sub">목표는 "논문 수준"이 아니라 <b>"개념을 자기 말로 설명할 수 있는 수준"</b>. 넓고 얕게, 대신 핵심은 확실히. 각 단계 <b>메인 1개 + 보조 1개</b>만 정해 완주.</p>
-    <div class="sec-rule"></div>
+    <!-- 2 -->
+    <section class="sec" id="s2">
+      <div class="sec-head"><span class="no">2</span><h2>왜 이 순서인가</h2></div>
+      <p class="sec-sub">감으로 정하지 않았다. <a href="interview_prep.html" style="color:var(--indigo-deep)">질문은행</a>에서 <b>근거가 확인된 문항만</b> 골라 분야별로 세어 역산했다.</p>
+      <div class="sec-rule"></div>
+      <div class="card">
+        <div style="font-weight:800;font-size:13px;color:var(--indigo-deep);margin-bottom:9px" id="evid-head"></div>
+        <div class="evid" id="evid"></div>
+        <p class="callout" style="margin-bottom:2px" id="evid-note"></p>
+      </div>
+    </section>
 
-    <div class="month m8">
-      <div class="mh"><span class="mm">8</span><div><div class="mt">수학 직관 + 파이썬</div><div class="mg">주 15~20시간 · 벡터·행렬·확률을 "무섭지 않게", 코드 읽고 짜기</div></div></div>
-      <div class="mb">
-        <ul class="checklist" data-group="m8">
-          <li><input type="checkbox" id="r1"><label><span class="lead"><b>파이썬 기초 + Numpy/Pandas</b> — 하루 30분~1시간 손코딩</span><span class="src">이수안컴퓨터연구소 · 부스트코스 "머신러닝을 위한 파이썬"</span></label></li>
-          <li><input type="checkbox" id="r2"><label><span class="lead"><b>선형대수 직관</b> — 3Blue1Brown "선형대수의 본질"(15편) → 혁펜하임으로 한국어 보강</span><span class="src">벡터·선형변환·행렬·고유값의 기하적 직관</span></label></li>
-          <li><input type="checkbox" id="r3"><label><span class="lead"><b>확률·통계 기초</b> — 칸아카데미 확률과 통계 + StatQuest</span></label></li>
-          <li><input type="checkbox" id="r4"><label><span class="lead">함정 주의 — <b>증명·엄밀한 유도에 매달리지 말 것.</b> 면접은 직관·개념을 묻는다</span></label></li>
+    <!-- 3 -->
+    <section class="sec" id="s3">
+      <div class="sec-head"><span class="no">3</span><h2>로드맵</h2></div>
+      <p class="sec-sub">지금 주(週)가 <b>하이라이트</b>된다. 체크는 자동 저장. 날짜별로 보려면 <a href="study_calendar.html" style="color:var(--indigo-deep)">📅 달력</a>.</p>
+      <div class="sec-rule"></div>
+      <div id="phases"></div>
+    </section>
+
+    <!-- 4 -->
+    <section class="sec" id="s4">
+      <div class="sec-head"><span class="no">4</span><h2>강의 · 자료</h2></div>
+      <p class="sec-sub">전부 <b>한국어</b>. 전부 볼 필요 없다 — 단계별 <b>메인 1 + 보조 1</b>만.</p>
+      <div class="sec-rule"></div>
+      <div class="card tbl-scroll"><table class="rtbl">
+        <thead><tr><th>자료</th><th>플랫폼</th><th>비용</th><th>메모</th></tr></thead>
+        <tbody id="res"></tbody>
+      </table></div>
+      <p class="callout info">🎫 <b>수료증이 의외로 쓸모 있다</b> — 확인된 면접 질문 중 "비전공자인데 수업을 따라갈 수 있겠습니까?"가 3개 학교에서 나왔다. 부스트코스·K-MOOC 수료증이 그 답변의 물증이 된다.</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="sec" id="s5">
+      <div class="sec-head"><span class="no">5</span><h2>학업계획서 · 식품공학 × AI</h2></div>
+      <p class="sec-sub">비전공은 약점이 아니라 <b>"도메인을 가진 융합형 지원자"</b>라는 차별화 포인트다.</p>
+      <div class="sec-rule"></div>
+      <div class="card">
+        <div style="font-weight:800;font-size:13px;color:var(--indigo-deep);margin-bottom:6px">연결 스토리 4단 구조</div>
+        <ul class="plain">
+          <li><b>① 경험</b> — 식품 실험·품질 데이터를 다루며 데이터 기반 의사결정의 한계를 느꼈다.</li>
+          <li><b>② 문제의식</b> — 관능·이화학 데이터는 비선형·고차원인데 전통 통계로는 부족하다.</li>
+          <li><b>③ 연결</b> — 그래서 품질·유통기한 예측, 외관 불량 검출(컴퓨터비전), 분광·전자코 센서 분석에 AI가 필요하다.</li>
+          <li><b>④ 구체 목표</b> — 지원 학과의 <b>실제 개설 과목명</b>과 교수 연구 분야를 짚어 1~2문장.</li>
+        </ul>
+        <div style="font-weight:800;font-size:13px;color:var(--indigo-deep);margin:14px 0 4px">근거로 쓸 실제 연구 흐름</div>
+        <ul class="plain">
+          <li>식품 <b>신선도·품질 예측</b> — 딥러닝 다중센서 융합, 유통기한(shelf-life) 예측</li>
+          <li>품질관리 — AI 머신비전으로 불량 선별·오염 위험 사전 식별</li>
+          <li>식품 <b>진위·원산지 판별</b> — ML/DL 기반 안전성·무결성 평가</li>
+        </ul>
+        <p class="callout info" style="margin-bottom:2px">✍️ 9월에 만든 <b>미니 프로젝트</b>를 여기 근거로 넣으면 ②③이 한 번에 설득된다. "이런 문제의식으로 실제로 이만큼 해봤다"가 되기 때문.</p>
+      </div>
+      <p class="callout warn">🚫 <b>절대 금지</b> — 내가 답 못 할 논문·방법론을 적어 넣기. 학업계획서의 모든 문장은 면접 꼬리질문이 된다.</p>
+    </section>
+
+    <!-- 6 -->
+    <section class="sec" id="s6">
+      <div class="sec-head"><span class="no">6</span><h2>지원 전략 (학교 무관 공통)</h2></div>
+      <p class="sec-sub">특수대학원 후기에서 반복적으로 확인된 것만. 학교별 세부는 <a href="interview_prep.html" style="color:var(--indigo-deep)">면접 페이지</a>에.</p>
+      <div class="sec-rule"></div>
+      <div class="card">
+        <ul class="plain">
+          <li><b>서류가 무게중심</b> — "면접은 이미 합격자를 정해두고 확인하는 느낌"이라는 후기가 여러 학교에서 반복된다.</li>
+          <li><b>파이썬은 협상 불가</b> — "파이썬을 처음부터 가르치지 않는다, 파이썬으로 가르친다"는 말이 여러 학교에서 회자된다.</li>
+          <li><b>병행 가능성을 숫자로</b> — "가능합니다"가 아니라 근무 형태·통학 시간·주말 학습 블록으로.</li>
+          <li><b>자신 있는 과목 1개</b>(머신러닝 권장)를 정해 깊게. 그 과목으로 파고드는 구조가 흔하다.</li>
+          <li><b>석사 경험이 큰 무기</b> — 실험 설계·논문 읽기·데이터 처리를 이미 해봤다는 뜻이다.</li>
+          <li><b>모르면 추론</b> — "정확히는 모르지만 ○○로 미루어 보면"이 침묵보다 언제나 낫다.</li>
+          <li><b>학교마다 일정이 다르다</b> — 접수 기간·제출 서류가 제각각. 10월에 표로 정리해 두지 않으면 지원 자체를 놓친다.</li>
         </ul>
       </div>
-    </div>
+    </section>
 
-    <div class="month m9">
-      <div class="mh"><span class="mm">9</span><div><div class="mt">머신러닝</div><div class="mg">주 15~20시간 · 회귀·분류·과적합·정규화를 설명 가능하게</div></div></div>
-      <div class="mb">
-        <ul class="checklist" data-group="m9">
-          <li><input type="checkbox" id="r5"><label><span class="lead"><b>메인</b> — Andrew Ng ML Specialization (청강 무료) 또는 김성훈 "모두를 위한 ML/DL" 시즌1</span></label></li>
-          <li><input type="checkbox" id="r6"><label><span class="lead"><b>실습 보조</b> — 박해선 "혼자 공부하는 머신러닝+딥러닝"으로 scikit-learn</span></label></li>
-          <li><input type="checkbox" id="r7"><label><span class="lead">순서 — 회귀 → 분류 → <b>과적합/정규화</b> → 트리·앙상블 → 클러스터링·PCA</span></label></li>
-          <li><input type="checkbox" id="r8"><label><span class="lead"><b>손으로 구현</b> — Numpy로 선형회귀 + 경사하강법 직접 짜보기 (면접 질문 절반 해결)</span></label></li>
-        </ul>
-      </div>
-    </div>
+    <!-- 7 -->
+    <section class="sec" id="s7">
+      <div class="sec-head"><span class="no">7</span><h2>합격 후 — 진짜 기초</h2></div>
+      <p class="sec-sub">확인된 면접 질문이 <b>0개</b>인 영역. 지금 하면 시간만 녹고, 입학하면 첫 학기부터 필요하다.</p>
+      <div class="sec-rule"></div>
+      <div class="card"><div class="timeline" id="post"></div></div>
+    </section>
 
-    <div class="month m10">
-      <div class="mh"><span class="mm">10</span><div><div class="mt">딥러닝</div><div class="mg">주 15~20시간 · 신경망·역전파·CNN/RNN·Transformer 개념</div></div></div>
-      <div class="mb">
-        <ul class="checklist" data-group="m10">
-          <li><input type="checkbox" id="r9"><label><span class="lead"><b>메인</b> — 김성훈 "모두를 위한 딥러닝 시즌2"(PyTorch) 또는 혁펜하임 "Easy! 딥러닝"</span></label></li>
-          <li><input type="checkbox" id="r10"><label><span class="lead"><b>역전파 이해</b> — 밑바닥부터 시작하는 딥러닝 1 (손으로 backprop 따라가기)</span></label></li>
-          <li><input type="checkbox" id="r11"><label><span class="lead">신경망 → <b>역전파</b> → 활성화함수 → CNN → RNN/LSTM → Attention·Transformer 개념</span></label></li>
-        </ul>
-      </div>
-    </div>
+    <!-- 8 -->
+    <section class="sec" id="s8">
+      <div class="sec-head"><span class="no">8</span><h2>흔한 함정</h2></div>
+      <div class="sec-rule"></div>
+      <div class="card"><ul class="plain" id="pitfalls"></ul></div>
+      <div class="prin" id="prin" style="margin-top:14px"></div>
+      <p class="callout" style="margin-top:16px">🌱 목표는 완벽이 아니라 <b>"개념을 내 말로 설명하는 상태"</b>. 식품 석사 경험은 이미 큰 자산이고, 「밑바닥 1」을 읽고 있다는 건 이미 절반쯤 와 있다는 뜻이다.</p>
+      <div style="text-align:center"><a class="back" href="index.html">← 개인 페이지로</a></div>
+    </section>
 
-    <div class="month m11">
-      <div class="mh"><span class="mm">11</span><div><div class="mt">면접 집중 + 학업계획서</div><div class="mg">주 20시간+ · 구술 연습, 식품×AI 스토리 완성</div></div></div>
-      <div class="mb">
-        <ul class="checklist" data-group="m11">
-          <li><input type="checkbox" id="r12"><label><span class="lead"><b>질문은행(아래 5번)을 말로 설명 + 녹음</b>해 다시 듣기 — 아는 것과 설명하는 것은 다르다</span></label></li>
-          <li><input type="checkbox" id="r13"><label><span class="lead"><b>학업계획서 작성</b> — 식품 배경 × AI 연결(아래 7번). 지원 교수 논문 1~2편 훑기</span></label></li>
-          <li><input type="checkbox" id="r14"><label><span class="lead">빈틈 메우기 — KOCW 오일석 "기계학습" · Google ML 단기집중과정</span></label></li>
-          <li><input type="checkbox" id="r15"><label><span class="lead">모의 면접 — 남편과 예상 질문 문답 리허설 1회 이상</span></label></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. 자료 -->
-  <section class="sec" id="s4">
-    <div class="sec-head"><span class="no">4</span><h2>추천 강의 · 자료</h2></div>
-    <p class="sec-sub">전부 볼 필요 없다. 단계별 <b>메인 1 + 보조 1</b>만. 대부분 무료.</p>
-    <div class="sec-rule"></div>
-    <div class="card tbl-scroll">
-      <table class="rtbl">
-        <thead><tr><th>단계</th><th>자료</th><th>비용</th><th>링크</th></tr></thead>
-        <tbody>
-          <tr><td>파이썬</td><td>이수안컴퓨터연구소 (유튜브)</td><td><span class="pill free">무료</span></td><td><a href="https://www.youtube.com/channel/UCFfALXX0DOx7zv6VeR5U_Bg">채널</a></td></tr>
-          <tr><td>파이썬</td><td>부스트코스 "머신러닝을 위한 파이썬"</td><td><span class="pill free">무료</span></td><td><a href="https://www.boostcourse.org/ai222">boostcourse</a></td></tr>
-          <tr><td>선형대수</td><td>3Blue1Brown "선형대수의 본질"(한글자막)</td><td><span class="pill free">무료</span></td><td><a href="https://www.youtube.com/playlist?list=PLkoaXOTFHiqhVDo0nWybNmihCP_4BjOFR">플레이리스트</a></td></tr>
-          <tr><td>선형대수</td><td>혁펜하임 "보이는 선형대수학"</td><td><span class="pill free">대부분 무료</span></td><td><a href="https://www.youtube.com/playlist?list=PL_iJu012NOxdZDxoGsYidMf2_bERIQaP0">플레이리스트</a></td></tr>
-          <tr><td>확률통계</td><td>칸아카데미 확률과 통계 (한국어)</td><td><span class="pill free">무료</span></td><td><a href="https://ko.khanacademy.org/math/statistics-probability">링크</a></td></tr>
-          <tr><td>머신러닝</td><td>Andrew Ng — ML Specialization</td><td><span class="pill free">청강 무료</span></td><td><a href="https://www.coursera.org/specializations/machine-learning-introduction">Coursera</a></td></tr>
-          <tr><td>머신러닝</td><td>김성훈 "모두를 위한 ML/DL" 시즌1</td><td><span class="pill free">무료</span></td><td><a href="https://hunkim.github.io/ml/">홈</a></td></tr>
-          <tr><td>머신러닝</td><td>박해선 "혼공 머신러닝+딥러닝"</td><td><span class="pill free">무료</span></td><td><a href="https://www.youtube.com/playlist?list=PLJN246lAkhQjoU0C4v8FgtbjOIXxSs_4Q">플레이리스트</a></td></tr>
-          <tr><td>딥러닝</td><td>김성훈 "모두를 위한 딥러닝 시즌2"(PyTorch)</td><td><span class="pill free">무료</span></td><td><a href="https://deeplearningzerotoall.github.io/season2/">시즌2</a></td></tr>
-          <tr><td>딥러닝</td><td>밑바닥부터 시작하는 딥러닝 1 (도서)</td><td><span class="pill paid">유료</span></td><td>역전파 이해 최적</td></tr>
-          <tr><td>이론보강</td><td>오일석 "기계학습" (KOCW)</td><td><span class="pill free">무료</span></td><td><a href="http://www.kocw.net/home/cview.do?mty=p&kemId=1345144">KOCW</a></td></tr>
-          <tr><td>이론보강</td><td>Google 머신러닝 단기집중과정</td><td><span class="pill free">무료</span></td><td><a href="https://developers.google.com/machine-learning/crash-course/?hl=ko">링크</a></td></tr>
-          <tr><td>면접</td><td>AI 대학원 면접 질문 정리 (velog @jhlim2993)</td><td><span class="pill free">무료</span></td><td><a href="https://velog.io/@jhlim2993/series/AI-대학원-면접-준비">시리즈</a></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- 5. 질문은행 -->
-  <section class="sec" id="s5">
-    <div class="sec-head"><span class="no">5</span><h2>면접 예상 질문 은행</h2></div>
-    <p class="sec-sub">국내 AI 대학원(한양대 포함 유사 대학원) <b>실제 면접 후기 기반</b>. 각 질문을 <b>자기 말로 30초~1분</b> 설명할 수 있으면 체크.</p>
-    <div class="sec-rule"></div>
-    <p class="qlegend"><span><span class="qtag real">🎤 실제후기</span> 실제 면접에서 나온 것</span><span><span class="qtag freq">⭐ 빈출</span> 합격자 정리 단골 개념</span></p>
-    <div id="qbank"></div>
-    <p class="callout">💡 <b>단골 3종</b> — 편향-분산 트레이드오프 · 과적합과 해결법 · 경사하강법(GD vs SGD). 여기에 <b>역전파 · PCA · 고유값</b>까지는 반드시 말로 설명 가능하게. 한양대는 자기소개 직후 <b>자료구조(이진탐색 복잡도·그래프)</b>를 묻는 패턴도 있었다.</p>
-  </section>
-
-  <!-- 6. 면접 전략 -->
-  <section class="sec" id="s6">
-    <div class="sec-head"><span class="no">6</span><h2>면접 형식 · 비전공자 전략</h2></div>
-    <div class="sec-rule"></div>
-    <div class="card">
-      <ul class="plain">
-        <li><b>분위기</b> — 화기애애·압박 낮음이 다수 후기. <b>영어 면접 언급 없음</b>(용어만 영어). 서류·(가능하면 교수 컨택) 비중이 크고 면접은 확인용 성격.</li>
-        <li><b>Python은 반드시</b> — 비전공자 후기 공통 조언: "Python을 처음부터 안 가르치고 Python으로 수업한다". 문법·자료구조·Numpy는 숙지하고 가야 꼬리질문에서 안 무너진다.</li>
-        <li><b>자신 있는 과목 1개</b>(머신러닝 권장)를 정해 깊게 답할 수 있게 — 그 과목 위주로 파고드는 구조.</li>
-        <li><b>모르면 얼지 말고 추론</b> — 아는 것에서 출발해 논리적으로 풀어가는 태도가 침묵보다 낫다. 면접관은 사고 과정을 본다.</li>
-        <li><b>석사 경험이 강점</b> — "연구를 해봤다 = 실험 설계·논문 읽기·데이터 훈련이 됐다". 학부 신입 대비 큰 무기.</li>
-      </ul>
-    </div>
-    <p class="callout warn">🚫 <b>흔한 함정</b> — ①수학 완벽주의로 시간 소진 ②강의만 보고 손 안 움직임 ③강의 쇼핑(tutorial hell) ④딥러닝만 파고 기초(선대·확률·과적합) 건너뜀 ⑤개념을 글로만 외우고 말로 못 함 ⑥지원동기가 "AI가 대세라서"처럼 추상적.</p>
-  </section>
-
-  <!-- 7. 학업계획서 -->
-  <section class="sec" id="s7">
-    <div class="sec-head"><span class="no">7</span><h2>학업계획서 · 식품공학 × AI</h2></div>
-    <p class="sec-sub">비전공은 약점이 아니라 <b>"도메인을 가진 융합형 지원자"</b>라는 차별화 포인트. AI+식품은 실제로 활발한 연구 분야.</p>
-    <div class="sec-rule"></div>
-    <div class="card">
-      <div style="font-weight:800;font-size:13px;color:var(--indigo-deep);margin-bottom:8px">연결 스토리 4단 구조</div>
-      <ul class="plain">
-        <li><b>① 경험</b> — 식품 실험·품질 데이터를 다루며 데이터 기반 의사결정의 한계를 느꼈다.</li>
-        <li><b>② 문제의식</b> — 관능·이화학 데이터는 비선형·고차원인데 전통 통계로는 부족 → ML/DL 필요.</li>
-        <li><b>③ 연결</b> — 그래서 품질·유통기한 예측, 외관 불량 검출(컴퓨터비전), 분광·전자코 센서 분석에 AI를 배우고자 한다.</li>
-        <li><b>④ 구체 목표</b> — 지원 연구실 방법론(시계열·멀티모달·이상탐지 등)이 식품 도메인에 어떻게 적용될지 1~2문장.</li>
-      </ul>
-      <div style="font-weight:800;font-size:13px;color:var(--indigo-deep);margin:14px 0 6px">근거로 인용할 실제 연구 흐름</div>
-      <ul class="plain">
-        <li>식품 <b>신선도·품질 예측</b> — 딥러닝 다중센서 융합, 유통기한(shelf-life) 예측</li>
-        <li>품질관리 — AI 머신비전으로 불량 선별·오염 위험 사전 식별</li>
-        <li>식품 <b>진위·원산지 판별</b> — ML/DL 기반 안전성·무결성 평가</li>
-      </ul>
-      <p class="callout info" style="margin-bottom:2px">✍️ 막연히 "AI가 유망해서"가 아니라 <b>"내 분야의 이 문제를 이 방법으로 풀고 싶다"</b>로 구체화. 주임교수 <b>윤기중</b>(기계학습·그래프 ML) 등 지원 교수 최근 논문 1편이라도 읽고 접점을 한 문장 넣으면 성의가 드러난다.</p>
-    </div>
-  </section>
-
-  <!-- 8. 리마인더 -->
-  <section class="sec" id="s8">
-    <div class="sec-head"><span class="no">8</span><h2>리마인더</h2></div>
-    <div class="sec-rule"></div>
-    <ul class="checklist" data-group="reminder" style="background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:6px 16px;box-shadow:var(--shadow)">
-      <li><input type="checkbox" id="k1"><label><span class="lead">2026년 하반기 <b>정확한 요강·일정</b> 공지 확인 (gsai.hanyang.ac.kr)</span></label></li>
-      <li><input type="checkbox" id="k2"><label><span class="lead">등록금 <b>학기/연 여부</b> 행정팀(02-2220-0237) 확인</span></label></li>
-      <li><input type="checkbox" id="k3"><label><span class="lead">학업계획서 초안 → 남편 검토 → 퇴고 (10월 말까지)</span></label></li>
-      <li><input type="checkbox" id="k4"><label><span class="lead">넓고 얕게, 대신 <b>편향-분산·과적합·경사하강법·역전파·PCA·고유값</b>은 말로 설명 가능하게</span></label></li>
-      <li><input type="checkbox" id="k5"><label><span class="lead">강의는 단계별 <b>메인 1 + 보조 1</b>만 완주 · 손으로 코드 짜기</span></label></li>
-    </ul>
-    <p class="callout" style="margin-top:14px">🌱 노베이스에서 시작하지만, 목표는 완벽이 아니라 <b>"개념을 내 말로 설명하는 상태"</b>. 4개월이면 충분히 도달할 수 있다. 식품 석사 경험은 이미 큰 자산이다.</p>
-    <div style="text-align:center"><a class="back" href="index.html">← 개인 페이지로</a></div>
-  </section>
-
-  <p class="foot">
-    🔒 개인용 · 검색 비노출<br>
-    일정·등록금은 <b>2026 하반기 공식 공지로 반드시 재확인</b> · 면접 질문은 유사 대학원 후기 기반 대비용
-  </p>
+    <p class="foot">
+      🔒 개인용 · 검색 비노출<br>
+      데이터 원본: <code>study_plan.json</code> · <code>interview_bank.json</code><br>
+      일정은 <b>직전 회차 기반 추정</b> — 학교별 공식 요강으로 반드시 재확인
+    </p>
+  </main>
 </div>
 
 <script>
-/* ---------- question bank data ---------- */
-var QBANK = [
-  { cat:'선형대수', color:'#6366f1', items:[
-    ['고유값·고유벡터(eigenvalue/eigenvector)란? 왜 중요한가? → PCA와의 연결','real'],
-    ['SVD(특이값분해)란 무엇인가? PCA·LDA에서 어떻게 쓰이나','real'],
-    ['Rank란? 선형독립/종속이란?','freq'],
-    ['Basis와 Dimension, Null space란?','freq'],
-    ['행렬 곱의 의미 / 선형변환으로서의 행렬','freq'],
-    ['내적(dot product)의 기하적 의미, 벡터의 norm','freq'],
-    ['Determinant가 의미하는 것 / Positive-definite란?','freq'],
-    ['왜 딥러닝에서 행렬 연산이 핵심인가?','freq'],
-  ]},
-  { cat:'확률 · 통계 · 미적분', color:'#0ea5e9', items:[
-    ['체인룰(chain rule)이란? → 역전파와의 연결','real'],
-    ['편향-분산 트레이드오프(bias-variance trade-off)','freq'],
-    ['최대우도추정(MLE)이란? MAP와의 차이','freq'],
-    ['중심극한정리(CLT) / 큰 수의 법칙이란?','freq'],
-    ['Frequentist와 Bayesian의 차이','freq'],
-    ['조건부확률·베이즈 정리, 기대값·분산','freq'],
-    ['표본분산에서 N 대신 N-1로 나누는 이유','freq'],
-    ['covariance vs correlation / p-value 직관','freq'],
-  ]},
-  { cat:'머신러닝', color:'#14b8a6', items:[
-    ['선형회귀와 로지스틱 회귀의 개념·차이','real'],
-    ['과적합/과소적합이란? 방지법(정규화·교차검증·early stopping)','freq'],
-    ['정규화 L1 vs L2의 차이','freq'],
-    ['경사하강법(GD)과 SGD·미니배치의 차이','freq'],
-    ['train/validation/test를 나누는 이유, 교차검증','freq'],
-    ['평가지표: precision/recall, F1, ROC-AUC, confusion matrix','freq'],
-    ['앙상블 — 배깅 vs 부스팅의 차이','freq'],
-    ['SVM이란? 마진을 최대화하면 뭐가 좋은가','freq'],
-    ['차원의 저주(curse of dimensionality)란?','freq'],
-    ['Generative vs Discriminative 모델','freq'],
-    ['Entropy / Cross-Entropy / KL-Divergence','freq'],
-  ]},
-  { cat:'딥러닝', color:'#f59e0b', items:[
-    ['CNN과 pooling layer 설명 (Max pooling을 쓰는 이유)','real'],
-    ['Sigmoid보다 ReLU를 많이 쓰는 이유 / 비선형성의 필요','freq'],
-    ['역전파(backpropagation)를 연쇄법칙으로 설명','freq'],
-    ['기울기 소실(vanishing gradient)과 완화법','freq'],
-    ['옵티마이저 — SGD, Momentum, Adam의 차이','freq'],
-    ['배치 정규화(Batch Normalization)는 왜 하는가','freq'],
-    ['CNN이 MLP보다 좋은 이유 / 파라미터 수 계산','freq'],
-    ['활성화함수 종류와 각각의 특징','freq'],
-    ['Attention / Transformer 개념 설명','freq'],
-    ['드롭아웃(dropout)이란?','freq'],
-  ]},
-  { cat:'자료구조 · CS 기초', color:'#ec4899', items:[
-    ['이진탐색(binary search) 설명과 시간복잡도 O(log n)','real'],
-    ['그래프·스패닝 트리(spanning tree) 기본 개념','real'],
-    ['시간복잡도(Big-O) 표기의 의미','freq'],
-    ['Python 기본 자료구조(list·dict·set) 사용 경험','freq'],
-  ]},
-  { cat:'인성 · 지원동기 · 연구계획', color:'#8b5cf6', items:[
-    ['자기소개 (연구·실무 경험 포함, 1분)','real'],
-    ['지원 동기 / 졸업 후 진로·계획','real'],
-    ['학업계획서에 쓴 연구 주제 심화 질문 대비','real'],
-    ['"직장 병행하며 수업 따라갈 수 있나"','real'],
-    ['"비전공자인데 수업을 따라갈 수 있나"','real'],
-  ]},
-];
-
 (function(){
-  var host = document.getElementById('qbank');
-  var idx = 0;
-  QBANK.forEach(function(c){
-    var wrap = document.createElement('div'); wrap.className = 'qcat';
-    var h = document.createElement('div'); h.className = 'qh';
-    h.innerHTML = '<span class="cdot" style="background:'+c.color+'"></span><span class="ct">'+c.cat+'</span><span class="cn">'+c.items.length+'문항</span>';
-    wrap.appendChild(h);
-    var ul = document.createElement('ul'); ul.className = 'qlist';
-    c.items.forEach(function(it){
-      idx++;
-      var id = 'q'+idx;
-      var tag = it[1]==='real' ? '<span class="qtag real">🎤 실제</span>' : '<span class="qtag freq">⭐ 빈출</span>';
-      var li = document.createElement('li');
-      li.innerHTML = '<input type="checkbox" id="'+id+'"><label for="'+id+'"><span class="qq">'+it[0]+'</span>'+tag+'</label>';
-      ul.appendChild(li);
-    });
-    wrap.appendChild(ul);
-    host.appendChild(wrap);
-  });
-})();
+  "use strict";
+  var STORE = 'aiGradPlan.v2';
+  var P = null, B = null, done = {};
 
-/* ---------- countdowns ---------- */
-(function(){
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function fmt(s){ return esc(s).replace(/`([^`]+)`/g,'<code>$1</code>'); }
+  function el(id){ return document.getElementById(id); }
+  function save(){ try{ localStorage.setItem(STORE, JSON.stringify(done)); }catch(e){} }
+  var today = new Date(); today.setHours(0,0,0,0);
   function d(s){ return new Date(s+'T00:00:00'); }
-  var now = new Date(); now.setHours(0,0,0,0);
-  function dd(target){ return Math.ceil((d(target)-now)/86400000); }
-  function fmt(n){ return n>0 ? 'D-'+n : (n===0 ? 'D-DAY' : '완료'); }
-  document.getElementById('d-interview').textContent = fmt(dd('2026-12-05'));
-  document.getElementById('d-apply').textContent = fmt(dd('2026-11-02'));
-  document.getElementById('d-enter').textContent = fmt(dd('2027-03-02'));
-})();
+  function days(a,b){ return Math.round((b-a)/86400000); }
+  var WD = ['일','월','화','수','목','금','토'];
+  function md(s){ var x=d(s); return (x.getMonth()+1)+'/'+x.getDate(); }
 
-/* ---------- checkbox persistence + progress ---------- */
-(function(){
-  var KEY = 'ai_grad_prep_v1', DAYS = 730;
-  function setCookie(v){ var e=new Date(); e.setTime(e.getTime()+DAYS*864e5); document.cookie=KEY+'='+encodeURIComponent(v)+';expires='+e.toUTCString()+';path=/;SameSite=Lax'; }
-  function getCookie(){ var m=document.cookie.match(new RegExp('(?:^|; )'+KEY+'=([^;]*)')); return m?decodeURIComponent(m[1]):''; }
-  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
-  function save(){ setCookie(boxes.filter(function(b){return b.checked;}).map(function(b){return b.id;}).join(',')); }
-  function prog(){
-    var total=boxes.length, done=boxes.filter(function(b){return b.checked;}).length;
-    var pct= total?Math.round(done/total*100):0;
-    document.getElementById('fill').style.width=pct+'%';
-    document.getElementById('pct').textContent=pct+'%';
-    document.getElementById('count').textContent=done+' / '+total;
+  Promise.all([
+    fetch('study_plan.json',{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); }),
+    fetch('interview_bank.json',{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
+  ]).then(function(a){ P=a[0]; B=a[1]; init(); })
+    .catch(function(){ el('loading').style.display='none'; el('loaderr').style.display='block'; });
+
+  function init(){
+    try { done = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e){ done = {}; }
+    el('loading').style.display='none';
+    el('app').style.display='block';
+    renderHero(); renderEvidence(); renderPhases(); renderRes(); renderPost(); renderMisc();
+    updateProgress();
+    el('resetBtn').addEventListener('click', function(){
+      if(!confirm('체크한 진행 기록을 모두 지울까요?')) return;
+      done={}; save(); renderPhases(); updateProgress();
+    });
   }
-  function style(b){ var li=b.closest('li'); if(li) li.classList.toggle('checked', b.checked); }
-  var saved = getCookie().split(',');
-  boxes.forEach(function(b){ b.checked = saved.indexOf(b.id)!==-1; style(b);
-    b.addEventListener('change', function(){ style(b); save(); prog(); }); });
-  prog();
-  window.resetAll = function(){ if(!confirm('모든 체크를 초기화할까요?')) return; boxes.forEach(function(b){ b.checked=false; style(b); }); save(); prog(); };
+
+  function anchor(label){ var a = P.anchors.filter(function(x){ return x.label.indexOf(label)===0; })[0]; return a?d(a.date):null; }
+
+  function renderHero(){
+    var cur = currentPhase();
+    el('d-now').textContent = cur ? cur.no + '단계' : '준비';
+    el('d-now').parentNode.querySelector('.l').textContent = cur ? cur.title.slice(0,10) : '현재 단계';
+    [['d-apply','2026-11-02'],['d-interview','2026-12-05'],['d-enter','2027-03-02']].forEach(function(p){
+      var dd = days(today, d(p[1]));
+      el(p[0]).textContent = dd>0 ? 'D–'+dd : (dd===0 ? 'D-DAY' : '지남');
+    });
+    el('principle').innerHTML = '🧭 <b>핵심 원칙 —</b> ' + fmt(P.meta.core_principle);
+  }
+
+  function currentPhase(){
+    for (var i=0;i<P.phases.length;i++){
+      var p=P.phases[i];
+      if (today >= d(p.from) && today <= d(p.to)) return p;
+    }
+    return null;
+  }
+
+  /* ---- 근거 분포 ---- */
+  function renderEvidence(){
+    var ev = B.questions.filter(function(q){ return q.tag==='real'||q.tag==='doc'; });
+    var cn = {}; B.categories.forEach(function(c){ cn[c.id]=c; });
+    var cnt = {}; ev.forEach(function(q){ cnt[q.cat]=(cnt[q.cat]||0)+1; });
+    var rows = Object.keys(cnt).map(function(k){ return {k:k,n:cnt[k]}; }).sort(function(a,b){ return b.n-a.n; });
+    var max = rows[0].n;
+    var soft = ev.filter(function(q){ return ['motive','exp','plan','closing'].indexOf(q.cat)>=0; }).length;
+    var math = ev.filter(function(q){ return ['linalg','stat'].indexOf(q.cat)>=0; }).length;
+
+    el('evid-head').textContent = '근거가 확인된 ' + ev.length + '문항의 분야 분포 (전체 ' + B.questions.length + '문항 중)';
+    el('evid').innerHTML = rows.map(function(r){
+      var c = cn[r.k] || {name:r.k, emoji:''};
+      var dim = ['linalg','stat'].indexOf(r.k)>=0 ? ' dim' : '';
+      return '<div class="erow'+dim+'"><span>'+c.emoji+' '+esc(c.name)+'</span>' +
+             '<span class="eb"><i data-w="'+Math.round(r.n/max*100)+'"></i></span>' +
+             '<span class="en">'+r.n+'</span></div>';
+    }).join('');
+    requestAnimationFrame(function(){
+      document.querySelectorAll('.eb > i').forEach(function(i){ i.style.width = i.dataset.w+'%'; });
+    });
+
+    el('evid-note').innerHTML = '📌 <b>' + Math.round(soft/ev.length*100) + '%(' + soft + '/' + ev.length +
+      ')가 인성·경험·학업계획·마무리</b>다. 전공 개념은 3문항, <b>수학(선형대수·확률)은 ' + math + '문항</b>. ' +
+      '그래서 로드맵이 <b>학업계획서 → 파이썬·머신러닝 → 구술</b> 순이고 수학은 합격 후로 갔다. ' +
+      '<span style="color:var(--muted)">다만 표본은 후기 8건으로 작다. 통계가 아니라 정황 증거로 볼 것.</span>';
+  }
+
+  /* ---- 로드맵 ---- */
+  function renderPhases(){
+    el('phases').innerHTML = P.phases.map(function(p){
+      var weeks = P.weeks.filter(function(w){ return w.phase===p.id; });
+      var isNow = today >= d(p.from) && today <= d(p.to);
+      var dd = days(today, d(p.from));
+      var badge = isNow ? '진행 중' : (dd>0 ? 'D–'+dd+' 시작' : '완료 구간');
+
+      var h = '<div class="phase" style="--c:'+p.color+'">';
+      h += '<div class="ph" style="background:linear-gradient(120deg,'+p.color+','+p.color+'cc)">' +
+             '<span class="pn">'+p.no+'</span><span><span class="pt">'+esc(p.title)+'</span>' +
+             '<div class="ps">'+esc(p.sub)+' · '+md(p.from)+'~'+md(p.to)+'</div></span>' +
+             '<span class="pd">'+badge+'</span></div>';
+      h += '<div class="pbody">';
+      h += '<dl class="pmeta"><dt>목표</dt><dd>'+fmt(p.goal)+'</dd>' +
+           '<dt>이유</dt><dd>'+fmt(p.why)+'</dd>' +
+           '<dt>주의</dt><dd style="color:var(--pink)">'+fmt(p.caution)+'</dd></dl>';
+      h += '<div class="pout"><b>이 단계의 산출물</b>'+fmt(p.output)+'</div>';
+
+      if (!weeks.length) {
+        h += '<p style="font-size:13px;color:var(--muted);margin:0">합격 발표 이후 구간 — 아래 <b>7. 합격 후</b> 참고.</p>';
+      }
+      weeks.forEach(function(w){
+        var wNow = today >= d(w.from) && today <= d(w.to);
+        var wPast = today > d(w.to);
+        h += '<div class="wk'+(wNow?' now':'')+(wPast?' past':'')+'">' +
+             '<div class="wkh"><span class="wid">'+w.id+'</span><span class="wf">'+esc(w.focus)+'</span>' +
+             (wNow?'<span class="nowtag">이번 주</span>':'') +
+             '<span class="wd">'+md(w.from)+' ~ '+md(w.to)+'</span></div>';
+        h += '<ul class="checklist">';
+        [['lesson','강의',w.lesson],['practice','실습',w.practice],['review','정리',w.review]].forEach(function(t){
+          if(!t[2]) return;
+          var id = w.id+'.'+t[0];
+          h += item(id, t[0], t[1], t[2]);
+        });
+        (w.todos||[]).forEach(function(td,i){
+          h += item(w.id+'.todo'+i, 'todo', '할 일', td.t);
+        });
+        h += '</ul></div>';
+      });
+      h += '</div></div>';
+      return h;
+    }).join('');
+
+    el('phases').addEventListener('change', function(e){
+      if (!e.target.matches('input[type=checkbox]')) return;
+      var id = e.target.dataset.id;
+      if (e.target.checked) done[id]=1; else delete done[id];
+      e.target.closest('li').classList.toggle('checked', e.target.checked);
+      save(); updateProgress();
+    });
+  }
+
+  function item(id, kind, label, text){
+    var on = !!done[id];
+    return '<li'+(on?' class="checked"':'')+'><input type="checkbox" data-id="'+id+'"'+(on?' checked':'')+'>' +
+      '<label><span class="kind k-'+kind+'">'+label+'</span><span class="txt">'+fmt(text)+'</span></label></li>';
+  }
+
+  function updateProgress(){
+    var total = 0;
+    P.weeks.forEach(function(w){
+      ['lesson','practice','review'].forEach(function(k){ if(w[k]) total++; });
+      total += (w.todos||[]).length;
+    });
+    var n = Object.keys(done).length;
+    var pct = total ? Math.round(n/total*100) : 0;
+    el('pct').textContent = pct+'%';
+    el('count').textContent = n+' / '+total;
+    el('fill').style.width = pct+'%';
+  }
+
+  /* ---- 자료 ---- */
+  function renderRes(){
+    el('res').innerHTML = P.resources.map(function(r){
+      var cost = r.cost==='무료' ? '<span class="pill free">무료</span>' : '<span class="pill paid">유료</span>';
+      if (r.cert) cost += ' <span class="pill cert">수료증</span>';
+      if (r.status) cost += ' <span class="pill now">'+esc(r.status)+'</span>';
+      var name = r.url ? '<a href="'+esc(r.url)+'"'+(/^http/.test(r.url)?' target="_blank" rel="noopener"':'')+'>'+esc(r.name)+'</a>' : esc(r.name);
+      return '<tr><td>'+name+'</td><td>'+esc(r.platform)+'</td><td>'+cost+'</td><td style="color:var(--ink-soft)">'+fmt(r.note||'')+'</td></tr>';
+    }).join('');
+  }
+
+  function renderPost(){
+    el('post').innerHTML = P.postplan.map(function(p){
+      return '<div class="tl"><div class="when">'+esc(p.when)+' · '+esc(p.what)+'</div>' +
+             '<div class="what">'+fmt(p.how)+'</div></div>'; }).join('');
+  }
+
+  function renderMisc(){
+    el('pitfalls').innerHTML = P.pitfalls.map(function(x){ return '<li>'+fmt(x)+'</li>'; }).join('');
+    el('prin').innerHTML = P.principles.map(function(x){
+      return '<div><b>'+esc(x.t)+'</b>'+fmt(x.d)+'</div>'; }).join('');
+  }
 })();
 </script>
 </body>
