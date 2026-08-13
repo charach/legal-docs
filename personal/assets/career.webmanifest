@@ -5,8 +5,8 @@
  "scope": "../",
  "display": "standalone",
  "orientation": "portrait",
- "background_color": "#f6f3ec",
- "theme_color": "#7c3aed",
+ "background_color": "#FAFDFD",
+ "theme_color": "#FAFDFD",
  "icons": [
   {
    "src": "icons/career-180.png",

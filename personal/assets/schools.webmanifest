@@ -5,8 +5,8 @@
  "scope": "../",
  "display": "standalone",
  "orientation": "portrait",
- "background_color": "#f2f8fc",
- "theme_color": "#d97706",
+ "background_color": "#FAFDFD",
+ "theme_color": "#FAFDFD",
  "icons": [
   {
    "src": "icons/schools-180.png",

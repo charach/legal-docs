@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <!-- pwa -->
-<meta name="theme-color" content="#7c3aed">
+<meta name="theme-color" content="#FAFDFD">
 <link rel="apple-touch-icon" href="assets/icons/career-180.png">
 <link rel="icon" type="image/png" sizes="180x180" href="assets/icons/career-180.png">
 <link rel="manifest" href="assets/career.webmanifest">
@@ -16,39 +16,36 @@
 <!-- /pwa -->
 
 <title>커리어 전환 로드맵 · 삼성전자 → AI Product Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/summer.css">
 <style>
   :root {
-    --paper: #f6f3ec;
-    --paper-2: #efeadf;
-    --card: #fbf9f4;
-    --ink: #23201b;
-    --ink-soft: #56514899;
-    --muted: #7a7365;
-    --line: #ddd6c7;
-    --line-strong: #c8bfab;
-    --accent: #9c3b2e;      /* terracotta */
-    --accent-soft: #b8674f;
-    --gold: #b08421;
-    --green: #4d6b3f;
-    --serif: "Noto Serif KR", "Newsreader", Georgia, serif;
-    --sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --paper: #FAFDFD;
+    --paper-2: #F2F8F9;
+    --card: #FFFFFF;
+    --ink: #1A2E35;
+    --ink-soft: #5C7A85;
+    --muted: #5C7A85;
+    --line: #E4EFF1;
+    --line-strong: #CFE3E7;
+    --accent: #0E7C94;      /* terracotta */
+    --accent-soft: #0E7C94;
+    --gold: #5C7A85;
+    --green: #0E7C94;
+    --serif: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+    --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", "Apple SD Gothic Neo", sans-serif;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    background: var(--paper);
-    color: var(--ink);
+    color: var(--accent);
     font-family: var(--sans);
     line-height: 1.72;
     font-size: 15px;
     -webkit-font-smoothing: antialiased;
     background-image:
-      radial-gradient(circle at 15% 0%, rgba(156,59,46,0.03), transparent 45%),
-      radial-gradient(circle at 100% 100%, rgba(176,132,33,0.035), transparent 40%);
+      rgba(156,59,46,0.03),
+      rgba(176,132,33,0.035);
   }
   .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px 140px; }
 
@@ -75,7 +72,7 @@
   .rule-ornament span { font-size: 13px; color: var(--accent); }
   .lede {
     font-family: var(--serif); font-weight: 500;
-    font-size: 17px; line-height: 1.75; color: #443f36;
+    font-size: 17px; line-height: 1.75; color: #1A2E35;
     max-width: 620px; margin: 0 auto 14px;
   }
   .thesis {
@@ -98,7 +95,7 @@
   }
   .status-label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
   .status-label b { color: var(--accent); font-size: 15px; font-family: var(--serif); }
-  .track { flex: 1; height: 3px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .track { flex: 1; height: 3px; background: var(--line); border-radius: 6px; overflow: hidden; }
   .track > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .4s ease; }
   .count { font-size: 12px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
   .reset {
@@ -178,7 +175,7 @@
 
   /* ---- Callout ---- */
   .callout {
-    font-family: var(--serif); font-size: 14.5px; line-height: 1.7; color: #4a463c;
+    font-family: var(--serif); font-size: 14.5px; line-height: 1.7; color: #1A2E35;
     border-left: 3px solid var(--gold); padding: 4px 0 4px 18px; margin: 18px 0;
   }
   .callout b { color: var(--accent); font-weight: 600; }
@@ -195,7 +192,7 @@
   /* ---- Timeline ---- */
   .timeline {
     font-family: "Newsreader", ui-monospace, monospace; font-size: 13px; line-height: 1.9;
-    color: #4a463c; background: var(--card); border: 1px solid var(--line);
+    color: #1A2E35; background: var(--card); border: 1px solid var(--line);
     border-radius: 4px; padding: 22px 24px; overflow-x: auto; white-space: pre; margin-top: 8px;
   }
 
@@ -208,7 +205,7 @@
   /* ---- Principle list ---- */
   ul.principle { list-style: none; padding: 0; margin: 14px 0 4px; }
   ul.principle li {
-    position: relative; padding: 6px 0 6px 22px; font-size: 14px; color: #443f36;
+    position: relative; padding: 6px 0 6px 22px; font-size: 14px; color: #1A2E35;
     border-bottom: 1px solid var(--line);
   }
   ul.principle li:last-child { border-bottom: none; }
@@ -237,12 +234,12 @@
     color: var(--accent-soft); padding: 9px 12px 9px 0; border-top: 1px solid var(--line);
   }
   dl.co-body dd {
-    margin: 0; font-size: 13.5px; color: #443f36; padding: 9px 0; border-top: 1px solid var(--line);
+    margin: 0; font-size: 13.5px; color: #1A2E35; padding: 9px 0; border-top: 1px solid var(--line);
     line-height: 1.65;
   }
   dl.co-body dd ul { margin: 0; padding-left: 16px; }
   dl.co-body dd li { margin: 2px 0; }
-  dl.co-body dt.risk { color: #a8563f; }
+  dl.co-body dt.risk { color: #0E7C94; }
 
   @media (max-width: 560px) {
     .phase-head { grid-template-columns: 1fr; gap: 4px; }
@@ -256,12 +253,14 @@
 </style>
 </head>
 <body>
+<nav class="nav"><div class="inner"><a class="brand" href="index.html">Personal</a><div class="links"><a href="study_calendar.html">오늘</a><a href="ai_grad_prep.html">로드맵</a><a href="interview_prep.html">면접</a><a href="grad_schools.html">대학원</a></div></div></nav>
+
 
 <div class="wrap">
   <header class="masthead">
     <div class="kicker">Career Transition · 2026 – 2027</div>
     <h1>삼성전자에서<br><em>AI Product Engineer</em>로</h1>
-    <div class="rule-ornament"><span>❧</span></div>
+    <div class="rule-ornament"><span></span></div>
     <p class="lede">백엔드·인프라 기반 위에 LLM 시스템(RAG·에이전트·평가)을 설계부터 운영까지 끝낼 수 있는 엔지니어가 된다.</p>
     <span class="thesis">이직 기준은 연차가 아니라 <b>"오퍼가 삼성 처우를 방어할 수 있을 때"</b></span>
   </header>
@@ -301,7 +300,7 @@
 
     <p class="callout" style="border-color: var(--green);"><b style="color:var(--green)">학위 불안, 데이터로 종결.</b> 직접 열어본 개발·애플리케이션 트랙 공고에서 <b>석사를 필수로 요구한 곳은 0건</b>이다. 업스테이지 AI Agent Engineer는 명시적으로 <b>"학력 무관"</b>, 백엔드·플랫폼·Document AI·데이터 공고 모두 학위 요건 미기재. 석사가 필수인 것은 <b>전문연구요원(병역특례)·파운데이션 모델 리서치</b> 트랙(논문 실적 요구)뿐이다. 애플리케이션 트랙에서 학위는 요건이 아니라 실무 포트폴리오로 대체된다 — 즉 <b>Phase Ⅱ의 프로젝트가 곧 학위 대체재</b>.</p>
 
-    <h3 class="block-title hot">A. 애플리케이션 / 제품 트랙 — 1순위 타겟 <span class="star">✦</span></h3>
+    <h3 class="block-title hot">A. 애플리케이션 / 제품 트랙 — 1순위 타겟 <span class="star"></span></h3>
     <p class="note" style="margin:-4px 0 10px">업스테이지·뤼튼·라이너·토스·당근 + 원티드 다수 공고 교차. 8년차 백엔드라는 본인 강점이 가장 잘 팔리는 트랙.</p>
     <table>
       <thead><tr><th>요구사항 (실조사)</th><th>어느 공고에 나오나</th><th>어느 Step이 채우나</th></tr></thead>
@@ -482,7 +481,7 @@
       </tbody>
     </table>
     <ul class="checklist" data-group="p3-resume">
-      <li><input type="checkbox" id="c33"><label><span class="lead">"내가 결정한 것" 중심 재작성 — ❌"AX팀에서 AI 서비스 개발" → ✅"LLM 기반 X 기능의 서빙 백엔드 설계, p95 레이턴시 Ns 달성, 일 요청 N만 건 처리, 스트리밍 응답·폴백 로직 직접 설계"</span><span class="note">원칙 — 팀이 한 일이 아니라 <b style="color:var(--ink)">내가 결정한 것</b> 중심. 모델은 다른 팀이 만들었어도 "그 모델을 서비스로 만드는 과정의 설계 결정"은 나의 것.</span></label></li>
+      <li><input type="checkbox" id="c33"><label><span class="lead">"내가 결정한 것" 중심 재작성 — "AX팀에서 AI 서비스 개발" → "LLM 기반 X 기능의 서빙 백엔드 설계, p95 레이턴시 Ns 달성, 일 요청 N만 건 처리, 스트리밍 응답·폴백 로직 직접 설계"</span><span class="note">원칙 — 팀이 한 일이 아니라 <b style="color:var(--ink)">내가 결정한 것</b> 중심. 모델은 다른 팀이 만들었어도 "그 모델을 서비스로 만드는 과정의 설계 결정"은 나의 것.</span></label></li>
       <li><input type="checkbox" id="c63"><label><span class="lead"><b>정량 지표를 이력서 상단에 못박기</b> — RPS·데이터량·SLA·p95 레이턴시·장애 복구시간. <span style="color:var(--accent)">토스는 "이력서에 트래픽 지표 명시"를 공고에서 대놓고 권장</span>한다</span></label></li>
       <li><input type="checkbox" id="c34"><label><span class="lead">영문 이력서 + LinkedIn 프로필 정비 (Tier 2·해외 옵션 대비)</span></label></li>
     </ul>
@@ -496,7 +495,7 @@
       <li><input type="checkbox" id="c66"><label><span class="lead"><b>몰로코 노릴 때만</b> — LeetCode Hard 중심 100문제+로 상향 + 영어 라운드. 안 노리면 이 항목은 스킵</span></label></li>
     </ul>
 
-    <h3 class="block-title hot">3-3 · 시스템 디자인 인터뷰 (4–6월) <span class="star">✦</span> 승부 라운드</h3>
+    <h3 class="block-title hot">3-3 · 시스템 디자인 인터뷰 (4–6월) <span class="star"></span> 승부 라운드</h3>
     <ul class="checklist" data-group="p3-sysdesign">
       <li><input type="checkbox" id="c37"><label><span class="lead">일반 시스템 디자인 정리 (System Design Interview vol.1–2) — <b>당근 백엔드·ML 직군은 실제로 시스템 디자인/ML 모델 설계 인터뷰가 별도 라운드</b></span></label></li>
       <li><input type="checkbox" id="c38"><label><span class="lead">AI — "RAG <b>에이전트</b> 서비스 설계" (Phase 2가 그대로 답안) — 리트리버·Tool Use·Function Calling·근거 인용까지</span><span class="note">→ 업스테이지·라이너 ML·뤼튼 ML</span></label></li>
@@ -505,7 +504,7 @@
       <li><input type="checkbox" id="c41"><label><span class="lead">각 유형별 화이트보드 답안 만들어 소리 내어 연습 (셀프 영상 촬영)</span></label></li>
     </ul>
 
-    <h3 class="block-title hot">3-4 · 리퍼럴 네트워크 (3월부터 상시) <span class="star">✦</span> 서류 통과율 1순위</h3>
+    <h3 class="block-title hot">3-4 · 리퍼럴 네트워크 (3월부터 상시) <span class="star"></span> 서류 통과율 1순위</h3>
     <ul class="checklist" data-group="p3-referral">
       <li><input type="checkbox" id="c42"><label><span class="lead">타겟 — 업스테이지·뤼튼·라이너·토스·당근 재직자 각 1명 이상</span></label></li>
       <li><input type="checkbox" id="c43"><label><span class="lead">경로 ① LinkedIn 콜드 메시지 (짧게: 공통점 + 구체 질문 1개 + 커피챗 제안)</span></label></li>
@@ -566,7 +565,7 @@
   <!-- COMPANIES -->
   <section class="phase" id="companies">
     <div class="phase-head">
-      <div class="phase-num" style="-webkit-text-stroke-color: var(--gold);">★</div>
+      <div class="phase-num" style="-webkit-text-stroke-color: var(--gold);"></div>
       <div class="phase-title">
         <h2>타겟 회사 & 준비 매핑</h2>
         <p class="desc">채용 상황·처우·조직은 계속 바뀐다. 지원 시점(2027)에 각사 채용 페이지·JD·최근 뉴스로 반드시 재확인.</p>
@@ -578,7 +577,7 @@
     <div class="tier-label">Tier 1 — 국내 AI 네이티브 <small>본명 타겟</small></div>
 
     <article class="company">
-      <div class="co-head"><span class="co-rank">①</span><h3 class="co-name">업스테이지 (Upstage)</h3><span class="co-badge">★ 최우선 추천</span></div>
+      <div class="co-head"><span class="co-rank">①</span><h3 class="co-name">업스테이지 (Upstage)</h3><span class="co-badge"> 최우선 추천</span></div>
       <dl class="co-body">
         <dt>무엇을 하나</dt><dd>자체 LLM '솔라(Solar)' 개발 + Document AI(OCR·파싱). 금융·법률·제조 등 B2B 특화 AI 솔루션. 2025년 약 1,000억 원 시리즈B, 미국 시장 진출 추진.</dd>
         <dt>왜 나에게 맞나</dt><dd><ul><li>"해외로 나아가는 회사" + "모델 가까이에서 일하기" 조건을 동시에 충족하는 국내 거의 유일한 곳</li><li>B2B 엔터프라이즈 딜리버리 → 삼성에서의 대규모·엔터프라이즈 경험이 그대로 신뢰 자산</li><li>Document AI ↔ Samsung Notes·필기인식 경험이 도메인적으로 연결됨 (문서 이해라는 공통점)</li></ul></dd>
@@ -688,15 +687,15 @@
     <table>
       <thead><tr><th>회사</th><th>Tier</th><th>결정적 준비물</th><th>난이도</th><th>궁합</th></tr></thead>
       <tbody>
-        <tr><td>업스테이지</td><td>1</td><td>법령 QA <b>에이전트</b> + Evals + LangGraph (Tool Use·Function Calling)</td><td>중상</td><td class="stars">★★★★★</td></tr>
-        <tr><td>뤼튼</td><td>1</td><td>에이전트 + Langfuse 관측 + 모델 라우팅 (context eng.)</td><td>중</td><td class="stars">★★★★☆</td></tr>
-        <tr><td>라이너</td><td>1</td><td>하이브리드 검색 + 리랭커 (Elasticsearch·nDCG/MRR) + agentic 평가</td><td>중상</td><td class="stars">★★★★☆</td></tr>
-        <tr><td>프렌들리AI</td><td>1</td><td>C++·vLLM 분석·기여</td><td>상</td><td class="stars">★★★★☆</td></tr>
-        <tr><td>트웰브랩스</td><td>1.5</td><td>영어 + 플랫폼 역량</td><td>최상</td><td class="stars">★★★☆☆</td></tr>
-        <tr><td>몰로코</td><td>2</td><td>LeetCode 상향 + 영어</td><td>최상</td><td class="stars">★★★☆☆</td></tr>
-        <tr><td>센드버드</td><td>2</td><td>SDK·DX 스토리 재구성</td><td>중상</td><td class="stars">★★★★☆</td></tr>
-        <tr><td>토스</td><td>3</td><td>코테 + 오너십 사례</td><td>중</td><td class="stars">★★★★☆</td></tr>
-        <tr><td>당근</td><td>3</td><td>검색·추천 기본기</td><td>중</td><td class="stars">★★★★☆</td></tr>
+        <tr><td>업스테이지</td><td>1</td><td>법령 QA <b>에이전트</b> + Evals + LangGraph (Tool Use·Function Calling)</td><td>중상</td><td class="stars"></td></tr>
+        <tr><td>뤼튼</td><td>1</td><td>에이전트 + Langfuse 관측 + 모델 라우팅 (context eng.)</td><td>중</td><td class="stars"></td></tr>
+        <tr><td>라이너</td><td>1</td><td>하이브리드 검색 + 리랭커 (Elasticsearch·nDCG/MRR) + agentic 평가</td><td>중상</td><td class="stars"></td></tr>
+        <tr><td>프렌들리AI</td><td>1</td><td>C++·vLLM 분석·기여</td><td>상</td><td class="stars"></td></tr>
+        <tr><td>트웰브랩스</td><td>1.5</td><td>영어 + 플랫폼 역량</td><td>최상</td><td class="stars"></td></tr>
+        <tr><td>몰로코</td><td>2</td><td>LeetCode 상향 + 영어</td><td>최상</td><td class="stars"></td></tr>
+        <tr><td>센드버드</td><td>2</td><td>SDK·DX 스토리 재구성</td><td>중상</td><td class="stars"></td></tr>
+        <tr><td>토스</td><td>3</td><td>코테 + 오너십 사례</td><td>중</td><td class="stars"></td></tr>
+        <tr><td>당근</td><td>3</td><td>검색·추천 기본기</td><td>중</td><td class="stars"></td></tr>
       </tbody>
     </table>
 
@@ -712,7 +711,7 @@
   <!-- REMINDER -->
   <section class="phase" id="reminder">
     <div class="phase-head">
-      <div class="phase-num">❦</div>
+      <div class="phase-num"></div>
       <div class="phase-title"><h2>마지막 리마인더</h2></div>
     </div>
     <div class="phase-rule"></div>

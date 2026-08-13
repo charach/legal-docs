@@ -5,8 +5,8 @@
  "scope": "../",
  "display": "standalone",
  "orientation": "portrait",
- "background_color": "#f2faf8",
- "theme_color": "#0f766e",
+ "background_color": "#FAFDFD",
+ "theme_color": "#FAFDFD",
  "icons": [
   {
    "src": "icons/calendar-180.png",

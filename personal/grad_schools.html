@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <!-- pwa -->
-<meta name="theme-color" content="#d97706">
+<meta name="theme-color" content="#FAFDFD">
 <link rel="apple-touch-icon" href="assets/icons/schools-180.png">
 <link rel="icon" type="image/png" sizes="180x180" href="assets/icons/schools-180.png">
 <link rel="manifest" href="assets/schools.webmanifest">
@@ -16,28 +16,26 @@
 <!-- /pwa -->
 
 <title>직장인 특수대학원 정리 · AI / 데이터 / 컴퓨터 석사</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/summer.css">
 <style>
   :root {
-    --bg: #f2f8fc;
-    --card: #ffffff;
-    --ink: #0f2740;
-    --ink-soft: #486079;
-    --muted: #8aa0b5;
-    --line: #dfeaf3;
-    --line-strong: #c7dcec;
-    --sky: #0ea5e9;
-    --sky-deep: #0284c7;
-    --teal: #14b8a6;
-    --violet: #8b5cf6;
-    --amber: #f59e0b;
-    --rose: #f43f5e;
-    --green: #10b981;
-    --sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --shadow: 0 1px 2px rgba(15,39,64,.05), 0 8px 24px rgba(15,39,64,.06);
-    --shadow-lg: 0 14px 44px rgba(2,132,199,.18), 0 4px 12px rgba(15,39,64,.10);
+    --bg: #FAFDFD;
+    --card: #FFFFFF;
+    --ink: #1A2E35;
+    --ink-soft: #5C7A85;
+    --muted: #5C7A85;
+    --line: #E4EFF1;
+    --line-strong: #CFE3E7;
+    --sky: #0E7C94;
+    --sky-deep: #0E7C94;
+    --teal: #0E7C94;
+    --violet: #5C7A85;
+    --amber: #5C7A85;
+    --rose: #0E7C94;
+    --green: #0E7C94;
+    --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", "Apple SD Gothic Neo", sans-serif;
+    --shadow: 0 1px 3px rgba(26,46,53,.06);
+    --shadow-lg: 0 1px 3px rgba(26,46,53,.06);
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html { scroll-behavior: smooth; }
@@ -46,9 +44,9 @@
     font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased;
     min-height: 100vh;
     background:
-      radial-gradient(1200px 600px at 100% -10%, rgba(14,165,233,.12), transparent 60%),
-      radial-gradient(900px 500px at -10% 20%, rgba(20,184,166,.09), transparent 55%),
-      radial-gradient(700px 500px at 50% 120%, rgba(139,92,246,.06), transparent 60%),
+      rgba(14,165,233,.12),
+      rgba(20,184,166,.09),
+      rgba(139,92,246,.06),
       var(--bg);
     background-attachment: fixed;
   }
@@ -60,14 +58,14 @@
     display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
     color: var(--ink-soft); font-size: 13px; font-weight: 600; margin-bottom: 16px;
     padding: 6px 12px; background: rgba(255,255,255,.7); border: 1px solid var(--line);
-    border-radius: 999px; transition: .15s;
+    border-radius: 6px; transition: .15s;
   }
   .backlink:hover { color: var(--sky-deep); border-color: var(--line-strong); }
   .kicker {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase;
     color: var(--sky-deep); font-weight: 700;
-    background: rgba(14,165,233,.10); padding: 6px 14px; border-radius: 999px; margin-bottom: 14px;
+    background: rgba(14,165,233,.10); padding: 6px 14px; border-radius: 6px; margin-bottom: 14px;
   }
   header.hero h1 { font-weight: 900; font-size: clamp(25px, 5.2vw, 38px); margin: 0 0 10px; letter-spacing: -.6px; line-height: 1.25; }
   header.hero p.sub { margin: 0; color: var(--ink-soft); font-size: 14px; max-width: 760px; }
@@ -75,7 +73,7 @@
   /* ── stats ──────────────────────────────── */
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; margin: 22px 0 6px; }
   .stat {
-    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
     padding: 14px 16px; box-shadow: var(--shadow); position: relative; overflow: hidden;
   }
   .stat::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background: var(--c, var(--sky)); }
@@ -85,18 +83,18 @@
 
   /* ── filters ────────────────────────────── */
   .panel {
-    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
     padding: 16px; box-shadow: var(--shadow); margin: 18px 0 14px;
   }
   .searchrow { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
   .searchbox { position: relative; flex: 1; }
   .searchbox svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); }
   .searchbox input {
-    width: 100%; border: 1.5px solid var(--line-strong); border-radius: 12px;
+    width: 100%; border: 1.5px solid var(--line-strong); border-radius: 8px;
     padding: 11px 14px 11px 40px; font-size: 14.5px; font-family: var(--sans); color: var(--ink);
-    background: #fbfdff; outline: none; transition: .15s;
+    background: #FAFDFD; outline: none; transition: .15s;
   }
-  .searchbox input:focus { border-color: var(--sky); background: #fff; box-shadow: 0 0 0 3px rgba(14,165,233,.12); }
+  .searchbox input:focus { border-color: var(--sky); background: #fff; box-shadow: 0 1px 3px rgba(26,46,53,.06); }
   .searchbox input::placeholder { color: var(--muted); }
 
   .filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px,1fr)); gap: 10px; }
@@ -106,25 +104,25 @@
     appearance: none; -webkit-appearance: none;
     border: 1.5px solid var(--line-strong); border-radius: 11px; padding: 9px 30px 9px 12px;
     font-size: 13.5px; font-family: var(--sans); font-weight: 600; color: var(--ink);
-    background: #fbfdff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%238aa0b5' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+    background: #FAFDFD url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%238aa0b5' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
     outline: none; cursor: pointer; transition: .15s;
   }
-  .f select:focus { border-color: var(--sky); box-shadow: 0 0 0 3px rgba(14,165,233,.12); }
-  .f select.on { border-color: var(--sky); background-color: #eaf7fe; color: var(--sky-deep); }
+  .f select:focus { border-color: var(--sky); box-shadow: 0 1px 3px rgba(26,46,53,.06); }
+  .f select.on { border-color: var(--sky); background-color: #FAFDFD; color: var(--sky-deep); }
 
   .actionrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
   .count { font-size: 13px; font-weight: 700; color: var(--ink-soft); }
   .count b { color: var(--sky-deep); font-size: 16px; font-variant-numeric: tabular-nums; }
   .btn {
     border: 1.5px solid var(--line-strong); background: #fff; color: var(--ink-soft);
-    border-radius: 999px; padding: 7px 15px; font-size: 12.5px; font-weight: 700;
+    border-radius: 6px; padding: 7px 15px; font-size: 12.5px; font-weight: 700;
     font-family: var(--sans); cursor: pointer; transition: .15s;
   }
   .btn:hover { border-color: var(--sky); color: var(--sky-deep); }
   .chips { display: flex; gap: 7px; flex-wrap: wrap; }
   .chip {
     border: 1.5px solid var(--line); background: #fff; color: var(--ink-soft);
-    border-radius: 999px; padding: 6px 13px; font-size: 12.5px; font-weight: 700;
+    border-radius: 6px; padding: 6px 13px; font-size: 12.5px; font-weight: 700;
     font-family: var(--sans); cursor: pointer; transition: .15s; white-space: nowrap;
   }
   .chip:hover { border-color: var(--line-strong); }
@@ -132,36 +130,36 @@
 
   /* ── table ──────────────────────────────── */
   .tablebox {
-    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
     box-shadow: var(--shadow); overflow: hidden;
   }
   .scroller { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1700px; font-size: 13px; }
   thead th {
     position: sticky; top: 0; z-index: 3;
-    background: #eef6fc; color: var(--ink); font-weight: 800; font-size: 11.5px;
+    background: #FAFDFD; color: var(--ink); font-weight: 800; font-size: 11.5px;
     letter-spacing: .03em; text-align: left; padding: 12px 12px; white-space: nowrap;
     border-bottom: 1.5px solid var(--line-strong); cursor: pointer; user-select: none;
   }
-  thead th:hover { background: #e3f1fb; color: var(--sky-deep); }
+  thead th:hover { background: #F2F8F9; color: var(--sky-deep); }
   thead th .ar { color: var(--muted); font-size: 10px; margin-left: 3px; }
   thead th.act .ar { color: var(--sky-deep); }
   thead th.nosort { cursor: default; }
-  thead th.nosort:hover { background: #eef6fc; color: var(--ink); }
+  thead th.nosort:hover { background: #FAFDFD; color: var(--ink); }
 
-  tbody td { padding: 11px 12px; border-bottom: 1px solid #eef4f9; vertical-align: top; }
+  tbody td { padding: 11px 12px; border-bottom: 1px solid #F2F8F9; vertical-align: top; }
   tbody tr { transition: background .12s; cursor: pointer; }
-  tbody tr:hover { background: #f7fcff; }
-  tbody tr.open { background: #f0f9ff; }
+  tbody tr:hover { background: #FAFDFD; }
+  tbody tr.open { background: #FAFDFD; }
   tbody tr:last-child td { border-bottom: none; }
 
   th.c-school, td.c-school {
     position: sticky; left: 0; z-index: 2; background: var(--card);
     border-right: 1px solid var(--line); min-width: 132px;
   }
-  thead th.c-school { z-index: 4; background: #eef6fc; }
-  tbody tr:hover td.c-school { background: #f7fcff; }
-  tbody tr.open td.c-school { background: #f0f9ff; }
+  thead th.c-school { z-index: 4; background: #FAFDFD; }
+  tbody tr:hover td.c-school { background: #FAFDFD; }
+  tbody tr.open td.c-school { background: #FAFDFD; }
 
   .sname { font-weight: 800; font-size: 13.5px; letter-spacing: -.2px; display: block; }
   .sflag { font-size: 11px; color: var(--muted); font-weight: 600; }
@@ -171,13 +169,13 @@
 
   .pill {
     display: inline-block; font-size: 11px; font-weight: 800; padding: 2.5px 9px;
-    border-radius: 999px; white-space: nowrap; letter-spacing: -.1px;
+    border-radius: 6px; white-space: nowrap; letter-spacing: -.1px;
   }
-  .p-특수 { background:#e0f2fe; color:#0369a1; }
-  .p-일반 { background:#ede9fe; color:#6d28d9; }
-  .p-전문 { background:#fce7f3; color:#be185d; }
-  .p-온라인 { background:#d1fae5; color:#047857; }
-  .p-mode { background:#f1f5f9; color:#475569; }
+  .p-특수 { background:#F2F8F9; color:#0E7C94; }
+  .p-일반 { background:#F2F8F9; color:#5C7A85; }
+  .p-전문 { background:#F2F8F9; color:#0E7C94; }
+  .p-온라인 { background:#F2F8F9; color:#1A2E35; }
+  .p-mode { background:#FAFDFD; color:#5C7A85; }
 
   .money { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .money .orig { display: block; font-size: 11px; font-weight: 600; color: var(--muted); }
@@ -186,17 +184,17 @@
 
   .rate { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-variant-numeric: tabular-nums; }
   .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
-  .lv-easy   { color: #047857; } .lv-easy   .dot { background:#10b981; }
-  .lv-mid    { color: #b45309; } .lv-mid    .dot { background:#f59e0b; }
-  .lv-hard   { color: #be123c; } .lv-hard   .dot { background:#f43f5e; }
-  .lv-none   { color: var(--muted); } .lv-none .dot { background:#cbd5e1; }
+  .lv-easy   { color: #1A2E35; } .lv-easy   .dot { background:#0E7C94; }
+  .lv-mid    { color: #5C7A85; } .lv-mid    .dot { background:#5C7A85; }
+  .lv-hard   { color: #0E7C94; } .lv-hard   .dot { background:#0E7C94; }
+  .lv-none   { color: var(--muted); } .lv-none .dot { background:#E4EFF1; }
 
-  .fillbar { width: 62px; height: 5px; background:#eef2f6; border-radius: 999px; overflow: hidden; margin-top: 4px; }
-  .fillbar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--sky), var(--teal)); }
+  .fillbar { width: 62px; height: 5px; background:#F2F8F9; border-radius: 6px; overflow: hidden; margin-top: 4px; }
+  .fillbar > i { display: block; height: 100%; border-radius: 6px; background: var(--teal); }
 
   .apply { display:inline-block; font-size:12px; font-weight:800; white-space:nowrap;
-    padding:3px 9px; border-radius:999px; background:#f1f5f9; color:#64748b; }
-  .apply.ok { background:#dcfce7; color:#15803d; }
+    padding:3px 9px; border-radius: 6px; background:#FAFDFD; color:#5C7A85; }
+  .apply.ok { background:#F2F8F9; color:#1A2E35; }
   .applyref { display:block; font-size:10.5px; color:var(--muted); margin-top:4px; max-width:235px; line-height:1.45; }
   .clamp { max-width: 250px; font-size: 12px; color: var(--ink-soft); line-height: 1.5;
     display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
@@ -205,7 +203,7 @@
   .sitelink {
     display: inline-flex; align-items: center; gap: 4px; text-decoration: none;
     color: var(--sky-deep); font-weight: 700; font-size: 12px; white-space: nowrap;
-    padding: 4px 10px; border: 1px solid var(--line-strong); border-radius: 999px; background:#fbfdff;
+    padding: 4px 10px; border: 1px solid var(--line-strong); border-radius: 6px; background:#FAFDFD;
     transition: .15s;
   }
   .sitelink:hover { background: var(--sky-deep); color:#fff; border-color: var(--sky-deep); }
@@ -216,7 +214,7 @@
   /* ── mobile cards ───────────────────────── */
   .cards { display: none; }
   .mcard {
-    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
     padding: 15px 16px; box-shadow: var(--shadow); margin-bottom: 11px; position: relative; overflow: hidden;
   }
   .mcard::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background: var(--c, var(--sky)); }
@@ -237,28 +235,28 @@
   .mask.show { display: flex; }
   .sheet {
     background: #fff; width: 100%; max-width: 620px; max-height: 88vh; overflow-y: auto;
-    border-radius: 24px 24px 0 0; padding: 8px 22px calc(28px + env(safe-area-inset-bottom));
-    box-shadow: 0 -12px 44px rgba(15,39,64,.25); animation: up .28s cubic-bezier(.22,1,.36,1);
+    border-radius: 8px 24px 0 0; padding: 8px 22px calc(28px + env(safe-area-inset-bottom));
+    box-shadow: 0 1px 3px rgba(26,46,53,.06); animation: up .28s cubic-bezier(.22,1,.36,1);
   }
   @media (min-width: 640px) {
     .mask { align-items: center; }
-    .sheet { border-radius: 24px; padding-bottom: 28px; animation: pop .24s cubic-bezier(.22,1,.36,1); }
+    .sheet { border-radius: 8px; padding-bottom: 28px; animation: pop .24s cubic-bezier(.22,1,.36,1); }
   }
   @keyframes up { from { transform: translateY(100%); } to { transform: none; } }
   @keyframes pop { from { opacity:0; transform: scale(.96) translateY(10px); } to { opacity:1; transform:none; } }
-  .grab { width: 40px; height: 4px; background: var(--line-strong); border-radius: 999px; margin: 8px auto 14px; }
+  .grab { width: 40px; height: 4px; background: var(--line-strong); border-radius: 6px; margin: 8px auto 14px; }
   .sheet .shead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 4px; }
   .sheet h2 { margin: 0; font-size: 19px; font-weight: 900; letter-spacing: -.4px; line-height: 1.35; }
   .sheet .ssub { color: var(--ink-soft); font-size: 13px; margin: 3px 0 14px; }
   .xbtn {
     flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line);
-    background: #f5f9fc; color: var(--ink-soft); font-size: 18px; line-height: 1; cursor: pointer;
+    background: #FAFDFD; color: var(--ink-soft); font-size: 18px; line-height: 1; cursor: pointer;
     display: flex; align-items: center; justify-content: center; transition: .15s;
   }
   .xbtn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
   .sheet .tagrow { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
   .sheet .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(110px,1fr)); gap: 9px; margin-bottom: 16px; }
-  .sheet .box { background:#f6fafd; border:1px solid var(--line); border-radius: 13px; padding: 11px 12px; }
+  .sheet .box { background:#FAFDFD; border:1px solid var(--line); border-radius: 8px; padding: 11px 12px; }
   .sheet .box .k { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing:.05em; }
   .sheet .box .v { font-size: 16px; font-weight: 900; letter-spacing:-.4px; font-variant-numeric: tabular-nums; }
   .sheet .box .v small { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); }
@@ -268,13 +266,13 @@
   .sec ul { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
   .gobtn {
     display: flex; align-items: center; justify-content: center; gap: 7px; text-decoration: none;
-    background: linear-gradient(135deg, var(--sky), var(--sky-deep)); color: #fff;
-    padding: 13px; border-radius: 14px; font-weight: 800; font-size: 14.5px;
-    box-shadow: 0 6px 18px rgba(2,132,199,.3);
+    background: var(--sky-deep); color: #fff;
+    padding: 13px; border-radius: 8px; font-weight: 800; font-size: 14.5px;
+    box-shadow: 0 1px 3px rgba(26,46,53,.06);
   }
 
   /* ── footnote ───────────────────────────── */
-  .notes { margin-top: 22px; background: rgba(255,255,255,.72); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+  .notes { margin-top: 22px; background: rgba(255,255,255,.72); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; }
   .notes h3 { margin: 0 0 10px; font-size: 13px; font-weight: 800; color: var(--ink); letter-spacing:.02em; }
   .notes ul { margin: 0; padding-left: 18px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.8; }
   .notes a { color: var(--sky-deep); }
@@ -285,7 +283,7 @@
     .cards { display: block; }
     .wrap { padding-left: 14px; padding-right: 14px; }
     header.hero { padding: 28px 0 14px; }
-    .panel { padding: 14px; border-radius: 18px; }
+    .panel { padding: 14px; border-radius: 8px; }
     .filters { grid-template-columns: 1fr 1fr; }
     .stats { grid-template-columns: 1fr 1fr; }
   }
@@ -293,11 +291,13 @@
 </style>
 </head>
 <body>
+<nav class="nav"><div class="inner"><a class="brand" href="index.html">Personal</a><div class="links"><a href="study_calendar.html">오늘</a><a href="ai_grad_prep.html">로드맵</a><a href="interview_prep.html">면접</a><a href="grad_schools.html" aria-current="page">대학원</a></div></div></nav>
+
 <div class="wrap">
 
   <header class="hero">
     <a class="backlink" href="index.html">← 개인 페이지</a>
-    <div><span class="kicker">🎓 Grad School</span></div>
+    <div><span class="kicker"> Grad School</span></div>
     <h1>직장인을 위한 대학원 정리<br>AI · 데이터분석 · 컴퓨터공학 석사</h1>
     <p class="sub">직장 다니면서 다닐 수 있는 <b>국내 야간·주말·온라인 대학원</b>을 한 표에 모았습니다. 학비·경쟁률·총원율은 <b>대학알리미 2025년 공시</b>와 각 대학원 공식 자료 기준이며, 행을 누르면 입학 요건과 비고 전문이 열립니다.</p>
   </header>
@@ -327,10 +327,10 @@
       </select></div>
       <div class="f"><label>경쟁률</label><select id="fComp">
         <option value="">전체</option>
-        <option value="0-1">미달 (1:1 미만) 🟢</option>
+        <option value="0-1">미달 (1:1 미만) </option>
         <option value="0-2">2:1 미만</option>
         <option value="2-4">2 ~ 4:1</option>
-        <option value="4-99">4:1 이상 🔴</option>
+        <option value="4-99">4:1 이상 </option>
       </select></div>
       <div class="f"><label>정렬</label><select id="fSort">
         <option value="cost-asc">총 학비 낮은 순</option>
@@ -345,12 +345,12 @@
 
     <div class="actionrow">
       <div class="chips">
-        <button class="chip" data-preset="ai">🤖 AI 전공만</button>
-        <button class="chip" data-preset="data">📊 데이터 전공만</button>
-        <button class="chip" data-preset="online">💻 100% 온라인</button>
-        <button class="chip" data-preset="seoul">🏙 서울권</button>
-        <button class="chip" data-preset="cheap">💰 2,500만원 이하</button>
-        <button class="chip" data-preset="easy">🟢 경쟁률 2:1 미만</button>
+        <button class="chip" data-preset="ai"> AI 전공만</button>
+        <button class="chip" data-preset="data"> 데이터 전공만</button>
+        <button class="chip" data-preset="online"> 100% 온라인</button>
+        <button class="chip" data-preset="seoul"> 서울권</button>
+        <button class="chip" data-preset="cheap"> 2,500만원 이하</button>
+        <button class="chip" data-preset="easy"> 경쟁률 2:1 미만</button>
       </div>
       <div style="display:flex;align-items:center;gap:12px">
         <span class="count"><b id="cnt">0</b>개 프로그램</span>
@@ -368,31 +368,31 @@
         <tbody id="tbody"></tbody>
       </table>
     </div>
-    <div class="empty" id="emptyD" style="display:none"><div class="big">🔍</div>조건에 맞는 프로그램이 없어요.</div>
+    <div class="empty" id="emptyD" style="display:none"><div class="big"></div>조건에 맞는 프로그램이 없어요.</div>
   </div>
 
   <div class="cards" id="cards"></div>
-  <div class="empty" id="emptyM" style="display:none"><div class="big">🔍</div>조건에 맞는 프로그램이 없어요.</div>
+  <div class="empty" id="emptyM" style="display:none"><div class="big"></div>조건에 맞는 프로그램이 없어요.</div>
 
   <div class="notes">
-    <h3>📌 데이터 읽는 법 &amp; 출처</h3>
+    <h3> 데이터 읽는 법 &amp; 출처</h3>
     <ul>
       <li><b>총 학비</b> = <b>학기당 등록금 × 총 학기 수 (+ 입학금)</b>입니다. 대학알리미 공시 '등록금'은 연간이 아니라 <b>학기당 수업료</b>라는 점을 <a href="https://www.yonsei.ac.kr/sites/dev_sc/down/2025_fee3.pdf" target="_blank" rel="noopener">연세대 2025 등록금 명세표</a>(인공지능융합대학원 학기당 10,380,000원)와 <a href="https://www.korea.ac.kr/sites/ko/files/2025_Registration_fee(etc)_re.pdf" target="_blank" rel="noopener">고려대 2025 등록금 일람표</a>(SW·AI융합대학원 7,718천원)로 교차 검증했습니다. 교재비·기타 납입금은 제외.</li>
       <li><b>연세대·고려대</b>는 위 공식 명세표의 2025학년도 금액과 입학금을 그대로 썼고, 나머지 학교는 대학알리미 공시값(2024년 기준)이라 실제 고지액이 3~5% 높을 수 있습니다.</li>
       <li><b>경쟁률 / 총원율(충원률)</b>은 <b>대학원 단위 2025학년도 공시값</b>입니다. 학과 단위 경쟁률은 대부분 비공개라, 같은 대학원 소속 학과는 같은 값을 공유합니다. 총원율 100% 미만 = 정원 미달(들어가기 상대적으로 쉬움).</li>
       <li><b>“미공시”</b>는 학교가 대학알리미에 자료를 제출하지 않은 항목입니다. 없는 게 아니라 확인이 필요하다는 뜻입니다.</li>
-      <li>⭐ <b>직장을 유지하면서 다닐 수 있는 과정만 실었습니다</b> — 야간·주말·온라인 운영이 확인된 국내 대학원입니다. 주간 전일제 과정은 제외했습니다.</li>
+      <li> <b>직장을 유지하면서 다닐 수 있는 과정만 실었습니다</b> — 야간·주말·온라인 운영이 확인된 국내 대학원입니다. 주간 전일제 과정은 제외했습니다.</li>
       <li><b>학비 출처는 두 가지</b>입니다. ① 대학알리미 2025 공시(학기당 수업료) ② 각 학교 공식 등록금 공지·모집요강. ②로 확인된 곳(연세대·고려대·한양대 AI융합·서강대·이화여대·아주대 IT융합·평택대·방송통신대)은 <b>입학금까지 총액에 포함</b>했고, 비고에 근거를 적었습니다.</li>
       <li>아직 학비를 못 채운 곳은 <b>5곳(성균관대 데이터사이언스융합·건국대 정보통신·한국공학대·인천대·한양대 ERICA)</b>입니다. 공지·모집요강·대학알리미 어디에도 금액이 없고 학사시스템 고지서나 행정실 문의로만 확인되는 경우라, 추정치를 넣는 대신 “확인 필요”로 남겼습니다. 각 행의 비고에 문의처를 적어뒀습니다.</li>
       <li>출처: <a href="http://phdkim.net/gradinfo/school/list?type=%ED%8A%B9%EC%88%98%EB%8C%80%ED%95%99%EC%9B%90&amp;category=%EA%B3%B5%ED%95%99" target="_blank" rel="noopener">김박사넷 대학원 정보(대학알리미 기반)</a> · <a href="https://www.academyinfo.go.kr" target="_blank" rel="noopener">대학알리미</a> · <a href="https://datapoint.tistory.com/28" target="_blank" rel="noopener">datapoint 블로그</a> · 각 대학원 공식 모집요강 · 각 해외 프로그램 공식 홈페이지</li>
-      <li>🗓 <b>원서접수 일정</b>은 5개 학교(한양대·고려대·연세대·숭실대·국민대)만 공식 요강에서 확정 일정을 확인했고 <span style="color:#15803d;font-weight:700">초록 배지</span>로 표시했습니다.
+      <li> <b>원서접수 일정</b>은 5개 학교(한양대·고려대·연세대·숭실대·국민대)만 공식 요강에서 확정 일정을 확인했고 <span style="color:#1A2E35;font-weight:700">초록 배지</span>로 표시했습니다.
       나머지는 국내 특수대학원 <b>일반 주기(전기 10~11월 접수 → 3월 입학 / 후기 4~5월 접수 → 9월 입학)</b> 기준 추정이니 반드시 학교 공지를 확인하세요.
       2027학년도 전기 요강은 보통 <b>9월경</b> 공고됩니다.</li>
       <li>기준 시점: <b id="asof">–</b> · 지원 전 반드시 공식 모집요강 원문을 확인하세요.</li>
     </ul>
   </div>
 
-  <p class="foot">🔒 개인용 · 검색 비노출</p>
+  <p class="foot"> 개인용 · 검색 비노출</p>
 </div>
 
 <div class="mask" id="mask"><div class="sheet" id="sheet"></div></div>
@@ -400,7 +400,7 @@
 <script>
 /* ══════════════════════════════════════════════════════════
    데이터
-   ty  : ★ 학기당 등록금(수업료, 원) | null = 미공시
+   ty  :  학기당 등록금(수업료, 원) | null = 미공시
          └ 대학알리미 공시 '등록금'은 연간이 아니라 학기당 수업료.
            연세대 2025 등록금명세표(인공지능융합대학원 학기당 10,380,000)와
            고려대 2025 등록금일람표(SW·AI융합대학원 7,718천원)로 교차 검증함.
@@ -477,13 +477,13 @@ const RAW = [
  c:"한국", r:"서울", t:"일반", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null, apply:"2026.10~11 예상",
  site:"https://skb.skku.edu/ads/", tags:["data"],
  req:"4년제 학사 · 재직자 대상 · 서류 + 면접 · 자세한 요건은 대학원 입학홈페이지 확인",
- note:"⭐ 특수대학원이 아니라 일반대학원 소속이라 학위 명칭이 '일반대학원 석사' — 이후 박사 진학이나 학위 인식 면에서 유리. 2025학년도까지 평일 야간 + 토요일 운영이었으나 2026학년도부터 토요일 수업 폐지, 평일 야간(18~21시)으로 일원화. 등록금·경쟁률 미공시라 학과 문의(031-290-5928) 필요."},
+ note:" 특수대학원이 아니라 일반대학원 소속이라 학위 명칭이 '일반대학원 석사' — 이후 박사 진학이나 학위 인식 면에서 유리. 2025학년도까지 평일 야간 + 토요일 운영이었으나 2026학년도부터 토요일 수업 폐지, 평일 야간(18~21시)으로 일원화. 등록금·경쟁률 미공시라 학과 문의(031-290-5928) 필요."},
 
 {s:"서강대학교", g:"AI·SW대학원", m:"인공지능전공", mdesc:"Artificial Intelligence",
  c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null, apply:"2026.10~11 예상",
  site:"https://gsinfo.sogang.ac.kr/", tags:["ai"],
  req:"4년제 학사 · 서류 + 면접 · 입시요강 PDF는 대학원 홈페이지에서 다운로드 (문의 02-705-8685)",
- note:"⭐ 총원율 61.4% — 2025년 86명만 등록했고 정원을 크게 못 채웠음. 서울 상위권 중 실질 진입 난이도가 가장 낮은 축. 재학생 415명으로 규모는 큼. 주말 수업 없이 평일 야간만 운영. <b>학교 공지(2026-1학기) 기준 수업료 6,406,000원 + 원우회비 150,000원 = 학기당 6,556,000원</b>이며, 표의 총액에는 수업료만 반영했습니다(원우회비 5학기 75만원 별도)."},
+ note:" 총원율 61.4% — 2025년 86명만 등록했고 정원을 크게 못 채웠음. 서울 상위권 중 실질 진입 난이도가 가장 낮은 축. 재학생 415명으로 규모는 큼. 주말 수업 없이 평일 야간만 운영. <b>학교 공지(2026-1학기) 기준 수업료 6,406,000원 + 원우회비 150,000원 = 학기당 6,556,000원</b>이며, 표의 총액에는 수업료만 반영했습니다(원우회비 5학기 75만원 별도)."},
 
 {s:"서강대학교", g:"AI·SW대학원", m:"데이터사이언스전공", mdesc:"Data Science",
  c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:6406000, cr:1.83, fr:61.4, qt:null, apply:"2026.10~11 예상",
@@ -507,7 +507,7 @@ const RAW = [
  c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:53, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/13~5/7 · 면접 5/15(19시) · 발표 5/20 · 등록 7/7~9 · 전형료 7만원",
  site:"https://itmba.ssu.ac.kr/", tags:["ai"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접 · 재직증명서",
- note:"⭐ 가성비 1순위. 학기당 515만원으로 서울 사립 중 최저 수준, 5학기 기준 총 2,575만원. 2026학년도부터 등록학기가 5학기 → <b>4학기로 단축될 예정</b>이라 실부담은 2,060만원까지 내려갈 수 있음. 총원율 100%(정원 완전 충족)이라 학사 운영이 안정적. 상도동 캠퍼스 야간. 학교 네임밸류는 SKY 대비 낮음."},
+ note:" 가성비 1순위. 학기당 515만원으로 서울 사립 중 최저 수준, 5학기 기준 총 2,575만원. 2026학년도부터 등록학기가 5학기 → <b>4학기로 단축될 예정</b>이라 실부담은 2,060만원까지 내려갈 수 있음. 총원율 100%(정원 완전 충족)이라 학사 운영이 안정적. 상도동 캠퍼스 야간. 학교 네임밸류는 SKY 대비 낮음."},
 
 {s:"숭실대학교", g:"정보과학대학원", m:"소프트웨어공학과", mdesc:"Software Engineering",
  c:"한국", r:"서울", t:"특수", mo:"야간", tm:5, ty:5150000, cr:2.33, fr:100, qt:48, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/13~5/7 · 면접 5/15(19시) · 발표 5/20 · 등록 7/7~9 · 전형료 7만원",
@@ -537,13 +537,13 @@ const RAW = [
  c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:6472000, adm:1029000, cr:1.87, fr:111.1, qt:48, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/29~5/14 · 서류 ~5/15 · 면접 5/23 · 발표 6/11 · 등록 6/30~7/3",
  site:"https://swgs.kookmin.ac.kr/", tags:["ai","online"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접 · 별도 필기시험 없음 (문의 02-910-4772)",
- note:"⚠️ <b>2026 공식 모집요강 기준 수업연한이 2년(4학기)</b>이며 수업료 6,472,000원 + 입학금 1,029,000원 → 총 2,692만원. (일부 블로그에 도는 ‘1.5년·3학기’ 정보는 옛 자료로 확인됨.) 평일 비대면 + 토요일 대면 운영. 총원율 111.1%로 정원 초과 모집이라 경쟁률 1.87:1 대비 진입은 수월. 전형은 서류 40점 + 면접 60점."},
+ note:" <b>2026 공식 모집요강 기준 수업연한이 2년(4학기)</b>이며 수업료 6,472,000원 + 입학금 1,029,000원 → 총 2,692만원. (일부 블로그에 도는 ‘1.5년·3학기’ 정보는 옛 자료로 확인됨.) 평일 비대면 + 토요일 대면 운영. 총원율 111.1%로 정원 초과 모집이라 경쟁률 1.87:1 대비 진입은 수월. 전형은 서류 40점 + 면접 60점."},
 
 {s:"국민대학교", g:"소프트웨어융합대학원", m:"인공지능응용전공", mdesc:"AI Application (100% 온라인)",
  c:"한국", r:"서울", t:"특수", mo:"온라인", tm:4, ty:6472000, adm:514000, cr:1.87, fr:111.1, qt:51, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/29~5/14 · 서류 ~5/15 · 면접 5/23 · 발표 6/11 · 등록 6/30~7/3",
  site:"https://swgs.kookmin.ac.kr/", tags:["ai","online"],
  req:"4년제 학사 또는 취득예정 · 서류 + 면접",
- note:"⭐ <b>100% 비대면 — 면접까지 Zoom으로 진행</b>하는 유일한 국내 옵션이라 수도권 밖·출장 잦은 경우에 강함. 입학금이 오프라인(1,029천원)의 절반인 514천원이라 총액도 51만원 저렴. 정원 51명으로 학과 중 최대. 단, 수업연한이 공식 요강에 명시되지 않아 4학기로 계산했으니 지원 전 확인 필요(02-910-6642)."},
+ note:" <b>100% 비대면 — 면접까지 Zoom으로 진행</b>하는 유일한 국내 옵션이라 수도권 밖·출장 잦은 경우에 강함. 입학금이 오프라인(1,029천원)의 절반인 514천원이라 총액도 51만원 저렴. 정원 51명으로 학과 중 최대. 단, 수업연한이 공식 요강에 명시되지 않아 4학기로 계산했으니 지원 전 확인 필요(02-910-6642)."},
 
 {s:"국민대학교", g:"소프트웨어융합대학원", m:"소프트웨어전공", mdesc:"Software (오프라인)",
  c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:6472000, adm:1029000, cr:1.87, fr:111.1, qt:27, apply:"2026.10~11 예상", applyRef:"2026 후기 확정: 접수 4/29~5/14 · 서류 ~5/15 · 면접 5/23 · 발표 6/11 · 등록 6/30~7/3",
@@ -554,7 +554,7 @@ const RAW = [
 {s:"이화여자대학교", g:"데이터사이언스대학원", m:"데이터사이언스학과", mdesc:"Data Science",
  c:"한국", r:"서울", t:"특수", mo:"하이브리드", tm:4, ty:6916000, adm:1090000, cr:null, fr:null, qt:null, apply:"2026.10~11 예상",
  site:"https://gsds.ewha.ac.kr/", tags:["data"],
- req:"4년제 학사 · ⚠️ 여성만 지원 가능 · 서류 + 면접 (문의 02-3277-2182)",
+ req:"4년제 학사 ·  여성만 지원 가능 · 서류 + 면접 (문의 02-3277-2182)",
  note:"2022년 3월 개원한 신생 대학원. 토요일 대면 + 평일 비대면 운영으로 직장 병행 설계가 잘 되어 있음. <b>학교 공지 기준 입학금 1,090,000원 + 수업료 6,916,000원/학기</b>(2024-2 신입생 기준이라 현재는 소폭 인상됐을 수 있음). 경쟁률·총원율은 여전히 미공시. 남성 지원 불가."},
 
 {s:"한양대학교", g:"공학대학원", m:"전기·전자·컴퓨터공학과", mdesc:"Electrical, Electronic & Computer Eng.",
@@ -573,7 +573,7 @@ const RAW = [
  c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:3676000, cr:2.52, fr:105.8, qt:45, apply:"2026.10~11 예상",
  site:"https://www.uos.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접",
- note:"⭐ 공립이라 학비가 압도적으로 쌈 — 학기당 368만원, 총 1,470만원. 총원율 105.8%로 정원 초과 충원될 만큼 인기. 경쟁률 2.52:1. 서울 동대문구, 야간. 가성비 기준 서울권 최상위권."},
+ note:" 공립이라 학비가 압도적으로 쌈 — 학기당 368만원, 총 1,470만원. 총원율 105.8%로 정원 초과 충원될 만큼 인기. 경쟁률 2.52:1. 서울 동대문구, 야간. 가성비 기준 서울권 최상위권."},
 
 {s:"서울시립대학교", g:"과학기술대학원", m:"전자전기컴퓨터공학과", mdesc:"Electronics, Electrical & Computer Eng.",
  c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:3676000, cr:2.52, fr:105.8, qt:34, apply:"2026.10~11 예상",
@@ -585,19 +585,19 @@ const RAW = [
  c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:2808000, cr:4.97, fr:95, qt:20, apply:"2026.10~11 예상",
  site:"https://gsi.seoultech.ac.kr/", tags:["data"],
  req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
- note:"⭐ 국내 최저가 — 학기당 281만원, 총 학비 약 1,123만원. 대신 경쟁률 4.97:1로 표에서 가장 높은 축(가성비 소문 때문). 국립, 노원구 공릉동 야간. 계열이 '인문사회(경영정보)'라 순수 공학 석사 학위를 원하면 확인 필요."},
+ note:" 국내 최저가 — 학기당 281만원, 총 학비 약 1,123만원. 대신 경쟁률 4.97:1로 표에서 가장 높은 축(가성비 소문 때문). 국립, 노원구 공릉동 야간. 계열이 '인문사회(경영정보)'라 순수 공학 석사 학위를 원하면 확인 필요."},
 
 {s:"광운대학교", g:"스마트융합대학원", m:"정보융합시스템 (정보시스템학과)", mdesc:"Information Convergence Systems",
  c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:5704000, cr:0.78, fr:58, qt:53, apply:"2026.10~11 예상",
  site:"https://compro.kw.ac.kr/", tags:["cs","data"],
  req:"4년제 학사 · 서류 + 면접 · 필기시험 없음",
- note:"⭐ 경쟁률 0.78:1 — 지원자가 정원보다 적은 미달 상태. 총원율 58%. 표 안에서 진입 난이도가 사실상 가장 낮은 서울권 옵션. 총 학비 2,282만원. 학교 네임밸류가 우선순위가 아니고 '일단 석사 학위 + 커리큘럼'이 목적이면 현실적 후보."},
+ note:" 경쟁률 0.78:1 — 지원자가 정원보다 적은 미달 상태. 총원율 58%. 표 안에서 진입 난이도가 사실상 가장 낮은 서울권 옵션. 총 학비 2,282만원. 학교 네임밸류가 우선순위가 아니고 '일단 석사 학위 + 커리큘럼'이 목적이면 현실적 후보."},
 
 {s:"건국대학교", g:"정보통신대학원", m:"인공지능전공 등 5개 전공", mdesc:"AI · 정보보안 · 블록체인 · IoT · 메타버스융합",
  c:"한국", r:"서울", t:"특수", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null, apply:"2026.10~11 예상",
  site:"https://www.konkuk.ac.kr/", tags:["cs"],
  req:"4년제 학사 · 서류 + 면접 · 상세 요강은 학교 문의",
- note:"학교 홈페이지 확인 결과 <b>정보보안·블록체인·사물인터넷·인공지능·메타버스융합 5개 전공</b> 운영. ⚠️ 등록금은 공지·요강 어디에도 금액이 없고 학사시스템 고지서로만 확인 가능 — 행정실(02-450-3261) 문의 필요. 경쟁률·총원율도 미공시."},
+ note:"학교 홈페이지 확인 결과 <b>정보보안·블록체인·사물인터넷·인공지능·메타버스융합 5개 전공</b> 운영.  등록금은 공지·요강 어디에도 금액이 없고 학사시스템 고지서로만 확인 가능 — 행정실(02-450-3261) 문의 필요. 경쟁률·총원율도 미공시."},
 
 /* ── 수도권 ──────────────────────────────────── */
 {s:"인하대학교", g:"공학대학원", m:"인공지능융합전공", mdesc:"AI Convergence",
@@ -622,7 +622,7 @@ const RAW = [
  c:"한국", r:"경기", t:"특수", mo:"하이브리드", tm:4, ty:6150000, cr:1.29, fr:91.8, qt:366, apply:"2026.10~11 예상",
  site:"https://ict.ajou.ac.kr/", tags:["cs","ai"],
  req:"4년제 학사 · 서류 + 면접 · 재직증명서",
- note:"⭐ 재학생 670명 · 정원 366명으로 국내 최대급 규모 → 붙기 쉬움(경쟁률 1.29:1). 총 학비 2,460만원. 온·오프 혼합 수업 옵션이 있어 수원·화성권 근무자에게 유리. 장학금 연 22억 규모. 2024 취업률 95.1%."},
+ note:" 재학생 670명 · 정원 366명으로 국내 최대급 규모 → 붙기 쉬움(경쟁률 1.29:1). 총 학비 2,460만원. 온·오프 혼합 수업 옵션이 있어 수원·화성권 근무자에게 유리. 장학금 연 22억 규모. 2024 취업률 95.1%."},
 
 {s:"아주대학교", g:"공학대학원", m:"산업데이터시스템전공", mdesc:"Industrial Data Systems",
  c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:5600000, cr:1.24, fr:123.3, qt:28, apply:"2026.10~11 예상",
@@ -640,7 +640,7 @@ const RAW = [
  c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:1.2, fr:85, qt:40, apply:"2026.10~11 예상",
  site:"https://www.tukorea.ac.kr/", tags:["data"],
  req:"4년제 학사 · 서류 + 면접 · 재직자 중심",
- note:"시흥/안산 산업단지 배후 대학원이라 제조·엔지니어링 직군 재직자가 많음. 경쟁률 1.2:1로 낮음. 모집요강상 <b>입학금 700,000원</b>이고 특수대학원 수업료는 400만원대 초반으로 표기돼 있으나 ⚠️ PDF 숫자 일부가 판독되지 않아 총액 집계에서 제외했습니다(교학팀 031-8041-1000). 공무원·공공기관 재직자 등록금 30~70% 감면, 가족회사 재직자 20% 감면 장학금 있음."},
+ note:"시흥/안산 산업단지 배후 대학원이라 제조·엔지니어링 직군 재직자가 많음. 경쟁률 1.2:1로 낮음. 모집요강상 <b>입학금 700,000원</b>이고 특수대학원 수업료는 400만원대 초반으로 표기돼 있으나  PDF 숫자 일부가 판독되지 않아 총액 집계에서 제외했습니다(교학팀 031-8041-1000). 공무원·공공기관 재직자 등록금 30~70% 감면, 가족회사 재직자 20% 감면 장학금 있음."},
 
 {s:"인천대학교", g:"정보기술대학원", m:"정보기술 계열 (3개 전공)", mdesc:"Information Technology",
  c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:null, cr:null, fr:null, qt:null, apply:"2026.10~11 예상",
@@ -652,7 +652,7 @@ const RAW = [
  c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:4379000, adm:840000, cr:0.64, fr:57.1, qt:14, apply:"2026.10~11 예상",
  site:"https://www.ptu.ac.kr/", tags:["ai"],
  req:"4년제 학사 · 서류 + 면접",
- note:"경쟁률 0.64:1(미달), 총원율 57.1%. 정원 14명 소규모. ⭐ <b>모집요강상 전 재학생 수업료 30% 기본 감면</b>(장학금 신청서 없이도 적용)이라 실부담은 학기 약 307만원 · 총 1,310만원 수준으로 내려감. 표의 총액은 감면 전 정가 기준. 평택·안성권 근무자에게 현실적인 선택지."},
+ note:"경쟁률 0.64:1(미달), 총원율 57.1%. 정원 14명 소규모.  <b>모집요강상 전 재학생 수업료 30% 기본 감면</b>(장학금 신청서 없이도 적용)이라 실부담은 학기 약 307만원 · 총 1,310만원 수준으로 내려감. 표의 총액은 감면 전 정가 기준. 평택·안성권 근무자에게 현실적인 선택지."},
 
 {s:"한양대학교(ERICA)", g:"융합산업대학원", m:"IT·데이터 계열", mdesc:"Convergence Industry",
  c:"한국", r:"경기", t:"특수", mo:"야간", tm:4, ty:null, cr:1.29, fr:88.9, qt:135, apply:"2026.10~11 예상",
@@ -665,7 +665,7 @@ const RAW = [
  c:"한국", r:"온라인", t:"특수", mo:"온라인", tm:5, ty:1303000, adm:177000, cr:2.0, fr:null, qt:null, apply:"2026.10~11 예상",
  site:"https://bsgrad.knou.ac.kr/", tags:["data","online"],
  req:"4년제 학사 또는 동등 학력 · 서류 + 면접 · 별도 필기시험 없음 (문의 02-3668-4347)",
- note:"⭐ <b>입학금 177,000원 + 수업료 1,303,000원/학기 → 5학기 전부 다녀도 총 669만원.</b> 2위인 서울과기대(1,123만원)의 절반, 연세대(4,272만원)의 1/6로 압도적 국내 최저. 100% 비대면이라 출장·야근·지방 근무 어떤 상황에서도 유지 가능. 대신 네임밸류와 네트워킹·연구 경험은 기대하기 어려움. 경쟁률 약 2:1."}
+ note:" <b>입학금 177,000원 + 수업료 1,303,000원/학기 → 5학기 전부 다녀도 총 669만원.</b> 2위인 서울과기대(1,123만원)의 절반, 연세대(4,272만원)의 1/6로 압도적 국내 최저. 100% 비대면이라 출장·야근·지방 근무 어떤 상황에서도 유지 가능. 대신 네임밸류와 네트워킹·연구 경험은 기대하기 어려움. 경쟁률 약 2:1."}
 
 ];
 
@@ -824,7 +824,7 @@ function render(rows){
 
   $("#cards").innerHTML = rows.map(d => {
     const cl = compLevel(d.cr);
-    const color = d.r === "서울" ? "#0ea5e9" : (d.r === "온라인" ? "#10b981" : "#8b5cf6");
+    const color = d.r === "서울" ? "#0E7C94" : (d.r === "온라인" ? "#0E7C94" : "#5C7A85");
     return `<div class="mcard" data-id="${d.id}" style="--c:${color}">
       <div class="top">
         <div><span class="sn">${esc(d.s)} · ${esc(d.g)}</span></div>
@@ -835,7 +835,7 @@ function render(rows){
         <span class="pill p-mode">${esc(d.mo)}</span>
         <span class="pill p-mode">${esc(d.r)}</span>
         ${d.tm?`<span class="pill p-mode">${d.tm}학기</span>`:""}
-        <span class="apply${d.applyRef?" ok":""}">🗓 ${esc(d.apply)}</span>
+        <span class="apply${d.applyRef?" ok":""}"> ${esc(d.apply)}</span>
       </div>
       <div class="kv">
         <div><div class="k">총 학비</div><div class="v" style="color:${color}">${d.tot!=null?esc(won(d.tot)):"–"}</div></div>
@@ -859,7 +859,7 @@ function openSheet(id){
         <h2>${esc(d.m)}</h2>
         <p class="ssub">${esc(d.s)} · ${esc(d.g)}${d.mdesc?` · ${esc(d.mdesc)}`:""}</p>
       </div>
-      <button class="xbtn" id="closeX" aria-label="닫기">✕</button>
+      <button class="xbtn" id="closeX" aria-label="닫기"></button>
     </div>
     <div class="tagrow">
       <span class="pill p-${esc(d.t)}">${esc(d.t)}대학원</span>
@@ -875,9 +875,9 @@ function openSheet(id){
       <div class="box"><div class="k">총원율</div><div class="v">${d.fr!=null?d.fr+"<small>%</small>":"미공시"}</div></div>
       <div class="box"><div class="k">모집인원</div><div class="v">${d.qt!=null?d.qt+"<small>명</small>":"–"}</div></div>
     </div>
-    <div class="sec"><h4>🗓 원서접수 일정</h4><p><b>다음 회차: ${esc(d.apply)}</b><br><span style="font-size:12.5px">${d.applyRef?esc(d.applyRef):"이 학교의 확정 일정은 아직 확인하지 못했습니다. 국내 특수대학원 일반 주기(전기 10~11월 접수 · 후기 4~5월 접수) 기준 추정입니다."}</span></p></div>
-    <div class="sec"><h4>✅ 입학 시 필요한 것</h4><p>${esc(d.req)}</p></div>
-    <div class="sec"><h4>💬 비고 · 의견</h4><p>${d.note||""}</p></div>
+    <div class="sec"><h4> 원서접수 일정</h4><p><b>다음 회차: ${esc(d.apply)}</b><br><span style="font-size:12.5px">${d.applyRef?esc(d.applyRef):"이 학교의 확정 일정은 아직 확인하지 못했습니다. 국내 특수대학원 일반 주기(전기 10~11월 접수 · 후기 4~5월 접수) 기준 추정입니다."}</span></p></div>
+    <div class="sec"><h4> 입학 시 필요한 것</h4><p>${esc(d.req)}</p></div>
+    <div class="sec"><h4> 비고 · 의견</h4><p>${d.note||""}</p></div>
     <a class="gobtn" href="${esc(d.site)}" target="_blank" rel="noopener">학교 사이트 열기 ↗</a>
   `;
   $("#mask").classList.add("show");
@@ -956,32 +956,26 @@ document.querySelectorAll(".chip").forEach(chip => {
   const easiest  = DATA.filter(d => d.cr != null).sort((a,b)=>a.cr-b.cr)[0];
   const hardest  = DATA.filter(d => d.cr != null).sort((a,b)=>b.cr-a.cr)[0];
   $("#stats").innerHTML = `
-    <div class="stat" style="--c:#0284c7"><div class="lab">전체 프로그램</div><div class="val">${DATA.length}<small>개</small></div></div>
-    <div class="stat" style="--c:#14b8a6"><div class="lab">서울 / 그 외</div><div class="val">${seoul.length} <small>/</small> ${etc.length}</div><div class="lab">${new Set(DATA.map(d=>d.s)).size}개 대학</div></div>
-    <div class="stat" style="--c:#10b981"><div class="lab">최저 총 학비</div><div class="val">${won(cheapest.tot)}</div><div class="lab">${cheapest.s}</div></div>
-    <div class="stat" style="--c:#f59e0b"><div class="lab">경쟁률 최저</div><div class="val">${easiest.cr.toFixed(2)}:1</div><div class="lab">${easiest.s}</div></div>
-    <div class="stat" style="--c:#f43f5e"><div class="lab">경쟁률 최고</div><div class="val">${hardest.cr.toFixed(2)}:1</div><div class="lab">${hardest.s}</div></div>
+    <div class="stat" style="--c:#0E7C94"><div class="lab">전체 프로그램</div><div class="val">${DATA.length}<small>개</small></div></div>
+    <div class="stat" style="--c:#0E7C94"><div class="lab">서울 / 그 외</div><div class="val">${seoul.length} <small>/</small> ${etc.length}</div><div class="lab">${new Set(DATA.map(d=>d.s)).size}개 대학</div></div>
+    <div class="stat" style="--c:#0E7C94"><div class="lab">최저 총 학비</div><div class="val">${won(cheapest.tot)}</div><div class="lab">${cheapest.s}</div></div>
+    <div class="stat" style="--c:#5C7A85"><div class="lab">경쟁률 최저</div><div class="val">${easiest.cr.toFixed(2)}:1</div><div class="lab">${easiest.s}</div></div>
+    <div class="stat" style="--c:#0E7C94"><div class="lab">경쟁률 최고</div><div class="val">${hardest.cr.toFixed(2)}:1</div><div class="lab">${hardest.s}</div></div>
   `;
 })();
 
 apply();
 </script>
 
-<a class="fab-today" href="study_calendar.html" aria-label="오늘 할 일">
-  <span class="fi">📅</span><span class="ft">오늘 할 일</span>
-</a>
+
+<a class="fab-today" href="study_calendar.html">오늘 할 일</a>
 <style>
-.fab-today{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:90;
- display:inline-flex;align-items:center;gap:8px;text-decoration:none;
- background:linear-gradient(135deg,#14b8a6,#0f766e);color:#fff;font-weight:800;font-size:13.5px;
- font-family:"Noto Sans KR",-apple-system,sans-serif;padding:12px 18px;border-radius:999px;
- box-shadow:0 6px 20px rgba(15,118,110,.34),0 2px 6px rgba(0,0,0,.10);
- transition:transform .15s ease,box-shadow .15s ease}
-.fab-today:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(15,118,110,.40)}
-.fab-today:active{transform:translateY(0) scale(.97)}
-.fab-today .fi{font-size:17px;line-height:1}
-@media(max-width:480px){.fab-today{padding:13px 15px}.fab-today .ft{display:none}}
-@media(prefers-reduced-motion:reduce){.fab-today{transition:none}}
+.fab-today{position:fixed;right:24px;bottom:calc(24px + env(safe-area-inset-bottom));z-index:90;
+ display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:6px;
+ background:#0E7C94;border:1px solid #0E7C94;color:#fff;font-family:var(--sans);font-size:14px;font-weight:500;
+ text-decoration:none;box-shadow:0 1px 3px rgba(26,46,53,.06);transition:background-color .2s ease,border-color .2s ease}
+.fab-today:hover{background:#0a5f72;border-color:#0a5f72;color:#fff}
+@media(max-width:640px){.fab-today{right:16px;bottom:calc(16px + env(safe-area-inset-bottom))}}
 </style>
 </body>
 </html>

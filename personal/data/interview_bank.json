@@ -18,27 +18,144 @@
       "질문 수가 많다고 다 준비할 필요는 없다. priority 필드가 3인 것부터."
     ]
   },
-
   "sources": [
-    { "id": "s1",  "title": "한양대학교 인공지능학과 석박사통합과정 면접 후기", "author": "Ohjinjin's DevLog", "url": "https://ohjinjin.github.io/etc/phdms-2/", "kind": "후기", "school": "한양대(일반대학원)" },
-    { "id": "s2",  "title": "인공지능 대학원 면접 보고왔는데 어떨까요? (한양대)", "author": "김박사넷 커뮤니티", "url": "https://phdkim.net/board/free/49823", "kind": "후기", "school": "한양대(일반대학원)" },
-    { "id": "s3",  "title": "성균관대학교 정보통신대학원 빅데이터학과 면접 후기 (2025.11.08)", "author": "velog @gohomebb", "url": "https://velog.io/@gohomebb/성균관대학교-정보통신대학원-빅데이터학과-면접-후기", "kind": "후기", "school": "성균관대(특수대학원)" },
-    { "id": "s4",  "title": "비전공자 입문 — 서강대 정보통신대학원(데이터사이언스·인공지능) 합격 후기", "author": "velog @yyk9612", "url": "https://velog.io/@yyk9612/비전공자-입문-서강대-정보통신대학원데이터-사이언스-인공지능-합격-후기-비전공자-준비-과정", "kind": "후기", "school": "서강대(특수대학원)" },
-    { "id": "s5",  "title": "공학대학원 입학 후기 (국민대·연세대·한양대 지원)", "author": "velog @seoyong-lee", "url": "https://velog.io/@seoyong-lee/공학대학원-입학-후기", "kind": "후기", "school": "국민대·연세대·한양대(특수대학원)" },
-    { "id": "s6",  "title": "AI 대학원 예상 면접 문제", "author": "velog @jhlim2993", "url": "https://velog.io/@jhlim2993/Kaist-AI-대학원-예상-면접-문제", "kind": "질문은행", "school": "공통" },
-    { "id": "s7",  "title": "인공지능 대학원 면접 대비", "author": "velog @yoonjuhan", "url": "https://velog.io/@yoonjuhan/인공지능-대학원-면접-대비-AI-통계", "kind": "질문은행", "school": "공통" },
-    { "id": "s8",  "title": "ai-tech-interview (AI 엔지니어 기술 면접 스터디, ⭐2k+)", "author": "boost-devs", "url": "https://github.com/boost-devs/ai-tech-interview", "kind": "질문은행", "school": "공통" },
-    { "id": "s9",  "title": "국민대학교 소프트웨어융합대학원 인공지능응용전공 면접 질문·기출 문항 자료", "author": "reportworld", "url": "https://www.reportworld.co.kr/thema/t6138267", "kind": "기출자료", "school": "국민대(특수대학원)" },
-    { "id": "s10", "title": "KAIST AI 대학원 합격 후기 (2026 봄학기)", "author": "velog @hewas1230", "url": "https://velog.io/@hewas1230/kaist-admission", "kind": "후기", "school": "KAIST" },
-    { "id": "s11", "title": "한양대 인공지능융합대학원 — 면접 안내 (공식)", "author": "gsai.hanyang.ac.kr", "url": "https://gsai.hanyang.ac.kr/front/admissionguide/application/interview", "kind": "공식", "school": "한양대(특수대학원)" },
-    { "id": "s12", "title": "대학원 면접 예상 질문 리스트와 복장 총정리", "author": "물어볼Lab", "url": "https://asklab.kr/guide/grad-school-interview", "kind": "질문은행", "school": "공통" },
-    { "id": "s13", "title": "ai대학원 면접 질문 (스레드)", "author": "김박사넷 커뮤니티", "url": "https://phdkim.net/board/free/17337/", "kind": "후기", "school": "고려대·공통" },
-    { "id": "s14", "title": "고려대 AI 대학원 전공 면접 예상 핵심 질문 자료", "author": "happycampus", "url": "https://www.happycampus.com/intro-doc/30277175/", "kind": "기출자료", "school": "고려대(일반대학원)" },
-    { "id": "s15", "title": "2026 전기 신입학 정시모집 면접전형 안내 (공식)", "author": "국민대 소프트웨어융합대학원", "url": "https://swgs.kookmin.ac.kr/swgs/notice/notice.do?mode=view&articleNo=5931963", "kind": "공식", "school": "국민대(특수대학원)" },
-    { "id": "s16", "title": "#1. 대학원 들어갔다 (고려대 컴퓨터정보통신대학원 빅데이터융합)", "author": "brunch @mokham", "url": "https://brunch.co.kr/@mokham/6", "kind": "후기", "school": "고려대(특수대학원)" },
-    { "id": "s17", "title": "고려대 인공지능학과 대학원 면접 질문! (스레드)", "author": "김박사넷 커뮤니티", "url": "https://phdkim.net/board/free/50360", "kind": "후기", "school": "고려대(일반대학원)" }
+    {
+      "id": "s1",
+      "title": "한양대학교 인공지능학과 석박사통합과정 면접 후기",
+      "author": "Ohjinjin's DevLog",
+      "url": "https://ohjinjin.github.io/etc/phdms-2/",
+      "kind": "후기",
+      "school": "한양대(일반대학원)"
+    },
+    {
+      "id": "s2",
+      "title": "인공지능 대학원 면접 보고왔는데 어떨까요? (한양대)",
+      "author": "김박사넷 커뮤니티",
+      "url": "https://phdkim.net/board/free/49823",
+      "kind": "후기",
+      "school": "한양대(일반대학원)"
+    },
+    {
+      "id": "s3",
+      "title": "성균관대학교 정보통신대학원 빅데이터학과 면접 후기 (2025.11.08)",
+      "author": "velog @gohomebb",
+      "url": "https://velog.io/@gohomebb/성균관대학교-정보통신대학원-빅데이터학과-면접-후기",
+      "kind": "후기",
+      "school": "성균관대(특수대학원)"
+    },
+    {
+      "id": "s4",
+      "title": "비전공자 입문 — 서강대 정보통신대학원(데이터사이언스·인공지능) 합격 후기",
+      "author": "velog @yyk9612",
+      "url": "https://velog.io/@yyk9612/비전공자-입문-서강대-정보통신대학원데이터-사이언스-인공지능-합격-후기-비전공자-준비-과정",
+      "kind": "후기",
+      "school": "서강대(특수대학원)"
+    },
+    {
+      "id": "s5",
+      "title": "공학대학원 입학 후기 (국민대·연세대·한양대 지원)",
+      "author": "velog @seoyong-lee",
+      "url": "https://velog.io/@seoyong-lee/공학대학원-입학-후기",
+      "kind": "후기",
+      "school": "국민대·연세대·한양대(특수대학원)"
+    },
+    {
+      "id": "s6",
+      "title": "AI 대학원 예상 면접 문제",
+      "author": "velog @jhlim2993",
+      "url": "https://velog.io/@jhlim2993/Kaist-AI-대학원-예상-면접-문제",
+      "kind": "질문은행",
+      "school": "공통"
+    },
+    {
+      "id": "s7",
+      "title": "인공지능 대학원 면접 대비",
+      "author": "velog @yoonjuhan",
+      "url": "https://velog.io/@yoonjuhan/인공지능-대학원-면접-대비-AI-통계",
+      "kind": "질문은행",
+      "school": "공통"
+    },
+    {
+      "id": "s8",
+      "title": "ai-tech-interview (AI 엔지니어 기술 면접 스터디, 2k+)",
+      "author": "boost-devs",
+      "url": "https://github.com/boost-devs/ai-tech-interview",
+      "kind": "질문은행",
+      "school": "공통"
+    },
+    {
+      "id": "s9",
+      "title": "국민대학교 소프트웨어융합대학원 인공지능응용전공 면접 질문·기출 문항 자료",
+      "author": "reportworld",
+      "url": "https://www.reportworld.co.kr/thema/t6138267",
+      "kind": "기출자료",
+      "school": "국민대(특수대학원)"
+    },
+    {
+      "id": "s10",
+      "title": "KAIST AI 대학원 합격 후기 (2026 봄학기)",
+      "author": "velog @hewas1230",
+      "url": "https://velog.io/@hewas1230/kaist-admission",
+      "kind": "후기",
+      "school": "KAIST"
+    },
+    {
+      "id": "s11",
+      "title": "한양대 인공지능융합대학원 — 면접 안내 (공식)",
+      "author": "gsai.hanyang.ac.kr",
+      "url": "https://gsai.hanyang.ac.kr/front/admissionguide/application/interview",
+      "kind": "공식",
+      "school": "한양대(특수대학원)"
+    },
+    {
+      "id": "s12",
+      "title": "대학원 면접 예상 질문 리스트와 복장 총정리",
+      "author": "물어볼Lab",
+      "url": "https://asklab.kr/guide/grad-school-interview",
+      "kind": "질문은행",
+      "school": "공통"
+    },
+    {
+      "id": "s13",
+      "title": "ai대학원 면접 질문 (스레드)",
+      "author": "김박사넷 커뮤니티",
+      "url": "https://phdkim.net/board/free/17337/",
+      "kind": "후기",
+      "school": "고려대·공통"
+    },
+    {
+      "id": "s14",
+      "title": "고려대 AI 대학원 전공 면접 예상 핵심 질문 자료",
+      "author": "happycampus",
+      "url": "https://www.happycampus.com/intro-doc/30277175/",
+      "kind": "기출자료",
+      "school": "고려대(일반대학원)"
+    },
+    {
+      "id": "s15",
+      "title": "2026 전기 신입학 정시모집 면접전형 안내 (공식)",
+      "author": "국민대 소프트웨어융합대학원",
+      "url": "https://swgs.kookmin.ac.kr/swgs/notice/notice.do?mode=view&articleNo=5931963",
+      "kind": "공식",
+      "school": "국민대(특수대학원)"
+    },
+    {
+      "id": "s16",
+      "title": "#1. 대학원 들어갔다 (고려대 컴퓨터정보통신대학원 빅데이터융합)",
+      "author": "brunch @mokham",
+      "url": "https://brunch.co.kr/@mokham/6",
+      "kind": "후기",
+      "school": "고려대(특수대학원)"
+    },
+    {
+      "id": "s17",
+      "title": "고려대 인공지능학과 대학원 면접 질문! (스레드)",
+      "author": "김박사넷 커뮤니티",
+      "url": "https://phdkim.net/board/free/50360",
+      "kind": "후기",
+      "school": "고려대(일반대학원)"
+    }
   ],
-
   "schools": [
     {
       "id": "hanyang_gsai",
@@ -58,7 +175,11 @@
       "weight": "서류·학업계획서 비중 큼 / 면접은 확인 성격으로 추정",
       "watch_out": "웹에서 보이는 '교수 3:1 · 자료구조·ML 전공질문' 후기는 한양대 **일반대학원 인공지능학과** 사례다. 혼동 금지.",
       "contact": "02-2220-0237 / hygsai@hanyang.ac.kr",
-      "sources": ["s11", "s1", "s2"]
+      "sources": [
+        "s11",
+        "s1",
+        "s2"
+      ]
     },
     {
       "id": "hanyang_ai_general",
@@ -79,8 +200,15 @@
         "(개인 프로젝트에 대한 상세 질문)",
         "마지막으로 하고 싶은 말 있나요?"
       ],
-      "tips": ["정장 권장(과해서 나쁜 경우 드묾)", "논문·수상 보도자료 등 준비 자료 지참", "spanning tree·그래프이론 등 CS 기초 훑기"],
-      "sources": ["s1", "s2"]
+      "tips": [
+        "정장 권장(과해서 나쁜 경우 드묾)",
+        "논문·수상 보도자료 등 준비 자료 지참",
+        "spanning tree·그래프이론 등 CS 기초 훑기"
+      ],
+      "sources": [
+        "s1",
+        "s2"
+      ]
     },
     {
       "id": "kookmin_swgs",
@@ -103,7 +231,11 @@
         "인공지능 분야에서 본인이 갖춘 강점은 무엇이라고 생각하나요?",
         "석사 과정 이후 어떤 연구 또는 목표를 이루고 싶으신가요?"
       ],
-      "sources": ["s9", "s15", "s5"]
+      "sources": [
+        "s9",
+        "s15",
+        "s5"
+      ]
     },
     {
       "id": "skku_ict",
@@ -128,7 +260,9 @@
         "\"파이썬을 처음부터 가르치지 않는다. 파이썬으로 가르친다\"는 교수 발언이 회자됨",
         "2분 안에 끝나므로 자기소개 한 덩어리를 완성도 높게 준비하는 게 사실상 전부"
       ],
-      "sources": ["s3"]
+      "sources": [
+        "s3"
+      ]
     },
     {
       "id": "sogang_ict",
@@ -150,7 +284,9 @@
         "비전공자는 자격증(정보처리기사·ADsP 등) + 코딩 경험 조합이 설득력 있음",
         "학업계획서(2p)에 지원 동기와 연구 목표를 명확히"
       ],
-      "sources": ["s4"]
+      "sources": [
+        "s4"
+      ]
     },
     {
       "id": "yonsei_eng",
@@ -167,8 +303,13 @@
         "비전공자인데 수업을 따라갈 수 있겠는가?",
         "(데이터베이스 등) 전공 기초 지식 확인 — 입사 면접 수준보다 어렵지 않음"
       ],
-      "tips": ["공개된 커리큘럼을 보고 학업계획서를 짜야 면접 꼬리질문이 편해진다", "특수대학원은 장학금이 적어 학자금대출 이용이 흔함"],
-      "sources": ["s5"]
+      "tips": [
+        "공개된 커리큘럼을 보고 학업계획서를 짜야 면접 꼬리질문이 편해진다",
+        "특수대학원은 장학금이 적어 학자금대출 이용이 흔함"
+      ],
+      "sources": [
+        "s5"
+      ]
     },
     {
       "id": "korea_gscit",
@@ -181,7 +322,9 @@
         "notes": "원우 절대다수가 직장인. 추가합격(충원) 전화로 입학한 사례 있음"
       },
       "atmosphere": "비CS 전공(경영학 등)으로 첫 지원에서 탈락 후 재도전해 합격한 사례 존재 → 서류에서 '전환 서사'가 중요",
-      "sources": ["s16"]
+      "sources": [
+        "s16"
+      ]
     },
     {
       "id": "korea_ai_general",
@@ -198,8 +341,15 @@
         "간단한 자기소개",
         "졸업 후 무엇을 할 것인가"
       ],
-      "tips": ["일반대학원 지망이면 면접 준비보다 컨택이 먼저", "다만 전공 필기·구술을 따로 보는 회차도 있으므로 요강 확인 필수"],
-      "sources": ["s13", "s17", "s14"]
+      "tips": [
+        "일반대학원 지망이면 면접 준비보다 컨택이 먼저",
+        "다만 전공 필기·구술을 따로 보는 회차도 있으므로 요강 확인 필수"
+      ],
+      "sources": [
+        "s13",
+        "s17",
+        "s14"
+      ]
     },
     {
       "id": "ewha_ai",
@@ -230,237 +380,2663 @@
         "그 프로젝트에서 구체적으로 무엇을 했고 본인 기여는 무엇인가",
         "왜 이 분야를 택했는가"
       ],
-      "tips": ["제출 서류의 모든 문장에서 예상 질문을 뽑아 연습할 것"],
-      "sources": ["s10"]
+      "tips": [
+        "제출 서류의 모든 문장에서 예상 질문을 뽑아 연습할 것"
+      ],
+      "sources": [
+        "s10"
+      ]
     }
   ],
-
   "categories": [
-    { "id": "motive",  "name": "인성 · 지원동기 · 직장 병행", "emoji": "🎯", "color": "#8b5cf6", "note": "특수대학원 면접의 8할. 여기서 승부가 난다." },
-    { "id": "exp",     "name": "경험 · 이력 · 프로젝트",       "emoji": "🧪", "color": "#ec4899", "note": "제출 서류에 쓴 모든 문장이 질문이 된다." },
-    { "id": "plan",    "name": "학업계획 · 연구계획 · 진로",   "emoji": "🗺", "color": "#f59e0b", "note": "커리큘럼을 보고 쓴 티가 나야 한다." },
-    { "id": "linalg",  "name": "선형대수",                     "emoji": "📐", "color": "#6366f1", "note": "고유값·SVD·PCA 연결은 사실상 필수." },
-    { "id": "stat",    "name": "확률 · 통계",                  "emoji": "📊", "color": "#0ea5e9", "note": "편향-분산, MLE, CLT 3종이 단골." },
-    { "id": "ml",      "name": "머신러닝",                     "emoji": "🤖", "color": "#14b8a6", "note": "과적합·정규화·평가지표는 무조건." },
-    { "id": "dl",      "name": "딥러닝",                       "emoji": "🧠", "color": "#f97316", "note": "역전파·활성화함수·최적화기." },
-    { "id": "nlp",     "name": "NLP · 생성모델 · 최신 동향",   "emoji": "💬", "color": "#a855f7", "note": "Transformer/LLM 한 문단은 말할 수 있게." },
-    { "id": "py",      "name": "파이썬 · 프로그래밍",          "emoji": "🐍", "color": "#22c55e", "note": "비전공자 탈락 1순위 사유. 여기서 무너지면 끝." },
-    { "id": "cs",      "name": "자료구조 · 알고리즘 · CS",     "emoji": "🗂", "color": "#64748b", "note": "한양대 일반대학원에서 실제 출제." },
-    { "id": "closing", "name": "마무리 · 역질문",              "emoji": "🎬", "color": "#0d9488", "note": "마지막 30초가 인상을 결정한다." }
+    {
+      "id": "motive",
+      "name": "인성 · 지원동기 · 직장 병행",
+      "color": "#8b5cf6",
+      "note": "특수대학원 면접의 8할. 여기서 승부가 난다."
+    },
+    {
+      "id": "exp",
+      "name": "경험 · 이력 · 프로젝트",
+      "color": "#ec4899",
+      "note": "제출 서류에 쓴 모든 문장이 질문이 된다."
+    },
+    {
+      "id": "plan",
+      "name": "학업계획 · 연구계획 · 진로",
+      "color": "#f59e0b",
+      "note": "커리큘럼을 보고 쓴 티가 나야 한다."
+    },
+    {
+      "id": "linalg",
+      "name": "선형대수",
+      "color": "#6366f1",
+      "note": "고유값·SVD·PCA 연결은 사실상 필수."
+    },
+    {
+      "id": "stat",
+      "name": "확률 · 통계",
+      "color": "#0ea5e9",
+      "note": "편향-분산, MLE, CLT 3종이 단골."
+    },
+    {
+      "id": "ml",
+      "name": "머신러닝",
+      "color": "#14b8a6",
+      "note": "과적합·정규화·평가지표는 무조건."
+    },
+    {
+      "id": "dl",
+      "name": "딥러닝",
+      "color": "#f97316",
+      "note": "역전파·활성화함수·최적화기."
+    },
+    {
+      "id": "nlp",
+      "name": "NLP · 생성모델 · 최신 동향",
+      "color": "#a855f7",
+      "note": "Transformer/LLM 한 문단은 말할 수 있게."
+    },
+    {
+      "id": "py",
+      "name": "파이썬 · 프로그래밍",
+      "color": "#22c55e",
+      "note": "비전공자 탈락 1순위 사유. 여기서 무너지면 끝."
+    },
+    {
+      "id": "cs",
+      "name": "자료구조 · 알고리즘 · CS",
+      "color": "#64748b",
+      "note": "한양대 일반대학원에서 실제 출제."
+    },
+    {
+      "id": "closing",
+      "name": "마무리 · 역질문",
+      "color": "#0d9488",
+      "note": "마지막 30초가 인상을 결정한다."
+    }
   ],
-
   "questions": [
-    { "id": "q001", "cat": "motive", "tag": "real", "priority": 3, "q": "간단히 자기소개 부탁드립니다. (짧게, 1분 이내)", "schools": ["한양대", "성균관대", "고려대", "KAIST"], "src": ["s2", "s3", "s10", "s13"], "key": "① 현재 하는 일 ② 왜 AI가 필요해졌는지 ③ 이 대학원에서 무엇을 할지 — 3문장 구조. 이력 나열 금지.", "follow": ["방금 말한 그 문제, 좀 더 구체적으로?"] },
-    { "id": "q002", "cat": "motive", "tag": "real", "priority": 3, "q": "지원 동기가 무엇인가요? 원서에 쓴 것보다 구체적으로 말해주세요.", "schools": ["서강대", "성균관대", "국민대"], "src": ["s3", "s4", "s9"], "key": "'AI가 대세라서'는 즉시 감점. '내 도메인의 이 문제 → 기존 방법의 한계 → 그래서 이 방법론' 3단으로." },
-    { "id": "q003", "cat": "motive", "tag": "real", "priority": 3, "q": "회사를 다니면서 야간 수업에 참여하는 데 어려움은 없겠습니까?", "schools": ["연세대", "국민대", "성균관대", "고려대"], "src": ["s5", "s3"], "key": "'가능합니다'로 끝내지 말 것. 근무 형태·통학 시간·주말 학습 블록까지 숫자로 제시하면 신뢰가 생긴다.", "follow": ["야근이 잦은 직무인데 어떻게 할 건가요?", "가족의 동의는 받았나요?"] },
-    { "id": "q004", "cat": "motive", "tag": "real", "priority": 3, "q": "비전공자인데 수업을 따라갈 수 있겠습니까?", "schools": ["연세대", "서강대", "성균관대"], "src": ["s5", "s3", "s4"], "key": "이미 한 준비를 증거로 답한다 — 수강 완료한 강의명, 짠 코드, 자격증. '열심히 하겠습니다'는 무효." },
-    { "id": "q005", "cat": "motive", "tag": "real", "priority": 3, "q": "지금 어떤 회사에서 어떤 업무를 하고 계신가요?", "schools": ["성균관대"], "src": ["s3"], "key": "업무 설명 → 그 업무에서 데이터/AI가 닿는 접점 한 문장으로 반드시 착지." },
-    { "id": "q006", "cat": "motive", "tag": "real", "priority": 3, "q": "그동안 공부한 (빅데이터/AI) 주제는 무엇이고, 스스로 부족하다고 느끼는 부분은 무엇인가요?", "schools": ["성균관대"], "src": ["s3"], "key": "부족한 부분을 솔직히 + 그 결핍이 바로 이 대학원 커리큘럼의 어느 과목과 맞닿는지 연결." },
-    { "id": "q007", "cat": "motive", "tag": "doc", "priority": 3, "q": "인공지능 분야에 관심을 가지게 된 계기는 무엇인가요?", "schools": ["국민대"], "src": ["s9"], "key": "추상적 관심 말고 '사건' 하나. 특정 업무·프로젝트·데이터에서 막혔던 구체적 순간." },
-    { "id": "q008", "cat": "motive", "tag": "doc", "priority": 3, "q": "인공지능 분야에서 본인이 갖춘 강점은 무엇이라고 생각하나요?", "schools": ["국민대"], "src": ["s9"], "key": "비전공자의 최대 강점은 도메인. '이 데이터가 왜 이렇게 생겼는지 아는 사람'이라는 포지션." },
-    { "id": "q009", "cat": "motive", "tag": "bank", "priority": 3, "q": "왜 다른 학교가 아니라 우리 대학원인가요?", "schools": [], "src": ["s12"], "key": "커리큘럼 과목명 1~2개 + 교수 연구 분야 1개를 실명으로 언급. 이걸 못 하면 준비 안 한 티가 난다." },
-    { "id": "q010", "cat": "motive", "tag": "bank", "priority": 2, "q": "왜 지금 시점에 대학원인가요? 독학이나 부트캠프로는 안 되나요?", "schools": [], "src": ["s4"], "key": "'독학은 체계와 깊이에 한계가 있었다 + 논문을 쓰며 방법론을 검증하는 훈련이 필요하다'가 정석." },
-    { "id": "q011", "cat": "motive", "tag": "bank", "priority": 2, "q": "본인의 장점과 단점은 무엇인가요?", "schools": [], "src": ["s12"], "key": "단점은 반드시 '개선 중인 행동'과 함께. 치명적 단점(끈기 없음 등) 고르지 말 것." },
-    { "id": "q012", "cat": "motive", "tag": "bank", "priority": 2, "q": "다른 대학원에도 지원했나요? 붙으면 어디로 갈 건가요?", "schools": [], "src": ["s12"], "key": "거짓말하지 말되 '여기가 1순위인 이유'를 커리큘럼 근거로 덧붙인다." },
-    { "id": "q013", "cat": "motive", "tag": "derived", "priority": 2, "q": "학비가 적지 않은데 부담은 없나요? 재정 계획은?", "schools": [], "src": ["s5"], "key": "회사 지원/학자금대출 등 계획을 짧게. 중도포기 리스크가 없다는 신호를 주는 게 목적." },
-    { "id": "q014", "cat": "motive", "tag": "derived", "priority": 2, "q": "졸업 후에도 지금 회사에 계속 다닐 계획인가요? 이직이 목적인가요?", "schools": [], "src": ["s12"], "key": "특수대학원은 '현업 역량 강화'가 정답에 가깝다. 이직 목적을 노골적으로 말하면 마이너스." },
-    { "id": "q015", "cat": "motive", "tag": "bank", "priority": 2, "q": "학부 성적이 좋지 않은데 이유가 무엇인가요?", "schools": [], "src": ["s12"], "key": "변명 대신 사실 + 이후 회복 증거(자격증·실무 성과·최근 수강 이력)." },
-    { "id": "q016", "cat": "motive", "tag": "bank", "priority": 1, "q": "전공을 바꾸는 것에 대한 두려움은 없나요?", "schools": ["고려대"], "src": ["s13", "s16"], "key": "이미 전환을 위해 한 행동(공부량, 프로젝트)을 근거로 '두려움보다 준비'를 보여준다." },
-    { "id": "q017", "cat": "motive", "tag": "bank", "priority": 2, "q": "AI 기술이 사회에 미치는 영향, 또는 AI 윤리에 대해 어떻게 생각하나요?", "schools": ["국민대"], "src": ["s9"], "key": "편향·프라이버시·설명가능성 중 하나를 골라 자기 도메인 예시로. 뜬구름 금지." },
-    { "id": "q018", "cat": "motive", "tag": "bank", "priority": 1, "q": "AI 분야에서 가장 흥미롭다고 생각하는 연구 주제는 무엇인가요?", "schools": ["국민대"], "src": ["s9"], "key": "지원 학과에 실제 그 주제를 하는 교수가 있으면 최고. 없으면 최소한 커리큘럼과 겹치게." },
-    { "id": "q019", "cat": "motive", "tag": "bank", "priority": 1, "q": "스트레스는 어떻게 관리하나요? 힘들 때 어떻게 버티나요?", "schools": [], "src": ["s12"], "key": "직장+대학원 병행의 지속가능성을 보는 질문. 루틴을 구체적으로." },
-    { "id": "q020", "cat": "motive", "tag": "bank", "priority": 1, "q": "10년 뒤 본인의 모습을 그려본다면?", "schools": [], "src": ["s12"], "key": "직무명 + 그 자리에서 AI로 무엇을 하는지. 막연한 '전문가' 금지." },
-    { "id": "q021", "cat": "exp", "tag": "real", "priority": 3, "q": "진행했던 연구 또는 회사 업무에 대해 설명해 주세요.", "schools": ["KAIST", "한양대"], "src": ["s1", "s10"], "key": "문제 → 접근 → 결과 → 한계 4단. 한계를 스스로 말하면 신뢰도가 급상승한다." },
-    { "id": "q022", "cat": "exp", "tag": "real", "priority": 3, "q": "그 프로젝트에서 구체적으로 무엇을 했고, 본인의 기여는 무엇인가요?", "schools": ["KAIST"], "src": ["s10"], "key": "'우리가'가 아니라 '제가'로 말한다. 기여 비율과 담당 파트를 명확히." },
-    { "id": "q023", "cat": "exp", "tag": "doc", "priority": 3, "q": "인공지능 프로젝트를 수행했던 경험이 있다면 자세히 설명해 주세요.", "schools": ["국민대"], "src": ["s9"], "key": "작아도 좋으니 '내가 직접 돌린 것' 하나. 데이터 규모·모델·평가지표·결과 숫자까지." },
-    { "id": "q024", "cat": "exp", "tag": "bank", "priority": 3, "q": "석사 논문(또는 졸업 프로젝트) 주제가 무엇이었나요? 방법론을 설명해 주세요.", "schools": [], "src": ["s12", "s1"], "key": "석사 경험자는 여기가 최대 무기 — 실험 설계·통계 검정·논문 작성 경험을 AI 연구 훈련으로 번역." },
-    { "id": "q025", "cat": "exp", "tag": "bank", "priority": 2, "q": "그 방법론을 선택한 이유는? 다른 대안은 고려하지 않았나요?", "schools": [], "src": ["s12"], "key": "선택의 '이유'를 못 대면 따라 한 것으로 읽힌다. 대안 1개와 기각 사유를 준비." },
-    { "id": "q026", "cat": "exp", "tag": "bank", "priority": 2, "q": "실험 결과가 기대와 달랐던 경험이 있나요? 어떻게 대응했나요?", "schools": [], "src": ["s12"], "key": "실패 → 원인 가설 → 검증 → 배운 것. 연구 태도를 보는 질문." },
-    { "id": "q027", "cat": "exp", "tag": "doc", "priority": 2, "q": "팀 프로젝트에서 역할 분담과 협업 경험에 대해 이야기해 주세요.", "schools": ["국민대"], "src": ["s9"], "key": "갈등 하나 + 해결 방식. 무난한 팀워크 미담보다 낫다." },
-    { "id": "q028", "cat": "exp", "tag": "doc", "priority": 2, "q": "인공지능을 활용한 문제 해결 사례를 하나 소개해 주세요.", "schools": ["국민대"], "src": ["s9"], "key": "남의 사례여도 됨. 단, 왜 그 방법이 그 문제에 맞았는지까지 설명해야 점수." },
-    { "id": "q029", "cat": "exp", "tag": "doc", "priority": 2, "q": "인공지능 알고리즘 중 가장 익숙하거나 선호하는 것은 무엇이며, 그 이유는?", "schools": ["국민대"], "src": ["s9"], "key": "여기서 고른 알고리즘으로 꼬리질문이 들어온다. 가장 자신 있는 하나(예: 로지스틱 회귀/랜덤포레스트)를 고를 것." },
-    { "id": "q030", "cat": "exp", "tag": "bank", "priority": 2, "q": "데이터 전처리에서 가장 중요하다고 생각하는 것은 무엇인가요?", "schools": ["국민대"], "src": ["s9"], "key": "결측치·이상치·스케일링·누수(leakage) 중 leakage를 언급하면 인상적." },
-    { "id": "q031", "cat": "exp", "tag": "bank", "priority": 2, "q": "다뤄본 데이터의 규모와 종류는? 어떤 도구를 사용했나요?", "schools": [], "src": ["s3", "s4"], "key": "Python/pandas/SQL/Excel — 과장 금지. 실제 쓴 것만." },
-    { "id": "q032", "cat": "exp", "tag": "bank", "priority": 1, "q": "최근에 읽은 논문이나 기술 문서가 있다면 소개해 주세요.", "schools": [], "src": ["s12"], "key": "한 편이라도 진짜 읽고 갈 것. 지원 교수 논문이면 만점." },
-    { "id": "q033", "cat": "exp", "tag": "bank", "priority": 1, "q": "지원한 연구실(교수)의 논문을 읽어봤나요? 어떤 내용이었나요?", "schools": ["고려대", "한양대"], "src": ["s12", "s17"], "key": "제목만 읽고 아는 척 금지. 초록 + 문제의식 한 줄이면 충분." },
-    { "id": "q034", "cat": "exp", "tag": "bank", "priority": 1, "q": "Kaggle이나 공모전 경험이 있나요?", "schools": [], "src": ["s4"], "key": "순위보다 '무엇을 시도했고 왜 안 됐는지'." },
-    { "id": "q035", "cat": "exp", "tag": "derived", "priority": 1, "q": "자격증(정보처리기사·ADsP·빅데이터분석기사 등)은 어떤 계기로 땄나요?", "schools": ["서강대"], "src": ["s4"], "key": "비전공자의 준비 증거로 쓰되, 자격증만 나열하면 '시험용'으로 읽힌다. 코드 경험과 세트로." },
-    { "id": "q036", "cat": "plan", "tag": "real", "priority": 3, "q": "대학원에 와서 구체적으로 무엇을 배우고 싶은가요? 학업계획을 말해보세요.", "schools": ["연세대", "국민대"], "src": ["s5", "s9"], "key": "학기별로 → 1학기 기초(수학·ML), 2~3학기 심화·도메인 적용, 4학기 논문/프로젝트. 실제 개설 과목명을 쓸 것." },
-    { "id": "q037", "cat": "plan", "tag": "doc", "priority": 3, "q": "석사 과정 이후 어떤 연구 또는 목표를 이루고 싶으신가요?", "schools": ["국민대"], "src": ["s9"], "key": "'현업 문제 X를 AI로 푸는 사람'처럼 직무 단위로 구체화." },
-    { "id": "q038", "cat": "plan", "tag": "real", "priority": 2, "q": "졸업 후 진로 계획은 무엇인가요? 박사 진학 생각도 있나요?", "schools": ["고려대"], "src": ["s13", "s12"], "key": "특수대학원은 박사 진학을 굳이 강조할 필요 없음. 다만 물으면 솔직하게." },
-    { "id": "q039", "cat": "plan", "tag": "bank", "priority": 2, "q": "학업계획서에 쓴 이 연구 주제, 현실적으로 2년 안에 가능하다고 보나요?", "schools": [], "src": ["s12"], "key": "범위를 좁히는 방향으로 답한다. '이 부분만 먼저'라고 말할 수 있으면 성숙해 보인다." },
-    { "id": "q040", "cat": "plan", "tag": "bank", "priority": 2, "q": "논문 트랙과 프로젝트(비논문) 트랙 중 무엇을 선택할 생각인가요?", "schools": ["국민대"], "src": ["s9"], "key": "학칙상 선택 가능한 학교가 많다. 이유를 커리어와 연결." },
-    { "id": "q041", "cat": "plan", "tag": "derived", "priority": 2, "q": "본인 도메인(현 업무 분야)과 AI를 어떻게 결합할 생각인가요?", "schools": [], "src": ["s4", "s16"], "key": "특수대학원 최고의 답변 소재. '도메인 데이터 + AI 방법론' 조합을 문제-방법 쌍으로 1개 준비." },
-    { "id": "q042", "cat": "plan", "tag": "bank", "priority": 1, "q": "입학 전까지 무엇을 준비할 계획인가요?", "schools": [], "src": ["s12"], "key": "Python/선형대수/확률 중 하나를 구체 교재·강의명으로." },
-    { "id": "q043", "cat": "plan", "tag": "bank", "priority": 1, "q": "지도교수를 정했나요? 어느 분과 하고 싶나요?", "schools": ["고려대", "한양대"], "src": ["s13", "s17"], "key": "일반대학원은 사실상 필수 질문. 특수대학원은 없어도 무방하나 이름 하나는 알고 갈 것." },
-    { "id": "q044", "cat": "plan", "tag": "bank", "priority": 1, "q": "연구가 막히면 어떻게 해결하나요? 교수와 의견이 다르면?", "schools": [], "src": ["s12"], "key": "'근거를 들고 가서 논의한다' — 순종도 고집도 아닌 태도." },
-    { "id": "q045", "cat": "plan", "tag": "bank", "priority": 1, "q": "장기 연구를 견딜 만한 인내심이 있다고 생각하나요? 근거는?", "schools": [], "src": ["s12"], "key": "오래 붙잡아 끝낸 일 하나(운동·자격증·프로젝트)를 사례로." },
-
-    { "id": "q046", "cat": "linalg", "tag": "bank", "priority": 3, "q": "고유값(eigenvalue)과 고유벡터(eigenvector)가 무엇이고, 왜 중요한가요?", "schools": [], "src": ["s6", "s8"], "key": "Av=λv — 선형변환을 해도 방향이 안 바뀌는 축과 그 축의 배율. 데이터 분산이 가장 큰 방향을 찾는 PCA의 뼈대.", "follow": ["그럼 PCA와 어떻게 연결되나요?"] },
-    { "id": "q047", "cat": "linalg", "tag": "bank", "priority": 3, "q": "SVD(특이값분해)란 무엇인가요? 왜 중요한가요?", "schools": [], "src": ["s6"], "key": "임의의 행렬을 회전·스케일·회전으로 분해(A=UΣVᵀ). 정방행렬이 아니어도 되고, 상위 특이값만 남기면 저차원 근사·압축·노이즈 제거가 된다." },
-    { "id": "q048", "cat": "linalg", "tag": "bank", "priority": 3, "q": "PCA는 차원 축소이면서 데이터 압축이자 노이즈 제거 기법이기도 합니다. 왜 그런가요?", "schools": [], "src": ["s8"], "key": "분산 큰 축만 남김 = 차원↓(축소), 적은 수로 원본 근사(압축), 분산 작은 축=노이즈로 간주해 버림(제거). 하나의 연산이 세 해석을 가진다." },
-    { "id": "q049", "cat": "linalg", "tag": "bank", "priority": 2, "q": "Rank란 무엇인가요? 선형독립/종속은?", "schools": [], "src": ["s6"], "key": "열(행)들이 만들어내는 공간의 실제 차원 수. 서로 다른 정보를 주는 축이 몇 개인가." },
-    { "id": "q050", "cat": "linalg", "tag": "bank", "priority": 2, "q": "Basis와 Dimension이란 무엇인가요?", "schools": [], "src": ["s6"], "key": "공간을 남김없이 표현하는 최소한의 독립 벡터 집합이 basis, 그 개수가 dimension." },
-    { "id": "q051", "cat": "linalg", "tag": "bank", "priority": 2, "q": "Null space란 무엇인가요?", "schools": [], "src": ["s6"], "key": "Ax=0을 만족하는 x들의 집합. 변환에 의해 원점으로 뭉개지는 방향들 = 정보가 소실되는 방향." },
-    { "id": "q052", "cat": "linalg", "tag": "bank", "priority": 2, "q": "행렬 곱의 의미는? 행렬을 선형변환으로 해석한다는 게 무슨 뜻인가요?", "schools": [], "src": ["s6"], "key": "행렬 = 공간을 회전·확대·전단하는 함수. 곱은 변환의 합성." },
-    { "id": "q053", "cat": "linalg", "tag": "bank", "priority": 2, "q": "Determinant가 의미하는 바는 무엇인가요?", "schools": [], "src": ["s6"], "key": "변환이 부피(면적)를 몇 배로 바꾸는가. 0이면 차원이 무너져 역행렬이 없다." },
-    { "id": "q054", "cat": "linalg", "tag": "bank", "priority": 2, "q": "Positive-definite 행렬이란? 왜 중요한가요?", "schools": [], "src": ["s6"], "key": "모든 x≠0에 대해 xᵀAx>0. 고유값이 모두 양수 → 최적화에서 볼록성(유일한 최소점)을 보장." },
-    { "id": "q055", "cat": "linalg", "tag": "bank", "priority": 2, "q": "Symmetric matrix의 성질은 무엇인가요?", "schools": [], "src": ["s6"], "key": "고유값이 실수이고 고유벡터가 서로 직교 → 직교대각화 가능. 공분산 행렬이 대칭이라 PCA가 깔끔하게 돌아간다." },
-    { "id": "q056", "cat": "linalg", "tag": "bank", "priority": 1, "q": "내적(dot product)의 기하적 의미는? 벡터의 norm이란?", "schools": [], "src": ["s6"], "key": "내적은 한 벡터를 다른 벡터 방향으로 투영한 길이 × 크기 → 유사도. norm은 벡터의 길이." },
-    { "id": "q057", "cat": "linalg", "tag": "bank", "priority": 1, "q": "Jacobian matrix란 무엇인가요?", "schools": [], "src": ["s6"], "key": "다변수 벡터함수의 1차 편미분들을 모은 행렬. 국소적으로 그 함수를 근사하는 선형변환 = 역전파 연쇄법칙의 실체." },
-    { "id": "q058", "cat": "linalg", "tag": "bank", "priority": 1, "q": "차원 축소 기법에는 보통 어떤 것들이 있나요?", "schools": [], "src": ["s8"], "key": "선형: PCA, LDA, SVD / 비선형: t-SNE, UMAP, autoencoder. LDA는 클래스 분리를 최대화한다는 점이 PCA와 다름." },
-    { "id": "q059", "cat": "linalg", "tag": "bank", "priority": 1, "q": "LSA, LDA, SVD가 각각 무엇이고 서로 어떤 관계인가요?", "schools": [], "src": ["s8"], "key": "LSA는 문서-단어 행렬에 SVD를 적용한 것. LDA(잠재 디리클레 할당)는 확률적 토픽 모델로 계열이 다름(선형판별분석 LDA와 이름 충돌 주의)." },
-    { "id": "q060", "cat": "linalg", "tag": "bank", "priority": 1, "q": "왜 딥러닝 연산의 대부분이 행렬 연산인가요?", "schools": [], "src": ["s6"], "key": "레이어 = 선형변환 + 비선형. 행렬로 표현해야 GPU 병렬화가 가능하다." },
-
-    { "id": "q061", "cat": "stat", "tag": "bank", "priority": 3, "q": "체인룰(chain rule)이란 무엇인가요?", "schools": [], "src": ["s6"], "key": "합성함수의 미분 = 바깥 미분 × 안쪽 미분. 역전파가 바로 이 규칙을 층마다 반복 적용하는 것." },
-    { "id": "q062", "cat": "stat", "tag": "bank", "priority": 3, "q": "편향-분산 트레이드오프(bias-variance trade-off)를 설명해 주세요.", "schools": [], "src": ["s6", "s7"], "key": "모델을 단순화하면 편향↑·분산↓(과소적합), 복잡하게 하면 편향↓·분산↑(과적합). 총 오차 = 편향² + 분산 + 잡음.", "follow": ["그럼 어느 쪽으로 조절해야 하나요?", "Bias, Variance, MSE의 관계는?"] },
-    { "id": "q063", "cat": "stat", "tag": "bank", "priority": 3, "q": "중심극한정리(CLT)란 무엇이고 왜 유용한가요?", "schools": [], "src": ["s6", "s8"], "key": "모집단 분포가 뭐든 표본평균의 분포는 표본이 커지면 정규분포에 근사. 그래서 정규분포 가정으로 구간추정·검정이 가능해진다." },
-    { "id": "q064", "cat": "stat", "tag": "bank", "priority": 3, "q": "최대우도추정(MLE)이란 무엇인가요? MAP와의 차이는?", "schools": [], "src": ["s6"], "key": "관측 데이터가 나올 확률(우도)을 최대화하는 파라미터를 고르는 것. MAP는 여기에 사전분포를 곱함 → 정규화(regularization)와 같은 효과." },
-    { "id": "q065", "cat": "stat", "tag": "bank", "priority": 3, "q": "표본분산을 구할 때 N이 아니라 N-1로 나누는 이유는?", "schools": [], "src": ["s6"], "key": "표본평균을 이미 데이터로 추정했기 때문에 자유도가 1 줄었다. N으로 나누면 분산을 과소추정(편향)하게 됨." },
-    { "id": "q066", "cat": "stat", "tag": "bank", "priority": 3, "q": "p-value를 모르는 사람에게 설명한다면?", "schools": [], "src": ["s8"], "key": "'귀무가설이 참이라고 할 때, 지금 본 것만큼 극단적인 결과가 나올 확률'. 가설이 참일 확률이 아니다 — 이 구분이 핵심." },
-    { "id": "q067", "cat": "stat", "tag": "bank", "priority": 3, "q": "Frequentist와 Bayesian의 차이는 무엇인가요?", "schools": [], "src": ["s6", "s8"], "key": "빈도주의는 파라미터를 고정된 미지수로, 베이지안은 확률변수로 본다. 후자는 사전지식을 넣을 수 있고 데이터가 적을 때 유리." },
-    { "id": "q068", "cat": "stat", "tag": "bank", "priority": 2, "q": "확률과 통계는 무엇이 다른가요?", "schools": [], "src": ["s6"], "key": "확률은 모형에서 데이터를 예측(연역), 통계는 데이터에서 모형을 추론(귀납)." },
-    { "id": "q069", "cat": "stat", "tag": "bank", "priority": 2, "q": "'likelihood'와 'probability'의 차이는?", "schools": [], "src": ["s8"], "key": "확률은 파라미터 고정·데이터 변수, 우도는 데이터 고정·파라미터 변수. 같은 식을 어느 쪽에서 보느냐의 차이." },
-    { "id": "q070", "cat": "stat", "tag": "bank", "priority": 2, "q": "조건부확률과 베이즈 정리를 설명해 주세요.", "schools": [], "src": ["s6", "s8"], "key": "P(A|B)=P(B|A)P(A)/P(B). 사전믿음을 증거로 갱신하는 공식." },
-    { "id": "q071", "cat": "stat", "tag": "bank", "priority": 2, "q": "공분산(covariance)과 상관계수(correlation)는 무엇이 다른가요?", "schools": [], "src": ["s6", "s8"], "key": "공분산은 단위에 의존, 상관계수는 표준편차로 나눠 -1~1로 정규화. 크기 비교가 가능해진다." },
-    { "id": "q072", "cat": "stat", "tag": "bank", "priority": 2, "q": "신뢰구간의 정의는 무엇인가요?", "schools": [], "src": ["s6", "s8"], "key": "같은 방식으로 표본을 반복 추출해 구간을 만들면 그중 95%가 참값을 포함한다는 뜻. 특정 구간이 참값을 포함할 확률이 아님." },
-    { "id": "q073", "cat": "stat", "tag": "bank", "priority": 2, "q": "엔트로피(entropy)란 무엇인가요? Information Gain도 함께 설명해 주세요.", "schools": [], "src": ["s6", "s8"], "key": "불확실성의 양 = 최적 전략에서 정답을 맞히는 데 필요한 평균 질문 수. IG는 분할 전후 엔트로피 감소량으로, 의사결정트리의 분할 기준." },
-    { "id": "q074", "cat": "stat", "tag": "bank", "priority": 2, "q": "Cross-Entropy와 KL-Divergence는 무엇이고 어떤 관계인가요?", "schools": [], "src": ["s6"], "key": "KL = 크로스엔트로피 − 엔트로피. 정답분포가 고정이면 크로스엔트로피 최소화 = KL 최소화라서 분류 손실로 쓴다." },
-    { "id": "q075", "cat": "stat", "tag": "bank", "priority": 2, "q": "Biased/Unbiased estimation의 차이는? Unbiased가 무조건 좋은가요?", "schools": [], "src": ["s6"], "key": "불편추정량은 기대값이 참값과 같음. 하지만 분산이 크면 MSE가 더 나쁠 수 있어 항상 좋은 건 아니다(편향-분산 관점)." },
-    { "id": "q076", "cat": "stat", "tag": "bank", "priority": 2, "q": "베르누이/이항/카테고리/다항/정규/포아송 분포를 설명하고 서로의 관계를 말해 주세요.", "schools": [], "src": ["s6", "s8"], "key": "베르누이(1회 이진) → 이항(n회) → 다항(다범주). 포아송은 드문 사건의 발생 횟수, 정규는 이들의 극한 근사." },
-    { "id": "q077", "cat": "stat", "tag": "bank", "priority": 1, "q": "Marginal distribution과 Conditional distribution이란?", "schools": [], "src": ["s6"], "key": "결합분포에서 한 변수를 적분해 지운 것이 주변분포, 특정 값으로 고정한 것이 조건부분포." },
-    { "id": "q078", "cat": "stat", "tag": "bank", "priority": 1, "q": "Conjugate prior란 무엇인가요?", "schools": [], "src": ["s6"], "key": "사후분포가 사전분포와 같은 계열이 되게 하는 사전분포. 계산이 닫힌 형태로 떨어진다(베타-이항 등)." },
-    { "id": "q079", "cat": "stat", "tag": "bank", "priority": 1, "q": "R square(결정계수)의 의미는 무엇인가요?", "schools": [], "src": ["s6", "s8"], "key": "총 변동 중 모델이 설명한 비율. 변수 늘리면 무조건 올라가므로 adjusted R²와 함께 봐야." },
-    { "id": "q080", "cat": "stat", "tag": "bank", "priority": 1, "q": "평균과 중앙값 중 어떤 경우에 무엇을 써야 하나요?", "schools": [], "src": ["s8"], "key": "이상치·왜도가 크면 중앙값. 소득·가격 데이터가 대표적." },
-    { "id": "q081", "cat": "stat", "tag": "bank", "priority": 1, "q": "이상치(outlier)를 판단하는 기준은 무엇인가요?", "schools": [], "src": ["s8"], "key": "IQR 1.5배, z-score 3, 도메인 기준. 통계적 이상치와 '진짜 중요한 신호'를 구분해야 한다는 점을 덧붙이면 좋다." },
-    { "id": "q082", "cat": "stat", "tag": "bank", "priority": 1, "q": "결측치(missing value)는 채워야 할까요? 그 이유는?", "schools": [], "src": ["s8"], "key": "결측 메커니즘(MCAR/MAR/MNAR)에 따라 다름. 무작정 평균 대체는 분산을 과소평가한다." },
-    { "id": "q083", "cat": "stat", "tag": "bank", "priority": 1, "q": "샘플링(Sampling)과 리샘플링(Resampling)이 무엇이고 리샘플링의 장점은?", "schools": [], "src": ["s8"], "key": "리샘플링(부트스트랩·CV)은 분포 가정 없이 추정량의 변동성을 경험적으로 얻을 수 있다." },
-    { "id": "q084", "cat": "stat", "tag": "bank", "priority": 1, "q": "통계에서 bootstrap의 의미는 무엇인가요?", "schools": [], "src": ["s8"], "key": "표본에서 복원추출로 여러 가상 표본을 만들어 통계량의 분포를 추정하는 방법. 배깅의 B가 이것." },
-    { "id": "q085", "cat": "stat", "tag": "bank", "priority": 1, "q": "모수적 방법과 비모수적 방법은 각각 언제 쓰나요?", "schools": [], "src": ["s8"], "key": "분포 가정을 할 수 있고 표본이 충분하면 모수적, 가정이 깨지거나 표본이 적으면 비모수적." },
-    { "id": "q086", "cat": "stat", "tag": "bank", "priority": 1, "q": "검정력(statistical power)이란 무엇인가요?", "schools": [], "src": ["s8"], "key": "대립가설이 참일 때 그것을 옳게 잡아낼 확률(1−β). 표본 크기 계산의 핵심." },
-    { "id": "q087", "cat": "stat", "tag": "bank", "priority": 1, "q": "로그 함수는 어떤 경우에 유용한가요? 사례를 들어 설명해 주세요.", "schools": [], "src": ["s8"], "key": "곱을 합으로 바꿔 수치 안정성 확보(로그우도), 왜도가 큰 분포를 대칭화, 스케일 압축." },
-    { "id": "q088", "cat": "stat", "tag": "bank", "priority": 1, "q": "Type 1 Error와 Type 2 Error의 차이는?", "schools": [], "src": ["s6"], "key": "1종=참인 귀무가설을 기각(거짓 양성), 2종=거짓인 귀무가설을 못 기각(거짓 음성). 어느 쪽이 더 치명적인지는 도메인이 정한다." },
-
-    { "id": "q089", "cat": "ml", "tag": "real", "priority": 3, "q": "선형회귀와 로지스틱 회귀의 차이는 무엇인가요?", "schools": ["한양대"], "src": ["s2"], "key": "출력이 연속값 vs 확률(시그모이드로 0~1 압축). 손실도 MSE vs 크로스엔트로피로 다르다. 로지스틱은 이름은 회귀지만 분류기." },
-    { "id": "q090", "cat": "ml", "tag": "bank", "priority": 3, "q": "과적합(overfitting)이란 무엇이고 어떻게 해결하나요?", "schools": [], "src": ["s6", "s7"], "key": "학습 데이터의 노이즈까지 외워 일반화가 안 되는 상태. 데이터 확보·증강, 정규화(L1/L2), 드롭아웃, early stopping, 모델 단순화, 교차검증.", "follow": ["과소적합은요?", "어떻게 진단하나요?"] },
-    { "id": "q091", "cat": "ml", "tag": "bank", "priority": 3, "q": "L1과 L2 정규화의 차이는 무엇인가요?", "schools": [], "src": ["s6", "s8"], "key": "L1은 절댓값 페널티 → 계수를 0으로 만들어 변수 선택 효과(Lasso). L2는 제곱 페널티 → 계수를 고르게 줄임(Ridge)." },
-    { "id": "q092", "cat": "ml", "tag": "bank", "priority": 3, "q": "경사하강법(GD)이란 무엇인가요? SGD·미니배치와의 차이는?", "schools": [], "src": ["s6", "s7"], "key": "손실의 기울기 반대 방향으로 파라미터를 조금씩 이동. GD는 전체 데이터로 1스텝(정확·느림), SGD는 1샘플(빠름·요동), 미니배치가 절충안이자 실전 표준." },
-    { "id": "q093", "cat": "ml", "tag": "bank", "priority": 3, "q": "Train / Validation / Test를 나누는 이유는 무엇인가요?", "schools": [], "src": ["s6", "s8"], "key": "학습용·하이퍼파라미터 선택용·최종 성능 측정용. valid로 튜닝하면 valid에도 과적합되기 때문에 test는 마지막에 딱 한 번." },
-    { "id": "q094", "cat": "ml", "tag": "bank", "priority": 3, "q": "교차검증(Cross Validation)은 무엇이고 어떻게 하나요?", "schools": [], "src": ["s6", "s8"], "key": "데이터를 K등분해 돌아가며 검증. 데이터가 적을 때 평가 분산을 줄인다. 클래스 불균형이면 stratified K-fold." },
-    { "id": "q095", "cat": "ml", "tag": "bank", "priority": 3, "q": "알고 있는 평가 metric을 설명해 주세요. (RMSE, MAE, recall, precision 등)", "schools": [], "src": ["s8"], "key": "회귀: MAE(해석 쉬움)·MSE/RMSE(큰 오차 민감)·R². 분류: precision(예측 양성 중 맞은 비율)·recall(실제 양성 중 잡은 비율)·F1(조화평균)." },
-    { "id": "q096", "cat": "ml", "tag": "bank", "priority": 3, "q": "Precision과 Recall 중 무엇이 더 중요한가요? 상황을 들어 설명해 주세요.", "schools": [], "src": ["s6"], "key": "암 진단·불량 검출처럼 놓치면 치명적이면 recall, 스팸 차단처럼 오탐 비용이 크면 precision. 트레이드오프 관계." },
-    { "id": "q097", "cat": "ml", "tag": "bank", "priority": 3, "q": "ROC 커브와 AUC에 대해 설명해 주세요.", "schools": [], "src": ["s6", "s8"], "key": "임계값을 움직이며 TPR-FPR을 그린 곡선. AUC는 무작위 양성이 무작위 음성보다 높은 점수를 받을 확률. 불균형이 심하면 PR curve가 더 정직하다." },
-    { "id": "q098", "cat": "ml", "tag": "bank", "priority": 3, "q": "혼동 행렬(confusion matrix)을 설명해 주세요.", "schools": [], "src": ["s7"], "key": "TP/FP/FN/TN 2×2. 정확도만 보면 불균형 데이터에서 속는다는 점을 함께 말할 것." },
-    { "id": "q099", "cat": "ml", "tag": "bank", "priority": 3, "q": "차원의 저주(curse of dimensionality)란 무엇인가요?", "schools": [], "src": ["s6", "s8"], "key": "차원이 늘면 공간 부피가 지수적으로 커져 데이터가 희박해지고 거리 개념이 무의미해진다. 필요한 표본 수가 폭증." },
-    { "id": "q100", "cat": "ml", "tag": "bank", "priority": 3, "q": "앙상블이란 무엇인가요? 배깅과 부스팅의 차이는?", "schools": [], "src": ["s6", "s8"], "key": "여러 모델을 합쳐 성능·안정성을 얻음. 배깅=병렬·분산 감소(랜덤포레스트), 부스팅=순차·이전 오차 보정·편향 감소(XGBoost)." },
-    { "id": "q101", "cat": "ml", "tag": "bank", "priority": 2, "q": "SVM이란 무엇인가요? 마진을 최대화하면 어떤 장점이 있나요?", "schools": [], "src": ["s6", "s8"], "key": "클래스를 가르는 초평면 중 여백이 가장 큰 것을 고름. 여백이 크면 새 데이터에 대한 일반화 오차 상한이 작아진다." },
-    { "id": "q102", "cat": "ml", "tag": "bank", "priority": 2, "q": "SVM은 왜 오히려 차원을 확장시키는 방식으로 동작하나요? (커널 트릭)", "schools": [], "src": ["s8"], "key": "저차원에서 선형분리 불가능한 데이터가 고차원에서는 가능해진다. 커널은 고차원 좌표를 실제로 만들지 않고 내적만 계산해 비용을 회피." },
-    { "id": "q103", "cat": "ml", "tag": "bank", "priority": 2, "q": "Generative model과 Discriminative model의 차이는?", "schools": [], "src": ["s6"], "key": "생성모델은 P(x,y)를 학습해 데이터 자체를 만들 수 있고, 판별모델은 P(y|x) 경계만 학습. 나이브베이즈 vs 로지스틱 회귀." },
-    { "id": "q104", "cat": "ml", "tag": "bank", "priority": 2, "q": "나이브 베이즈 분류기란 무엇인가요? 오래된 기법인데 장점을 옹호해 보세요.", "schools": [], "src": ["s6", "s8"], "key": "특징 간 조건부 독립을 가정해 계산을 단순화. 가정이 거칠어도 텍스트처럼 고차원·희박한 데이터에서 빠르고 강건하며 적은 데이터로도 동작." },
-    { "id": "q105", "cat": "ml", "tag": "bank", "priority": 2, "q": "의사결정나무는 어떻게 분할 기준을 정하나요?", "schools": [], "src": ["s7"], "key": "정보이득(엔트로피 감소) 또는 지니 불순도 감소가 최대인 특징·임계값. 깊어지면 과적합 → 가지치기·깊이 제한." },
-    { "id": "q106", "cat": "ml", "tag": "bank", "priority": 2, "q": "랜덤포레스트는 의사결정나무와 무엇이 다른가요?", "schools": [], "src": ["s8"], "key": "부트스트랩 샘플 + 분할 시 특징도 랜덤 선택 → 트리 간 상관을 낮춰 분산을 크게 줄임." },
-    { "id": "q107", "cat": "ml", "tag": "bank", "priority": 2, "q": "서버가 100대 있습니다. 이때 신경망보다 랜덤포레스트를 써야 하는 이유는?", "schools": [], "src": ["s8"], "key": "트리는 완전 병렬화가 쉽고 튜닝이 덜 민감하며 표 형태 데이터에서 종종 더 강하다. 해석 가능성도." },
-    { "id": "q108", "cat": "ml", "tag": "bank", "priority": 2, "q": "K-means의 대표적 단점은 무엇인가요? (계산량 말고)", "schools": [], "src": ["s8"], "key": "K를 미리 정해야 하고, 구형·비슷한 크기 군집만 잘 찾으며, 초기값에 민감하고 이상치에 취약." },
-    { "id": "q109", "cat": "ml", "tag": "bank", "priority": 2, "q": "지도학습·비지도학습·준지도학습·강화학습을 각각 설명해 주세요.", "schools": [], "src": ["s6", "s7"], "key": "정답 라벨 유무와 보상 신호의 차이. 준지도는 소량 라벨 + 대량 무라벨, 강화학습은 시행착오와 보상." },
-    { "id": "q110", "cat": "ml", "tag": "bank", "priority": 2, "q": "분류와 회귀의 차이는 무엇인가요?", "schools": [], "src": ["s7"], "key": "출력이 이산 범주냐 연속값이냐. 손실함수와 평가지표가 통째로 달라진다." },
-    { "id": "q111", "cat": "ml", "tag": "bank", "priority": 2, "q": "정규화(normalization)를 왜 해야 하나요? 방법에는 무엇이 있나요?", "schools": [], "src": ["s7", "s8"], "key": "스케일이 다르면 거리 기반 모델이 왜곡되고 경사하강 수렴이 느려진다. Min-Max, Standardization(z-score), Robust scaling." },
-    { "id": "q112", "cat": "ml", "tag": "bank", "priority": 2, "q": "Regularization, Normalization, Standardization은 각각 무엇을 대상으로 하나요?", "schools": [], "src": ["s7"], "key": "Regularization은 모델(가중치)에, Normalization·Standardization은 데이터에 가하는 처리. 용어 혼동을 노린 질문." },
-    { "id": "q113", "cat": "ml", "tag": "bank", "priority": 2, "q": "Local minima와 global minimum에 대해 설명해 주세요.", "schools": [], "src": ["s8"], "key": "국소적으로만 최소인 점 vs 전체 최소. 고차원에서는 나쁜 local minima보다 saddle point가 더 문제라는 게 현대적 이해." },
-    { "id": "q114", "cat": "ml", "tag": "bank", "priority": 2, "q": "머신러닝적 접근과 통계적 접근의 차이에 대한 생각은?", "schools": [], "src": ["s8"], "key": "통계는 해석·추론과 가정 검증, ML은 예측 성능 우선. 최근에는 경계가 흐려지고 설명가능성이 다시 부각." },
-    { "id": "q115", "cat": "ml", "tag": "bank", "priority": 1, "q": "머신러닝과 딥러닝의 차이는 무엇인가요? AI·ML·DL의 관계는?", "schools": ["국민대", "고려대"], "src": ["s9", "s14"], "key": "AI ⊃ ML ⊃ DL. 핵심 차이는 특징(feature)을 사람이 설계하느냐, 모델이 데이터에서 학습하느냐." },
-    { "id": "q116", "cat": "ml", "tag": "bank", "priority": 1, "q": "K-NN 알고리즘을 설명해 주세요. 장단점은?", "schools": [], "src": ["s7"], "key": "학습 없이 가장 가까운 K개의 다수결. 단순하지만 차원의 저주·예측 비용·스케일 민감." },
-    { "id": "q117", "cat": "ml", "tag": "bank", "priority": 1, "q": "XGBoost가 캐글에서 유명한 이유는 무엇일까요?", "schools": [], "src": ["s8"], "key": "정형 데이터에서 성능이 강하고, 정규화·결측 처리·병렬화가 내장돼 튜닝 대비 효율이 좋다." },
-    { "id": "q118", "cat": "ml", "tag": "bank", "priority": 1, "q": "스태킹(stacking) 앙상블이란?", "schools": [], "src": ["s6"], "key": "여러 모델의 예측값을 다시 입력으로 받는 메타모델을 학습. 누수 방지를 위해 OOF 예측을 써야 함." },
-    { "id": "q119", "cat": "ml", "tag": "bank", "priority": 1, "q": "클래스 불균형 데이터는 어떻게 다루나요?", "schools": [], "src": ["s7", "s8"], "key": "리샘플링(SMOTE·언더샘플링), class weight, 임계값 조정, 그리고 accuracy 대신 F1·PR-AUC로 평가." },
-    { "id": "q120", "cat": "ml", "tag": "bank", "priority": 1, "q": "feature vector란 무엇인가요? 좋은 feature의 조건은?", "schools": [], "src": ["s8"], "key": "샘플을 수치 벡터로 표현한 것. 좋은 feature는 타깃과 관련 있고, 서로 중복이 적고, 누수가 없어야." },
-    { "id": "q121", "cat": "ml", "tag": "bank", "priority": 1, "q": "'좋은 모델'의 정의는 무엇이라고 생각하나요?", "schools": [], "src": ["s8"], "key": "테스트 성능뿐 아니라 일반화·해석가능성·추론비용·유지보수까지 포함. 현업 관점을 얹으면 특수대학원에서 특히 좋은 답." },
-    { "id": "q122", "cat": "ml", "tag": "bank", "priority": 1, "q": "Newton's method와 Gradient Descent의 차이는?", "schools": [], "src": ["s6", "s8"], "key": "GD는 1차 미분만, 뉴턴법은 2차(헤시안)까지 써서 빠르게 수렴하지만 헤시안 계산·역행렬 비용이 큼." },
-    { "id": "q123", "cat": "ml", "tag": "bank", "priority": 1, "q": "데이터 누수(data leakage)란 무엇인가요?", "schools": [], "src": ["s8"], "key": "학습 시점에 알 수 없는 정보가 feature에 섞여 성능이 비현실적으로 좋아지는 것. 전처리를 train/test 분리 전에 하면 발생." },
-    { "id": "q124", "cat": "ml", "tag": "bank", "priority": 1, "q": "텍스트 더미에서 주제를 추출해야 합니다. 어떻게 접근하시겠습니까?", "schools": [], "src": ["s8"], "key": "전처리→벡터화(TF-IDF/임베딩)→LDA 토픽모델 또는 임베딩 클러스터링. 최근엔 LLM 요약도 옵션. 평가는 coherence." },
-    { "id": "q125", "cat": "ml", "tag": "bank", "priority": 1, "q": "Markov Chain을 고등학생에게 설명한다면?", "schools": [], "src": ["s8"], "key": "다음 상태는 오직 지금 상태에만 달려 있다 — 날씨 예보나 보드게임 말 이동 비유." },
-
-    { "id": "q126", "cat": "dl", "tag": "real", "priority": 3, "q": "CNN과 pooling layer에 대해 설명해 주세요.", "schools": ["한양대"], "src": ["s2"], "key": "합성곱은 지역 패턴을 가중치 공유로 추출, 풀링은 공간 크기를 줄여 계산량↓ + 작은 위치 변화에 강인해짐(translation invariance).", "follow": ["Max pooling을 쓰는 이유는?", "CNN이 MLP보다 좋은 이유는?"] },
-    { "id": "q127", "cat": "dl", "tag": "bank", "priority": 3, "q": "역전파(backpropagation)를 설명해 주세요.", "schools": [], "src": ["s6", "s7"], "key": "출력 손실을 연쇄법칙으로 층을 거슬러 미분해 각 가중치의 기울기를 구하는 과정. 순전파로 값 저장 → 역방향으로 기울기 전파." },
-    { "id": "q128", "cat": "dl", "tag": "bank", "priority": 3, "q": "요즘 Sigmoid보다 ReLU를 많이 쓰는 이유는 무엇인가요?", "schools": [], "src": ["s8"], "key": "시그모이드는 양끝에서 기울기가 0에 가까워 기울기 소실이 심함. ReLU는 양수 구간 기울기가 1로 일정하고 계산이 싸다.", "follow": ["ReLU의 문제점은?", "그럼 ReLU로 어떻게 곡선을 근사하나요?"] },
-    { "id": "q129", "cat": "dl", "tag": "bank", "priority": 3, "q": "비선형성(non-linearity)이 왜 필요한가요?", "schools": [], "src": ["s8"], "key": "활성화가 없으면 층을 아무리 쌓아도 결국 하나의 선형변환이라 표현력이 늘지 않는다." },
-    { "id": "q130", "cat": "dl", "tag": "bank", "priority": 3, "q": "기울기 소실(vanishing gradient)은 왜 생기고 어떻게 완화하나요?", "schools": [], "src": ["s7"], "key": "작은 기울기가 층마다 곱해져 0으로 수렴. ReLU 계열, 적절한 초기화(He/Xavier), 배치정규화, 잔차연결(ResNet), LSTM/GRU." },
-    { "id": "q131", "cat": "dl", "tag": "bank", "priority": 3, "q": "배치 정규화(Batch Normalization)는 무엇이고 왜 하나요?", "schools": [], "src": ["s6", "s8"], "key": "미니배치 단위로 층 입력을 정규화해 분포 변화(internal covariate shift)를 줄임. 학습이 빨라지고 초기값·학습률에 덜 민감, 약한 정규화 효과도.", "follow": ["학습 후 추론 시 주의할 점은?"] },
-    { "id": "q132", "cat": "dl", "tag": "bank", "priority": 3, "q": "드롭아웃(Dropout)의 효과는 무엇인가요?", "schools": [], "src": ["s7", "s8"], "key": "학습 중 뉴런을 랜덤하게 꺼서 특정 경로 의존을 막음 → 암묵적 앙상블 효과로 과적합 억제. 추론 시에는 끄고 스케일 보정." },
-    { "id": "q133", "cat": "dl", "tag": "bank", "priority": 3, "q": "SGD, Momentum, RMSprop, Adam의 차이를 설명해 주세요.", "schools": [], "src": ["s6", "s8"], "key": "Momentum은 관성으로 진동 억제, RMSprop은 파라미터별 학습률을 기울기 크기로 조정, Adam은 둘을 합친 것(1·2차 모멘트)." },
-    { "id": "q134", "cat": "dl", "tag": "bank", "priority": 3, "q": "활성화 함수의 종류와 각각의 특징을 말해 주세요.", "schools": [], "src": ["s7", "s8"], "key": "Sigmoid(0~1, 소실), Tanh(-1~1, 중심0), ReLU(빠름·죽는 뉴런), LeakyReLU(음수 기울기), Softmax(다중분류 확률)." },
-    { "id": "q135", "cat": "dl", "tag": "bank", "priority": 3, "q": "Cost function과 Activation function은 무엇인가요?", "schools": [], "src": ["s8"], "key": "손실함수는 예측과 정답의 차이를 수치화(무엇을 최적화할지), 활성화함수는 뉴런의 비선형 변환(무엇을 표현할지)." },
-    { "id": "q136", "cat": "dl", "tag": "bank", "priority": 2, "q": "CNN이 MLP보다 이미지에서 유리한 이유는? 파라미터 수를 계산해 보세요.", "schools": [], "src": ["s6"], "key": "지역 연결 + 가중치 공유로 파라미터가 급감하고 위치 불변성을 얻는다. Conv 파라미터 = (k×k×C_in+1)×C_out." },
-    { "id": "q137", "cat": "dl", "tag": "bank", "priority": 2, "q": "RNN에 대해 설명해 주세요. 장기 의존성 문제는 무엇인가요?", "schools": [], "src": ["s6", "s7"], "key": "이전 은닉상태를 다음 시점에 넘기는 순환 구조. 시퀀스가 길어지면 기울기가 소실/폭발해 먼 과거를 못 배운다." },
-    { "id": "q138", "cat": "dl", "tag": "bank", "priority": 2, "q": "LSTM과 GRU는 무엇이 다른가요?", "schools": [], "src": ["s7"], "key": "둘 다 게이트로 정보를 취사선택. LSTM은 셀 상태 + 3게이트, GRU는 2게이트로 더 가볍고 빠름." },
-    { "id": "q139", "cat": "dl", "tag": "bank", "priority": 2, "q": "Weight initialization 방법에는 무엇이 있고 왜 중요한가요?", "schools": [], "src": ["s8"], "key": "0 초기화는 대칭성이 안 깨져 학습 불가. Xavier(시그모이드/tanh), He(ReLU)로 분산을 맞춰 신호가 죽거나 폭발하지 않게." },
-    { "id": "q140", "cat": "dl", "tag": "bank", "priority": 2, "q": "하이퍼파라미터란 무엇인가요? 어떻게 튜닝하나요?", "schools": [], "src": ["s8"], "key": "학습으로 정해지지 않고 사람이 정하는 값(학습률·배치크기·층수). Grid/Random/Bayesian search + 검증셋." },
-    { "id": "q141", "cat": "dl", "tag": "bank", "priority": 2, "q": "학습률(learning rate)이 너무 크거나 작으면 어떻게 되나요?", "schools": [], "src": ["s7"], "key": "크면 발산·진동, 작으면 수렴이 느리고 국소최소에 갇힘. 스케줄링·warmup으로 조절." },
-    { "id": "q142", "cat": "dl", "tag": "bank", "priority": 2, "q": "미니배치 크기를 작게/크게 할 때의 장단점은?", "schools": [], "src": ["s8"], "key": "작으면 노이즈로 일반화에 도움·메모리 절약, 느림. 크면 안정적·GPU 효율↑, 일반화가 나빠질 수 있음." },
-    { "id": "q143", "cat": "dl", "tag": "bank", "priority": 2, "q": "Local minima 문제에도 불구하고 딥러닝이 잘 되는 이유는?", "schools": [], "src": ["s6", "s8"], "key": "고차원에서는 대부분의 임계점이 saddle point이고, 도달하는 local minima들의 손실값이 서로 비슷하다는 것이 경험적 관찰." },
-    { "id": "q144", "cat": "dl", "tag": "bank", "priority": 2, "q": "오버피팅일 경우 딥러닝에서는 어떻게 대처하나요?", "schools": [], "src": ["s8"], "key": "데이터 증강, 드롭아웃, weight decay, early stopping, 모델 축소, 전이학습." },
-    { "id": "q145", "cat": "dl", "tag": "bank", "priority": 2, "q": "전이학습(Transfer Learning)과 파인튜닝은 무엇인가요?", "schools": [], "src": ["s7"], "key": "대규모 데이터로 학습된 표현을 가져와 소량 데이터에 적응. 하위층은 동결하고 상위층만 재학습하는 식." },
-    { "id": "q146", "cat": "dl", "tag": "bank", "priority": 2, "q": "오토인코더(Autoencoder)란 무엇인가요? 어디에 쓰나요?", "schools": [], "src": ["s7"], "key": "입력을 압축했다 복원하며 재구성 오차를 최소화. 차원축소·이상탐지·노이즈 제거(재구성 오차가 크면 이상)." },
-    { "id": "q147", "cat": "dl", "tag": "bank", "priority": 2, "q": "딥러닝에 GPU를 쓰면 좋은 이유는 무엇인가요?", "schools": [], "src": ["s8"], "key": "행렬 곱 같은 동일 연산의 대규모 병렬 처리에 특화. CPU는 코어가 적고 순차 처리에 강함." },
-    { "id": "q148", "cat": "dl", "tag": "bank", "priority": 1, "q": "TensorFlow와 PyTorch의 차이는 무엇인가요?", "schools": [], "src": ["s8"], "key": "PyTorch는 동적 그래프로 디버깅·연구에 유리해 사실상 표준이 됨. TF는 배포·서빙 생태계 강점." },
-    { "id": "q149", "cat": "dl", "tag": "bank", "priority": 1, "q": "Internal covariate shift란 무엇인가요?", "schools": [], "src": ["s6"], "key": "앞 층 파라미터가 바뀌면서 뒤 층의 입력 분포가 계속 변하는 현상. BN의 원래 동기였지만 최근엔 손실 표면 평활화가 더 큰 이유라는 해석도." },
-    { "id": "q150", "cat": "dl", "tag": "bank", "priority": 1, "q": "MNIST 분류기를 numpy만으로 MLP로 짠다면 대략 몇 줄이고 얼마나 걸릴까요?", "schools": [], "src": ["s8"], "key": "'해봤는가'를 떠보는 질문. 실제로 한 번 짜본 사람만 자연스럽게 답한다 — 8월~9월에 꼭 한 번 구현해 볼 것." },
-    { "id": "q151", "cat": "dl", "tag": "bank", "priority": 1, "q": "뉴럴넷의 가장 큰 단점은 무엇인가요? One-Shot Learning은 무엇인가요?", "schools": [], "src": ["s8"], "key": "데이터·연산 요구가 크고 블랙박스. 원샷/퓨샷 학습은 극소량 샘플로 일반화하는 접근(메트릭 학습·메타러닝)." },
-    { "id": "q152", "cat": "dl", "tag": "bank", "priority": 1, "q": "Bias(편향 항)는 왜 필요한가요?", "schools": [], "src": ["s8"], "key": "결정 경계를 원점에서 평행 이동시킬 수 있게 해 표현력을 확보." },
-    { "id": "q153", "cat": "dl", "tag": "bank", "priority": 1, "q": "GD 도중에 Loss가 오히려 증가하는 이유는?", "schools": [], "src": ["s8"], "key": "학습률이 과하거나 미니배치 노이즈, BN·드롭아웃의 확률성. 전체 추세가 내려가면 정상." },
-
-    { "id": "q154", "cat": "nlp", "tag": "bank", "priority": 3, "q": "Transformer의 핵심인 Self-Attention을 설명해 주세요.", "schools": [], "src": ["s7"], "key": "각 토큰이 Query·Key·Value를 만들고, Q·K 유사도로 가중치를 구해 V를 가중합. 거리와 무관하게 문맥을 직접 연결한다." },
-    { "id": "q155", "cat": "nlp", "tag": "bank", "priority": 3, "q": "Transformer는 RNN에 비해 무엇이 좋은가요?", "schools": [], "src": ["s7"], "key": "순차 처리가 없어 병렬화가 가능하고 장거리 의존성을 한 번에 연결. 대신 시퀀스 길이의 제곱 비용." },
-    { "id": "q156", "cat": "nlp", "tag": "bank", "priority": 2, "q": "Positional Encoding은 왜 필요한가요?", "schools": [], "src": ["s7"], "key": "어텐션 자체는 순서 정보가 없어서, 위치를 벡터로 주입해야 어순을 구분할 수 있다." },
-    { "id": "q157", "cat": "nlp", "tag": "bank", "priority": 2, "q": "Multi-Head Attention을 왜 여러 개로 나누나요?", "schools": [], "src": ["s7"], "key": "서로 다른 부분공간에서 다른 관계(구문·의미 등)를 동시에 보게 하려고." },
-    { "id": "q158", "cat": "nlp", "tag": "bank", "priority": 2, "q": "단어 임베딩(word embedding)이란 무엇인가요?", "schools": [], "src": ["s7"], "key": "단어를 의미가 가까우면 벡터도 가깝도록 저차원 실수 벡터로 표현. 원-핫의 희박성·무관계성을 해결." },
-    { "id": "q159", "cat": "nlp", "tag": "bank", "priority": 2, "q": "토큰화(tokenization)란? 서브워드 토크나이저를 왜 쓰나요?", "schools": [], "src": ["s7"], "key": "텍스트를 처리 단위로 자르는 것. BPE 같은 서브워드는 미등록 단어(OOV) 문제를 줄이고 어휘 크기를 통제." },
-    { "id": "q160", "cat": "nlp", "tag": "bank", "priority": 2, "q": "GAN의 학습 원리를 설명해 주세요.", "schools": [], "src": ["s7"], "key": "생성자와 판별자의 적대적 게임. 판별자는 진짜/가짜 구분을, 생성자는 판별자를 속이도록 학습. 학습 불안정·모드 붕괴가 약점." },
-    { "id": "q161", "cat": "nlp", "tag": "bank", "priority": 2, "q": "Diffusion 모델은 어떻게 이미지를 생성하나요?", "schools": [], "src": ["s7"], "key": "이미지에 노이즈를 점진적으로 더하는 과정을 역으로 학습해, 순수 노이즈에서 조금씩 복원하며 생성. GAN보다 안정적이고 품질이 높음." },
-    { "id": "q162", "cat": "nlp", "tag": "bank", "priority": 2, "q": "LLM의 환각(hallucination)은 왜 생기고 어떻게 줄이나요?", "schools": [], "src": [], "key": "다음 토큰 확률을 최대화할 뿐 사실 검증 기제가 없어서. RAG로 근거 문서를 주거나, 도구 호출·검증 단계·불확실성 표현 유도." },
-    { "id": "q163", "cat": "nlp", "tag": "bank", "priority": 2, "q": "RAG(검색 증강 생성)란 무엇인가요?", "schools": [], "src": [], "key": "질의를 임베딩해 관련 문서를 검색하고, 그 문맥을 프롬프트에 넣어 생성. 모델 재학습 없이 최신·사내 지식을 반영." },
-    { "id": "q164", "cat": "nlp", "tag": "bank", "priority": 1, "q": "파인튜닝과 프롬프트 엔지니어링, RAG 중 언제 무엇을 선택하나요?", "schools": [], "src": [], "key": "지식이 부족하면 RAG, 형식·스타일 고정이 필요하면 파인튜닝, 가볍게 될 일이면 프롬프트. 비용 순으로 낮은 것부터." },
-    { "id": "q165", "cat": "nlp", "tag": "doc", "priority": 2, "q": "최근 인공지능 관련 최신 기술이나 연구 동향 중 어떤 것을 알고 계신가요?", "schools": ["국민대", "고려대"], "src": ["s9", "s14"], "key": "LLM·멀티모달·에이전트·경량화(양자화/LoRA)·온디바이스 중 하나를 골라 '무엇이 왜 바뀌었는지'로 설명. 뉴스 나열 금지." },
-    { "id": "q166", "cat": "nlp", "tag": "bank", "priority": 1, "q": "멀티모달 모델이란 무엇인가요?", "schools": [], "src": [], "key": "텍스트·이미지·음성 등 서로 다른 형식을 하나의 표현 공간에서 다루는 모델(CLIP 계열이 대표)." },
-    { "id": "q167", "cat": "nlp", "tag": "bank", "priority": 1, "q": "설명가능한 AI(XAI)가 왜 필요한가요?", "schools": [], "src": ["s9"], "key": "의료·금융·제조처럼 책임이 따르는 도메인에서는 결과만으로 부족. SHAP·LIME·attention 시각화 등." },
-
-    { "id": "q168", "cat": "py", "tag": "real", "priority": 3, "q": "파이썬을 다뤄본 경험이 있나요? 어느 정도 수준인가요?", "schools": ["서강대", "성균관대", "연세대"], "src": ["s3", "s4", "s5"], "key": "비전공자 탈락의 제1 사유. '무엇을, 몇 줄 정도, 어떤 라이브러리로 짜봤다'로 구체적으로.", "follow": ["Numpy/Pandas는 써봤나요?", "가장 최근에 짠 코드는 무엇인가요?"] },
-    { "id": "q169", "cat": "py", "tag": "real", "priority": 3, "q": "(간단한 알고리즘 로직을) 말로 설명해 보세요.", "schools": ["서강대"], "src": ["s4"], "key": "코드를 못 써도 절차를 순서대로 말할 수 있으면 통과. 침묵이 최악." },
-    { "id": "q170", "cat": "py", "tag": "bank", "priority": 3, "q": "List와 Tuple의 차이는 무엇인가요?", "schools": [], "src": ["s8"], "key": "리스트는 가변, 튜플은 불변. 튜플은 해시 가능해 dict 키로 쓸 수 있고 약간 빠르다." },
-    { "id": "q171", "cat": "py", "tag": "bank", "priority": 3, "q": "List, Dict, Set은 각각 언제 쓰나요? 조회 속도는?", "schools": [], "src": ["s8"], "key": "리스트는 순서·중복 허용 O(n) 탐색, dict/set은 해시 기반 평균 O(1) 조회. 중복 제거·멤버십 검사는 set." },
-    { "id": "q172", "cat": "py", "tag": "bank", "priority": 2, "q": "Numpy 배열이 파이썬 리스트보다 나은 점은 무엇인가요?", "schools": [], "src": ["s8"], "key": "연속 메모리 + 벡터화 연산(C 구현)으로 훨씬 빠르고 메모리 효율적. 브로드캐스팅으로 반복문 제거." },
-    { "id": "q173", "cat": "py", "tag": "bank", "priority": 2, "q": "얕은 복사(shallow copy)와 깊은 복사(deep copy)의 차이는?", "schools": [], "src": ["s8"], "key": "얕은 복사는 내부 객체 참조를 공유해 한쪽 수정이 다른 쪽에 반영됨. deepcopy는 재귀적으로 전부 복제." },
-    { "id": "q174", "cat": "py", "tag": "bank", "priority": 2, "q": "`*args`와 `**kwargs`는 무엇인가요?", "schools": [], "src": ["s8"], "key": "가변 위치 인자 튜플과 가변 키워드 인자 딕셔너리. 함수 시그니처를 유연하게." },
-    { "id": "q175", "cat": "py", "tag": "bank", "priority": 2, "q": "제너레이터(generator)란 무엇이고 왜 쓰나요?", "schools": [], "src": ["s8"], "key": "yield로 값을 하나씩 지연 생성. 전체를 메모리에 올리지 않아 대용량 데이터 처리에 유리." },
-    { "id": "q176", "cat": "py", "tag": "bank", "priority": 2, "q": "iterator와 iterable의 차이는?", "schools": [], "src": ["s8"], "key": "iterable은 __iter__를 가진 순회 가능한 대상, iterator는 __next__로 실제 값을 하나씩 꺼내는 객체." },
-    { "id": "q177", "cat": "py", "tag": "bank", "priority": 2, "q": "람다(lambda) 함수란 무엇인가요?", "schools": [], "src": ["s8"], "key": "이름 없는 한 줄 함수. map/filter/sort의 key 인자로 자주 쓴다." },
-    { "id": "q178", "cat": "py", "tag": "bank", "priority": 2, "q": "파이썬의 메모리 관리는 어떻게 이루어지나요?", "schools": [], "src": ["s8"], "key": "참조 카운팅 + 순환 참조를 처리하는 GC. 개인 힙에서 관리되며 사용자가 직접 해제하지 않는다." },
-    { "id": "q179", "cat": "py", "tag": "bank", "priority": 1, "q": "파이썬은 인터프리터 언어라는 말의 의미는?", "schools": [], "src": ["s8"], "key": "소스를 바이트코드로 컴파일해 실행 시점에 해석. 컴파일 언어보다 느리지만 개발이 빠르다." },
-    { "id": "q180", "cat": "py", "tag": "bank", "priority": 1, "q": "`__init__`과 `self`는 무엇인가요?", "schools": [], "src": ["s8"], "key": "__init__은 인스턴스 생성 시 호출되는 초기화 메서드, self는 그 인스턴스 자신에 대한 참조." },
-    { "id": "q181", "cat": "py", "tag": "bank", "priority": 1, "q": "`[::-1]`은 무엇을 하나요?", "schools": [], "src": ["s8"], "key": "시퀀스를 뒤집은 새 객체를 반환하는 슬라이싱." },
-    { "id": "q182", "cat": "py", "tag": "bank", "priority": 1, "q": "파이썬에서 멀티스레딩은 어떻게 동작하나요? (GIL)", "schools": [], "src": ["s8"], "key": "GIL 때문에 CPU 바운드는 스레드로 병렬화가 안 됨 → multiprocessing 사용. I/O 바운드에는 스레드가 유효." },
-    { "id": "q183", "cat": "py", "tag": "bank", "priority": 1, "q": "Pandas에서 groupby / merge를 써본 경험을 말해 주세요.", "schools": [], "src": [], "key": "실제 분석 흐름(불러오기→결측 처리→집계→시각화) 한 사이클을 말할 수 있으면 충분." },
-    { "id": "q184", "cat": "py", "tag": "bank", "priority": 1, "q": "SQL은 다룰 수 있나요? JOIN과 GROUP BY를 설명해 주세요.", "schools": ["성균관대"], "src": ["s3"], "key": "빅데이터·데이터사이언스 계열이면 Python 다음 순위로 물을 수 있음." },
-
-    { "id": "q185", "cat": "cs", "tag": "real", "priority": 3, "q": "이진탐색(binary search)을 설명하고 시간복잡도를 말해 보세요.", "schools": ["한양대"], "src": ["s2"], "key": "정렬된 배열에서 중앙값과 비교해 탐색 범위를 절반씩 줄임 → O(log n). 정렬이 전제라는 점을 반드시 언급.", "follow": ["정렬이 안 되어 있으면요?", "그럼 정렬 비용까지 포함하면?"] },
-    { "id": "q186", "cat": "cs", "tag": "real", "priority": 3, "q": "스패닝 트리(spanning tree)와 그래프 이론 기본 개념을 설명해 주세요.", "schools": ["한양대"], "src": ["s1"], "key": "모든 정점을 사이클 없이 연결하는 부분 그래프(간선 V−1개). 가중치 합이 최소면 MST — Prim·Kruskal." },
-    { "id": "q187", "cat": "cs", "tag": "bank", "priority": 3, "q": "시간복잡도(Big-O)란 무엇인가요? 대표적인 복잡도를 예와 함께.", "schools": [], "src": ["s8"], "key": "입력이 커질 때 연산 증가율의 상한. O(1) 해시조회, O(log n) 이진탐색, O(n log n) 병합정렬, O(n²) 버블정렬." },
-    { "id": "q188", "cat": "cs", "tag": "bank", "priority": 2, "q": "스택과 큐의 차이는 무엇이고 어디에 쓰이나요?", "schools": [], "src": ["s8"], "key": "LIFO vs FIFO. 스택은 DFS·되돌리기, 큐는 BFS·작업 대기열." },
-    { "id": "q189", "cat": "cs", "tag": "bank", "priority": 2, "q": "해시 테이블은 어떻게 동작하나요? 충돌은 어떻게 해결하나요?", "schools": [], "src": ["s8"], "key": "키를 해시함수로 인덱스에 매핑해 평균 O(1). 충돌은 체이닝 또는 개방 주소법." },
-    { "id": "q190", "cat": "cs", "tag": "bank", "priority": 2, "q": "BFS와 DFS의 차이는? 각각 언제 쓰나요?", "schools": [], "src": ["s8"], "key": "BFS는 큐로 최단 경로(가중치 없는 그래프), DFS는 스택/재귀로 경로 탐색·사이클 검출." },
-    { "id": "q191", "cat": "cs", "tag": "bank", "priority": 2, "q": "이진탐색트리(BST)란? 최악의 경우 복잡도는?", "schools": [], "src": ["s8"], "key": "왼쪽<루트<오른쪽. 균형이 깨지면 연결리스트처럼 O(n) → 그래서 red-black tree 등 균형 트리." },
-    { "id": "q192", "cat": "cs", "tag": "bank", "priority": 2, "q": "대표적인 정렬 알고리즘과 복잡도를 말해 주세요.", "schools": [], "src": ["s8"], "key": "퀵정렬 평균 O(n log n)·최악 O(n²), 병합정렬 항상 O(n log n)·안정, 힙정렬 O(n log n)·제자리." },
-    { "id": "q193", "cat": "cs", "tag": "bank", "priority": 1, "q": "동적 계획법(DP)과 분할정복의 차이는?", "schools": [], "src": ["s8"], "key": "둘 다 부분문제로 나누지만 DP는 부분문제가 겹칠 때 결과를 저장해 재활용." },
-    { "id": "q194", "cat": "cs", "tag": "bank", "priority": 1, "q": "프로세스와 스레드의 차이는 무엇인가요?", "schools": [], "src": ["s8"], "key": "프로세스는 독립된 메모리 공간, 스레드는 같은 프로세스 내에서 메모리를 공유. 컨텍스트 스위칭 비용이 다름." },
-    { "id": "q195", "cat": "cs", "tag": "real", "priority": 2, "q": "데이터베이스 기초 — 정규화나 인덱스에 대해 설명해 주세요.", "schools": ["연세대"], "src": ["s5"], "key": "후기상 '입사 면접 수준보다 어렵지 않은' 전공 기초 확인. 정규화=중복 제거, 인덱스=조회 가속·쓰기 비용." },
-    { "id": "q196", "cat": "cs", "tag": "bank", "priority": 1, "q": "SQL에서 INNER JOIN과 LEFT JOIN의 차이는?", "schools": [], "src": [], "key": "교집합만 vs 왼쪽 전체 + 매칭되는 오른쪽(없으면 NULL)." },
-    { "id": "q197", "cat": "cs", "tag": "bank", "priority": 1, "q": "링크드 리스트와 배열의 차이는?", "schools": [], "src": ["s8"], "key": "배열은 임의 접근 O(1)·삽입 삭제 O(n), 링크드 리스트는 반대." },
-
-    { "id": "q198", "cat": "closing", "tag": "real", "priority": 3, "q": "마지막으로 하고 싶은 말 있으신가요?", "schools": ["한양대", "성균관대"], "src": ["s2", "s3"], "key": "반드시 준비할 것. 후기 중 '여기서 아무 말도 못 했다'는 후회가 가장 많다. 20~30초 분량의 '왜 나를 뽑아야 하는가' 압축본." },
-    { "id": "q199", "cat": "closing", "tag": "bank", "priority": 2, "q": "저희에게 궁금한 점 있으신가요? (역질문)", "schools": [], "src": ["s12"], "key": "좋은 역질문: 입학 전 추천 과목·자료, 신입생이 첫 학기에 흔히 겪는 어려움, 프로젝트 트랙 운영 방식. 금지: 학비 감면, 출석 느슨한지, 과제 양." },
-    { "id": "q200", "cat": "closing", "tag": "derived", "priority": 2, "q": "(모르는 개념을 물었을 때) 혹시 이건 아시나요?", "schools": [], "src": ["s1"], "key": "모르면 '정확히는 모르지만 ○○에서 유추하면 …'으로 사고 과정을 보여준다. 침묵과 허세가 가장 나쁨." },
-    { "id": "q201", "cat": "closing", "tag": "bank", "priority": 1, "q": "합격하면 언제부터 출근·수강이 가능한가요? 등록에 문제는 없나요?", "schools": [], "src": [], "key": "행정 확인성 질문. 담백하게." }
+    {
+      "id": "q001",
+      "cat": "motive",
+      "tag": "real",
+      "priority": 3,
+      "q": "간단히 자기소개 부탁드립니다. (짧게, 1분 이내)",
+      "schools": [
+        "한양대",
+        "성균관대",
+        "고려대",
+        "KAIST"
+      ],
+      "src": [
+        "s2",
+        "s3",
+        "s10",
+        "s13"
+      ],
+      "key": "① 현재 하는 일 ② 왜 AI가 필요해졌는지 ③ 이 대학원에서 무엇을 할지 — 3문장 구조. 이력 나열 금지.",
+      "follow": [
+        "방금 말한 그 문제, 좀 더 구체적으로?"
+      ]
+    },
+    {
+      "id": "q002",
+      "cat": "motive",
+      "tag": "real",
+      "priority": 3,
+      "q": "지원 동기가 무엇인가요? 원서에 쓴 것보다 구체적으로 말해주세요.",
+      "schools": [
+        "서강대",
+        "성균관대",
+        "국민대"
+      ],
+      "src": [
+        "s3",
+        "s4",
+        "s9"
+      ],
+      "key": "'AI가 대세라서'는 즉시 감점. '내 도메인의 이 문제 → 기존 방법의 한계 → 그래서 이 방법론' 3단으로."
+    },
+    {
+      "id": "q003",
+      "cat": "motive",
+      "tag": "real",
+      "priority": 3,
+      "q": "회사를 다니면서 야간 수업에 참여하는 데 어려움은 없겠습니까?",
+      "schools": [
+        "연세대",
+        "국민대",
+        "성균관대",
+        "고려대"
+      ],
+      "src": [
+        "s5",
+        "s3"
+      ],
+      "key": "'가능합니다'로 끝내지 말 것. 근무 형태·통학 시간·주말 학습 블록까지 숫자로 제시하면 신뢰가 생긴다.",
+      "follow": [
+        "야근이 잦은 직무인데 어떻게 할 건가요?",
+        "가족의 동의는 받았나요?"
+      ]
+    },
+    {
+      "id": "q004",
+      "cat": "motive",
+      "tag": "real",
+      "priority": 3,
+      "q": "비전공자인데 수업을 따라갈 수 있겠습니까?",
+      "schools": [
+        "연세대",
+        "서강대",
+        "성균관대"
+      ],
+      "src": [
+        "s5",
+        "s3",
+        "s4"
+      ],
+      "key": "이미 한 준비를 증거로 답한다 — 수강 완료한 강의명, 짠 코드, 자격증. '열심히 하겠습니다'는 무효."
+    },
+    {
+      "id": "q005",
+      "cat": "motive",
+      "tag": "real",
+      "priority": 3,
+      "q": "지금 어떤 회사에서 어떤 업무를 하고 계신가요?",
+      "schools": [
+        "성균관대"
+      ],
+      "src": [
+        "s3"
+      ],
+      "key": "업무 설명 → 그 업무에서 데이터/AI가 닿는 접점 한 문장으로 반드시 착지."
+    },
+    {
+      "id": "q006",
+      "cat": "motive",
+      "tag": "real",
+      "priority": 3,
+      "q": "그동안 공부한 (빅데이터/AI) 주제는 무엇이고, 스스로 부족하다고 느끼는 부분은 무엇인가요?",
+      "schools": [
+        "성균관대"
+      ],
+      "src": [
+        "s3"
+      ],
+      "key": "부족한 부분을 솔직히 + 그 결핍이 바로 이 대학원 커리큘럼의 어느 과목과 맞닿는지 연결."
+    },
+    {
+      "id": "q007",
+      "cat": "motive",
+      "tag": "doc",
+      "priority": 3,
+      "q": "인공지능 분야에 관심을 가지게 된 계기는 무엇인가요?",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "추상적 관심 말고 '사건' 하나. 특정 업무·프로젝트·데이터에서 막혔던 구체적 순간."
+    },
+    {
+      "id": "q008",
+      "cat": "motive",
+      "tag": "doc",
+      "priority": 3,
+      "q": "인공지능 분야에서 본인이 갖춘 강점은 무엇이라고 생각하나요?",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "비전공자의 최대 강점은 도메인. '이 데이터가 왜 이렇게 생겼는지 아는 사람'이라는 포지션."
+    },
+    {
+      "id": "q009",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 3,
+      "q": "왜 다른 학교가 아니라 우리 대학원인가요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "커리큘럼 과목명 1~2개 + 교수 연구 분야 1개를 실명으로 언급. 이걸 못 하면 준비 안 한 티가 난다."
+    },
+    {
+      "id": "q010",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 2,
+      "q": "왜 지금 시점에 대학원인가요? 독학이나 부트캠프로는 안 되나요?",
+      "schools": [],
+      "src": [
+        "s4"
+      ],
+      "key": "'독학은 체계와 깊이에 한계가 있었다 + 논문을 쓰며 방법론을 검증하는 훈련이 필요하다'가 정석."
+    },
+    {
+      "id": "q011",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 2,
+      "q": "본인의 장점과 단점은 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "단점은 반드시 '개선 중인 행동'과 함께. 치명적 단점(끈기 없음 등) 고르지 말 것."
+    },
+    {
+      "id": "q012",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 2,
+      "q": "다른 대학원에도 지원했나요? 붙으면 어디로 갈 건가요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "거짓말하지 말되 '여기가 1순위인 이유'를 커리큘럼 근거로 덧붙인다."
+    },
+    {
+      "id": "q013",
+      "cat": "motive",
+      "tag": "derived",
+      "priority": 2,
+      "q": "학비가 적지 않은데 부담은 없나요? 재정 계획은?",
+      "schools": [],
+      "src": [
+        "s5"
+      ],
+      "key": "회사 지원/학자금대출 등 계획을 짧게. 중도포기 리스크가 없다는 신호를 주는 게 목적."
+    },
+    {
+      "id": "q014",
+      "cat": "motive",
+      "tag": "derived",
+      "priority": 2,
+      "q": "졸업 후에도 지금 회사에 계속 다닐 계획인가요? 이직이 목적인가요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "특수대학원은 '현업 역량 강화'가 정답에 가깝다. 이직 목적을 노골적으로 말하면 마이너스."
+    },
+    {
+      "id": "q015",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 2,
+      "q": "학부 성적이 좋지 않은데 이유가 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "변명 대신 사실 + 이후 회복 증거(자격증·실무 성과·최근 수강 이력)."
+    },
+    {
+      "id": "q016",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 1,
+      "q": "전공을 바꾸는 것에 대한 두려움은 없나요?",
+      "schools": [
+        "고려대"
+      ],
+      "src": [
+        "s13",
+        "s16"
+      ],
+      "key": "이미 전환을 위해 한 행동(공부량, 프로젝트)을 근거로 '두려움보다 준비'를 보여준다."
+    },
+    {
+      "id": "q017",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 2,
+      "q": "AI 기술이 사회에 미치는 영향, 또는 AI 윤리에 대해 어떻게 생각하나요?",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "편향·프라이버시·설명가능성 중 하나를 골라 자기 도메인 예시로. 뜬구름 금지."
+    },
+    {
+      "id": "q018",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 1,
+      "q": "AI 분야에서 가장 흥미롭다고 생각하는 연구 주제는 무엇인가요?",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "지원 학과에 실제 그 주제를 하는 교수가 있으면 최고. 없으면 최소한 커리큘럼과 겹치게."
+    },
+    {
+      "id": "q019",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 1,
+      "q": "스트레스는 어떻게 관리하나요? 힘들 때 어떻게 버티나요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "직장+대학원 병행의 지속가능성을 보는 질문. 루틴을 구체적으로."
+    },
+    {
+      "id": "q020",
+      "cat": "motive",
+      "tag": "bank",
+      "priority": 1,
+      "q": "10년 뒤 본인의 모습을 그려본다면?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "직무명 + 그 자리에서 AI로 무엇을 하는지. 막연한 '전문가' 금지."
+    },
+    {
+      "id": "q021",
+      "cat": "exp",
+      "tag": "real",
+      "priority": 3,
+      "q": "진행했던 연구 또는 회사 업무에 대해 설명해 주세요.",
+      "schools": [
+        "KAIST",
+        "한양대"
+      ],
+      "src": [
+        "s1",
+        "s10"
+      ],
+      "key": "문제 → 접근 → 결과 → 한계 4단. 한계를 스스로 말하면 신뢰도가 급상승한다."
+    },
+    {
+      "id": "q022",
+      "cat": "exp",
+      "tag": "real",
+      "priority": 3,
+      "q": "그 프로젝트에서 구체적으로 무엇을 했고, 본인의 기여는 무엇인가요?",
+      "schools": [
+        "KAIST"
+      ],
+      "src": [
+        "s10"
+      ],
+      "key": "'우리가'가 아니라 '제가'로 말한다. 기여 비율과 담당 파트를 명확히."
+    },
+    {
+      "id": "q023",
+      "cat": "exp",
+      "tag": "doc",
+      "priority": 3,
+      "q": "인공지능 프로젝트를 수행했던 경험이 있다면 자세히 설명해 주세요.",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "작아도 좋으니 '내가 직접 돌린 것' 하나. 데이터 규모·모델·평가지표·결과 숫자까지."
+    },
+    {
+      "id": "q024",
+      "cat": "exp",
+      "tag": "bank",
+      "priority": 3,
+      "q": "석사 논문(또는 졸업 프로젝트) 주제가 무엇이었나요? 방법론을 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s12",
+        "s1"
+      ],
+      "key": "석사 경험자는 여기가 최대 무기 — 실험 설계·통계 검정·논문 작성 경험을 AI 연구 훈련으로 번역."
+    },
+    {
+      "id": "q025",
+      "cat": "exp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "그 방법론을 선택한 이유는? 다른 대안은 고려하지 않았나요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "선택의 '이유'를 못 대면 따라 한 것으로 읽힌다. 대안 1개와 기각 사유를 준비."
+    },
+    {
+      "id": "q026",
+      "cat": "exp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "실험 결과가 기대와 달랐던 경험이 있나요? 어떻게 대응했나요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "실패 → 원인 가설 → 검증 → 배운 것. 연구 태도를 보는 질문."
+    },
+    {
+      "id": "q027",
+      "cat": "exp",
+      "tag": "doc",
+      "priority": 2,
+      "q": "팀 프로젝트에서 역할 분담과 협업 경험에 대해 이야기해 주세요.",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "갈등 하나 + 해결 방식. 무난한 팀워크 미담보다 낫다."
+    },
+    {
+      "id": "q028",
+      "cat": "exp",
+      "tag": "doc",
+      "priority": 2,
+      "q": "인공지능을 활용한 문제 해결 사례를 하나 소개해 주세요.",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "남의 사례여도 됨. 단, 왜 그 방법이 그 문제에 맞았는지까지 설명해야 점수."
+    },
+    {
+      "id": "q029",
+      "cat": "exp",
+      "tag": "doc",
+      "priority": 2,
+      "q": "인공지능 알고리즘 중 가장 익숙하거나 선호하는 것은 무엇이며, 그 이유는?",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "여기서 고른 알고리즘으로 꼬리질문이 들어온다. 가장 자신 있는 하나(예: 로지스틱 회귀/랜덤포레스트)를 고를 것."
+    },
+    {
+      "id": "q030",
+      "cat": "exp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "데이터 전처리에서 가장 중요하다고 생각하는 것은 무엇인가요?",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "결측치·이상치·스케일링·누수(leakage) 중 leakage를 언급하면 인상적."
+    },
+    {
+      "id": "q031",
+      "cat": "exp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "다뤄본 데이터의 규모와 종류는? 어떤 도구를 사용했나요?",
+      "schools": [],
+      "src": [
+        "s3",
+        "s4"
+      ],
+      "key": "Python/pandas/SQL/Excel — 과장 금지. 실제 쓴 것만."
+    },
+    {
+      "id": "q032",
+      "cat": "exp",
+      "tag": "bank",
+      "priority": 1,
+      "q": "최근에 읽은 논문이나 기술 문서가 있다면 소개해 주세요.",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "한 편이라도 진짜 읽고 갈 것. 지원 교수 논문이면 만점."
+    },
+    {
+      "id": "q033",
+      "cat": "exp",
+      "tag": "bank",
+      "priority": 1,
+      "q": "지원한 연구실(교수)의 논문을 읽어봤나요? 어떤 내용이었나요?",
+      "schools": [
+        "고려대",
+        "한양대"
+      ],
+      "src": [
+        "s12",
+        "s17"
+      ],
+      "key": "제목만 읽고 아는 척 금지. 초록 + 문제의식 한 줄이면 충분."
+    },
+    {
+      "id": "q034",
+      "cat": "exp",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Kaggle이나 공모전 경험이 있나요?",
+      "schools": [],
+      "src": [
+        "s4"
+      ],
+      "key": "순위보다 '무엇을 시도했고 왜 안 됐는지'."
+    },
+    {
+      "id": "q035",
+      "cat": "exp",
+      "tag": "derived",
+      "priority": 1,
+      "q": "자격증(정보처리기사·ADsP·빅데이터분석기사 등)은 어떤 계기로 땄나요?",
+      "schools": [
+        "서강대"
+      ],
+      "src": [
+        "s4"
+      ],
+      "key": "비전공자의 준비 증거로 쓰되, 자격증만 나열하면 '시험용'으로 읽힌다. 코드 경험과 세트로."
+    },
+    {
+      "id": "q036",
+      "cat": "plan",
+      "tag": "real",
+      "priority": 3,
+      "q": "대학원에 와서 구체적으로 무엇을 배우고 싶은가요? 학업계획을 말해보세요.",
+      "schools": [
+        "연세대",
+        "국민대"
+      ],
+      "src": [
+        "s5",
+        "s9"
+      ],
+      "key": "학기별로 → 1학기 기초(수학·ML), 2~3학기 심화·도메인 적용, 4학기 논문/프로젝트. 실제 개설 과목명을 쓸 것."
+    },
+    {
+      "id": "q037",
+      "cat": "plan",
+      "tag": "doc",
+      "priority": 3,
+      "q": "석사 과정 이후 어떤 연구 또는 목표를 이루고 싶으신가요?",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "'현업 문제 X를 AI로 푸는 사람'처럼 직무 단위로 구체화."
+    },
+    {
+      "id": "q038",
+      "cat": "plan",
+      "tag": "real",
+      "priority": 2,
+      "q": "졸업 후 진로 계획은 무엇인가요? 박사 진학 생각도 있나요?",
+      "schools": [
+        "고려대"
+      ],
+      "src": [
+        "s13",
+        "s12"
+      ],
+      "key": "특수대학원은 박사 진학을 굳이 강조할 필요 없음. 다만 물으면 솔직하게."
+    },
+    {
+      "id": "q039",
+      "cat": "plan",
+      "tag": "bank",
+      "priority": 2,
+      "q": "학업계획서에 쓴 이 연구 주제, 현실적으로 2년 안에 가능하다고 보나요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "범위를 좁히는 방향으로 답한다. '이 부분만 먼저'라고 말할 수 있으면 성숙해 보인다."
+    },
+    {
+      "id": "q040",
+      "cat": "plan",
+      "tag": "bank",
+      "priority": 2,
+      "q": "논문 트랙과 프로젝트(비논문) 트랙 중 무엇을 선택할 생각인가요?",
+      "schools": [
+        "국민대"
+      ],
+      "src": [
+        "s9"
+      ],
+      "key": "학칙상 선택 가능한 학교가 많다. 이유를 커리어와 연결."
+    },
+    {
+      "id": "q041",
+      "cat": "plan",
+      "tag": "derived",
+      "priority": 2,
+      "q": "본인 도메인(현 업무 분야)과 AI를 어떻게 결합할 생각인가요?",
+      "schools": [],
+      "src": [
+        "s4",
+        "s16"
+      ],
+      "key": "특수대학원 최고의 답변 소재. '도메인 데이터 + AI 방법론' 조합을 문제-방법 쌍으로 1개 준비."
+    },
+    {
+      "id": "q042",
+      "cat": "plan",
+      "tag": "bank",
+      "priority": 1,
+      "q": "입학 전까지 무엇을 준비할 계획인가요?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "Python/선형대수/확률 중 하나를 구체 교재·강의명으로."
+    },
+    {
+      "id": "q043",
+      "cat": "plan",
+      "tag": "bank",
+      "priority": 1,
+      "q": "지도교수를 정했나요? 어느 분과 하고 싶나요?",
+      "schools": [
+        "고려대",
+        "한양대"
+      ],
+      "src": [
+        "s13",
+        "s17"
+      ],
+      "key": "일반대학원은 사실상 필수 질문. 특수대학원은 없어도 무방하나 이름 하나는 알고 갈 것."
+    },
+    {
+      "id": "q044",
+      "cat": "plan",
+      "tag": "bank",
+      "priority": 1,
+      "q": "연구가 막히면 어떻게 해결하나요? 교수와 의견이 다르면?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "'근거를 들고 가서 논의한다' — 순종도 고집도 아닌 태도."
+    },
+    {
+      "id": "q045",
+      "cat": "plan",
+      "tag": "bank",
+      "priority": 1,
+      "q": "장기 연구를 견딜 만한 인내심이 있다고 생각하나요? 근거는?",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "오래 붙잡아 끝낸 일 하나(운동·자격증·프로젝트)를 사례로."
+    },
+    {
+      "id": "q046",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 3,
+      "q": "고유값(eigenvalue)과 고유벡터(eigenvector)가 무엇이고, 왜 중요한가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "Av=λv — 선형변환을 해도 방향이 안 바뀌는 축과 그 축의 배율. 데이터 분산이 가장 큰 방향을 찾는 PCA의 뼈대.",
+      "follow": [
+        "그럼 PCA와 어떻게 연결되나요?"
+      ]
+    },
+    {
+      "id": "q047",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 3,
+      "q": "SVD(특이값분해)란 무엇인가요? 왜 중요한가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "임의의 행렬을 회전·스케일·회전으로 분해(A=UΣVᵀ). 정방행렬이 아니어도 되고, 상위 특이값만 남기면 저차원 근사·압축·노이즈 제거가 된다."
+    },
+    {
+      "id": "q048",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 3,
+      "q": "PCA는 차원 축소이면서 데이터 압축이자 노이즈 제거 기법이기도 합니다. 왜 그런가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "분산 큰 축만 남김 = 차원↓(축소), 적은 수로 원본 근사(압축), 분산 작은 축=노이즈로 간주해 버림(제거). 하나의 연산이 세 해석을 가진다."
+    },
+    {
+      "id": "q049",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Rank란 무엇인가요? 선형독립/종속은?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "열(행)들이 만들어내는 공간의 실제 차원 수. 서로 다른 정보를 주는 축이 몇 개인가."
+    },
+    {
+      "id": "q050",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Basis와 Dimension이란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "공간을 남김없이 표현하는 최소한의 독립 벡터 집합이 basis, 그 개수가 dimension."
+    },
+    {
+      "id": "q051",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Null space란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "Ax=0을 만족하는 x들의 집합. 변환에 의해 원점으로 뭉개지는 방향들 = 정보가 소실되는 방향."
+    },
+    {
+      "id": "q052",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 2,
+      "q": "행렬 곱의 의미는? 행렬을 선형변환으로 해석한다는 게 무슨 뜻인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "행렬 = 공간을 회전·확대·전단하는 함수. 곱은 변환의 합성."
+    },
+    {
+      "id": "q053",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Determinant가 의미하는 바는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "변환이 부피(면적)를 몇 배로 바꾸는가. 0이면 차원이 무너져 역행렬이 없다."
+    },
+    {
+      "id": "q054",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Positive-definite 행렬이란? 왜 중요한가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "모든 x≠0에 대해 xᵀAx>0. 고유값이 모두 양수 → 최적화에서 볼록성(유일한 최소점)을 보장."
+    },
+    {
+      "id": "q055",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Symmetric matrix의 성질은 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "고유값이 실수이고 고유벡터가 서로 직교 → 직교대각화 가능. 공분산 행렬이 대칭이라 PCA가 깔끔하게 돌아간다."
+    },
+    {
+      "id": "q056",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 1,
+      "q": "내적(dot product)의 기하적 의미는? 벡터의 norm이란?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "내적은 한 벡터를 다른 벡터 방향으로 투영한 길이 × 크기 → 유사도. norm은 벡터의 길이."
+    },
+    {
+      "id": "q057",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Jacobian matrix란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "다변수 벡터함수의 1차 편미분들을 모은 행렬. 국소적으로 그 함수를 근사하는 선형변환 = 역전파 연쇄법칙의 실체."
+    },
+    {
+      "id": "q058",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 1,
+      "q": "차원 축소 기법에는 보통 어떤 것들이 있나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "선형: PCA, LDA, SVD / 비선형: t-SNE, UMAP, autoencoder. LDA는 클래스 분리를 최대화한다는 점이 PCA와 다름."
+    },
+    {
+      "id": "q059",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 1,
+      "q": "LSA, LDA, SVD가 각각 무엇이고 서로 어떤 관계인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "LSA는 문서-단어 행렬에 SVD를 적용한 것. LDA(잠재 디리클레 할당)는 확률적 토픽 모델로 계열이 다름(선형판별분석 LDA와 이름 충돌 주의)."
+    },
+    {
+      "id": "q060",
+      "cat": "linalg",
+      "tag": "bank",
+      "priority": 1,
+      "q": "왜 딥러닝 연산의 대부분이 행렬 연산인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "레이어 = 선형변환 + 비선형. 행렬로 표현해야 GPU 병렬화가 가능하다."
+    },
+    {
+      "id": "q061",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 3,
+      "q": "체인룰(chain rule)이란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "합성함수의 미분 = 바깥 미분 × 안쪽 미분. 역전파가 바로 이 규칙을 층마다 반복 적용하는 것."
+    },
+    {
+      "id": "q062",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 3,
+      "q": "편향-분산 트레이드오프(bias-variance trade-off)를 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s6",
+        "s7"
+      ],
+      "key": "모델을 단순화하면 편향↑·분산↓(과소적합), 복잡하게 하면 편향↓·분산↑(과적합). 총 오차 = 편향² + 분산 + 잡음.",
+      "follow": [
+        "그럼 어느 쪽으로 조절해야 하나요?",
+        "Bias, Variance, MSE의 관계는?"
+      ]
+    },
+    {
+      "id": "q063",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 3,
+      "q": "중심극한정리(CLT)란 무엇이고 왜 유용한가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "모집단 분포가 뭐든 표본평균의 분포는 표본이 커지면 정규분포에 근사. 그래서 정규분포 가정으로 구간추정·검정이 가능해진다."
+    },
+    {
+      "id": "q064",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 3,
+      "q": "최대우도추정(MLE)이란 무엇인가요? MAP와의 차이는?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "관측 데이터가 나올 확률(우도)을 최대화하는 파라미터를 고르는 것. MAP는 여기에 사전분포를 곱함 → 정규화(regularization)와 같은 효과."
+    },
+    {
+      "id": "q065",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 3,
+      "q": "표본분산을 구할 때 N이 아니라 N-1로 나누는 이유는?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "표본평균을 이미 데이터로 추정했기 때문에 자유도가 1 줄었다. N으로 나누면 분산을 과소추정(편향)하게 됨."
+    },
+    {
+      "id": "q066",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 3,
+      "q": "p-value를 모르는 사람에게 설명한다면?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "'귀무가설이 참이라고 할 때, 지금 본 것만큼 극단적인 결과가 나올 확률'. 가설이 참일 확률이 아니다 — 이 구분이 핵심."
+    },
+    {
+      "id": "q067",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 3,
+      "q": "Frequentist와 Bayesian의 차이는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "빈도주의는 파라미터를 고정된 미지수로, 베이지안은 확률변수로 본다. 후자는 사전지식을 넣을 수 있고 데이터가 적을 때 유리."
+    },
+    {
+      "id": "q068",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 2,
+      "q": "확률과 통계는 무엇이 다른가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "확률은 모형에서 데이터를 예측(연역), 통계는 데이터에서 모형을 추론(귀납)."
+    },
+    {
+      "id": "q069",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 2,
+      "q": "'likelihood'와 'probability'의 차이는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "확률은 파라미터 고정·데이터 변수, 우도는 데이터 고정·파라미터 변수. 같은 식을 어느 쪽에서 보느냐의 차이."
+    },
+    {
+      "id": "q070",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 2,
+      "q": "조건부확률과 베이즈 정리를 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "P(A|B)=P(B|A)P(A)/P(B). 사전믿음을 증거로 갱신하는 공식."
+    },
+    {
+      "id": "q071",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 2,
+      "q": "공분산(covariance)과 상관계수(correlation)는 무엇이 다른가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "공분산은 단위에 의존, 상관계수는 표준편차로 나눠 -1~1로 정규화. 크기 비교가 가능해진다."
+    },
+    {
+      "id": "q072",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 2,
+      "q": "신뢰구간의 정의는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "같은 방식으로 표본을 반복 추출해 구간을 만들면 그중 95%가 참값을 포함한다는 뜻. 특정 구간이 참값을 포함할 확률이 아님."
+    },
+    {
+      "id": "q073",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 2,
+      "q": "엔트로피(entropy)란 무엇인가요? Information Gain도 함께 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "불확실성의 양 = 최적 전략에서 정답을 맞히는 데 필요한 평균 질문 수. IG는 분할 전후 엔트로피 감소량으로, 의사결정트리의 분할 기준."
+    },
+    {
+      "id": "q074",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Cross-Entropy와 KL-Divergence는 무엇이고 어떤 관계인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "KL = 크로스엔트로피 − 엔트로피. 정답분포가 고정이면 크로스엔트로피 최소화 = KL 최소화라서 분류 손실로 쓴다."
+    },
+    {
+      "id": "q075",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Biased/Unbiased estimation의 차이는? Unbiased가 무조건 좋은가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "불편추정량은 기대값이 참값과 같음. 하지만 분산이 크면 MSE가 더 나쁠 수 있어 항상 좋은 건 아니다(편향-분산 관점)."
+    },
+    {
+      "id": "q076",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 2,
+      "q": "베르누이/이항/카테고리/다항/정규/포아송 분포를 설명하고 서로의 관계를 말해 주세요.",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "베르누이(1회 이진) → 이항(n회) → 다항(다범주). 포아송은 드문 사건의 발생 횟수, 정규는 이들의 극한 근사."
+    },
+    {
+      "id": "q077",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Marginal distribution과 Conditional distribution이란?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "결합분포에서 한 변수를 적분해 지운 것이 주변분포, 특정 값으로 고정한 것이 조건부분포."
+    },
+    {
+      "id": "q078",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Conjugate prior란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "사후분포가 사전분포와 같은 계열이 되게 하는 사전분포. 계산이 닫힌 형태로 떨어진다(베타-이항 등)."
+    },
+    {
+      "id": "q079",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "R square(결정계수)의 의미는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "총 변동 중 모델이 설명한 비율. 변수 늘리면 무조건 올라가므로 adjusted R²와 함께 봐야."
+    },
+    {
+      "id": "q080",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "평균과 중앙값 중 어떤 경우에 무엇을 써야 하나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "이상치·왜도가 크면 중앙값. 소득·가격 데이터가 대표적."
+    },
+    {
+      "id": "q081",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "이상치(outlier)를 판단하는 기준은 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "IQR 1.5배, z-score 3, 도메인 기준. 통계적 이상치와 '진짜 중요한 신호'를 구분해야 한다는 점을 덧붙이면 좋다."
+    },
+    {
+      "id": "q082",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "결측치(missing value)는 채워야 할까요? 그 이유는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "결측 메커니즘(MCAR/MAR/MNAR)에 따라 다름. 무작정 평균 대체는 분산을 과소평가한다."
+    },
+    {
+      "id": "q083",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "샘플링(Sampling)과 리샘플링(Resampling)이 무엇이고 리샘플링의 장점은?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "리샘플링(부트스트랩·CV)은 분포 가정 없이 추정량의 변동성을 경험적으로 얻을 수 있다."
+    },
+    {
+      "id": "q084",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "통계에서 bootstrap의 의미는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "표본에서 복원추출로 여러 가상 표본을 만들어 통계량의 분포를 추정하는 방법. 배깅의 B가 이것."
+    },
+    {
+      "id": "q085",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "모수적 방법과 비모수적 방법은 각각 언제 쓰나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "분포 가정을 할 수 있고 표본이 충분하면 모수적, 가정이 깨지거나 표본이 적으면 비모수적."
+    },
+    {
+      "id": "q086",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "검정력(statistical power)이란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "대립가설이 참일 때 그것을 옳게 잡아낼 확률(1−β). 표본 크기 계산의 핵심."
+    },
+    {
+      "id": "q087",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "로그 함수는 어떤 경우에 유용한가요? 사례를 들어 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "곱을 합으로 바꿔 수치 안정성 확보(로그우도), 왜도가 큰 분포를 대칭화, 스케일 압축."
+    },
+    {
+      "id": "q088",
+      "cat": "stat",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Type 1 Error와 Type 2 Error의 차이는?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "1종=참인 귀무가설을 기각(거짓 양성), 2종=거짓인 귀무가설을 못 기각(거짓 음성). 어느 쪽이 더 치명적인지는 도메인이 정한다."
+    },
+    {
+      "id": "q089",
+      "cat": "ml",
+      "tag": "real",
+      "priority": 3,
+      "q": "선형회귀와 로지스틱 회귀의 차이는 무엇인가요?",
+      "schools": [
+        "한양대"
+      ],
+      "src": [
+        "s2"
+      ],
+      "key": "출력이 연속값 vs 확률(시그모이드로 0~1 압축). 손실도 MSE vs 크로스엔트로피로 다르다. 로지스틱은 이름은 회귀지만 분류기."
+    },
+    {
+      "id": "q090",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "과적합(overfitting)이란 무엇이고 어떻게 해결하나요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s7"
+      ],
+      "key": "학습 데이터의 노이즈까지 외워 일반화가 안 되는 상태. 데이터 확보·증강, 정규화(L1/L2), 드롭아웃, early stopping, 모델 단순화, 교차검증.",
+      "follow": [
+        "과소적합은요?",
+        "어떻게 진단하나요?"
+      ]
+    },
+    {
+      "id": "q091",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "L1과 L2 정규화의 차이는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "L1은 절댓값 페널티 → 계수를 0으로 만들어 변수 선택 효과(Lasso). L2는 제곱 페널티 → 계수를 고르게 줄임(Ridge)."
+    },
+    {
+      "id": "q092",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "경사하강법(GD)이란 무엇인가요? SGD·미니배치와의 차이는?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s7"
+      ],
+      "key": "손실의 기울기 반대 방향으로 파라미터를 조금씩 이동. GD는 전체 데이터로 1스텝(정확·느림), SGD는 1샘플(빠름·요동), 미니배치가 절충안이자 실전 표준."
+    },
+    {
+      "id": "q093",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "Train / Validation / Test를 나누는 이유는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "학습용·하이퍼파라미터 선택용·최종 성능 측정용. valid로 튜닝하면 valid에도 과적합되기 때문에 test는 마지막에 딱 한 번."
+    },
+    {
+      "id": "q094",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "교차검증(Cross Validation)은 무엇이고 어떻게 하나요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "데이터를 K등분해 돌아가며 검증. 데이터가 적을 때 평가 분산을 줄인다. 클래스 불균형이면 stratified K-fold."
+    },
+    {
+      "id": "q095",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "알고 있는 평가 metric을 설명해 주세요. (RMSE, MAE, recall, precision 등)",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "회귀: MAE(해석 쉬움)·MSE/RMSE(큰 오차 민감)·R². 분류: precision(예측 양성 중 맞은 비율)·recall(실제 양성 중 잡은 비율)·F1(조화평균)."
+    },
+    {
+      "id": "q096",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "Precision과 Recall 중 무엇이 더 중요한가요? 상황을 들어 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "암 진단·불량 검출처럼 놓치면 치명적이면 recall, 스팸 차단처럼 오탐 비용이 크면 precision. 트레이드오프 관계."
+    },
+    {
+      "id": "q097",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "ROC 커브와 AUC에 대해 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "임계값을 움직이며 TPR-FPR을 그린 곡선. AUC는 무작위 양성이 무작위 음성보다 높은 점수를 받을 확률. 불균형이 심하면 PR curve가 더 정직하다."
+    },
+    {
+      "id": "q098",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "혼동 행렬(confusion matrix)을 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "TP/FP/FN/TN 2×2. 정확도만 보면 불균형 데이터에서 속는다는 점을 함께 말할 것."
+    },
+    {
+      "id": "q099",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "차원의 저주(curse of dimensionality)란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "차원이 늘면 공간 부피가 지수적으로 커져 데이터가 희박해지고 거리 개념이 무의미해진다. 필요한 표본 수가 폭증."
+    },
+    {
+      "id": "q100",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 3,
+      "q": "앙상블이란 무엇인가요? 배깅과 부스팅의 차이는?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "여러 모델을 합쳐 성능·안정성을 얻음. 배깅=병렬·분산 감소(랜덤포레스트), 부스팅=순차·이전 오차 보정·편향 감소(XGBoost)."
+    },
+    {
+      "id": "q101",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "SVM이란 무엇인가요? 마진을 최대화하면 어떤 장점이 있나요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "클래스를 가르는 초평면 중 여백이 가장 큰 것을 고름. 여백이 크면 새 데이터에 대한 일반화 오차 상한이 작아진다."
+    },
+    {
+      "id": "q102",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "SVM은 왜 오히려 차원을 확장시키는 방식으로 동작하나요? (커널 트릭)",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "저차원에서 선형분리 불가능한 데이터가 고차원에서는 가능해진다. 커널은 고차원 좌표를 실제로 만들지 않고 내적만 계산해 비용을 회피."
+    },
+    {
+      "id": "q103",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Generative model과 Discriminative model의 차이는?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "생성모델은 P(x,y)를 학습해 데이터 자체를 만들 수 있고, 판별모델은 P(y|x) 경계만 학습. 나이브베이즈 vs 로지스틱 회귀."
+    },
+    {
+      "id": "q104",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "나이브 베이즈 분류기란 무엇인가요? 오래된 기법인데 장점을 옹호해 보세요.",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "특징 간 조건부 독립을 가정해 계산을 단순화. 가정이 거칠어도 텍스트처럼 고차원·희박한 데이터에서 빠르고 강건하며 적은 데이터로도 동작."
+    },
+    {
+      "id": "q105",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "의사결정나무는 어떻게 분할 기준을 정하나요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "정보이득(엔트로피 감소) 또는 지니 불순도 감소가 최대인 특징·임계값. 깊어지면 과적합 → 가지치기·깊이 제한."
+    },
+    {
+      "id": "q106",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "랜덤포레스트는 의사결정나무와 무엇이 다른가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "부트스트랩 샘플 + 분할 시 특징도 랜덤 선택 → 트리 간 상관을 낮춰 분산을 크게 줄임."
+    },
+    {
+      "id": "q107",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "서버가 100대 있습니다. 이때 신경망보다 랜덤포레스트를 써야 하는 이유는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "트리는 완전 병렬화가 쉽고 튜닝이 덜 민감하며 표 형태 데이터에서 종종 더 강하다. 해석 가능성도."
+    },
+    {
+      "id": "q108",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "K-means의 대표적 단점은 무엇인가요? (계산량 말고)",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "K를 미리 정해야 하고, 구형·비슷한 크기 군집만 잘 찾으며, 초기값에 민감하고 이상치에 취약."
+    },
+    {
+      "id": "q109",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "지도학습·비지도학습·준지도학습·강화학습을 각각 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s6",
+        "s7"
+      ],
+      "key": "정답 라벨 유무와 보상 신호의 차이. 준지도는 소량 라벨 + 대량 무라벨, 강화학습은 시행착오와 보상."
+    },
+    {
+      "id": "q110",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "분류와 회귀의 차이는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "출력이 이산 범주냐 연속값이냐. 손실함수와 평가지표가 통째로 달라진다."
+    },
+    {
+      "id": "q111",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "정규화(normalization)를 왜 해야 하나요? 방법에는 무엇이 있나요?",
+      "schools": [],
+      "src": [
+        "s7",
+        "s8"
+      ],
+      "key": "스케일이 다르면 거리 기반 모델이 왜곡되고 경사하강 수렴이 느려진다. Min-Max, Standardization(z-score), Robust scaling."
+    },
+    {
+      "id": "q112",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Regularization, Normalization, Standardization은 각각 무엇을 대상으로 하나요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "Regularization은 모델(가중치)에, Normalization·Standardization은 데이터에 가하는 처리. 용어 혼동을 노린 질문."
+    },
+    {
+      "id": "q113",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Local minima와 global minimum에 대해 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "국소적으로만 최소인 점 vs 전체 최소. 고차원에서는 나쁜 local minima보다 saddle point가 더 문제라는 게 현대적 이해."
+    },
+    {
+      "id": "q114",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 2,
+      "q": "머신러닝적 접근과 통계적 접근의 차이에 대한 생각은?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "통계는 해석·추론과 가정 검증, ML은 예측 성능 우선. 최근에는 경계가 흐려지고 설명가능성이 다시 부각."
+    },
+    {
+      "id": "q115",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "머신러닝과 딥러닝의 차이는 무엇인가요? AI·ML·DL의 관계는?",
+      "schools": [
+        "국민대",
+        "고려대"
+      ],
+      "src": [
+        "s9",
+        "s14"
+      ],
+      "key": "AI ⊃ ML ⊃ DL. 핵심 차이는 특징(feature)을 사람이 설계하느냐, 모델이 데이터에서 학습하느냐."
+    },
+    {
+      "id": "q116",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "K-NN 알고리즘을 설명해 주세요. 장단점은?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "학습 없이 가장 가까운 K개의 다수결. 단순하지만 차원의 저주·예측 비용·스케일 민감."
+    },
+    {
+      "id": "q117",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "XGBoost가 캐글에서 유명한 이유는 무엇일까요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "정형 데이터에서 성능이 강하고, 정규화·결측 처리·병렬화가 내장돼 튜닝 대비 효율이 좋다."
+    },
+    {
+      "id": "q118",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "스태킹(stacking) 앙상블이란?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "여러 모델의 예측값을 다시 입력으로 받는 메타모델을 학습. 누수 방지를 위해 OOF 예측을 써야 함."
+    },
+    {
+      "id": "q119",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "클래스 불균형 데이터는 어떻게 다루나요?",
+      "schools": [],
+      "src": [
+        "s7",
+        "s8"
+      ],
+      "key": "리샘플링(SMOTE·언더샘플링), class weight, 임계값 조정, 그리고 accuracy 대신 F1·PR-AUC로 평가."
+    },
+    {
+      "id": "q120",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "feature vector란 무엇인가요? 좋은 feature의 조건은?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "샘플을 수치 벡터로 표현한 것. 좋은 feature는 타깃과 관련 있고, 서로 중복이 적고, 누수가 없어야."
+    },
+    {
+      "id": "q121",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "'좋은 모델'의 정의는 무엇이라고 생각하나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "테스트 성능뿐 아니라 일반화·해석가능성·추론비용·유지보수까지 포함. 현업 관점을 얹으면 특수대학원에서 특히 좋은 답."
+    },
+    {
+      "id": "q122",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Newton's method와 Gradient Descent의 차이는?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "GD는 1차 미분만, 뉴턴법은 2차(헤시안)까지 써서 빠르게 수렴하지만 헤시안 계산·역행렬 비용이 큼."
+    },
+    {
+      "id": "q123",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "데이터 누수(data leakage)란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "학습 시점에 알 수 없는 정보가 feature에 섞여 성능이 비현실적으로 좋아지는 것. 전처리를 train/test 분리 전에 하면 발생."
+    },
+    {
+      "id": "q124",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "텍스트 더미에서 주제를 추출해야 합니다. 어떻게 접근하시겠습니까?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "전처리→벡터화(TF-IDF/임베딩)→LDA 토픽모델 또는 임베딩 클러스터링. 최근엔 LLM 요약도 옵션. 평가는 coherence."
+    },
+    {
+      "id": "q125",
+      "cat": "ml",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Markov Chain을 고등학생에게 설명한다면?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "다음 상태는 오직 지금 상태에만 달려 있다 — 날씨 예보나 보드게임 말 이동 비유."
+    },
+    {
+      "id": "q126",
+      "cat": "dl",
+      "tag": "real",
+      "priority": 3,
+      "q": "CNN과 pooling layer에 대해 설명해 주세요.",
+      "schools": [
+        "한양대"
+      ],
+      "src": [
+        "s2"
+      ],
+      "key": "합성곱은 지역 패턴을 가중치 공유로 추출, 풀링은 공간 크기를 줄여 계산량↓ + 작은 위치 변화에 강인해짐(translation invariance).",
+      "follow": [
+        "Max pooling을 쓰는 이유는?",
+        "CNN이 MLP보다 좋은 이유는?"
+      ]
+    },
+    {
+      "id": "q127",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 3,
+      "q": "역전파(backpropagation)를 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s6",
+        "s7"
+      ],
+      "key": "출력 손실을 연쇄법칙으로 층을 거슬러 미분해 각 가중치의 기울기를 구하는 과정. 순전파로 값 저장 → 역방향으로 기울기 전파."
+    },
+    {
+      "id": "q128",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 3,
+      "q": "요즘 Sigmoid보다 ReLU를 많이 쓰는 이유는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "시그모이드는 양끝에서 기울기가 0에 가까워 기울기 소실이 심함. ReLU는 양수 구간 기울기가 1로 일정하고 계산이 싸다.",
+      "follow": [
+        "ReLU의 문제점은?",
+        "그럼 ReLU로 어떻게 곡선을 근사하나요?"
+      ]
+    },
+    {
+      "id": "q129",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 3,
+      "q": "비선형성(non-linearity)이 왜 필요한가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "활성화가 없으면 층을 아무리 쌓아도 결국 하나의 선형변환이라 표현력이 늘지 않는다."
+    },
+    {
+      "id": "q130",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 3,
+      "q": "기울기 소실(vanishing gradient)은 왜 생기고 어떻게 완화하나요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "작은 기울기가 층마다 곱해져 0으로 수렴. ReLU 계열, 적절한 초기화(He/Xavier), 배치정규화, 잔차연결(ResNet), LSTM/GRU."
+    },
+    {
+      "id": "q131",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 3,
+      "q": "배치 정규화(Batch Normalization)는 무엇이고 왜 하나요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "미니배치 단위로 층 입력을 정규화해 분포 변화(internal covariate shift)를 줄임. 학습이 빨라지고 초기값·학습률에 덜 민감, 약한 정규화 효과도.",
+      "follow": [
+        "학습 후 추론 시 주의할 점은?"
+      ]
+    },
+    {
+      "id": "q132",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 3,
+      "q": "드롭아웃(Dropout)의 효과는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s7",
+        "s8"
+      ],
+      "key": "학습 중 뉴런을 랜덤하게 꺼서 특정 경로 의존을 막음 → 암묵적 앙상블 효과로 과적합 억제. 추론 시에는 끄고 스케일 보정."
+    },
+    {
+      "id": "q133",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 3,
+      "q": "SGD, Momentum, RMSprop, Adam의 차이를 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "Momentum은 관성으로 진동 억제, RMSprop은 파라미터별 학습률을 기울기 크기로 조정, Adam은 둘을 합친 것(1·2차 모멘트)."
+    },
+    {
+      "id": "q134",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 3,
+      "q": "활성화 함수의 종류와 각각의 특징을 말해 주세요.",
+      "schools": [],
+      "src": [
+        "s7",
+        "s8"
+      ],
+      "key": "Sigmoid(0~1, 소실), Tanh(-1~1, 중심0), ReLU(빠름·죽는 뉴런), LeakyReLU(음수 기울기), Softmax(다중분류 확률)."
+    },
+    {
+      "id": "q135",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 3,
+      "q": "Cost function과 Activation function은 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "손실함수는 예측과 정답의 차이를 수치화(무엇을 최적화할지), 활성화함수는 뉴런의 비선형 변환(무엇을 표현할지)."
+    },
+    {
+      "id": "q136",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "CNN이 MLP보다 이미지에서 유리한 이유는? 파라미터 수를 계산해 보세요.",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "지역 연결 + 가중치 공유로 파라미터가 급감하고 위치 불변성을 얻는다. Conv 파라미터 = (k×k×C_in+1)×C_out."
+    },
+    {
+      "id": "q137",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "RNN에 대해 설명해 주세요. 장기 의존성 문제는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s7"
+      ],
+      "key": "이전 은닉상태를 다음 시점에 넘기는 순환 구조. 시퀀스가 길어지면 기울기가 소실/폭발해 먼 과거를 못 배운다."
+    },
+    {
+      "id": "q138",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "LSTM과 GRU는 무엇이 다른가요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "둘 다 게이트로 정보를 취사선택. LSTM은 셀 상태 + 3게이트, GRU는 2게이트로 더 가볍고 빠름."
+    },
+    {
+      "id": "q139",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Weight initialization 방법에는 무엇이 있고 왜 중요한가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "0 초기화는 대칭성이 안 깨져 학습 불가. Xavier(시그모이드/tanh), He(ReLU)로 분산을 맞춰 신호가 죽거나 폭발하지 않게."
+    },
+    {
+      "id": "q140",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "하이퍼파라미터란 무엇인가요? 어떻게 튜닝하나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "학습으로 정해지지 않고 사람이 정하는 값(학습률·배치크기·층수). Grid/Random/Bayesian search + 검증셋."
+    },
+    {
+      "id": "q141",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "학습률(learning rate)이 너무 크거나 작으면 어떻게 되나요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "크면 발산·진동, 작으면 수렴이 느리고 국소최소에 갇힘. 스케줄링·warmup으로 조절."
+    },
+    {
+      "id": "q142",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "미니배치 크기를 작게/크게 할 때의 장단점은?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "작으면 노이즈로 일반화에 도움·메모리 절약, 느림. 크면 안정적·GPU 효율↑, 일반화가 나빠질 수 있음."
+    },
+    {
+      "id": "q143",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Local minima 문제에도 불구하고 딥러닝이 잘 되는 이유는?",
+      "schools": [],
+      "src": [
+        "s6",
+        "s8"
+      ],
+      "key": "고차원에서는 대부분의 임계점이 saddle point이고, 도달하는 local minima들의 손실값이 서로 비슷하다는 것이 경험적 관찰."
+    },
+    {
+      "id": "q144",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "오버피팅일 경우 딥러닝에서는 어떻게 대처하나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "데이터 증강, 드롭아웃, weight decay, early stopping, 모델 축소, 전이학습."
+    },
+    {
+      "id": "q145",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "전이학습(Transfer Learning)과 파인튜닝은 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "대규모 데이터로 학습된 표현을 가져와 소량 데이터에 적응. 하위층은 동결하고 상위층만 재학습하는 식."
+    },
+    {
+      "id": "q146",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "오토인코더(Autoencoder)란 무엇인가요? 어디에 쓰나요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "입력을 압축했다 복원하며 재구성 오차를 최소화. 차원축소·이상탐지·노이즈 제거(재구성 오차가 크면 이상)."
+    },
+    {
+      "id": "q147",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 2,
+      "q": "딥러닝에 GPU를 쓰면 좋은 이유는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "행렬 곱 같은 동일 연산의 대규모 병렬 처리에 특화. CPU는 코어가 적고 순차 처리에 강함."
+    },
+    {
+      "id": "q148",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 1,
+      "q": "TensorFlow와 PyTorch의 차이는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "PyTorch는 동적 그래프로 디버깅·연구에 유리해 사실상 표준이 됨. TF는 배포·서빙 생태계 강점."
+    },
+    {
+      "id": "q149",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Internal covariate shift란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s6"
+      ],
+      "key": "앞 층 파라미터가 바뀌면서 뒤 층의 입력 분포가 계속 변하는 현상. BN의 원래 동기였지만 최근엔 손실 표면 평활화가 더 큰 이유라는 해석도."
+    },
+    {
+      "id": "q150",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 1,
+      "q": "MNIST 분류기를 numpy만으로 MLP로 짠다면 대략 몇 줄이고 얼마나 걸릴까요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "'해봤는가'를 떠보는 질문. 실제로 한 번 짜본 사람만 자연스럽게 답한다 — 8월~9월에 꼭 한 번 구현해 볼 것."
+    },
+    {
+      "id": "q151",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 1,
+      "q": "뉴럴넷의 가장 큰 단점은 무엇인가요? One-Shot Learning은 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "데이터·연산 요구가 크고 블랙박스. 원샷/퓨샷 학습은 극소량 샘플로 일반화하는 접근(메트릭 학습·메타러닝)."
+    },
+    {
+      "id": "q152",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Bias(편향 항)는 왜 필요한가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "결정 경계를 원점에서 평행 이동시킬 수 있게 해 표현력을 확보."
+    },
+    {
+      "id": "q153",
+      "cat": "dl",
+      "tag": "bank",
+      "priority": 1,
+      "q": "GD 도중에 Loss가 오히려 증가하는 이유는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "학습률이 과하거나 미니배치 노이즈, BN·드롭아웃의 확률성. 전체 추세가 내려가면 정상."
+    },
+    {
+      "id": "q154",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 3,
+      "q": "Transformer의 핵심인 Self-Attention을 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "각 토큰이 Query·Key·Value를 만들고, Q·K 유사도로 가중치를 구해 V를 가중합. 거리와 무관하게 문맥을 직접 연결한다."
+    },
+    {
+      "id": "q155",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 3,
+      "q": "Transformer는 RNN에 비해 무엇이 좋은가요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "순차 처리가 없어 병렬화가 가능하고 장거리 의존성을 한 번에 연결. 대신 시퀀스 길이의 제곱 비용."
+    },
+    {
+      "id": "q156",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Positional Encoding은 왜 필요한가요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "어텐션 자체는 순서 정보가 없어서, 위치를 벡터로 주입해야 어순을 구분할 수 있다."
+    },
+    {
+      "id": "q157",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Multi-Head Attention을 왜 여러 개로 나누나요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "서로 다른 부분공간에서 다른 관계(구문·의미 등)를 동시에 보게 하려고."
+    },
+    {
+      "id": "q158",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "단어 임베딩(word embedding)이란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "단어를 의미가 가까우면 벡터도 가깝도록 저차원 실수 벡터로 표현. 원-핫의 희박성·무관계성을 해결."
+    },
+    {
+      "id": "q159",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "토큰화(tokenization)란? 서브워드 토크나이저를 왜 쓰나요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "텍스트를 처리 단위로 자르는 것. BPE 같은 서브워드는 미등록 단어(OOV) 문제를 줄이고 어휘 크기를 통제."
+    },
+    {
+      "id": "q160",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "GAN의 학습 원리를 설명해 주세요.",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "생성자와 판별자의 적대적 게임. 판별자는 진짜/가짜 구분을, 생성자는 판별자를 속이도록 학습. 학습 불안정·모드 붕괴가 약점."
+    },
+    {
+      "id": "q161",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Diffusion 모델은 어떻게 이미지를 생성하나요?",
+      "schools": [],
+      "src": [
+        "s7"
+      ],
+      "key": "이미지에 노이즈를 점진적으로 더하는 과정을 역으로 학습해, 순수 노이즈에서 조금씩 복원하며 생성. GAN보다 안정적이고 품질이 높음."
+    },
+    {
+      "id": "q162",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "LLM의 환각(hallucination)은 왜 생기고 어떻게 줄이나요?",
+      "schools": [],
+      "src": [],
+      "key": "다음 토큰 확률을 최대화할 뿐 사실 검증 기제가 없어서. RAG로 근거 문서를 주거나, 도구 호출·검증 단계·불확실성 표현 유도."
+    },
+    {
+      "id": "q163",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 2,
+      "q": "RAG(검색 증강 생성)란 무엇인가요?",
+      "schools": [],
+      "src": [],
+      "key": "질의를 임베딩해 관련 문서를 검색하고, 그 문맥을 프롬프트에 넣어 생성. 모델 재학습 없이 최신·사내 지식을 반영."
+    },
+    {
+      "id": "q164",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 1,
+      "q": "파인튜닝과 프롬프트 엔지니어링, RAG 중 언제 무엇을 선택하나요?",
+      "schools": [],
+      "src": [],
+      "key": "지식이 부족하면 RAG, 형식·스타일 고정이 필요하면 파인튜닝, 가볍게 될 일이면 프롬프트. 비용 순으로 낮은 것부터."
+    },
+    {
+      "id": "q165",
+      "cat": "nlp",
+      "tag": "doc",
+      "priority": 2,
+      "q": "최근 인공지능 관련 최신 기술이나 연구 동향 중 어떤 것을 알고 계신가요?",
+      "schools": [
+        "국민대",
+        "고려대"
+      ],
+      "src": [
+        "s9",
+        "s14"
+      ],
+      "key": "LLM·멀티모달·에이전트·경량화(양자화/LoRA)·온디바이스 중 하나를 골라 '무엇이 왜 바뀌었는지'로 설명. 뉴스 나열 금지."
+    },
+    {
+      "id": "q166",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 1,
+      "q": "멀티모달 모델이란 무엇인가요?",
+      "schools": [],
+      "src": [],
+      "key": "텍스트·이미지·음성 등 서로 다른 형식을 하나의 표현 공간에서 다루는 모델(CLIP 계열이 대표)."
+    },
+    {
+      "id": "q167",
+      "cat": "nlp",
+      "tag": "bank",
+      "priority": 1,
+      "q": "설명가능한 AI(XAI)가 왜 필요한가요?",
+      "schools": [],
+      "src": [
+        "s9"
+      ],
+      "key": "의료·금융·제조처럼 책임이 따르는 도메인에서는 결과만으로 부족. SHAP·LIME·attention 시각화 등."
+    },
+    {
+      "id": "q168",
+      "cat": "py",
+      "tag": "real",
+      "priority": 3,
+      "q": "파이썬을 다뤄본 경험이 있나요? 어느 정도 수준인가요?",
+      "schools": [
+        "서강대",
+        "성균관대",
+        "연세대"
+      ],
+      "src": [
+        "s3",
+        "s4",
+        "s5"
+      ],
+      "key": "비전공자 탈락의 제1 사유. '무엇을, 몇 줄 정도, 어떤 라이브러리로 짜봤다'로 구체적으로.",
+      "follow": [
+        "Numpy/Pandas는 써봤나요?",
+        "가장 최근에 짠 코드는 무엇인가요?"
+      ]
+    },
+    {
+      "id": "q169",
+      "cat": "py",
+      "tag": "real",
+      "priority": 3,
+      "q": "(간단한 알고리즘 로직을) 말로 설명해 보세요.",
+      "schools": [
+        "서강대"
+      ],
+      "src": [
+        "s4"
+      ],
+      "key": "코드를 못 써도 절차를 순서대로 말할 수 있으면 통과. 침묵이 최악."
+    },
+    {
+      "id": "q170",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 3,
+      "q": "List와 Tuple의 차이는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "리스트는 가변, 튜플은 불변. 튜플은 해시 가능해 dict 키로 쓸 수 있고 약간 빠르다."
+    },
+    {
+      "id": "q171",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 3,
+      "q": "List, Dict, Set은 각각 언제 쓰나요? 조회 속도는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "리스트는 순서·중복 허용 O(n) 탐색, dict/set은 해시 기반 평균 O(1) 조회. 중복 제거·멤버십 검사는 set."
+    },
+    {
+      "id": "q172",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 2,
+      "q": "Numpy 배열이 파이썬 리스트보다 나은 점은 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "연속 메모리 + 벡터화 연산(C 구현)으로 훨씬 빠르고 메모리 효율적. 브로드캐스팅으로 반복문 제거."
+    },
+    {
+      "id": "q173",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 2,
+      "q": "얕은 복사(shallow copy)와 깊은 복사(deep copy)의 차이는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "얕은 복사는 내부 객체 참조를 공유해 한쪽 수정이 다른 쪽에 반영됨. deepcopy는 재귀적으로 전부 복제."
+    },
+    {
+      "id": "q174",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 2,
+      "q": "`*args`와 `**kwargs`는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "가변 위치 인자 튜플과 가변 키워드 인자 딕셔너리. 함수 시그니처를 유연하게."
+    },
+    {
+      "id": "q175",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 2,
+      "q": "제너레이터(generator)란 무엇이고 왜 쓰나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "yield로 값을 하나씩 지연 생성. 전체를 메모리에 올리지 않아 대용량 데이터 처리에 유리."
+    },
+    {
+      "id": "q176",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 2,
+      "q": "iterator와 iterable의 차이는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "iterable은 __iter__를 가진 순회 가능한 대상, iterator는 __next__로 실제 값을 하나씩 꺼내는 객체."
+    },
+    {
+      "id": "q177",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 2,
+      "q": "람다(lambda) 함수란 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "이름 없는 한 줄 함수. map/filter/sort의 key 인자로 자주 쓴다."
+    },
+    {
+      "id": "q178",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 2,
+      "q": "파이썬의 메모리 관리는 어떻게 이루어지나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "참조 카운팅 + 순환 참조를 처리하는 GC. 개인 힙에서 관리되며 사용자가 직접 해제하지 않는다."
+    },
+    {
+      "id": "q179",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 1,
+      "q": "파이썬은 인터프리터 언어라는 말의 의미는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "소스를 바이트코드로 컴파일해 실행 시점에 해석. 컴파일 언어보다 느리지만 개발이 빠르다."
+    },
+    {
+      "id": "q180",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 1,
+      "q": "`__init__`과 `self`는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "__init__은 인스턴스 생성 시 호출되는 초기화 메서드, self는 그 인스턴스 자신에 대한 참조."
+    },
+    {
+      "id": "q181",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 1,
+      "q": "`[::-1]`은 무엇을 하나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "시퀀스를 뒤집은 새 객체를 반환하는 슬라이싱."
+    },
+    {
+      "id": "q182",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 1,
+      "q": "파이썬에서 멀티스레딩은 어떻게 동작하나요? (GIL)",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "GIL 때문에 CPU 바운드는 스레드로 병렬화가 안 됨 → multiprocessing 사용. I/O 바운드에는 스레드가 유효."
+    },
+    {
+      "id": "q183",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 1,
+      "q": "Pandas에서 groupby / merge를 써본 경험을 말해 주세요.",
+      "schools": [],
+      "src": [],
+      "key": "실제 분석 흐름(불러오기→결측 처리→집계→시각화) 한 사이클을 말할 수 있으면 충분."
+    },
+    {
+      "id": "q184",
+      "cat": "py",
+      "tag": "bank",
+      "priority": 1,
+      "q": "SQL은 다룰 수 있나요? JOIN과 GROUP BY를 설명해 주세요.",
+      "schools": [
+        "성균관대"
+      ],
+      "src": [
+        "s3"
+      ],
+      "key": "빅데이터·데이터사이언스 계열이면 Python 다음 순위로 물을 수 있음."
+    },
+    {
+      "id": "q185",
+      "cat": "cs",
+      "tag": "real",
+      "priority": 3,
+      "q": "이진탐색(binary search)을 설명하고 시간복잡도를 말해 보세요.",
+      "schools": [
+        "한양대"
+      ],
+      "src": [
+        "s2"
+      ],
+      "key": "정렬된 배열에서 중앙값과 비교해 탐색 범위를 절반씩 줄임 → O(log n). 정렬이 전제라는 점을 반드시 언급.",
+      "follow": [
+        "정렬이 안 되어 있으면요?",
+        "그럼 정렬 비용까지 포함하면?"
+      ]
+    },
+    {
+      "id": "q186",
+      "cat": "cs",
+      "tag": "real",
+      "priority": 3,
+      "q": "스패닝 트리(spanning tree)와 그래프 이론 기본 개념을 설명해 주세요.",
+      "schools": [
+        "한양대"
+      ],
+      "src": [
+        "s1"
+      ],
+      "key": "모든 정점을 사이클 없이 연결하는 부분 그래프(간선 V−1개). 가중치 합이 최소면 MST — Prim·Kruskal."
+    },
+    {
+      "id": "q187",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 3,
+      "q": "시간복잡도(Big-O)란 무엇인가요? 대표적인 복잡도를 예와 함께.",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "입력이 커질 때 연산 증가율의 상한. O(1) 해시조회, O(log n) 이진탐색, O(n log n) 병합정렬, O(n²) 버블정렬."
+    },
+    {
+      "id": "q188",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 2,
+      "q": "스택과 큐의 차이는 무엇이고 어디에 쓰이나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "LIFO vs FIFO. 스택은 DFS·되돌리기, 큐는 BFS·작업 대기열."
+    },
+    {
+      "id": "q189",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 2,
+      "q": "해시 테이블은 어떻게 동작하나요? 충돌은 어떻게 해결하나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "키를 해시함수로 인덱스에 매핑해 평균 O(1). 충돌은 체이닝 또는 개방 주소법."
+    },
+    {
+      "id": "q190",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 2,
+      "q": "BFS와 DFS의 차이는? 각각 언제 쓰나요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "BFS는 큐로 최단 경로(가중치 없는 그래프), DFS는 스택/재귀로 경로 탐색·사이클 검출."
+    },
+    {
+      "id": "q191",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 2,
+      "q": "이진탐색트리(BST)란? 최악의 경우 복잡도는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "왼쪽<루트<오른쪽. 균형이 깨지면 연결리스트처럼 O(n) → 그래서 red-black tree 등 균형 트리."
+    },
+    {
+      "id": "q192",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 2,
+      "q": "대표적인 정렬 알고리즘과 복잡도를 말해 주세요.",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "퀵정렬 평균 O(n log n)·최악 O(n²), 병합정렬 항상 O(n log n)·안정, 힙정렬 O(n log n)·제자리."
+    },
+    {
+      "id": "q193",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 1,
+      "q": "동적 계획법(DP)과 분할정복의 차이는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "둘 다 부분문제로 나누지만 DP는 부분문제가 겹칠 때 결과를 저장해 재활용."
+    },
+    {
+      "id": "q194",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 1,
+      "q": "프로세스와 스레드의 차이는 무엇인가요?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "프로세스는 독립된 메모리 공간, 스레드는 같은 프로세스 내에서 메모리를 공유. 컨텍스트 스위칭 비용이 다름."
+    },
+    {
+      "id": "q195",
+      "cat": "cs",
+      "tag": "real",
+      "priority": 2,
+      "q": "데이터베이스 기초 — 정규화나 인덱스에 대해 설명해 주세요.",
+      "schools": [
+        "연세대"
+      ],
+      "src": [
+        "s5"
+      ],
+      "key": "후기상 '입사 면접 수준보다 어렵지 않은' 전공 기초 확인. 정규화=중복 제거, 인덱스=조회 가속·쓰기 비용."
+    },
+    {
+      "id": "q196",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 1,
+      "q": "SQL에서 INNER JOIN과 LEFT JOIN의 차이는?",
+      "schools": [],
+      "src": [],
+      "key": "교집합만 vs 왼쪽 전체 + 매칭되는 오른쪽(없으면 NULL)."
+    },
+    {
+      "id": "q197",
+      "cat": "cs",
+      "tag": "bank",
+      "priority": 1,
+      "q": "링크드 리스트와 배열의 차이는?",
+      "schools": [],
+      "src": [
+        "s8"
+      ],
+      "key": "배열은 임의 접근 O(1)·삽입 삭제 O(n), 링크드 리스트는 반대."
+    },
+    {
+      "id": "q198",
+      "cat": "closing",
+      "tag": "real",
+      "priority": 3,
+      "q": "마지막으로 하고 싶은 말 있으신가요?",
+      "schools": [
+        "한양대",
+        "성균관대"
+      ],
+      "src": [
+        "s2",
+        "s3"
+      ],
+      "key": "반드시 준비할 것. 후기 중 '여기서 아무 말도 못 했다'는 후회가 가장 많다. 20~30초 분량의 '왜 나를 뽑아야 하는가' 압축본."
+    },
+    {
+      "id": "q199",
+      "cat": "closing",
+      "tag": "bank",
+      "priority": 2,
+      "q": "저희에게 궁금한 점 있으신가요? (역질문)",
+      "schools": [],
+      "src": [
+        "s12"
+      ],
+      "key": "좋은 역질문: 입학 전 추천 과목·자료, 신입생이 첫 학기에 흔히 겪는 어려움, 프로젝트 트랙 운영 방식. 금지: 학비 감면, 출석 느슨한지, 과제 양."
+    },
+    {
+      "id": "q200",
+      "cat": "closing",
+      "tag": "derived",
+      "priority": 2,
+      "q": "(모르는 개념을 물었을 때) 혹시 이건 아시나요?",
+      "schools": [],
+      "src": [
+        "s1"
+      ],
+      "key": "모르면 '정확히는 모르지만 ○○에서 유추하면 …'으로 사고 과정을 보여준다. 침묵과 허세가 가장 나쁨."
+    },
+    {
+      "id": "q201",
+      "cat": "closing",
+      "tag": "bank",
+      "priority": 1,
+      "q": "합격하면 언제부터 출근·수강이 가능한가요? 등록에 문제는 없나요?",
+      "schools": [],
+      "src": [],
+      "key": "행정 확인성 질문. 담백하게."
+    }
   ],
-
   "strategy": {
     "core_thesis": "특수대학원(야간) AI 석사 면접은 지식 검증이 아니라 '완주 가능성 + 동기 진정성 + 최소 기술 기반' 확인이다. 배점의 무게는 서류·학업계획서에 있다.",
     "pillars": [
@@ -468,52 +3044,92 @@
         "id": "p1",
         "title": "면접 유형부터 구분하라",
         "body": "일반대학원(주간·연구중심)은 컨택 + 전공 구술이 핵심이고, 특수대학원(야간)은 지원동기 + 병행 가능성 + 파이썬이 핵심이다. 두 후기를 섞어 읽으면 엉뚱한 준비를 하게 된다.",
-        "evidence": ["한양대 일반대학원: 자기소개→자료구조→ML 3단 (s1,s2)", "성균관대 특수대학원: 1인 2분, 자기소개·직장·부족한 점 (s3)", "고려대 일반대학원: 컨택하면 사실상 끝 (s13,s17)"]
+        "evidence": [
+          "한양대 일반대학원: 자기소개→자료구조→ML 3단 (s1,s2)",
+          "성균관대 특수대학원: 1인 2분, 자기소개·직장·부족한 점 (s3)",
+          "고려대 일반대학원: 컨택하면 사실상 끝 (s13,s17)"
+        ]
       },
       {
         "id": "p2",
         "title": "파이썬은 협상 불가",
         "body": "비전공자 후기에서 가장 반복되는 경고. \"파이썬을 처음부터 가르치지 않는다, 파이썬으로 가르친다\"는 말이 여러 학교에서 회자된다. 문법·자료형·Numpy/Pandas 수준이면 충분하지만 '없다'고 답하는 순간 꼬리질문이 날카로워진다.",
-        "evidence": ["성균관대 후기 (s3)", "서강대 후기 — 이론보다 실제 코딩 (s4)"]
+        "evidence": [
+          "성균관대 후기 (s3)",
+          "서강대 후기 — 이론보다 실제 코딩 (s4)"
+        ]
       },
       {
         "id": "p3",
         "title": "자신 있는 과목 하나를 정해 깊게",
         "body": "한양대 일반대학원은 지원자가 고른 core 과목으로 파고든다. 특수대학원에서도 '가장 익숙한 알고리즘은?'류 질문에서 같은 구조가 나온다. 머신러닝(로지스틱 회귀·과적합·평가지표)을 축으로 잡는 게 가장 효율적이다.",
-        "evidence": ["(s1)", "국민대 기출 문항 (s9)"]
+        "evidence": [
+          "(s1)",
+          "국민대 기출 문항 (s9)"
+        ]
       },
       {
         "id": "p4",
         "title": "서류의 모든 문장이 질문이 된다",
         "body": "학업계획서·자기소개서에 쓴 방법론·수치·논문은 전부 꼬리질문 대상. 반대로 말하면 '내가 답할 수 있는 것만 쓴다'가 서류 작성 원칙이다.",
-        "evidence": ["연세대·국민대 — 학업계획서 기반 질문 (s5)", "KAIST — 자소서·우수성 자료 기반 예상질문 필수 (s10)", "(s12)"]
+        "evidence": [
+          "연세대·국민대 — 학업계획서 기반 질문 (s5)",
+          "KAIST — 자소서·우수성 자료 기반 예상질문 필수 (s10)",
+          "(s12)"
+        ]
       },
       {
         "id": "p5",
         "title": "짧은 면접일수록 자기소개가 전부",
         "body": "성균관대는 1인당 약 2분. 이런 회차에서는 자기소개 한 덩어리가 곧 면접 전체다. 30초·1분·2분 세 버전을 만들어 두고, 어느 길이로 잘려도 '왜 AI인지'가 남게 설계한다.",
-        "evidence": ["성균관대 2분 면접 (s3)", "고려대 일반 10분에 5명 (s13)"]
+        "evidence": [
+          "성균관대 2분 면접 (s3)",
+          "고려대 일반 10분에 5명 (s13)"
+        ]
       },
       {
         "id": "p6",
         "title": "도메인은 약점이 아니라 포지션",
         "body": "비전공 경력은 '따라올 수 있나'라는 의심을 받지만, 동시에 '그 데이터를 아는 사람'이라는 희소성이 된다. 문제-방법 쌍을 하나 준비해 두면 지원동기·강점·연구계획 세 질문을 한 번에 덮는다.",
-        "evidence": ["고려대 특수대학원 — 경영학 출신 전환 사례 (s16)", "서강대 — 기계공학→IT 전환 합격 (s4)"]
+        "evidence": [
+          "고려대 특수대학원 — 경영학 출신 전환 사례 (s16)",
+          "서강대 — 기계공학→IT 전환 합격 (s4)"
+        ]
       },
       {
         "id": "p7",
         "title": "모르면 추론하고, 침묵하지 마라",
         "body": "면접관은 정답보다 사고 과정을 본다. '정확히는 모르지만 ○○로 미루어 보면'이 침묵보다 언제나 낫다. 반대로 아는 척은 꼬리질문에서 즉시 드러난다.",
-        "evidence": ["한양대 후기 — 화기애애, 태도 중심 (s1)"]
+        "evidence": [
+          "한양대 후기 — 화기애애, 태도 중심 (s1)"
+        ]
       }
     ],
     "timeline": [
-      { "when": "면접 4주 전", "do": "제출 서류 전 문장에서 예상 질문 추출 → 답변 초안" },
-      { "when": "면접 3주 전", "do": "priority 3 질문 전부를 소리 내어 답변 + 녹음해 다시 듣기" },
-      { "when": "면접 2주 전", "do": "자기소개 30초/1분/2분 세 버전 확정, 지원 교수 논문 1편 초록 정독" },
-      { "when": "면접 1주 전", "do": "모의 면접 1회 이상(제3자 앞에서), 역질문 2개 확정" },
-      { "when": "면접 전날", "do": "준비물 확인 — 신분증·수험표·옷핀. 복장은 비즈니스 캐주얼 이상" },
-      { "when": "면접 당일", "do": "10분 전 도착. 마지막 한마디 문장 한 번만 되뇌기" }
+      {
+        "when": "면접 4주 전",
+        "do": "제출 서류 전 문장에서 예상 질문 추출 → 답변 초안"
+      },
+      {
+        "when": "면접 3주 전",
+        "do": "priority 3 질문 전부를 소리 내어 답변 + 녹음해 다시 듣기"
+      },
+      {
+        "when": "면접 2주 전",
+        "do": "자기소개 30초/1분/2분 세 버전 확정, 지원 교수 논문 1편 초록 정독"
+      },
+      {
+        "when": "면접 1주 전",
+        "do": "모의 면접 1회 이상(제3자 앞에서), 역질문 2개 확정"
+      },
+      {
+        "when": "면접 전날",
+        "do": "준비물 확인 — 신분증·수험표·옷핀. 복장은 비즈니스 캐주얼 이상"
+      },
+      {
+        "when": "면접 당일",
+        "do": "10분 전 도착. 마지막 한마디 문장 한 번만 되뇌기"
+      }
     ],
     "pitfalls": [
       "지원동기가 'AI가 대세라서'처럼 추상적",
@@ -535,11 +3151,26 @@
       "피할 것": "후드티, 반바지, 슬리퍼, 눈에 띄는 프린트"
     }
   },
-
   "gaps": [
-    { "school": "이화여대 인공지능대학원", "issue": "공개된 대학원 면접 후기를 찾지 못함", "action": "입학처·학과 사무실에 면접 방식 직접 문의" },
-    { "school": "고려대 SW·AI융합대학원", "issue": "야간 과정 면접 진행 방식에 대한 구체 후기 부족", "action": "재학생 커뮤니티·설명회에서 확인" },
-    { "school": "한양대 인공지능융합대학원(특수)", "issue": "면접 개별/그룹 여부, 소요시간, 전공질문 유무 모두 공식 미공개", "action": "행정팀 02-2220-0237 문의" },
-    { "school": "전체", "issue": "2026 하반기(2027학년도 전기) 요강 미공개", "action": "10~11월 각 학교 공지 재확인" }
+    {
+      "school": "이화여대 인공지능대학원",
+      "issue": "공개된 대학원 면접 후기를 찾지 못함",
+      "action": "입학처·학과 사무실에 면접 방식 직접 문의"
+    },
+    {
+      "school": "고려대 SW·AI융합대학원",
+      "issue": "야간 과정 면접 진행 방식에 대한 구체 후기 부족",
+      "action": "재학생 커뮤니티·설명회에서 확인"
+    },
+    {
+      "school": "한양대 인공지능융합대학원(특수)",
+      "issue": "면접 개별/그룹 여부, 소요시간, 전공질문 유무 모두 공식 미공개",
+      "action": "행정팀 02-2220-0237 문의"
+    },
+    {
+      "school": "전체",
+      "issue": "2026 하반기(2027학년도 전기) 요강 미공개",
+      "action": "10~11월 각 학교 공지 재확인"
+    }
   ]
 }

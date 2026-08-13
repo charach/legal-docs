@@ -5,8 +5,8 @@
  "scope": "../",
  "display": "standalone",
  "orientation": "portrait",
- "background_color": "#fdf5f7",
- "theme_color": "#be123c",
+ "background_color": "#FAFDFD",
+ "theme_color": "#FAFDFD",
  "icons": [
   {
    "src": "icons/interview-180.png",
