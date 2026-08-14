@@ -134,7 +134,7 @@
     box-shadow: var(--shadow); overflow: hidden;
   }
   .scroller { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1700px; font-size: 13px; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1830px; font-size: 13px; }
   thead th {
     position: sticky; top: 0; z-index: 3;
     background: #FAFDFD; color: var(--ink); font-weight: 800; font-size: 11.5px;
@@ -195,6 +195,24 @@
   .apply { display:inline-block; font-size:12px; font-weight:800; white-space:nowrap;
     padding:3px 9px; border-radius: 6px; background:#FAFDFD; color:#5C7A85; }
   .apply.ok { background:#F2F8F9; color:#1A2E35; }
+
+  /* ── 장학 ─────────────────────────────────── */
+  .schmax { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
+  .schauto { display:block; font-size:10.5px; font-weight:800; color:var(--sky-deep); margin-top:3px; white-space:nowrap; }
+  .schn { display:block; font-size:10.5px; color:var(--muted); font-weight:600; margin-top:2px; }
+
+  .schlist { list-style:none; margin:12px 0 0; padding:0; }
+  .schlist li { padding:9px 0; border-bottom:1px solid var(--line); }
+  .schlist li:first-child { border-top:1px solid var(--line); }
+  .sl-top { display:flex; justify-content:space-between; align-items:baseline; gap:14px; }
+  .sl-n { font-size:13.5px; font-weight:700; color:var(--ink); letter-spacing:-.2px; }
+  .sl-r { flex:none; font-size:13px; font-weight:800; color:var(--sky-deep);
+          white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .sl-w { font-size:12.5px; color:var(--muted); margin-top:2px; line-height:1.55; max-width:70ch; }
+  .schcond { margin-top:12px; padding:10px 13px; background:#FAFDFD; border:1px solid var(--line);
+             border-radius:8px; font-size:12px; color:var(--muted); line-height:1.65; }
+  .schsrc { display:inline-block; margin-top:10px; font-size:11.5px; color:var(--sky-deep); font-weight:700; }
+  .schnone { font-size:13px; color:var(--muted); }
   .applyref { display:block; font-size:10.5px; color:var(--muted); margin-top:4px; max-width:235px; line-height:1.45; }
   .clamp { max-width: 250px; font-size: 12px; color: var(--ink-soft); line-height: 1.5;
     display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
@@ -222,10 +240,10 @@
   .mcard .sn { font-size: 12px; font-weight: 700; color: var(--muted); }
   .mcard h3 { margin: 2px 0 8px; font-size: 15.5px; font-weight: 800; letter-spacing: -.3px; line-height: 1.35; }
   .mcard .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 11px; }
-  .mcard .kv { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; padding-top: 11px; border-top: 1px dashed var(--line); }
-  .mcard .kv > div { text-align: center; }
+  .mcard .kv { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; padding-top: 11px; border-top: 1px dashed var(--line); }
+  .mcard .kv > div { text-align: center; min-width: 0; }
   .mcard .kv .k { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
-  .mcard .kv .v { font-size: 14px; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -.3px; }
+  .mcard .kv .v { font-size: 13.5px; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -.4px; }
 
   /* ── modal ──────────────────────────────── */
   .mask {
@@ -234,20 +252,28 @@
   }
   .mask.show { display: flex; }
   .sheet {
-    background: #fff; width: 100%; max-width: 620px; max-height: 88vh; overflow-y: auto;
+    background: #fff; width: 100%; max-width: 620px; max-height: 92vh; overflow-y: auto;
     border-radius: 8px 24px 0 0; padding: 8px 22px calc(28px + env(safe-area-inset-bottom));
     box-shadow: 0 1px 3px rgba(26,46,53,.06); animation: up .28s cubic-bezier(.22,1,.36,1);
   }
   @media (min-width: 640px) {
-    .mask { align-items: center; }
-    .sheet { border-radius: 8px; padding-bottom: 28px; animation: pop .24s cubic-bezier(.22,1,.36,1); }
+    .mask { align-items: center; padding: 18px; }
+    .sheet { border-radius: 8px; padding: 10px 26px 28px; animation: pop .24s cubic-bezier(.22,1,.36,1);
+             max-width: min(880px, 94vw); max-height: 92vh; }
   }
   @keyframes up { from { transform: translateY(100%); } to { transform: none; } }
   @keyframes pop { from { opacity:0; transform: scale(.96) translateY(10px); } to { opacity:1; transform:none; } }
-  .grab { width: 40px; height: 4px; background: var(--line-strong); border-radius: 6px; margin: 8px auto 14px; }
-  .sheet .shead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 4px; }
-  .sheet h2 { margin: 0; font-size: 19px; font-weight: 900; letter-spacing: -.4px; line-height: 1.35; }
-  .sheet .ssub { color: var(--ink-soft); font-size: 13px; margin: 3px 0 14px; }
+  .grab { width: 40px; height: 4px; background: var(--line-strong); border-radius: 6px; margin: 8px auto 10px; }
+
+  /* 시트 헤더 — 스크롤해도 학교 이름이 붙어 있게 */
+  .sheet .shead {
+    position: sticky; top: 0; z-index: 3; background: #fff;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 14px;
+    padding: 6px 0 12px; margin-bottom: 14px; border-bottom: 1px solid var(--line);
+  }
+  .sheet .sh-eye { display: block; font-size: 12px; font-weight: 700; color: var(--sky-deep); letter-spacing: -.1px; }
+  .sheet h2 { margin: 2px 0 0; font-size: 20px; font-weight: 900; letter-spacing: -.4px; line-height: 1.3; }
+  .sheet .sh-en { display: block; font-size: 12px; color: var(--muted); margin-top: 3px; }
   .xbtn {
     flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line);
     background: #FAFDFD; color: var(--ink-soft); font-size: 18px; line-height: 1; cursor: pointer;
@@ -255,21 +281,38 @@
   }
   .xbtn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
   .sheet .tagrow { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-  .sheet .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(110px,1fr)); gap: 9px; margin-bottom: 16px; }
-  .sheet .box { background:#FAFDFD; border:1px solid var(--line); border-radius: 8px; padding: 11px 12px; }
-  .sheet .box .k { font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing:.05em; }
-  .sheet .box .v { font-size: 16px; font-weight: 900; letter-spacing:-.4px; font-variant-numeric: tabular-nums; }
-  .sheet .box .v small { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); }
-  .sec { margin-bottom: 15px; }
-  .sec h4 { margin: 0 0 6px; font-size: 12px; font-weight: 800; color: var(--sky-deep); letter-spacing:.05em; }
+
+  /* 핵심 수치 — 큰 것 둘, 나머지는 한 줄 */
+  .figs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .fig { background:#FAFDFD; border:1px solid var(--line); border-radius: 8px; padding: 13px 15px; }
+  .fig .k { font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing:.05em; }
+  .fig .v { font-size: 24px; font-weight: 900; letter-spacing:-.8px; line-height:1.25;
+            font-variant-numeric: tabular-nums; color: var(--sky-deep); margin-top: 1px; }
+  .fig .v.dim { font-size: 17px; color: var(--muted); letter-spacing:-.3px; }
+  .fig .sub { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+  .fig .sub b { color: var(--sky-deep); }
+
+  .figrow { display: flex; flex-wrap: wrap; gap: 0 26px; padding: 11px 15px; margin-bottom: 18px;
+            border: 1px solid var(--line); border-radius: 8px; }
+  .figrow > div { display: flex; align-items: baseline; gap: 7px; padding: 3px 0; }
+  .figrow .k { font-size: 11.5px; font-weight: 700; color: var(--muted); }
+  .figrow .v { font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing:-.2px; }
+  .figrow .v.na { color: var(--muted); font-weight: 600; font-size: 13px; }
+
+  .sec { margin-bottom: 20px; }
+  .sec h4 { margin: 0 0 7px; font-size: 12px; font-weight: 800; color: var(--sky-deep); letter-spacing:.05em; }
   .sec p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; }
   .sec ul { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+
+  /* 하단 버튼 — 항상 손 닿는 곳에 */
+  .gofoot { position: sticky; bottom: 0; background: #fff; padding: 12px 0 2px;
+            margin-top: 4px; border-top: 1px solid var(--line); }
   .gobtn {
     display: flex; align-items: center; justify-content: center; gap: 7px; text-decoration: none;
     background: var(--sky-deep); color: #fff;
     padding: 13px; border-radius: 8px; font-weight: 800; font-size: 14.5px;
-    box-shadow: 0 1px 3px rgba(26,46,53,.06);
   }
+  @media (max-width: 520px) { .figs { grid-template-columns: 1fr; } }
 
   /* ── footnote ───────────────────────────── */
   .notes { margin-top: 22px; background: rgba(255,255,255,.72); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; }
@@ -325,6 +368,14 @@
         <option value="3000-3500">3,000 ~ 3,500만원</option>
         <option value="3500-99999">3,500만원 이상</option>
       </select></div>
+      <div class="f"><label>장학 감면</label><select id="fSch">
+        <option value="">전체</option>
+        <option value="known">공개된 곳만</option>
+        <option value="auto">무조건 받는 감면 있음</option>
+        <option value="20">최대 20% 이상</option>
+        <option value="30">최대 30% 이상</option>
+        <option value="50">최대 50% 이상</option>
+      </select></div>
       <div class="f"><label>경쟁률</label><select id="fComp">
         <option value="">전체</option>
         <option value="0-1">미달 (1:1 미만) </option>
@@ -335,6 +386,7 @@
       <div class="f"><label>정렬</label><select id="fSort">
         <option value="cost-asc">총 학비 낮은 순</option>
         <option value="cost-desc">총 학비 높은 순</option>
+        <option value="sch-desc">장학 감면율 높은 순</option>
         <option value="comp-asc">경쟁률 낮은 순</option>
         <option value="comp-desc">경쟁률 높은 순</option>
         <option value="fill-desc">총원율 높은 순</option>
@@ -351,6 +403,7 @@
         <button class="chip" data-preset="seoul"> 서울권</button>
         <button class="chip" data-preset="cheap"> 2,500만원 이하</button>
         <button class="chip" data-preset="easy"> 경쟁률 2:1 미만</button>
+        <button class="chip" data-preset="sch"> 장학 30% 이상</button>
       </div>
       <div style="display:flex;align-items:center;gap:12px">
         <span class="count"><b id="cnt">0</b>개 프로그램</span>
@@ -381,6 +434,21 @@
       <li><b>연세대·고려대</b>는 위 공식 명세표의 2025학년도 금액과 입학금을 그대로 썼고, 나머지 학교는 대학알리미 공시값(2024년 기준)이라 실제 고지액이 3~5% 높을 수 있습니다.</li>
       <li><b>경쟁률 / 총원율(충원률)</b>은 <b>대학원 단위 2025학년도 공시값</b>입니다. 학과 단위 경쟁률은 대부분 비공개라, 같은 대학원 소속 학과는 같은 값을 공유합니다. 총원율 100% 미만 = 정원 미달(들어가기 상대적으로 쉬움).</li>
       <li><b>“미공시”</b>는 학교가 대학알리미에 자료를 제출하지 않은 항목입니다. 없는 게 아니라 확인이 필요하다는 뜻입니다.</li>
+      <li><b>장학 (최대 감면)</b>은 각 대학원이 <b>공식 홈페이지에 공개한 장학 규정에서 가장 높은 감면율</b>입니다. 실제로 그만큼 받는다는 뜻이 아니라 <b>제도상 상한</b>이라는 뜻이고, 대부분 원우회 임원·교직원·군위탁처럼 조건이 붙습니다. 행을 누르면 장학금 종류 전체와 대상·조건이 열립니다.
+      <b>“기본 N% 확정”</b> 배지는 심사나 신분 조건 없이(또는 재직 사실만으로) 받는 감면이 있는 곳입니다 — <b>평택대(전원 30%) · 광운대(직장인 25%) · 인하대(일반기업 재직자 20%)</b> 세 곳뿐입니다.</li>
+      <li><b>금액으로 주는 장학금</b>(서강대 150만원, 성균관대 성균가족 100만원 등)은 감면율 비교를 위해 <b>해당 학교 학기 수업료로 나눈 환산 비율</b>을 괄호에 적었습니다. 서강대·서울과기대는 감면이 아니라 <b>학기 중 계좌 입금</b> 방식이라 등록금은 일단 전액 내야 합니다.</li>
+      <li>장학 <b>“확인 필요”가 11개 대학원(표에서 20개 프로그램)</b>입니다 — 연세대(인공지능융합·공학) · 고려대(SW·AI융합·공학) · 한양대 공학대학원 · 숭실대 정보과학 · 이화여대 · 서울시립대 · 건국대 · 인천대 · 성균관대 소프트웨어융합. 장학이 없다는 뜻이 아니라 <b>학교가 감면율을 공개하지 않았다</b>는 뜻이고, 각 행 상세에 문의처를 적어뒀습니다. 특히 <b>연세대·고려대는 이 표에서 학비가 가장 비싼데 장학 정보가 가장 불투명</b>합니다.</li>
+      <li>장학 출처: 각 대학원 공식 장학제도 페이지 ·
+      <a href="https://www.ajou.ac.kr/ict/admission/scholarship.do" target="_blank" rel="noopener">아주대 정보통신</a> ·
+      <a href="https://itc.ajou.ac.kr/itc/scholarship/scholarship.do" target="_blank" rel="noopener">아주대 IT융합</a> ·
+      <a href="https://gse.ajou.ac.kr/gse/admission/scholarship.do" target="_blank" rel="noopener">아주대 공학</a> ·
+      <a href="https://gsic.skku.edu/gsic/scholarship.do" target="_blank" rel="noopener">성균관대</a> ·
+      <a href="https://cms.kookmin.ac.kr/swgs/bachelor/scholarship-system.do" target="_blank" rel="noopener">국민대</a> ·
+      <a href="https://compro.kw.ac.kr/entrance/process.php" target="_blank" rel="noopener">광운대</a> ·
+      <a href="https://engrad.inha.ac.kr/bbs/engrad/2970/137320/artclView.do" target="_blank" rel="noopener">인하대</a> ·
+      <a href="https://gsi.seoultech.ac.kr/acad/scholar" target="_blank" rel="noopener">서울과기대</a> ·
+      <a href="https://grad.knou.ac.kr/grad/2091/subview.do" target="_blank" rel="noopener">방송통신대</a> ·
+      <a href="https://gsai.hanyang.ac.kr/front/admissionguide/entFaq" target="_blank" rel="noopener">한양대 AI융합</a></li>
       <li> <b>직장을 유지하면서 다닐 수 있는 과정만 실었습니다</b> — 야간·주말·온라인 운영이 확인된 국내 대학원입니다. 주간 전일제 과정은 제외했습니다.</li>
       <li><b>학비 출처는 두 가지</b>입니다. ① 대학알리미 2025 공시(학기당 수업료) ② 각 학교 공식 등록금 공지·모집요강. ②로 확인된 곳(연세대·고려대·한양대 AI융합·서강대·이화여대·아주대 IT융합·평택대·방송통신대)은 <b>입학금까지 총액에 포함</b>했고, 비고에 근거를 적었습니다.</li>
       <li>아직 학비를 못 채운 곳은 <b>5곳(성균관대 데이터사이언스융합·건국대 정보통신·한국공학대·인천대·한양대 ERICA)</b>입니다. 공지·모집요강·대학알리미 어디에도 금액이 없고 학사시스템 고지서나 행정실 문의로만 확인되는 경우라, 추정치를 넣는 대신 “확인 필요”로 남겼습니다. 각 행의 비고에 문의처를 적어뒀습니다.</li>
@@ -604,7 +672,7 @@ const RAW = [
  c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:16, apply:"2026.10~11 예상",
  site:"https://engrad.inha.ac.kr/", tags:["ai"],
  req:"4년제 학사 · 서류 + 면접 · 재직 경력 우대",
- note:"경쟁률 1.36:1로 낮고 총원율 85.4%. 총 학비 2,414만원. 인천/부천 거주·근무라면 통학 최적. 장학금 규모가 커서(연 8.8억) 실부담이 더 낮아질 수 있음. 2024 취업률 95.3%."},
+ note:"경쟁률 1.36:1로 낮고 총원율 85.4%. 총 학비 2,414만원. 인천/부천 거주·근무라면 통학 최적. <b>일반 기업 재직자만 돼도 20% 감면</b>이고 상한이 50%라 실부담은 1,900만원대까지 내려감(장학 규모 연 8.8억). 2024 취업률 95.3%."},
 
 {s:"인하대학교", g:"공학대학원", m:"빅데이터전공", mdesc:"Big Data",
  c:"한국", r:"인천", t:"특수", mo:"야간", tm:4, ty:6035000, cr:1.36, fr:85.4, qt:11, apply:"2026.10~11 예상",
@@ -670,14 +738,267 @@ const RAW = [
 ];
 
 /* ══════════════════════════════════════════════════════════
+   장학제도 — 대학원 단위 (학교명|대학원명 을 키로 씀)
+   max  : 확인된 최대 감면율(%) | null = 학교가 공개하지 않음
+   auto : 조건 심사 없이(또는 재직 사실만으로) 받는 감면율(%) | 없으면 생략
+   list : [장학금명, 대상, 감면율/금액]
+   ══════════════════════════════════════════════════════════ */
+const SCH = {
+
+"한양대학교|인공지능융합대학원": { max:50,
+ sum:"2026학년도에 처음 생긴 신규 제도. 일반 재직자가 받을 수 있는 건 HY-in 15% 하나뿐이고 나머지는 원우회 임원용이라, 학비 3,486만원 대비 실효는 크지 않음.",
+ list:[["HY-in 장학","재학생","15%"],
+       ["공로장학 (원우회장)","원우회 회장","50%"],
+       ["공로장학 (부회장)","원우회 부회장","30%"],
+       ["공로장학 (부장·임원)","원우회 부장 및 임원","10%"]],
+ cond:"직전학기 평점 3.0 이상 · 중복 수혜 불가(가장 높은 감면율 하나만 적용) · 휴학생·학업연장자·연구등록생 제외",
+ src:"https://gsai.hanyang.ac.kr/front/admissionguide/entFaq" },
+
+"한양대학교|공학대학원": { max:null,
+ sum:"공학대학원 자체 장학 내규를 공개하지 않음. 학교 장학 안내도 '특수대학원은 각 대학원에 문의'로만 넘김.",
+ list:[], cond:"문의 02-2220-0114 (공학대학원 행정팀)",
+ src:"https://www.hanyang.ac.kr/web/www/sc_s" },
+
+"한양대학교(ERICA)|융합산업대학원": { max:20,
+ sum:"성적우수 20%가 사실상 전부. 서울캠퍼스 대학원들보다 장학 폭이 눈에 띄게 좁음.",
+ list:[["성적우수장학","학과·전공별 재학생 10% 내외 선발","등록금 20%"],
+       ["신입생 추천장학","원장 추천 · 자율장학금 예산 범위","예산 내 10% 범위"],
+       ["재직자 우수 신입생 장학","제조인공지능학과 산업체 재직자 중 서류·면접 성적우수자","예산 내"]],
+ cond:"배정장학금은 중복 수혜 불가(감면율이 높은 하나만 적용) · 문의 031-400-5102~5",
+ src:"https://gsic.hanyang.ac.kr/" },
+
+"고려대학교|SW·AI융합대학원": { max:null,
+ sum:"학칙에 장학 조항은 있는데 감면율·금액을 명시하지 않고 매학기 대학원위원회가 정함. 대상도 '성적 최우수자'로 좁아서, 학비가 국내 최상위권(3,982만원)인 데 비해 기대하기 어려움.",
+ list:[["재학생 장학금","직전학기 성적 최우수자 (1~4학기 · 6학점 이상 취득)","금액 미공개"],
+       ["학생활동 장학금","학생회 활동 기여자 · 전체 교내 장학생의 20% 이내","금액 미공개"]],
+ cond:"학칙 제42~44조. 학과 주임교수·지도교수 추천 → 대학원위원회 결정 · 타 장학 수혜자와 휴학생 제외",
+ src:"https://gscit.korea.ac.kr/gscit/guide/rule.do" },
+
+"고려대학교|공학대학원": { max:null,
+ sum:"공학대학원 자체 장학 내역이 공개돼 있지 않음. SW·AI융합대학원과 별도 운영이라 그쪽 학칙을 그대로 적용할 수 없음.",
+ list:[], cond:"문의 고려대 공학대학원 행정실",
+ src:"https://www.korea.ac.kr/" },
+
+"연세대학교|인공지능융합대학원": { max:null,
+ sum:"입학 안내에 '장학금 지급 내규' 링크만 있고 종류·감면율은 비공개. 이 표에서 가장 비싼 프로그램(4,272만원)이라 지원 전 반드시 직접 확인할 것.",
+ list:[], cond:"문의 02-2123-5679 · gcomputing@yonsei.ac.kr",
+ src:"https://gcomputing.yonsei.ac.kr/gcomputing/Admission.do" },
+
+"연세대학교|공학대학원": { max:null,
+ sum:"장학금 종류는 여섯 갈래로 많은데 감면율을 어디에도 적어두지 않았음. 대부분 교수·원우회장 추천제라 예측이 어려움.",
+ list:[["공학대학원 일반장학금","전공주임교수 추천자 또는 전공 내 성적우수자","미공개"],
+       ["원우회 장학금","원우회·학생자치기구 봉사자, 가계곤란자 (원우회장 추천)","미공개"],
+       ["수업조교 장학금","담당교수가 추천한 수업조교","미공개"],
+       ["동창회·동우회 장학금","각 단체 내규","미공개"],
+       ["김수복 장학금 / 산업고위자장학금","각 내규","미공개"]],
+ cond:"감면율은 공학대학원 학칙 내 '장학금 지급규정'을 봐야 함",
+ src:"https://urban.yonsei.ac.kr/urban/program/engineering_scholarship.do" },
+
+"성균관대학교|정보통신대학원": { max:50,
+ sum:"일반 직장인이 현실적으로 노릴 수 있는 건 성적우수 25%. 공무원·군인·교사면 15%가 따로 붙고, 군위탁이면 30%.",
+ list:[["성적우수장학금","매학기 직전학기 성적우수자","등록금 25%"],
+       ["공로장학금 (회장)","학생회장","등록금 50%"],
+       ["공로장학금 (임원)","학생회 임원 및 원우회 지도부 (평점 3.0 이상)","등록금 25~30%"],
+       ["군위탁생장학금","국방부·교육부 군위탁생 취학 추천자","등록금 30%"],
+       ["공무원/군인/교사장학금","정규 공무원·군인·교사 재직자","등록금 15%"],
+       ["외국인교포장학금","외국인 또는 교포","등록금 15%"],
+       ["성균가족장학금","형제자매 동시 재학, 부모 동문 자녀 등","첫 학기 100만원 (1회성)"]],
+ cond:"감면고지 방식 — 등록금 고지서에서 장학금을 뺀 차액만 납부 · 문의 02-760-1172",
+ src:"https://gsic.skku.edu/gsic/scholarship.do" },
+
+"성균관대학교|소프트웨어융합대학원": { max:null,
+ sum:"일반대학원 소속이라 같은 학교 정보통신대학원의 장학 체계가 그대로 적용되지 않음. 등록금 자체도 미공시.",
+ list:[], cond:"문의 031-290-5928 (데이터사이언스융합학과)",
+ src:"https://skb.skku.edu/ads/" },
+
+"서강대학교|AI·SW대학원": { max:23,
+ sum:"감면이 아니라 현금 지급형(학기 중 계좌 입금). 대신 전공별 재학생 30%가 받으니 확률은 높은 편이고, 공무원·군인이면 별도로 20%.",
+ list:[["성적장학 A","전공별 재학생 상위 30% 이내 (6학점 이상 · 평점 3.7 이상)","150만원 (학기 수업료의 약 23%)"],
+       ["성적장학 B","위 기준 차순위","100만원 (약 16%)"],
+       ["공무원·군인 장학","공무원 및 군인 재직자","수업료 약 20%"],
+       ["봉사장학","원우회 임원진","별도 산정"]],
+ cond:"성적장학은 1학기·5학기 제외 · 선정 후 휴학하면 수혜 취소 · 금액은 2025-1학기 기준 · 문의 02-705-8685~6",
+ src:"https://gsinfo.sogang.ac.kr/front/cmsboardview.do?siteId=gsinfo&bbsConfigFK=386&pkid=919588" },
+
+"숭실대학교|정보과학대학원": { max:null,
+ sum:"대학원 자체 장학 내역이 공개돼 있지 않고, 학교 공통 교내장학 체계를 따름. 애초에 학기 515만원으로 싼 편이라 감면 없이도 총액 부담이 낮은 쪽.",
+ list:[], cond:"교내장학은 국가장학금을 신청해 소득분위가 조회된 학생만 대상 · 지급은 등록금 고지서 감면 방식 · 문의 정보과학대학원 행정실",
+ src:"https://ssu.ac.kr/%ED%95%99%EC%82%AC/%ED%95%99%EC%82%AC%EC%A0%95%EB%B3%B4/%EC%9E%A5%ED%95%99/%EA%B5%90%EB%82%B4%EC%9E%A5%ED%95%99%EA%B8%88/" },
+
+"국민대학교|소프트웨어융합대학원": { max:75,
+ sum:"일반 직장인이 노릴 수 있는 선은 동문 25% · 협력기관 20~30%. 100% 온라인 전공(인공지능응용)도 같은 규정을 씀.",
+ list:[["교직원장학금","본교 교직원 / 계약직원 / 산하기관 임직원","75% / 50% / 75%"],
+       ["군위탁생특별장학금","학군제휴 협약 군위탁생","등록금 50%"],
+       ["교직원 직계가족 장학금","교직원 배우자·직계자녀, 명예교수 직계자녀","30~50%"],
+       ["협력기관장학금","협약 기관 소속 입학자","수업료 20~30%"],
+       ["동문장학금","국민대 출신 입학자","수업료 25%"],
+       ["조교장학금","수업 관련 업무를 보조하는 재학생","수업료 일정액"],
+       ["우수학생·특별·대내외공로·외국인 장학금","학업 우수자, 대학원 기여자 등","운영위원회 심의로 결정"]],
+ cond:"운영위원회 심의로 금액과 대상이 조정될 수 있음 · 문의 02-910-6642",
+ src:"https://cms.kookmin.ac.kr/swgs/bachelor/scholarship-system.do" },
+
+"이화여자대학교|데이터사이언스대학원": { max:null,
+ sum:"특수대학원 전용 장학이 안내돼 있지 않음. 아래는 이화 대학원 공통 장학이라 데이터사이언스대학원 적용 여부부터 확인해야 하고, 성적 감면보다 가계곤란·조교 중심.",
+ list:[["이화플러스","가계 형편이 어려운 석·박사·통합 학생","100만원"],
+       ["면학장려금","가계 형편이 어려운 석사·통합 1~3학기","대학별 상이"],
+       ["학생조교","행정업무·연구 보조 학생","121~440만원"]],
+ cond:"위 항목은 대학원 공통 장학. 특수대학원 적용 여부 확인 필요 · 문의 02-3277-2182",
+ src:"http://www.ewha.ac.kr/ewha/bachelor/scholarship-info05.do" },
+
+"서울시립대학교|과학기술대학원": { max:null,
+ sum:"학교 장학 포털의 '특수대학원 교내장학' 페이지가 로그인 뒤에 있어 종류·감면율을 확인하지 못했음. 다만 학기 368만원 공립이라 감면 없이도 서울권 최저가권.",
+ list:[], cond:"문의 과학기술대학원 02-6490-2308 · 학생과 장학팀 02-6490-6220~3",
+ src:"https://scholarship.uos.ac.kr/" },
+
+"서울과학기술대학교|산업대학원": { max:100,
+ sum:"가계곤란(어의장학)이 최대 100%. 원래 학비가 국내 두 번째로 싼데 장학까지 두터워서, 조건이 맞으면 총 부담이 가장 낮아질 수 있는 조합.",
+ list:[["어의장학금","경제적 사정이 곤란한 학생 (직전학기 3학점 이상 · F 없음)","수업료 40~100%"],
+       ["성적우수장학금","직전학기 6학점 이상 · 평점 3.7 이상 · C0 이하 과목 없음","수업료 일부"],
+       ["ST 사회기여장학금","원우회 업무·운영 공로자 (평점 3.5 이상)","100만원 또는 50만원"],
+       ["학생조교장학금","학생조교 운영지침에 따라 선발","월 최대 65만원"],
+       ["외국인장학금","외국인특별전형 입학자 (평점 3.5 이상)","등록금 50~100%"]],
+ cond:"국립대 교내장학 지침에 따름. 학술발표·논문게재 장려금도 별도 운영",
+ src:"https://gsi.seoultech.ac.kr/acad/scholar" },
+
+"광운대학교|스마트융합대학원": { max:50, auto:25,
+ sum:"이 표에서 장학 설계가 가장 촘촘함. 특별한 신분이 아닌 그냥 직장인도 25%가 기본이라, 총 학비 2,282만원이 실부담 1,700만원대까지 내려감. 원래 경쟁률도 0.78:1로 가장 낮은 곳.",
+ list:[["사업장 근로자·자영업자 장학","일반 직장인 및 자영업자","수업료 25%"],
+       ["공직자(공무원) 장학","공무원","수업료 30~50%"],
+       ["군위탁생 장학","육군본부 선발 군 위탁생","수업료 50%"],
+       ["직업군인 장학","직업군인","수업료 30%"],
+       ["산학협력기관(MOU) 장학","MOU 체결 기관 재직자","수업료 30%"],
+       ["동문장학","광운대 학사학위 취득자 (학점은행제 포함)","수업료 30%"],
+       ["학업성적 우수 및 제청자 장학","성적 우수자·추천 대상자","50%"],
+       ["신입(편입)생 장학","신입 및 편입생","30~50%"],
+       ["재학생 장학","재학생","30%"],
+       ["수상경력·자격취득 장학","국내외 수상경력자, 자격증 취득자","25%"],
+       ["저소득층 장학","저소득층","20~50%"]],
+ cond:"입학 안내와 대학원 소개 페이지의 항목 구성이 서로 조금 달라, 실제 적용 기준은 문의 필요 · 4학기 이상 등록 조건 · 문의 02-940-5096, 5098",
+ src:"https://compro.kw.ac.kr/entrance/process.php" },
+
+"건국대학교|정보통신대학원": { max:null,
+ sum:"매학기 '등록금 고지서 감면' 방식으로 장학금을 신청받는 것까지만 확인됨. 종류와 감면율은 공지 어디에도 없음. 등록금도 미공시라 이 학교는 전반적으로 확인할 게 많음.",
+ list:[], cond:"장학금 신청은 학기 시작 전(12월·6월경) 공지 · 문의 02-450-3261",
+ src:"https://www.konkuk.ac.kr/gsit/17692/subview.do" },
+
+"인하대학교|공학대학원": { max:50, auto:20,
+ sum:"일반 기업 재직자도 20%가 기본이고 상한이 50%. 총 학비 2,414만원 → 실부담 1,900만원대. 공무원이면 바로 50%라 수도권에서 가성비가 가장 좋은 축.",
+ list:[["기업체 임직원 장학금","일반 기업 재직자","20%"],
+       ["공무원 장학금","공무원 (군위탁생·교사 포함)","50%"],
+       ["성적우수 장학금","차수별 학업성적 우수자","50%"],
+       ["한진그룹 임직원 장학금","한진그룹 임직원","50%"],
+       ["인하대병원 직원 장학금","인하대병원 직원","50%"],
+       ["공기업·공공기관 장학금","공기업·공공기관 임직원 및 시·군·구의원","40%"],
+       ["학부 졸업생 장학금","인하대 학부 졸업생","30%"],
+       ["MOU 협약기관 장학금","MOU 체결 협회 회원사·기업 임직원","30%"],
+       ["타 대학 교직원 장학금","타 대학 교직원","20%"],
+       ["재학생 추천 입학","공학대학원 재학생 추천 (최대 3명)","+10% (첫 학기)"],
+       ["동일기관 3명 이상 동시 입학","3명 이상 동시 입학","+10% (첫 학기)"]],
+ cond:"장학금 총액은 최대 50%까지만 수혜 가능 · 추천·동시입학 가산은 입학 첫 학기 1회 한정 · 문의 032-860-8396",
+ src:"https://engrad.inha.ac.kr/bbs/engrad/2970/137320/artclView.do" },
+
+"아주대학교|정보통신대학원": { max:50,
+ sum:"군인·군무원이면 40~50%로 폭이 가장 큼. 일반 직장인은 같은 회사에서 3명 이상 함께 입학해야 20%라 조건이 까다로운 편. 장학 예산은 연 22억 규모.",
+ list:[["성적우수장학 A","전공별 성적 상위 30% 이내 · 평점 4.3 이상","50%"],
+       ["성적우수장학 B","전공별 성적 상위 30% 이내 · 평점 4.0 이상","30%"],
+       ["교직원장학","아주대학교 교직원","50%"],
+       ["희망장학50","취학추천자 중 군인 (하사 이상 ~ 대위 이하)","50%"],
+       ["군인(군무원)장학50","취학추천자 중 군인 (소령~대령), 군무원 전원","50%"],
+       ["희망장학40","미취학추천자 중 군인 (하사~대위)","40%"],
+       ["군인(군무원)장학40","미취학추천자 중 군인 (소령~대령), 군무원 전원","40%"],
+       ["특별장학 A","국방과학연구소 / 국방기술진흥연구소 재직자","40%"],
+       ["특별장학 B","아주대학교 졸업생","20%"],
+       ["기업체장학","신입생 동일기업 3인 이상 또는 재학생 동일기업 10인 이상","20%"],
+       ["공무원장학","공무원 (경찰·교사 등)","20%"]],
+ cond:"문의 031-219-1831~2 (정보통신대학원 교학팀)",
+ src:"https://www.ajou.ac.kr/ict/admission/scholarship.do" },
+
+"아주대학교|공학대학원": { max:50,
+ sum:"공무원·정부투자기관 임직원이면 바로 50%이고, 일반 회사도 3명이 같이 들어가면 50%. 신입학 장학은 30학점 취득 학기까지 계속 적용된다는 점이 큼.",
+ list:[["공무원·정부투자기관·지방공사 임직원","해당 재직자","50%"],
+       ["일반 회사 재직자 3명 동시 입학","3명 이상 동시 입학","50%"],
+       ["정부투자기관·지방공사 3명 동시 입학","3명 이상 동시 입학","50%"],
+       ["교직원장학","아주대학교 교직원","50%"],
+       ["의료원·대우학원 임직원","아주대 의료원 및 대우학원 임직원","30%"],
+       ["자녀 재학 장학","자녀가 본교 학부 재학생인 입학생","30%"],
+       ["동문장학","아주대학교 졸업생","20%"],
+       ["국가자격증 장학","기술사·건축사·공인회계사 등 국가자격증 소지자","20%"],
+       ["특별·협약과정 장학","공학대학원 특별과정 및 협약과정 이수생","20%"],
+       ["봉사장학 S / A / B / C","원우회 회장 / 임원 5인 / 학과대표 / 학과총무","50 / 30 / 20 / 20%"],
+       ["성적우수장학","직전학기 과목낙제 없이 6학점 이상 · 평점 4.0 이상, 학과별 최고·차석","별도 산정"]],
+ cond:"신입학 장학 수혜기간은 30학점 취득 학기까지",
+ src:"https://gse.ajou.ac.kr/gse/admission/scholarship.do" },
+
+"아주대학교|IT융합대학원": { max:50,
+ sum:"항목이 19개로 이 표에서 가장 잘게 쪼개져 있음. 공공기관 30%, 동문 20%, 둘이서만 같이 입학해도 20%라 조합해서 걸릴 확률이 높은 구조.",
+ list:[["교직원장학","아주대학교 교직원","50%"],
+       ["자기개발장학","글로벌IT융합세미나 등 대학원장이 인정하는 프로그램 참가자","30~50%"],
+       ["공공기관장학","정부기관, 군인·군무원, 공공기관 및 공사 임직원","30%"],
+       ["봉사장학 A","원우회 회장","30%"],
+       ["융합B","3명 이상 동시 입학","25%"],
+       ["기업추천장학","기업 대표가 자체 장학금 30% 이상 지급하는 경우","20%"],
+       ["계약학과장학","IT융합대학원 계약학과 입학생","20%"],
+       ["국가자격장학","기술사·건축사·공인회계사 또는 동등 자격증 소지자","20%"],
+       ["아주가족장학","아주대 동문 (특수대학원 포함)","20%"],
+       ["성적장학","성적이 우수한 자","20%"],
+       ["봉사장학 B","원우회 사무총장","20%"],
+       ["원장추천장학 H","학과장 추천자 또는 대학원장이 인정하는 자","20%"],
+       ["융합A","2명 동시 입학","20%"],
+       ["희망장학","학사운영위원회가 승인한 경제적 사정","20%"],
+       ["원장추천장학 B","3명 동시 입학","15%"],
+       ["가족기업장학","아주대 LINC3.0 사업단 가족기업 임직원","10%"],
+       ["기여장학","본 대학원 발전에 기여한 자","10%"],
+       ["봉사장학 C / D","학습도움 봉사 / 온라인 홍보·대응 봉사","5~10%"]],
+ cond:"문의 031-219-3710~2 · itcgrad@ajou.ac.kr",
+ src:"https://itc.ajou.ac.kr/itc/scholarship/scholarship.do" },
+
+"한국공학대학교|산업기술경영대학원": { max:70,
+ sum:"국내 최초로 가족회사 제도를 만든 학교라 제휴 기업이 4,500여 곳. 제조·엔지니어링 재직자면 20%는 거의 확정이고, 공무원이면 최대 70%.",
+ list:[["공무원·공공기관 재직자 감면","공무원 및 공공기관 재직자","등록금 30~70%"],
+       ["가족회사 재직자 감면","한국공학대 가족회사 임직원 (4,500여 개 기업)","등록금 20%"]],
+ cond:"가족회사 해당 여부는 family.tukorea.ac.kr에서 조회 가능 · 문의 031-8041-1000",
+ src:"https://family.tukorea.ac.kr/familyGuide/guide.hs" },
+
+"인천대학교|정보기술대학원": { max:null,
+ sum:"재직자 장학이 있다는 것만 확인되고 금액·감면율은 비공개. 등록금도 미공시라 인하대와 비교하려면 직접 전화가 필요함.",
+ list:[["산업체·공공기관 근무자 장학","해당 재직자","예산 범위 내 소정 금액"],
+       ["학비감면 장학","성적우수 · 학생회 간부 · 보훈","미공시"]],
+ cond:"등록금 범위 내 지급 · 정규학기(8학기) 내 이중수혜 불가 · 문의 032-835-8602",
+ src:"https://www.inu.ac.kr/grad/5541/subview.do" },
+
+"평택대학교|AI융합대학원": { max:30, auto:30,
+ sum:"조건도 심사도 없이 전원 30%. 장학금 신청서조차 필요 없다는 점에서 이 표에서 가장 확실한 장학이고, 실부담이 학기 약 307만원 · 총 1,310만원으로 내려감.",
+ list:[["기본 학비감면","모든 재학생·입학생 (신청 불필요)","수업료 30%"],
+       ["편입생 입학금 면제","편입생","입학금 전액"]],
+ cond:"모집요강에 명시된 기본 감면이라 별도 심사 없음. 이 표의 총 학비는 감면 전 정가 기준",
+ src:"https://graduate.ptu.ac.kr/graduate/3443/subview.do" },
+
+"한국방송통신대학교|대학원": { max:100,
+ sum:"학과 상위 15% 안에 들면 수업료를 25~100% 깎아줌. 원래 학기 130만원이라 성적우수 C(25%)만 받아도 학기 98만원. 재학생 1,500여 명 중 매학기 220여 명이 받음.",
+ list:[["성적우수 A등급","직전학기 전공 6학점 이상 · 평점 3.5 이상, 학과 현원 2% 이내","수업료 전액"],
+       ["성적우수 B등급","위 기준 · 학과 현원 2% 초과 5% 이내","수업료 75%"],
+       ["성적우수 C등급","전공 6학점 이상 · 학과 현원 5% 초과 15% 이내","수업료 25%"],
+       ["기초생활수급자","신입생 / 재학생 (평점 2.0 이상)","입학금 + 수업료 85% / 수업료 85%"],
+       ["차상위계층","신입생 / 재학생 (평점 2.0 이상)","입학금 + 수업료 80% / 수업료 80%"],
+       ["R등급 (수료 후 연구생)","6개 학기 이상 등록 후 논문 재심사자","수업료 85%"]],
+ cond:"가계곤란 장학은 학과장 추천 필요 · 문의 02-3668-4347",
+ src:"https://grad.knou.ac.kr/grad/2091/subview.do" }
+
+};
+
+/* ══════════════════════════════════════════════════════════
    파생값 계산
    ══════════════════════════════════════════════════════════ */
 const DATA = RAW.map((d,i) => {
   const tot = d.tot != null ? d.tot
             : (d.ty != null && d.tm ? d.ty * d.tm + (d.adm || 0) : null);
   const apply = d.apply || "2026.10~11 예상";
-  return Object.assign({}, d, { id:i, tot, apply,
-    _search: [d.s,d.g,d.m,d.mdesc,d.r,d.t,d.mo,apply,d.applyRef,d.req,d.note,(d.tags||[]).join(" ")].join(" ").toLowerCase() });
+  const sch = SCH[d.s + "|" + d.g] || null;
+  const schMax = sch ? sch.max : null;
+  return Object.assign({}, d, { id:i, tot, apply, sch, schMax,
+    _search: [d.s,d.g,d.m,d.mdesc,d.r,d.t,d.mo,apply,d.applyRef,d.req,d.note,(d.tags||[]).join(" "),
+              sch ? sch.sum + " " + (sch.list||[]).map(x=>x.join(" ")).join(" ") + " 장학금 장학" : ""
+             ].join(" ").toLowerCase() });
 });
 
 /* ══════════════════════════════════════════════════════════
@@ -722,6 +1043,7 @@ const COLS = [
   {k:"type",   t:"유형",        sort:null},
   {k:"mode",   t:"수업",        sort:null},
   {k:"cost",   t:"총 학비",     sort:"cost"},
+  {k:"sch",    t:"장학 (최대 감면)", sort:"sch"},
   {k:"year",   t:"학기당 등록금", sort:"year"},
   {k:"term",   t:"학기",        sort:"term"},
   {k:"comp",   t:"경쟁률",      sort:"comp"},
@@ -752,9 +1074,9 @@ function apply(){
   const q  = $("#q").value.trim().toLowerCase();
   const fr = $("#fRegion").value, ft = $("#fType").value,
         fm = $("#fMode").value,     fcost = $("#fCost").value,
-        fcomp = $("#fComp").value;
+        fcomp = $("#fComp").value,  fsch = $("#fSch").value;
 
-  [["#fRegion",fr],["#fType",ft],["#fMode",fm],["#fCost",fcost],["#fComp",fcomp]]
+  [["#fRegion",fr],["#fType",ft],["#fMode",fm],["#fCost",fcost],["#fComp",fcomp],["#fSch",fsch]]
     .forEach(([sel,v]) => $(sel).classList.toggle("on", !!v));
 
   let rows = DATA.filter(d => {
@@ -764,6 +1086,9 @@ function apply(){
     if (fm && d.mo !== fm) return false;
     if (fcost && !inRange(d.tot == null ? null : d.tot/10000, fcost)) return false;
     if (fcomp && !inRange(d.cr, fcomp)) return false;
+    if (fsch === "known" && d.schMax == null) return false;
+    if (fsch === "auto"  && !(d.sch && d.sch.auto)) return false;
+    if (fsch && /^\d+$/.test(fsch) && !(d.schMax != null && d.schMax >= +fsch)) return false;
     // 퀵 필터 칩
     if (preset === "ai"    && !(d.tags||[]).includes("ai"))     return false;
     if (preset === "data"  && !(d.tags||[]).includes("data"))   return false;
@@ -771,10 +1096,11 @@ function apply(){
     if (preset === "seoul" && d.r !== "서울")                   return false;
     if (preset === "cheap" && !(d.tot != null && d.tot <= 25000000)) return false;
     if (preset === "easy"  && !(d.cr != null && d.cr < 2))      return false;
+    if (preset === "sch"   && !(d.schMax != null && d.schMax >= 30)) return false;
     return true;
   });
 
-  const get = d => ({ cost:d.tot, year:d.ty, term:d.tm, comp:d.cr, fill:d.fr, quota:d.qt, school:d.s }[sortKey]);
+  const get = d => ({ cost:d.tot, year:d.ty, term:d.tm, comp:d.cr, fill:d.fr, quota:d.qt, sch:d.schMax, school:d.s }[sortKey]);
   rows.sort((a,b) => {
     if (sortKey === "school") {
       const r = a.s.localeCompare(b.s,'ko') || a.m.localeCompare(b.m,'ko');
@@ -808,6 +1134,11 @@ function render(rows){
       <td><span class="pill p-${esc(d.t)}">${esc(d.t)}</span></td>
       <td><span class="pill p-mode">${esc(d.mo)}</span></td>
       <td class="money">${d.tot!=null ? esc(won(d.tot)) + (d.origCost?`<span class="orig">${esc(d.origCost)}</span>`:"") : '<span class="na">확인 필요</span>'}</td>
+      <td>${d.schMax!=null
+            ? `<span class="schmax">최대 ${d.schMax}%</span>`
+              + (d.sch.auto ? `<span class="schauto">기본 ${d.sch.auto}% 확정</span>` : "")
+              + (d.sch.list.length ? `<span class="schn">${d.sch.list.length}종</span>` : "")
+            : '<span class="na">확인 필요</span>'}</td>
       <td class="money">${d.ty!=null ? esc(won(d.ty)) : '<span class="na">미공시</span>'}</td>
       <td class="num">${d.tm ? d.tm+"학기" : '<span class="na">–</span>'}</td>
       <td><span class="rate ${cl.cls}"><span class="dot"></span>${cl.txt}</span></td>
@@ -841,6 +1172,7 @@ function render(rows){
         <div><div class="k">총 학비</div><div class="v" style="color:${color}">${d.tot!=null?esc(won(d.tot)):"–"}</div></div>
         <div><div class="k">경쟁률</div><div class="v ${cl.cls}">${cl.txt}</div></div>
         <div><div class="k">총원율</div><div class="v">${d.fr!=null?d.fr+"%":"–"}</div></div>
+        <div><div class="k">장학 최대</div><div class="v" ${d.schMax!=null?`style="color:${color}"`:""}>${d.schMax!=null?d.schMax+"%":"–"}</div></div>
       </div>
     </div>`;
   }).join("");
@@ -849,6 +1181,23 @@ function render(rows){
 /* ══════════════════════════════════════════════════════════
    상세 시트
    ══════════════════════════════════════════════════════════ */
+function schBlock(d){
+  const s = d.sch;
+  if (!s) return `<div class="sec"><h4> 장학제도</h4><p class="schnone">이 대학원의 장학 정보를 아직 확인하지 못했습니다.</p></div>`;
+  const rows = s.list.length
+    ? `<ul class="schlist">${s.list.map(([n,w,r]) =>
+        `<li><div class="sl-top"><span class="sl-n">${esc(n)}</span><span class="sl-r">${esc(r)}</span></div>
+             <div class="sl-w">${esc(w)}</div></li>`).join("")}</ul>`
+    : `<p class="schnone">공개된 장학금 목록이 없습니다.</p>`;
+  return `<div class="sec">
+    <h4> 장학제도${s.list.length ? ` · ${s.list.length}종` : ""}</h4>
+    <p>${esc(s.sum)}</p>
+    ${rows}
+    ${s.cond ? `<div class="schcond">${esc(s.cond)}</div>` : ""}
+    <a class="schsrc" href="${esc(s.src)}" target="_blank" rel="noopener">장학 정보 출처 ↗</a>
+  </div>`;
+}
+
 function openSheet(id){
   const d = DATA.find(x => x.id === +id); if (!d) return;
   const cl = compLevel(d.cr);
@@ -856,10 +1205,11 @@ function openSheet(id){
     <div class="grab"></div>
     <div class="shead">
       <div>
+        <span class="sh-eye">${esc(d.s)} · ${esc(d.g)}</span>
         <h2>${esc(d.m)}</h2>
-        <p class="ssub">${esc(d.s)} · ${esc(d.g)}${d.mdesc?` · ${esc(d.mdesc)}`:""}</p>
+        ${d.mdesc?`<span class="sh-en">${esc(d.mdesc)}</span>`:""}
       </div>
-      <button class="xbtn" id="closeX" aria-label="닫기"></button>
+      <button class="xbtn" id="closeX" aria-label="닫기">×</button>
     </div>
     <div class="tagrow">
       <span class="pill p-${esc(d.t)}">${esc(d.t)}대학원</span>
@@ -867,18 +1217,38 @@ function openSheet(id){
       <span class="pill p-mode">${esc(d.r)}</span>
       ${d.tm?`<span class="pill p-mode">${d.tm}학기</span>`:""}
     </div>
-    <div class="grid">
-      <div class="box"><div class="k">총 학비</div><div class="v">${d.tot!=null?esc(won(d.tot)):"확인 필요"}</div>${d.origCost?`<div class="k" style="margin-top:2px">${esc(d.origCost)}</div>`:""}</div>
-      <div class="box"><div class="k">학기당 등록금</div><div class="v">${d.ty!=null?esc(won(d.ty)):"미공시"}</div></div>
-      <div class="box"><div class="k">입학금</div><div class="v">${d.adm!=null?esc(won(d.adm)):"–"}</div></div>
-      <div class="box"><div class="k">경쟁률</div><div class="v ${cl.cls}">${cl.txt}</div></div>
-      <div class="box"><div class="k">총원율</div><div class="v">${d.fr!=null?d.fr+"<small>%</small>":"미공시"}</div></div>
-      <div class="box"><div class="k">모집인원</div><div class="v">${d.qt!=null?d.qt+"<small>명</small>":"–"}</div></div>
+
+    <div class="figs">
+      <div class="fig">
+        <div class="k">총 학비</div>
+        <div class="v ${d.tot==null?"dim":""}">${d.tot!=null?esc(won(d.tot)):"확인 필요"}</div>
+        <div class="sub">${d.ty!=null
+            ? `학기 ${esc(won(d.ty))} × ${d.tm}학기${d.adm!=null?` + 입학금 ${esc(won(d.adm))}`:" (입학금 미확인)"}`
+            : "등록금 미공시"}</div>
+      </div>
+      <div class="fig">
+        <div class="k">장학 최대 감면</div>
+        <div class="v ${d.schMax==null?"dim":""}">${d.schMax!=null?d.schMax+"%":"확인 필요"}</div>
+        <div class="sub">${d.schMax!=null
+            ? (d.sch.auto ? `<b>조건 없이 ${d.sch.auto}% 확정</b> · 총 ${d.sch.list.length}종`
+                          : `${d.sch.list.length}종 · 조건 없는 감면은 없음`)
+            : "학교가 감면율을 공개하지 않음"}</div>
+      </div>
     </div>
+
+    <div class="figrow">
+      <div><span class="k">경쟁률</span><span class="v ${cl.cls}">${cl.txt}</span></div>
+      <div><span class="k">총원율</span><span class="v${d.fr==null?" na":""}">${d.fr!=null?d.fr+"%":"미공시"}</span></div>
+      <div><span class="k">모집인원</span><span class="v${d.qt==null?" na":""}">${d.qt!=null?d.qt+"명":"–"}</span></div>
+      <div><span class="k">학기당 등록금</span><span class="v${d.ty==null?" na":""}">${d.ty!=null?esc(won(d.ty)):"미공시"}</span></div>
+      <div><span class="k">입학금</span><span class="v${d.adm==null?" na":""}">${d.adm!=null?esc(won(d.adm)):"–"}</span></div>
+    </div>
+
     <div class="sec"><h4> 원서접수 일정</h4><p><b>다음 회차: ${esc(d.apply)}</b><br><span style="font-size:12.5px">${d.applyRef?esc(d.applyRef):"이 학교의 확정 일정은 아직 확인하지 못했습니다. 국내 특수대학원 일반 주기(전기 10~11월 접수 · 후기 4~5월 접수) 기준 추정입니다."}</span></p></div>
     <div class="sec"><h4> 입학 시 필요한 것</h4><p>${esc(d.req)}</p></div>
     <div class="sec"><h4> 비고 · 의견</h4><p>${d.note||""}</p></div>
-    <a class="gobtn" href="${esc(d.site)}" target="_blank" rel="noopener">학교 사이트 열기 ↗</a>
+    ${schBlock(d)}
+    <div class="gofoot"><a class="gobtn" href="${esc(d.site)}" target="_blank" rel="noopener">학교 사이트 열기 ↗</a></div>
   `;
   $("#mask").classList.add("show");
   document.body.style.overflow = "hidden";
@@ -889,7 +1259,7 @@ function closeSheet(){ $("#mask").classList.remove("show"); document.body.style.
 /* ══════════════════════════════════════════════════════════
    이벤트
    ══════════════════════════════════════════════════════════ */
-["q","fRegion","fType","fMode","fCost","fComp"].forEach(id => {
+["q","fRegion","fType","fMode","fCost","fComp","fSch"].forEach(id => {
   $("#"+id).addEventListener("input", apply);
 });
 $("#fSort").addEventListener("change", e => {
@@ -925,7 +1295,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet()
 
 $("#reset").addEventListener("click", () => {
   $("#q").value = "";
-  ["fRegion","fType","fMode","fCost","fComp"].forEach(id => $("#"+id).value = "");
+  ["fRegion","fType","fMode","fCost","fComp","fSch"].forEach(id => $("#"+id).value = "");
   document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
   preset = null;
   $("#fSort").value = "cost-asc"; sortKey = "cost"; sortDir = "asc";
@@ -955,12 +1325,15 @@ document.querySelectorAll(".chip").forEach(chip => {
   const cheapest = DATA.filter(d => d.tot != null).sort((a,b)=>a.tot-b.tot)[0];
   const easiest  = DATA.filter(d => d.cr != null).sort((a,b)=>a.cr-b.cr)[0];
   const hardest  = DATA.filter(d => d.cr != null).sort((a,b)=>b.cr-a.cr)[0];
+  const schKnown = DATA.filter(d => d.schMax != null);
+  const schAuto  = new Set(DATA.filter(d => d.sch && d.sch.auto).map(d => d.s));
   $("#stats").innerHTML = `
     <div class="stat" style="--c:#0E7C94"><div class="lab">전체 프로그램</div><div class="val">${DATA.length}<small>개</small></div></div>
     <div class="stat" style="--c:#0E7C94"><div class="lab">서울 / 그 외</div><div class="val">${seoul.length} <small>/</small> ${etc.length}</div><div class="lab">${new Set(DATA.map(d=>d.s)).size}개 대학</div></div>
     <div class="stat" style="--c:#0E7C94"><div class="lab">최저 총 학비</div><div class="val">${won(cheapest.tot)}</div><div class="lab">${cheapest.s}</div></div>
     <div class="stat" style="--c:#5C7A85"><div class="lab">경쟁률 최저</div><div class="val">${easiest.cr.toFixed(2)}:1</div><div class="lab">${easiest.s}</div></div>
     <div class="stat" style="--c:#0E7C94"><div class="lab">경쟁률 최고</div><div class="val">${hardest.cr.toFixed(2)}:1</div><div class="lab">${hardest.s}</div></div>
+    <div class="stat" style="--c:#0E7C94"><div class="lab">장학 감면율 공개</div><div class="val">${schKnown.length} <small>/</small> ${DATA.length}</div><div class="lab">조건 없는 감면 ${schAuto.size}개 대학</div></div>
   `;
 })();
 
