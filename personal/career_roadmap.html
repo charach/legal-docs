@@ -12,10 +12,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="커리어">
+<meta name="apple-mobile-web-app-title" content="합격 준비">
 <!-- /pwa -->
 
-<title>AI 학습 로드맵 · 석사 2년을 실력으로</title>
+<title>대학원 합격 준비 · 공부할 것</title>
 <link rel="stylesheet" href="assets/summer.css">
 <style>
   :root {
@@ -28,7 +28,6 @@
     --line: #E4EFF1;
     --line-strong: #CFE3E7;
     --accent: #0E7C94;
-    --accent-soft: #0E7C94;
     --gold: #5C7A85;
     --green: #0E7C94;
     --serif: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
@@ -37,57 +36,27 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    color: var(--accent);
-    font-family: var(--sans);
-    line-height: 1.72;
-    font-size: 15px;
-    -webkit-font-smoothing: antialiased;
-    background-image:
-      rgba(156,59,46,0.03),
-      rgba(176,132,33,0.035);
+    margin: 0; color: var(--ink); font-family: var(--sans);
+    line-height: 1.7; font-size: 15px; -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px 140px; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px 120px; }
 
-  /* ---- Masthead ---- */
-  header.masthead { padding: 72px 0 30px; text-align: center; }
-  .kicker {
-    font-family: var(--sans);
-    font-size: 11.5px; letter-spacing: 0.32em; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; margin-bottom: 22px;
-  }
+  header.masthead { padding: 56px 0 22px; text-align: center; }
   header.masthead h1 {
     font-family: var(--serif); font-weight: 700;
-    font-size: clamp(30px, 6vw, 46px); line-height: 1.18;
-    margin: 0 0 20px; letter-spacing: -0.5px;
+    font-size: clamp(26px, 5vw, 36px); line-height: 1.2;
+    margin: 0 0 14px; letter-spacing: -0.5px;
   }
-  header.masthead h1 em { font-style: normal; color: var(--accent); }
-  .rule-ornament {
-    display: flex; align-items: center; justify-content: center; gap: 14px;
-    color: var(--line-strong); margin: 26px 0;
+  .dday {
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700;
   }
-  .rule-ornament::before, .rule-ornament::after {
-    content: ""; height: 1px; width: 90px; background: var(--line-strong);
-  }
-  .rule-ornament span { font-size: 13px; color: var(--accent); }
-  .lede {
-    font-family: var(--serif); font-weight: 500;
-    font-size: 17px; line-height: 1.75; color: #1A2E35;
-    max-width: 620px; margin: 0 auto 14px;
-  }
-  .thesis {
-    display: inline-block; font-family: var(--sans); font-size: 13.5px;
-    color: var(--muted); border-top: 1px solid var(--line);
-    padding-top: 14px; margin-top: 6px;
-  }
-  .thesis b { color: var(--ink); font-weight: 700; }
+  .dday b { font-family: var(--serif); font-size: 15px; }
 
-  /* ---- Sticky progress ---- */
   .statusbar {
     position: sticky; top: 0; z-index: 30;
-    background: rgba(246,243,236,0.86); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-    padding: 11px 0; margin: 24px 0 8px;
+    background: rgba(250,253,253,0.9); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line); padding: 11px 0; margin: 8px 0;
   }
   .statusbar .inner {
     max-width: 820px; margin: 0 auto; padding: 0 24px;
@@ -105,45 +74,35 @@
   }
   .reset:hover { color: var(--accent); }
 
-  /* ---- Table of contents ---- */
   nav.toc {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px;
-    margin: 20px 0 10px; font-size: 12.5px;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px;
+    margin: 16px 0 8px; font-size: 12.5px;
   }
-  nav.toc a {
-    color: var(--muted); text-decoration: none; letter-spacing: 0.02em;
-    border-bottom: 1px solid transparent; padding-bottom: 2px;
-  }
+  nav.toc a { color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
   nav.toc a:hover { color: var(--accent); border-color: var(--accent); }
 
-  /* ---- Phase ---- */
-  section.phase { margin-top: 60px; }
-  .phase-head { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; }
-  .phase-num {
-    font-family: var(--serif); font-weight: 700; font-size: 52px; line-height: 0.9;
-    color: var(--paper); -webkit-text-stroke: 1.4px var(--accent-soft);
-    letter-spacing: -2px; padding-top: 2px;
+  section.blk { margin-top: 52px; }
+  section.blk > h2 {
+    font-family: var(--serif); font-weight: 700; font-size: 22px;
+    margin: 0 0 4px; letter-spacing: -0.3px;
+    display: flex; align-items: baseline; gap: 10px;
   }
-  .phase-title h2 { font-family: var(--serif); font-weight: 700; font-size: 24px; margin: 0 0 3px; letter-spacing: -0.3px; }
-  .phase-title .when { font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
-  .phase-title .desc { font-size: 14px; color: var(--muted); margin-top: 12px; max-width: 620px; }
-  .phase-title .desc b { color: var(--ink); }
-  .phase-rule { height: 2px; background: var(--ink); margin: 20px 0 8px; }
+  section.blk > h2 small {
+    font-family: var(--sans); font-size: 12.5px; font-weight: 400; color: var(--muted);
+    letter-spacing: 0;
+  }
+  .rule { height: 2px; background: var(--ink); margin: 12px 0 6px; }
 
-  h3.block-title {
+  h3.sub {
     font-family: var(--sans); font-weight: 700; font-size: 12.5px;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
-    margin: 30px 0 12px; display: flex; align-items: center; gap: 8px;
+    margin: 26px 0 10px;
   }
-  h3.block-title .star { color: var(--gold); -webkit-text-stroke: 0; }
-  h3.block-title.hot { color: var(--accent); }
 
-  /* ---- Checklist ---- */
   ul.checklist { list-style: none; padding: 0; margin: 0; }
   ul.checklist li {
     display: grid; grid-template-columns: 26px 1fr; gap: 4px;
-    padding: 11px 0; border-bottom: 1px solid var(--line);
-    align-items: start;
+    padding: 10px 0; border-bottom: 1px solid var(--line); align-items: start;
   }
   ul.checklist li:first-child { border-top: 1px solid var(--line); }
   ul.checklist input[type=checkbox] {
@@ -160,159 +119,58 @@
     transform: rotate(43deg);
   }
   ul.checklist label { cursor: pointer; }
-  ul.checklist label b { font-weight: 700; }
   ul.checklist li.checked label { color: var(--ink-soft); }
-  ul.checklist li.checked label b { color: var(--ink-soft); }
   ul.checklist li.checked label > .lead { text-decoration: line-through; text-decoration-color: var(--line-strong); }
-  .pass { display: block; font-size: 12.5px; color: var(--green); margin-top: 3px; }
+  .pass { display: block; font-size: 12.5px; color: var(--green); margin-top: 2px; }
+  .note { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  .tag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em;
+    padding: 1px 7px; border-radius: 3px; vertical-align: middle; margin-right: 6px;
+    background: rgba(14,124,148,0.12); color: var(--accent);
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 4px 0; font-size: 13.5px; }
+  th, td { text-align: left; padding: 9px 10px; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th { border-bottom: 2px solid var(--ink); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  tbody tr:hover { background: var(--paper-2); }
+  td.hi { color: var(--accent); font-weight: 600; }
+  .table-scroll { overflow-x: auto; }
+  tr.grp td {
+    font-family: var(--serif); font-weight: 700; font-size: 15px; color: var(--ink);
+    padding-top: 20px; border-bottom: 1.5px solid var(--line-strong);
+  }
+  tr.grp:first-child td { padding-top: 6px; }
+  td.st { white-space: nowrap; font-size: 12.5px; }
+  .have { color: var(--muted); }
+  .doing { color: var(--accent); font-weight: 700; }
+  .todo { color: var(--ink); }
+  td.wh { white-space: nowrap; font-size: 12.5px; }
+  .wh-now { color: var(--accent); font-weight: 700; }
+  .wh-later { color: var(--muted); }
   code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
     background: var(--paper-2); border: 1px solid var(--line); border-radius: 3px; padding: 0 4px;
   }
-  .note { display: block; font-size: 12.5px; color: var(--muted); margin-top: 3px; }
-  .tag {
-    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em;
-    padding: 1px 7px; border-radius: 3px; vertical-align: middle; margin-right: 6px;
-  }
-  .tag.rec { background: rgba(77,107,63,0.14); color: var(--green); }
-  .tag.ver { background: rgba(156,59,46,0.1); color: var(--accent); font-family: var(--serif); }
-
-  /* ---- Callout ---- */
-  .callout {
-    font-family: var(--serif); font-size: 14.5px; line-height: 1.7; color: #1A2E35;
-    border-left: 3px solid var(--gold); padding: 4px 0 4px 18px; margin: 18px 0;
-  }
-  .callout b { color: var(--accent); font-weight: 600; }
-
-  /* ---- Tables ---- */
-  table { width: 100%; border-collapse: collapse; margin: 6px 0 4px; font-size: 13.5px; }
-  th, td { text-align: left; padding: 9px 10px; vertical-align: top; border-bottom: 1px solid var(--line); }
-  thead th { border-bottom: 2px solid var(--ink); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-  tbody tr:hover { background: var(--paper-2); }
-  td .verdict { color: var(--green); font-weight: 500; }
-  td .warn { color: var(--accent); }
-  .stars { color: var(--gold); letter-spacing: 1px; white-space: nowrap; }
-  .table-scroll { overflow-x: auto; }
-
-  /* ---- Ledger (현재 위치) ---- */
-  .ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; margin-top: 8px; }
-  .ledger h4 {
-    font-family: var(--sans); font-size: 12px; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 4px;
-    padding-bottom: 8px; border-bottom: 2px solid var(--ink);
-  }
-  .ledger h4.have { color: var(--green); }
-  .ledger h4.gap { color: var(--accent); }
-  .ledger ul { list-style: none; padding: 0; margin: 0; }
-  .ledger li {
-    font-size: 13.5px; color: #1A2E35; padding: 9px 0 9px 20px;
-    border-bottom: 1px solid var(--line); position: relative; line-height: 1.6;
-  }
-  .ledger li::before { position: absolute; left: 0; font-weight: 700; }
-  .ledger .have li::before { content: "✓"; color: var(--green); }
-  .ledger .gap li::before { content: "→"; color: var(--accent); }
-  .ledger li small { display: block; font-size: 12px; color: var(--muted); }
-
-  /* ---- Timeline ---- */
-  .timeline {
-    font-family: "Newsreader", ui-monospace, monospace; font-size: 13px; line-height: 1.9;
-    color: #1A2E35; background: var(--card); border: 1px solid var(--line);
-    border-radius: 4px; padding: 22px 24px; overflow-x: auto; white-space: pre; margin-top: 8px;
-  }
 
   footer {
-    text-align: center; margin-top: 72px; padding-top: 24px;
+    text-align: center; margin-top: 64px; padding-top: 20px;
     border-top: 1px solid var(--line);
-    font-size: 12px; color: var(--muted); font-family: var(--serif); font-style: italic;
+    font-size: 12px; color: var(--muted); font-style: italic;
   }
-
-  /* ---- Principle list ---- */
-  ul.principle { list-style: none; padding: 0; margin: 14px 0 4px; }
-  ul.principle li {
-    position: relative; padding: 6px 0 6px 22px; font-size: 14px; color: #1A2E35;
-    border-bottom: 1px solid var(--line);
-  }
-  ul.principle li:last-child { border-bottom: none; }
-  ul.principle li::before {
-    content: "—"; position: absolute; left: 0; color: var(--accent); font-weight: 700;
-  }
-  ul.principle b { font-weight: 700; color: var(--ink); }
-
-  /* ---- Collapsed archive (이직 파트) ---- */
-  details.archive {
-    margin-top: 26px; border: 1px solid var(--line-strong); border-radius: 5px;
-    background: var(--card);
-  }
-  details.archive > summary {
-    cursor: pointer; list-style: none; padding: 18px 22px;
-    font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--ink);
-    display: flex; align-items: baseline; gap: 10px;
-  }
-  details.archive > summary::-webkit-details-marker { display: none; }
-  details.archive > summary::before {
-    content: "▸"; color: var(--accent); font-size: 13px; transition: transform .2s;
-  }
-  details.archive[open] > summary::before { content: "▾"; }
-  details.archive > summary small {
-    font-family: var(--sans); font-size: 12.5px; font-weight: 400; color: var(--muted);
-  }
-  .archive-body { padding: 0 22px 26px; border-top: 1px solid var(--line); }
-  .archive-body > .callout:first-child { margin-top: 20px; }
-  .archive-body section.phase { margin-top: 40px; }
-  .archive-body .phase-num { font-size: 40px; }
-
-  /* ---- Company profiles ---- */
-  .tier-label {
-    font-family: var(--serif); font-weight: 600; font-size: 16px; color: var(--accent);
-    margin: 34px 0 6px; padding-bottom: 6px; border-bottom: 1.5px solid var(--line-strong);
-  }
-  .tier-label small { font-family: var(--sans); font-size: 12px; color: var(--muted); font-weight: 400; letter-spacing: 0.04em; }
-  article.company {
-    background: var(--card); border: 1px solid var(--line); border-radius: 5px;
-    padding: 18px 22px; margin: 14px 0;
-  }
-  .co-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
-  .co-rank { font-family: var(--serif); font-size: 22px; color: var(--accent); font-weight: 700; }
-  .co-name { font-family: var(--serif); font-size: 19px; font-weight: 700; margin: 0; }
-  .co-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: var(--gold); }
-  dl.co-body { margin: 6px 0 0; display: grid; grid-template-columns: 120px 1fr; gap: 0; }
-  dl.co-body dt {
-    font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--accent-soft); padding: 9px 12px 9px 0; border-top: 1px solid var(--line);
-  }
-  dl.co-body dd {
-    margin: 0; font-size: 13.5px; color: #1A2E35; padding: 9px 0; border-top: 1px solid var(--line);
-    line-height: 1.65;
-  }
-  dl.co-body dd ul { margin: 0; padding-left: 16px; }
-  dl.co-body dd li { margin: 2px 0; }
-  dl.co-body dt.risk { color: #0E7C94; }
 
   @media (max-width: 560px) {
-    .phase-head { grid-template-columns: 1fr; gap: 4px; }
-    .phase-num { font-size: 40px; }
     .statusbar .inner { gap: 10px; }
     .status-label { font-size: 11px; }
-    .ledger { grid-template-columns: 1fr; gap: 0; }
-    .ledger h4.gap { margin-top: 30px; }
-    .archive-body { padding: 0 14px 22px; }
-    dl.co-body { grid-template-columns: 1fr; }
-    dl.co-body dt { padding-bottom: 0; border-top: 1px solid var(--line); }
-    dl.co-body dd { border-top: none; padding-top: 2px; }
   }
 </style>
 </head>
 <body>
 <nav class="nav"><div class="inner"><a class="brand" href="index.html">Personal</a><div class="links"><a href="study_calendar.html">오늘</a><a href="ai_grad_prep.html">로드맵</a><a href="interview_prep.html">면접</a><a href="grad_schools.html">대학원</a></div></div></nav>
 
-
 <div class="wrap">
   <header class="masthead">
-    <div class="kicker">AI Study Roadmap · 석사 병행 · 2026 – 2029</div>
-    <h1>석사 2년을<br><em>실력으로 바꾼다</em></h1>
-    <div class="rule-ornament"><span></span></div>
-    <p class="lede">아내와 같이 2027년 3월 입학. 수업이 채워주지 않는 칸을 학기와 방학의 리듬 위에서 스스로 채워, 졸업할 때 남는 것이 학위 하나가 아니라 <b>돌아가는 시스템 하나</b>가 되게 한다.</p>
-    <span class="thesis">기준은 학점이 아니라 <b>"남에게 설명할 수 있는가"</b></span>
+    <h1>대학원 합격 준비</h1>
+    <div class="dday">원서 마감까지 <b id="dday">D-—</b> · 2026.11.15</div>
   </header>
 </div>
 
@@ -327,645 +185,349 @@
 
 <div class="wrap">
   <nav class="toc">
-    <a href="#now">현재 위치</a>
-    <a href="#p0">0 원서 시즌</a>
-    <a href="#p1">Ⅰ 입학 전</a>
-    <a href="#p2">Ⅱ 재학 1년차</a>
-    <a href="#p3">Ⅲ 재학 2년차</a>
-    <a href="#timeline">타임라인</a>
-    <a href="#req">공고 요구사항</a>
-    <a href="#job">이직 준비(보관)</a>
-    <a href="#reminder">리마인더</a>
+    <a href="#week">주차별</a>
+    <a href="#map">전체 과목</a>
+    <a href="#alloc">과목·시간</a>
+    <a href="#book">밑바닥 2</a>
+    <a href="#classic">고전 ML</a>
+    <a href="#linalg">선형대수</a>
+    <a href="#calc">미적분·최적화</a>
+    <a href="#stat">확률통계</a>
+    <a href="#concept">개념 정리</a>
+    <a href="#proj">PyTorch·프로젝트</a>
+    <a href="#interview">면접 답변</a>
+    <a href="#doc">서류</a>
+    <a href="#school">학교</a>
+    <a href="#res">자료</a>
   </nav>
 
-  <!-- 현재 위치 -->
-  <section class="phase" id="now">
-    <div class="phase-head">
-      <div class="phase-num" style="-webkit-text-stroke-color: var(--gold);">◎</div>
-      <div class="phase-title">
-        <h2>현재 위치 — 무엇이 있고 무엇이 비었나</h2>
-        <p class="desc">로드맵을 짜기 전에 출발선을 고정한다. <b>가진 것을 다시 쌓는 게 가장 흔한 낭비</b>이고, 비어 있는 칸만이 계획이 될 자격이 있다.</p>
-      </div>
-    </div>
-    <div class="phase-rule"></div>
-
-    <div class="ledger">
-      <div>
-        <h4 class="have">이미 가진 것</h4>
-        <ul class="have">
-          <li>컴퓨터과학 전공 · <b>CS 석사 보유</b><small>ASU 온라인 석사 — 학위 신호는 이미 확보돼 있다</small></li>
-          <li>8년차 백엔드 · 분산 시스템<small>Samsung Notes 1.4억 사용자 규모</small></li>
-          <li>저지연·고신뢰 C++<small>기지국 미들웨어 — 추론 서빙과 문제 구조가 같다</small></li>
-          <li>쿠버네티스 운영 · 배포<small>CKA + CKAD 보유 — 자격으로 이미 증명됨</small></li>
-          <li>신경망 · 역전파 · CNN<small>「밑바닥부터 시작하는 딥러닝 1」 완주</small></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="gap">비어 있는 칸</h4>
-        <ul class="gap">
-          <li>어텐션 · 트랜스포머 내부<small>말로 설명하고 코드로 재현하는 수준까지</small></li>
-          <li>GPU 위에서의 추론<small>PagedAttention · continuous batching · 양자화</small></li>
-          <li>K8s의 <b>GPU</b> 절반<small>device plugin · MIG · 배치 스케줄링 — K8s는 알지만 GPU는 아직</small></li>
-          <li>LLM 파이프라인 실물<small>RAG · 에이전트 · 평가(Evals)</small></li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="callout" style="border-color: var(--green);"><b style="color:var(--green)">자격증은 여기서 끝났다.</b> 타겟 공고에 등장하는 자격증 영역은 <b>쿠버네티스 하나뿐</b>이었고 CKA·CKAD를 이미 둘 다 갖고 있다. 나머지 AI 자격증은 채용 신호가 없다 — NVIDIA NCA-GENL(객관식 60분·2년 만료), Databricks GenAI Engineer(Databricks 쓰는 곳 한정), 빅데이터분석기사·AICE. AWS ML Specialty는 <b>2026-03-31 종료</b>, TensorFlow Developer Certificate는 2024년 폐지. <b>새로 딸 자격증은 없다. 남은 갭은 전부 실물로만 메워진다.</b></p>
-
-    <h3 class="block-title hot">두 번째 석사 · 무엇을 얻고 무엇을 못 얻나 <span class="star"></span></h3>
-    <p class="note" style="margin:-4px 0 10px">아내와 같이 2027년 3월 입학. <b style="color:var(--ink)">결정은 끝났고</b>, 남은 건 이 2년을 무엇으로 채우느냐다. 그러려면 대학원이 주는 것과 주지 않는 것을 정확히 갈라야 한다.</p>
+  <!-- 주차별 -->
+  <section class="blk" id="week">
+    <h2>주차별 <small>2026.08.17 – 11.15 · 주 5–6시간</small></h2>
+    <div class="rule"></div>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>항목</th><th>대학원이 주나</th><th>그래서</th></tr></thead>
+      <thead><tr><th>주</th><th>기간</th><th>서류·전형</th><th>공부</th></tr></thead>
       <tbody>
-        <tr><td><b>아내와 같이 보내는 2년</b></td><td class="verdict">준다 — 이게 1순위 이유</td><td>같은 학교·같은 학기를 맞추는 게 학교 선택의 제약이 된다</td></tr>
-        <tr><td><b>인맥 · 리퍼럴 경로</b></td><td class="verdict">준다 — 동기가 전부 직장인</td><td>이직 계획에서 <b>서류 통과 1순위로 꼽았던 리퍼럴</b>을 콜드 메시지 없이 얻는다</td></tr>
-        <tr><td><b>강제 커리큘럼 · 페이스</b></td><td class="verdict">준다 — 학점과 마감이 있다</td><td>혼자 하는 계획이 3주 연속 무너지던 문제를 구조로 푼다</td></tr>
-        <tr><td><b>교수 · 산학 연결</b></td><td>학교·연구실마다 다름</td><td>입학 후 첫 학기에 확인. 프로젝트 트랙 운영 방식을 물어볼 것</td></tr>
-        <tr><td><b>채용 신호로서의 학위</b></td><td class="warn">거의 없다</td><td><b>이미 CS 석사 보유</b> + 직접 조사한 공고에서 개발 트랙 석사 필수 <b>0건</b></td></tr>
-        <tr><td><b>공고가 요구하는 스택</b><small class="note" style="margin:0">RAG·Agent·LangGraph·Evals·vLLM·GPU 스케줄링</small></td><td class="warn">안 준다</td><td>특수대학원 커리큘럼은 기초 ML·DL·통계 중심 → <b>이 로드맵이 존재하는 이유</b></td></tr>
+        <tr><td>W1</td><td>8/17–8/23</td><td class="hi">ASU 증명서 발급 착수 · 5곳 요강</td><td>밑바닥 2 · 2–4장</td></tr>
+        <tr><td>W2</td><td>8/24–8/30</td><td>학교별 필기·구술 유무 문의</td><td>밑바닥 2 · 5–7장</td></tr>
+        <tr><td>W3</td><td>8/31–9/6</td><td>지원 리스트 확정</td><td class="hi">밑바닥 2 · 8장 어텐션</td></tr>
+        <tr><td>W4</td><td>9/7–9/13</td><td>학부·재직 증명서 · 영어성적 요구 확인</td><td class="hi">어텐션 NumPy 재구현</td></tr>
+        <tr><td>W5</td><td>9/14–9/20</td><td>학업계획서 초안</td><td class="hi">혼공머신 1–3장 (전처리·회귀)</td></tr>
+        <tr><td>W6</td><td>9/21–9/27</td><td>학업계획서 2고 · 학점인정 문의</td><td class="hi">혼공머신 4–6장 (분류·트리·군집)</td></tr>
+        <tr><td>W7</td><td>9/28–10/4</td><td>요강 확정본 재확인</td><td>3B1B 선형대수 15편</td></tr>
+        <tr><td>W8</td><td>10/5–10/11</td><td>학업계획서 완성 · 학교별 수정</td><td>선형대수 정리 · 미적분·최적화 · 확률통계</td></tr>
+        <tr><td>W9</td><td>10/12–10/18</td><td class="hi">서류 5곳분 완성</td><td class="hi">PyTorch 기초 · 프로젝트 착수</td></tr>
+        <tr><td>W10</td><td>10/19–10/25</td><td>접수 시작하는 곳부터 제출</td><td class="hi">프로젝트 마무리 · 면접 답변 작성</td></tr>
+        <tr><td>W11</td><td>10/26–11/1</td><td>나머지 접수 · 전형료</td><td>밑바닥 1 정리 · 최신 동향 · 리허설</td></tr>
+        <tr><td>W12</td><td>11/2–11/15</td><td class="hi">접수 마감 · 면접</td><td>복기만</td></tr>
       </tbody>
     </table>
     </div>
-    <p class="callout"><b>결론 — 인맥은 진짜고, 커리큘럼은 대체재가 아니다.</b> 그래서 이 페이지는 대학원과 경쟁하지 않는다. <b>수업이 채우지 않는 칸만</b> 골라서, 재학 2년의 학기·방학 리듬 위에 얹는다. 졸업할 때 남는 것이 학위 하나가 아니라 <b>돌아가는 시스템 하나</b>가 되게 하는 게 목표다.</p>
+  </section>
 
-    <h3 class="block-title">「밑바닥」 시리즈 · 어디까지 갈 것인가</h3>
-    <p class="note" style="margin:-4px 0 10px">이어지는 책이 아니라 각각 다른 산이다. 5권 완독은 성취감은 주지만 능력 곡선은 2편 이후 급격히 평평해진다. <b style="color:var(--ink)">5권 읽기보다 2권 구현이 낫다.</b></p>
+  <!-- 전체 과목 -->
+  <section class="blk" id="map">
+    <h2>전체 과목 <small>✓ 보유 · ◐ 진행 중 · ○ 필요 &nbsp;|&nbsp; [합격] 원서 전 · [입학] 합격 후</small></h2>
+    <div class="rule"></div>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>권</th><th>내용</th><th>판단</th></tr></thead>
+      <thead><tr><th>과목</th><th>목차</th><th>상태</th><th>시점</th></tr></thead>
       <tbody>
-        <tr><td><b>1</b></td><td>신경망·역전파·CNN, NumPy 직접 구현</td><td class="verdict">완주 ✓ 토대</td></tr>
-        <tr><td><b>2</b></td><td>word2vec → RNN/LSTM → seq2seq → <b>어텐션(8장)</b></td><td class="verdict">계속. 단 <b>8장이 본체</b> — 앞은 역사로 통과</td></tr>
-        <tr><td><b>3</b></td><td>프레임워크 자작 (DeZero, 자동미분 60단계)</td><td>보상용. 8년차 시스템 엔지니어에겐 가장 빨리 읽히지만 채용 신호는 약함</td></tr>
-        <tr><td><b>4</b></td><td>강화학습 (밴딧·MDP·Q러닝·DQN)</td><td class="warn">우회로. 고전 RL이라 RLHF/PPO/DPO와는 다른 세계</td></tr>
-        <tr><td><b>5</b></td><td><b>이미지</b> 생성 모델 (VAE·확산모델)</td><td class="warn">멀티모달로 틀 때만</td></tr>
+        <tr class="grp"><td colspan="4">A. 수학</td></tr>
+        <tr><td>A1 <b>선형대수</b></td><td>벡터·행렬, 선형변환, 행렬곱, <b>랭크·선형독립</b>, 역행렬, <b>고유값·고유벡터</b>, 대각화, <b>SVD</b>, 직교·정사영, 노름, 이차형식</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span> 6개만</td></tr>
+        <tr><td>A2 <b>미적분·최적화</b></td><td>편미분, <b>그래디언트</b>, <b>연쇄법칙</b>, 야코비안·헤시안, 테일러 근사, <b>경사하강법</b>, 학습률, <b>SGD·Momentum·Adam</b>, 볼록성, 라그랑주 승수</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span> 6개만</td></tr>
+        <tr><td>A3 <b>확률·통계</b></td><td>확률변수, 분포(베르누이·이항·정규·포아송), 기댓값·분산, <b>조건부확률·베이즈</b>, 공분산·상관, <b>MLE·MAP</b>, <b>CLT</b>, 가설검정, 신뢰구간, <b>편향-분산</b></td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span> 5개만</td></tr>
+        <tr><td>A4 정보이론</td><td>엔트로피, <b>KL divergence</b>, cross-entropy</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-later">[입학]</span></td></tr>
+
+        <tr class="grp"><td colspan="4">B. 프로그래밍 · 도구</td></tr>
+        <tr><td>B1 파이썬 문법</td><td>—</td><td class="st"><span class="have">✓ 보유</span></td><td class="wh"><span class="wh-later">—</span></td></tr>
+        <tr><td>B2 <b>데이터 스택</b></td><td>numpy(브로드캐스팅·벡터화), pandas(결측치·그룹·병합), matplotlib</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span></td></tr>
+        <tr><td>B3 <b>scikit-learn</b></td><td>파이프라인, 전처리, 교차검증, 그리드서치</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span></td></tr>
+        <tr><td>B4 <b>PyTorch</b></td><td>텐서, <b>autograd</b>, <code>nn.Module</code>, Dataset·DataLoader, 학습 루프</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span> 기초만</td></tr>
+        <tr><td>B5 자동미분 내부</td><td>계산그래프, Define-by-Run, 고차 미분 — 「밑바닥 3」 DeZero</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-later">[입학] 선택</span></td></tr>
+
+        <tr class="grp"><td colspan="4">C. 머신러닝</td></tr>
+        <tr><td>C1 <b>회귀</b></td><td>k-최근접, <b>선형회귀</b>, 다항회귀, 릿지·라쏘</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격] ★기출</span></td></tr>
+        <tr><td>C2 <b>분류</b></td><td><b>로지스틱 회귀</b>, 확률적 경사하강법, kNN, SVM, 나이브베이즈</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격] ★기출</span></td></tr>
+        <tr><td>C3 <b>트리·앙상블</b></td><td>결정트리, 교차검증, 그리드서치, 랜덤포레스트, 부스팅(XGBoost·LightGBM)</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span></td></tr>
+        <tr><td>C4 <b>비지도학습</b></td><td>k-평균, 계층군집, DBSCAN, <b>PCA</b>, t-SNE</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span> PCA만</td></tr>
+        <tr><td>C5 <b>평가·검증</b></td><td>train/valid/test, 교차검증, 과적합·정규화, <b>precision·recall·F1·ROC-AUC</b>, 불균형 데이터</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span></td></tr>
+        <tr><td>C6 특성공학</td><td>스케일링, 인코딩, 결측치 처리</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[합격]</span></td></tr>
+
+        <tr class="grp"><td colspan="4">D. 딥러닝</td></tr>
+        <tr><td>D1 신경망 기초</td><td>퍼셉트론, <b>활성화함수</b>, 순전파, <b>역전파</b>, 손실함수</td><td class="st"><span class="have">✓ 밑바닥 1</span></td><td class="wh"><span class="wh-now">[합격]</span> 정리만</td></tr>
+        <tr><td>D2 학습 기술</td><td>가중치 초기화, 배치정규화, 드롭아웃, 옵티마이저, 하이퍼파라미터</td><td class="st"><span class="have">✓ 밑바닥 1</span></td><td class="wh"><span class="wh-now">[합격]</span> 정리만</td></tr>
+        <tr><td>D3 CNN</td><td>합성곱, 패딩·스트라이드, 풀링, 대표 아키텍처</td><td class="st"><span class="have">✓ 밑바닥 1</span></td><td class="wh"><span class="wh-now">[합격]</span> 정리만</td></tr>
+        <tr><td>D4 <b>RNN 계열</b></td><td>RNN, LSTM, GRU, seq2seq</td><td class="st"><span class="doing">◐ 밑바닥 2</span></td><td class="wh"><span class="wh-now">[합격]</span></td></tr>
+        <tr><td>D5 <b>어텐션·트랜스포머</b></td><td>셀프어텐션, <b>QKᵀ</b>, 멀티헤드, 포지셔널 인코딩</td><td class="st"><span class="doing">◐ 밑바닥 2 · 8장</span></td><td class="wh"><span class="wh-now">[합격] ★본체</span></td></tr>
+        <tr><td>D6 생성모델</td><td>GAN, VAE, 확산모델 — 「밑바닥 5」</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-later">[입학] 과목 있으면</span></td></tr>
+        <tr><td>D7 강화학습</td><td>밴딧, MDP, Q러닝, DQN — 「밑바닥 4」</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-later">[입학] 과목 있으면</span></td></tr>
+
+        <tr class="grp"><td colspan="4">E. 최신 동향 — 본인이 가장 강한 영역</td></tr>
+        <tr><td>E1 LLM</td><td>사전학습·파인튜닝, 토크나이저(BPE), 프롬프트</td><td class="st"><span class="doing">◐ 부분</span></td><td class="wh"><span class="wh-now">[합격]</span> 한 문단</td></tr>
+        <tr><td>E2 RAG</td><td>임베딩, 벡터DB, 하이브리드 검색, 리랭킹</td><td class="st"><span class="doing">◐ 조사함</span></td><td class="wh"><span class="wh-now">[합격]</span> 한 문단</td></tr>
+        <tr><td>E3 에이전트</td><td>Tool Use, Function Calling, multi-step reasoning</td><td class="st"><span class="doing">◐ 조사함</span></td><td class="wh"><span class="wh-now">[합격]</span> 한 문단</td></tr>
+        <tr><td>E4 MLOps·서빙</td><td>모델 서빙, 배치·스트리밍, 모니터링</td><td class="st"><span class="have">✓ 실무 경험</span></td><td class="wh"><span class="wh-now">[합격]</span> 스토리로</td></tr>
+
+        <tr class="grp"><td colspan="4">F. CS 기초</td></tr>
+        <tr><td>F1 CS 전반</td><td>자료구조, 알고리즘, DB, 네트워크, OS, 분산시스템</td><td class="st"><span class="have">✓ 8년차</span></td><td class="wh"><span class="wh-later">준비 대상 아님</span></td></tr>
       </tbody>
     </table>
     </div>
-    <p class="callout"><b>이 시리즈는 읽는 책이 아니라 치는 책이다.</b> 2권 8장을 읽고 어텐션을 NumPy로 다시 짜는 데 쓴 3주가, 3·4·5권을 훑는 3개월보다 남는 게 많다.</p>
   </section>
 
-  <!-- PHASE 0 -->
-  <section class="phase" id="p0">
-    <div class="phase-head">
-      <div class="phase-num">0</div>
-      <div class="phase-title">
-        <div class="when">2026.08 – 2026.11 · 12주 · 지금</div>
-        <h2>원서 시즌 — 먼저 들어가야 한다</h2>
-        <p class="desc">원서 접수가 <b>2026년 11월 초·중순</b>이다. 지금부터 12주는 <b>학습보다 지원 실무가 우선</b>이다. 여기서 밀리면 2027년 3월 입학이 통째로 1년 밀리고, 아내와 같은 학기라는 전제가 깨진다. 학습은 이 기간엔 <b>학업계획서에 쓸 재료가 되는 것</b>만 골라서 병행한다.</p>
-      </div>
-    </div>
-    <div class="phase-rule"></div>
-
-    <h3 class="block-title hot">0-1 · 학교 선택 — "둘 다 붙는 곳"이라는 새 제약 <span class="star"></span></h3>
-    <p class="note" style="margin:-4px 0 10px">기존 6곳 사다리는 <b style="color:var(--ink)">각자 최적화</b>였다. 같이 다니는 게 목적이면 기준이 바뀐다 — <b style="color:var(--ink)">둘 다 합격하는 학교가 최소 한 곳</b> 있어야 하고, 그러면 안전권의 무게가 올라간다.</p>
+  <!-- 과목·시간 -->
+  <section class="blk" id="alloc">
+    <h2>과목·시간 <small>골고루 얕게 · 전부 "두 문장으로 말할 수 있는" 수준까지</small></h2>
+    <div class="rule"></div>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>학교 · 대학원</th><th>구분</th><th>형태</th><th>경쟁률</th><th>같이 지원</th></tr></thead>
+      <thead><tr><th>과목</th><th>목표 시간</th><th>어디까지</th><th>자료</th></tr></thead>
       <tbody>
-        <tr><td><b>한양대</b> 인공지능융합대학원</td><td>도전</td><td>하이브리드</td><td>7.05 : 1</td><td>가능 — 단 <b>둘 다</b> 붙을 확률은 낮게 잡을 것</td></tr>
-        <tr><td><b>성균관대</b> 정보통신대학원 빅데이터</td><td>도전</td><td>야간</td><td>4.02 : 1</td><td>가능 — 정원 185명으로 문이 넓다</td></tr>
-        <tr><td><b>고려대</b> SW·AI융합대학원 AAI</td><td>적정</td><td>야간</td><td>3.39 : 1</td><td>가능 — 타 전공 지원 명시, 정원 125명</td></tr>
-        <tr><td>이화여대 데이터사이언스학과</td><td>적정</td><td>하이브리드</td><td>미공시</td><td class="warn"><b>본인 지원 불가</b> — 여성만 지원 가능</td></tr>
-        <tr><td><b>국민대</b> 소프트웨어융합대학원 AI</td><td>안전</td><td>하이브리드</td><td>1.87 : 1</td><td class="verdict">가능 — 정원 48명, 별도 필기 없음</td></tr>
-        <tr><td><b>아주대</b> 정보통신대학원</td><td>안전</td><td>하이브리드</td><td>1.29 : 1</td><td class="verdict">가능 — <b>정원 366명. 둘 다 붙을 확률이 가장 높다</b></td></tr>
+        <tr><td class="hi">밑바닥 2 · 5–8장 + 재구현</td><td>8h</td><td>어텐션을 NumPy로 다시 짠다</td><td>책</td></tr>
+        <tr><td class="hi">고전 ML · 회귀·분류</td><td>4h</td><td>선형/로지스틱 차이를 손실함수까지</td><td>혼공 3–4장</td></tr>
+        <tr><td>선형대수</td><td>5h</td><td>개념 6개 두 문장씩</td><td>3B1B 15편</td></tr>
+        <tr><td>트리·앙상블·교차검증</td><td>2h</td><td>랜덤포레스트가 왜 강한지</td><td>혼공 5장</td></tr>
+        <tr><td>미적분·최적화</td><td>2h</td><td>연쇄법칙으로 역전파 설명</td><td>정리만</td></tr>
+        <tr><td>확률·통계</td><td>2h</td><td>베이즈·MLE·편향분산</td><td>정리만</td></tr>
+        <tr><td>밑바닥 1 복습 정리</td><td>2h</td><td>역전파·CNN·활성화함수를 말로</td><td>기존 코드</td></tr>
+        <tr><td>비지도·PCA</td><td>1.5h</td><td>PCA를 고유벡터로 설명</td><td>혼공 6장</td></tr>
+        <tr><td>평가지표·특성공학</td><td>1.5h</td><td>정확도의 한계, F1·ROC</td><td>혼공 포함</td></tr>
+        <tr><td>최신 동향 (LLM·RAG·에이전트)</td><td>1.5h</td><td>각 한 문단</td><td>이미 조사함</td></tr>
+        <tr><td>데이터 스택 (numpy·pandas)</td><td>—</td><td>혼공 1–2장에 포함</td><td>혼공 1–2장</td></tr>
+        <tr><td><b>순수 공부 합</b></td><td><b>30h</b></td><td></td><td></td></tr>
+        <tr><td class="hi">PyTorch + 미니 프로젝트</td><td>12h</td><td>별도 — 아래 섹션</td><td>실습</td></tr>
+        <tr><td>서류 · 학업계획서</td><td>15h</td><td></td><td></td></tr>
+        <tr><td>면접 답변 설계 · 리허설</td><td>8h</td><td></td><td></td></tr>
+        <tr><td><b>전체 합</b></td><td><b>65h</b></td><td>12주 × 5.5h</td><td></td></tr>
       </tbody>
     </table>
     </div>
-    <ul class="checklist" data-group="p0-school">
-      <li><input type="checkbox" id="a1"><label><span class="lead"><span class="tag rec">먼저</span><b>"같은 학교"가 필수 조건인지 둘이 합의</b> — 필수라면 안전권 중심, 아니라면 각자 사다리대로</span><span class="note">이 결정 하나가 아래 전부를 바꾼다. 학교 고르기 전에 먼저 정할 것</span></label></li>
-      <li><input type="checkbox" id="a2"><label><span class="lead"><b>본인 지원 리스트 확정</b> — 이화여대 제외 5곳. 도전 2 · 적정 1 · 안전 2</span><span class="note">전형료 학교당 7~8.5만원 · 5곳이면 약 38만원</span></label></li>
-      <li><input type="checkbox" id="a3"><label><span class="lead"><b>통학 조건 재확인</b> — 수원 거주 + 둘 다 직장인. 야간 전용(성균관·고려)은 주 2~3회 서울 왕복이 실제로 가능한지</span><span class="note">하이브리드(한양·국민·아주)가 조건상 압도적으로 유리하다</span></label></li>
-      <li><input type="checkbox" id="a4"><label><span class="lead"><b>각 학교 모집요강 직접 확인</b> — 접수 기간·서류·전형 방식은 학교마다 다르고 위 일정은 추정치다</span><span class="note">9월 안에 5곳 요강을 한 표로 정리. 이화여대 학과 사무실(02-3277-2182)은 배우자분 몫</span></label></li>
-    </ul>
+  </section>
 
-    <h3 class="block-title hot">0-2 · 본인 전용 준비 — "왜 두 번째 석사인가" <span class="star"></span></h3>
-    <p class="callout" style="border-color:var(--accent)"><b>이 질문은 반드시 나온다.</b> 배우자분은 식품공학 석사에서 AI로 <b>전공을 바꾸는</b> 사람이라 지원 동기가 자명하다. 본인은 다르다 — <b>CS 전공에 CS 석사까지 있는 8년차</b>가 또 석사를 지원하면, 면접관 입장에서 가장 먼저 떠오르는 질문이 "이미 있는데 왜?"다. 여기에 답이 준비돼 있느냐가 본인 면접의 거의 전부다.</p>
-    <ul class="checklist" data-group="p0-why">
-      <li><input type="checkbox" id="a5"><label><span class="lead"><b>답변 설계</b> — 피해야 할 답: "AI가 대세라서", "회사에서 필요해서", "아내와 같이 하려고"</span><span class="note">마지막 것이 진짜 이유여도 면접 답변으로는 약하다. 개인 사정은 동기가 아니라 <b style="color:var(--ink)">완주 가능성의 근거</b>로 쓸 것 — "배우자와 함께 다니므로 중도 포기 위험이 낮다"</span></label></li>
-      <li><input type="checkbox" id="a6"><label><span class="lead"><b>쓸 수 있는 답의 뼈대</b> — "8년간 시스템·백엔드를 했고 최근 AI 서비스의 <b>서빙 쪽</b>을 맡았다. 모델을 쓰는 쪽에서 <b>이해하는 쪽</b>으로 넘어가려는데, 혼자 읽는 것으로는 한계가 명확했다"</span><span class="pass">통과 — 기존 석사를 부정하지 않으면서 이번 석사의 자리를 만든다</span></label></li>
-      <li><input type="checkbox" id="a7"><label><span class="lead"><b>기존 CS 석사를 자산으로 전환</b> — "연구 방법론과 논문 읽는 훈련은 이미 돼 있어 첫 학기부터 프로젝트에 붙을 수 있다"</span><span class="note">약점처럼 보이는 걸 완주 가능성의 증거로 뒤집는 유일한 카드</span></label></li>
-      <li><input type="checkbox" id="a8"><label><span class="lead"><b>학점·이수 인정 여부 확인</b> — 동일 계열 석사 보유자에 대한 학점 인정·면제 규정이 학교마다 있다. 있으면 학기가 줄어든다</span><span class="note">요강에 없으면 학과 사무실에 직접 문의. 물어볼 가치가 충분하다</span></label></li>
-    </ul>
-
-    <h3 class="block-title">0-3 · 서류 (9–10월)</h3>
-    <ul class="checklist" data-group="p0-doc">
-      <li><input type="checkbox" id="a9"><label><span class="lead"><b>학업계획서</b> — 위 0-2의 답변이 곧 1문단. 나머지는 "무엇을 배워서 무엇을 만들 것인가"</span><span class="note">Phase Ⅰ~Ⅲ 계획을 그대로 옮기면 된다. 대부분의 지원자가 못 쓰는 부분이 <b style="color:var(--ink)">구체적인 산출물 계획</b>이다</span></label></li>
-      <li><input type="checkbox" id="a10"><label><span class="lead"><b>졸업증명서·성적증명서</b> — 학부 + <b>ASU 석사분은 영문·아포스티유 필요 여부 확인</b></span><span class="note">해외 학위 서류는 발급에 시간이 걸린다. 9월에 착수할 것</span></label></li>
-      <li><input type="checkbox" id="a11"><label><span class="lead"><b>재직증명서·경력증명서</b> — 삼성전자 8년차. 학교에 따라 경력 가점이 있다</span></label></li>
-      <li><input type="checkbox" id="a12"><label><span class="lead">서류는 <b>10월 안에 완료</b> — 5곳 접수 시기가 10~11월로 겹친다</span></label></li>
-    </ul>
-
-    <h3 class="block-title">0-4 · 병행 학습 — 「밑바닥 2」 마무리 (8–10월 · 주 4–5h)</h3>
-    <p class="note" style="margin:-4px 0 10px">원서 시즌엔 학습 분량을 낮춘다. 대신 <b style="color:var(--ink)">학업계획서와 면접에 그대로 쓸 수 있는 것</b>만 고른다 — "지금 무엇을 하고 있느냐"에 답할 재료다.</p>
-    <ul class="checklist" data-group="p0-book">
-      <li><input type="checkbox" id="a13"><label><span class="lead"><b>2–7장</b> word2vec·RNN·LSTM·seq2seq — 역사적 맥락으로 빠르게 통과</span><span class="note">여기서 "왜 순차 처리가 병목인가"만 남기면 8장이 극적으로 이해된다</span></label></li>
-      <li><input type="checkbox" id="a14"><label><span class="lead"><span class="tag rec">본체</span><b>8장 어텐션</b> — 시간의 절반을 여기에</span><span class="pass">통과 — seq2seq의 어떤 한계를 어텐션이 어떻게 푸는지 그림으로 설명</span></label></li>
-      <li><input type="checkbox" id="a15"><label><span class="lead"><b>어텐션 재구현</b> — 책 덮고 NumPy로 scaled dot-product attention 처음부터</span><span class="pass">통과 — Q·K·V가 각각 무엇이고 왜 √d로 나누는지 말로 설명</span><span class="note">이 노트북 하나가 면접에서 "혼자서도 한다"의 물증이 된다</span></label></li>
-      <li><input type="checkbox" id="a16"><label><span class="lead"><b>3·4·5권은 여기서 멈춘다</b> — 3권(DeZero)은 재학 중 보상으로, 4·5권은 목표가 바뀔 때</span></label></li>
-    </ul>
-
-    <h3 class="block-title">0-5 · 면접 (11–12월)</h3>
-    <ul class="checklist" data-group="p0-interview">
-      <li><input type="checkbox" id="a17"><label><span class="lead"><b>0-2의 답변을 소리 내어 연습</b> — 성균관대 기준 <b>1인당 약 2분</b>. 자기소개·현 직장·부족한 점·마지막 한마디가 전부다</span><span class="note">2분이면 준비된 문장 3~4개가 전부다. 즉흥으로 채울 시간이 없다</span></label></li>
-      <li><input type="checkbox" id="a18"><label><span class="lead"><b>국민대 기출 8문항</b>으로 대비 — 관심 계기·프로젝트 경험·선호 알고리즘·협업·최신 동향·강점·석사 후 목표</span><span class="note">배우자분 <a href="interview_prep.html" style="color:var(--accent)">면접 페이지</a>의 문항 은행과 공유. 단 <b style="color:var(--ink)">답변 내용은 완전히 달라야 한다</b></span></label></li>
-      <li><input type="checkbox" id="a19"><label><span class="lead"><b>역질문 준비</b> — 입학 전 추천 과목·자료, 프로젝트 트랙 운영 방식, 산학 연계</span><span class="note">금지: 학비 감면, 출석 느슨한지, 과제 양</span></label></li>
-      <li><input type="checkbox" id="a20"><label><span class="lead"><b>수학은 합격 후로</b> — 확인된 면접 질문 중 수학 문항은 0개다. 합격 전에 하면 시간만 녹는다</span></label></li>
+  <!-- 밑바닥 2 -->
+  <section class="blk" id="book">
+    <h2>「밑바닥 2」 <small>8장까지 · 진행 중</small></h2>
+    <div class="rule"></div>
+    <ul class="checklist" data-group="book">
+      <li><input type="checkbox" id="b1"><label><span class="lead"><b>2–4장</b> 단어의 분산 표현 · word2vec · 속도 개선</span></label></li>
+      <li><input type="checkbox" id="b2"><label><span class="lead"><b>5–7장</b> RNN · LSTM · 문장 생성 · seq2seq</span><span class="pass">왜 순차 처리가 병목인지 설명</span></label></li>
+      <li><input type="checkbox" id="b3"><label><span class="lead"><span class="tag">본체</span><b>8장 어텐션</b></span><span class="pass">seq2seq의 어떤 한계를 어텐션이 어떻게 푸는지 그림으로</span></label></li>
+      <li><input type="checkbox" id="b4"><label><span class="lead"><b>어텐션 NumPy 재구현</b> — 책 덮고 scaled dot-product attention 처음부터</span><span class="pass">Q·K·V가 각각 무엇이고 왜 √d로 나누는지 말로 설명</span></label></li>
     </ul>
   </section>
 
-  <!-- PHASE 1 -->
-  <section class="phase" id="p1">
-    <div class="phase-head">
-      <div class="phase-num">Ⅰ</div>
-      <div class="phase-title">
-        <div class="when">2026.12 – 2027.02 · 12주</div>
-        <h2>입학 전 공백 — 유일하게 방해가 없는 구간</h2>
-        <p class="desc">합격 발표가 12월 중순, 입학이 3월. 이 <b>12주가 앞으로 2년 중 학업 부담이 0인 유일한 시간</b>이다. 여기서 트랜스포머를 끝내두면 재학 중 수업이 복습이 되고, 안 해두면 수업과 기초를 동시에 쫓게 된다.</p>
-      </div>
-    </div>
-    <div class="phase-rule"></div>
-
-    <h3 class="block-title">주간 시간 설계 · 주 6–8시간 (이 구간만 상향)</h3>
+  <!-- 고전 ML -->
+  <section class="blk" id="classic">
+    <h2>고전 머신러닝 <small>「혼자 공부하는 머신러닝+딥러닝」 1–6장 · 유튜브 무료</small></h2>
+    <div class="rule"></div>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>요일</th><th>시간</th><th>내용</th></tr></thead>
+      <thead><tr><th>장</th><th>내용</th><th>면접에서</th></tr></thead>
       <tbody>
-        <tr><td>토요일 오전</td><td>3–4h (고정 09–13시)</td><td>메인 학습 블록 — 강의 시청 + 코드 구현</td></tr>
-        <tr><td>평일 2–3회</td><td>각 1–1.5h</td><td>복습·재구현 (영상 안 보고 같은 코드 다시 짜기)</td></tr>
+        <tr><td>1–2</td><td>훈련/테스트 분할 · 전처리 · 스케일링 · numpy·pandas·matplotlib</td><td>"파이썬 다뤄봤나"에 답할 근거</td></tr>
+        <tr><td class="hi">3</td><td>회귀 — k-최근접 · <b>선형회귀</b> · 다항회귀 · 규제(릿지·라쏘)</td><td class="hi">기출 직결</td></tr>
+        <tr><td class="hi">4</td><td>분류 — <b>로지스틱 회귀</b> · 확률적 경사하강법</td><td class="hi">기출 직결</td></tr>
+        <tr><td>5</td><td>결정트리 · 교차검증 · 그리드서치 · 앙상블(랜덤포레스트)</td><td>"선호하는 알고리즘" 질문</td></tr>
+        <tr><td>6</td><td>비지도 — k-평균 군집 · <b>PCA</b></td><td>선형대수 고유값·SVD와 연결</td></tr>
       </tbody>
     </table>
     </div>
-    <p class="callout">토요일 블록은 <b>장소를 집 밖으로</b> — 카페·스터디카페. 평일이 무너져도 토요일만 지키면 유효하다. <b>합격의 안도감으로 이 12주를 흘려보내는 게 가장 흔한 실패</b>다.</p>
-
-    <h3 class="block-title">Karpathy "Zero to Hero" — 통과 기준을 체크</h3>
-    <ul class="checklist" data-group="p1-karpathy">
-      <li><input type="checkbox" id="b1"><label><span class="lead"><b>1–2주 · micrograd</b> — 역전파를 손으로 구현</span><span class="pass">통과 — 영상 없이 micrograd를 처음부터 재구현 가능</span><span class="note">밑바닥 1과 겹치므로 빠르게. 겹친다고 건너뛰지는 말 것 — 시각이 다르다</span></label></li>
-      <li><input type="checkbox" id="b2"><label><span class="lead"><b>3–5주 · makemore (1–3편)</b> — bigram → MLP 언어모델</span><span class="pass">통과 — loss가 왜 내려가는지, 하이퍼파라미터 역할을 말로 설명</span></label></li>
-      <li><input type="checkbox" id="b3"><label><span class="lead"><b>6–7주 · makemore (4–5편)</b> — BatchNorm, 수동 backprop</span><span class="pass">통과 — 활성화·그래디언트 분포를 보고 문제 진단 가능</span></label></li>
-      <li><input type="checkbox" id="b4"><label><span class="lead"><span class="tag rec">정점</span><b>8–10주 · Let's build GPT</b> — 트랜스포머 전체를 처음부터</span><span class="pass">통과 — attention 수식을 코드 없이 화이트보드에 그림</span><span class="note">Phase 0에서 본 밑바닥 2의 8장과 같은 산을 반대편에서 오른다. 두 번 만나는 게 목적</span></label></li>
-      <li><input type="checkbox" id="b5"><label><span class="lead"><b>11–12주 · Tokenizer</b> — BPE 토크나이저 구현</span><span class="pass">통과 — 한국어 토크나이징이 왜 어려운지 설명 가능</span></label></li>
-    </ul>
-    <p class="callout"><b>진도보다 통과 기준.</b> 1강에 3주 걸려도 무방하다. 목적은 완주가 아니라 "설명 가능한 상태".</p>
-
-    <h3 class="block-title">입학 준비 · 병행</h3>
-    <ul class="checklist" data-group="p1-enroll">
-      <li><input type="checkbox" id="b6"><label><span class="lead"><b>수업 시간표 확인 후 회사와 조율</b> — 야간·하이브리드라도 주 2~3회 고정 일정이 생긴다</span><span class="note">팀 리더에게 미리 알리는 편이 학기 중 갈등을 줄인다</span></label></li>
-      <li><input type="checkbox" id="b7"><label><span class="lead"><b>2년 예산 세우기</b> — 학비 두 사람 몫 + 교통 + Phase Ⅱ의 GPU 비용</span><span class="note">후보 5곳 기준 1인 2,460~3,982만원. 두 사람이면 5천만~8천만원 규모다</span></label></li>
-      <li><input type="checkbox" id="b8"><label><span class="lead"><b>장학 확인</b> — <a href="grad_schools.html" style="color:var(--accent)">대학원 비교표</a>의 장학 컬럼. 재직자 감면이 있는 곳은 신청 시기를 놓치지 말 것</span></label></li>
-      <li><input type="checkbox" id="b9"><label><span class="lead"><b>입학 전 추천 자료</b> — 면접 역질문에서 받은 답이 있으면 이 구간에 소화</span></label></li>
-    </ul>
-
-    <h3 class="block-title">Phase Ⅰ 산출물</h3>
-    <ul class="checklist" data-group="p1-output">
-      <li><input type="checkbox" id="b10"><label><span class="lead">micrograd · makemore · nanoGPT 직접 구현 repo (본인 커밋 히스토리)</span></label></li>
-      <li><input type="checkbox" id="b11"><label><span class="lead">NumPy 어텐션 구현 노트북 1개 (Phase 0에서 시작한 것)</span></label></li>
-      <li><input type="checkbox" id="b12"><label><span class="lead">"트랜스포머를 화이트보드로 설명하는 셀프 영상" 1개</span><span class="note">입학 후 수업에서 이 주제가 나오면 그대로 발표 자료가 된다</span></label></li>
+    <ul class="checklist" data-group="classic">
+      <li><input type="checkbox" id="k1"><label><span class="lead"><b>1–2장</b> 데이터 다루기 · 전처리 · 파이썬 데이터 스택</span></label></li>
+      <li><input type="checkbox" id="k2"><label><span class="lead"><span class="tag">기출</span><b>3–4장</b> 선형회귀 · 로지스틱 회귀</span><span class="pass">두 개의 차이를 회귀/분류 · 출력 범위 · 손실함수로 설명</span></label></li>
+      <li><input type="checkbox" id="k3"><label><span class="lead"><b>5장</b> 결정트리 · 교차검증 · 앙상블</span><span class="pass">교차검증이 왜 필요한지, 랜덤포레스트가 왜 강한지</span></label></li>
+      <li><input type="checkbox" id="k4"><label><span class="lead"><b>6장</b> k-평균 · PCA</span><span class="pass">PCA를 고유벡터로 설명 — 선형대수 답변과 이어붙인다</span></label></li>
+      <li><input type="checkbox" id="k5"><label><span class="lead">7–8장(신경망)은 <b>건너뛴다</b> — 밑바닥 1과 겹침</span></label></li>
     </ul>
   </section>
 
-  <!-- PHASE 2 -->
-  <section class="phase" id="p2">
-    <div class="phase-head">
-      <div class="phase-num">Ⅱ</div>
-      <div class="phase-title">
-        <div class="when">2027.03 – 2028.02 · 재학 1년차</div>
-        <h2>재학 1년차 — 학기는 수업, 방학은 서빙</h2>
-        <p class="desc">직장 + 대학원 + 개인 학습을 동시에 굴리면 셋 다 무너진다. <b>학기 중엔 수업이 우선</b>이고 개인 학습은 주 3시간으로 낮춘다. 대신 <b>여름·겨울 방학 각 8주를 서빙 레이어에 통째로 쓴다</b> — 이 로드맵에서 가장 희소하고, 수업이 절대 가르쳐주지 않는 구간이다.</p>
-      </div>
-    </div>
-    <div class="phase-rule"></div>
-
-    <h3 class="block-title">1년차 리듬</h3>
+  <!-- 선형대수 -->
+  <section class="blk" id="linalg">
+    <h2>선형대수 <small>개념 6 · 직관 한 문장 + AI 쓰임 한 문장</small></h2>
+    <div class="rule"></div>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>기간</th><th>주력</th><th>개인 학습</th></tr></thead>
+      <thead><tr><th>개념</th><th>직관</th><th>AI에서 어디에</th></tr></thead>
       <tbody>
-        <tr><td><b>2027.03–06</b> 1학기</td><td>수업 · 과제 · 동기 관계 만들기</td><td>주 3h — 수업에서 나온 개념을 코드로 확인하는 정도</td></tr>
-        <tr><td class="verdict"><b>2027.07–08</b> 여름방학</td><td class="verdict"><b>추론 엔진 8주 집중</b></td><td>주 8–10h</td></tr>
-        <tr><td><b>2027.09–12</b> 2학기</td><td>수업 · 프로젝트 주제 탐색</td><td>주 3h</td></tr>
-        <tr><td class="verdict"><b>2028.01–02</b> 겨울방학</td><td class="verdict"><b>K8s GPU 8주 집중</b></td><td>주 8–10h</td></tr>
+        <tr><td class="hi">고유값·고유벡터</td><td>변환해도 방향이 안 바뀌는 벡터. 크기만 λ배</td><td>공분산행렬의 고유벡터 = 분산이 가장 큰 방향 → <b>PCA의 주성분</b></td></tr>
+        <tr><td class="hi">SVD</td><td>어떤 행렬이든 회전 → 늘이기 → 회전으로 분해</td><td>저랭크 근사 = 차원축소·압축. 공분산 없이 PCA를 구하는 방법</td></tr>
+        <tr><td class="hi">내적</td><td>두 벡터가 얼마나 같은 방향인가</td><td>코사인 유사도 → 임베딩 검색 → <b>어텐션의 QKᵀ</b></td></tr>
+        <tr><td class="hi">행렬곱</td><td>행렬은 숫자 표가 아니라 공간을 바꾸는 함수. 곱 = 변환의 합성</td><td>신경망의 층이 왜 행렬곱인가. 층을 쌓는다 = 변환을 합성한다</td></tr>
+        <tr><td class="hi">랭크·선형독립</td><td>실제로 몇 차원어치 정보가 들어있나</td><td>차원축소가 왜 가능한가. 다중공선성이 왜 문제인가</td></tr>
+        <tr><td class="hi">그래디언트·야코비안</td><td>다변수에서의 기울기 = 가장 가파른 방향</td><td>역전파의 연쇄법칙 = 야코비안 행렬의 곱</td></tr>
       </tbody>
     </table>
     </div>
-    <p class="callout"><b>학기 중에 무리하지 않는 것이 계획의 일부다.</b> 방학 두 번이 통째로 비어 있다는 게 대학원 병행의 최대 장점이고, 그걸 쓰려면 학기 중에 소진되지 않아야 한다.</p>
-
-    <h3 class="block-title hot">2-1 · 여름방학 — 추론 엔진 (2027.07–08 · 8주) <span class="star"></span></h3>
-    <p class="note" style="margin:-4px 0 10px">Phase Ⅰ에서 직접 만든 모델을 <b style="color:var(--ink)">GPU 위에 올려 레이턴시와 비용을 숫자로 통제</b>한다. 여기가 이 로드맵의 핵심 차별점 — RAG 프로젝트 한 사람은 많지만, <b style="color:var(--ink)">CKA·CKAD를 들고 GPU 서빙까지 아는 8년차 시스템 엔지니어는 드물다.</b></p>
-    <ul class="checklist" data-group="p2-engine">
-      <li><input type="checkbox" id="c1"><label><span class="lead"><b>vLLM으로 모델 띄우기</b> — 로컬 GPU 또는 클라우드 스팟에 소형 모델(1–8B) 서빙</span><span class="pass">통과 — OpenAI 호환 API로 스트리밍 응답이 나온다</span></label></li>
-      <li><input type="checkbox" id="c2"><label><span class="lead"><span class="tag rec">핵심</span><b>PagedAttention 이해</b> — KV 캐시가 왜 메모리 병목이고 페이징이 어떻게 푸는지</span><span class="pass">통과 — OS 가상메모리 페이징에 빗대어 설명 가능 (8년차 시스템 배경이 그대로 무기)</span></label></li>
-      <li><input type="checkbox" id="c3"><label><span class="lead"><b>continuous batching</b> — static batching과 처리량·레이턴시를 직접 측정해 비교</span><span class="pass">통과 — 요청이 도중에 끝날 때 배치가 어떻게 재구성되는지 그림으로</span></label></li>
-      <li><input type="checkbox" id="c4"><label><span class="lead"><b>벤치마크 설계</b> — TTFT(첫 토큰), TPOT(토큰당), 처리량, p95. 동시성을 올리며 곡선을 그린다</span><span class="note">이 곡선 하나가 인터뷰에서 열 문장보다 강하다</span></label></li>
-      <li><input type="checkbox" id="c5"><label><span class="lead"><b>양자화 실측</b> — FP16 vs INT8/FP8, 메모리·처리량·품질 저하를 표로</span><span class="note">→ 프렌들리AI GPU Kernel 공고(FP8/FP4 양자화)</span></label></li>
-      <li><input type="checkbox" id="c6"><label><span class="lead">비교군 하나 — <b>SGLang 또는 Triton Inference Server</b>로 같은 모델을 한 번 더 서빙</span><span class="note">"vLLM만 써봤다"와 "둘을 비교해봤다"는 인터뷰에서 다른 등급이다</span></label></li>
-    </ul>
-
-    <h3 class="block-title hot">2-2 · 겨울방학 — K8s의 GPU 절반 (2028.01–02 · 8주) <span class="star"></span></h3>
-    <p class="note" style="margin:-4px 0 10px">CKA·CKAD로 이미 아는 영역 위에 GPU만 얹는다. 처음부터 배우는 게 아니라 <b style="color:var(--ink)">빈칸을 채우는 작업</b>이라 속도가 빠르다.</p>
-    <ul class="checklist" data-group="p2-k8s">
-      <li><input type="checkbox" id="c7"><label><span class="lead"><b>NVIDIA device plugin</b> — GPU가 어떻게 스케줄 가능한 리소스가 되는가</span><span class="pass">통과 — <code>nvidia.com/gpu</code> 리소스 요청이 kubelet까지 흐르는 경로를 설명</span></label></li>
-      <li><input type="checkbox" id="c8"><label><span class="lead"><b>GPU 분할</b> — time-slicing vs MIG. 각각 언제 맞고 언제 틀린지</span><span class="pass">통과 — "추론 여러 개"와 "학습 하나"에 어느 쪽을 쓸지 근거와 함께</span></label></li>
-      <li><input type="checkbox" id="c9"><label><span class="lead"><b>배치 스케줄링</b> — Kueue 또는 Volcano로 GPU 잡 큐잉·gang scheduling</span><span class="note">→ 토스 ML Platform·업스테이지 Platform(GPU 스케줄링)</span></label></li>
-      <li><input type="checkbox" id="c10"><label><span class="lead"><b>모델 서빙 오케스트레이션</b> — KServe 또는 Ray Serve로 오토스케일링(0→N)</span><span class="pass">통과 — 콜드스타트 시간을 측정하고 줄인 방법을 말할 수 있다</span></label></li>
-      <li><input type="checkbox" id="c11"><label><span class="lead"><b>GPU 관측성</b> — DCGM exporter + Prometheus·Grafana로 사용률·메모리·전력 대시보드</span><span class="pass">통과 — "GPU 사용률 90%인데 처리량이 낮다"를 진단할 수 있다</span></label></li>
-      <li><input type="checkbox" id="c12"><label><span class="lead"><b>파이프라인 도구 하나</b> — Kubeflow 또는 Airflow로 배포 파이프라인 구성</span><span class="note">→ 토스 ML Platform 자격요건(MLflow·Airflow·Kubeflow)·당근(Kubeflow·TFX)</span></label></li>
-    </ul>
-    <p class="callout"><b>비용 주의.</b> GPU 시간은 유일하게 돈이 드는 구간인데, 마침 학비가 나가는 시기와 겹친다. 클라우드 스팟 + 소형 모델로 시작하고 실험 스크립트를 먼저 짜서 <b>띄운 시간을 짧게</b> 가져간다. 방학당 예산 상한을 정해두고 시작할 것. <b>학교 GPU 서버 사용 가능 여부를 첫 학기에 확인</b>하면 이 비용이 0이 될 수도 있다.</p>
-
-    <h3 class="block-title hot">2-3 · 인맥 — 재학 중 상시 <span class="star"></span></h3>
-    <p class="note" style="margin:-4px 0 10px">이직 계획에서 <b style="color:var(--ink)">서류 통과율 1순위로 꼽았던 게 리퍼럴</b>이고, 그걸 LinkedIn 콜드 메시지로 뚫으려 했었다. 대학원 동기는 <b style="color:var(--ink)">전부 직장인</b>이라 그 문제가 자연히 풀린다. 다만 자연히 풀린다고 저절로 되지는 않는다.</p>
-    <ul class="checklist" data-group="p2-network">
-      <li><input type="checkbox" id="c13"><label><span class="lead"><b>1학기에 팀 과제를 피하지 말 것</b> — 관계는 조별과제에서 만들어진다. 야근을 이유로 빠지면 2년 내내 겉돈다</span></label></li>
-      <li><input type="checkbox" id="c14"><label><span class="lead"><b>동기들의 소속 회사를 자연스럽게 파악</b> — 타겟 9개사 재직자가 있으면 그게 곧 리퍼럴 경로</span><span class="note">이직 얘기를 먼저 꺼내지 말 것. 2년은 긴 시간이고 관계가 먼저다</span></label></li>
-      <li><input type="checkbox" id="c15"><label><span class="lead"><b>교수 · 산학 연계 확인</b> — 프로젝트 트랙 운영 방식, 기업 연계 과제 유무</span><span class="note">첫 학기 상담에서 물어볼 것</span></label></li>
-      <li><input type="checkbox" id="c16"><label><span class="lead"><b>스터디 하나 만들기</b> — Phase Ⅱ 서빙 내용을 동기에게 공유하는 형태</span><span class="note">가르치는 게 가장 빠른 학습이고, 동시에 "이 사람 뭘 아는구나"가 각인된다</span></label></li>
-    </ul>
-
-    <h3 class="block-title">Phase Ⅱ 산출물</h3>
-    <ul class="checklist" data-group="p2-output">
-      <li><input type="checkbox" id="c17"><label><span class="lead"><b>벤치마크 리포트</b> — 엔진·배칭·양자화 조합별 TTFT·처리량·비용 표와 곡선</span></label></li>
-      <li><input type="checkbox" id="c18"><label><span class="lead">GPU 노드 위에서 도는 <b>K8s 서빙 스택</b> (매니페스트·Helm 차트 공개)</span></label></li>
-      <li><input type="checkbox" id="c19"><label><span class="lead">기술 블로그 2편 — ①PagedAttention·continuous batching을 시스템 엔지니어 시각으로 ②K8s GPU 스케줄링 실전</span><span class="note">이 두 편이 이 로드맵에서 가장 희소한 콘텐츠다. 쓰는 사람이 적다</span></label></li>
-      <li><input type="checkbox" id="c20"><label><span class="lead">1년차 종료 시점에 <b>졸업 프로젝트 주제 확정</b> — Phase Ⅲ가 곧 그것</span></label></li>
+    <ul class="checklist" data-group="linalg">
+      <li><input type="checkbox" id="l1"><label><span class="lead"><b>3Blue1Brown 「선형대수학의 본질」 15편</b> — 한국어 공식 더빙 · 3~4시간</span></label></li>
+      <li><input type="checkbox" id="l2"><label><span class="lead">개념 6개를 각각 <b>두 문장</b>으로 작성</span><span class="pass">노트 없이 여섯 개를 연속으로 말할 수 있다</span></label></li>
+      <li><input type="checkbox" id="l3"><label><span class="lead">"내적이 뭐냐"에 <b>어텐션 구현 경험으로 답하는 연습</b> — QKᵀ가 내적이고 그게 유사도다</span><span class="pass">선형대수 질문 하나를 본인 구현으로 되받는다</span></label></li>
+      <li><input type="checkbox" id="l4"><label><span class="lead">손으로 2×2 계산 한 번씩 — 고유값, 행렬곱, 내적</span></label></li>
     </ul>
   </section>
 
-  <!-- PHASE 3 -->
-  <section class="phase" id="p3">
-    <div class="phase-head">
-      <div class="phase-num">Ⅲ</div>
-      <div class="phase-title">
-        <div class="when">2028.03 – 2029.02 · 재학 2년차</div>
-        <h2>재학 2년차 — 졸업 프로젝트가 곧 포트폴리오</h2>
-        <p class="desc">여기가 이 계획에서 가장 큰 절약이다. <b>석사 졸업 프로젝트와 개인 포트폴리오를 하나로 합친다.</b> 따로 하면 2년치 일이고, 합치면 한 번이다. 주제는 <b>법령·규정 QA 에이전트</b>를 <b>Phase Ⅱ에서 구축한 자체 서빙 스택 위에</b> 올리는 것.</p>
-      </div>
-    </div>
-    <div class="phase-rule"></div>
-
-    <h3 class="block-title">원칙</h3>
-    <ul class="principle">
-      <li><b>졸업 프로젝트 = 포트폴리오 = 시스템 디자인 인터뷰 답안.</b> 세 개를 따로 만들지 않는다. 지도교수와 주제를 정할 때 이 점을 염두에 두고 <b>학술적 기여</b>와 <b>공고 요구사항</b>이 겹치는 지점을 고른다.</li>
-      <li>프로젝트는 <b>딱 하나</b>. 여러 개 벌리지 않는다.</li>
-      <li><b>먼저 직접 구현 → 그다음 LangGraph로 재구현</b>, 둘 다 한다. 인터뷰 만점 답변 = "리트리버를 직접 짜며 X 때문에 Y로 설계했고, 프로덕션은 LangGraph로 옮기며 트레이드오프를 이렇게 봤다".</li>
-      <li>Claude Code 등 AI 도구 사용 OK. 단 <b>철칙</b> — 각 컴포넌트를 화이트보드에 그려 남에게 설명할 수 있을 때까지 다음으로 넘어가지 않는다.</li>
-      <li><b>모델은 Phase Ⅱ의 자체 서빙 스택에서 가져온다.</b> 상용 API는 품질 비교용 기준선으로만 — "자체 서빙 대비 상용 API의 품질·비용 차이"가 그 자체로 논문 한 절이자 블로그 글 하나다.</li>
-    </ul>
-
-    <h3 class="block-title">주제 · 하나 선택 (지도교수와 조율)</h3>
-    <ul class="checklist" data-group="p3-topic">
-      <li><input type="checkbox" id="d1"><label><span class="lead"><span class="tag rec">추천</span><b>한국어 법령·사내규정 QA 에이전트</b> — 공개 법령 데이터 활용. 업스테이지 AI Agent Engineer("문서 워크플로우 문제를 푸는 Agent 제품") + Document AI 도메인이 정확히 겹침</span><span class="note">한국어 법률 도메인 RAG는 학술적으로도 다룰 거리가 있어 졸업 프로젝트로 통과시키기 쉽다</span></label></li>
-      <li><input type="checkbox" id="d2"><label><span class="lead"><b>개인 지식베이스 에이전트</b> — 데이터 준비가 쉬움, 대신 평가 설계가 어려움</span></label></li>
-      <li><input type="checkbox" id="d3"><label><span class="lead"><b>기술문서 검색+요약 서비스</b> — 오픈소스 docs 대상. 실사용자 확보 가능</span></label></li>
-    </ul>
-
-    <h3 class="block-title">구현할 컴포넌트 · 각 항목 = 어느 공고 요구사항</h3>
-    <p class="note" style="margin:-4px 0 10px"><span class="tag ver" style="font-family:var(--sans)">→</span> 뒤 회사명은 그 컴포넌트를 <b>자격요건/우대로 실제 명시한 공고</b>다.</p>
-    <ul class="checklist" data-group="p3-components">
-      <li><input type="checkbox" id="d4"><label><span class="lead"><b>문서 파이프라인</b> — 파싱(PDF/HTML), 청킹 전략 (고정길이 vs 의미 단위 둘 다 구현·비교)</span><span class="note">→ 업스테이지 Document AI</span></label></li>
-      <li><input type="checkbox" id="d5"><label><span class="lead"><b>임베딩</b> — 한국어 임베딩 모델 2–3개 비교, 선택 근거 문서화</span><span class="note">→ 공통 필수(벡터DB 계열)</span></label></li>
-      <li><input type="checkbox" id="d6"><label><span class="lead"><b>벡터 저장소</b> — pgvector 사용 + 인메모리 버전 직접 구현</span><span class="note">→ 인터엑스(Pinecone)·토스(Milvus)·바운드포</span></label></li>
-      <li><input type="checkbox" id="d7"><label><span class="lead"><b>리트리버</b> — BM25 + Dense 하이브리드 직접 구현, 가중치 실험. Elasticsearch로도 한 번 구성</span><span class="note">→ 라이너 Search·당근 Search·뤼튼 Studio(hybrid search)</span></label></li>
-      <li><input type="checkbox" id="d8"><label><span class="lead"><b>리랭커</b> — cross-encoder 리랭킹 전/후 비교. 검색 지표(nDCG·MRR) 직접 계산</span><span class="note">→ 라이너 Search(Ranking 최적화)·당근 Search. <b>논문의 정량 결과 절이 여기서 나온다</b></span></label></li>
-      <li><input type="checkbox" id="d9"><label><span class="lead"><b>생성부 · context engineering</b> — 프롬프트 버전 관리, 컨텍스트 윈도우 관리, 근거 인용(citation)</span><span class="note">→ 뤼튼 AI("context engineering" 자격요건)·다큐브·제논</span></label></li>
-      <li><input type="checkbox" id="d10"><label><span class="lead"><span class="tag ver">핵심</span><b>에이전트 레이어</b> — 검색을 tool로 감싸고 <b>Tool Use·Function Calling</b>으로 법령 교차참조·요건 계산·multi-step reasoning 구현</span><span class="note">→ 업스테이지 AI Agent(자격요건)·뤼튼 ML(Agent System·Tool Learning)·라이너 ML(Agentic flow)</span></label></li>
-      <li><input type="checkbox" id="d11"><label><span class="lead"><span class="tag ver">가장 중요</span><b>평가 파이프라인 (Evals)</b> — golden QA셋 50–100개, faithfulness·relevance 메트릭 + <b>에이전트 궤적(trajectory) 평가</b></span><span class="note">→ 업스테이지 Senior("Evals")·AI Agent("평가")·라이너 ML·뤼튼 AI. <b>논문의 실험 설계가 그대로 이것</b></span></label></li>
-      <li><input type="checkbox" id="d12"><label><span class="lead"><b>관측성</b> — Langfuse로 trace·토큰 비용·레이턴시. 모델 라우팅 실험</span><span class="note">→ 뤼튼 Studio·제논(Langfuse/LangSmith 우대)</span></label></li>
-      <li><input type="checkbox" id="d13"><label><span class="lead"><b>서빙</b> — FastAPI + 스트리밍 응답</span><span class="note">→ 공통 필수(바운드포·인터엑스·프렌들리AI Seoul 백엔드)</span></label></li>
-      <li><input type="checkbox" id="d14"><label><span class="lead"><span class="tag ver">연결</span><b>Phase Ⅱ 스택 위에 배포</b> — 자체 vLLM 서빙 + K8s GPU 노드 + DCGM 대시보드에 이 에이전트를 얹는다</span><span class="note">여기가 이 로드맵이 다른 포트폴리오와 갈라지는 지점</span></label></li>
-      <li><input type="checkbox" id="d15"><label><span class="lead"><b>LangGraph 재구현</b> — 직접 짠 에이전트를 완성한 뒤 LangGraph로 옮겨 동일 기능 구성</span><span class="note">→ 업스테이지·제논·인터엑스·뤼튼 Studio(LangChain/LangGraph 요건)</span></label></li>
-    </ul>
-
-    <h3 class="block-title">학기별 마일스톤</h3>
-    <ul class="checklist" data-group="p3-milestone">
-      <li><input type="checkbox" id="d16"><label><span class="lead"><b>2028.03–06 · 3학기</b> — 데이터 파이프라인 + 임베딩 + 벡터저장 + 하이브리드 리트리버. 검색만 됨. <b>중간발표</b></span></label></li>
-      <li><input type="checkbox" id="d17"><label><span class="lead"><b>2028.07–08 · 여름방학</b> — 생성부 + 에이전트 레이어. E2E로 "질문→도구 호출→근거 인용 답변"</span><span class="note">세 번째 방학. 가장 무거운 구간을 여기에 배치</span></label></li>
-      <li><input type="checkbox" id="d18"><label><span class="lead"><b>2028.09–11 · 4학기</b> — 평가 파이프라인 + 리랭커 + Langfuse. 개선을 숫자로 증명</span></label></li>
-      <li><input type="checkbox" id="d19"><label><span class="lead"><b>2028.12</b> — 자체 서빙 스택으로 이전 + 상용 API 대비 품질·비용 비교표. <b>논문·최종발표 초안</b></span></label></li>
-      <li><input type="checkbox" id="d20"><label><span class="lead"><b>2029.01–02</b> — LangGraph 재구현 + README·아키텍처 문서. <b>졸업 · 공개</b></span></label></li>
-    </ul>
-
-    <h3 class="block-title">Phase Ⅲ 산출물</h3>
-    <ul class="checklist" data-group="p3-output">
-      <li><input type="checkbox" id="d21"><label><span class="lead"><b>석사 학위</b> — 아내와 같은 시기 졸업</span></label></li>
-      <li><input type="checkbox" id="d22"><label><span class="lead">배포되어 실제 접속 가능한 서비스 1개 — <b>본인이 운영하는 GPU 스택 위에서</b></span></label></li>
-      <li><input type="checkbox" id="d23"><label><span class="lead">GitHub repo — 아키텍처 다이어그램 + "왜 이 설계인가" README</span></label></li>
-      <li><input type="checkbox" id="d24"><label><span class="lead">기술 블로그 4편 — ①청킹·임베딩 ②하이브리드 검색·리랭킹(nDCG/MRR) ③에이전트·Tool Use ④평가·관측 파이프라인</span></label></li>
-      <li><input type="checkbox" id="d25"><label><span class="lead">컴포넌트별 개선 전/후 평가 점수 표 + 토큰 비용·레이턴시 표</span></label></li>
-      <li><input type="checkbox" id="d26"><label><span class="lead">2년간 쌓인 <b>동기 네트워크</b> — 타겟 회사 재직자 포함</span></label></li>
-    </ul>
-    <p class="callout"><b>2029년 2월에 무엇을 들고 있는가.</b> 석사 학위 하나가 아니라 — 트랜스포머를 직접 구현한 repo, GPU 서빙 벤치마크 리포트, 자체 스택 위에서 도는 에이전트 서비스, 블로그 6편, 그리고 각 회사에 흩어진 동기들. <b>이직 준비를 따로 한 적이 없는데 준비가 끝나 있는 상태</b>가 이 계획의 설계 목표다.</p>
-  </section>
-
-  <!-- TIMELINE -->
-  <section class="phase" id="timeline">
-    <div class="phase-head">
-      <div class="phase-num" style="-webkit-text-stroke-color: var(--gold);">◷</div>
-      <div class="phase-title"><h2>전체 타임라인</h2></div>
-    </div>
-    <div class="phase-rule"></div>
-    <div class="timeline">2026.08 ─┬─ Phase 0   원서 시즌 (12주) ← 지금 여기
-         │     ├ 학교 5곳 확정 · "왜 두 번째 석사인가" 답변 설계
-         │     ├ 서류 10월 완료 (ASU 석사 서류는 9월 착수)
-         │     └ 병행 학습 — 밑바닥 2 · 8장 어텐션 + NumPy 재구현
-2026.11 ─┤     └ 원서 접수 · 면접
-2026.12 ─┬─ Phase Ⅰ  입학 전 공백 (12주) ★ 방해 없는 유일한 구간
-         │     └ Karpathy Zero to Hero — micrograd → GPT → Tokenizer
-2027.03 ─┬─ Phase Ⅱ  재학 1년차 — 아내와 같이 입학
-         │     ├ 1학기 · 수업 우선 (개인 학습 주 3h) · 동기 관계
-         │     ├ 여름방학 · 추론 엔진 8주 ★ vLLM · 배칭 · 양자화
-         │     ├ 2학기 · 수업 + 졸업 프로젝트 주제 탐색
-         │     └ 겨울방학 · K8s GPU 8주 ★ device plugin · MIG · KServe
-2028.03 ─┬─ Phase Ⅲ  재학 2년차 — 졸업 프로젝트 = 포트폴리오
-         │     ├ 3학기 · 검색 파이프라인 · 중간발표
-         │     ├ 여름방학 · 에이전트 레이어 (가장 무거운 구간)
-         │     ├ 4학기 · 평가 · 리랭커 · 관측
-         │     └ 겨울 · 자체 서빙 스택 이전 · 논문 · 졸업
-2029.02 ─┴─ 졸업 · 이때 이직 준비를 "펼친다"
-                 (재학 중 좋은 기회가 오면 그때 앞당겨도 됨)</div>
-    <p class="callout"><b>이직을 목표에서 뺀 게 아니라 뒤로 옮겼다.</b> 명시적 준비(이력서·코테·지원)는 2029년으로 미루되, <b>리퍼럴 네트워크만은 재학 중 상시</b>로 돌아간다 — 그게 대학원의 가장 큰 실익이라서다. 아래 <a href="#job" style="color:var(--accent)">이직 준비 섹션</a>은 접어두고 졸업 직전에 펼친다.</p>
-  </section>
-
-  <!-- REQUIREMENTS -->
-  <section class="phase" id="req">
-    <div class="phase-head">
-      <div class="phase-num" style="-webkit-text-stroke-color: var(--gold);">▤</div>
-      <div class="phase-title">
-        <h2>공고에서 역산한 요구사항</h2>
-        <p class="desc">2026.07 기준 타겟 9개사 + 인접 스타트업의 <b>실제 채용 공고를 직접 열어</b> 뽑은 요구사항이다. 이 표가 <b>위 네 단계의 설계 근거</b> — 각 항목은 "하면 좋아서"가 아니라 "이 공고가 요구해서" 존재한다. <b>대학원 커리큘럼이 이 표를 채워주지 않는다</b>는 것이 Phase Ⅱ·Ⅲ가 존재하는 이유이기도 하다. 공고는 빠르게 바뀌므로 실제 지원 시점(2029)에 반드시 재수집.</p>
-      </div>
-    </div>
-    <div class="phase-rule"></div>
-
-    <p class="callout" style="border-color: var(--green);"><b style="color:var(--green)">학위 불안, 데이터로 종결.</b> 직접 열어본 개발·애플리케이션 트랙 공고에서 <b>석사를 필수로 요구한 곳은 0건</b>이다. 업스테이지 AI Agent Engineer는 명시적으로 <b>"학력 무관"</b>, 백엔드·플랫폼·Document AI·데이터 공고 모두 학위 요건 미기재. 석사가 필수인 것은 <b>전문연구요원·파운데이션 모델 리서치</b> 트랙(논문 실적 요구)뿐이다. <b>학위도 자격증도 요건이 아니고, 실물 포트폴리오가 그 자리를 대신한다</b> — 즉 Phase Ⅱ·Ⅲ의 산출물이 곧 대체재.</p>
-
-    <h3 class="block-title hot">A. 애플리케이션 / 제품 트랙 <span class="star"></span></h3>
-    <p class="note" style="margin:-4px 0 10px">업스테이지·뤼튼·라이너·토스·당근 + 원티드 다수 공고 교차. 8년차 백엔드라는 강점이 가장 잘 팔리는 트랙.</p>
+  <!-- 미적분·최적화 -->
+  <section class="blk" id="calc">
+    <h2>미적분·최적화 <small>선형대수와 세트로 나온다</small></h2>
+    <div class="rule"></div>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>요구사항 (실조사)</th><th>어느 공고에 나오나</th><th>어디서 채우나</th></tr></thead>
+      <thead><tr><th>개념</th><th>직관</th><th>AI에서 어디에</th></tr></thead>
       <tbody>
-        <tr><td><b>Python + 백엔드 API</b> (REST/gRPC)</td><td>거의 전 공고 필수 — 바운드포·워트·라이너 BE·토스·당근</td><td class="verdict">이미 보유</td></tr>
-        <tr><td><b>대규모 트래픽·분산 시스템</b></td><td>토스(선착순 결제)·당근(2,100만 MAU)·라이너 최상위 강조</td><td class="verdict">이미 보유</td></tr>
-        <tr><td><b>RAG 파이프라인 구축</b></td><td>업스테이지 AI Agent·Senior <b>자격요건</b>, 바운드포·제논 필수, 라이너 BE</td><td>Phase Ⅲ 코어</td></tr>
-        <tr><td><b>Agent · Tool Use · Function Calling</b></td><td>업스테이지 AI Agent <b>자격요건</b>, 뤼튼 ML(Agent System), 라이너 ML(Agentic flow)</td><td>Phase Ⅲ 에이전트 레이어</td></tr>
-        <tr><td><b>LangChain / LangGraph</b> 경험</td><td>업스테이지 <b>자격요건</b>, 제논·인터엑스 우대, 뤼튼 Studio</td><td>Phase Ⅲ 재구현</td></tr>
-        <tr><td><b>평가 / Evals 파이프라인</b></td><td>업스테이지 Senior("Evals")·AI Agent("평가"), 라이너 ML, 뤼튼 AI</td><td>Phase Ⅲ 최중요</td></tr>
-        <tr><td><b>벡터DB</b> (pgvector·Pinecone·Milvus)</td><td>인터엑스(Pinecone)·바운드포·토스(Milvus)</td><td>Phase Ⅲ</td></tr>
-        <tr><td><b>하이브리드/시맨틱 검색 · 랭킹</b></td><td>라이너 Search(Retrieval+Ranking)·당근 Search·뤼튼 Studio</td><td>Phase Ⅲ 리트리버·리랭커</td></tr>
-        <tr><td><b>관측성</b> (Langfuse·LangSmith)</td><td>뤼튼 Studio·제논 우대</td><td>Phase Ⅲ</td></tr>
-        <tr><td><b>Docker / Kubernetes</b></td><td>원티드랩·인터엑스·전 인프라 공고</td><td class="verdict">CKA·CKAD 보유 → Phase Ⅱ에서 GPU까지 확장</td></tr>
-        <tr><td>context engineering · 프롬프트</td><td>뤼튼 AI(자격요건)·다큐브·제논</td><td>Phase Ⅲ 생성부</td></tr>
+        <tr><td class="hi">연쇄법칙</td><td>합성함수의 미분 = 미분의 곱</td><td>역전파 그 자체. 층을 거슬러 올라가며 곱해 나간다</td></tr>
+        <tr><td class="hi">편미분·그래디언트</td><td>변수 하나씩 본 기울기를 모은 벡터</td><td>파라미터 수만큼의 그래디언트를 한 번에 구한다</td></tr>
+        <tr><td class="hi">경사하강법</td><td>기울기 <b>반대</b> 방향으로 조금씩 내려간다</td><td>모든 학습의 기본. 왜 반대 방향인지 말할 수 있어야</td></tr>
+        <tr><td class="hi">학습률</td><td>한 걸음의 크기</td><td>크면 발산·진동, 작으면 안 움직인다. 스케줄링</td></tr>
+        <tr><td class="hi">SGD · Momentum · Adam</td><td>전체 대신 배치 → 관성 추가 → 변수별 학습률 적응</td><td>"어떤 옵티마이저 쓰나"에 이유를 붙여 답한다</td></tr>
+        <tr><td class="hi">볼록 vs 비볼록</td><td>골짜기가 하나냐 여러 개냐</td><td>딥러닝은 비볼록. 지역최솟값·안장점 얘기가 여기서 나온다</td></tr>
       </tbody>
     </table>
     </div>
+    <ul class="checklist" data-group="calc">
+      <li><input type="checkbox" id="g1"><label><span class="lead">여섯 개를 <b>한 문장씩</b> 정리</span><span class="pass">"역전파 설명해보세요"에 연쇄법칙으로 시작해서 끝까지 간다</span></label></li>
+      <li><input type="checkbox" id="g2"><label><span class="lead"><b>밑바닥 1에서 구현한 역전파 코드를 다시 열어볼 것</b> — 이론이 아니라 이미 짜본 것</span></label></li>
+      <li><input type="checkbox" id="g3"><label><span class="lead">SGD · Momentum · Adam <b>한 줄씩 차이</b>만</span></label></li>
+    </ul>
+  </section>
 
-    <h3 class="block-title hot">B. 인프라 / 모델 서빙 트랙 — 시스템 강점이 최고로 팔리는 곳 <span class="star"></span></h3>
-    <p class="note" style="margin:-4px 0 10px">프렌들리AI·토스 ML Platform·업스테이지 Platform. AI 지식보다 시스템 실력이 우위인 트랙 — <b style="color:var(--ink)">Phase Ⅱ가 통째로 이 표를 겨냥한다.</b></p>
+  <!-- 확률통계 -->
+  <section class="blk" id="stat">
+    <h2>확률·통계 <small>5</small></h2>
+    <div class="rule"></div>
+    <ul class="checklist" data-group="stat">
+      <li><input type="checkbox" id="s1"><label><span class="lead"><b>편향-분산 트레이드오프</b></span><span class="pass">"모델을 키웠는데 검증 성능이 떨어진다"를 이 언어로 설명</span></label></li>
+      <li><input type="checkbox" id="s2"><label><span class="lead"><b>MLE (최대우도추정)</b></span><span class="pass">cross-entropy가 MLE에서 나온다는 걸 말할 수 있다</span></label></li>
+      <li><input type="checkbox" id="s3"><label><span class="lead"><b>조건부확률 · 베이즈 정리</b></span><span class="pass">사전확률 → 관측 → 사후확률의 흐름을 예로 설명</span></label></li>
+      <li><input type="checkbox" id="s4"><label><span class="lead"><b>공분산 · 상관</b></span><span class="pass">공분산행렬이 PCA로 이어지는 지점까지</span></label></li>
+      <li><input type="checkbox" id="s5"><label><span class="lead"><b>중심극한정리</b></span><span class="pass">왜 정규분포가 어디에나 나오는지 설명</span></label></li>
+    </ul>
+  </section>
+
+  <!-- 개념 정리 -->
+  <section class="blk" id="concept">
+    <h2>개념 정리 <small>말로 만들어 두는 것</small></h2>
+    <div class="rule"></div>
+    <ul class="checklist" data-group="concept">
+      <li><input type="checkbox" id="m1"><label><span class="lead"><b>과적합과 정규화</b> — L1/L2, 드롭아웃, 조기종료</span></label></li>
+      <li><input type="checkbox" id="m2"><label><span class="lead"><b>평가지표</b> — 정확도의 한계, precision·recall·F1, 불균형 데이터</span></label></li>
+      <li><input type="checkbox" id="m3"><label><span class="lead"><b>활성화함수</b> — 시그모이드의 문제, ReLU가 왜 이겼나</span></label></li>
+      <li><input type="checkbox" id="m4"><label><span class="lead"><b>CNN 한 문단</b> — 밑바닥 1 7장. 왜 이미지에 완전연결이 아닌가</span></label></li>
+      <li><input type="checkbox" id="m5"><label><span class="lead"><b>트랜스포머 한 문단</b> — 최신 동향 질문의 표준 답</span></label></li>
+      <li><input type="checkbox" id="m6"><label><span class="lead"><b>LLM · RAG · 에이전트 한 문단</b> — "최근 관심 있게 본 기술" 질문</span><span class="note">본인 직무와 가장 가까운 답. 여기서 차별화된다</span></label></li>
+    </ul>
+  </section>
+
+  <!-- 미니 프로젝트 -->
+  <section class="blk" id="proj">
+    <h2>PyTorch · 미니 프로젝트 <small>12h · 노트북 1개 · 같은 데이터에 sklearn과 PyTorch 둘 다</small></h2>
+    <div class="rule"></div>
+
+    <h3 class="sub">PyTorch 기초 · 5h</h3>
+    <ul class="checklist" data-group="torch">
+      <li><input type="checkbox" id="t1"><label><span class="lead"><b>텐서</b> — numpy 배열과 뭐가 다른가, GPU로 보내기</span></label></li>
+      <li><input type="checkbox" id="t2"><label><span class="lead"><b>autograd</b> — <code>requires_grad</code> · <code>backward()</code> · 계산그래프</span><span class="pass">밑바닥 1에서 손으로 짠 역전파가 여기서 자동으로 되는 걸 확인</span></label></li>
+      <li><input type="checkbox" id="t3"><label><span class="lead"><b><code>nn.Module</code></b> — 층 정의, <code>forward()</code></span></label></li>
+      <li><input type="checkbox" id="t4"><label><span class="lead"><b>Dataset · DataLoader</b> — 배치 만들기</span></label></li>
+      <li><input type="checkbox" id="t5"><label><span class="lead"><b>학습 루프</b> — optimizer · loss · <code>zero_grad</code> → <code>backward</code> → <code>step</code></span><span class="pass">이 세 줄의 순서와 이유를 말할 수 있다</span></label></li>
+    </ul>
+
+    <h3 class="sub">미니 프로젝트 · 7h</h3>
+    <ul class="checklist" data-group="proj">
+      <li><input type="checkbox" id="p1"><label><span class="lead"><b>데이터 고르기</b> — 공공데이터포털 CSV 하나</span><span class="note">주제는 작을수록 좋다. 끝내는 게 목적</span></label></li>
+      <li><input type="checkbox" id="p2"><label><span class="lead"><b>EDA</b> — 결측치 · 분포 · 상관관계 그림 3장</span></label></li>
+      <li><input type="checkbox" id="p3"><label><span class="lead"><b>전처리</b> — 스케일링 · 인코딩 · 훈련/검증 분할</span></label></li>
+      <li><input type="checkbox" id="p4"><label><span class="lead"><b>sklearn 모델 2개</b> — 로지스틱 회귀 vs 랜덤포레스트, 교차검증으로</span><span class="pass">"왜 이 모델을 골랐나"에 숫자로 답한다</span></label></li>
+      <li><input type="checkbox" id="p5"><label><span class="lead"><span class="tag">PyTorch</span><b>같은 데이터에 신경망 하나 더</b> — 은닉층 1~2개 MLP</span><span class="pass">"딥러닝 프레임워크 써봤나"에 코드로 답한다</span><span class="note">작은 표 데이터에서는 랜덤포레스트가 더 낫다는 결과가 나올 가능성이 높다 — <b>그 결과를 그대로 쓰고 이유를 적는 게 더 좋은 답변이 된다</b></span></label></li>
+      <li><input type="checkbox" id="p6"><label><span class="lead"><b>평가</b> — 정확도만이 아니라 precision·recall·혼동행렬 · 세 모델 비교표</span></label></li>
+      <li><input type="checkbox" id="p7"><label><span class="lead"><b>노트북 + README</b> — GitHub 공개. 학업계획서에 링크</span></label></li>
+    </ul>
+  </section>
+
+  <!-- 면접 -->
+  <section class="blk" id="interview">
+    <h2>면접 답변 <small>1인당 2~5분 · 준비된 문장 3~4개</small></h2>
+    <div class="rule"></div>
+    <ul class="checklist" data-group="interview">
+      <li><input type="checkbox" id="i1"><label><span class="lead"><span class="tag">최우선</span><b>왜 두 번째 석사인가</b> — 시스템·백엔드 8년, AI 서비스 서빙 담당. 모델을 쓰는 쪽에서 이해하는 쪽으로</span><span class="note">금지 — "AI가 대세라서", "회사에서 필요해서", "아내와 같이 하려고"</span></label></li>
+      <li><input type="checkbox" id="i2"><label><span class="lead"><b>기존 CS 석사를 자산으로</b> — 연구 방법론·논문 읽기가 이미 돼 있어 첫 학기부터 프로젝트 가능</span></label></li>
+      <li><input type="checkbox" id="i3"><label><span class="lead"><b>직장 병행 가능한가</b> — 토요일 오전 고정 학습 블록을 8월부터 운영 중</span></label></li>
+      <li><input type="checkbox" id="i4"><label><span class="lead"><b>무엇을 연구하고 싶은가 · 석사 후 목표</b> — 학업계획서와 같은 문장이어야 한다</span></label></li>
+      <li><input type="checkbox" id="i5"><label><span class="lead"><b>프로젝트 경험</b> — 미니 프로젝트 + 회사에서의 ML 서빙 경험</span></label></li>
+      <li><input type="checkbox" id="i6"><label><span class="lead"><b>자기소개 · 현 직장 · 부족한 점 · 마지막 한마디</b></span></label></li>
+      <li><input type="checkbox" id="i7"><label><span class="lead"><b>국민대 기출 8문항</b> — 관심 계기 · 프로젝트 경험 · 선호 알고리즘 · 협업 · 최신 동향 · 강점 · 석사 후 목표</span></label></li>
+      <li><input type="checkbox" id="i8"><label><span class="lead"><b>역질문</b> — 입학 전 추천 과목·자료, 프로젝트 트랙 운영 방식, 산학 연계</span><span class="note">금지 — 학비 감면, 출석 느슨한지, 과제 양</span></label></li>
+      <li><input type="checkbox" id="i9"><label><span class="lead"><b>소리 내어 리허설 + 셀프 녹화</b></span></label></li>
+    </ul>
+  </section>
+
+  <!-- 서류 -->
+  <section class="blk" id="doc">
+    <h2>서류 <small>10월 말까지</small></h2>
+    <div class="rule"></div>
+    <ul class="checklist" data-group="doc">
+      <li><input type="checkbox" id="d1"><label><span class="lead"><span class="tag">8월 중</span><b>ASU 석사 증명서</b> — 영문 성적·학위증명서, 아포스티유 필요 여부 확인</span><span class="note">발급·배송에 몇 주</span></label></li>
+      <li><input type="checkbox" id="d2"><label><span class="lead">학부 졸업·성적증명서</span></label></li>
+      <li><input type="checkbox" id="d3"><label><span class="lead">재직증명서 · 경력증명서</span></label></li>
+      <li><input type="checkbox" id="d4"><label><span class="lead"><b>영어성적 요구 여부 확인</b> — 학교마다 다르고, 필요하면 시험 일정을 지금 잡아야 한다</span></label></li>
+      <li><input type="checkbox" id="d5"><label><span class="lead"><b>학업계획서</b> — 1문단은 "왜 두 번째 석사인가", 나머지는 무엇을 배워 무엇을 만들 것인가</span></label></li>
+      <li><input type="checkbox" id="d6"><label><span class="lead">학업계획서 학교별 수정본 5개</span></label></li>
+      <li><input type="checkbox" id="d7"><label><span class="lead"><b>학점 인정·면제 규정 문의</b> — 동일 계열 석사 보유자</span></label></li>
+    </ul>
+  </section>
+
+  <!-- 학교 -->
+  <section class="blk" id="school">
+    <h2>학교 <small>지원 5곳</small></h2>
+    <div class="rule"></div>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>요구사항 (실조사)</th><th>어느 공고에 나오나</th><th>본인 상태</th></tr></thead>
+      <thead><tr><th>학교 · 대학원</th><th>구분</th><th>형태</th><th>경쟁률</th><th>정원</th></tr></thead>
       <tbody>
-        <tr><td><b>저지연 분산 시스템</b></td><td>프렌들리AI(low-latency inference)·토스(JVM/하드웨어 레벨 성능)</td><td class="verdict">기지국 미들웨어 경험 직결</td></tr>
-        <tr><td><b>Docker · Kubernetes 운영</b></td><td>전 인프라 공고</td><td class="verdict">CKA + CKAD 보유 — 증명 완료</td></tr>
-        <tr><td><b>K8s GPU 스케줄링</b> · Kubeflow·Airflow·MLflow</td><td>토스 ML Platform <b>자격요건</b>, 업스테이지 Platform(GPU 스케줄링), 인터엑스</td><td class="warn">K8s 절반은 보유 → <b>Phase Ⅱ-2가 GPU 절반을 채운다</b></td></tr>
-        <tr><td><b>vLLM · SGLang · Triton · TensorRT-LLM</b> 서빙</td><td>토스 ML Platform 우대, 프렌들리AI(자체 엔진)</td><td class="warn">비어 있음 → <b>Phase Ⅱ-1</b></td></tr>
-        <tr><td><b>C++ · CUDA · GPU 커널</b> 최적화</td><td>프렌들리AI Inference Engine·GPU Kernel 자격요건(C++ 프로덕션·FP8/FP4 양자화)</td><td>C++ 저지연 강점 보유 → 커널 트랙 노릴 때만 vLLM 코드 분석·기여</td></tr>
+        <tr><td>한양대 인공지능융합대학원</td><td>도전</td><td>하이브리드</td><td>7.05 : 1</td><td>40</td></tr>
+        <tr><td>성균관대 정보통신대학원 빅데이터</td><td>도전</td><td>야간</td><td>4.02 : 1</td><td>185</td></tr>
+        <tr><td>고려대 SW·AI융합대학원 AAI</td><td>적정</td><td>야간</td><td>3.39 : 1</td><td>125</td></tr>
+        <tr><td>국민대 소프트웨어융합대학원 AI</td><td>안전</td><td>하이브리드</td><td>1.87 : 1</td><td>48</td></tr>
+        <tr><td>아주대 정보통신대학원</td><td>안전</td><td>하이브리드</td><td>1.29 : 1</td><td>366</td></tr>
       </tbody>
     </table>
     </div>
-    <p class="callout"><b>이 B 표가 이 로드맵의 논거 전체다.</b> 5행 중 2행이 이미 <span style="color:var(--green)">보유</span>, 1행이 절반 보유다. 같은 표를 RAG 프로젝트만 한 지원자가 채우면 5행 중 0행이 찬다.</p>
+    <ul class="checklist" data-group="school">
+      <li><input type="checkbox" id="c1"><label><span class="lead">"같은 학교" 필수 조건인지 둘이 합의</span></label></li>
+      <li><input type="checkbox" id="c2"><label><span class="lead">지원 리스트 확정 — 전형료 학교당 7~8.5만원 · 5곳 약 38만원</span></label></li>
+      <li><input type="checkbox" id="c3"><label><span class="lead"><span class="tag">중요</span><b>학교별 전공 필기·구술 유무 문의</b> — 위 공부 분량이 여기서 정해진다</span><span class="note">한양대 행정팀 02-2220-0237 · 국민대는 별도 필기 없음 확인됨</span></label></li>
+      <li><input type="checkbox" id="c4"><label><span class="lead">5곳 모집요강 한 표로 정리 — 접수 기간 · 서류 · 전형 방식</span><span class="note">2027학년도 전기 요강은 미공개. 9~10월 재확인</span></label></li>
+      <li><input type="checkbox" id="c5"><label><span class="lead">원서 접수 5곳 완료</span></label></li>
+    </ul>
   </section>
 
-  <!-- 이직 준비 (보관) -->
-  <section class="phase" id="job">
-    <div class="phase-head">
-      <div class="phase-num" style="-webkit-text-stroke-color: var(--gold);">▨</div>
-      <div class="phase-title">
-        <h2>이직 준비 — 보관</h2>
-        <p class="desc">2026.07에 조사한 이직 실무 내용이다. <b>석사 2년 동안은 접어 둔다</b> — 다만 조사에 시간이 많이 들어간 데이터라 지우지 않고, <b>졸업이 가까워지는 2028년 하반기</b>에 다시 펼쳐 최신화한다. 단 하나, <b>리퍼럴 네트워크(4번)만은 재학 중 상시</b>로 돌아간다. 그게 대학원의 가장 큰 실익이다.</p>
-      </div>
+  <!-- 자료 -->
+  <section class="blk" id="res">
+    <h2>자료 <small>전부 무료</small></h2>
+    <div class="rule"></div>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>자료</th><th>어디에</th><th>쓰는 곳</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://www.youtube.com/playlist?list=PLVsNizTWUw7E2RxZ4aspcR9vNamXccmFE">혼자 공부하는 머신러닝+딥러닝</a></td><td>유튜브 · 박해선</td><td>고전 ML 1–6장</td></tr>
+        <tr><td><a href="https://www.youtube.com/playlist?list=PLkoaXOTFHiqhVDo0nWybNmihCP_4BjOFR">선형대수학의 본질</a></td><td>유튜브 · 3b1b 한국어 더빙</td><td>선형대수 15편</td></tr>
+        <tr><td><a href="https://www.boostcourse.org/ai100">인공지능 기초 다지기</a></td><td>부스트코스</td><td>numpy·pandas 구멍 메울 때</td></tr>
+        <tr><td><a href="https://developers.google.com/machine-learning/crash-course/?hl=ko">머신러닝 단기집중과정</a></td><td>Google · 한국어</td><td>개념 확인용. 전부 볼 필요 없음</td></tr>
+        <tr><td><a href="https://www.data.go.kr/">공공데이터포털</a></td><td>행정안전부</td><td>미니 프로젝트 CSV</td></tr>
+        <tr><td><a href="interview_prep.html">면접 질문은행 201문항</a></td><td>자체</td><td>면접 답변</td></tr>
+        <tr><td><a href="grad_schools.html">직장인 특수대학원 42곳</a></td><td>자체</td><td>학교 · 장학</td></tr>
+      </tbody>
+    </table>
     </div>
-    <div class="phase-rule"></div>
-
-    <details class="archive">
-      <summary>전형 준비 · 이력서 · 코테 · 시스템 디자인 · 리퍼럴 <small>2026.07 조사</small></summary>
-      <div class="archive-body">
-        <p class="callout" style="border-color:var(--accent)">아래는 <b>이직을 2027년에 한다는 가정</b>으로 짠 것이다. 석사 2년이 들어오면서 실제 시점은 <b>2029년</b>으로 밀렸으므로 <b>날짜는 무시하고 내용만</b> 쓴다. 회사·공고 정보는 2년 뒤 통째로 다시 조사해야 한다.</p>
-
-        <h3 class="block-title">1 · 경력기술서 재작성 — 경력자산을 공고 요구사항에 매핑</h3>
-        <p class="note" style="margin:-4px 0 10px">8년차의 강점은 연차가 아니라 이 매핑이 만드는 <b>희소 조합</b>이다.</p>
-        <div class="table-scroll">
-        <table>
-          <thead><tr><th>내 경력 자산</th><th>매칭되는 공고 요구사항</th><th>이 조합이 통하는 곳</th></tr></thead>
-          <tbody>
-            <tr><td>Samsung Notes 1.4억 사용자 백엔드</td><td>대규모 트래픽·분산 시스템</td><td class="stars">토스·당근·뤼튼</td></tr>
-            <tr><td>기지국 미들웨어 (저지연·고신뢰 C++)</td><td>low-latency inference·GPU 커널·C++ 프로덕션</td><td class="stars">프렌들리AI·토스 ML Platform</td></tr>
-            <tr><td>CKA · CKAD + Phase Ⅱ GPU 스케줄링</td><td>K8s·GPU 스케줄링 (토스 ML Platform·업스테이지 Platform 자격요건)</td><td class="stars">토스·업스테이지 Platform</td></tr>
-            <tr><td>S Pen SDK — 개발자용 제품 개발</td><td>SDK·개발자 경험(DX) 설계</td><td class="stars">센드버드</td></tr>
-            <tr><td>필기인식·문서 이해 도메인</td><td>Document AI·문서 워크플로우</td><td class="stars">업스테이지</td></tr>
-            <tr><td>ML 서비스 서빙 경험(AX팀)</td><td>ML 모델 서빙·파이프라인</td><td class="stars">업스테이지·토스</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <ul class="checklist" data-group="job-resume">
-          <li><input type="checkbox" id="j1"><label><span class="lead">"내가 결정한 것" 중심 재작성 — "AX팀에서 AI 서비스 개발" → "LLM 기반 X 기능의 서빙 백엔드 설계, p95 레이턴시 Ns 달성, 일 요청 N만 건 처리, 스트리밍 응답·폴백 로직 직접 설계"</span><span class="note">모델은 다른 팀이 만들었어도 "그 모델을 서비스로 만드는 과정의 설계 결정"은 나의 것</span></label></li>
-          <li><input type="checkbox" id="j2"><label><span class="lead"><b>정량 지표를 이력서 상단에 못박기</b> — RPS·데이터량·SLA·p95 레이턴시·장애 복구시간. <span style="color:var(--accent)">토스는 "이력서에 트래픽 지표 명시"를 공고에서 대놓고 권장</span>한다</span></label></li>
-          <li><input type="checkbox" id="j3"><label><span class="lead">영문 이력서 + LinkedIn 프로필 정비 (해외 옵션 대비)</span></label></li>
-        </ul>
-
-        <h3 class="block-title">2 · 코딩테스트 — 회사별 실제 전형에 맞춤</h3>
-        <ul class="checklist" data-group="job-coding">
-          <li><input type="checkbox" id="j4"><label><span class="lead">기본선 — 프로그래머스 Lv2–3 + LeetCode Medium, 총 60–80문제</span></label></li>
-          <li><input type="checkbox" id="j5"><label><span class="lead">유형 — 구현·문자열, 그래프·BFS/DFS, 힙·우선순위큐, DP 기본</span><span class="note">8년차에게 코테는 통과만 하면 되는 관문 — 감각 회복이 목적</span></label></li>
-          <li><input type="checkbox" id="j6"><label><span class="lead"><b>라이브 코딩 대비</b> — 토스·당근은 <b>화상 라이브 코딩</b>이 표준. <b>말로 사고를 설명하며 푸는</b> 연습을 별도로. 셀프 녹화로 점검</span></label></li>
-          <li><input type="checkbox" id="j7"><label><span class="lead"><b>토스 사전과제</b> 대비 — 일부 실은 알고리즘 대신 사전과제. Phase Ⅲ 프로젝트가 사실상 사전과제 포트폴리오가 됨</span></label></li>
-          <li><input type="checkbox" id="j8"><label><span class="lead"><b>몰로코 노릴 때만</b> — LeetCode Hard 중심 100문제+ 상향 + 영어 라운드</span></label></li>
-        </ul>
-
-        <h3 class="block-title hot">3 · 시스템 디자인 인터뷰 <span class="star"></span> 승부 라운드</h3>
-        <ul class="checklist" data-group="job-sysdesign">
-          <li><input type="checkbox" id="j9"><label><span class="lead">일반 시스템 디자인 정리 (System Design Interview vol.1–2) — <b>당근 백엔드·ML 직군은 실제로 별도 라운드</b></span></label></li>
-          <li><input type="checkbox" id="j10"><label><span class="lead">AI — "RAG <b>에이전트</b> 서비스 설계" (Phase Ⅲ가 그대로 답안)</span><span class="note">→ 업스테이지·라이너 ML·뤼튼 ML</span></label></li>
-          <li><input type="checkbox" id="j11"><label><span class="lead"><span class="tag rec">최강 카드</span>AI — "LLM 서빙 비용·레이턴시 최적화" (캐싱·배칭·라우팅·vLLM/SGLang/Triton)</span><span class="note">→ 토스 ML Platform·프렌들리AI. <b style="color:var(--ink)">Phase Ⅱ의 벤치마크 리포트가 곧 답안</b>이고, 여기에 기지국 미들웨어 저지연 경험을 얹는다</span></label></li>
-          <li><input type="checkbox" id="j12"><label><span class="lead">AI — "AI 기능 품질 측정·개선" (Evals 설계, faithfulness·에이전트 궤적 평가)</span><span class="note">→ 업스테이지 Senior·라이너 ML</span></label></li>
-          <li><input type="checkbox" id="j13"><label><span class="lead">각 유형별 화이트보드 답안 만들어 소리 내어 연습 (셀프 영상 촬영)</span></label></li>
-        </ul>
-
-        <h3 class="block-title hot">4 · 리퍼럴 네트워크 <span class="star"></span> 서류 통과율 1순위</h3>
-        <ul class="checklist" data-group="job-referral">
-          <li><input type="checkbox" id="j14"><label><span class="lead">타겟 — 업스테이지·뤼튼·라이너·토스·당근 재직자 각 1명 이상</span></label></li>
-          <li><input type="checkbox" id="j15"><label><span class="lead">경로 ① LinkedIn 콜드 메시지 (짧게: 공통점 + 구체 질문 1개 + 커피챗 제안)</span></label></li>
-          <li><input type="checkbox" id="j16"><label><span class="lead">경로 ② 커뮤니티 오프라인 행사 — AI 밋업·컨퍼런스 (if(kakao), DEVIEW, 각사 테크 밋업)</span></label></li>
-          <li><input type="checkbox" id="j17"><label><span class="lead">경로 ③ 가짜연구소·모두의연구소 스터디 참여</span></label></li>
-          <li><input type="checkbox" id="j18"><label><span class="lead">목표 — 커피챗 5회 이상. 이직 얘기 먼저 꺼내지 말 것, 팀 분위기·기술스택 질문 중심</span><span class="note">리퍼럴은 관계에서 자연히 나온다</span></label></li>
-        </ul>
-
-        <h3 class="block-title">5 · 지원 순서 & 협상 전략</h3>
-        <ul class="checklist" data-group="job-apply">
-          <li><input type="checkbox" id="j19"><label><span class="lead"><b>1차</b> Tier 3 + 관심도 낮은 회사 2–3곳 — 인터뷰 감각 회복용</span></label></li>
-          <li><input type="checkbox" id="j20"><label><span class="lead"><b>2차</b> Tier 1 본명 회사 — 1차 피드백·오퍼 들고 지원</span></label></li>
-          <li><input type="checkbox" id="j21"><label><span class="lead">오퍼 겹치기 — 프로세스 타임라인을 맞춰 오퍼가 비슷한 시기에 나오게 조율</span></label></li>
-          <li><input type="checkbox" id="j22"><label><span class="lead">기준선 — 현재 삼성 총보상(기본급+성과급+복지 환산) 정확히 계산해두기</span></label></li>
-          <li><input type="checkbox" id="j23"><label><span class="lead">스타트업 오퍼 평가 — 현금 기준 삼성 대비 −10% 이내면 협상 여지, 스톡옵션은 0원으로 가정</span></label></li>
-          <li><input type="checkbox" id="j24"><label><span class="lead">Tier 3(토스·당근)는 삼성 이상 현금 오퍼가 실제로 가능한 곳 — 베이스라인 오퍼로 활용</span></label></li>
-          <li><input type="checkbox" id="j25"><label><span class="lead">첫 오퍼에 바로 수락하지 않기 ("검토 시간 1주"는 어느 회사든 표준)</span></label></li>
-          <li><input type="checkbox" id="j26"><label><span class="lead">퇴사는 오퍼레터(처우 명시 서면) 수령 후에만 + 삼성 성과급 지급 시기(연초 OPI 등) 확인 후 퇴사일 조율</span></label></li>
-        </ul>
-        <p class="callout">처우를 못 맞추면 무리 말고 다음 해로 연기. 프로젝트를 v2로 업그레이드하며 재도전. <b>"나쁜 오퍼로 탈출"이 최악의 수.</b></p>
-      </div>
-    </details>
-
-    <details class="archive">
-      <summary>타겟 회사 9곳 · 전형 프로파일 <small>2026.07 조사 — 지원 시점 재확인 필수</small></summary>
-      <div class="archive-body">
-        <p class="callout">채용 상황·처우·조직은 계속 바뀐다. <b>스타트업은 1년이면 상황이 뒤집힌다.</b> 지원 시점에 각사 채용 페이지·JD·최근 뉴스로 반드시 재확인.</p>
-
-        <div class="tier-label">Tier 1 — 국내 AI 네이티브 <small>본명 타겟</small></div>
-
-        <article class="company">
-          <div class="co-head"><span class="co-rank">①</span><h3 class="co-name">업스테이지 (Upstage)</h3><span class="co-badge">최우선 추천</span></div>
-          <dl class="co-body">
-            <dt>무엇을 하나</dt><dd>자체 LLM '솔라(Solar)' 개발 + Document AI(OCR·파싱). 금융·법률·제조 등 B2B 특화 AI 솔루션. 2025년 약 1,000억 원 시리즈B, 미국 시장 진출 추진.</dd>
-            <dt>왜 나에게 맞나</dt><dd><ul><li>"해외로 나아가는 회사" + "모델 가까이에서 일하기"를 동시에 충족하는 국내 거의 유일한 곳</li><li>B2B 엔터프라이즈 딜리버리 → 삼성에서의 대규모 경험이 그대로 신뢰 자산</li><li>Document AI ↔ Samsung Notes·필기인식 경험이 도메인적으로 연결됨</li></ul></dd>
-            <dt>실제 공고</dt><dd><b>AI Agent Engineer</b>(학력 무관) · Software Engineer-Backend(Golang/Python/TS/Java, AWS/GCP, 5년+, ML 서빙) · <b>Platform SW Engineer(K8s·Terraform·GPU 스케줄링)</b> · Senior SWE(RAG·Agent·Evals·Document AI). <span class="verdict">개발 트랙 전부 학위 미요구.</span></dd>
-            <dt>준비 포인트</dt><dd>Phase Ⅲ 주제를 "법령·규정 QA <b>에이전트</b>"로 하면 AI Agent Engineer 공고와 문장 단위로 겹침. <b>Platform SW Engineer는 Phase Ⅱ(CKA·CKAD + GPU 스케줄링)가 정면으로 겨냥하는 자리</b> — 이 회사만 두 개의 문이 열린다.</dd>
-            <dt class="risk">리스크·체크</dt><dd>B2B 특성상 고객사 프로젝트(SI성 업무) 비중이 팀마다 다름 → 커피챗에서 "제품 조직 vs 딜리버리 조직" 구분 확인.</dd>
-          </dl>
-        </article>
-
-        <article class="company">
-          <div class="co-head"><span class="co-rank">②</span><h3 class="co-name">프렌들리AI (FriendliAI)</h3><span class="co-badge">Phase Ⅱ 직결</span></div>
-          <dl class="co-body">
-            <dt>무엇을 하나</dt><dd>LLM 서빙·추론 최적화 인프라 (GPU 효율화, 배칭). 글로벌 B2B.</dd>
-            <dt>왜 나에게 맞나</dt><dd><ul><li><b>시스템 역량(C++·멀티스레딩·저지연)이 가장 직접적으로 팔리는 곳.</b> AI 지식보다 시스템 실력이 우위</li><li>기지국 미들웨어 경험(저지연·고신뢰)이 추론 서빙과 문제 구조가 유사</li><li><b>Phase Ⅱ 전체가 이 회사의 언어</b> — vLLM·배칭·양자화·GPU</li></ul></dd>
-            <dt>실제 공고</dt><dd>SW Engineer-AI Inference Engine(SF, <b>C++·Python·CUDA</b>, GPU 커널·컴파일러·memory planning·kernel fusion, 5년+) · SW Engineer-GPU Kernel(<b>CUDA/ROCm·HIP</b>, GEMM·attention 커널, <b>FP8/FP4 양자화</b>) · <b>Senior Backend(Seoul)</b>(Python·FastAPI, REST/gRPC/GraphQL, PostgreSQL·ClickHouse, K8s·OpenTelemetry, 5년+)</dd>
-            <dt>준비 포인트</dt><dd><b>Seoul 백엔드 트랙은 CUDA 없이 진입 가능</b> — 본인에게 가장 현실적인 문이고 Phase Ⅱ만으로 자격이 선다. 커널 트랙을 노리면 <b>vLLM 코드베이스 분석 + 소규모 기여</b>가 최고의 준비(Kaggle보다 낫다).</dd>
-            <dt class="risk">리스크·체크</dt><dd>서비스 개발보다 인프라 개발 — "프로덕트를 만들고 싶다"는 욕구와 맞는지 자문 필요. 다만 커리어 희소성은 이쪽이 최상.</dd>
-          </dl>
-        </article>
-
-        <article class="company">
-          <div class="co-head"><span class="co-rank">③</span><h3 class="co-name">뤼튼테크놀로지스 (Wrtn)</h3></div>
-          <dl class="co-body">
-            <dt>무엇을 하나</dt><dd>MAU 600만+ 국내 최대 B2C AI 서비스 + 기업용 AX 솔루션. 일본 등 해외 확장 중.</dd>
-            <dt>왜 나에게 맞나</dt><dd>대규모 트래픽 B2C — 1.4억 사용자 Samsung Notes 경험이 직결되는 유일한 Tier 1. 성장 속도가 빠른 조직.</dd>
-            <dt>실제 공고</dt><dd>Backend Engineer(Python·3년+, RAG·Agent·LLM 파인튜닝, <b>"0.2초 안에 99.9% 성공률"</b>) · AI Engineer(<b>context engineering</b> 자격요건, LLM 제품 E2E, 모델 테스트·평가) · AI Engineer Studio(<b>Python·FastAPI·Claude Agent SDK·LangChain·LangGraph</b>, Airflow·<b>Langfuse</b>·ElasticSearch hybrid search) · ML Engineer(Autonomous Agent·Tool Learning·RAG·IR)</dd>
-            <dt>준비 포인트</dt><dd>Phase Ⅲ의 <b>에이전트 레이어 + Langfuse 관측 + 모델 라우팅 실험</b>이 뤼튼 3개 공고에 그대로 꽂힌다.</dd>
-            <dt class="risk">리스크·체크</dt><dd>B2C 회사 특성상 시장 변동에 민감. 지원 시점에 최근 투자·실적 뉴스 확인 필수.</dd>
-          </dl>
-        </article>
-
-        <article class="company">
-          <div class="co-head"><span class="co-rank">④</span><h3 class="co-name">라이너 (Liner)</h3></div>
-          <dl class="co-body">
-            <dt>무엇을 하나</dt><dd>AI 검색·리서치 에이전트. 글로벌(특히 미국) 사용자 비중이 높은 서비스.</dd>
-            <dt>왜 나에게 맞나</dt><dd>제품의 심장이 검색+RAG → Phase Ⅲ에서 채우는 갭과 정확히 동일. 글로벌 매출 중심이라 영어 환경.</dd>
-            <dt>실제 공고</dt><dd><b>Search Engineer</b>(Elasticsearch·Lucene·Solr 3년+, <b>"LLM RAG Agent용 Retrieval·Ranking 최적화"</b>) · <b>ML Engineer</b>(AI 에이전트 시스템, <b>Agentic flow 설계 및 평가</b>) · Backend Engineer(Kotlin/JVM·Python, 대규모 트래픽, RAG 인프라). <span class="warn">"Ranking Engineer/AI Engineer" 별도 직군은 없음.</span></dd>
-            <dt>준비 포인트</dt><dd>Phase Ⅲ 리트리버·리랭커를 <b>Elasticsearch로도</b> 구성 + nDCG/MRR 직접 계산. 지표명이 공고에 없으므로 오히려 차별화 지점.</dd>
-            <dt class="risk">리스크·체크</dt><dd>조직 규모가 상대적으로 작아 처우 협상 폭 확인 필요.</dd>
-          </dl>
-        </article>
-
-        <article class="company">
-          <div class="co-head"><span class="co-rank">⑤</span><h3 class="co-name">트웰브랩스 (Twelve Labs)</h3><span class="co-badge">Tier 1.5</span></div>
-          <dl class="co-body">
-            <dt>무엇을 하나</dt><dd>영상 이해(Video Understanding) 파운데이션 모델. 시리즈A 약 5,000만 달러, 사실상 미국 지향.</dd>
-            <dt>왜 나에게 맞나</dt><dd>"해외" 조건에 가장 부합. 글로벌 팀, 영어 환경.</dd>
-            <dt>예상 포지션</dt><dd>Backend/Platform Engineer (리서치 포지션은 논문 요구로 진입 불가)</dd>
-            <dt class="risk">리스크·체크</dt><dd>기술 허들과 영어 허들이 모두 높음 → 학습 일정이 밀린 만큼 2028년 타겟이 현실적.</dd>
-          </dl>
-        </article>
-
-        <div class="tier-label">Tier 2 — 글로벌 <small>도전 타겟, 처우 최상</small></div>
-
-        <article class="company">
-          <div class="co-head"><span class="co-rank">⑥</span><h3 class="co-name">몰로코 (Moloco)</h3></div>
-          <dl class="co-body">
-            <dt>무엇을 하나</dt><dd>ML 기반 애드테크, 한국계 미국 유니콘. 실리콘밸리 수준 처우.</dd>
-            <dt>왜 나에게 맞나</dt><dd>ML 인프라 + 대규모 시스템 — 시스템 역량이 통하는 구조. 한국 오피스 존재.</dd>
-            <dt class="risk">허들</dt><dd>코딩 인터뷰 난이도 국내 최상위권(LeetCode Hard급), 영어 라운드 포함.</dd>
-            <dt>판단</dt><dd>처우는 확실히 삼성 초과. 단 "스타트업스러운 열정"과는 결이 다를 수 있음(이미 큰 회사).</dd>
-          </dl>
-        </article>
-
-        <article class="company">
-          <div class="co-head"><span class="co-rank">⑦</span><h3 class="co-name">센드버드 (Sendbird)</h3></div>
-          <dl class="co-body">
-            <dt>무엇을 하나</dt><dd>채팅·메시징 API, 글로벌 B2B SaaS. 최근 AI 에이전트 방향으로 확장.</dd>
-            <dt>왜 나에게 맞나</dt><dd>SDK 개발 경험(S Pen SDK)이 정확히 겹침 — "개발자를 위한 제품을 만들어본 사람"은 희소하다. 글로벌 매출 중심.</dd>
-            <dt>준비 포인트</dt><dd>S Pen SDK 경험을 "개발자 경험(DX) 설계" 스토리로 재구성해두면 강력.</dd>
-          </dl>
-        </article>
-
-        <div class="tier-label">Tier 3 — 베이스라인 <small>스타트업 문화 + 대기업급 처우</small></div>
-
-        <article class="company">
-          <div class="co-head"><span class="co-rank">⑧</span><h3 class="co-name">토스 (비바리퍼블리카)</h3><span class="co-badge">Phase Ⅱ 직결</span></div>
-          <dl class="co-body">
-            <dt>왜 베이스라인</dt><dd>국내에서 "스타트업 속도 + 삼성급 이상 현금 보상"이 성립하는 대표적인 곳. AI 조직 확장 중.</dd>
-            <dt>실제 공고</dt><dd>Server Developer(Kotlin·Java·Spring, 대규모 트래픽) · <b>ML Backend Engineer(토스뱅크)</b> — <span class="verdict">"ML 경험은 불필요, AI/ML에 대한 강한 관심과 의지"</span> 명시. 8년차 백엔드에게 <b>가장 문턱 낮은 AI 진입로</b> · <b>ML Engineer(ML Platform)</b> — vLLM·SGLang·Triton·TensorRT-LLM 서빙, LLMOps, MLflow·Airflow·Kubeflow, <b>GPU 클러스터</b></dd>
-            <dt>준비 포인트</dt><dd><b>ML Platform 공고가 Phase Ⅱ의 체크리스트와 거의 일대일로 대응</b>한다. 이 공고를 Phase Ⅱ 설계도로 옆에 두고 학습할 것.</dd>
-            <dt>전형(실조사)</dt><dd>계열사 공통 후 실로 선택. 경력·ML은 <b>라이브 코딩 또는 사전과제</b> + 직무 + <b>문화적합성 인터뷰</b> + 레퍼런스. 이력서에 트래픽 지표 명시 권장.</dd>
-            <dt class="risk">체크포인트</dt><dd>업무 강도가 높기로 유명 — 워라밸 기대는 버려야 함.</dd>
-          </dl>
-        </article>
-
-        <article class="company">
-          <div class="co-head"><span class="co-rank">⑨</span><h3 class="co-name">당근 (당근마켓)</h3></div>
-          <dl class="co-body">
-            <dt>왜 베이스라인</dt><dd>검색·추천·신뢰안전 등에 ML을 대규모로 운영. 개발 문화 평판이 좋고 처우도 상위권.</dd>
-            <dt>실제 공고</dt><dd>Backend(<b>Go·gRPC</b> 또는 Kotlin·Spring, 2,100만 MAU 인증·MSA 분산, 3년+) · ML Engineer-Search(NLP·그래프·랭킹, A/B) · ML-피드/광고 추천(<b>"LLM 활용 개인화 추천"</b>, BigQuery·<b>Kubeflow</b>·TFX)</dd>
-            <dt>전형(실조사)</dt><dd>화상 <b>라이브 코딩</b>이 표준. ML 직군은 <b>ML 기초 테스트 + ML 모델 설계 인터뷰</b>, 백엔드 일부는 <b>시스템 디자인 인터뷰</b> 추가 + 별도 컬처핏. 3개월 수습.</dd>
-            <dt>준비 포인트</dt><dd>검색·추천 도메인이라 라이너 준비와 겹침. Go+gRPC는 지원 전 소규모 학습.</dd>
-          </dl>
-        </article>
-
-        <h3 class="block-title">회사별 준비 매핑 · 한눈에</h3>
-        <div class="table-scroll">
-        <table>
-          <thead><tr><th>회사</th><th>Tier</th><th>결정적 준비물</th><th>어느 Phase</th><th>난이도</th></tr></thead>
-          <tbody>
-            <tr><td>업스테이지</td><td>1</td><td>법령 QA 에이전트 + Evals + LangGraph / Platform은 GPU 스케줄링</td><td>Ⅱ + Ⅲ</td><td>중상</td></tr>
-            <tr><td>프렌들리AI</td><td>1</td><td>vLLM·배칭·양자화 벤치마크 (Seoul BE) / C++·커널 기여 (SF)</td><td class="verdict">Ⅱ</td><td>중 ~ 상</td></tr>
-            <tr><td>뤼튼</td><td>1</td><td>에이전트 + Langfuse 관측 + 모델 라우팅</td><td>Ⅲ</td><td>중</td></tr>
-            <tr><td>라이너</td><td>1</td><td>하이브리드 검색 + 리랭커 (Elasticsearch·nDCG/MRR)</td><td>Ⅲ</td><td>중상</td></tr>
-            <tr><td>토스</td><td>3</td><td>ML Platform은 GPU·서빙 스택 / ML Backend는 의지 + 코테</td><td class="verdict">Ⅱ</td><td>중</td></tr>
-            <tr><td>당근</td><td>3</td><td>검색·추천 기본기 + Kubeflow</td><td>Ⅱ + Ⅲ</td><td>중</td></tr>
-            <tr><td>센드버드</td><td>2</td><td>SDK·DX 스토리 재구성</td><td>—</td><td>중상</td></tr>
-            <tr><td>트웰브랩스</td><td>1.5</td><td>영어 + 플랫폼 역량</td><td>Ⅱ</td><td>최상</td></tr>
-            <tr><td>몰로코</td><td>2</td><td>LeetCode 상향 + 영어</td><td>—</td><td>최상</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <p class="callout"><b>Phase Ⅱ를 넣으면서 표가 바뀌었다.</b> 프렌들리AI와 토스 ML Platform이 "옵션"에서 <b>Phase Ⅱ만으로 문이 열리는 곳</b>으로 올라왔다. 학습을 우선한 결정이 결과적으로 진입로를 넓힌 셈이다.</p>
-      </div>
-    </details>
   </section>
 
-  <!-- REMINDER -->
-  <section class="phase" id="reminder">
-    <div class="phase-head">
-      <div class="phase-num"></div>
-      <div class="phase-title"><h2>마지막 리마인더</h2></div>
-    </div>
-    <div class="phase-rule"></div>
-    <p class="callout" style="border-color: var(--accent);"><b>지금 가장 중요한 마감은 11월 원서다.</b> 학습 로드맵이 재밌어 보여도 Phase 0가 밀리면 입학이 1년 밀리고, 아내와 같은 학기라는 전제 자체가 깨진다. <b>10월 말까지는 서류가 학습보다 우선</b>이다.</p>
-    <p class="callout"><b>학기 중에 무리하지 않는 것이 계획의 일부다.</b> 직장 + 대학원 + 개인 학습을 동시에 최대로 굴리면 셋 다 무너진다. 이 로드맵의 무거운 구간은 전부 <b>방학</b>에 배치돼 있고, 그건 실수가 아니라 설계다.</p>
-    <p class="callout"><b>졸업 프로젝트와 포트폴리오를 따로 만들지 말 것.</b> Phase Ⅲ의 전제가 이것 하나다. 지도교수와 주제를 정하는 순간에 이 결정이 내려지므로, 2학기(2027년 하반기)에 주제를 탐색할 때 미리 염두에 둔다.</p>
-    <p class="callout"><b>자격증을 새로 알아보고 싶어질 때 이 문장을 읽을 것.</b> 이미 확인했다 — 공고에 나오는 자격증은 쿠버네티스뿐이고 그건 이미 갖고 있다. 새 자격증을 찾는 시간은 <b>vLLM을 한 번 띄워보는 시간</b>과 맞바꾸는 게 항상 낫다.</p>
-    <p class="callout">「밑바닥」 3·4·5권도 같다. <b>읽는 책이 아니라 치는 책.</b> 완독 욕구가 올라오면 2권 8장을 다시 구현하는 쪽으로 돌린다.</p>
-    <p class="callout">공고·회사 리스트는 <b>2026.07 스냅샷</b>이다. 실제 지원은 2029년이라 그때는 통째로 다시 조사해야 한다 — 이 데이터는 "무엇을 배울지"의 근거로만 쓰고, "어디에 지원할지"의 근거로는 쓰지 않는다.</p>
-  </section>
-
-  <footer>진행 상태는 이 브라우저의 쿠키에 저장됩니다 · 로컬 전용, 서버 전송 없음</footer>
+  <footer>진행 상태는 이 브라우저의 쿠키에 저장됩니다 · 로컬 전용</footer>
 </div>
 
 <script>
 (function () {
-  var COOKIE_KEY = "career_roadmap_v3";
+  var COOKIE_KEY = "career_roadmap_v6";
   var EXPIRE_DAYS = 730;
 
   function setCookie(value) {
@@ -1011,6 +573,12 @@
     save(); updateProgress();
   };
   load();
+
+  var deadline = new Date(2026, 10, 15);
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  var days = Math.round((deadline - today) / 864e5);
+  document.getElementById('dday').textContent = days > 0 ? "D-" + days : (days === 0 ? "D-DAY" : "D+" + (-days));
 })();
 </script>
 </body>
