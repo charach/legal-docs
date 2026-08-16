@@ -479,8 +479,9 @@
 
   function renderShortlist(){
     var S = P.shortlist;
+    var n = S.tiers.reduce(function(a, t){ return a + t.items.length; }, 0);
     el('sl-sub').textContent = '42곳에서 AI·데이터 계열 24곳을 추리고, ' + S.criteria.join(' · ') +
-      ' 세 축으로 여섯 곳을 남겼다. 통학은 ' + S.commute + ' 기준.';
+      ' 세 축으로 ' + n + '곳을 남겼다. 통학은 ' + S.commute + ' 기준.';
     el('shortlist').innerHTML = S.tiers.map(function(t){
       return '<div class="tier"><div class="tier-head"><span class="lab">'+esc(t.label)+'</span>' +
         '<span class="why">'+fmt(t.why)+'</span></div>' +
