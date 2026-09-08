@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<title>안장 위의 힘 — 손에서 무게를 빼는 원리</title>
+<link rel="stylesheet" href="assets/summer.css">
+<style>
+  :root {
+    --f-grav:   #1A2E35;
+    --f-saddle: #5C7A85;
+    --f-pedal:  #0E7C94;
+    --f-hand:   #C2410C;
+    --f-tip:    #B42318;
+    --f-core:   #15803D;
+  }
+  body { background: var(--bg); }
+
+  .hero { padding: 72px 0 0; }
+  .hero .lead { max-width: 60ch; }
+
+  .lab {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { .lab { grid-template-columns: 1fr; } }
+
+  .stage {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 12px;
+  }
+  .stage svg { display: block; width: 100%; height: auto; }
+  .stage .toolbar {
+    display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center;
+    padding: 6px 4px 2px; font-size: 13px; color: var(--ink-2);
+  }
+  .stage .toolbar .spacer { flex: 1; }
+  .stage .toolbar label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+  .stage .toolbar input[type="checkbox"] { accent-color: var(--accent); }
+
+  .panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+  }
+  .panel h3 { font-size: 15px; margin-bottom: 14px; }
+  .panel + .panel { margin-top: 16px; }
+
+  .ctl { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: baseline; margin-top: 14px; }
+  .ctl:first-of-type { margin-top: 0; }
+  .ctl label { font-size: 14px; }
+  .ctl .val { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .ctl input[type="range"] { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); margin: 2px 0 0; }
+  .ctl .hint { grid-column: 1 / -1; font-size: 12px; color: var(--ink-2); line-height: 1.5; }
+
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .presets .btn { min-height: 34px; padding: 0 12px; font-size: 13px; }
+  .presets .btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .load { margin-top: 10px; }
+  .load .row { display: grid; grid-template-columns: 56px 1fr 104px; gap: 10px; align-items: center; margin-top: 10px; font-size: 14px; }
+  .load .row .name { display: flex; align-items: center; gap: 6px; }
+  .load .row .name i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .load .bar { height: 10px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .load .bar b { display: block; height: 100%; width: 0; transition: width .25s ease; border-radius: 3px; }
+  .load .num { text-align: right; font-variant-numeric: tabular-nums; font-size: 13px; color: var(--ink-2); }
+  .load .num strong { color: var(--ink); font-size: 14px; }
+
+  .verdict {
+    margin-top: 16px; padding: 12px 14px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--bg); font-size: 14px; line-height: 1.6;
+  }
+  .verdict.bad  { border-color: rgba(194,65,12,.35); }
+  .verdict.ok   { border-color: rgba(21,128,61,.35); }
+  .verdict b { display: block; margin-bottom: 2px; }
+
+  .torque { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; font-size: 13px; color: var(--ink-2); }
+  .torque div { display: flex; justify-content: space-between; gap: 12px; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .torque strong { color: var(--ink); text-align: right; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; padding: 0 4px; font-size: 13px; color: var(--ink-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 18px; height: 3px; border-radius: 2px; display: inline-block; }
+  .legend i.arc { width: 12px; height: 12px; border-radius: 50%; border: 3px solid; border-bottom-color: transparent; background: none; }
+
+  /* SVG */
+  .road       { stroke: var(--line); stroke-width: 2; }
+  .road-dash  { stroke: #CFE3E7; stroke-width: 3; stroke-dasharray: 26 22; }
+  .tube       { fill: none; stroke: #33505A; stroke-linecap: round; stroke-linejoin: round; }
+  .tire       { fill: none; stroke: #1A2E35; stroke-width: 9; }
+  .rim        { fill: none; stroke: #8FA6AE; stroke-width: 3.5; }
+  .spoke      { stroke: #8FA6AE; stroke-width: 1; }
+  .hub        { fill: #33505A; }
+  .ring       { fill: none; stroke: #33505A; stroke-width: 5; }
+  .chain      { stroke: #33505A; stroke-width: 2.5; stroke-dasharray: 3 2; }
+  .poly       { stroke: #fff; stroke-width: 3; stroke-linejoin: round; paint-order: stroke; }
+  .far        { opacity: .55; }
+  .force      { fill: none; stroke-width: 4; stroke-linecap: round; }
+  .flabel     { font-family: var(--sans); font-size: 12px; font-weight: 600; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
+  .flabel.sub { font-weight: 400; font-size: 11px; opacity: .85; }
+  .lever      { stroke: var(--f-tip); stroke-width: 1.5; stroke-dasharray: 4 4; fill: none; opacity: .8; }
+  .com        { fill: #fff; stroke: var(--f-grav); stroke-width: 2; }
+  .arc        { fill: none; stroke-width: 4; stroke-linecap: round; }
+  .hidden     { display: none; }
+
+  section.band { padding-top: 96px; }
+  .explain h2 { margin-bottom: 8px; }
+  .explain p + p { margin-top: 12px; }
+  .steps { counter-reset: s; list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .steps li::before { content: counter(s, decimal-leading-zero); font-size: 13px; color: var(--accent); padding-top: 4px; letter-spacing: .04em; }
+  .steps h4 { margin-bottom: 4px; }
+  .steps p { color: var(--ink-2); font-size: 15px; }
+  .steps p b { color: var(--ink); }
+  .formula { font-family: var(--mono); font-size: 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin-top: 16px; overflow-x: auto; white-space: nowrap; }
+  .note { font-size: 13px; color: var(--ink-2); margin-top: 24px; line-height: 1.6; }
+  footer { padding: 80px 0 40px; font-size: 13px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="index.html">Personal</a>
+    <div class="links">
+      <a href="exercise.html">훈련</a>
+      <a href="bike_forces.html" aria-current="page">안장 위의 힘</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Bike fit · Physics</span>
+    <h1 style="margin-top:12px">손이 무거운 건<br>팔 문제가 아니라 상체 회전 문제다</h1>
+    <p class="lead">안장에 앉은 라이더에게 작용하는 힘을 전부 화살표로 그렸습니다. 슬라이더를 움직여 보면 손에 실리는 무게가 어디서 오고, 무엇이 그걸 없애는지 보입니다. 결론부터 말하면 손은 <b>상체가 앞으로 쓰러지려는 토크</b>를 받치고 있고, 그 토크를 <b>골반 뒤쪽 근육</b>이 대신 받으면 손은 핸들에 얹혀만 있게 됩니다.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="lab">
+
+    <div class="stage">
+      <svg id="scene" viewBox="0 0 1000 640" role="img" aria-label="로드 자전거 라이더에 작용하는 힘 다이어그램">
+        <defs>
+          <marker id="m-grav"   markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#1A2E35"/></marker>
+          <marker id="m-saddle" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#5C7A85"/></marker>
+          <marker id="m-pedal"  markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#0E7C94"/></marker>
+          <marker id="m-hand"   markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#C2410C"/></marker>
+          <marker id="m-tip"    markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#B42318"/></marker>
+          <marker id="m-core"   markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#15803D"/></marker>
+        </defs>
+
+        <line class="road" x1="0" y1="622" x2="1000" y2="622"/>
+        <line id="roadDash" class="road-dash" x1="-60" y1="633" x2="1060" y2="633"/>
+
+        <g id="rearWheel"></g>
+        <g id="frontWheel"></g>
+
+        <line id="farCrank" class="tube" style="stroke-width:7; opacity:.6" x1="0" y1="0" x2="0" y2="0"/>
+        <rect id="farPedal" x="-14" y="-3" width="28" height="7" rx="2" fill="#33505A" opacity=".6"/>
+        <g id="farBody" class="far"></g>
+
+        <g id="frame"></g>
+        <g id="saddle"></g>
+
+        <g id="nearBody"></g>
+        <line id="nearCrank" class="tube" style="stroke-width:7" x1="0" y1="0" x2="0" y2="0"/>
+        <rect id="nearPedal" x="-14" y="-3" width="28" height="7" rx="2" fill="#1A2E35"/>
+        <g id="nearFootG"></g>
+        <g id="nearArmG"></g>
+
+        <g id="gLever">
+          <path id="leverPath" class="lever" d=""/>
+          <text id="leverLabel" class="flabel sub" fill="#B42318"></text>
+          <circle id="torsoCom" class="com" r="5" style="stroke:#B42318"/>
+        </g>
+        <circle id="bodyCom" class="com" r="6"/>
+
+        <path id="arcTip"  class="arc" stroke="#B42318" marker-end="url(#m-tip)"  d=""/>
+        <path id="arcCore" class="arc" stroke="#15803D" marker-end="url(#m-core)" d=""/>
+        <text id="arcTipLabel"  class="flabel" fill="#B42318"></text>
+        <text id="arcCoreLabel" class="flabel" fill="#15803D"></text>
+
+        <g id="fGrav"><line class="force" stroke="#1A2E35" marker-end="url(#m-grav)"/><text class="flabel" fill="#1A2E35"></text><text class="flabel sub" fill="#1A2E35"></text></g>
+        <g id="fSaddle"><line class="force" stroke="#5C7A85" marker-end="url(#m-saddle)"/><text class="flabel" fill="#5C7A85"></text><text class="flabel sub" fill="#5C7A85"></text></g>
+        <g id="fPedal"><line class="force" stroke="#0E7C94" marker-end="url(#m-pedal)"/><text class="flabel" fill="#0E7C94"></text><text class="flabel sub" fill="#0E7C94"></text></g>
+        <g id="fPedalFar"><line class="force" stroke="#0E7C94" marker-end="url(#m-pedal)" style="opacity:.45"/></g>
+        <g id="fHand"><line class="force" stroke="#C2410C" marker-end="url(#m-hand)"/><text class="flabel" fill="#C2410C"></text><text class="flabel sub" fill="#C2410C"></text></g>
+        <g id="fSlide"><line class="force" stroke="#C2410C" stroke-dasharray="6 5" marker-end="url(#m-hand)"/><text class="flabel sub" fill="#C2410C"></text></g>
+      </svg>
+
+      <div class="toolbar">
+        <label><input type="checkbox" id="chkPause"> 멈춤</label>
+        <label><input type="checkbox" id="chkForces" checked> 힘 화살표</label>
+        <label><input type="checkbox" id="chkTorque" checked> 엉덩이 토크</label>
+        <label><input type="checkbox" id="chkLever" checked> 모멘트 팔</label>
+        <span class="spacer"></span>
+        <span>케이던스 85 rpm · 56 사이즈 로드 · 크랭크 172.5</span>
+      </div>
+      <div class="legend">
+        <span><i style="background:#1A2E35"></i>체중 (중력)</span>
+        <span><i style="background:#5C7A85"></i>안장 반력</span>
+        <span><i style="background:#0E7C94"></i>페달 반력</span>
+        <span><i style="background:#C2410C"></i>손 하중 (핸들 반력)</span>
+        <span><i class="arc" style="border-color:#B42318; border-bottom-color:transparent"></i>상체가 쏠리는 토크</span>
+        <span><i class="arc" style="border-color:#15803D; border-bottom-color:transparent"></i>코어·둔근이 잡는 토크</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <h3>조절</h3>
+
+        <div class="ctl">
+          <label for="rTheta">상체 각도 (지면 기준)</label>
+          <span class="val" id="vTheta">42°</span>
+          <input type="range" id="rTheta" min="26" max="50" value="42" step="1">
+          <span class="hint">26° 드롭 · 42° 후드 · 50° 탑바. 손 위치도 각도에 맞춰 옮겨집니다. 상체를 눕힐수록 모멘트 팔이 길어집니다.</span>
+        </div>
+
+        <div class="ctl">
+          <label for="rCore">코어·둔근이 상체를 잡는 비율</label>
+          <span class="val" id="vCore">0%</span>
+          <input type="range" id="rCore" min="0" max="100" value="0" step="1">
+          <span class="hint">0%면 상체를 손이 전부 받칩니다. 골반 뒤쪽 근육(둔근·햄스트링·기립근)이 토크를 가져갈수록 손이 비워집니다.</span>
+        </div>
+
+        <div class="ctl">
+          <label for="rPedal">페달을 미는 힘 (양발 평균)</label>
+          <span class="val" id="vPedal">15% 체중</span>
+          <input type="range" id="rPedal" min="0" max="70" value="15" step="1">
+          <span class="hint">가볍게 돌리면 10~15%, 힘차게 밀면 40~60%. 페달 반력은 안장 하중을 덜어 줍니다.</span>
+        </div>
+
+        <div class="ctl">
+          <label for="rTilt">안장 각도</label>
+          <span class="val" id="vTilt">수평</span>
+          <input type="range" id="rTilt" min="-3" max="6" value="0" step="0.5">
+          <span class="hint">+는 코 내림. 코를 내리면 안장 하중의 일부가 앞으로 미끄러지는 힘이 되어 손이 수평으로도 밀립니다. 평평한 안장은 0~2°, 뒤가 올라온 안장은 2~5°까지.</span>
+        </div>
+
+        <div class="ctl">
+          <label for="rMass">체중</label>
+          <span class="val" id="vMass">82 kg</span>
+          <input type="range" id="rMass" min="50" max="110" value="82" step="1">
+        </div>
+
+        <div class="presets" id="presets">
+          <button class="btn btn-ghost" data-p="lean">손에 기대기</button>
+          <button class="btn btn-ghost" data-p="core">코어로 버티기</button>
+          <button class="btn btn-ghost" data-p="drive">둔근 페달링</button>
+          <button class="btn btn-ghost" data-p="upright">상체 세우기</button>
+          <button class="btn btn-ghost" data-p="drops">드롭 + 코어</button>
+          <button class="btn btn-ghost" data-p="nose">안장 코 내림</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>어디에 얼마나 실리나</h3>
+        <div class="load">
+          <div class="row"><span class="name"><i style="background:#C2410C"></i>손</span><div class="bar"><b id="bHand" style="background:#C2410C"></b></div><span class="num" id="nHand"></span></div>
+          <div class="row"><span class="name"><i style="background:#5C7A85"></i>안장</span><div class="bar"><b id="bSaddle" style="background:#5C7A85"></b></div><span class="num" id="nSaddle"></span></div>
+          <div class="row"><span class="name"><i style="background:#0E7C94"></i>페달</span><div class="bar"><b id="bPedal" style="background:#0E7C94"></b></div><span class="num" id="nPedal"></span></div>
+        </div>
+        <div class="verdict" id="verdict"></div>
+        <div class="torque">
+          <div><span>상체 무게 × 모멘트 팔 = 쏠림 토크</span><strong id="tTip"></strong></div>
+          <div><span>코어·둔근 토크</span><strong id="tCore"></strong></div>
+          <div><span>남은 토크 ÷ 손까지 거리 = 손 수직 하중</span><strong id="tHand"></strong></div>
+          <div><span>안장 하중 × sin(안장 각도) = 손 수평 하중</span><strong id="tSlide"></strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="band explain">
+  <div class="wrap-narrow">
+    <span class="eyebrow">Why</span>
+    <h2 style="margin-top:8px">손에 실리는 무게의 정체</h2>
+    <p>상체는 엉덩이 관절을 축으로 앞으로 기울어진 막대입니다. 막대의 무게중심이 축보다 앞에 있으니, 중력은 상체를 <b>앞으로 쓰러뜨리려는 토크</b>를 만듭니다. 이 토크는 누군가 반드시 받아야 합니다. 받는 방법은 둘뿐입니다.</p>
+    <p>하나는 <b>손</b>입니다. 핸들이 손을 위로 밀어 올려서 상체를 받칩니다. 이것이 손 저림, 손목 통증, 어깨 뭉침의 원인입니다. 다른 하나는 <b>엉덩이 관절 뒤쪽 근육</b>입니다. 둔근, 햄스트링, 척추기립근이 골반과 상체를 뒤로 당겨 잡으면 손은 방향만 잡는 역할로 돌아갑니다.</p>
+    <div class="formula">손 하중 = (상체 무게 × 모멘트 팔 − 코어·둔근 토크) ÷ 엉덩이에서 손까지 수평 거리</div>
+    <p style="margin-top:16px">위 식에서 손을 비우는 변수는 세 개입니다. 모멘트 팔을 줄이거나(상체 세우기), 코어·둔근 토크를 키우거나, 손까지 거리를 늘리는 것(긴 리치는 오히려 상체를 더 눕혀 모멘트 팔도 같이 늘리므로 실제로는 도움이 되지 않습니다). 그래서 실전에서 쓸 수 있는 건 사실상 <b>코어·둔근 토크 하나</b>입니다.</p>
+
+    <span class="eyebrow" style="display:block; margin-top:64px">How</span>
+    <h2 style="margin-top:8px">주행 중 손 힘 빼는 순서</h2>
+    <ol class="steps">
+      <li>
+        <div><h4>좌골로 앉기 (골반을 세우기)</h4>
+        <p>안장 위에서 골반을 살짝 앞으로 굴려 <b>좌골 두 점</b>이 안장 넓은 부분에 닿게 합니다. 골반이 뒤로 말리면 허리가 둥글어지고, 상체 무게가 엉덩이 근육을 거치지 못하고 그대로 손으로 흘러갑니다. 좌골이 안장을 눌러야 둔근과 햄스트링이 상체를 잡을 수 있는 자세가 됩니다.</p></div>
+      </li>
+      <li>
+        <div><h4>엉덩이 관절에서 접기, 허리에서 접지 않기</h4>
+        <p>상체를 숙일 때 허리를 구부리지 말고 <b>엉덩이 관절을 경첩처럼</b> 접습니다. 등이 평평한 상태로 앞으로 기울면 햄스트링이 팽팽해지며 자연스럽게 상체를 붙잡습니다. 이것이 슬라이더의 코어·둔근 비율을 올리는 실제 동작입니다.</p></div>
+      </li>
+      <li>
+        <div><h4>페달을 둔근으로 밀기</h4>
+        <p>페달을 발로 누르는 대신 <b>엉덩이로 밀어낸다</b>고 생각합니다. 둔근은 엉덩이 관절을 펴는 근육인데, 발이 페달에 고정되어 있으면 같은 수축이 상체를 뒤로 들어 올리는 방향으로도 작용합니다. 힘차게 페달링할 때 손이 가벼워지는 게 이 때문입니다. 프리셋 “둔근 페달링”이 그 상태입니다.</p></div>
+      </li>
+      <li>
+        <div><h4>팔꿈치는 살짝 굽히고, 손은 얹기만</h4>
+        <p>팔꿈치를 굽히는 것 자체는 손 하중을 줄이지 않습니다. 하중은 위 식으로 정해집니다. 대신 잠긴 팔꿈치는 노면 충격을 그대로 어깨로 보내고, 굽힌 팔꿈치는 삼두근이 완충합니다. 손 하중이 줄어든 뒤에야 팔꿈치를 굽힐 여유가 생기므로 <b>순서는 코어가 먼저, 팔꿈치가 나중</b>입니다.</p></div>
+      </li>
+      <li>
+        <div><h4>확인: 손 들어 보기</h4>
+        <p>안전한 직선 도로에서 한 손씩, 그다음 양손을 핸들에서 <b>1cm만 띄워</b> 봅니다. 상체가 앞으로 떨어지면 손이 받치고 있던 겁니다. 떨어지지 않고 그 자리에 머물면 골반 근육이 상체를 잡고 있는 것이고, 그 감각을 손을 다시 얹은 뒤에도 유지하는 것이 연습의 전부입니다.</p></div>
+      </li>
+    </ol>
+
+    <span class="eyebrow" style="display:block; margin-top:64px">Fit</span>
+    <h2 style="margin-top:8px">세팅이 손 하중을 만드는 경우</h2>
+    <ul class="plain" style="margin-top:20px">
+      <li><div><b>안장 코가 아래로 기울어짐</b> — 골반이 앞으로 미끄러지고, 미끄러짐을 손이 막게 됩니다. 위 슬라이더에서 안장 각도를 올려 보면 손에 수평 하중이 생기는 게 보입니다. 숫자 자체는 작아 보여도, 실제로는 골반이 좁은 코 쪽으로 밀려 앉게 되어 좌골 지지를 잃는 것이 더 큰 문제입니다. 평평한 안장은 0~2°, 뒤가 올라온 안장은 2~5°가 한계입니다.</div></li>
+      <li><div><b>안장이 너무 높음</b> — 골반이 좌우로 흔들리고 좌골이 안장에서 뜹니다. 그러면 둔근이 골반을 잡을 기준점을 잃습니다. 페달 최하점에서 무릎 각도가 140° 안팎이어야 합니다.</div></li>
+      <li><div><b>리치가 너무 김</b> — 상체가 더 눕고 모멘트 팔이 길어집니다. 팔을 뻗어야 후드에 닿는다면 스템을 1cm 줄이는 것부터 시험합니다. 후드에서 상체와 위팔 사이 각도가 85~90°가 기준입니다.</div></li>
+      <li><div><b>핸들이 너무 낮음</b> — 상체 각도가 작아져 같은 문제입니다. 유연성이 안 되면 스페이서로 핸들을 올리는 게 손 힘을 빼는 가장 빠른 방법입니다.</div></li>
+    </ul>
+
+    <p class="note">그림의 자전거는 56 사이즈 로드 지오메트리(휠베이스 990mm, 시트튜브 73.5°, 헤드튜브 73°, BB 드롭 70mm, 체인스테이 410mm, 스택 580mm, 리치 390mm, 700×28C)를 mm 단위로 그린 것이고 라이더는 키 178cm 기준 분절 길이입니다. 안장 높이는 페달 최하점 무릎 각도 141°, 후드에서 팔꿈치 굽힘 약 25°가 되도록 맞췄습니다. 모델 가정: 머리·몸통·팔을 합친 상체 무게는 체중의 65%, 상체 무게중심은 엉덩이에서 어깨까지의 45% 지점. 손 수직 하중은 토크 균형, 수평 하중은 안장 하중의 안장 방향 성분으로 계산하며, 팔의 무게와 공기저항은 무시했습니다. 페달 힘은 양발의 시간 평균값이고 화살표는 크랭크 위치에 따라 두 발에 나눠 그렸습니다. 실제 측정에서 편안한 라이더의 손 하중은 체중의 5~10%, 불편한 라이더는 15~25%가 흔합니다.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">힘의 크기는 kg중으로 표시합니다 (1 kg중 ≈ 9.8 N).</div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const G = 9.81;
+
+  // ---------- world: mm, origin at the bottom bracket, x forward, y up ----------
+  const K = 0.34;                                  // px per mm
+  const BBpx = { x: 360, y: 530 };
+  const P = (x, y) => ({ x: BBpx.x + K * x, y: BBpx.y - K * y });
+  const pt = (p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`;
+  const seg = (a, b) => `M${pt(a)} L${pt(b)}`;
+  const deg = Math.PI / 180;
+
+  // bike geometry (mm) — 56 size road bike
+  const WHEEL_R = 340;                             // 700x28C
+  const BB_DROP = 70, CHAINSTAY = 410, WHEELBASE = 990;
+  const REAR  = { x: -Math.sqrt(CHAINSTAY ** 2 - BB_DROP ** 2), y: BB_DROP };
+  const FRONT = { x: WHEELBASE + REAR.x, y: BB_DROP };
+  const STA = 73.5 * deg, HTA = 73 * deg;
+  const STACK = 580, REACH = 390, HT_LEN = 150;
+  const HT_TOP = { x: REACH, y: STACK };
+  const HT_BOT = { x: REACH + HT_LEN * Math.cos(HTA), y: STACK - HT_LEN * Math.sin(HTA) };
+  const ST_TOP = { x: -520 * Math.cos(STA), y: 520 * Math.sin(STA) };
+  const CRANK = 172.5;
+  const SIT   = { x: -225, y: 715 };               // sit-bone contact on the saddle
+  const RAIL  = { x: -215, y: 685 };
+  const STEM_TOP = { x: HT_TOP.x - 30 * Math.cos(HTA), y: HT_TOP.y + 30 * Math.sin(HTA) };
+  const BAR   = { x: 480, y: 634 };
+  const HOODS = { x: 580, y: 650 }, DROPS = { x: 548, y: 520 }, TOPS = { x: 442, y: 640 };
+
+  // rider (mm) — 178 cm
+  const HIP   = { x: -185, y: 785 };
+  const TORSO = 560;                               // hip joint -> shoulder joint chord
+  const COM_F = 0.45;
+  const THIGH = 445, SHANK = 440;
+  const UARM  = 330, FARM  = 310;
+
+  // segment thicknesses (mm, full width at each joint) and colours
+  const TH = { thigh: [170, 118], shank: [118, 72], uarm: [102, 82], farm: [82, 58], neck: [84, 72] };
+  const C_JERSEY = '#0E7C94', C_BIB = '#1A2E35', C_SKIN = '#E6C3A5';
+
+  const S = { theta: 42, core: 0, pedal: 15, tilt: 0, mass: 82, paused: false, cadence: 85 };
+  let phi = 0, wheelAng = 0, roadOff = 0, last = performance.now();
+
+  // ---------- static parts ----------
+  function wheel(gid, c) {
+    const g = $(gid); const cp = P(c.x, c.y); const r = WHEEL_R * K;
+    let s = `<circle class="tire" cx="0" cy="0" r="${r}"/><circle class="rim" cx="0" cy="0" r="${r - 8}"/>`;
+    for (let i = 0; i < 18; i++) { const a = i * Math.PI / 9; s += `<line class="spoke" x1="0" y1="0" x2="${((r - 10) * Math.cos(a)).toFixed(1)}" y2="${((r - 10) * Math.sin(a)).toFixed(1)}"/>`; }
+    s += `<circle class="hub" cx="0" cy="0" r="6"/>`;
+    g.innerHTML = s; g.dataset.cx = cp.x; g.dataset.cy = cp.y;
+  }
+  const tube = (a, b, w) => `<path class="tube" style="stroke-width:${w}" d="${seg(P(a.x, a.y), P(b.x, b.y))}"/>`;
+  function drawFrame() {
+    const bb = { x: 0, y: 0 };
+    const rear = P(REAR.x, REAR.y);
+    const forkMid = { x: (HT_BOT.x + FRONT.x) / 2 + 16, y: (HT_BOT.y + FRONT.y) / 2 };
+    const s = [
+      tube(bb, ST_TOP, 12),                                                     // seat tube
+      tube({ x: ST_TOP.x - 6, y: ST_TOP.y - 18 }, HT_TOP, 11),                  // sloping top tube
+      tube(bb, HT_BOT, 14),                                                     // down tube
+      tube(HT_TOP, HT_BOT, 15),                                                 // head tube
+      tube(bb, REAR, 8), tube({ x: ST_TOP.x - 4, y: ST_TOP.y - 24 }, REAR, 7),  // chainstay, seatstay
+      tube(ST_TOP, RAIL, 8),                                                    // seat post
+      `<path class="tube" style="stroke-width:8" d="M${pt(P(HT_BOT.x, HT_BOT.y))} Q${pt(P(forkMid.x, forkMid.y))} ${pt(P(FRONT.x, FRONT.y))}"/>`,  // fork
+      tube(HT_TOP, STEM_TOP, 12), tube(STEM_TOP, BAR, 10),                      // spacers, stem
+      `<path class="tube" style="stroke-width:8" d="M${pt(P(TOPS.x - 10, TOPS.y))} L${pt(P(BAR.x, BAR.y))} L${pt(P(HOODS.x - 30, HOODS.y - 4))} Q${pt(P(HOODS.x + 42, HOODS.y + 6))} ${pt(P(HOODS.x + 40, HOODS.y - 60))} Q${pt(P(HOODS.x + 22, HOODS.y - 135))} ${pt(P(DROPS.x - 20, DROPS.y - 6))}"/>`,  // bar
+      `<path class="tube" style="stroke-width:16" d="${seg(P(HOODS.x - 34, HOODS.y - 2), P(HOODS.x - 4, HOODS.y + 4))}"/>`,  // hood
+      `<circle class="ring" cx="${BBpx.x}" cy="${BBpx.y}" r="${100 * K}"/><circle class="ring" style="stroke-width:3" cx="${BBpx.x}" cy="${BBpx.y}" r="${70 * K}"/>`,
+      `<circle class="ring" style="stroke-width:4" cx="${rear.x}" cy="${rear.y}" r="${48 * K}"/>`,
+      `<line class="chain" x1="${BBpx.x}" y1="${BBpx.y - 100 * K}" x2="${rear.x}" y2="${rear.y - 48 * K}"/>`,
+      `<line class="chain" x1="${BBpx.x}" y1="${BBpx.y + 100 * K}" x2="${rear.x}" y2="${rear.y + 48 * K}"/>`,
+      `<circle class="hub" cx="${BBpx.x}" cy="${BBpx.y}" r="7"/>`,
+    ];
+    $('frame').innerHTML = s.join('');
+  }
+  function drawSaddle() {
+    const t = -S.tilt * deg;                        // nose down = clockwise in y-up coords
+    const rot = (x, y) => ({ x: SIT.x + x * Math.cos(t) - y * Math.sin(t), y: SIT.y + x * Math.sin(t) + y * Math.cos(t) });
+    const top = [[-115, 8], [-70, 16], [0, 8], [60, 6], [135, 4]];
+    const bot = [[135, -8], [60, -14], [0, -22], [-70, -18], [-115, -6]];
+    const d = 'M' + top.map(([x, y]) => pt(P(rot(x, y).x, rot(x, y).y))).join(' L') + ' L' + bot.map(([x, y]) => pt(P(rot(x, y).x, rot(x, y).y))).join(' L') + ' z';
+    $('saddle').innerHTML = `<path d="${d}" fill="#1A2E35"/>`;
+  }
+
+  // rider parts: every part is one filled polygon with a thin white edge
+  const PARTS = {
+    far:  [['fUArm', C_JERSEY], ['fFArm', C_SKIN], ['fThigh', C_BIB], ['fShank', C_SKIN], ['fFoot', '#F4F7F8'], ['farHand', C_SKIN]],
+    near: [['torso', C_JERSEY], ['neck', C_SKIN], ['helmet', '#1A2E35'], ['head', C_SKIN], ['thigh', C_BIB], ['shank', C_SKIN]],
+    foot: [['foot', '#F4F7F8']],
+    arm:  [['uarm', C_JERSEY], ['farm', C_SKIN], ['hand', C_SKIN]],
+  };
+  function buildParts(gid, list) {
+    $(gid).innerHTML = list.map(([id, c]) => `<path id="${id}" class="poly" style="fill:${c}" d=""/>`).join('');
+  }
+  const setD = (id, d) => $(id).setAttribute('d', d);
+
+  // tapered limb between two joints (mm), round ends — returned as a px path
+  function limbPath(A, B, wA, wB) {
+    const a = P(A.x, A.y), b = P(B.x, B.y);
+    const L = Math.hypot(b.x - a.x, b.y - a.y) || 1;
+    const d = { x: (b.x - a.x) / L, y: (b.y - a.y) / L }, n = { x: -d.y, y: d.x };
+    const ra = wA * K / 2, rb = wB * K / 2;
+    const p1 = { x: a.x + n.x * ra, y: a.y + n.y * ra }, p2 = { x: b.x + n.x * rb, y: b.y + n.y * rb };
+    const p3 = { x: b.x - n.x * rb, y: b.y - n.y * rb }, p4 = { x: a.x - n.x * ra, y: a.y - n.y * ra };
+    return `M${pt(p1)} L${pt(p2)} A${rb},${rb} 0 0 0 ${pt(p3)} L${pt(p4)} A${ra},${ra} 0 0 0 ${pt(p1)} z`;
+  }
+  // torso: offset a cubic spine by a half-width that changes from hips to shoulders
+  function torsoPath(p0, c1, c2, p3) {
+    const N = 18, back = [], front = [];
+    const hw = (t) => (t < 0.25 ? 108 - 4 * t : t < 0.7 ? 107 - 40 * (t - 0.25) : 89 - 50 * (t - 0.7)) * K;   // px half-width
+    for (let i = 0; i <= N; i++) {
+      const t = i / N, u = 1 - t;
+      const x = u * u * u * p0.x + 3 * u * u * t * c1.x + 3 * u * t * t * c2.x + t * t * t * p3.x;
+      const y = u * u * u * p0.y + 3 * u * u * t * c1.y + 3 * u * t * t * c2.y + t * t * t * p3.y;
+      const dx = 3 * u * u * (c1.x - p0.x) + 6 * u * t * (c2.x - c1.x) + 3 * t * t * (p3.x - c2.x);
+      const dy = 3 * u * u 
+        * (c1.y - p0.y) + 6 * u * t * (c2.y - c1.y) + 3 * t * t * (p3.y - c2.y);
+      const q = P(x, y); const L = Math.hypot(dx, -dy) || 1;
+      const n = { x: dy / L, y: dx / L };            // px-space normal (y flipped)
+      const r = hw(t);
+      back.push({ x: q.x - n.x * r, y: q.y - n.y * r });
+      front.push({ x: q.x + n.x * r, y: q.y + n.y * r });
+    }
+    const r0 = hw(0), r1 = hw(1);
+    return `M${pt(back[0])} ` + back.slice(1).map(q => 'L' + pt(q)).join(' ') +
+      ` A${r1},${r1} 0 0 1 ${pt(front[N])} ` + front.slice(0, N).reverse().map(q => 'L' + pt(q)).join(' ') +
+      ` A${r0},${r0} 0 0 1 ${pt(back[0])} z`;
+  }
+
+  // two-bar inverse kinematics in mm space (y up)
+  function ik(A, B, l1, l2, pick) {
+    let dx = B.x - A.x, dy = B.y - A.y, d = Math.hypot(dx, dy);
+    const max = l1 + l2 - 1;
+    if (d > max) { dx *= max / d; dy *= max / d; d = max; }
+    const a = (l1 * l1 - l2 * l2 + d * d) / (2 * d);
+    const h = Math.sqrt(Math.max(0, l1 * l1 - a * a));
+    const mx = A.x + a * dx / d, my = A.y + a * dy / d;
+    return pick({ x: mx + h * dy / d, y: my - h * dx / d }, { x: mx - h * dy / d, y: my + h * dx / d });
+  }
+  function handPos(theta) {
+    if (theta <= 42) { const t = (theta - 26) / 16; return { x: DROPS.x + (HOODS.x - DROPS.x) * t, y: DROPS.y + (HOODS.y - DROPS.y) * t }; }
+    const t = (theta - 42) / 8; return { x: HOODS.x + (TOPS.x - HOODS.x) * t, y: HOODS.y + (TOPS.y - HOODS.y) * t };
+  }
+  function shoePath(pedal, ang) {
+    const pts = [[-185, 14], [-100, 8], [80, 4], [88, 24], [40, 42], [-30, 72], [-150, 78], [-190, 50]];
+    const c = Math.cos(ang), s = Math.sin(ang);
+    return 'M' + pts.map(([x, y]) => pt(P(pedal.x + x * c - y * s, pedal.y + x * s + y * c))).join(' L') + ' z';
+  }
+  function leg(pedal, ph, ids) {
+    const ankAng = (-10 + 10 * Math.cos(ph)) * deg;                 // flat at the top, toe down through the bottom
+    const c = Math.cos(ankAng), s = Math.sin(ankAng);
+    const ankle = { x: pedal.x + (-130 * c - 90 * s), y: pedal.y + (-130 * s + 90 * c) };
+    const knee = ik(HIP, ankle, THIGH, SHANK, (p, q) => (p.x > q.x ? p : q));
+    setD(ids[0], limbPath(HIP, knee, TH.thigh[0], TH.thigh[1]));
+    setD(ids[1], limbPath(knee, ankle, TH.shank[0], TH.shank[1]));
+    setD(ids[2], shoePath(pedal, ankAng));
+    return knee;
+  }
+  function arm(shoulder, hand, ids) {
+    const elbow = ik(shoulder, hand, UARM, FARM, (p, q) => (p.y < q.y ? p : q));   // elbow hangs below the shoulder-hand line
+    setD(ids[0], limbPath(shoulder, elbow, TH.uarm[0], TH.uarm[1]));
+    setD(ids[1], limbPath(elbow, hand, TH.farm[0], TH.farm[1]));
+    const hp = P(hand.x, hand.y);
+    setD(ids[2], `M${hp.x - 12},${hp.y - 8} a12,10 0 1,0 24,0 a12,10 0 1,0 -24,0`);
+    return elbow;
+  }
+
+  // ---------- physics ----------
+  function compute() {
+    const th = S.theta * deg;
+    const W = S.mass * G, Wt = 0.65 * W;
+    const hand = handPos(S.theta);
+    const xCom = COM_F * TORSO * Math.cos(th) / 1000;             // m
+    const dHand = (hand.x - HIP.x) / 1000;                         // m
+    const tauTip = Wt * xCom;
+    const tauCore = tauTip * S.core / 100;
+    const Fh = Math.max(0, (tauTip - tauCore) / dHand);
+    const Fp = W * S.pedal / 100;
+    let Fs = W - Fh - Fp; const off = Fs < 0; if (off) Fs = 0;
+    const Fx = Math.max(0, Fs * Math.sin(S.tilt * deg));           // forward slide carried by the hands
+    return { W, Wt, Fh, Fp, Fs, Fx, tauTip, tauCore, xCom, dHand, off, hand, th };
+  }
+  const kg = (N) => (N / G).toFixed(1);
+  const pct = (N, W) => Math.round(100 * N / W);
+
+  function setForce(gid, from, dir, N, scale, label, sub, ls) {
+    const g = $(gid); const line = g.querySelector('line'); const t = g.querySelectorAll('text');
+    const len = Math.max(0, N * scale);
+    const to = { x: from.x + dir.x * len, y: from.y + dir.y * len };
+    line.setAttribute('x1', from.x); line.setAttribute('y1', from.y); line.setAttribute('x2', to.x); line.setAttribute('y2', to.y);
+    line.style.opacity = len < 2 ? 0 : 1;
+    if (t.length && ls) {
+      const lx = to.x + ls.x, ly = to.y + ls.y;
+      t[0].setAttribute('x', lx); t[0].setAttribute('y', ly); t[0].textContent = label; t[0].setAttribute('text-anchor', ls.anchor || 'start');
+      if (t[1]) { t[1].setAttribute('x', lx); t[1].setAttribute('y', ly + 14); t[1].textContent = sub; t[1].setAttribute('text-anchor', ls.anchor || 'start'); }
+    }
+    return to;
+  }
+  function arcPath(c, r, a0, a1) {
+    const p0 = { x: c.x + r * Math.cos(a0), y: c.y + r * Math.sin(a0) };
+    const p1 = { x: c.x + r * Math.cos(a1), y: c.y + r * Math.sin(a1) };
+    return `M${pt(p0)} A${r},${r} 0 ${Math.abs(a1 - a0) > Math.PI ? 1 : 0} ${a1 > a0 ? 1 : 0} ${pt(p1)}`;
+  }
+
+  // ---------- render ----------
+  function render(dt) {
+    const R = compute(); const th = R.th;
+    if (!S.paused) {
+      const w = S.cadence / 60 * 2 * Math.PI;
+      phi += w * dt; wheelAng += w * dt * 2.7; roadOff = (roadOff + w * dt * 2.7 * WHEEL_R * K) % 48;
+    }
+    // cranks: phi = 0 at the top, forward through the front
+    const nearP = { x: CRANK * Math.sin(phi), y: CRANK * Math.cos(phi) };
+    const farP  = { x: -nearP.x, y: -nearP.y };
+    const np = P(nearP.x, nearP.y), fp = P(farP.x, farP.y);
+    for (const [id, q] of [['nearCrank', np], ['farCrank', fp]]) { const l = $(id); l.setAttribute('x1', BBpx.x); l.setAttribute('y1', BBpx.y); l.setAttribute('x2', q.x); l.setAttribute('y2', q.y); }
+    $('nearPedal').setAttribute('transform', `translate(${np.x},${np.y})`);
+    $('farPedal').setAttribute('transform', `translate(${fp.x},${fp.y})`);
+
+    const wa = (wheelAng * 180 / Math.PI).toFixed(1);
+    for (const id of ['rearWheel', 'frontWheel']) { const g = $(id); g.setAttribute('transform', `translate(${g.dataset.cx},${g.dataset.cy}) rotate(${wa})`); }
+    $('roadDash').setAttribute('transform', `translate(${-roadOff},0)`);
+
+    // torso: cubic spine — steeper at the hip hinge, rounding over the upper back
+    const shoulder = { x: HIP.x + TORSO * Math.cos(th), y: HIP.y + TORSO * Math.sin(th) };
+    const hump = 1 + Math.max(0, -S.tilt) * 0.12;                 // a nose-up saddle rounds the back a little more
+    const a0 = th + 16 * deg * hump, a1 = th - 30 * deg * hump, cl = 0.38 * TORSO;
+    const c1 = { x: HIP.x + cl * Math.cos(a0), y: HIP.y + cl * Math.sin(a0) };
+    const c2 = { x: shoulder.x - cl * Math.cos(a1), y: shoulder.y - cl * Math.sin(a1) };
+    const spineStart = { x: HIP.x + 20 * Math.cos(th), y: HIP.y + 20 * Math.sin(th) };
+    setD('torso', torsoPath(spineStart, c1, c2, shoulder));
+
+    // neck and head, looking down the road
+    const neckA = th + 12 * deg;                                     // neck cranes up to look down the road
+    const neckEnd = { x: shoulder.x + 120 * Math.cos(neckA), y: shoulder.y + 120 * Math.sin(neckA) };
+    const headC = { x: shoulder.x + 165 * Math.cos(neckA), y: shoulder.y + 165 * Math.sin(neckA) + 8 };
+    setD('neck', limbPath({ x: shoulder.x - 10, y: shoulder.y + 10 }, neckEnd, TH.neck[0], TH.neck[1]));
+    const hc = P(headC.x, headC.y), helC = P(headC.x - 14, headC.y + 16);
+    setD('helmet', `M${helC.x - 34},${helC.y} a34,32 0 1,1 68,0 a34,32 0 1,1 -68,0`);
+    setD('head', `M${hc.x - 28},${hc.y} a28,28 0 1,1 56,0 a28,28 0 1,1 -56,0`);
+
+    // legs and arms
+    leg(farP, phi + Math.PI, ['fThigh', 'fShank', 'fFoot']);
+    const knee = leg(nearP, phi, ['thigh', 'shank', 'foot']);
+    const hand = R.hand;
+    arm({ x: shoulder.x - 20, y: shoulder.y - 25 }, { x: hand.x - 15, y: hand.y }, ['fUArm', 'fFArm', 'farHand']);
+    arm(shoulder, hand, ['uarm', 'farm', 'hand']);
+
+    // centres of mass and the lever arm
+    const torsoCom = { x: HIP.x + COM_F * TORSO * Math.cos(th), y: HIP.y + COM_F * TORSO * Math.sin(th) };
+    const legCom = { x: HIP.x + 0.55 * (knee.x - HIP.x), y: HIP.y + 0.55 * (knee.y - HIP.y) - 60 };
+    const bodyCom = { x: 0.65 * torsoCom.x + 0.35 * legCom.x, y: 0.65 * torsoCom.y + 0.35 * legCom.y };
+    const tcp = P(torsoCom.x, torsoCom.y), bcp = P(bodyCom.x, bodyCom.y), hip = P(HIP.x, HIP.y);
+    $('torsoCom').setAttribute('cx', tcp.x); $('torsoCom').setAttribute('cy', tcp.y);
+    $('bodyCom').setAttribute('cx', bcp.x); $('bodyCom').setAttribute('cy', bcp.y);
+    $('leverPath').setAttribute('d', `M${pt(tcp)} L${tcp.x.toFixed(1)},${hip.y.toFixed(1)} L${pt(hip)}`);
+    const ll = $('leverLabel'); ll.setAttribute('x', tcp.x + 8); ll.setAttribute('y', hip.y - 5); ll.textContent = `모멘트 팔 ${(R.xCom * 100).toFixed(0)} cm`;
+
+    // torques at the hip (clockwise on screen = tipping forward)
+    const sweepTip = Math.min(1.5 * Math.PI, R.tauTip / 60 * Math.PI / 2);
+    const sweepCore = Math.min(1.5 * Math.PI, R.tauCore / 60 * Math.PI / 2);
+    const s0 = -Math.PI * 0.9;
+    $('arcTip').setAttribute('d', arcPath(hip, 52, s0, s0 + sweepTip));
+    $('arcCore').setAttribute('d', sweepCore > 0.05 ? arcPath(hip, 66, s0 + sweepCore, s0) : '');
+    $('arcCore').style.opacity = sweepCore > 0.05 ? 1 : 0;
+    const tl = $('arcTipLabel'); tl.setAttribute('x', hip.x - 72); tl.setAttribute('y', hip.y + 52); tl.setAttribute('text-anchor', 'end'); tl.textContent = `쏠림 ${R.tauTip.toFixed(0)} N·m`;
+    const cl2 = $('arcCoreLabel'); cl2.setAttribute('x', hip.x - 72); cl2.setAttribute('y', hip.y + 68); cl2.setAttribute('text-anchor', 'end'); cl2.textContent = R.tauCore > 1 ? `코어 ${R.tauCore.toFixed(0)} N·m` : '';
+
+    // force arrows (1 N = 0.12 px)
+    const sc = 0.12;
+    setForce('fGrav', bcp, { x: 0, y: 1 }, R.W, sc, `체중 ${kg(R.W)} kg`, '', { x: 10, y: 4 });
+    setForce('fSaddle', P(SIT.x - 45, SIT.y + 6), { x: 0, y: -1 }, R.Fs, sc, R.off ? '안장 하중 0 (댄싱)' : `안장 ${kg(R.Fs)} kg`, R.off ? '' : `체중의 ${pct(R.Fs, R.W)}%`, { x: -14, y: -8, anchor: 'end' });
+    const share = 0.5 + 0.45 * Math.sin(phi);
+    setForce('fPedal', np, { x: 0, y: -1 }, R.Fp * share, sc, '', '', null);
+    { const t = $('fPedal').querySelectorAll('text'); t[0].setAttribute('x', BBpx.x + 36); t[0].setAttribute('y', BBpx.y + 60); t[0].textContent = `페달 ${kg(R.Fp)} kg`; t[1].setAttribute('x', BBpx.x + 36); t[1].setAttribute('y', BBpx.y + 74); t[1].textContent = `양발 평균 · ${pct(R.Fp, R.W)}%`; }
+    setForce('fPedalFar', fp, { x: 0, y: -1 }, R.Fp * (1 - share), sc, '', '', null);
+    const hp = P(hand.x, hand.y);
+    setForce('fHand', { x: hp.x + 4, y: hp.y + 8 }, { x: 0, y: -1 }, R.Fh, sc, `손 ${kg(R.Fh)} kg`, `체중의 ${pct(R.Fh, R.W)}%`, { x: 12, y: 4 });
+    if (R.Fh < 8) { const t = $('fHand').querySelectorAll('text'); t[0].setAttribute('x', hp.x + 16); t[0].setAttribute('y', hp.y - 6); t[0].textContent = '손 0 kg — 얹혀만 있음'; t[1].textContent = ''; }
+    setForce('fSlide', { x: hp.x - 8, y: hp.y + 24 }, { x: -1, y: 0 }, R.Fx, sc * 2, '', '', null);
+    { const t = $('fSlide').querySelector('text'); t.setAttribute('x', hp.x - 10); t.setAttribute('y', hp.y + 42); t.setAttribute('text-anchor', 'end'); t.textContent = R.Fx > 2 ? `미끄러짐 ${kg(R.Fx)} kg` : ''; }
+
+    // side panel
+    const Ftot = Math.hypot(R.Fh, R.Fx);
+    $('bHand').style.width = Math.min(100, 100 * Ftot / R.W * 3) + '%';
+    $('bSaddle').style.width = Math.min(100, 100 * R.Fs / R.W) + '%';
+    $('bPedal').style.width = Math.min(100, 100 * R.Fp / R.W) + '%';
+    $('nHand').innerHTML = `<strong>${kg(Ftot)} kg</strong> · ${pct(Ftot, R.W)}%`;
+    $('nSaddle').innerHTML = `<strong>${kg(R.Fs)} kg</strong> · ${pct(R.Fs, R.W)}%`;
+    $('nPedal').innerHTML = `<strong>${kg(R.Fp)} kg</strong> · ${pct(R.Fp, R.W)}%`;
+    $('tTip').textContent = `${kg(R.Wt)} kg × ${(R.xCom * 100).toFixed(0)} cm = ${R.tauTip.toFixed(0)} N·m`;
+    $('tCore').textContent = `${R.tauCore.toFixed(0)} N·m`;
+    $('tHand').textContent = `${(R.tauTip - R.tauCore).toFixed(0)} ÷ ${(R.dHand * 100).toFixed(0)} cm = ${kg(R.Fh)} kg`;
+    $('tSlide').textContent = S.tilt > 0 ? `${kg(R.Fs)} kg × sin ${S.tilt}° = ${kg(R.Fx)} kg` : '0 kg';
+
+    const v = $('verdict'); const p = 100 * Ftot / R.W;
+    if (p < 5) { v.className = 'verdict ok'; v.innerHTML = '<b>손은 얹혀만 있습니다</b>상체를 골반 근육이 잡고 있어 손은 방향만 잡습니다. 이 상태에서 팔꿈치를 살짝 굽히면 노면 충격까지 흡수됩니다.'; }
+    else if (p < 12) { v.className = 'verdict'; v.innerHTML = '<b>가볍게 지지 중</b>롱라이드에서 견딜 만한 범위입니다. 손 위치를 자주 바꾸면 저림을 피할 수 있습니다.'; }
+    else { v.className = 'verdict bad'; v.innerHTML = `<b>손이 상체를 받치고 있습니다</b>손에 ${kg(Ftot)} kg이 실려 있습니다. 한 시간을 넘기면 손 저림과 어깨 뭉침이 옵니다. 코어·둔근 슬라이더를 올려 보세요.`; }
+  }
+
+  // ---------- controls ----------
+  const tiltText = (t) => t === 0 ? '수평' : (t > 0 ? `코 ${t}° 내림` : `코 ${-t}° 올림`);
+  function syncLabels() {
+    $('vTheta').textContent = S.theta + '°'; $('vCore').textContent = S.core + '%';
+    $('vPedal').textContent = S.pedal + '% 체중'; $('vMass').textContent = S.mass + ' kg'; $('vTilt').textContent = tiltText(S.tilt);
+    $('rTheta').value = S.theta; $('rCore').value = S.core; $('rPedal').value = S.pedal; $('rMass').value = S.mass; $('rTilt').value = S.tilt;
+  }
+  const bind = (id, key) => $(id).addEventListener('input', (e) => { S[key] = +e.target.value; if (key === 'tilt') drawSaddle(); syncLabels(); clearPreset(); render(0); });
+  bind('rTheta', 'theta'); bind('rCore', 'core'); bind('rPedal', 'pedal'); bind('rMass', 'mass'); bind('rTilt', 'tilt');
+
+  const PRESETS = {
+    lean:    { theta: 42, core: 0,  pedal: 12, tilt: 0 },
+    core:    { theta: 42, core: 85, pedal: 12, tilt: 0 },
+    drive:   { theta: 42, core: 70, pedal: 50, tilt: 0 },
+    upright: { theta: 50, core: 20, pedal: 12, tilt: 0 },
+    drops:   { theta: 27, core: 90, pedal: 30, tilt: 0 },
+    nose:    { theta: 42, core: 40, pedal: 12, tilt: 5 },
+  };
+  function clearPreset() { document.querySelectorAll('#presets .btn').forEach(b => b.classList.remove('on')); }
+  $('presets').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; clearPreset(); b.classList.add('on'); animateTo(PRESETS[b.dataset.p]); });
+  let anim = null;
+  function animateTo(target) {
+    if (anim) cancelAnimationFrame(anim);
+    const from = { theta: S.theta, core: S.core, pedal: S.pedal, tilt: S.tilt }; const t0 = performance.now();
+    const step = (now) => {
+      const u = Math.min(1, (now - t0) / 600); const e = 1 - Math.pow(1 - u, 3);
+      for (const k of Object.keys(target)) { const v = from[k] + (target[k] - from[k]) * e; S[k] = k === 'tilt' ? Math.round(v * 2) / 2 : Math.round(v); }
+      drawSaddle(); syncLabels(); render(0);
+      if (u < 1) anim = requestAnimationFrame(step); else anim = null;
+    };
+    anim = requestAnimationFrame(step);
+  }
+
+  $('chkPause').addEventListener('change', (e) => { S.paused = e.target.checked; });
+  const toggle = (id, ids) => $(id).addEventListener('change', (e) => ids.forEach(i => $(i).classList.toggle('hidden', !e.target.checked)));
+  toggle('chkForces', ['fGrav', 'fSaddle', 'fPedal', 'fPedalFar', 'fHand', 'fSlide', 'bodyCom']);
+  toggle('chkTorque', ['arcTip', 'arcCore', 'arcTipLabel', 'arcCoreLabel']);
+  toggle('chkLever', ['gLever']);
+
+  // ---------- boot ----------
+  wheel('rearWheel', REAR); wheel('frontWheel', FRONT);
+  drawFrame(); drawSaddle();
+  buildParts('farBody', PARTS.far); buildParts('nearBody', PARTS.near); buildParts('nearFootG', PARTS.foot); buildParts('nearArmG', PARTS.arm);
+  // optional start state via #phi=90&theta=26&tilt=5 (used for screenshots and sharing)
+  try {
+    const H = new URLSearchParams(location.hash.slice(1));
+    if (H.has('phi')) phi = (+H.get('phi') || 0) * deg;
+    for (const k of ['theta', 'core', 'pedal', 'tilt', 'mass']) if (H.has(k)) S[k] = +H.get(k);
+    drawSaddle();
+  } catch (e) {}
+  syncLabels();
+  function loop(now) { const dt = Math.min(0.05, (now - last) / 1000); last = now; render(dt); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
