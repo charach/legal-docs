@@ -182,7 +182,7 @@
     </div>
     <div class="tiles">
       <div class="tile"><div class="k">수영</div><div class="v">3.8<small>km</small></div><div class="s">1.9km 직사각형 2바퀴 · 지리산 호수(구만제) · 롤링 스타트 5명씩 5~6초 · 07:00~07:19</div></div>
-      <div class="tile"><div class="k">바이크</div><div class="v">176.7<small>km</small></div><div class="s">산동 왕복 → 산업도로 → 문척·간전 T자 2회전 → 구례1교~용방 3회전. <b>U턴 14회</b></div></div>
+      <div class="tile"><div class="k">바이크</div><div class="v">176.7<small>km</small></div><div class="s">산동 왕복 → 산업도로 → 문척·간전 T자 2회전 → 구례1교~용방 3회전. <b>U턴 14회</b> · 획득고도 약 1,000m(DEM 추정) — 큰 산은 없고 초반 산동 오르막과 순환로의 짧은 언덕들</div></div>
       <div class="tile"><div class="k">런</div><div class="v">42.0<small>km</small></div><div class="s">서시천 9.92km × 4바퀴 + 2.34km · 보급소 5곳/바퀴 → 21회 통과 · 도로 구간은 KBS~사림 1.2km뿐</div></div>
       <div class="tile"><div class="k">보급</div><div class="v">8<small>+ 1 PN</small></div><div class="s">바이크 보급소 3곳(AS1 ×4, AS2 ×2, AS3 ×2) · 퍼스널니즈는 <b>90km 한 번</b> · 물·게토레이·바나나½·젤</div></div>
     </div>
@@ -395,7 +395,7 @@
       <div>
         <span class="eyebrow">Bike · 176.7km</span>
         <h2>바이크 · 다섯 조각으로 쪼개서 탄다</h2>
-        <p class="lead">코스를 통째로 보면 복잡하지만 순서대로 다섯 조각입니다. ① 산동 왕복 13.5km ② 산업도로 남하 → 문척 9.6km ③ 문척·간전 <b>T자 순환 2회전 79km</b> ④ 구례1교~용방 <b>산업도로 순환 3회전 73km</b> ⑤ T2 진입 7.7km. 지도 위 점은 시뮬레이터 시계를 따라 움직입니다.</p>
+        <p class="lead">지도 선의 색이 경사도입니다 — 오르막이 있는 자리와 그 언덕을 몇 번 오르는지가 한눈에 보이고, 아래 고도 프로파일과 언덕 표가 같은 데이터에서 나옵니다. 코스를 통째로 보면 복잡하지만 순서대로 다섯 조각입니다. ① 산동 왕복 13.5km ② 산업도로 남하 → 문척 9.6km ③ 문척·간전 <b>T자 순환 2회전 79km</b> ④ 구례1교~용방 <b>산업도로 순환 3회전 73km</b> ⑤ T2 진입 7.7km. 지도 위 점은 시뮬레이터 시계를 따라 움직입니다.</p>
       </div>
     </div>
 
@@ -403,10 +403,21 @@
       <div class="bar">
         <span class="ro"><b id="bk-km">0.0</b> km · <b id="bk-clock">—</b> · <span id="bk-seg">—</span></span>
         <span class="sp"></span>
-        <span class="ro">U턴 <b id="bk-u">0</b>/14 · 보급 <b id="bk-a">0</b>/8</span>
+        <span class="ro">U턴 <b id="bk-u">0</b>/14 · 보급 <b id="bk-a">0</b>/8 · 고도 <b id="bk-ele">—</b> m · 경사 <b id="bk-grade">—</b></span>
       </div>
-      <svg id="bikemap" viewBox="0 0 1000 940" role="img" aria-label="바이크 코스 도식"></svg>
-      <div class="legend"><span><i style="background:#0E7C94;opacity:.3"></i>코스(겹칠수록 진함 = 여러 번 지남)</span><span><i style="background:#fff;border:2px solid #0E7C94"></i>U턴</span><span><i style="background:#0E7C94"></i>보급소</span><span><i style="background:#1A2E35"></i>퍼스널니즈</span><span><i style="background:#fff;border:2px solid #B42318"></i>컷오프</span><span><i style="background:#B42318"></i>나</span></div>
+      <svg id="bikemap" viewBox="0 0 1000 900" role="img" aria-label="바이크 코스 지도 · 경사도 색상"></svg>
+      <div class="legend"><span><i style="background:#9FB6BC"></i>내리막 (−2% 이하)</span><span><i style="background:#0E7C94;opacity:.55"></i>평지</span><span><i style="background:#D98E2B"></i>완만 오르막 2~4%</span><span><i style="background:#C2410C"></i>오르막 4~7%</span><span><i style="background:#B42318"></i>급경사 7%+</span><span><i style="background:#fff;border:2px solid #0E7C94"></i>U턴</span><span><i style="background:#0E7C94"></i>보급소</span><span><i style="background:#1A2E35"></i>퍼스널니즈</span><span><i style="background:#fff;border:2px solid #B42318"></i>컷오프</span><span><i style="background:#B42318"></i>나</span></div>
+      <div class="bar" style="margin-top:14px; border-top:1px solid var(--line); padding-top:12px"><span>고도 프로파일 · 0.1km 간격 · 회색 띠는 T자 순환(23~102km), 나머지는 산업도로 순환</span><span class="sp"></span><span class="ro">획득고도 <b id="bk-gain">—</b> m · 최대 경사 <b id="bk-maxg">—</b></span></div>
+      <svg id="bikeprofile" viewBox="0 0 1000 260" role="img" aria-label="바이크 고도 프로파일"></svg>
+    </div>
+
+    <div class="sec-body">
+      <h3>언덕 목록 · 같은 언덕을 몇 번 오르나</h3>
+      <p class="muted" style="font-size:14px; margin-top:6px">획득고도 20m 이상, 평균 경사 0.9% 이상인 오르막만(구례는 급한 언덕이 없어 기준을 낮춤). 같은 자리의 언덕은 한 줄로 묶고 통과 횟수를 표시. 위치·고도는 OSM 도로망 + Copernicus DEM(90m)이라 실제와 수 m 차이가 있을 수 있음.</p>
+      <div class="tbl-scroll" style="margin-top:12px"><table class="tbl" id="tbl-climbs">
+        <thead><tr><th>언덕</th><th class="n">시작 km (통과)</th><th class="n">길이</th><th class="n">획득</th><th class="n">평균 / 최대</th><th>파워 · 할 일</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
     </div>
 
     <div class="sec-body">
@@ -624,6 +635,7 @@
 </footer>
 
 <script src="assets/gurye.js"></script>
+<script src="assets/gurye_geo.js"></script>
 <script>
 (function () {
   "use strict";
@@ -971,81 +983,172 @@
     txt(160, 250, "웻슈트 상의 벗으며", "s", svg);
   })();
 
-  /* ---------- 바이크 지도 ---------- */
-  var BXY = {
-    "T1": [60, 300], "산동교차로": [85, 150], "산수관": [170, 135], "자연드림": [22, 310], "죽정": [40, 350], "용냇골": [95, 410],
-    "용방교차로": [106, 428], "AS1": [163, 470], "광의교차로": [213, 500], "한성산업": [240, 525], "냉천교차로": [319, 590],
-    "문척교차로아래": [300, 625], "산이고운": [276, 640], "구성교차로": [345, 670], "오봉산가든": [470, 676], "대평로터리": [624, 700],
-    "백운관": [613, 738], "삼산": [602, 800], "논곡": [624, 895], "양동": [674, 720], "백운천": [837, 628], "남도대교": [972, 698],
-    "무수내": [760, 664], "스카이바이크": [291, 720], "구례1교": [255, 825], "문척교차로": [322, 650], "정장교": [272, 572], "T2": [262, 556]
-  };
-  function bkey(b) {
-    var n = b.name;
-    if (b.type === "start") return "T1"; if (b.type === "t2") return "T2";
-    if (n.indexOf("정장교") === 0) return "정장교";
-    if (n.indexOf("산수관") === 0) return "산수관"; if (n.indexOf("산동교차로") === 0) return "산동교차로";
-    if (n.indexOf("자연드림") === 0) return "자연드림"; if (n.indexOf("죽정") === 0) return "죽정"; if (n.indexOf("용냇골") === 0) return "용냇골";
-    if (n.indexOf("용방교차로") === 0) return "용방교차로"; if (n.indexOf("AS1") === 0) return "AS1";
-    if (n.indexOf("광의교차로") === 0) return "광의교차로"; if (n.indexOf("한성산업") === 0) return "한성산업"; if (n.indexOf("냉천교차로") === 0) return "냉천교차로";
-    if (n.indexOf("문척교차로 아래") === 0) return "문척교차로아래"; if (n.indexOf("문척교차로") === 0) return "문척교차로";
-    if (n.indexOf("산이고운") === 0) return "산이고운"; if (n.indexOf("구성교차로") === 0) return "구성교차로"; if (n.indexOf("AS3") === 0) return "오봉산가든";
-    if (n.indexOf("대평로터리") === 0) return "대평로터리"; if (n.indexOf("백운관") === 0) return "백운관"; if (n.indexOf("논곡") === 0) return "논곡";
-    if (n.indexOf("수평") === 0) return "삼산"; if (n.indexOf("AS2") === 0) return "양동"; if (n.indexOf("백운천") === 0 || n.indexOf("PN") === 0) return "백운천";
-    if (n.indexOf("남도대교") === 0) return "남도대교"; if (n.indexOf("무수내") === 0) return "무수내"; if (n.indexOf("스카이") === 0) return "스카이바이크";
-    if (n.indexOf("구례1교") === 0) return "구례1교";
-    return "T1";
+  /* ---------- 바이크 지도 · 실제 경로 + 경사도 ---------- */
+  var GEO = window.GURYE_GEO || [];           // [km, lat, lon, elev] · 0.1km
+  var GN = GEO.length;
+  // 스무딩 고도(±0.2km) · 경사(%)
+  var ELE = GEO.map(function (g, i) { var a = Math.max(0, i - 2), b = Math.min(GN - 1, i + 2), s = 0; for (var j = a; j <= b; j++) s += GEO[j][3]; return s / (b - a + 1); });
+  var GRADE = GEO.map(function (g, i) { var a = Math.max(0, i - 1), b = Math.min(GN - 1, i + 1); return (ELE[b] - ELE[a]) / ((GEO[b][0] - GEO[a][0]) * 1000 || 1) * 100; });
+  function gradeColor(g) { if (g < -2) return "#9FB6BC"; if (g < 2) return "rgba(14,124,148,.55)"; if (g < 4) return "#D98E2B"; if (g < 7) return "#C2410C"; return "#B42318"; }
+  function gradeName(g) { if (g < -2) return "내리막"; if (g < 2) return "평지"; if (g < 4) return "완만 오르막"; if (g < 7) return "오르막"; return "급경사"; }
+  // 투영
+  var lat0 = 35.23, K = 111000;
+  var PX = { pad: 40, w: 1000, h: 900 };
+  var minx = 1e9, maxx = -1e9, miny = 1e9, maxy = -1e9;
+  GEO.forEach(function (g) { var x = (g[2] - 127.4) * Math.cos(lat0 * Math.PI / 180) * K, y = -(g[1] - lat0) * K; if (x < minx) minx = x; if (x > maxx) maxx = x; if (y < miny) miny = y; if (y > maxy) maxy = y; });
+  var scale = Math.min((PX.w - 2 * PX.pad) / (maxx - minx || 1), (PX.h - 2 * PX.pad - 30) / (maxy - miny || 1));
+  var ox = (PX.w - (maxx - minx) * scale) / 2, oy = (PX.h - (maxy - miny) * scale) / 2 + 10;
+  function proj(lat, lon) { var x = (lon - 127.4) * Math.cos(lat0 * Math.PI / 180) * K, y = -(lat - lat0) * K; return [ox + (x - minx) * scale, oy + (y - miny) * scale]; }
+  function geoAt(km) {
+    if (!GN) return { lat: 35.23, lon: 127.45, ele: 0, grade: 0 };
+    var i = Math.min(GN - 1, Math.max(0, Math.floor(km / 0.1)));
+    var j = Math.min(GN - 1, i + 1), f = Math.max(0, Math.min(1, (km - GEO[i][0]) / 0.1));
+    return { lat: GEO[i][1] + (GEO[j][1] - GEO[i][1]) * f, lon: GEO[i][2] + (GEO[j][2] - GEO[i][2]) * f, ele: ELE[i] + (ELE[j] - ELE[i]) * f, grade: GRADE[i] };
   }
-  var bikePts = G.BIKE.map(function (b) { return BXY[bkey(b)]; });
-  var bikeDot, bikeTrail;
+  function xyAt(km) { var g = geoAt(km); return proj(g.lat, g.lon); }
+  var bikeDot, bikeTrail, profCur, profDot;
   (function () {
     var svg = $("#bikemap");
-    el("rect", { x: 0, y: 0, width: 1000, height: 940, fill: "#fff" }, svg);
-    // 강(섬진강) 암시
-    el("path", { d: "M330,690 C420,700 520,720 640,715 C760,708 860,690 1000,690", fill: "none", stroke: "#E4EFF1", "stroke-width": 26, "stroke-linecap": "round" }, svg);
-    el("path", { d: "M300,560 C260,650 240,740 250,860", fill: "none", stroke: "#E4EFF1", "stroke-width": 20, "stroke-linecap": "round" }, svg);
-    txt(560, 760, "섬진강", "s", svg, "middle");
-    // 코스: 구간별 폴리라인 (겹치면 진해짐)
-    for (var i = 1; i < bikePts.length; i++) {
-      el("line", { x1: bikePts[i - 1][0], y1: bikePts[i - 1][1], x2: bikePts[i][0], y2: bikePts[i][1], "class": "course" }, svg);
-    }
+    el("rect", { x: 0, y: 0, width: PX.w, height: PX.h, fill: "#fff" }, svg);
+    if (!GN) { txt(500, 450, "고도 데이터(assets/gurye_geo.js)가 없습니다", "b", svg, "middle"); return; }
+    // 바탕 경로
+    el("polyline", { points: GEO.map(function (g) { return proj(g[1], g[2]).join(","); }).join(" "), fill: "none", stroke: "#E4EFF1", "stroke-width": 11, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
+    // 경사 색 구간 (오르막이 위에 오도록 정렬)
+    var segs = [];
+    for (var i = 1; i < GN; i++) segs.push([i, GRADE[i]]);
+    segs.sort(function (p, q) { return p[1] - q[1]; });
+    segs.forEach(function (sg) { var i = sg[0], a = proj(GEO[i - 1][1], GEO[i - 1][2]), b = proj(GEO[i][1], GEO[i][2]); el("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: gradeColor(sg[1]), "stroke-width": sg[1] >= 2 ? 6 : 4, "stroke-linecap": "round" }, svg); });
     // 노드
     var done = {};
     G.BIKE.forEach(function (b) {
-      var k = bkey(b), p = BXY[k];
-      if (b.type === "turn") el("circle", { cx: p[0], cy: p[1], r: 8, "class": "nd turn" }, svg);
-      else if (b.type === "aid") el("circle", { cx: p[0], cy: p[1], r: 8, "class": "nd aid" }, svg);
+      var p = xyAt(b.km), k = b.name.split(" ")[0];
+      if (b.type === "turn") el("circle", { cx: p[0], cy: p[1], r: 7, "class": "nd turn" }, svg);
+      else if (b.type === "aid") el("circle", { cx: p[0], cy: p[1], r: 7, "class": "nd aid" }, svg);
       else if (b.type === "pn") el("rect", { x: p[0] - 7, y: p[1] - 7, width: 14, height: 14, "class": "nd pn" }, svg);
       else if (b.type === "cut") el("circle", { cx: p[0], cy: p[1], r: 9, "class": "nd cut" }, svg);
-      else if (b.type === "start" || b.type === "t2") el("rect", { x: p[0] - 9, y: p[1] - 9, width: 18, height: 18, fill: "#1A2E35", rx: 2 }, svg);
-      else if (!done[k]) el("circle", { cx: p[0], cy: p[1], r: 3.5, "class": "nd" }, svg);
+      else if (b.type === "start" || b.type === "t2") el("rect", { x: p[0] - 8, y: p[1] - 8, width: 16, height: 16, fill: "#1A2E35", rx: 2 }, svg);
+      else if (!done[k]) el("circle", { cx: p[0], cy: p[1], r: 3, "class": "nd" }, svg);
       done[k] = true;
     });
-    // 라벨
+    // 라벨 (km 기준 · 첫 통과 위치)
     var L = [
-      ["T1", "T1 · 호수공원", 16, 6], ["산동교차로", "산동교차로", -10, -8, "end"], ["산수관", "산수관 U", 12, 4], ["자연드림", "자연드림 10K", 10, 22],
-      ["용방교차로", "용방교차로 U ×4", -10, -10, "end"], ["AS1", "AS1 ×4", 14, 4], ["냉천교차로", "냉천교차로 · 2차 컷오프 150.5K 16:40", 14, -6],
-      ["산이고운", "산이고운 U ×2", -10, 18, "end"], ["구성교차로", "구성사거리", 8, 24], ["오봉산가든", "AS3 오봉산가든 ×2", 0, -14, "middle"],
-      ["대평로터리", "대평로터리 ×4", 12, -8], ["논곡", "논곡 U ×2", 14, 4], ["양동", "AS2 양동 ×2", 12, 22], ["백운천", "PN 백운천 90K", 0, -14, "middle"],
-      ["남도대교", "남도대교 U ×2 · 1차 컷오프 86.7K 13:45", -14, 24, "end"], ["구례1교", "구례1교 U ×3", 14, 4], ["스카이바이크", "스카이바이크", -12, 4, "end"],
-      ["T2", "T2 · 정장교", -12, 4, "end"], ["광의교차로", "광의교차로", 12, -4], ["한성산업", "한성산업", 12, 6], ["문척교차로", "문척교차로", 12, 6]
+      [0, "T1 · 호수공원", -12, 4, "end"], [3.55, "산동교차로", -10, -8, "end"], [4.82, "산수관 U · 4km 오르막 끝", 12, 4], [10.44, "자연드림 10K", -12, 6, "end"],
+      [13.5, "용방교차로 U ×4", -12, 4, "end"], [15.2, "AS1 ×4", 12, 4], [150.48, "냉천교차로 · 2차 컷오프 16:40", 12, -4],
+      [21.76, "산이고운 U ×2", -12, 4, "end"], [23.08, "구성사거리", 12, 12], [58.74, "AS3 오봉산가든 ×2", 0, -12, "middle"],
+      [29.6, "대평로터리 ×4", 10, -10], [34.03, "논곡 U ×2", 12, 4], [38.99, "AS2 양동 ×2", 10, 18], [89.93, "PN 백운천 90K", 0, -12, "middle"],
+      [86.73, "남도대교 U ×2 · 1차 컷오프 13:45", -12, 18, "end"], [107.88, "구례1교 U ×3", 12, 4], [176.68, "T2 · 정장교", -12, 4, "end"]
     ];
-    L.forEach(function (l) { var p = BXY[l[0]]; txt(p[0] + l[2], p[1] + l[3], l[1], l[0] === "냉천교차로" || l[0] === "남도대교" ? "s" : "s", svg, l[4] || "start"); });
-    txt(500, 40, "북 ↑ · 도식은 공식 코스도 좌표를 단순화한 것 (축척 무시)", "s", svg, "middle");
+    L.forEach(function (l) { var p = xyAt(l[0]); txt(p[0] + l[2], p[1] + l[3], l[1], "s", svg, l[4] || "start"); });
+    txt(500, 26, "북 ↑ · OSM 도로망 위 실제 경로 · 선 색 = 경사도", "s", svg, "middle");
+    // 축척
+    var sx = 60, sy = PX.h - 26, len = 5000 * scale; el("line", { x1: sx, y1: sy, x2: sx + len, y2: sy, stroke: "#1A2E35", "stroke-width": 2 }, svg); txt(sx + len / 2, sy - 8, "5 km", "s", svg, "middle");
     bikeTrail = el("polyline", { points: "", "class": "trail" }, svg);
-    bikeDot = el("circle", { cx: 60, cy: 300, r: 10, "class": "rider" }, svg);
+    bikeDot = el("circle", { cx: xyAt(0)[0], cy: xyAt(0)[1], r: 9, "class": "rider" }, svg);
   })();
+
+  /* ---------- 고도 프로파일 ---------- */
+  var PF = { x0: 44, x1: 985, y0: 24, y1: 220 };
+  var eMin = GN ? Math.min.apply(null, ELE) : 0, eMax = GN ? Math.max.apply(null, ELE) : 100;
+  function px(km) { return PF.x0 + km / R.bikeKm * (PF.x1 - PF.x0); }
+  function py(e) { return PF.y1 - (e - eMin) / ((eMax - eMin) || 1) * (PF.y1 - PF.y0); }
+  (function () {
+    var svg = $("#bikeprofile"); if (!GN) return;
+    el("rect", { x: 0, y: 0, width: 1000, height: 260, fill: "#fff" }, svg);
+    el("rect", { x: px(23.08), y: PF.y0 - 6, width: px(102) - px(23.08), height: PF.y1 - PF.y0 + 6, fill: "#F2F8F9" }, svg);
+    // 면
+    var d = "M" + px(0) + "," + PF.y1;
+    GEO.forEach(function (g, i) { d += " L" + px(g[0]).toFixed(1) + "," + py(ELE[i]).toFixed(1); });
+    d += " L" + px(R.bikeKm) + "," + PF.y1 + " Z";
+    el("path", { d: d, fill: "#E4EFF1" }, svg);
+    for (var i = 1; i < GN; i++) el("line", { x1: px(GEO[i - 1][0]), y1: py(ELE[i - 1]), x2: px(GEO[i][0]), y2: py(ELE[i]), stroke: gradeColor(GRADE[i]), "stroke-width": GRADE[i] >= 2 ? 3.5 : 2 }, svg);
+    // 격자 · 눈금
+    var step = (eMax - eMin) > 150 ? 50 : 25;
+    for (var e = Math.ceil(eMin / step) * step; e <= eMax; e += step) { el("line", { x1: PF.x0, y1: py(e), x2: PF.x1, y2: py(e), stroke: "#E4EFF1" }, svg); txt(PF.x0 - 6, py(e) + 4, e + "m", "s", svg, "end"); }
+    for (var k = 0; k <= 170; k += 10) { el("line", { x1: px(k), y1: PF.y1, x2: px(k), y2: PF.y1 + 4, stroke: "#5C7A85" }, svg); txt(px(k), PF.y1 + 18, k, "s", svg, "middle"); }
+    txt(PF.x1, PF.y1 + 18, "km", "s", svg, "end");
+    // 마커
+    G.BIKE.forEach(function (b) {
+      if (!(b.type === "aid" || b.type === "pn" || b.type === "cut" || b.type === "turn")) return;
+      var x = px(b.km), y = py(geoAt(b.km).ele);
+      if (b.type === "turn") el("circle", { cx: x, cy: y, r: 3.5, "class": "nd turn" }, svg);
+      else if (b.type === "aid") el("circle", { cx: x, cy: y - 10, r: 4, "class": "nd aid" }, svg);
+      else if (b.type === "pn") el("rect", { x: x - 4, y: y - 14, width: 8, height: 8, "class": "nd pn" }, svg);
+      else if (b.type === "cut") { el("line", { x1: x, y1: PF.y0 - 6, x2: x, y2: PF.y1, stroke: "#B42318", "stroke-dasharray": "3 3" }, svg); txt(x, PF.y0 - 10, "컷 " + (b.cut === 0 ? "13:45" : "16:40"), "s", svg, "middle").setAttribute("fill", "#B42318"); }
+    });
+    var c0 = G.BIKE.filter(function (b) { return b.cut === 0; })[0]; if (c0) { el("line", { x1: px(c0.km), y1: PF.y0 - 6, x2: px(c0.km), y2: PF.y1, stroke: "#B42318", "stroke-dasharray": "3 3" }, svg); txt(px(c0.km), PF.y0 - 10, "컷 13:45", "s", svg, "middle").setAttribute("fill", "#B42318"); }
+    txt(px(62), PF.y1 + 36, "T자 순환 ×2 (23~102km)", "s", svg, "middle"); txt(px(140), PF.y1 + 36, "산업도로 순환 ×3 (102~169km)", "s", svg, "middle"); txt(px(7), PF.y1 + 36, "산동 왕복", "s", svg, "middle");
+    profCur = el("line", { x1: px(0), y1: PF.y0 - 6, x2: px(0), y2: PF.y1, stroke: "#B42318", "stroke-width": 1.5 }, svg);
+    profDot = el("circle", { cx: px(0), cy: py(ELE[0]), r: 5, "class": "rider" }, svg);
+    // 통계
+    var gain = 0, maxg = 0; for (var i = 1; i < GN; i++) { gain += Math.max(0, ELE[i] - ELE[i - 1]); if (GRADE[i] > maxg) maxg = GRADE[i]; }
+    $("#bk-gain").textContent = Math.round(gain); $("#bk-maxg").textContent = maxg.toFixed(1) + "%";
+  })();
+
+  /* ---------- 언덕 검출 ---------- */
+  (function () {
+    if (!GN) return;
+    function dist(i, j) { return Math.hypot((GEO[i][1] - GEO[j][1]) * K, (GEO[i][2] - GEO[j][2]) * K * Math.cos(lat0 * Math.PI / 180)); }
+    var climbs = [], i = 1;
+    while (i < GN) {
+      if (ELE[i] > ELE[i - 1]) {
+        var s0 = i - 1, j = i, dip = 0, lastTop = i;
+        while (j < GN) {
+          if (ELE[j] >= ELE[j - 1]) { dip = 0; lastTop = j; }
+          else { dip += ELE[j - 1] - ELE[j]; if (dip > 5) break; }
+          j++;
+        }
+        while (s0 + 3 < lastTop && ELE[s0 + 3] - ELE[s0] < 1.5) s0++;   // 앞쪽 평지 잘라내기
+        var gain = ELE[lastTop] - ELE[s0], len = GEO[lastTop][0] - GEO[s0][0];
+        if (gain >= 20 && len > 0 && gain / (len * 1000) * 100 >= 0.9) {
+          var mg = 0; for (var k = s0 + 1; k <= lastTop; k++) mg = Math.max(mg, GRADE[k]);
+          climbs.push({ s: s0, e: lastTop, km: GEO[s0][0], len: len, gain: gain, avg: gain / (len * 1000) * 100, max: mg });
+        }
+        i = Math.max(j, lastTop + 1);
+      } else i++;
+    }
+    // 같은 언덕의 다른 통과: 시작점·끝점을 지리적으로 다시 지나는 km 찾기
+    var groups = [];
+    climbs.forEach(function (c) {
+      if (groups.some(function (g) { return g.passes.some(function (p) { return Math.abs(p - c.km) < 0.5; }); })) return;
+      var passes = [], span = Math.round(c.len / 0.1 * 1.5) + 3;
+      for (var x = 0; x < GN; x++) {
+        if (dist(x, c.s) > 150) continue;
+        var ok = false; for (var y = x + 1; y < Math.min(GN, x + span); y++) if (dist(y, c.e) < 150) { ok = true; break; }
+        if (ok && !passes.some(function (p) { return Math.abs(p - GEO[x][0]) < 0.5; })) passes.push(GEO[x][0]);
+      }
+      if (!passes.length) passes.push(c.km);
+      groups.push({ c: c, passes: passes });
+    });
+    function landmarkNear(km) { var best = null, bd = 1e9; G.BIKE.forEach(function (b) { if (b.type === "node" || b.type === "mark") return; var d = Math.abs(b.km - km); if (d < bd) { bd = d; best = b; } }); if (!best || bd > 3) { G.BIKE.forEach(function (b) { var d = Math.abs(b.km - km); if (d < bd) { bd = d; best = b; } }); } return best ? best.name.split(" (")[0].split(" · ")[0].replace(/ [①②③④]$/, "") : ""; }
+    var tb = $("#tbl-climbs tbody");
+    groups.sort(function (a, b) { return a.c.km - b.c.km; });
+    groups.forEach(function (gr) {
+      var c = gr.c, tr = document.createElement("tr");
+      var tip = c.max >= 7 ? "<b>175W 상한</b> — 기어 가볍게, 케이던스 80 유지. 일어서지 않기" : (c.avg >= 2.5 ? "150~175W · 앉아서 · 정상에서 바로 파워 회복하지 말고 10초 릴랙스" : "140~150W 그대로 · 속도 떨어지는 건 정상 · 기어만 한두 단 가볍게");
+      if (c.km < 1) tip = "<b>출발 직후 · 130W대 고정.</b> 다리가 안 풀린 상태에서 175W를 넘기면 하루가 무거워집니다";
+      if (gr.passes.length >= 2) tip += " · <b>" + gr.passes.length + "번 오르는 언덕</b> — 매번 같은 파워로";
+      var name = landmarkNear(c.km + c.len / 2) || (c.km.toFixed(1) + "km");
+      var kmList = gr.passes.map(function (p) { return p.toFixed(1); }).join(" · ");
+      if (c.max >= 7 || c.gain >= 40) tr.className = "hl";
+      var cn = c.avg < 2 ? "긴 완만 오르막" : (c.avg < 4 ? "오르막" : (c.avg < 7 ? "가파른 오르막" : "급경사"));
+      tr.innerHTML = '<td>' + name + ' 부근 · ' + cn + '</td><td class="n">' + kmList + ' <span class="muted">(' + gr.passes.length + '회)</span></td><td class="n">' + (c.len * 1000).toFixed(0) + ' m</td><td class="n">' + c.gain.toFixed(0) + ' m</td><td class="n">' + c.avg.toFixed(1) + '% / ' + c.max.toFixed(1) + '%</td><td class="sm">' + tip + '</td>';
+      tb.appendChild(tr);
+    });
+    if (!groups.length) tb.innerHTML = '<tr><td colspan="6">기준(획득 20m · 평균 0.9%)을 넘는 오르막이 없습니다 — 사실상 평탄한 코스.</td></tr>';
+  })();
+
   function drawBike(e) {
     var km = 0;
     if (e >= sim.t1End) km = G.bikeElapsedToKm(sim, Math.min(e, sim.bikeEnd));
-    // 위치: 랜드마크 사이 보간
-    var i = 1; while (i < G.BIKE.length - 1 && G.BIKE[i].km < km) i++;
-    var a = G.BIKE[i - 1], b = G.BIKE[i];
-    var f = (km - a.km) / (b.km - a.km || 1); f = Math.max(0, Math.min(1, f));
-    var pa = bikePts[i - 1], pb = bikePts[i];
-    var x = pa[0] + (pb[0] - pa[0]) * f, y = pa[1] + (pb[1] - pa[1]) * f;
-    bikeDot.setAttribute("cx", x); bikeDot.setAttribute("cy", y);
-    var tr = bikePts.slice(Math.max(0, i - 6), i).map(function (p) { return p.join(","); }); tr.push(x + "," + y);
-    bikeTrail.setAttribute("points", tr.join(" "));
+    if (bikeDot) {
+      var p = xyAt(km); bikeDot.setAttribute("cx", p[0]); bikeDot.setAttribute("cy", p[1]);
+      var tr = []; for (var k = Math.max(0, km - 3); k <= km; k += 0.2) tr.push(xyAt(k).join(",")); tr.push(p.join(","));
+      bikeTrail.setAttribute("points", tr.join(" "));
+    }
+    if (profCur) { profCur.setAttribute("x1", px(km)); profCur.setAttribute("x2", px(km)); profDot.setAttribute("cx", px(km)); profDot.setAttribute("cy", py(geoAt(km).ele)); }
+    var g = geoAt(km);
+    $("#bk-ele").textContent = GN ? g.ele.toFixed(0) : "—";
+    $("#bk-grade").textContent = GN ? (g.grade >= 0 ? "+" : "") + g.grade.toFixed(1) + "% " + gradeName(g.grade) : "—";
     $("#bk-km").textContent = km.toFixed(1);
     $("#bk-clock").textContent = e < sim.t1End ? "—" : G.hhmm(sim.start + Math.min(e, sim.bikeEnd));
     $("#bk-seg").textContent = e < sim.t1End ? "T1 전" : (e >= sim.bikeEnd ? "T2 도착" : bikeSeg(km));

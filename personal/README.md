@@ -26,6 +26,7 @@ personal/
 └── assets/
     ├── summer.css          공용 디자인 시스템 (모든 페이지가 이걸 먼저 로드)
     ├── gurye.js            구례 코스 데이터(랜드마크 170곳)·레이스 시뮬레이터 — 코스·보급 페이지 공유
+    ├── gurye_geo.js        바이크 코스 0.1km 간격 [km, 위도, 경도, 고도] 1,767점 — 지도·경사 색·고도 프로파일용
     ├── gurye/              구례 공식 코스도 13장(1100px) + SOURCE.md(카페 글 전문)
     ├── *.webmanifest       페이지별 PWA 매니페스트 (홈화면 설치용)
     └── icons/              홈화면 아이콘 PNG (180·512px)
@@ -93,6 +94,8 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 시뮬레이터 설정은 localStorage `gurye.sim.v1`에 저장되고 보급 페이지가 그대로 읽는다(보급 페이지에는 슬라이더 없음).
 백 체크리스트는 `gurye.pack.v1`. 거리·컷오프·보급소 품목의 출처는 `assets/gurye/SOURCE.md`.
 영문 AIG가 나오면 `gurye.js`의 `BIKE`/`RUN_LAP`/`CUTOFFS`만 고치면 두 페이지와 표가 같이 바뀐다.
+
+`gurye_geo.js`는 엑셀 랜드마크 사이를 OSRM(OSM 도로망)으로 이어 엑셀 누적 km에 매핑한 뒤 Open-Meteo(Copernicus DEM 90m)로 고도를 붙인 것. 공식 GPX가 나오면 같은 형식 `[km, lat, lon, elev]`으로 교체하면 지도·프로파일·언덕 표가 그대로 따라온다.
 
 ## 로컬에서 열기
 
