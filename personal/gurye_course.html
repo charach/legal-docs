@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<title>구례 코스 분석과 전략 — 2026 IRONMAN Gurye</title>
+<link rel="stylesheet" href="assets/summer.css">
+<style>
+  body { background: var(--bg); }
+  .hero { padding: 72px 0 0; }
+  .hero .lead { max-width: 62ch; }
+  .src { font-size: 13px; color: var(--ink-2); margin-top: 18px; line-height: 1.6; }
+  .src a { border-bottom: 1px solid rgba(14,124,148,.28); }
+
+  section.band { padding-top: 96px; }
+  .sec-head h2 { margin-top: 6px; }
+  .sec-head .lead { font-size: 16px; }
+
+  /* 숫자 타일 */
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 32px; }
+  .tile { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 18px 18px 16px; box-shadow: var(--shadow); }
+  .tile .k { font-size: 12px; color: var(--ink-2); letter-spacing: .04em; }
+  .tile .v { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px; line-height: 1.1; }
+  .tile .v small { font-size: 14px; font-weight: 400; color: var(--ink-2); margin-left: 4px; }
+  .tile .s { font-size: 13px; color: var(--ink-2); margin-top: 8px; line-height: 1.5; }
+  @media (max-width: 900px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+
+  /* 시뮬레이터 */
+  .lab { display: grid; grid-template-columns: minmax(300px, 1fr) minmax(0, 1.9fr); gap: 24px; align-items: start; margin-top: 32px; }
+  @media (max-width: 960px) { .lab { grid-template-columns: 1fr; } }
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: 20px; }
+  .panel h3 { font-size: 15px; margin-bottom: 6px; }
+  .panel .sub { font-size: 13px; color: var(--ink-2); margin-bottom: 14px; }
+  .ctl { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: baseline; margin-top: 12px; }
+  .ctl label { font-size: 14px; }
+  .ctl .val { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .ctl input[type="range"] { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); margin: 0; }
+  .ctl .hint { grid-column: 1 / -1; font-size: 12px; color: var(--ink-2); line-height: 1.5; }
+  .grp { font-size: 12px; color: var(--ink-2); letter-spacing: .08em; text-transform: uppercase; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .grp:first-of-type { margin-top: 0; padding-top: 0; border: 0; }
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .presets .btn { min-height: 34px; padding: 0 12px; font-size: 13px; }
+  .presets .btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .out { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .out .o { background: #F2F8F9; border-radius: 6px; padding: 12px 12px 10px; }
+  .out .o .k { font-size: 11.5px; color: var(--ink-2); }
+  .out .o .v { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .out .o .c { font-size: 12px; color: var(--ink-2); margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .out .o.fin { background: var(--ink); color: #fff; }
+  .out .o.fin .k, .out .o.fin .c { color: rgba(255,255,255,.7); }
+  @media (max-width: 640px) { .out { grid-template-columns: repeat(2, 1fr); } .out .o.fin { grid-column: 1 / -1; } }
+
+  /* 하루 타임라인 바 */
+  .dayline { margin-top: 20px; }
+  .dayline svg { display: block; width: 100%; height: auto; }
+  .cutlist { margin-top: 16px; }
+  .cutlist .row { display: grid; grid-template-columns: 1fr 96px 96px; gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14px; }
+  .cutlist .row:last-child { border-bottom: 1px solid var(--line); }
+  .cutlist .row .n { font-size: 13.5px; }
+  .cutlist .row .t { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 13px; }
+  .cutlist .row .m { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .cutlist .row .m.bad { color: #B42318; }
+  @media (max-width: 640px) { .cutlist .row { grid-template-columns: 1fr 70px 70px; } }
+
+  /* 재생 컨트롤 */
+  .player { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .player input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
+  .player .clock { font-variant-numeric: tabular-nums; font-size: 14px; white-space: nowrap; }
+  .player .clock b { font-size: 18px; }
+  .now { margin-top: 14px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .now .n { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+  .now .n .k { font-size: 11.5px; color: var(--ink-2); }
+  .now .n .v { font-size: 14px; font-weight: 600; margin-top: 2px; line-height: 1.35; }
+  @media (max-width: 640px) { .now { grid-template-columns: repeat(2, 1fr); } }
+
+  /* 랜드마크 표 */
+  details.acc { border: 1px solid var(--line); border-radius: 8px; background: #fff; margin-top: 14px; box-shadow: var(--shadow); }
+  details.acc > summary { cursor: pointer; list-style: none; padding: 14px 18px; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+  details.acc > summary::-webkit-details-marker { display: none; }
+  details.acc > summary::after { content: "+"; margin-left: auto; color: var(--ink-2); font-weight: 400; }
+  details.acc[open] > summary::after { content: "−"; }
+  details.acc > summary .tag { margin-left: 2px; }
+  details.acc .body { padding: 0 18px 18px; }
+  table.mk { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.mk th, table.mk td { text-align: left; padding: 7px 10px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.mk th { font-size: 11.5px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+  table.mk td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.mk tr.aid td { background: #F2F8F9; }
+  table.mk tr.turn td:first-child::before { content: "U "; color: var(--accent); font-weight: 600; }
+  table.mk tr.cut td { color: #B42318; font-weight: 600; }
+  table.mk tr.pn td { background: #EEF6F7; font-weight: 600; }
+
+  /* 무대 (SVG 지도) */
+  .stage { background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: 12px; margin-top: 28px; }
+  .stage svg { display: block; width: 100%; height: auto; }
+  .stage .bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 8px 4px 2px; font-size: 13px; color: var(--ink-2); }
+  .stage .bar .sp { flex: 1; }
+  .stage .bar .btn { min-height: 32px; padding: 0 12px; font-size: 13px; }
+  .stage .bar .ro { font-variant-numeric: tabular-nums; }
+  .stage .bar .ro b { color: var(--ink); }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--ink-2); padding: 6px 4px 0; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+
+  /* SVG 공통 */
+  .course { fill: none; stroke: #0E7C94; stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; opacity: .18; }
+  .course.thin { stroke-width: 3; }
+  .lbl { font-family: var(--sans); font-size: 12px; fill: #1A2E35; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
+  .lbl.s { font-size: 10.5px; fill: #5C7A85; }
+  .lbl.b { font-weight: 600; }
+  .nd { fill: #fff; stroke: #5C7A85; stroke-width: 1.5; }
+  .nd.turn { stroke: #0E7C94; stroke-width: 2.5; }
+  .nd.aid { fill: #0E7C94; stroke: #0E7C94; }
+  .nd.pn { fill: #1A2E35; stroke: #1A2E35; }
+  .nd.cut { fill: #fff; stroke: #B42318; stroke-width: 2.5; }
+  .rider { fill: #B42318; stroke: #fff; stroke-width: 2.5; }
+  .trail { fill: none; stroke: #0E7C94; stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; opacity: .55; }
+  .water { fill: #E4EFF1; }
+  .land { fill: #F2F8F9; }
+
+  /* 단계 리스트 */
+  .steps { counter-reset: s; list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .steps li::before { content: counter(s, decimal-leading-zero); font-size: 13px; color: var(--accent); padding-top: 4px; letter-spacing: .04em; }
+  .steps h4 { margin-bottom: 4px; }
+  .steps p { color: var(--ink-2); font-size: 15px; }
+  .steps p b { color: var(--ink); }
+  .callout { border-left: 3px solid var(--accent); background: #F2F8F9; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 20px; font-size: 15px; }
+  .warn { border-left-color: #B42318; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  @media (max-width: 800px) { .two { grid-template-columns: 1fr; } }
+  .official { margin-top: 20px; }
+  .official summary { cursor: pointer; font-size: 14px; color: var(--accent); list-style: none; display: inline-flex; align-items: center; gap: 8px; min-height: 36px; }
+  .official summary::-webkit-details-marker { display: none; }
+  .official img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; margin-top: 10px; }
+  .official .cap { font-size: 12.5px; color: var(--ink-2); margin-top: 8px; }
+  table.tbl td.n, table.tbl th.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.tbl tr.hl td { background: #F2F8F9; }
+  .gauge { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; }
+  @media (max-width: 800px) { .gauge { grid-template-columns: 1fr; } }
+
+  footer { padding: 80px 0 40px; font-size: 13px; color: var(--ink-2); line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="index.html">Personal</a>
+    <div class="links">
+      <a href="exercise.html">훈련</a>
+      <a href="gurye_course.html" aria-current="page">코스</a>
+      <a href="gurye_fuel.html">보급</a>
+      <a href="bike_forces.html">안장</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">IRONMAN Gurye Korea · 2026년 10월 4일 (일)</span>
+    <h1 style="margin-top:12px">구례 코스 분석과 전략</h1>
+    <p class="lead">수영 1.9km 두 바퀴, 바이크 <b>176.7km</b>(180km가 아님), 런 9.92km 네 바퀴 + 2.34km. U턴 14번, 바이크 보급소 8번 통과, 런 보급소 21번 통과. 아래 시뮬레이터에 내 페이스를 넣으면 <b>보급소마다 몇 시에 도착하는지, 컷오프 여유가 얼마인지, 해가 몇 km에서 지는지</b>가 나오고, 하루 전체를 재생해 볼 수 있습니다.</p>
+    <p class="src">출처 · 김형식 이사 KTS 카페 글(9/10 21:11)과 첨부 거리표 엑셀 <code>2026 distance-0815-korea</code>. 영문 AIG는 다음 주 월요일 배포 예정이라 세부는 바뀔 수 있고, 홈페이지 홍보게시판 일정은 오류이며 <b>이 글의 일정이 맞다</b>고 명시됨. 첨부 원본은 <code>assets/gurye/</code>.</p>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= 00 숫자 ================= -->
+<section class="band" id="numbers">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">00</div>
+      <div>
+        <span class="eyebrow">At a glance</span>
+        <h2>숫자로 보는 구례</h2>
+        <p class="lead">계획서에 있던 "180km · 컷오프 24:00" 두 숫자가 바뀌었습니다. 바이크는 3.3km 짧고, 컷오프는 구간별 시계 시각으로 걸려 있습니다.</p>
+      </div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="k">수영</div><div class="v">3.8<small>km</small></div><div class="s">1.9km 직사각형 2바퀴 · 지리산 호수(구만제) · 롤링 스타트 5명씩 5~6초 · 07:00~07:19</div></div>
+      <div class="tile"><div class="k">바이크</div><div class="v">176.7<small>km</small></div><div class="s">산동 왕복 → 산업도로 → 문척·간전 T자 2회전 → 구례1교~용방 3회전. <b>U턴 14회</b></div></div>
+      <div class="tile"><div class="k">런</div><div class="v">42.0<small>km</small></div><div class="s">서시천 9.92km × 4바퀴 + 2.34km · 보급소 5곳/바퀴 → 21회 통과 · 도로 구간은 KBS~사림 1.2km뿐</div></div>
+      <div class="tile"><div class="k">보급</div><div class="v">8<small>+ 1 PN</small></div><div class="s">바이크 보급소 3곳(AS1 ×4, AS2 ×2, AS3 ×2) · 퍼스널니즈는 <b>90km 한 번</b> · 물·게토레이·바나나½·젤</div></div>
+    </div>
+
+    <div class="sec-body">
+      <h3>컷오프 · 전부 시계 시각</h3>
+      <div class="tbl-scroll" style="margin-top:12px"><table class="tbl">
+        <thead><tr><th>지점</th><th class="n">시각</th><th>내 예상 도착 (기본 시나리오)</th><th>의미</th></tr></thead>
+        <tbody>
+          <tr><td>바이크 1차 · 남도대교 턴 <b>86.7km</b></td><td class="n">13:45</td><td class="n" data-cut="0">—</td><td>T자 순환 2회전째 남도대교. 여기까지 평속 22km/h면 아슬아슬</td></tr>
+          <tr><td>바이크 2차 · 냉천교차로 구례출구 <b>150.5km</b></td><td class="n">16:40</td><td class="n" data-cut="1">—</td><td>산업도로 순환 2회전 끝 직후. 구례출구 앞 50m</td></tr>
+          <tr><td>런 · 파크골프 입구 <b>31.9km</b></td><td class="n">23:00</td><td class="n" data-cut="2">—</td><td>4바퀴째 시작 직후. 여기를 지나면 남은 10km는 걸어도 됨</td></tr>
+          <tr class="hl"><td>공식 종료</td><td class="n">24:20</td><td class="n" data-cut="3">—</td><td>마지막 출발자(07:19) 기준 17시간. 개인은 <b>본인 입수 시각 + 17시간</b></td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout">계획서의 "바이크 컷오프 약 10:30"과 "컷오프 24:00 / 17:00"은 틀린 값이었습니다. 실제로는 <b>바이크 위에서 두 번, 런에서 한 번</b> 시계가 걸립니다. 기본 시나리오(수영 1:40 · 바이크 평속 28 · 런 걷뛰 4:1)로는 전부 <b>1시간 30분 이상</b> 여유가 있으니 컷오프 자체는 걱정할 대상이 아닙니다. 걱정할 것은 그 여유를 <b>초반 오버페이스로 써버리는 것</b>입니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 01 시뮬레이터 ================= -->
+<section class="band" id="sim">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">01</div>
+      <div>
+        <span class="eyebrow">Simulator</span>
+        <h2>레이스 시뮬레이터 · 내 하루를 미리 돌려보기</h2>
+        <p class="lead">거리표 엑셀의 랜드마크 91 + 79개 지점에 내 페이스를 얹어 시계 시각을 계산합니다. 슬라이더를 움직이면 아래 지도의 애니메이션과 표가 전부 같이 바뀝니다. 설정은 이 기기에 저장됩니다.</p>
+      </div>
+    </div>
+
+    <div class="lab">
+      <div class="panel" id="controls">
+        <h3>내 페이스</h3>
+        <div class="sub">9/6 거북섬 실측(수영 2:38/100m · 바이크 NP 207W)과 계획(대회 NP 140W ≈ 28km/h · 런 걷뛰 4:1)에서 시작</div>
+
+        <div class="grp">스타트 · 수영</div>
+        <div class="ctl"><label>입수 시각</label><span class="val" data-v="startOffset"></span><input type="range" data-p="startOffset" min="0" max="19" step="1"><div class="hint">07:00부터 5명씩 5~6초. 뒤쪽에 서면 07:12~07:19 입수 — 컷오프는 시계 시각이라 늦게 들어갈수록 여유가 줄어듭니다.</div></div>
+        <div class="ctl"><label>수영 페이스 (/100m)</label><span class="val" data-v="swimPace"></span><input type="range" data-p="swimPace" min="130" max="200" step="2"><div class="hint">9/6 실측 2:38. 웻슈트면 2:25~2:30.</div></div>
+        <div class="ctl"><label>T1</label><span class="val" data-v="t1"></span><input type="range" data-p="t1" min="4" max="20" step="1"><div class="hint">수영 출구 → 백 거치대 → 체인지 텐트 → 자전거 → 마운트 라인. 텐트 안에서 갈아입으면 10분.</div></div>
+
+        <div class="grp">바이크</div>
+        <div class="ctl"><label>이동 평속</label><span class="val" data-v="bikeSpeed"></span><input type="range" data-p="bikeSpeed" min="22" max="34" step="0.5"><div class="hint">NP 140W ≈ 28km/h (후드, 82kg). 125W 27 · 155W 29 · 9/6 실측 198W 32.</div></div>
+        <div class="ctl"><label>U턴 1회 손실</label><span class="val" data-v="uturnLoss"></span><input type="range" data-p="uturnLoss" min="0" max="40" step="2"><div class="hint">감속·회전·재가속. 14회 × 12초 = 약 3분. 콘 돌고 일어서서 밟으면 여기서 파워를 낭비합니다.</div></div>
+        <div class="ctl"><label>보급소 1곳 감속</label><span class="val" data-v="aidLoss"></span><input type="range" data-p="aidLoss" min="0" max="90" step="5"><div class="hint">8곳. 물통 받고 버리는 데 20초. 멈춰서 화장실 가면 90초.</div></div>
+        <div class="ctl"><label>퍼스널니즈 정차 (90km)</label><span class="val" data-v="pnStop"></span><input type="range" data-p="pnStop" min="0" max="10" step="0.5"><div class="hint">봉투 받아 젤 옮겨 담기 1분. 휴식 공간에서 쉬면 5분.</div></div>
+        <div class="ctl"><label>T2</label><span class="val" data-v="t2"></span><input type="range" data-p="t2" min="3" max="20" step="1"></div>
+
+        <div class="grp">런 (걷뛰)</div>
+        <div class="ctl"><label>뛰는 구간 페이스</label><span class="val" data-v="runPace"></span><input type="range" data-p="runPace" min="300" max="480" step="5"><div class="hint">계획 5:45~6:15/km · 심박 135 이하.</div></div>
+        <div class="ctl"><label>걷는 구간 페이스</label><span class="val" data-v="walkPace"></span><input type="range" data-p="walkPace" min="420" max="900" step="10"><div class="hint">빠른 걷기 8:30~9:30/km.</div></div>
+        <div class="ctl"><label>뛰기 : 걷기 (분)</label><span class="val" data-v="ratio"></span><input type="range" data-p="runMin" min="0" max="9" step="1"><div class="hint">뛰기 0 = 전 구간 걷기. 걷기는 1분 고정.</div></div>
+        <div class="ctl"><label>바퀴당 느려짐</label><span class="val" data-v="fade"></span><input type="range" data-p="fade" min="0" max="12" step="1"><div class="hint">1바퀴 페이스 대비 매 바퀴 % 느려짐. 보급을 지키면 3%, 무너지면 10%.</div></div>
+        <div class="ctl"><label>보급소마다 추가 걷기</label><span class="val" data-v="aidWalk"></span><input type="range" data-p="aidWalk" min="0" max="60" step="5"><div class="hint">21곳. 컵 두 개 마시고 스펀지 받는 시간.</div></div>
+
+        <div class="presets">
+          <button class="btn btn-ghost" data-preset="plan">계획대로</button>
+          <button class="btn btn-ghost" data-preset="safe">보수적</button>
+          <button class="btn btn-ghost" data-preset="fast">잘 풀리면</button>
+          <button class="btn btn-ghost" data-preset="walk">런 전부 걷기</button>
+          <button class="btn btn-ghost" data-preset="bonk">바이크 무너짐</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel">
+          <h3>결과</h3>
+          <div class="out">
+            <div class="o"><div class="k">수영 3.8km</div><div class="v" id="o-swim">—</div><div class="c" id="o-swim-c">—</div></div>
+            <div class="o"><div class="k">바이크 176.7km</div><div class="v" id="o-bike">—</div><div class="c" id="o-bike-c">—</div></div>
+            <div class="o"><div class="k">런 42.0km</div><div class="v" id="o-run">—</div><div class="c" id="o-run-c">—</div></div>
+            <div class="o"><div class="k">런 평균 페이스</div><div class="v" id="o-pace">—</div><div class="c">걷뛰 합산 /km</div></div>
+            <div class="o fin"><div class="k">완주</div><div class="v" id="o-fin">—</div><div class="c" id="o-fin-c">—</div></div>
+          </div>
+
+          <div class="dayline">
+            <svg id="dayline" viewBox="0 0 1000 118" role="img" aria-label="하루 타임라인"></svg>
+          </div>
+
+          <div class="cutlist" id="cutlist"></div>
+
+          <div class="player">
+            <button class="btn btn-sm" id="play">재생</button>
+            <input type="range" id="scrub" min="0" max="1000" step="1" value="0">
+            <div class="clock"><b id="clock">07:12</b> <span id="elapsed" class="muted">경과 0:00</span></div>
+          </div>
+          <div class="now">
+            <div class="n"><div class="k">구간</div><div class="v" id="now-leg">스타트 대기</div></div>
+            <div class="n"><div class="k">위치</div><div class="v" id="now-pos">—</div></div>
+            <div class="n"><div class="k">다음 보급 · 이벤트</div><div class="v" id="now-next">—</div></div>
+            <div class="n"><div class="k">다음 컷오프까지</div><div class="v" id="now-cut">—</div></div>
+          </div>
+        </div>
+
+        <details class="acc" id="acc-bike">
+          <summary>바이크 랜드마크 79곳 · 도착 시각 <span class="tag">거리표 엑셀</span></summary>
+          <div class="body"><div class="tbl-scroll"><table class="mk" id="tbl-bike"><thead><tr><th>km</th><th>지점</th><th>경과</th><th>시각</th></tr></thead><tbody></tbody></table></div></div>
+        </details>
+        <details class="acc" id="acc-run">
+          <summary>런 랜드마크 91곳 · 도착 시각 <span class="tag">4바퀴 + 2.34km</span></summary>
+          <div class="body"><div class="tbl-scroll"><table class="mk" id="tbl-run"><thead><tr><th>km</th><th>지점</th><th>경과</th><th>시각</th></tr></thead><tbody></tbody></table></div></div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 수영 ================= -->
+<section class="band" id="swim">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">02</div>
+      <div>
+        <span class="eyebrow">Swim · 3.8km</span>
+        <h2>수영 · 긴 직사각형 두 바퀴</h2>
+        <p class="lead">서쪽 변을 따라 북으로 약 900m, 꼭대기에서 50m 건너, 동쪽 변으로 900m 내려와 출발 폰툰 앞에서 돌아 한 바퀴 더. 꼭대기 회전 지점에 <b>5×10m 휴식 폰툰</b>이 있습니다. 두 바퀴 모두 물 안에서 돕니다(육상 통과 없음).</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="bar">
+        <span>롤링 스타트 · 5명씩 5~6초</span>
+        <span class="sp"></span>
+        <button class="btn btn-ghost" id="roll-play">스타트 보기</button>
+        <span class="ro"><b id="roll-clock">07:00:00</b> · 입수 <b id="roll-n">0</b> / 1,160</span>
+      </div>
+      <svg id="rolling" viewBox="0 0 1000 150" role="img" aria-label="롤링 스타트 애니메이션"></svg>
+    </div>
+
+    <div class="stage">
+      <div class="bar">
+        <span>코스 애니메이션은 위 시뮬레이터의 시계를 따릅니다</span>
+        <span class="sp"></span>
+        <span class="ro">바퀴 <b id="swim-lap">—</b> · <b id="swim-m">0</b> m · <b id="swim-clock">—</b></span>
+      </div>
+      <svg id="swimmap" viewBox="0 0 1000 560" role="img" aria-label="수영 코스 도식"></svg>
+      <div class="legend"><span><i style="background:#0E7C94"></i>코스(2바퀴)</span><span><i style="background:#fff;border:2px solid #0E7C94"></i>회전 부이</span><span><i style="background:#1A2E35"></i>휴식 폰툰</span><span><i style="background:#B42318"></i>나</span></div>
+    </div>
+
+    <ol class="steps">
+      <li><div><h4>뒤쪽에 서서 늦게 들어간다 — 그래도 07:19 전이다</h4><p>1,160명이 5명씩 5~6초 간격이니 마지막 조가 07:19에 들어갑니다. 계획대로 <b>10~15초 늦게</b> 옆·뒤에서 출발하는 게 롤링 스타트에서는 그냥 "뒤쪽 줄에 서는 것"입니다. 예상 수영 1:40 근처 사람들 뒤에 서면 앞에서 밟힐 일도, 뒤에서 치일 일도 줄어듭니다. 단, 컷오프는 시계 시각이라 <b>07:15 이후 입수는 여유 5분씩을 깎아먹는다</b>는 것만 기억.</p></div></li>
+      <li><div><h4>사이팅 기준은 부이 줄과 꼭대기 폰툰</h4><p>서쪽 변은 부이가 약 100m 간격으로 한 줄로 이어집니다. <b>6~8스트로크마다 고개 들어 다음 부이</b>만 확인하면 됩니다. 500m·800m·1000m·1500m·1820m에 거리 부이가 있어 바퀴 안에서 내가 어디쯤인지 압니다. 꼭대기 폰툰이 보이면 좌회전 준비.</p></div></li>
+      <li><div><h4>1바퀴 = 25분이면 정확히 계획대로</h4><p>2:38/100m로 1.9km면 50분, 1바퀴 25분. 첫 400m 오버페이스 금지. 첫 바퀴 시계를 보고 <b>25분 ± 2분</b>이면 그대로, 22분 이하면 두 번째 바퀴는 한 단계 늦춥니다. 물속에서 힘을 아끼는 것이 바이크 6시간을 삽니다.</p></div></li>
+      <li><div><h4>휴식 폰툰은 쓰지 않을 계획, 쓰면 30초만</h4><p>꼭대기 860m 지점 회전부에 있습니다. 심하게 부딪혔거나 고글에 물이 찼을 때만 잡고 정리. 폰툰을 잡는 건 실격이 아니지만 앞으로 나아가면 안 됩니다.</p></div></li>
+      <li><div><h4>출구 램프 → 400m 남았을 때부터 다리를 깨운다</h4><p>두 바퀴째 1500m 부이를 지나면 <b>킥을 조금 넣어 다리에 피를 보내고</b>, 마지막 50m는 웻슈트 지퍼 끈을 찾아둡니다. 램프는 경사(SLOPE) 폰툰이라 서두르지 말고 손으로 짚고 올라갑니다.</p></div></li>
+    </ol>
+
+    <div class="callout">웻슈트 · 수온은 아직 미확정. 10월 초 지리산 호수는 예년 20~23℃로 웻슈트 허용 범위(24.5℃ 이하)일 가능성이 높습니다. <b>토요일 13:00 또는 15:00 공식 수영훈련(타이밍 칩 착용 의무)</b>에서 수온과 웻슈트 착용을 확정합니다. 9/27 3.8km 완영 리허설을 웻슈트로 하면 더 좋습니다.</div>
+
+    <details class="official"><summary>공식 수영 코스도 보기</summary><img src="assets/gurye/swim.jpg" alt="공식 수영 코스도" loading="lazy"><div class="cap">지리산 호수(구만제). 빨간 선이 2바퀴 코스, 우측 하단이 출발 폰툰과 출구 램프 설계도. 노란 숫자는 SUP 안전요원 위치.</div></details>
+  </div>
+</section>
+
+<!-- ================= 03 T1 ================= -->
+<section class="band" id="t1">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">03</div>
+      <div>
+        <span class="eyebrow">T1 · 지리산 호수공원</span>
+        <h2>바꿈터 1 · 토요일에 맡긴 것은 일요일에 못 만진다</h2>
+        <p class="lead">바이크백은 <b>토요일 T1에 걸면 일요일 아침 접근 불가</b>(봉사자에게 부탁해 전달만 가능). 헬멧은 바이크백에만, 사이클화는 페달에 끼워 두면 자전거와 함께 거치 가능. 나머지는 전부 바이크백. 체인지 텐트에서 갈아입을 수 있고, 백은 봉사자가 챙깁니다.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <svg id="t1map" viewBox="0 0 1000 380" role="img" aria-label="T1 동선 도식"></svg>
+      <div class="legend"><span><i style="background:#0E7C94"></i>내 동선</span><span><i style="background:#1A2E35"></i>번호별 백 거치대 · 체인지 텐트</span><span><i style="background:#5C7A85"></i>자전거 거치대 (배번 순)</span></div>
+    </div>
+
+    <div class="two">
+      <div class="card">
+        <h4>토요일 바이크백에 넣는 것 (일요일 못 봄)</h4>
+        <ul class="plain" style="margin-top:12px; font-size:15px">
+          <li><div><b>헬멧</b> — 반드시 바이크백. 선글라스는 헬멧 안에</div></li>
+          <li><div><b>배번 벨트</b>(바이크는 등 쪽) · 양말(신을 거면) · 팔토시</div></li>
+          <li><div><b>여분 젤 2개 + 전해질 캡슐 지퍼백</b> — 일요일 아침 자전거에 못 붙였을 때 보험</div></li>
+          <li><div>수건 작은 것 · 바세린 미니 · 타월(발 닦기)</div></li>
+          <li><div><b>사이클화는 페달에 끼워서</b> 자전거에 둠. 클리트 커버 없이 신는 연습은 9/20에</div></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>일요일 05:10~06:40 T1에서 하는 것</h4>
+        <ul class="plain" style="margin-top:12px; font-size:15px">
+          <li><div><b>물통 2개(자작 레시피, 차갑게) 장착</b> · 벤토박스에 젤 세팅 · 남는 젤 탑튜브 테이핑</div></li>
+          <li><div>타이어 공기압(메카닉 05:10~10:00 상주) · 변속 확인 · 가민 위성 잡기</div></li>
+          <li><div><b>스트리트 기어백</b>(수영 후 안 쓰는 옷·슬리퍼) 05:10~06:40 맡김</div></li>
+          <li><div><b>바이크 PN백 · 런 PN백</b> 05:10~06:40 맡김 — 내용은 <a href="gurye_fuel.html#pn">보급 페이지</a></div></li>
+          <li><div>06:00~06:20 수영 웜업 → 06:25 에어로빅 → 06:40 대기열</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li><div><h4>램프 → 배번 백 거치대 → 체인지 텐트</h4><p>출구 램프에서 올라오면 캠핑장 쪽 길을 따라 백 거치대로 갑니다. <b>내 배번 줄을 미리 외워 두기</b>(토요일 체크인 때 사진). 백을 들고 텐트로 — 텐트 안에서 웻슈트 벗고 헬멧·벨트·양말. 봉사자가 백을 가져갑니다.</p></div></li>
+      <li><div><h4>T1 보급소 · 물 · 게토레이</h4><p>텐트 나오면서 <b>물 200~300ml + 젤 1개 + 전해질 캡슐 1개</b>. 바이크 위에서 바로 시작하는 게 낫다는 계획 그대로.</p></div></li>
+      <li><div><h4>자전거 → 마운트 라인 → 바로 3.5km 오르막</h4><p>바이크 아웃은 캠핑장 남동쪽 출구. 마운트 라인 넘어 타자마자 <b>산동교차로까지 3.5km 오르막</b>이 나옵니다. 여기서 175W를 넘기지 말 것. 첫 40km는 130W대라는 계획이 정확히 이 구간을 위한 겁니다.</p></div></li>
+    </ol>
+
+    <details class="official"><summary>공식 T1 배치도 보기</summary><img src="assets/gurye/t1.jpg" alt="공식 T1 배치도" loading="lazy"><div class="cap">지리산 오토캠핑장. 하늘색이 수영 출구 동선, 남색이 바이크 아웃. 초록 격자가 배번별 자전거 거치대.</div></details>
+  </div>
+</section>
+
+<!-- ================= 04 바이크 ================= -->
+<section class="band" id="bike">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">04</div>
+      <div>
+        <span class="eyebrow">Bike · 176.7km</span>
+        <h2>바이크 · 다섯 조각으로 쪼개서 탄다</h2>
+        <p class="lead">코스를 통째로 보면 복잡하지만 순서대로 다섯 조각입니다. ① 산동 왕복 13.5km ② 산업도로 남하 → 문척 9.6km ③ 문척·간전 <b>T자 순환 2회전 79km</b> ④ 구례1교~용방 <b>산업도로 순환 3회전 73km</b> ⑤ T2 진입 7.7km. 지도 위 점은 시뮬레이터 시계를 따라 움직입니다.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="bar">
+        <span class="ro"><b id="bk-km">0.0</b> km · <b id="bk-clock">—</b> · <span id="bk-seg">—</span></span>
+        <span class="sp"></span>
+        <span class="ro">U턴 <b id="bk-u">0</b>/14 · 보급 <b id="bk-a">0</b>/8</span>
+      </div>
+      <svg id="bikemap" viewBox="0 0 1000 940" role="img" aria-label="바이크 코스 도식"></svg>
+      <div class="legend"><span><i style="background:#0E7C94;opacity:.3"></i>코스(겹칠수록 진함 = 여러 번 지남)</span><span><i style="background:#fff;border:2px solid #0E7C94"></i>U턴</span><span><i style="background:#0E7C94"></i>보급소</span><span><i style="background:#1A2E35"></i>퍼스널니즈</span><span><i style="background:#fff;border:2px solid #B42318"></i>컷오프</span><span><i style="background:#B42318"></i>나</span></div>
+    </div>
+
+    <div class="sec-body">
+      <h3>다섯 조각 · 각 조각에서 할 일</h3>
+      <div class="tbl-scroll" style="margin-top:12px"><table class="tbl">
+        <thead><tr><th>조각</th><th class="n">km</th><th>길</th><th>파워 · 할 일</th></tr></thead>
+        <tbody>
+          <tr><td>① 산동 왕복</td><td class="n">0 → 13.5</td><td>T1 → 산동교차로 3.5km 오르막 → 우회전 1km 오르막 → 산수관 U턴 → 내려와 산동교차로 좌회전 → 자연드림 우회로 → 죽정마을 → 용산로·용방로 → 용방교차로 U턴</td><td><b>130W대 고정, 오르막 175W 상한.</b> 다리 깨우는 구간. 0:20에 첫 물통. 내리막에서 앞사람 추월 욕심 금지</td></tr>
+          <tr><td>② 산업도로 남하</td><td class="n">13.5 → 23.1</td><td>용방 U턴 후 1.7km에 <b>AS1</b>(첫 보급) → 광의사거리 → 냉천교차로 → 문척교차로로 내려가 산이고운아파트 U턴 → 문척교 건너 구성사거리</td><td>AS1에서 물통 교체 연습(첫 보급소는 여유 있게). 산업도로는 <b>자전거가 양방향 갓길</b>을 씀 — 마주 오는 선수와 교차하니 중앙선 쪽으로 붙지 말 것</td></tr>
+          <tr class="hl"><td>③ T자 순환 ×2</td><td class="n">23.1 → 102.0</td><td>구성 → 대평로터리 → 백운관 → <b>논곡 U턴</b> → 삼산 → 대평 → 양동(<b>AS2</b>) → 백운천 → <b>남도대교 U턴</b> → 백운천(2회전째 <b>PN</b>) → 무수내 → 대평 → 오봉산가든(<b>AS3</b>) → 구성. 1회전 39.5km, 대평로터리를 4번 지남</td><td><b>135~145W.</b> 속도계 100km 넘으면 3회전 돌지 말고 문척교로. 남도대교 2회전째(86.7km)가 <b>1차 컷오프 13:45</b>. 90km PN에서 젤 재보급 + 화장실. AS3는 자리가 좁아 게토레이 테이블 2개 적음</td></tr>
+          <tr class="hl"><td>④ 산업도로 순환 ×3</td><td class="n">102.0 → 169.0</td><td>산이고운 U턴 → 스카이바이크 → <b>구례1교 U턴</b> → 문척교차로 → 한성산업 → 광의 → <b>용방교차로 U턴</b> (1회전 24.4km). 용방 턴 직후 AS1을 매번 지남(121.9 · 146.3 · 170.7)</td><td><b>여기가 승부처.</b> 3시간 30분 이후 = 8/30에 무너진 지점. 젤·음료만, 고형식 종료. 냉천교차로 3회째 통과(150.5km)가 <b>2차 컷오프 16:40</b>. 용방 4번째 U턴이 마지막 U턴</td></tr>
+          <tr><td>⑤ T2 진입</td><td class="n">169.0 → 176.7</td><td>AS1(마지막) → 냉천교차로에서 <b>구례읍 출구로 빠짐</b> → 서시천 뚝방도로 → <b>정장교 좌회전</b> → 다리 건너 다시 좌회전 → 80m 뒤 하차선</td><td>마지막 20분은 물만. <b>정장교 좌회전 10km/h 이하</b> — 안 줄이면 충돌·부상. 좌회전 하자마자 하차 준비, 바이크 캐처가 자전거를 받아감</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="stage" style="margin-top:32px">
+      <div class="bar"><span>T2 진입 · 정장교 좌회전 감속</span><span class="sp"></span><button class="btn btn-ghost" id="brake-play">재생</button></div>
+      <div class="gauge">
+        <svg id="brake" viewBox="0 0 600 300" role="img" aria-label="정장교 감속 도식"></svg>
+        <div style="font-size:15px; line-height:1.7; padding:8px 12px">
+          <p><b>냉천교차로 구례출구</b>로 빠져 서시천 뚝방을 따라오면 정장교. 여기서 <b>좌회전, 다리 건너서 다시 좌회전</b>. 두 번째 좌회전 후 <b>80m가 안 되는 거리</b>에 하차선입니다.</p>
+          <p style="margin-top:10px">운영자가 글에서 세 번 반복한 유일한 경고: <b>"정장교 좌회전에서 10km/h 이하로 안 줄이면 꽝, 부상 위험."</b> 하차선 직전이라 뒤에서 오는 선수도 감속합니다. 뚝방에서 미리 기어를 가볍게 바꾸고, 첫 좌회전부터 브레이크.</p>
+          <p style="margin-top:10px">T2는 좁아 거치대 간격이 좁고, <b>바이크 캐처 봉사자가 자전거를 받아 거치</b>합니다. 나는 자전거를 넘기고 백 거치대로 뛰어가 체인지 텐트로.</p>
+        </div>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li><div><h4>U턴 14번 · 한 번에 12초, 그리고 파워 스파이크</h4><p>산수관 1 · 용방 4 · 산이고운 2 · 논곡 2 · 남도대교 2 · 구례1교 3. 시간 손실은 총 3분이라 별것 아닙니다. 문제는 <b>콘 돌고 일어서서 밟는 습관</b> — 매번 300W를 5초씩 찍으면 14번이면 NP가 5W 올라가고 다리에 젖산이 쌓입니다. <b>턴 전 기어 2단 가볍게 → 앉아서 90rpm으로 재가속.</b> 9/15·9/22 실외에서 U턴 연습 10회씩.</p></div></li>
+      <li><div><h4>같은 길을 여러 번 — 랩 카운트를 가민에 맡기지 말 것</h4><p>대평로터리 4번, 용방교차로 U턴 4번, 구례1교 U턴 3번. 운영자 조언대로 <b>속도계 누적 거리로 판단</b>합니다. T자 순환은 100km 넘으면 끝, 산업도로 순환은 용방 U턴 4번째(169km)가 끝. 탑튜브에 테이프로 <b>"T자 ×2 → 102 · 용방 ×4 → 169"</b> 써 붙이기.</p></div></li>
+      <li><div><h4>보급소 간격 20~24km = 43~52분 · 물통 1개/시간 계획과 맞다</h4><p>AS1 15.2 → AS2 39.0(23.8km) → AS3 58.7 → AS2 78.5 → AS3 98.2 → AS1 121.9(23.7km) → 146.3 → 170.7. 자작 물통 2개로 출발하면 <b>첫 2시간은 내 것</b>, 이후는 보급소 게토레이. 세부는 <a href="gurye_fuel.html#bike">보급 페이지</a>.</p></div></li>
+      <li><div><h4>산업도로 통행 방식 — 양방향 자전거가 같은 도로</h4><p>E~M 구간은 차가 가운데, 자전거가 양쪽 바깥 차로를 씁니다. 남원방향(북)으로 갈 때와 순천방향(남)으로 갈 때 <b>마주 오는 선수가 옆 차로에 있음</b>. 추월은 왼쪽으로만, 중앙선 넘지 않기(페널티 박스가 T2 옆에 있습니다).</p></div></li>
+      <li><div><h4>메카닉 · SAG</h4><p>1·2보급소 고정 메카닉, 이동 메카닉 6명, SAG 차량 4대. 펑크는 스스로 때우는 게 빠릅니다(튜브 2 · CO2 2). 대회일 새벽 T1에도 메카닉이 있으니 공기압은 거기서.</p></div></li>
+    </ol>
+
+    <details class="official"><summary>공식 바이크 코스도 보기</summary><img src="assets/gurye/bike.jpg" alt="공식 바이크 코스도" loading="lazy"><div class="cap">A~M 구간 기호와 통과 순서(S A B A C D E F G H I J K J L J I H M H G F E … F G F). 우상단 표에 산업도로 통행방식.</div></details>
+  </div>
+</section>
+
+<!-- ================= 05 T2 ================= -->
+<section class="band" id="t2">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">05</div>
+      <div>
+        <span class="eyebrow">T2 · 지리산 둘레길 센터 옆 주차장</span>
+        <h2>바꿈터 2 · 자전거는 넘기고 뛴다</h2>
+        <p class="lead">토요일 10:00~18:20에 <b>런 기어백을 여기 맡깁니다</b>(T1과 다른 장소, 운동장 옆). 일요일에는 캐처가 자전거를 받고, 나는 백 거치대 → 체인지 텐트 → 런 아웃. T2 보급소는 물·게토레이.</p>
+      </div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h4>토요일 런 기어백</h4>
+        <ul class="plain" style="margin-top:12px; font-size:15px">
+          <li><div><b>러닝화</b>(끈 미리 고정) · 양말 새것 · 모자</div></li>
+          <li><div><b>배번 벨트는 바이크 것 그대로</b>(앞으로 돌리기) — 따로 넣지 않음</div></li>
+          <li><div><b>젤 1개(런 출발 직전용) + 전해질 캡슐 3개</b> · 바세린</div></li>
+          <li><div><b>헤드램프 또는 팔 LED</b> — 18:11 일몰, 2바퀴째부터 어두움. 코스에 조명은 있으나 보험</div></li>
+          <li><div>얇은 긴팔(밤 15℃ 대비) · 물티슈</div></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>T2 순서 (10분)</h4>
+        <ol class="steps" style="margin-top:8px; border-top:0">
+          <li><div><h4>정장교 감속 → 하차선 → 캐처에게 자전거</h4><p>헬멧 벗지 말고 그대로 백 거치대까지 뛰기. 헬멧은 텐트에서.</p></div></li>
+          <li><div><h4>텐트: 양말·신발·모자 · 발 상태 확인</h4><p>물집 하나가 6시간을 망칩니다. 발이 젖어 있으면 닦고 바세린.</p></div></li>
+          <li><div><h4>나오면서 젤 1 + 물 200ml + 캡슐 1</h4><p>런 출발 직전 젤은 필수. 운동장 옆 시작점에서 1km부터 걷뛰 4:1.</p></div></li>
+        </ol>
+      </div>
+    </div>
+    <details class="official"><summary>공식 T2 배치도 보기</summary><img src="assets/gurye/t2.jpg" alt="공식 T2 배치도" loading="lazy"><div class="cap">남색 점선이 바이크 피니시(캐처 → 거치대), 하늘색이 런 스타트. 빨간 선은 런 코스가 T2 옆을 4·5회 지나는 동선.</div></details>
+  </div>
+</section>
+
+<!-- ================= 06 런 ================= -->
+<section class="band" id="run">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">06</div>
+      <div>
+        <span class="eyebrow">Run · 42.0km</span>
+        <h2>런 · 서시천 9.92km 네 바퀴</h2>
+        <p class="lead">운동장 앞에서 출발해 서시교 쪽으로 0.9km 갔다 돌아오고, 서시천 산책로를 따라 북서로 올라가 KBS로터리에서 돌고, 꽃강에서 돌아 동쪽 강변으로 내려옵니다. 한 바퀴에 보급소 5곳, 턴 3곳. 4바퀴 후 서시교 턴 → 보급소 → 운동장 진입 → 피니시.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="bar">
+        <span class="ro">바퀴 <b id="rn-lap">—</b> · <b id="rn-km">0.0</b> km · <b id="rn-clock">—</b> · <span id="rn-light">—</span></span>
+        <span class="sp"></span>
+        <span class="ro">보급 통과 <b id="rn-a">0</b>/21</span>
+      </div>
+      <svg id="runmap" viewBox="0 0 1000 760" role="img" aria-label="런 코스 도식"></svg>
+      <div class="legend"><span><i style="background:#0E7C94;opacity:.3"></i>코스</span><span><i style="background:#fff;border:2px solid #0E7C94"></i>턴</span><span><i style="background:#0E7C94"></i>보급소</span><span><i style="background:#1A2E35"></i>퍼스널니즈</span><span><i style="background:#fff;border:2px solid #B42318"></i>컷오프 23:00</span><span><i style="background:#B42318"></i>나</span></div>
+    </div>
+
+    <div class="sec-body">
+      <h3>바퀴별 계획 · 시계와 빛</h3>
+      <div class="tbl-scroll" style="margin-top:12px"><table class="tbl" id="tbl-laps">
+        <thead><tr><th>바퀴</th><th class="n">km</th><th class="n">시작 시각</th><th>빛</th><th>할 일</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="n">0 → 9.9</td><td class="n" data-lap="1">—</td><td data-light="1">—</td><td><b>첫 5km 5:30보다 빠르지 않게.</b> 1km부터 걷뛰 4:1. AS1(1.4km)에서 콜라 1컵 — 잘 넘어가는지 확인. 서시교 턴에서 랩밴드 받기</td></tr>
+          <tr><td>2</td><td class="n">9.9 → 19.8</td><td class="n" data-lap="2">—</td><td data-light="2">—</td><td>매시간 젤 1 + 매 보급소 콜라 또는 게토레이 1컵. 해가 지면 <b>헤드램프 켜기</b>. 조명대 구간은 발밑 주의</td></tr>
+          <tr><td>3</td><td class="n">19.8 → 29.8</td><td class="n" data-lap="3">—</td><td data-light="3">—</td><td>콜라 위주 전환(2컵 + 물 1컵). 걷기 1분을 절대 줄이지 말 것 — 여기서 줄이면 4바퀴째 전부 걷게 됨</td></tr>
+          <tr><td>4</td><td class="n">29.8 → 39.7</td><td class="n" data-lap="4">—</td><td data-light="4">—</td><td>파크골프 앞(31.9km) <b>컷오프 23:00</b> 통과 확인. 이후는 뭘 해도 완주. 안 넘어가면 콜라·물만</td></tr>
+          <tr class="hl"><td>피니시</td><td class="n">39.7 → 42.0</td><td class="n" data-lap="5">—</td><td data-light="5">—</td><td>서시교 턴 → AS1 → 운동장. <b>피니시 방향이 작년과 반대</b>(잔디 보호). 마지막 300m는 뛰기</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <ol class="steps">
+      <li><div><h4>보급소 21곳 = 1.6~2.4km마다 · 걷뛰 리듬과 맞춘다</h4><p>AS1 1.38 → AS2 3.19 → AS3 5.27 → AS4 7.69 → AS5 9.33 → (다음 바퀴 AS1까지 1.97). 걷뛰 4:1이면 5분마다 걷는 1분이 오는데, <b>보급소가 보이면 그 자리에서 걷기 1분을 시작</b>하면 됩니다. 구성: 스펀지 → 물 → 게토레이·콜라 → 음식(오렌지·바나나·비스킷·젤·소금·포도당정) → 게토레이·콜라 → 물 → 물품(선크림·바세린·에어파스) → 화장실 → 스펀지.</p></div></li>
+      <li><div><h4>런 퍼스널니즈 · 1.48km · 5번 지남 · 여러 번 사용 가능</h4><p>AS1 지나 100m 분수광장. 바이크 PN과 달리 <b>다시 쓸 수 있고</b>(Multiple Pickups 테이블에 반납) 다 썼으면 버리는 곳에. 젤이 8천 개뿐이라 주최 측도 개인 젤을 권합니다 — <b>런 PN백에 젤 5개 + 캡슐 + 여분 양말</b>. 세부는 <a href="gurye_fuel.html#pn">보급 페이지</a>.</p></div></li>
+      <li><div><h4>빛 · 18:11 일몰, 18:37 완전히 어두움</h4><p>기본 시나리오로 <span id="sun-km">약 23km</span>에서 해가 집니다. 코스 조명은 ① 가로등 구간 ② 전기공사 조명 구간 ③ 조명대·캠핑등 구간 세 종류이고, 작년 캠핑등이 너무 어두웠던 걸 올해 밝힌다고 합니다. 그래도 <b>헤드램프는 T2 백에</b>. 어두워지면 페이스가 자연히 떨어지니 3바퀴째 기록이 나빠도 정상.</p></div></li>
+      <li><div><h4>랩밴드 · 바퀴 세기</h4><p>서시교 턴(0.9km)에서 바퀴마다 밴드를 받습니다. <b>밴드 4개 + 마지막 서시교 턴 = 피니시 방향.</b> 가민 랩보다 밴드를 믿을 것.</p></div></li>
+      <li><div><h4>도로 구간 1.2km · 사림로터리 ↔ KBS로터리</h4><p>나머지는 전부 산책로·자전거길. 도로 구간은 차량 통제라도 <b>턴 직후 마주 오는 선수</b>가 있으니 오른쪽 유지.</p></div></li>
+    </ol>
+
+    <details class="official"><summary>공식 런 코스도 보기</summary><img src="assets/gurye/run.jpg" alt="공식 런 코스도" loading="lazy"><div class="cap">노란 상자는 바퀴별 누적 km(예: 4K · 13.9K · 23.8K · 33.7K). 컷오프 23:00은 31.9K 파크골프 입구.</div></details>
+  </div>
+</section>
+
+<!-- ================= 07 일정 ================= -->
+<section class="band" id="schedule">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">07</div>
+      <div>
+        <span class="eyebrow">Schedule · 10/2 (금) ~ 10/5 (월)</span>
+        <h2>나흘 일정 · 어디에 몇 시에 있어야 하나</h2>
+        <p class="lead">운영자가 "이곳에 올린 일정이 맞다"고 못 박은 표입니다. 장소가 셋으로 나뉩니다 — <b>공설운동장</b>(등록·검차·엑스포·피니시·T2 옆), <b>지리산 호수공원</b>(수영·T1), <b>지리산 둘레길 센터</b>(설명회·T2). 호수공원과 운동장은 셔틀 산동 라인으로 연결.</p>
+      </div>
+    </div>
+
+    <div class="sec-body">
+      <div class="tbl-scroll"><table class="tbl">
+        <thead><tr><th class="n">시각</th><th>이벤트</th><th>장소</th><th>나</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td colspan="4"><b>금요일 10/2</b> — 수원 출발. 오전 러닝 20분 후 이동(약 4시간)</td></tr>
+          <tr><td class="n">10:00~17:00</td><td>선수 체크인 · 메카닉 · 공식 상점 · 엑스포</td><td>공설운동장</td><td>도착하면 <b>체크인 먼저</b>. 배번·칩·백 4개 수령. 배번 위치 사진</td></tr>
+          <tr><td class="n">16:15~17:00</td><td><b>의무 레이스 브리핑 (한국어)</b></td><td>지리산 둘레길 센터 2층</td><td>금요일에 듣는다. 토요일 것은 16:30이라 검차·체크인과 겹침</td></tr>
+          <tr><td class="n">18:00~19:30</td><td>개회식</td><td>더케이 지리산 호텔 (산동)</td><td>선택. 일찍 자는 게 우선</td></tr>
+          <tr class="hl"><td colspan="4"><b>토요일 10/3</b> — 운동장 → 호수공원 → 운동장 순서. 이동 거리 있으니 오전에 끝낸다</td></tr>
+          <tr><td class="n">09:00~17:30</td><td>체크인 · 메카닉 · 상점 · 엑스포</td><td>공설운동장</td><td>금요일 못 한 게 있으면 여기서</td></tr>
+          <tr><td class="n">10:00~18:20</td><td><b>자전거 검차 → 검차 스티커</b></td><td>공설운동장 메인 행사장</td><td>운동장에서 검차받고 스티커. <b>토요일 T1에는 메카닉 없음</b> — 정비는 운동장에서 끝낼 것</td></tr>
+          <tr><td class="n">10:00~18:20</td><td><b>의무 바이크 체크인 + 바이크백 체크인</b></td><td>지리산 호수공원 (T1)</td><td>헬멧은 바이크백에, 사이클화는 페달에. 물통·젤은 일요일 아침에</td></tr>
+          <tr><td class="n">13:00~14:00 · 15:00~16:00</td><td>공식 수영훈련 1·2 (타이밍 칩 착용 의무)</td><td>수영 코스 · 지리산 호수</td><td><b>13:00 세션 15분만</b> — 수온·웻슈트·부이 시야 확인. 길게 하지 않기</td></tr>
+          <tr><td class="n">10:00~18:20</td><td><b>의무 런 기어백 체크인</b></td><td>지리산 둘레길 센터 옆 주차장 (T2)</td><td>운동장 복귀 후. 헤드램프·러닝화·젤 1</td></tr>
+          <tr><td class="n">저녁</td><td>—</td><td>숙소</td><td>익숙한 탄수 저녁 → 물통 분말 소분 · PN백 2개 포장 → <b>21:00 취침</b></td></tr>
+          <tr class="hl"><td colspan="4"><b>일요일 10/4 · 대회</b> — 04:00 기상 → 04:15 아침(플랜 B 준비) → 05:00 호수공원</td></tr>
+          <tr><td class="n">05:10~06:40</td><td>T1 오픈 · <b>스트리트 기어백 · 바이크 PN백 · 런 PN백 맡김</b> · 메카닉(~10:00)</td><td>지리산 호수공원 (T1)</td><td>물통 장착 · 젤 세팅 · 공기압 · PN백 2개 제출</td></tr>
+          <tr><td class="n">06:00~06:20</td><td>수영 웜업</td><td>지리산 호수</td><td>5~10분만. 06:45 젤 1개</td></tr>
+          <tr><td class="n">06:40~06:55</td><td>대기열 준비</td><td>T1</td><td>예상 1:40 근처 그룹 뒤쪽</td></tr>
+          <tr><td class="n">07:00~07:20</td><td><b>롤링 스타트</b></td><td>지리산 호수</td><td></td></tr>
+          <tr><td class="n">15:20</td><td>첫 완주자 (예측)</td><td>피니시 · 운동장 북측</td><td>이때 나는 산업도로 순환 마지막 회전</td></tr>
+          <tr><td class="n">16:00~00:30</td><td>스트리트 · 바이크 기어백 체크아웃</td><td>T1</td><td>가족이 대신 찾을 수 있는지 체크인 때 확인</td></tr>
+          <tr><td class="n">18:00~00:50</td><td>바이크(자전거) · 런 기어백 체크아웃</td><td>T2</td><td>완주 후 여기서 자전거 회수</td></tr>
+          <tr><td class="n">24:20</td><td>공식 종료</td><td></td><td></td></tr>
+          <tr class="hl"><td colspan="4"><b>월요일 10/5</b></td></tr>
+          <tr><td class="n">07:30~10:00</td><td>바이크 · 런 기어백 체크아웃</td><td>T2</td><td>일요일 밤에 못 찾았으면</td></tr>
+          <tr><td class="n">10:00~11:40</td><td>시상식 · 2027 코나 슬롯 롤다운</td><td>공설운동장</td><td>선택. 체크아웃 후 수원 복귀</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="two">
+        <div class="card">
+          <h4>주차 · 셔틀</h4>
+          <p style="font-size:15px; margin-top:10px">대회일은 <b>운동장에 주차하고 셔틀(산동 라인)로 호수공원</b>으로 가라는 게 운영자 권고입니다. 호수공원은 스탭 주차로 차고, 선수는 호수 건너편 협소한 곳뿐. 셔틀은 금~월 운행, 2026 시간표는 다음 주 홈페이지(gurye.go.kr/tour/ironman.do)에 교체 예정. 산동 라인: 운동장 ↔ 자연드림파크 ↔ 호수공원 ↔ 산동 호텔. 마산 라인: 운동장 ↔ 지리산 리조트 등 마산 숙소.</p>
+        </div>
+        <div class="card">
+          <h4>숙소 위치 판단</h4>
+          <p style="font-size:15px; margin-top:10px">산동 호텔 지역(더케이 지리산 가족호텔 등)은 <b>T1에 가깝고</b> 새벽 이동이 짧습니다. 마산 지역(지리산 리조트 등)은 운동장·피니시에 가깝습니다. 새벽 05:00 T1 도착이 가장 중요하니 <b>산동 쪽이 유리</b>, 단 피니시 후 밤에 T2에서 자전거를 찾아 숙소로 가는 동선은 미리 정해둘 것(가족 차량).</p>
+        </div>
+      </div>
+
+      <details class="official"><summary>이벤트 맵 · 셔틀 맵 · 운동장 배치 보기</summary>
+        <img src="assets/gurye/event-map.jpg" alt="이벤트 맵" loading="lazy"><div class="cap">10/4 이벤트 맵. 산동(북) 호텔 지역 · 호수공원(수영·T1) · 마산 호텔 지역 · 구례 공설운동장(결승·T2·엑스포·등록·시상).</div>
+        <img src="assets/gurye/shuttle.jpg" alt="셔틀버스 맵" loading="lazy"><div class="cap">셔틀 산동 라인(빨강) · 마산 라인(파랑). 시간표는 2025년 것이 공유되어 있고 다음 주 2026년으로 교체 예정.</div>
+        <img src="assets/gurye/village-sat.jpg" alt="토요일 운동장 배치" loading="lazy"><div class="cap">토요일 아이언맨 빌리지. 우측 상단 REGISTRATION → BIB NUMBER → EXPO 순. 검차 후 BIKE RACK.</div>
+        <img src="assets/gurye/finish-sun.jpg" alt="일요일 피니시 배치" loading="lazy"><div class="cap">일요일 피니시. 운동장 남쪽에서 들어와 서쪽 트랙으로 올라가 북측 아치. 리커버리·마사지·스트리트 기어백이 북쪽.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 훈련 반영 ================= -->
+<section class="band" id="training">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">08</div>
+      <div>
+        <span class="eyebrow">Last 3 weeks</span>
+        <h2>코스가 정한 마지막 3주 과제</h2>
+        <p class="lead">체력은 9/20 이후 못 올립니다. 남은 건 이 코스에서 <b>시간을 잃는 자리</b>를 미리 겪어 보는 것뿐입니다. 훈련 캘린더(<a href="exercise.html">exercise.html</a>)에 반영한 항목입니다.</p>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><div><h4>9/20 180km 리허설을 "구례 방식"으로</h4><p>물통 2개 자작 → 이후 <b>게토레이(시판)로 교체</b>해 대회 보급소 음료를 미리 위장에 시험. 파워젤·GO 시간당 2개. 90km 지점에서 1분 정지 후 재출발(PN 시뮬레이션). <b>U턴 14회</b>를 코스에 넣어 앉아서 재가속. 마지막 20분 물만. 런 20km는 첫 5km 5:30 상한, 2km마다 30초 걷기 추가(보급소 리듬).</p></div></li>
+      <li><div><h4>어두운 데서 뛰어 본다</h4><p>런 2~4바퀴는 해 진 뒤입니다. <b>9/22 또는 9/29 저녁 러닝을 19:00 이후 헤드램프 켜고</b>. 발밑 감각과 페이스 체감 차이를 미리 알아둘 것.</p></div></li>
+      <li><div><h4>사이팅은 직사각형 코스 기준으로</h4><p>9/17 3,000m · 9/27 3.8km 완영에서 <b>8스트로크마다 고개 들기 + 100m마다 가상 부이</b>. 첫 400m를 25분 페이스보다 빠르지 않게 들어가는 연습(스타트 후 첫 100m 시계 확인).</p></div></li>
+      <li><div><h4>마운트 · 디스마운트 · 페달에 끼운 신발</h4><p>사이클화를 페달에 끼워 두고 맨발 양말로 뛰어가 올라타는 연습을 9/26 브릭에서 5회. 안 되면 T1에서 신고 뛰기로 확정(느리지만 안전). 하차선 앞 <b>10km/h 감속 → 정지 → 내리기</b>도 같이.</p></div></li>
+      <li><div><h4>백 4개를 미리 싸 본다 — 9/27 저녁</h4><p>바이크백(토), 런 기어백(토), 스트리트백(일), 바이크 PN백(일), 런 PN백(일). 각각 지퍼백에 라벨. 리스트는 <a href="gurye_fuel.html#pack">보급 페이지</a>.</p></div></li>
+      <li><div><h4>추석 9/24 답사</h4><p>구례까지 가면 <b>정장교 좌회전 → 하차선, 산동교차로 오르막, 산업도로 갓길</b> 세 곳만 차로 지나보기. 호수공원 주차장·셔틀 정류장 위치 확인.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    출처 — KTS 카페 68020 「구례 정보 0910 - 한국어 AIG?」(김형식, 2026-09-10) · 첨부 거리표 <code>2026 distance-0815-korea.xlsx</code> · 첨부 코스도 15장(<code>assets/gurye/</code>). 일출·일몰은 구례(35.2°N, 127.5°E) 10/4 계산값 06:27 · 18:11. 영문 AIG 배포 후 갱신 예정.
+  </div>
+</footer>
+
+<script src="assets/gurye.js"></script>
+<script>
+(function () {
+  "use strict";
+  var G = window.GURYE, R = G.RACE;
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function txt(x, y, s, cls, parent, anchor) { var t = el("text", { x: x, y: y, "class": "lbl " + (cls || ""), "text-anchor": anchor || "start" }, parent); t.textContent = s; return t; }
+
+  /* ---------- 상태 ---------- */
+  var KEY = "gurye.sim.v1";
+  var params = Object.assign({}, G.DEFAULT, G.load(KEY, {}));
+  var sim = G.simulate(params);
+  var clockEl = 0;             // 경과(분)
+  var playing = false, lastT = 0;
+  var SPEED = 13 * 60 / 75;    // 13시간을 75초에
+
+  var PRESETS = {
+    plan: {},
+    safe: { swimPace: 170, t1: 12, bikeSpeed: 26, uturnLoss: 15, aidLoss: 30, pnStop: 3, t2: 12, runPace: 390, walkPace: 600, fade: 6, aidWalk: 20 },
+    fast: { swimPace: 150, t1: 8, bikeSpeed: 30, uturnLoss: 10, aidLoss: 15, pnStop: 1, t2: 8, runPace: 345, walkPace: 510, fade: 2, aidWalk: 10 },
+    walk: { runMin: 0, walkPace: 560, fade: 4, aidWalk: 15 },
+    bonk: { bikeSpeed: 24, aidLoss: 60, pnStop: 5, t2: 15, runMin: 2, runPace: 420, walkPace: 660, fade: 10, aidWalk: 30 }
+  };
+
+  /* ---------- 컨트롤 ---------- */
+  var VAL = {
+    startOffset: function (v) { return G.hhmm(R.startFirst + v); },
+    swimPace: function (v) { return G.pace(v) + " /100m"; },
+    t1: function (v) { return v + "분"; }, t2: function (v) { return v + "분"; },
+    bikeSpeed: function (v) { return v + " km/h"; },
+    uturnLoss: function (v) { return v + "초"; }, aidLoss: function (v) { return v + "초"; },
+    pnStop: function (v) { return v + "분"; },
+    runPace: function (v) { return G.pace(v) + " /km"; }, walkPace: function (v) { return G.pace(v) + " /km"; },
+    ratio: function () { return params.runMin === 0 ? "걷기만" : params.runMin + " : " + params.walkMin; },
+    fade: function (v) { return v + " %"; }, aidWalk: function (v) { return v + "초"; }
+  };
+  function syncControls() {
+    $$("#controls input[type=range]").forEach(function (r) { r.value = params[r.dataset.p]; });
+    $$("#controls .val").forEach(function (v) { var k = v.dataset.v; v.textContent = VAL[k](params[k]); });
+  }
+  $$("#controls input[type=range]").forEach(function (r) {
+    r.addEventListener("input", function () {
+      params[r.dataset.p] = parseFloat(r.value);
+      $$(".presets .btn").forEach(function (b) { b.classList.remove("on"); });
+      recompute();
+    });
+  });
+  $$(".presets .btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      params = Object.assign({}, G.DEFAULT, PRESETS[b.dataset.preset]);
+      $$(".presets .btn").forEach(function (x) { x.classList.remove("on"); });
+      b.classList.add("on");
+      recompute();
+    });
+  });
+
+  function recompute() {
+    sim = G.simulate(params);
+    G.save(KEY, params);
+    syncControls();
+    renderOut();
+    renderDayline();
+    renderCuts();
+    renderTables();
+    renderLapTable();
+    $("#scrub").max = Math.ceil(sim.finish);
+    if (clockEl > sim.finish) clockEl = sim.finish;
+    renderNow();
+  }
+
+  /* ---------- 결과 ---------- */
+  function renderOut() {
+    $("#o-swim").textContent = G.dur(sim.swimMin);
+    $("#o-swim-c").textContent = G.hhmm(sim.start) + " 입수 → " + G.hhmm(sim.start + sim.swimEnd) + " 출수";
+    $("#o-bike").textContent = G.dur(sim.bikeMin);
+    $("#o-bike-c").textContent = G.hhmm(sim.start + sim.t1End) + " 출발 → " + G.hhmm(sim.start + sim.bikeEnd) + " 하차";
+    $("#o-run").textContent = G.dur(sim.runMin);
+    $("#o-run-c").textContent = G.hhmm(sim.start + sim.t2End) + " 출발";
+    $("#o-pace").textContent = G.pace(sim.runPaceAvg);
+    $("#o-fin").textContent = G.dur(sim.finish);
+    $("#o-fin-c").textContent = G.hhmm(sim.finishClock) + " 피니시 · 제한 " + G.hhmm(sim.limitClock);
+    var sk = G.runElapsedToKm(sim, sim.sunsetElapsed);
+    $("#sun-km").textContent = sim.sunsetElapsed > sim.finish ? "피니시 후" : (sim.sunsetElapsed < sim.t2End ? "바이크 중" : "약 " + sk.toFixed(0) + "km");
+    $$("[data-cut]").forEach(function (td) { var c = sim.cutoffs[+td.dataset.cut]; td.textContent = G.hhmm(c.arrive) + " (여유 " + G.dur(c.margin) + ")"; });
+  }
+
+  /* ---------- 하루 타임라인 ---------- */
+  var DL = { x0: 40, x1: 980, t0: 5 * 60, t1: 24 * 60 + 30 };
+  function dx(clock) { return DL.x0 + (clock - DL.t0) / (DL.t1 - DL.t0) * (DL.x1 - DL.x0); }
+  function renderDayline() {
+    var svg = $("#dayline"); svg.innerHTML = "";
+    // 낮/밤
+    el("rect", { x: DL.x0, y: 30, width: DL.x1 - DL.x0, height: 34, fill: "#1A2E35", opacity: .08 }, svg);
+    el("rect", { x: dx(R.sunrise), y: 30, width: dx(R.sunset) - dx(R.sunrise), height: 34, fill: "#fff" }, svg);
+    el("rect", { x: dx(R.sunset), y: 30, width: dx(R.dusk) - dx(R.sunset), height: 34, fill: "#1A2E35", opacity: .04 }, svg);
+    // 구간
+    var legs = [
+      ["수영", sim.start, sim.start + sim.swimEnd, "#0E7C94", .35],
+      ["T1", sim.start + sim.swimEnd, sim.start + sim.t1End, "#5C7A85", .5],
+      ["바이크", sim.start + sim.t1End, sim.start + sim.bikeEnd, "#0E7C94", .6],
+      ["T2", sim.start + sim.bikeEnd, sim.start + sim.t2End, "#5C7A85", .5],
+      ["런", sim.start + sim.t2End, sim.finishClock, "#0E7C94", .85]
+    ];
+    legs.forEach(function (l) {
+      var x = dx(l[1]), w = Math.max(1, dx(l[2]) - x);
+      el("rect", { x: x, y: 36, width: w, height: 22, fill: l[3], opacity: l[4], rx: 2 }, svg);
+      if (w > 34) txt(x + w / 2, 51, l[0], "b", svg, "middle").setAttribute("fill", "#fff");
+    });
+    // 시각 눈금
+    for (var h = 6; h <= 24; h += 2) { var x = dx(h * 60); el("line", { x1: x, y1: 64, x2: x, y2: 70, stroke: "#5C7A85" }, svg); txt(x, 84, (h < 10 ? "0" : "") + h + ":00", "s", svg, "middle"); }
+    // 일출·일몰
+    [[R.sunrise, "일출 06:27"], [R.sunset, "일몰 18:11"]].forEach(function (s) { var x = dx(s[0]); el("line", { x1: x, y1: 22, x2: x, y2: 64, stroke: "#5C7A85", "stroke-dasharray": "3 3" }, svg); txt(x, 16, s[1], "s", svg, "middle"); });
+    // 컷오프
+    sim.cutoffs.forEach(function (c, i) { var x = dx(c.clock); el("line", { x1: x, y1: 30, x2: x, y2: 64, stroke: "#B42318", "stroke-width": 1.5 }, svg); txt(x, 104, (i < 3 ? "컷 " : "종료 ") + G.hhmm(c.clock), "s", svg, "middle").setAttribute("fill", "#B42318"); });
+    // 피니시
+    var fx = dx(sim.finishClock); txt(fx, 104, "피니시 " + G.hhmm(sim.finishClock), "b", svg, "middle");
+    // 커서
+    el("line", { id: "dl-cur", x1: dx(sim.start), y1: 26, x2: dx(sim.start), y2: 66, stroke: "#B42318", "stroke-width": 2 }, svg);
+  }
+
+  function renderCuts() {
+    var box = $("#cutlist"); box.innerHTML = "";
+    sim.cutoffs.forEach(function (c) {
+      var r = document.createElement("div"); r.className = "row";
+      var bad = c.margin < 0;
+      r.innerHTML = '<div class="n">' + c.name + '</div><div class="t">' + G.hhmm(c.arrive) + ' 도착</div><div class="m' + (bad ? ' bad' : '') + '">' + (bad ? "초과 " : "여유 ") + G.dur(c.margin) + '</div>';
+      box.appendChild(r);
+    });
+  }
+
+  function renderTables() {
+    var tb = $("#tbl-bike tbody"); tb.innerHTML = "";
+    sim.bike.forEach(function (b) {
+      var tr = document.createElement("tr"); tr.className = b.type;
+      tr.innerHTML = '<td class="n">' + b.km.toFixed(1) + '</td><td>' + b.name + '</td><td class="n">' + G.dur(b.elapsed) + '</td><td class="n">' + G.hhmm(b.clock) + '</td>';
+      tb.appendChild(tr);
+    });
+    var tr2 = $("#tbl-run tbody"); tr2.innerHTML = "";
+    sim.run.forEach(function (b) {
+      var tr = document.createElement("tr"); tr.className = b.type;
+      tr.innerHTML = '<td class="n">' + b.km.toFixed(1) + '</td><td>' + b.name + '</td><td class="n">' + G.dur(b.elapsed) + '</td><td class="n">' + G.hhmm(b.clock) + '</td>';
+      tr2.appendChild(tr);
+    });
+  }
+  function lightLabel(clock) {
+    if (clock < R.sunset - 30) return "낮";
+    if (clock < R.sunset) return "해질녘";
+    if (clock < R.dusk) return "일몰 직후 · 램프 준비";
+    return "밤 · 램프";
+  }
+  function renderLapTable() {
+    for (var i = 1; i <= 5; i++) {
+      var km = (i - 1) * R.runLapKm;
+      var m = sim.run.filter(function (r) { return Math.abs(r.km - km) < 0.05; })[0];
+      var clock = m ? m.clock : sim.start + sim.t2End;
+      $('[data-lap="' + i + '"]').textContent = G.hhmm(clock);
+      $('[data-light="' + i + '"]').textContent = lightLabel(clock);
+    }
+  }
+
+  /* ---------- 지금 (재생) ---------- */
+  function legAt(e) {
+    if (e < 0) return "스타트 대기";
+    if (e < sim.swimEnd) return "수영";
+    if (e < sim.t1End) return "T1";
+    if (e < sim.bikeEnd) return "바이크";
+    if (e < sim.t2End) return "T2";
+    if (e < sim.finish) return "런";
+    return "피니시";
+  }
+  function renderNow() {
+    var e = clockEl, clock = sim.start + e;
+    $("#clock").textContent = G.hhmm(clock);
+    $("#elapsed").textContent = "경과 " + G.dur(e);
+    $("#scrub").value = Math.round(e);
+    var leg = legAt(e);
+    $("#now-leg").textContent = leg;
+    var cur = $("#dl-cur"); if (cur) { cur.setAttribute("x1", dx(clock)); cur.setAttribute("x2", dx(clock)); }
+    var pos = "—", next = "—";
+    if (leg === "수영") {
+      var m = e / sim.swimMin * R.swimKm * 1000;
+      pos = Math.round(m) + " m · " + (m < 1900 ? "1바퀴" : "2바퀴");
+      next = "출수 " + G.hhmm(sim.start + sim.swimEnd);
+    } else if (leg === "바이크") {
+      var km = G.bikeElapsedToKm(sim, e);
+      pos = km.toFixed(1) + " km · " + bikeSeg(km);
+      var nx = sim.bike.filter(function (b) { return b.km > km && (b.type === "aid" || b.type === "pn" || b.type === "turn" || b.type === "cut" || b.type === "t2"); })[0];
+      if (nx) next = nx.name.split(" · ")[0] + " · " + (nx.km - km).toFixed(1) + "km · " + G.hhmm(nx.clock);
+    } else if (leg === "런") {
+      var rk = G.runElapsedToKm(sim, e);
+      pos = rk.toFixed(1) + " km · " + Math.min(5, Math.floor(rk / R.runLapKm) + 1) + "바퀴 · " + lightLabel(clock);
+      var nr = sim.run.filter(function (b) { return b.km > rk && (b.type === "aid" || b.type === "pn" || b.type === "cut" || b.type === "finish"); })[0];
+      if (nr) next = nr.name + " · " + (nr.km - rk).toFixed(1) + "km";
+    } else if (leg === "T1") { pos = "지리산 호수공원"; next = "바이크 출발 " + G.hhmm(sim.start + sim.t1End); }
+    else if (leg === "T2") { pos = "둘레길 센터 옆"; next = "런 출발 " + G.hhmm(sim.start + sim.t2End); }
+    else if (leg === "피니시") { pos = "공설운동장"; next = "완주 " + G.dur(sim.finish); }
+    $("#now-pos").textContent = pos;
+    $("#now-next").textContent = next;
+    var nc = sim.cutoffs.filter(function (c) { return c.arrive > clock; })[0];
+    $("#now-cut").textContent = nc ? nc.name.split(" · ")[0] + " " + G.hhmm(nc.clock) + " · 남은 " + G.dur(nc.clock - clock) : "—";
+    drawSwim(e); drawBike(e); drawRun(e);
+  }
+  function bikeSeg(km) {
+    if (km < 13.5) return "① 산동 왕복";
+    if (km < 23.08) return "② 산업도로 남하";
+    if (km < 62.54) return "③ T자 1회전";
+    if (km < 102) return "③ T자 2회전";
+    if (km < 120.18) return "④ 산업도로 1회전";
+    if (km < 144.58) return "④ 산업도로 2회전";
+    if (km < 168.98) return "④ 산업도로 3회전";
+    return "⑤ T2 진입";
+  }
+
+  $("#scrub").addEventListener("input", function () { clockEl = +this.value; renderNow(); });
+  $("#play").addEventListener("click", function () {
+    playing = !playing; this.textContent = playing ? "정지" : "재생";
+    if (playing) { if (clockEl >= sim.finish - 1) clockEl = 0; lastT = performance.now(); requestAnimationFrame(tick); }
+  });
+  function tick(now) {
+    if (!playing) return;
+    var dt = (now - lastT) / 1000; lastT = now;
+    clockEl += dt * SPEED;
+    if (clockEl >= sim.finish) { clockEl = sim.finish; playing = false; $("#play").textContent = "재생"; }
+    renderNow();
+    if (playing) requestAnimationFrame(tick);
+  }
+
+  /* ---------- 롤링 스타트 ---------- */
+  (function () {
+    var svg = $("#rolling"); var W = 1000;
+    el("rect", { x: 0, y: 0, width: W, height: 150, fill: "#fff" }, svg);
+    el("rect", { x: 600, y: 0, width: 400, height: 150, "class": "water" }, svg);
+    el("rect", { x: 560, y: 60, width: 60, height: 30, fill: "#1A2E35", rx: 2 }, svg);
+    txt(590, 105, "출발 폰툰", "s", svg, "middle");
+    txt(800, 24, "지리산 호수", "s", svg, "middle");
+    txt(40, 24, "대기열 (예상 수영 시간 순 자율 정렬)", "s", svg);
+    var N = 60, dots = [];
+    for (var i = 0; i < N; i++) {
+      var col = Math.floor(i / 5), row = i % 5;
+      var d = el("circle", { cx: 540 - col * 22, cy: 50 + row * 14, r: 5, fill: i < 5 ? "#B42318" : "#5C7A85" }, svg);
+      dots.push({ el: d, x0: 540 - col * 22, y0: 50 + row * 14, group: col });
+    }
+    var t = 0, running = false, last = 0;
+    var GAP = 5.5;   // 초/조
+    function frame(now) {
+      if (!running) return;
+      var dt = (now - last) / 1000; last = now; t += dt * 4;   // 4배속
+      var released = Math.min(N, Math.floor(t / GAP) * 5);
+      dots.forEach(function (d, i) {
+        var rel = (i < released) ? (t - Math.floor(i / 5) * GAP) : 0;
+        if (rel > 0) {
+          var x = Math.min(980, 600 + rel * 22), y = d.y0 + Math.sin(rel * 3 + i) * 3;
+          d.el.setAttribute("cx", x); d.el.setAttribute("cy", y);
+          d.el.setAttribute("fill", x > 620 ? "#0E7C94" : "#B42318");
+        } else {
+          var shift = Math.floor(t / GAP) * 22;
+          d.el.setAttribute("cx", Math.min(540 - (d.group * 22) + shift, 540));
+          d.el.setAttribute("cy", d.y0);
+          d.el.setAttribute("fill", (d.group * 22 - shift <= 0) ? "#B42318" : "#5C7A85");
+        }
+      });
+      var secs = Math.floor(t);
+      $("#roll-clock").textContent = "07:" + (Math.floor(secs / 60) < 10 ? "0" : "") + Math.floor(secs / 60) + ":" + (secs % 60 < 10 ? "0" : "") + (secs % 60);
+      $("#roll-n").textContent = Math.min(R.athletes, Math.floor(t / GAP) * 5).toLocaleString();
+      if (t / GAP * 5 < N + 40) requestAnimationFrame(frame); else running = false;
+    }
+    $("#roll-play").addEventListener("click", function () {
+      t = 0; running = true; last = performance.now(); requestAnimationFrame(frame);
+    });
+  })();
+
+  /* ---------- 수영 지도 ---------- */
+  var SW = { x0: 300, x1: 700, yTop: 70, yBot: 490 };
+  var swimPts = [[SW.x0, SW.yBot], [SW.x0, SW.yTop], [SW.x1, SW.yTop], [SW.x1, SW.yBot], [SW.x0, SW.yBot]];
+  var swimL = G.polyLen(swimPts);
+  var swimDot;
+  (function () {
+    var svg = $("#swimmap");
+    el("rect", { x: 0, y: 0, width: 1000, height: 560, fill: "#fff" }, svg);
+    el("path", { d: "M180,20 C120,140 120,420 220,545 L800,545 C880,420 860,140 820,20 Z", "class": "water" }, svg);
+    el("polyline", { points: swimPts.map(function (p) { return p.join(","); }).join(" "), "class": "course" }, svg);
+    // 부이
+    for (var i = 1; i < 9; i++) {
+      var y = SW.yBot - (SW.yBot - SW.yTop) * i / 9;
+      el("circle", { cx: SW.x0, cy: y, r: 4, fill: "#0E7C94", opacity: .5 }, svg);
+      el("circle", { cx: SW.x1, cy: y, r: 4, fill: "#0E7C94", opacity: .5 }, svg);
+    }
+    // 회전 부이
+    [[SW.x0, SW.yTop], [SW.x1, SW.yTop], [SW.x1, SW.yBot]].forEach(function (p) { el("circle", { cx: p[0], cy: p[1], r: 8, "class": "nd turn" }, svg); });
+    // 휴식 폰툰
+    el("rect", { x: SW.x0 - 34, y: SW.yTop - 30, width: 24, height: 12, fill: "#1A2E35", rx: 1 }, svg);
+    txt(SW.x0 - 44, SW.yTop - 36, "휴식 폰툰 5×10m · 860m", "s", svg, "end");
+    // 출발 폰툰 · 출구
+    el("rect", { x: SW.x0 - 50, y: SW.yBot - 10, width: 44, height: 20, fill: "#1A2E35", rx: 2 }, svg);
+    txt(SW.x0 - 56, SW.yBot + 40, "출발 폰툰 · 다이빙 스타트", "s", svg, "end");
+    txt(SW.x0 - 56, SW.yBot + 56, "출구 램프(경사) · 2바퀴 후", "s", svg, "end");
+    // 거리 표시
+    [[500, "500m"], [800, "800m"], [1000, "1000m"], [1500, "1500m"], [1820, "1820m 턴"]].forEach(function (m) {
+      var p = G.pointAt(swimPts, swimL, m[0] / 1900);
+      el("circle", { cx: p[0], cy: p[1], r: 5, fill: "#fff", stroke: "#1A2E35", "stroke-width": 1.5 }, svg);
+      txt(p[0] + (p[0] > 500 ? 14 : -14), p[1] + 4, m[1], "s", svg, p[0] > 500 ? "start" : "end");
+    });
+    txt(500, SW.yTop - 40, "북 · 세침교 방향", "s", svg, "middle");
+    txt(500, 300, "1바퀴 1,900m · 서쪽 변 북상 → 동쪽 변 남하", "", svg, "middle");
+    txt(500, 322, "2바퀴 = 3,800m · 물 안에서 회전", "s", svg, "middle");
+    txt(SW.x0 - 14, 300, "▲", "s", svg, "end"); txt(SW.x1 + 14, 300, "▼", "s", svg, "start");
+    swimDot = el("circle", { cx: SW.x0, cy: SW.yBot, r: 9, "class": "rider" }, svg);
+  })();
+  function drawSwim(e) {
+    var f = Math.max(0, Math.min(1, e / sim.swimMin));
+    var m = f * 3800, lap = m < 1900 ? 1 : 2;
+    var p = G.pointAt(swimPts, swimL, (m % 1900) / 1900);
+    if (f >= 1) p = [SW.x0, SW.yBot];
+    swimDot.setAttribute("cx", p[0]); swimDot.setAttribute("cy", p[1]);
+    $("#swim-lap").textContent = e < 0 ? "—" : (f >= 1 ? "완료" : lap);
+    $("#swim-m").textContent = Math.round(m).toLocaleString();
+    $("#swim-clock").textContent = G.hhmm(sim.start + Math.min(e, sim.swimMin));
+  }
+
+  /* ---------- T1 도식 ---------- */
+  (function () {
+    var svg = $("#t1map");
+    el("rect", { x: 0, y: 0, width: 1000, height: 380, fill: "#fff" }, svg);
+    el("rect", { x: 0, y: 300, width: 1000, height: 80, "class": "water" }, svg);
+    txt(500, 350, "지리산 호수", "s", svg, "middle");
+    el("rect", { x: 80, y: 40, width: 840, height: 230, "class": "land", rx: 8 }, svg);
+    // 출구 램프
+    el("rect", { x: 120, y: 280, width: 40, height: 40, fill: "#1A2E35", rx: 2 }, svg); txt(140, 336, "출구 램프", "s", svg, "middle");
+    // 백 거치대
+    el("rect", { x: 200, y: 70, width: 160, height: 100, fill: "#1A2E35", opacity: .85, rx: 3 }, svg); txt(280, 115, "배번 백 거치대", "b", svg, "middle").setAttribute("fill", "#fff"); txt(280, 135, "내 줄 번호 외우기", "s", svg, "middle").setAttribute("fill", "#fff");
+    el("rect", { x: 380, y: 70, width: 90, height: 100, fill: "#1A2E35", opacity: .65, rx: 3 }, svg); txt(425, 125, "체인지 텐트", "b", svg, "middle").setAttribute("fill", "#fff");
+    // 자전거 거치대
+    for (var i = 0; i < 6; i++) el("rect", { x: 520 + i * 52, y: 70, width: 40, height: 100, fill: "#5C7A85", opacity: .35, rx: 2 }, svg);
+    txt(675, 60, "자전거 거치대 (배번 순 · 1~1180)", "s", svg, "middle");
+    // 보급
+    el("rect", { x: 470, y: 205, width: 120, height: 34, fill: "#0E7C94", opacity: .15, rx: 3 }, svg); txt(530, 227, "T1 보급 · 물 · 게토레이", "s", svg, "middle");
+    // 마운트
+    el("line", { x1: 880, y1: 60, x2: 880, y2: 200, stroke: "#B42318", "stroke-width": 3, "stroke-dasharray": "8 6" }, svg); txt(880, 230, "마운트 라인 → 3.5km 오르막", "s", svg, "middle");
+    // 동선
+    var path = el("path", { d: "M140,300 L140,220 L200,200 L280,175 L425,175 L470,222 L560,222 L560,190 L860,190 L880,130", "class": "trail", "stroke-dasharray": "1000", "stroke-dashoffset": "1000" }, svg);
+    var io = new IntersectionObserver(function (es) { es.forEach(function (x) { if (x.isIntersecting) { path.style.transition = "stroke-dashoffset 3s ease"; path.style.strokeDashoffset = "0"; io.disconnect(); } }); });
+    io.observe(svg);
+    txt(160, 250, "웻슈트 상의 벗으며", "s", svg);
+  })();
+
+  /* ---------- 바이크 지도 ---------- */
+  var BXY = {
+    "T1": [60, 300], "산동교차로": [85, 150], "산수관": [170, 135], "자연드림": [22, 310], "죽정": [40, 350], "용냇골": [95, 410],
+    "용방교차로": [106, 428], "AS1": [163, 470], "광의교차로": [213, 500], "한성산업": [240, 525], "냉천교차로": [319, 590],
+    "문척교차로아래": [300, 625], "산이고운": [276, 640], "구성교차로": [345, 670], "오봉산가든": [470, 676], "대평로터리": [624, 700],
+    "백운관": [613, 738], "삼산": [602, 800], "논곡": [624, 895], "양동": [674, 720], "백운천": [837, 628], "남도대교": [972, 698],
+    "무수내": [760, 664], "스카이바이크": [291, 720], "구례1교": [255, 825], "문척교차로": [322, 650], "정장교": [272, 572], "T2": [262, 556]
+  };
+  function bkey(b) {
+    var n = b.name;
+    if (b.type === "start") return "T1"; if (b.type === "t2") return "T2";
+    if (n.indexOf("정장교") === 0) return "정장교";
+    if (n.indexOf("산수관") === 0) return "산수관"; if (n.indexOf("산동교차로") === 0) return "산동교차로";
+    if (n.indexOf("자연드림") === 0) return "자연드림"; if (n.indexOf("죽정") === 0) return "죽정"; if (n.indexOf("용냇골") === 0) return "용냇골";
+    if (n.indexOf("용방교차로") === 0) return "용방교차로"; if (n.indexOf("AS1") === 0) return "AS1";
+    if (n.indexOf("광의교차로") === 0) return "광의교차로"; if (n.indexOf("한성산업") === 0) return "한성산업"; if (n.indexOf("냉천교차로") === 0) return "냉천교차로";
+    if (n.indexOf("문척교차로 아래") === 0) return "문척교차로아래"; if (n.indexOf("문척교차로") === 0) return "문척교차로";
+    if (n.indexOf("산이고운") === 0) return "산이고운"; if (n.indexOf("구성교차로") === 0) return "구성교차로"; if (n.indexOf("AS3") === 0) return "오봉산가든";
+    if (n.indexOf("대평로터리") === 0) return "대평로터리"; if (n.indexOf("백운관") === 0) return "백운관"; if (n.indexOf("논곡") === 0) return "논곡";
+    if (n.indexOf("수평") === 0) return "삼산"; if (n.indexOf("AS2") === 0) return "양동"; if (n.indexOf("백운천") === 0 || n.indexOf("PN") === 0) return "백운천";
+    if (n.indexOf("남도대교") === 0) return "남도대교"; if (n.indexOf("무수내") === 0) return "무수내"; if (n.indexOf("스카이") === 0) return "스카이바이크";
+    if (n.indexOf("구례1교") === 0) return "구례1교";
+    return "T1";
+  }
+  var bikePts = G.BIKE.map(function (b) { return BXY[bkey(b)]; });
+  var bikeDot, bikeTrail;
+  (function () {
+    var svg = $("#bikemap");
+    el("rect", { x: 0, y: 0, width: 1000, height: 940, fill: "#fff" }, svg);
+    // 강(섬진강) 암시
+    el("path", { d: "M330,690 C420,700 520,720 640,715 C760,708 860,690 1000,690", fill: "none", stroke: "#E4EFF1", "stroke-width": 26, "stroke-linecap": "round" }, svg);
+    el("path", { d: "M300,560 C260,650 240,740 250,860", fill: "none", stroke: "#E4EFF1", "stroke-width": 20, "stroke-linecap": "round" }, svg);
+    txt(560, 760, "섬진강", "s", svg, "middle");
+    // 코스: 구간별 폴리라인 (겹치면 진해짐)
+    for (var i = 1; i < bikePts.length; i++) {
+      el("line", { x1: bikePts[i - 1][0], y1: bikePts[i - 1][1], x2: bikePts[i][0], y2: bikePts[i][1], "class": "course" }, svg);
+    }
+    // 노드
+    var done = {};
+    G.BIKE.forEach(function (b) {
+      var k = bkey(b), p = BXY[k];
+      if (b.type === "turn") el("circle", { cx: p[0], cy: p[1], r: 8, "class": "nd turn" }, svg);
+      else if (b.type === "aid") el("circle", { cx: p[0], cy: p[1], r: 8, "class": "nd aid" }, svg);
+      else if (b.type === "pn") el("rect", { x: p[0] - 7, y: p[1] - 7, width: 14, height: 14, "class": "nd pn" }, svg);
+      else if (b.type === "cut") el("circle", { cx: p[0], cy: p[1], r: 9, "class": "nd cut" }, svg);
+      else if (b.type === "start" || b.type === "t2") el("rect", { x: p[0] - 9, y: p[1] - 9, width: 18, height: 18, fill: "#1A2E35", rx: 2 }, svg);
+      else if (!done[k]) el("circle", { cx: p[0], cy: p[1], r: 3.5, "class": "nd" }, svg);
+      done[k] = true;
+    });
+    // 라벨
+    var L = [
+      ["T1", "T1 · 호수공원", 16, 6], ["산동교차로", "산동교차로", -10, -8, "end"], ["산수관", "산수관 U", 12, 4], ["자연드림", "자연드림 10K", 10, 22],
+      ["용방교차로", "용방교차로 U ×4", -10, -10, "end"], ["AS1", "AS1 ×4", 14, 4], ["냉천교차로", "냉천교차로 · 2차 컷오프 150.5K 16:40", 14, -6],
+      ["산이고운", "산이고운 U ×2", -10, 18, "end"], ["구성교차로", "구성사거리", 8, 24], ["오봉산가든", "AS3 오봉산가든 ×2", 0, -14, "middle"],
+      ["대평로터리", "대평로터리 ×4", 12, -8], ["논곡", "논곡 U ×2", 14, 4], ["양동", "AS2 양동 ×2", 12, 22], ["백운천", "PN 백운천 90K", 0, -14, "middle"],
+      ["남도대교", "남도대교 U ×2 · 1차 컷오프 86.7K 13:45", -14, 24, "end"], ["구례1교", "구례1교 U ×3", 14, 4], ["스카이바이크", "스카이바이크", -12, 4, "end"],
+      ["T2", "T2 · 정장교", -12, 4, "end"], ["광의교차로", "광의교차로", 12, -4], ["한성산업", "한성산업", 12, 6], ["문척교차로", "문척교차로", 12, 6]
+    ];
+    L.forEach(function (l) { var p = BXY[l[0]]; txt(p[0] + l[2], p[1] + l[3], l[1], l[0] === "냉천교차로" || l[0] === "남도대교" ? "s" : "s", svg, l[4] || "start"); });
+    txt(500, 40, "북 ↑ · 도식은 공식 코스도 좌표를 단순화한 것 (축척 무시)", "s", svg, "middle");
+    bikeTrail = el("polyline", { points: "", "class": "trail" }, svg);
+    bikeDot = el("circle", { cx: 60, cy: 300, r: 10, "class": "rider" }, svg);
+  })();
+  function drawBike(e) {
+    var km = 0;
+    if (e >= sim.t1End) km = G.bikeElapsedToKm(sim, Math.min(e, sim.bikeEnd));
+    // 위치: 랜드마크 사이 보간
+    var i = 1; while (i < G.BIKE.length - 1 && G.BIKE[i].km < km) i++;
+    var a = G.BIKE[i - 1], b = G.BIKE[i];
+    var f = (km - a.km) / (b.km - a.km || 1); f = Math.max(0, Math.min(1, f));
+    var pa = bikePts[i - 1], pb = bikePts[i];
+    var x = pa[0] + (pb[0] - pa[0]) * f, y = pa[1] + (pb[1] - pa[1]) * f;
+    bikeDot.setAttribute("cx", x); bikeDot.setAttribute("cy", y);
+    var tr = bikePts.slice(Math.max(0, i - 6), i).map(function (p) { return p.join(","); }); tr.push(x + "," + y);
+    bikeTrail.setAttribute("points", tr.join(" "));
+    $("#bk-km").textContent = km.toFixed(1);
+    $("#bk-clock").textContent = e < sim.t1End ? "—" : G.hhmm(sim.start + Math.min(e, sim.bikeEnd));
+    $("#bk-seg").textContent = e < sim.t1End ? "T1 전" : (e >= sim.bikeEnd ? "T2 도착" : bikeSeg(km));
+    $("#bk-u").textContent = G.BIKE.filter(function (b) { return b.type === "turn" && b.km <= km; }).length;
+    $("#bk-a").textContent = G.BIKE.filter(function (b) { return b.type === "aid" && b.km <= km; }).length;
+  }
+
+  /* ---------- 정장교 감속 ---------- */
+  (function () {
+    var svg = $("#brake");
+    el("rect", { x: 0, y: 0, width: 600, height: 300, fill: "#fff" }, svg);
+    el("path", { d: "M0,150 C100,150 200,150 300,150 L300,60 L360,60", fill: "none", stroke: "#E4EFF1", "stroke-width": 36, "stroke-linecap": "round" }, svg); // 뚝방 → 좌회전 → 다리
+    el("path", { d: "M360,60 L360,120 L560,120", fill: "none", stroke: "#E4EFF1", "stroke-width": 36, "stroke-linecap": "round" }, svg);            // 다리 → 좌회전 → 하차
+    el("rect", { x: 300, y: 40, width: 60, height: 40, fill: "#CFE3E7" }, svg); txt(330, 32, "정장교", "s", svg, "middle");
+    el("line", { x1: 470, y1: 100, x2: 470, y2: 140, stroke: "#B42318", "stroke-width": 3, "stroke-dasharray": "6 4" }, svg); txt(470, 160, "하차선 (80m)", "s", svg, "middle");
+    txt(150, 185, "서시천 뚝방 · 냉천교차로에서", "s", svg, "middle");
+    txt(150, 200, "미리 기어 가볍게", "s", svg, "middle");
+    txt(300, 210, "좌회전 ①", "s", svg, "middle"); txt(420, 45, "좌회전 ② · 10km/h 이하", "s", svg, "start");
+    var pts = [[0, 150], [300, 150], [300, 60], [360, 60], [360, 120], [470, 120]];
+    var L = G.polyLen(pts);
+    var dot = el("circle", { cx: 0, cy: 150, r: 9, "class": "rider" }, svg);
+    var g = el("g", {}, svg);
+    var speedTxt = txt(300, 270, "속도 28 km/h", "b", g, "middle");
+    var bar = el("rect", { x: 150, y: 280, width: 300, height: 8, fill: "#E4EFF1", rx: 2 }, g);
+    var fill = el("rect", { x: 150, y: 280, width: 280, height: 8, fill: "#0E7C94", rx: 2 }, g);
+    var run = false, t = 0, last = 0;
+    function speedAt(f) { if (f < 0.35) return 28; if (f < 0.55) return 28 - (f - 0.35) / 0.2 * 18; if (f < 0.9) return 10 - (f - 0.55) / 0.35 * 4; return 6 - (f - 0.9) / 0.1 * 6; }
+    function frame(now) {
+      if (!run) return; var dt = (now - last) / 1000; last = now; t += dt / 6;
+      var f = Math.min(1, t); var p = G.pointAt(pts, L, f);
+      dot.setAttribute("cx", p[0]); dot.setAttribute("cy", p[1]);
+      var v = Math.max(0, speedAt(f)); speedTxt.textContent = "속도 " + v.toFixed(0) + " km/h" + (f >= 0.35 && f < 0.55 ? " · 브레이크" : (f >= 0.55 && f < 0.9 ? " · 10 이하 유지" : (f >= 0.9 ? " · 하차" : "")));
+      fill.setAttribute("width", 300 * v / 30); fill.setAttribute("fill", v > 10 && f > 0.3 ? "#B42318" : "#0E7C94");
+      if (f < 1) requestAnimationFrame(frame); else run = false;
+    }
+    $("#brake-play").addEventListener("click", function () { t = 0; run = true; last = performance.now(); requestAnimationFrame(frame); });
+  })();
+
+  /* ---------- 런 지도 ---------- */
+  var RXY = {
+    "시작점": [665, 637], "서시교": [824, 800], "AS1": [636, 735], "PN": [618, 700], "파크골프": [560, 612], "AS2": [424, 470], "광의교서단": [219, 280],
+    "사림": [106, 325], "AS3": [311, 492], "KBS": [347, 540], "꽃강": [124, 265], "광의교동단": [233, 322], "AS4": [292, 362], "광의대교": [396, 435],
+    "갑동": [636, 500], "AS5": [700, 545], "정장교": [660, 590], "피니시": [600, 672]
+  };
+  function rkey(r) {
+    var n = r.name;
+    if (r.type === "start" || r.type === "lap") return "시작점"; if (r.type === "finish") return "피니시";
+    if (n.indexOf("서시교") === 0) return "서시교"; if (n.indexOf("AS1") === 0) return "AS1"; if (n.indexOf("런 퍼스널") === 0) return "PN";
+    if (n.indexOf("시작점") === 0) return "시작점"; if (n.indexOf("파크골프") === 0) return "파크골프"; if (n.indexOf("AS2") === 0) return "AS2";
+    if (n.indexOf("광의교 서단") === 0) return "광의교서단"; if (n.indexOf("사림") === 0) return "사림"; if (n.indexOf("AS3") === 0) return "AS3";
+    if (n.indexOf("KBS") === 0) return "KBS"; if (n.indexOf("꽃강") === 0) return "꽃강"; if (n.indexOf("광의교 동단") === 0) return "광의교동단";
+    if (n.indexOf("AS4") === 0) return "AS4"; if (n.indexOf("광의대교") === 0) return "광의대교"; if (n.indexOf("갑동") === 0) return "갑동";
+    if (n.indexOf("AS5") === 0) return "AS5"; if (n.indexOf("정장교") === 0) return "정장교";
+    return "시작점";
+  }
+  var runAllMarks = G.runAll();
+  var runPts = runAllMarks.map(function (r) { return RXY[rkey(r)]; });
+  runPts.unshift(RXY["시작점"]);   // 0km
+  var runKm = [0].concat(runAllMarks.map(function (r) { return r.km; }));
+  var runDot, runTrail;
+  (function () {
+    var svg = $("#runmap");
+    el("rect", { x: 0, y: 0, width: 1000, height: 760, fill: "#fff" }, svg);
+    el("path", { d: "M80,240 C250,300 400,380 520,470 C620,540 700,600 900,760", fill: "none", stroke: "#E4EFF1", "stroke-width": 44, "stroke-linecap": "round" }, svg);
+    txt(470, 600, "서시천", "s", svg, "middle");
+    el("rect", { x: 560, y: 630, width: 90, height: 60, fill: "#F2F8F9", stroke: "#CFE3E7", rx: 20 }, svg); txt(605, 648, "운동장", "s", svg, "middle");
+    // 코스 (1바퀴만 그림)
+    var lapPts = [RXY["시작점"]].concat(G.RUN_LAP.slice(1).map(function (r) { return RXY[rkey(r)]; }));
+    for (var i = 1; i < lapPts.length; i++) el("line", { x1: lapPts[i - 1][0], y1: lapPts[i - 1][1], x2: lapPts[i][0], y2: lapPts[i][1], "class": "course" }, svg);
+    G.RUN_LAP.forEach(function (r) {
+      var p = RXY[rkey(r)];
+      if (r.type === "turn") el("circle", { cx: p[0], cy: p[1], r: 8, "class": "nd turn" }, svg);
+      else if (r.type === "aid") el("circle", { cx: p[0], cy: p[1], r: 8, "class": "nd aid" }, svg);
+      else if (r.type === "pn") el("rect", { x: p[0] - 7, y: p[1] - 7, width: 14, height: 14, "class": "nd pn" }, svg);
+      else if (r.type === "start") el("rect", { x: p[0] - 9, y: p[1] - 9, width: 18, height: 18, fill: "#1A2E35", rx: 2 }, svg);
+      else el("circle", { cx: p[0], cy: p[1], r: 3.5, "class": "nd" }, svg);
+    });
+    el("circle", { cx: RXY["파크골프"][0], cy: RXY["파크골프"][1], r: 10, "class": "nd cut" }, svg);
+    var L = [
+      ["시작점", "시작점 · T2 · 0 / 9.9 / 19.8 / 29.8 / 39.7K", 14, 4], ["서시교", "서시교 턴 · 랩밴드", 12, 20], ["AS1", "AS1 1.4K", 14, 20], ["PN", "런 PN 1.5K", -12, -6, "end"],
+      ["파크골프", "파크골프 · 컷오프 23:00 (31.9K)", -14, -8, "end"], ["AS2", "AS2 3.2K", 12, -8], ["광의교서단", "광의교 서단", 12, -8], ["사림", "사림로터리 · 도로 1.2K", -10, -10, "end"],
+      ["AS3", "AS3 5.3K", 12, 4], ["KBS", "KBS로터리 턴 5.5K", 12, 18], ["꽃강", "꽃강 턴 7.0K", -10, -8, "end"], ["AS4", "AS4 7.7K", 12, 12], ["광의대교", "광의대교", 12, 16],
+      ["갑동", "갑동굴다리", -10, -8, "end"], ["AS5", "AS5 9.3K", 14, 0], ["정장교", "정장교", 14, 18], ["피니시", "피니시", 0, 26, "middle"]
+    ];
+    L.forEach(function (l) { var p = RXY[l[0]]; txt(p[0] + l[2], p[1] + l[3], l[1], "s", svg, l[4] || "start"); });
+    txt(500, 40, "북서 ↖ · 서시천 산책로 · 도식(축척 무시)", "s", svg, "middle");
+    runTrail = el("polyline", { points: "", "class": "trail" }, svg);
+    runDot = el("circle", { cx: 665, cy: 637, r: 10, "class": "rider" }, svg);
+  })();
+  function drawRun(e) {
+    var km = 0;
+    if (e >= sim.t2End) km = G.runElapsedToKm(sim, Math.min(e, sim.finish));
+    var i = 1; while (i < runKm.length - 1 && runKm[i] < km) i++;
+    var f = (km - runKm[i - 1]) / (runKm[i] - runKm[i - 1] || 1); f = Math.max(0, Math.min(1, f));
+    var pa = runPts[i - 1], pb = runPts[i];
+    var x = pa[0] + (pb[0] - pa[0]) * f, y = pa[1] + (pb[1] - pa[1]) * f;
+    runDot.setAttribute("cx", x); runDot.setAttribute("cy", y);
+    var tr = runPts.slice(Math.max(0, i - 4), i).map(function (p) { return p.join(","); }); tr.push(x + "," + y);
+    runTrail.setAttribute("points", tr.join(" "));
+    $("#rn-km").textContent = km.toFixed(1);
+    $("#rn-lap").textContent = e < sim.t2End ? "—" : (km >= R.runKm ? "완주" : Math.min(5, Math.floor(km / R.runLapKm) + 1));
+    $("#rn-clock").textContent = e < sim.t2End ? "—" : G.hhmm(sim.start + Math.min(e, sim.finish));
+    $("#rn-light").textContent = e < sim.t2End ? "" : lightLabel(sim.start + Math.min(e, sim.finish));
+    $("#rn-a").textContent = runAllMarks.filter(function (r) { return r.type === "aid" && r.km <= km; }).length;
+  }
+
+  /* ---------- 시작 ---------- */
+  recompute();
+  var onBtn = $$(".presets .btn").filter(function (b) { return b.dataset.preset === "plan"; })[0];
+  if (JSON.stringify(params) === JSON.stringify(G.DEFAULT)) onBtn.classList.add("on");
+  clockEl = 0; renderNow();
+})();
+</script>
+</body>
+</html>

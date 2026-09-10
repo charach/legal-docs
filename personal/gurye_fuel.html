@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<title>구례 보급 전략 — 보급소마다 몇 시에 무엇을</title>
+<link rel="stylesheet" href="assets/summer.css">
+<style>
+  body { background: var(--bg); }
+  .hero { padding: 72px 0 0; }
+  .hero .lead { max-width: 62ch; }
+  .src { font-size: 13px; color: var(--ink-2); margin-top: 18px; line-height: 1.6; }
+  section.band { padding-top: 96px; }
+  .sec-head h2 { margin-top: 6px; }
+  .sec-head .lead { font-size: 16px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; }
+  .tile { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 18px; box-shadow: var(--shadow); }
+  .tile .k { font-size: 12px; color: var(--ink-2); letter-spacing: .04em; }
+  .tile .v { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px; line-height: 1.3; }
+  .tile .s { font-size: 13.5px; color: var(--ink-2); margin-top: 8px; line-height: 1.55; }
+  .tile .s b { color: var(--ink); }
+  @media (max-width: 800px) { .tiles { grid-template-columns: 1fr; } }
+
+  .lab { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr); gap: 24px; align-items: start; margin-top: 32px; }
+  @media (max-width: 960px) { .lab { grid-template-columns: 1fr; } }
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: 20px; }
+  .panel h3 { font-size: 15px; margin-bottom: 6px; }
+  .panel .sub { font-size: 13px; color: var(--ink-2); margin-bottom: 14px; }
+  .ctl { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: baseline; margin-top: 12px; }
+  .ctl label { font-size: 14px; }
+  .ctl .val { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .ctl input[type="range"] { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); margin: 0; }
+  .ctl .hint { grid-column: 1 / -1; font-size: 12px; color: var(--ink-2); line-height: 1.5; }
+  .grp { font-size: 12px; color: var(--ink-2); letter-spacing: .08em; text-transform: uppercase; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .grp:first-of-type { margin-top: 0; padding-top: 0; border: 0; }
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .presets .btn { min-height: 34px; padding: 0 12px; font-size: 13px; }
+  .presets .btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .verdict { margin-top: 16px; padding: 12px 14px; border-radius: 6px; background: #F2F8F9; font-size: 14.5px; line-height: 1.6; border-left: 3px solid var(--accent); }
+  .verdict.bad { border-left-color: #B42318; }
+  .verdict b { font-weight: 600; }
+  .kv { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+  .kv .n { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+  .kv .n .k { font-size: 11.5px; color: var(--ink-2); }
+  .kv .n .v { font-size: 16px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  @media (max-width: 640px) { .kv { grid-template-columns: repeat(2, 1fr); } }
+  .chart svg { display: block; width: 100%; height: auto; }
+
+  .stage { background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: 12px; margin-top: 28px; }
+  .stage svg { display: block; width: 100%; height: auto; }
+  .stage .bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 8px 4px 2px; font-size: 13px; color: var(--ink-2); }
+  .stage .bar .sp { flex: 1; }
+  .stage .bar .btn { min-height: 32px; padding: 0 12px; font-size: 13px; }
+  .stage .bar .ro { font-variant-numeric: tabular-nums; }
+  .stage .bar .ro b { color: var(--ink); }
+  .lbl { font-family: var(--sans); font-size: 12px; fill: #1A2E35; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
+  .lbl.s { font-size: 10.5px; fill: #5C7A85; }
+  .lbl.b { font-weight: 600; }
+  .rider { fill: #B42318; stroke: #fff; stroke-width: 2.5; }
+
+  table.tbl td.n, table.tbl th.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.tbl tr.hl td { background: #F2F8F9; }
+  table.tbl tr.pn td { background: #EEF6F7; font-weight: 600; }
+  table.tbl tr.cut td { color: #B42318; }
+  table.tbl td.sm { font-size: 13.5px; color: var(--ink-2); }
+  table.tbl td.sm b { color: var(--ink); }
+  .callout { border-left: 3px solid var(--accent); background: #F2F8F9; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 20px; font-size: 15px; }
+  .callout.warn { border-left-color: #B42318; }
+  .steps { counter-reset: s; list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .steps li::before { content: counter(s, decimal-leading-zero); font-size: 13px; color: var(--accent); padding-top: 4px; letter-spacing: .04em; }
+  .steps h4 { margin-bottom: 4px; }
+  .steps p { color: var(--ink-2); font-size: 15px; }
+  .steps p b { color: var(--ink); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  @media (max-width: 800px) { .two { grid-template-columns: 1fr; } }
+  .official { margin-top: 20px; }
+  .official summary { cursor: pointer; font-size: 14px; color: var(--accent); list-style: none; display: inline-flex; align-items: center; min-height: 36px; }
+  .official summary::-webkit-details-marker { display: none; }
+  .official img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; margin-top: 10px; }
+  .official .cap { font-size: 12.5px; color: var(--ink-2); margin-top: 8px; }
+
+  /* 체크리스트 */
+  .bags { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 28px; }
+  @media (max-width: 800px) { .bags { grid-template-columns: 1fr; } }
+  .bag { background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: 20px; }
+  .bag h4 { display: flex; align-items: baseline; gap: 10px; }
+  .bag h4 .when { font-size: 12.5px; color: var(--ink-2); font-weight: 400; margin-left: auto; white-space: nowrap; }
+  .bag ul { list-style: none; margin: 12px 0 0; padding: 0; }
+  .bag li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 14.5px; align-items: start; }
+  .bag li .h { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
+  .bag li.done > span { color: var(--ink-2); text-decoration: line-through; }
+  .bag .pc { font-size: 12px; color: var(--ink-2); margin-top: 10px; text-align: right; }
+  footer { padding: 80px 0 40px; font-size: 13px; color: var(--ink-2); line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="index.html">Personal</a>
+    <div class="links">
+      <a href="exercise.html">훈련</a>
+      <a href="gurye_course.html">코스</a>
+      <a href="gurye_fuel.html" aria-current="page">보급</a>
+      <a href="bike_forces.html">안장</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">IRONMAN Gurye · Fueling</span>
+    <h1 style="margin-top:12px">구례 보급 전략<br>보급소마다 몇 시에 무엇을</h1>
+    <p class="lead">8/30에 무너진 건 체력이 아니라 연료였습니다. 이 페이지는 <b>구례 보급소 8곳 + 퍼스널니즈 + 런 보급소 21곳</b>을 내 예상 시각에 맞춰 늘어놓고, 무엇을 집고 무엇을 지나칠지 정해 둔 것입니다. 시각은 <a href="gurye_course.html#sim">코스 페이지 시뮬레이터</a> 설정을 그대로 씁니다.</p>
+    <p class="src">확정된 것 — 바이크 보급소는 <b>물 · 게토레이 · 바나나½ · 에너지젤</b>, 런 보급소는 <b>물 · 게토레이 · 콜라 · 오렌지·바나나·비스킷·젤·소금·포도당정 · 스펀지 · 선크림·바세린·에어파스</b>. 바이크 퍼스널니즈는 <b>90km 한 번</b>, 백은 폐기. 런 퍼스널니즈는 1.48km, 5번 지나며 재사용 가능. 젤은 주최 측 물량이 약 8천 개라 개인 젤 지참 권고.</p>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= 00 바뀐 것 ================= -->
+<section class="band" id="changes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">00</div>
+      <div>
+        <span class="eyebrow">What changed</span>
+        <h2>운영 정보로 확정된 세 가지</h2>
+        <p class="lead">훈련 캘린더 전략 ⑧ "미확정 항목"에 있던 <b>구례 보급소 품목</b>이 확정됐습니다. 그래서 물류가 단순해집니다.</p>
+      </div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="k">① 분말 7봉 시나리오 폐기</div><div class="v">자작 물통 2개 + 보급소 게토레이</div><div class="s">"물만 주면 분말 소분" 걱정은 끝. <b>T1에서 자작 레시피 2병(2시간)</b>으로 출발하고, 이후는 보급소 게토레이(600ml ≈ 탄수 36g)로 교체. 젤은 시간당 2개 그대로. 단 <b>게토레이는 9/20 리허설에서 미리 마셔볼 것</b> — 대회날 처음은 금지.</div></div>
+      <div class="tile"><div class="k">② 퍼스널니즈는 90km 한 번</div><div class="v">젤 재보급 지점 = 바이크 3시간 10분</div><div class="s">1회전(50km) 때는 통과, <b>2회전째 백운천 휴게소(89.9km)</b>에서만. 백은 회수 안 되니 귀중품 금지. 여기까지 젤 7개, 여기서 <b>젤 6개 + 캡슐 4개</b>를 받아 벤토박스 채우기. 화장실도 여기.</div></div>
+      <div class="tile"><div class="k">③ 런 콜라 확정</div><div class="v">보급소 21곳 · 콜라 · 포도당정 · 소금</div><div class="s">런 계획(김 뺀 콜라 주력)이 그대로 성립. 보급소가 <b>1.6~2.4km마다</b>라 걷뛰 4:1의 걷기 1분과 맞물림. 젤 물량이 적으니 <b>런 PN백에 젤 5개</b>를 넣어 두면 주최 측 젤 의존 없음.</div></div>
+    </div>
+    <div class="callout warn">바뀌지 않은 것 — <b>시간당 탄수 75~85g · 물 500~700ml · 나트륨 700~1,000mg</b>, 3시간 30분 이후 고형식 금지, 마지막 20분 물만, 새 제품 금지, 떡·밥류 금지, 농축 물통 금지. 이유는 <a href="exercise.html#strategy">훈련 캘린더 전략 ④·⑤</a>에.</div>
+  </div>
+</section>
+
+<!-- ================= 01 연료 탱크 시뮬레이션 ================= -->
+<section class="band" id="tank">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">01</div>
+      <div>
+        <span class="eyebrow">Simulation · Glycogen tank</span>
+        <h2>연료 탱크 시뮬레이션 · 몇 km에서 벽이 오나</h2>
+        <p class="lead">몸의 탄수 저장고(근육+간 글리코겐, 로딩 시 약 550g)에서 강도에 따라 태우는 양을 빼고, 먹는 양을 더해 시간별 잔량을 그립니다. 잔량이 <b>약 100g 아래</b>로 내려가면 그게 "벽"입니다. 8/30의 시간당 28g을 넣어 보면 왜 3시간 30분에 무너졌는지 보입니다.</p>
+      </div>
+    </div>
+
+    <div class="lab">
+      <div class="panel" id="tank-controls">
+        <h3>변수</h3>
+        <div class="sub">체중 82kg · 기계효율 22% · 탄수 비율은 강도(IF)에 따라 45~90%</div>
+        <div class="grp">출발 전</div>
+        <div class="ctl"><label>출발 시 저장고</label><span class="val" data-v="store"></span><input type="range" data-p="store" min="300" max="650" step="10"><div class="hint">D-3 탄수 로딩 + 아침 정상 = 550. 아침 못 먹고 플랜 B(액체 110g) = 480. 로딩 없이 = 400.</div></div>
+        <div class="grp">바이크</div>
+        <div class="ctl"><label>NP</label><span class="val" data-v="np"></span><input type="range" data-p="np" min="110" max="200" step="5"><div class="hint">FTP 210 기준. 140W = IF 0.67. 8/30은 143W(당시 FTP 190, IF 0.75).</div></div>
+        <div class="ctl"><label>바이크 섭취</label><span class="val" data-v="bikeIn"></span><input type="range" data-p="bikeIn" min="0" max="110" step="5"><div class="hint">계획 80g/h. 8/30 실측 28g/h. 흡수 상한 약 90g/h(포도당 60 + 과당 30).</div></div>
+        <div class="grp">런</div>
+        <div class="ctl"><label>런 섭취</label><span class="val" data-v="runIn"></span><input type="range" data-p="runIn" min="0" max="80" step="5"><div class="hint">계획 50~60g/h. 달리면 위장 내성이 떨어져 바이크보다 낮게.</div></div>
+        <div class="presets">
+          <button class="btn btn-ghost on" data-tp="plan">계획</button>
+          <button class="btn btn-ghost" data-tp="aug30">8/30 그대로</button>
+          <button class="btn btn-ghost" data-tp="planb">아침 플랜 B</button>
+          <button class="btn btn-ghost" data-tp="hard">파워 욕심</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>잔량 곡선</h3>
+        <div class="sub">가로축은 내 예상 시계 시각(코스 시뮬레이터 기준). 회색 띠가 벽(100g 이하).</div>
+        <div class="chart"><svg id="tankchart" viewBox="0 0 1000 420" role="img" aria-label="글리코겐 잔량 곡선"></svg></div>
+        <div class="kv">
+          <div class="n"><div class="k">바이크 소모 / 섭취</div><div class="v" id="tk-bike">—</div></div>
+          <div class="n"><div class="k">런 소모 / 섭취</div><div class="v" id="tk-run">—</div></div>
+          <div class="n"><div class="k">T2 잔량</div><div class="v" id="tk-t2">—</div></div>
+          <div class="n"><div class="k">피니시 잔량</div><div class="v" id="tk-fin">—</div></div>
+        </div>
+        <div class="verdict" id="tk-verdict">—</div>
+      </div>
+    </div>
+    <p class="muted" style="font-size:13px; margin-top:14px; line-height:1.6">모델은 단순화한 것입니다 — 지방 산화가 늘어나는 적응, 간 글리코겐과 혈당의 구분, 섭취 직후 흡수 지연은 무시했습니다. 숫자 자체보다 <b>섭취량 슬라이더를 30에서 80으로 올릴 때 벽이 사라지는 것</b>, 그리고 <b>파워를 20W 올리면 같은 섭취로도 벽이 돌아오는 것</b>이 요점입니다.</p>
+  </div>
+</section>
+
+<!-- ================= 02 바이크 보급소별 ================= -->
+<section class="band" id="bike">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">02</div>
+      <div>
+        <span class="eyebrow">Bike · 8 aid stations + PN</span>
+        <h2>바이크 · 보급소마다 몇 시에 무엇을</h2>
+        <p class="lead">보급소 간격 20~24km는 28km/h로 <b>43~52분</b>. 물통 1개/시간 계획과 거의 맞습니다. 물통 2개로 출발하면 첫 2시간은 자작 음료, 그 뒤는 보급소마다 <b>빈 통 버리고 게토레이 1개</b>. 시각은 시뮬레이터에서 옵니다.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="bar">
+        <span>보급소 통과 · 테이블 순서와 내 동작</span>
+        <span class="sp"></span>
+        <button class="btn btn-ghost" id="aid-play">통과 보기</button>
+        <span class="ro" id="aid-say">—</span>
+      </div>
+      <svg id="aidpass" viewBox="0 0 1000 250" role="img" aria-label="바이크 보급소 통과 애니메이션"></svg>
+    </div>
+
+    <div class="sec-body">
+      <div class="tbl-scroll"><table class="tbl" id="tbl-bike">
+        <thead><tr><th class="n">km</th><th>지점</th><th class="n">시각</th><th class="n">바이크 경과</th><th class="n">이전 보급에서</th><th>집는 것</th><th>이 구간에서 먹는 것</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <div class="callout"><b>물통 규칙.</b> 자전거 케이지는 2개. T1 출발 = 자작 2병(A·B). AS1(15km, 0:32)은 아직 A를 반도 안 마셨으니 <b>통과</b>. AS2(39km, 1:24)에서 빈 A 버리고 게토레이. 이후 보급소마다 <b>가장 빈 통 하나</b>를 게토레이로. 서늘한 날 물통이 남으면 그대로 통과하되, <b>젤은 시계대로</b> 먹습니다 — 음료가 줄면 탄수도 같이 줄어드니까.</div>
+    </div>
+
+    <ol class="steps">
+      <li><div><h4>보급소 진입 · 15km/h로 줄이고 오른쪽 · "게토레이!"</h4><p>테이블 순서는 <b>물통 버리는 곳 → 물 → 물 → 게토레이 → 게토레이 → 바나나 → 젤 → 게토레이 → 게토레이 → 물 → 물 → 화장실</b>. 첫 테이블 앞 그물에 빈 통을 던지고, <b>첫 게토레이 테이블(3번째)</b>에서 봉사자 손을 보고 목을 잡고 받습니다. 못 받으면 뒤쪽 게토레이 테이블(8·9번째)이 한 번 더 있으니 급브레이크 금지. 여기서 시간당 2개 젤 페이스를 맞추는 게 아니라, 젤은 내 벤토박스 것으로 시계대로.</p></div></li>
+      <li><div><h4>바나나 테이블은 3시간 30분 전까지만 · 대신 양갱과 교환</h4><p>고형식은 <b>추가가 아니라 대체</b>. AS2 ①(1:24)과 AS3 ①(2:07)에서 바나나 반 개(약 13g)를 집으면 그 시간의 젤 하나를 건너뜁니다. AS2 ②(2:50)에서 양갱 1개. <b>AS3 ②(3:34) 이후는 젤·음료만.</b></p></div></li>
+      <li><div><h4>AS3(오봉산가든)는 좁다 — 게토레이 테이블 2개 적음</h4><p>두 번 지나는 곳인데 자리가 협소해 게토레이 테이블이 줄어듭니다. 놓치면 다음 AS2 ②까지 20km(43분)를 남은 음료로 가야 하니 <b>AS3에서는 속도를 더 줄여</b> 확실히 받기.</p></div></li>
+      <li><div><h4>AS1은 산업도로 남행에서만 · 4번</h4><p>용방교차로 U턴 직후 1.7km. 121.9 · 146.3 · 170.7km, 즉 <b>순환 3회전마다 24.4km(52분) 간격</b>으로 정확히 한 번씩. 마지막 AS1(170.7km)에서는 게토레이 대신 <b>물</b> — 남은 6km, 마지막 20분은 물만.</p></div></li>
+      <li><div><h4>정장교 앞 · 위를 비운다</h4><p>런 출발 전 T2에서 젤 1개를 먹을 거니까, 바이크 마지막 20분은 물만 마셔 위장을 가볍게. 이게 8/30에 없었던 순서입니다.</p></div></li>
+    </ol>
+    <details class="official"><summary>공식 보급소 배치도(바이크) 보기</summary><img src="assets/gurye/aid-bike.jpg" alt="바이크 보급소 배치" loading="lazy"><div class="cap">봉사자 1~12가 선수에게 전달, 16~21 물통 세척, 22~31 음료 세팅. 3보급소는 게토레이 테이블 2개 감소.</div></details>
+  </div>
+</section>
+
+<!-- ================= 03 퍼스널니즈 ================= -->
+<section class="band" id="pn">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">03</div>
+      <div>
+        <span class="eyebrow">Personal needs</span>
+        <h2>퍼스널니즈 · 바이크는 한 번, 런은 다섯 번</h2>
+        <p class="lead">둘 다 일요일 05:10~06:40 T1에서 맡깁니다. 바이크 PN은 <b>회수 안 됨</b>(백 전부 폐기), 런 PN은 <b>여러 번 꺼내 쓰고 반납</b> 가능. 배번 구간별 테이블(1~300 · 301~600 · 601~900 · 901~1180)이라 <b>내 배번 구간을 백에 크게 써 둘 것</b>.</p>
+      </div>
+    </div>
+
+    <div class="two">
+      <div class="card">
+        <h4>바이크 PN백 · 백운천 휴게소 89.9km · 2회전째만</h4>
+        <p class="muted" style="font-size:13.5px; margin-top:6px" id="pn-bike-time">도착 예상 —</p>
+        <ul class="plain" style="margin-top:12px; font-size:15px">
+          <li><div><b>젤 6개</b> — 파워젤 3 + GO 3, 지퍼백. 벤토박스 바로 채움</div></li>
+          <li><div><b>전해질 캡슐 4개</b> (남은 3시간 + 여분)</div></li>
+          <li><div><b>양갱 1개</b> — 3시간 30분 전이니 여기서 먹거나 AS2 ② 전에</div></li>
+          <li><div>선스틱 · 립밤 · 물티슈 1장</div></li>
+          <li><div>튜브 1 · CO2 1 (앞 90km에서 썼을 경우 보충)</div></li>
+          <li><div><b>넣지 않는 것</b>: 지갑·열쇠·폰. 백은 돌아오지 않습니다</div></li>
+        </ul>
+        <p style="font-size:14px; margin-top:12px; color:var(--ink-2)">동작: 오른쪽으로 붙어 <b>배번 구간 테이블</b>에서 백 받기 → 거치대(40대)에 자전거 세우고 <b>1분</b> — 젤을 벤토박스로, 캡슐 1개 즉시, 화장실 → 빈 백은 Disposal Zone에. 휴식 공간(50명)에서는 물만 나오고, 앉으면 5분이 갑니다. <b>앉지 않기.</b></p>
+      </div>
+      <div class="card">
+        <h4>런 PN백 · 분수광장 1.48km · 5번 통과</h4>
+        <p class="muted" style="font-size:13.5px; margin-top:6px" id="pn-run-time">통과 예상 —</p>
+        <ul class="plain" style="margin-top:12px; font-size:15px">
+          <li><div><b>젤 5개</b> (GO 3 + 파워젤 2) — 바퀴마다 1개씩 꺼냄</div></li>
+          <li><div><b>전해질 캡슐 5개</b></div></li>
+          <li><div><b>양말 1켤레 · 바세린 미니</b> — 발이 젖거나 쓸리면 3바퀴째</div></li>
+          <li><div><b>헤드램프 예비 배터리</b> 또는 팔 LED</div></li>
+          <li><div>얇은 장갑 · 버프 (밤 15℃)</div></li>
+          <li><div>포도당 사탕 5개 (콜라가 안 넘어갈 때)</div></li>
+        </ul>
+        <p style="font-size:14px; margin-top:12px; color:var(--ink-2)">동작: <b>Multiple Pickups 테이블</b>에서 받아 필요한 것만 꺼내고 <b>Bag Return Table</b>에 반납. 마지막(41.2km)엔 다 쓰고 Bag Disposal에. 여기는 AS1 바로 다음이라 걷기 1분 안에 처리.</p>
+      </div>
+    </div>
+    <details class="official"><summary>공식 퍼스널니즈 배치도 보기</summary><img src="assets/gurye/pn-bike.jpg" alt="바이크 퍼스널니즈" loading="lazy"><div class="cap">바이크 PN · 백운천 휴게소. 배번 구간별 백 테이블 → 거치대 40대 → Disposal → 휴식 공간(물만).</div><img src="assets/gurye/pn-run.jpg" alt="런 퍼스널니즈" loading="lazy"><div class="cap">런 PN · 분수광장. One-time pickup과 Multiple Pickups 테이블이 분리. 반납 테이블 있음.</div></details>
+  </div>
+</section>
+
+<!-- ================= 04 런 보급소별 ================= -->
+<section class="band" id="run">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">04</div>
+      <div>
+        <span class="eyebrow">Run · 21 aid stations</span>
+        <h2>런 · 21곳을 다 걸어서 지난다</h2>
+        <p class="lead">구성: <b>스펀지 → 물 → 게토레이·콜라 → 음식 → 게토레이·콜라 → 물 → 물품 → 화장실 → 스펀지</b>. 보급소가 보이면 걷기 1분 시작, 첫 물로 입 헹구고 콜라 1컵, 나가면서 물 1컵. 시간당 젤은 PN백 것으로. 시각은 시뮬레이터에서.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="tbl-scroll"><table class="tbl" id="tbl-run">
+        <thead><tr><th class="n">km</th><th>보급소</th><th class="n">시각</th><th class="n">런 경과</th><th>빛</th><th>집는 것</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </div>
+    <ol class="steps">
+      <li><div><h4>1~3시간 · 콜라 1컵 + 매시간 젤</h4><p>콜라 1컵(약 150ml ≈ 16g) × 보급소 3곳/시간 = 48g + 젤 22g = <b>시간당 70g</b>. 계획 55~60g보다 조금 높으니 <b>속이 무거우면 콜라를 게토레이로</b>. 물은 매번.</p></div></li>
+      <li><div><h4>3~4시간 · 콜라 위주</h4><p>젤 대신 콜라 2컵 + 물 1컵. 포도당정·소금이 보급소에 있으니 캡슐이 떨어지면 <b>소금 한 꼬집</b>으로 대체.</p></div></li>
+      <li><div><h4>마지막 1시간 · 넘어가는 것만</h4><p>콜라·물만. 안 넘어가면 무리하지 않기. 여기서 억지로 먹다 토하면 20분을 잃습니다.</p></div></li>
+      <li><div><h4>카페인 · 바이크 5시간째부터</h4><p>바이크 PN(3:10)에서는 아직. AS1 ③(146km, 4:00)부터 카페인 젤 또는 콜라 시작. 런은 콜라가 곧 카페인. 하루 총 체중당 3~6mg(250~500mg).</p></div></li>
+      <li><div><h4>스펀지·바세린·에어파스</h4><p>10월 초 저녁이라 스펀지는 1~2바퀴째만. <b>바세린은 2바퀴째 PN에서 미리</b> — 쓸리기 시작하면 늦습니다. 에어파스는 근육 경련 조짐 때만.</p></div></li>
+    </ol>
+    <details class="official"><summary>공식 보급소 배치도(런) 보기</summary><img src="assets/gurye/aid-run.jpg" alt="런 보급소 배치" loading="lazy"><div class="cap">스펀지 → Water → Gatorade·Coke → Food(오렌지·바나나·비스킷·젤·소금·포도당정) → Gatorade·Coke → Water → 물품(선크림·바세린·에어파스) → 화장실 → 스펀지.</div></details>
+  </div>
+</section>
+
+<!-- ================= 05 하루 총계 ================= -->
+<section class="band" id="total">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">05</div>
+      <div>
+        <span class="eyebrow">Totals</span>
+        <h2>당일 총계 · 시뮬레이터 시간 기준</h2>
+        <p class="lead">구간 시간이 바뀌면 필요한 젤 개수도 바뀝니다. 아래는 현재 설정 기준입니다.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="tbl-scroll"><table class="tbl" id="tbl-total">
+        <thead><tr><th>구간</th><th class="n">시간</th><th class="n">시간당</th><th class="n">탄수</th><th>구성</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <div class="callout" id="gel-count">—</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 백 5개 ================= -->
+<section class="band" id="pack">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">06</div>
+      <div>
+        <span class="eyebrow">Packing · 5 bags</span>
+        <h2>백 5개 + 자전거 + 몸</h2>
+        <p class="lead">토요일에 2개(바이크백 · 런 기어백), 일요일 새벽에 3개(스트리트 · 바이크 PN · 런 PN). 체크 상태는 이 기기에 저장됩니다. <b>9/27 저녁에 한 번 다 싸 보고</b>, 10/2 출발 전에 다시.</p>
+      </div>
+    </div>
+    <div class="bags" id="bags"></div>
+    <div class="callout">토요일 T1에는 메카닉이 없고, 바이크백은 일요일에 못 엽니다. <b>헬멧을 바이크백에 넣는 순간 일요일 아침까지 못 봅니다</b> — 선글라스·배번 벨트·양말을 같이 넣어 두고, 일요일 아침에는 물통·젤·공기압만 손댑니다.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    보급소 품목·PN 규칙·테이블 순서는 KTS 카페 68020(김형식, 9/10) 본문과 첨부 배치도 기준. 게토레이 탄수는 국내 600ml 제품 영양표시(100ml당 6g) 기준 약 36g. 흡수 원리·물통 레시피·8/30 분석은 <a href="exercise.html#strategy">훈련 캘린더 전략 ②~⑥</a>.
+  </div>
+</footer>
+
+<script src="assets/gurye.js"></script>
+<script>
+(function () {
+  "use strict";
+  var G = window.GURYE, R = G.RACE;
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function txt(x, y, s, cls, parent, anchor) { var t = el("text", { x: x, y: y, "class": "lbl " + (cls || ""), "text-anchor": anchor || "start" }, parent); t.textContent = s; return t; }
+
+  var params = Object.assign({}, G.DEFAULT, G.load("gurye.sim.v1", {}));
+  var sim = G.simulate(params);
+
+  /* ---------- 02 바이크 보급소 표 ---------- */
+  var SOLID_LIMIT = 210; // 바이크 경과 3:30
+  var bikeStops = sim.bike.filter(function (b) { return b.type === "aid" || b.type === "pn" || b.type === "start" || b.type === "t2"; });
+  var tb = $("#tbl-bike tbody");
+  var prevKm = 0, prevT = 0, nA = 0;
+  bikeStops.forEach(function (b, i) {
+    var legT = b.elapsed - sim.t1End;
+    var tr = document.createElement("tr");
+    var grab = "", eat = "";
+    if (b.type === "start") { grab = "자작 물통 A·B 장착 · 벤토박스 젤 7 · 캡슐 4"; eat = "0:00 물통 5모금 → 0:20 · 0:40 · 1시간 젤"; }
+    else if (b.type === "t2") { tr.className = "hl"; grab = "캐처에게 자전거 · 텐트 나오며 젤 1 + 물 200 + 캡슐 1"; eat = "—"; }
+    else if (b.type === "pn") { tr.className = "pn"; grab = "PN백: 젤 6 → 벤토박스 · 캡슐 4 · 양갱 · 화장실 · 1분"; eat = legT < SOLID_LIMIT ? "양갱은 여기서(3:30 전)" : "젤·음료만"; }
+    else {
+      nA++;
+      if (nA === 1) { grab = "통과 (자작 A 아직 절반)"; }
+      else if (b.km > 168) { grab = "물 1개 — 마지막 20분은 물만"; }
+      else { grab = "빈 통 버리고 게토레이 1개" + (b.aid === 3 ? " · 좁으니 더 감속" : ""); }
+      if (legT < 120) eat = "자작 음료 20분마다 + 젤(시간당 2)";
+      else if (legT < SOLID_LIMIT) eat = "게토레이 + 젤 · 바나나½ 또는 양갱이면 젤 1개 생략";
+      else if (b.km > 168) eat = "물만";
+      else eat = "게토레이 + 젤 · 고형식 종료" + (legT > 240 ? " · 카페인 시작" : "");
+    }
+    var gap = i === 0 ? "—" : (b.km - prevKm).toFixed(1) + "km · " + G.dur(legT - prevT);
+    tr.innerHTML = '<td class="n">' + b.km.toFixed(1) + '</td><td>' + b.name.split(" (")[0] + '</td><td class="n">' + G.hhmm(b.clock) + '</td><td class="n">' + G.dur(legT) + '</td><td class="n sm">' + gap + '</td><td>' + grab + '</td><td class="sm">' + eat + '</td>';
+    tb.appendChild(tr);
+    prevKm = b.km; prevT = legT;
+  });
+  var pnB = sim.bike.filter(function (b) { return b.type === "pn"; })[0];
+  $("#pn-bike-time").textContent = "도착 예상 " + G.hhmm(pnB.clock) + " · 바이크 " + G.dur(pnB.elapsed - sim.t1End) + " 경과 · 1회전째(50.5km, " + G.hhmm(sim.bike.filter(function (b) { return b.km === 50.47; })[0].clock) + ")는 통과";
+  var pnR = sim.run.filter(function (r) { return r.type === "pn"; });
+  $("#pn-run-time").textContent = "통과 예상 " + pnR.map(function (r) { return G.hhmm(r.clock); }).join(" · ");
+
+  /* ---------- 04 런 보급소 표 ---------- */
+  function light(clock) { if (clock < R.sunset - 30) return "낮"; if (clock < R.sunset) return "해질녘"; if (clock < R.dusk) return "일몰 직후"; return "밤"; }
+  var tr2 = $("#tbl-run tbody");
+  var runAids = sim.run.filter(function (r) { return r.type === "aid" || r.type === "pn" || r.type === "finish"; });
+  var gelHour = -1;
+  runAids.forEach(function (r) {
+    var legT = r.elapsed - sim.t2End;
+    var h = Math.floor(legT / 60);
+    var tr = document.createElement("tr");
+    var grab;
+    if (r.type === "finish") { tr.className = "hl"; grab = "피니시 · 리커버리 텐트에서 물·음식"; }
+    else if (r.type === "pn") { grab = "젤 1 꺼내기" + (r.lap === 2 ? " · 바세린 미리" : "") + (r.lap >= 3 ? " · 캡슐 1" : "") + (r.lap === 5 ? " · 백 버리기" : ""); tr.className = "pn"; }
+    else {
+      if (legT < 180) { grab = "물 1컵 + 콜라 1컵"; if (h > gelHour && r.type === "aid" && r.aid !== 1) { grab += " · 젤(이번 시간 첫 보급소)"; gelHour = h; } }
+      else if (legT < 240) grab = "콜라 2컵 + 물 1컵 · 소금 필요 시";
+      else grab = "콜라·물 · 넘어가는 것만";
+      if (r.lap <= 2 && r.aid === 3) grab += " · 스펀지";
+    }
+    if (r.type === "cut") tr.className = "cut";
+    tr.innerHTML = '<td class="n">' + r.km.toFixed(1) + '</td><td>' + r.name + '</td><td class="n">' + G.hhmm(r.clock) + '</td><td class="n">' + G.dur(legT) + '</td><td class="sm">' + light(r.clock) + '</td><td>' + grab + '</td>';
+    tr2.appendChild(tr);
+  });
+
+  /* ---------- 05 총계 ---------- */
+  (function () {
+    var bikeH = sim.bikeMin / 60, runH = sim.runMin / 60;
+    var rows = [
+      ["아침 + 스타트 전", "—", "—", "~200g (플랜 B ~110g)", "04:15 아침 · 06:45 젤 1"],
+      ["T1", "—", "—", "22g", "젤 1 + 물 300 + 캡슐 1"],
+      ["바이크", G.dur(sim.bikeMin), "80g", Math.round(bikeH * 80) + "g", "자작 2병(120g) + 게토레이 " + Math.max(0, Math.round(bikeH) - 2) + "병(약 " + Math.max(0, Math.round(bikeH) - 2) * 36 + "g) + 젤 " + Math.round(bikeH * 2) + "개 + 양갱·바나나 1~2"],
+      ["T2", "—", "—", "22g", "젤 1 + 물 200 + 캡슐 1"],
+      ["런", G.dur(sim.runMin), "55g", Math.round(runH * 55) + "g", "콜라 " + Math.round(runH * 3) + "컵(약 " + Math.round(runH * 3 * 16) + "g) + 젤 " + Math.min(5, Math.round(runH)) + "개"],
+      ["총계", G.dur(sim.finish), "—", Math.round(200 + 44 + bikeH * 80 + runH * 55) + "g", "액체·젤이 대부분 · 고형식은 바이크 3:30 전 2개"]
+    ];
+    var tb = $("#tbl-total tbody");
+    rows.forEach(function (r, i) { var tr = document.createElement("tr"); if (i === rows.length - 1 || i === 2 || i === 4) tr.className = "hl"; tr.innerHTML = '<td>' + r[0] + '</td><td class="n">' + r[1] + '</td><td class="n">' + r[2] + '</td><td class="n">' + r[3] + '</td><td class="sm">' + r[4] + '</td>'; tb.appendChild(tr); });
+    var gelsBike = Math.round(bikeH * 2), gelsRun = Math.min(5, Math.round(runH));
+    $("#gel-count").innerHTML = "<b>젤 총 " + (gelsBike + gelsRun + 3) + "개</b> — 스타트 전 1 · T1 1 · 바이크 " + gelsBike + "(벤토박스 7 + PN백 " + Math.max(0, gelsBike - 7) + ") · T2 1 · 런 " + gelsRun + "(런 PN백). 파워젤 : GO를 반반. 전해질 캡슐 15개(T1 1 · 바이크 " + Math.round(bikeH) + " · T2 1 · 런 " + Math.round(runH) + " · 여분). 양갱 2개(바이크 PN백 1 · 벤토박스 1).";
+  })();
+
+  /* ---------- 01 연료 탱크 ---------- */
+  var TP = { store: 550, np: 140, bikeIn: 80, runIn: 55 };
+  var TPRE = { plan: { store: 550, np: 140, bikeIn: 80, runIn: 55 }, aug30: { store: 500, np: 158, bikeIn: 28, runIn: 30 }, planb: { store: 480, np: 140, bikeIn: 80, runIn: 55 }, hard: { store: 550, np: 165, bikeIn: 80, runIn: 55 } };
+  var FTP = 210, KG = 82;
+  var TVAL = { store: function (v) { return v + " g"; }, np: function (v) { return v + " W · IF " + (v / FTP).toFixed(2); }, bikeIn: function (v) { return v + " g/h"; }, runIn: function (v) { return v + " g/h"; } };
+  function carbFrac(IF) { return Math.max(0.35, Math.min(0.95, 0.45 + (IF - 0.5) * 1.1)); }
+  function bikeBurn(np) { var kcal = np * 3.6 / 0.22 / 4.184; return kcal * carbFrac(np / FTP) / 4; }       // g/h
+  function runBurn() { var kmh = 3600 / sim.runPaceAvg; var kcal = KG * kmh * 0.95; return kcal * 0.55 / 4; }  // g/h
+  var swimBurn = 70; // g/h, 이지 강도
+
+  function tankCurve() {
+    var pts = [], g = TP.store, t = 0, wall = null, walls = [];
+    var bb = bikeBurn(TP.np), rb = runBurn();
+    var step = 5; // 분
+    var lastLeg = "";
+    for (t = 0; t <= sim.finish; t += step) {
+      var burn = 0, intake = 0, leg;
+      if (t < sim.swimEnd) { burn = swimBurn; leg = "수영"; }
+      else if (t < sim.t1End) { burn = 20; intake = 22 * 12; leg = "T1"; }
+      else if (t < sim.bikeEnd) { burn = bb; intake = TP.bikeIn; leg = "바이크"; }
+      else if (t < sim.t2End) { burn = 20; intake = 22 * 6; leg = "T2"; }
+      else { burn = rb; intake = TP.runIn; leg = "런"; }
+      if (leg === "T1" && lastLeg !== "T1") { g += 22; intake = 0; }
+      if (leg === "T2" && lastLeg !== "T2") { g += 22; intake = 0; }
+      lastLeg = leg;
+      g += (intake - burn) * step / 60;
+      if (g > 650) g = 650;
+      if (g < 0) g = 0;
+      if (g < 100 && wall === null) wall = t;
+      pts.push([t, g, leg]);
+    }
+    return { pts: pts, wall: wall, bb: bb, rb: rb };
+  }
+  function tankRender() {
+    var svg = $("#tankchart"); svg.innerHTML = "";
+    var res = tankCurve();
+    var X0 = 60, X1 = 980, Y0 = 30, Y1 = 360;
+    var T1 = sim.finish;
+    function x(t) { return X0 + t / T1 * (X1 - X0); }
+    function y(g) { return Y1 - g / 650 * (Y1 - Y0); }
+    // 벽
+    el("rect", { x: X0, y: y(100), width: X1 - X0, height: Y1 - y(100), fill: "#1A2E35", opacity: .06 }, svg);
+    txt(X1, y(100) - 6, "벽 · 100g", "s", svg, "end");
+    // 격자
+    [0, 200, 400, 600].forEach(function (g) { el("line", { x1: X0, y1: y(g), x2: X1, y2: y(g), stroke: "#E4EFF1" }, svg); txt(X0 - 8, y(g) + 4, g + "g", "s", svg, "end"); });
+    // 구간 띠
+    var legs = [["수영", 0, sim.swimEnd], ["바이크", sim.t1End, sim.bikeEnd], ["런", sim.t2End, sim.finish]];
+    legs.forEach(function (l) { el("rect", { x: x(l[1]), y: Y1 + 8, width: x(l[2]) - x(l[1]), height: 6, fill: "#0E7C94", opacity: .5 }, svg); txt((x(l[1]) + x(l[2])) / 2, Y1 + 30, l[0], "s", svg, "middle"); });
+    // 시각 눈금
+    for (var h = 8; h <= 24; h += 2) { var t = h * 60 - sim.start; if (t > 0 && t < T1) { el("line", { x1: x(t), y1: Y1, x2: x(t), y2: Y1 + 4, stroke: "#5C7A85" }, svg); txt(x(t), Y1 + 48, (h < 10 ? "0" : "") + h + ":00", "s", svg, "middle"); } }
+    // 곡선
+    var d = res.pts.map(function (p, i) { return (i ? "L" : "M") + x(p[0]).toFixed(1) + "," + y(p[1]).toFixed(1); }).join(" ");
+    var path = el("path", { d: d, fill: "none", stroke: "#0E7C94", "stroke-width": 3, "stroke-linejoin": "round" }, svg);
+    var len = path.getTotalLength ? path.getTotalLength() : 2000;
+    path.setAttribute("stroke-dasharray", len); path.setAttribute("stroke-dashoffset", len);
+    requestAnimationFrame(function () { path.style.transition = "stroke-dashoffset 1.6s ease"; path.style.strokeDashoffset = "0"; });
+    // 일몰
+    var st = R.sunset - sim.start; if (st > 0 && st < T1) { el("line", { x1: x(st), y1: Y0, x2: x(st), y2: Y1, stroke: "#5C7A85", "stroke-dasharray": "3 3" }, svg); txt(x(st), Y0 - 8, "일몰", "s", svg, "middle"); }
+    // 벽 지점
+    var t2g = res.pts.filter(function (p) { return p[0] >= sim.t2End; })[0];
+    var fin = res.pts[res.pts.length - 1];
+    if (res.wall !== null) {
+      el("circle", { cx: x(res.wall), cy: y(100), r: 7, fill: "#B42318", stroke: "#fff", "stroke-width": 2 }, svg);
+      var where = res.wall < sim.bikeEnd ? "바이크 " + G.bikeElapsedToKm(sim, res.wall).toFixed(0) + "km" : "런 " + G.runElapsedToKm(sim, res.wall).toFixed(0) + "km";
+      txt(x(res.wall), y(100) + 24, "벽 · " + G.hhmm(sim.start + res.wall) + " · " + where, "b", svg, res.wall > T1 * 0.7 ? "end" : "start").setAttribute("fill", "#B42318");
+    }
+    $("#tk-bike").textContent = Math.round(res.bb) + " / " + TP.bikeIn + " g/h";
+    $("#tk-run").textContent = Math.round(res.rb) + " / " + TP.runIn + " g/h";
+    $("#tk-t2").textContent = t2g ? Math.round(t2g[1]) + " g" : "—";
+    $("#tk-fin").textContent = Math.round(fin[1]) + " g";
+    var v = $("#tk-verdict");
+    if (res.wall === null) { v.className = "verdict"; v.innerHTML = "<b>벽 없이 완주.</b> 피니시 잔량 " + Math.round(fin[1]) + "g. 바이크에서 시간당 " + Math.round(res.bb - TP.bikeIn) + "g씩만 축나므로 T2에 " + Math.round(t2g[1]) + "g을 들고 런을 시작합니다. 런은 시간당 " + Math.round(res.rb - TP.runIn) + "g 적자지만 저장고가 버팁니다."; }
+    else { v.className = "verdict bad"; var wh = res.wall < sim.bikeEnd ? "바이크 " + G.bikeElapsedToKm(sim, res.wall).toFixed(0) + "km" : "런 " + G.runElapsedToKm(sim, res.wall).toFixed(0) + "km"; v.innerHTML = "<b>" + G.hhmm(sim.start + res.wall) + " · " + wh + "에서 벽.</b> 바이크에서 시간당 " + Math.round(res.bb - TP.bikeIn) + "g씩 축나 " + (t2g ? "T2 잔량 " + Math.round(t2g[1]) + "g" : "바이크 중 고갈") + ". 8/30이 정확히 이 곡선이었습니다 — 강도를 내리거나 섭취를 올리거나, 둘 다."; }
+  }
+  function tankSync() { $$("#tank-controls input[type=range]").forEach(function (r) { r.value = TP[r.dataset.p]; }); $$("#tank-controls .val").forEach(function (v) { v.textContent = TVAL[v.dataset.v](TP[v.dataset.v]); }); }
+  $$("#tank-controls input[type=range]").forEach(function (r) { r.addEventListener("input", function () { TP[r.dataset.p] = +r.value; $$(".presets [data-tp]").forEach(function (b) { b.classList.remove("on"); }); tankSync(); tankRender(); }); });
+  $$(".presets [data-tp]").forEach(function (b) { b.addEventListener("click", function () { TP = Object.assign({}, TPRE[b.dataset.tp]); $$(".presets [data-tp]").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); tankSync(); tankRender(); }); });
+  tankSync(); tankRender();
+
+  /* ---------- 02 보급소 통과 애니메이션 ---------- */
+  (function () {
+    var svg = $("#aidpass");
+    el("rect", { x: 0, y: 0, width: 1000, height: 250, fill: "#fff" }, svg);
+    el("rect", { x: 0, y: 150, width: 1000, height: 70, fill: "#F2F8F9" }, svg);
+    el("line", { x1: 0, y1: 185, x2: 1000, y2: 185, stroke: "#CFE3E7", "stroke-dasharray": "14 10" }, svg);
+    var order = G.AID_BIKE_ORDER;
+    var W = 1000 / (order.length + 1);
+    var plan = { 0: "빈 통 던지기", 3: "게토레이 받기", 4: "(놓치면 여기)", 5: "3:30 전엔 ½", 6: "부족할 때만", 7: "예비", 8: "예비", 11: "PN에서" };
+    order.forEach(function (n, i) {
+      var cx = W * (i + 1);
+      var take = (i === 0 || i === 3);
+      el("rect", { x: cx - 26, y: 96, width: 52, height: 30, fill: take ? "#0E7C94" : "#fff", stroke: take ? "#0E7C94" : "#5C7A85", "stroke-width": 1.5, rx: 3 }, svg);
+      txt(cx, 116, n, take ? "b" : "s", svg, "middle").setAttribute("fill", take ? "#fff" : "#1A2E35");
+      if (plan[i]) txt(cx, 84, plan[i], "s", svg, "middle");
+      if (i === 0) el("rect", { x: cx - 20, y: 130, width: 40, height: 14, fill: "none", stroke: "#1A2E35", "stroke-dasharray": "3 2" }, svg);
+    });
+    txt(30, 40, "진입: 15km/h · 오른쪽 · 손 들고 \"게토레이!\"", "b", svg);
+    txt(970, 40, "이탈: 통 케이지에 넣고 재가속", "b", svg, "end");
+    var dot = el("circle", { cx: -20, cy: 185, r: 10, "class": "rider" }, svg);
+    var run = false, t = 0, last = 0;
+    var msgs = [[0, "진입 · 감속 15km/h"], [0.08, "물통 버리는 곳 · 빈 통 던짐"], [0.2, "물 테이블 통과"], [0.3, "게토레이 · 목 잡고 받기"], [0.42, "바나나 · 3:30 전이면 ½"], [0.5, "젤 테이블 · 내 젤이 있으면 통과"], [0.6, "게토레이 예비 테이블"], [0.78, "물 테이블 · 더운 날 머리에"], [0.9, "화장실 · PN에서 해결"], [0.97, "케이지에 넣고 재가속 · 20초"]];
+    function frame(now) {
+      if (!run) return; var dt = (now - last) / 1000; last = now; t += dt / 9;
+      var f = Math.min(1, t); dot.setAttribute("cx", -20 + f * 1040);
+      var m = msgs.filter(function (x) { return x[0] <= f; }).pop(); $("#aid-say").textContent = m ? m[1] : "";
+      if (f < 1) requestAnimationFrame(frame); else run = false;
+    }
+    $("#aid-play").addEventListener("click", function () { t = 0; run = true; last = performance.now(); requestAnimationFrame(frame); });
+  })();
+
+  /* ---------- 06 백 체크리스트 ---------- */
+  var BAGS = [
+    { id: "bikebag", name: "바이크백", when: "토 10:00~18:20 · T1 · 일요일 접근 불가", items: [
+      ["헬멧 (선글라스 안에)", "헬멧은 바이크백에만"], ["배번 벨트 (배번 뒤쪽)", ""], ["양말 · 팔토시", "웻슈트 벗고 신을 것"], ["여분 젤 2 + 캡슐 2 지퍼백", "일요일 자전거에 못 붙였을 때 보험"], ["작은 수건 · 바세린 미니", ""], ["칩 스트랩 확인", "발목 · 수영 때 착용"] ] },
+    { id: "runbag", name: "런 기어백", when: "토 10:00~18:20 · T2 (둘레길 센터 옆)", items: [
+      ["러닝화 (끈 고정)", ""], ["양말 새것 · 모자", ""], ["젤 1 (런 출발 직전) + 캡슐 3", ""], ["헤드램프 (배터리 새것)", "18:11 일몰"], ["얇은 긴팔 · 버프", "밤 15℃"], ["바세린 · 물티슈", ""] ] },
+    { id: "street", name: "스트리트 기어백", when: "일 05:10~06:40 · T1 → 피니시에서 수령", items: [
+      ["수영 전 벗은 옷 · 슬리퍼", ""], ["폰 · 지갑 · 차 키", "가족에게 맡기는 게 더 안전"], ["완주 후 갈아입을 옷 · 수건", ""], ["회복 음료 분말", ""] ] },
+    { id: "pnbike", name: "바이크 PN백", when: "일 05:10~06:40 · T1 · 90km에서 수령 · 회수 없음", items: [
+      ["젤 6 (파워젤 3 · GO 3)", "벤토박스 바로 채움"], ["전해질 캡슐 4", ""], ["양갱 1", "3:30 전"], ["선스틱 · 립밤 · 물티슈", ""], ["튜브 1 · CO2 1", ""], ["배번 구간 크게 표기", "1~300 / 301~600 / 601~900 / 901~1180"] ] },
+    { id: "pnrun", name: "런 PN백", when: "일 05:10~06:40 · T1 · 1.48km 5번 · 재사용 가능", items: [
+      ["젤 5 (GO 3 · 파워젤 2)", "바퀴마다 1"], ["전해질 캡슐 5", ""], ["양말 1켤레 · 바세린 미니", "3바퀴째"], ["램프 예비 배터리 · 팔 LED", ""], ["얇은 장갑", ""], ["포도당 사탕 5", "콜라가 안 넘어갈 때"] ] },
+    { id: "bike", name: "자전거에 (일요일 아침)", when: "일 05:10~06:40 · T1 · 메카닉 상주", items: [
+      ["자작 물통 A·B (차갑게, 700ml)", "말토 20 + 설탕 40 + 소금 2"], ["벤토박스: 파워젤 4 · GO 3", "= 3시간 30분치"], ["탑튜브 테이프: 캡슐 4 · 양갱 1", ""], ["탑튜브 메모 \"T자 ×2 → 102 · 용방 ×4 → 169 · 정장교 10\"", ""], ["공기압 · 변속 · 가민 위성", ""], ["사이클화 페달에 (클리트 커버 없이)", "또는 T1에서 신기"] ] },
+    { id: "body", name: "몸에 (수영 스타트)", when: "일 06:40 대기열", items: [
+      ["웻슈트 (수온 확정 후) · 수모 · 고글 + 예비 고글", ""], ["칩 (발목)", ""], ["06:45 젤 1 · 물 300ml 나눠서 · 캡슐 1 (05:00)", "스타트 30~60분 전 당 금지"], ["트라이수트 안에 아무것도 없음", "젤은 전부 자전거·백에"] ] }
+  ];
+  var CK = G.load("gurye.pack.v1", {});
+  var box = $("#bags");
+  BAGS.forEach(function (b) {
+    var d = document.createElement("div"); d.className = "bag";
+    var h = '<h4>' + b.name + '<span class="when">' + b.when + '</span></h4><ul>';
+    b.items.forEach(function (it, i) {
+      var k = b.id + "." + i, on = !!CK[k];
+      h += '<li' + (on ? ' class="done"' : '') + '><input class="chk" type="checkbox" data-k="' + k + '"' + (on ? ' checked' : '') + '><span>' + it[0] + (it[1] ? '<span class="h">' + it[1] + '</span>' : '') + '</span></li>';
+    });
+    h += '</ul><div class="pc" data-pc="' + b.id + '"></div>';
+    d.innerHTML = h; box.appendChild(d);
+  });
+  function pc() { BAGS.forEach(function (b) { var n = b.items.length, m = b.items.filter(function (_, i) { return CK[b.id + "." + i]; }).length; $('[data-pc="' + b.id + '"]').textContent = m + " / " + n; }); }
+  $$("#bags input.chk").forEach(function (c) { c.addEventListener("change", function () { CK[c.dataset.k] = c.checked; c.closest("li").classList.toggle("done", c.checked); G.save("gurye.pack.v1", CK); pc(); }); });
+  pc();
+})();
+</script>
+</body>
+</html>
