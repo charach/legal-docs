@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-title" content="공부 계획">
 <!-- /pwa -->
 
-<title>AI 논문 로드맵 · 53편</title>
+<title>AI 논문 로드맵 · 36편</title>
 <link rel="stylesheet" href="assets/summer.css">
 <style>
   :root {
@@ -196,8 +196,28 @@
   }
   .sortbar button:hover { color: var(--accent); }
   .sortbar button.on { color: var(--accent); font-weight: 700; border-color: var(--accent); }
-  td.pr { white-space: nowrap; font-weight: 700; font-size: 12px; font-variant-numeric: tabular-nums; }
-  .pr1 { color: var(--accent); } .pr2 { color: var(--ink); } .pr3 { color: var(--muted); font-weight: 400; }
+  td.pr { white-space: nowrap; }
+  .pill {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em;
+    padding: 2px 8px; border-radius: 999px; line-height: 1.5; vertical-align: middle;
+    border: 1px solid transparent; white-space: nowrap;
+  }
+  .pill.p1 { background: var(--accent); color: #fff; }
+  .pill.p2 { border-color: var(--accent); color: var(--accent); background: var(--card); }
+  .pill.p3 { border-color: var(--line-strong); color: var(--muted); background: var(--card); }
+  tr.pri-1 > td { background: rgba(14,124,148,0.06); }
+  tr.pri-1 > td.ck { box-shadow: inset 3px 0 0 var(--accent); }
+  tr.pri-1 td.pt b { color: var(--accent); }
+  tr.pri-3 td.pt, tr.pri-3 td.pv, tr.pri-3 td.do { color: var(--ink-soft); }
+  tr.pri-3 td.pt b { font-weight: 600; }
+  tbody.pri td.pt::before {
+    content: attr(data-br); display: block; font-size: 10.5px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 2px;
+  }
+  .sortbar .sep { width: 1px; height: 14px; background: var(--line-strong); align-self: center; }
+  .sortbar button.flt .pill { margin-right: 4px; }
+  .sortbar button.flt.on { color: var(--ink); font-weight: 700; border-color: var(--ink); }
+  tr[data-p].hid { display: none; }
   .do-chk::after { content: " \203B"; color: var(--muted); font-weight: 700; }
   tr.checked td.pt { color: var(--ink-soft); }
   tr.checked td.pt b { text-decoration: line-through; text-decoration-color: var(--line-strong); }
@@ -235,8 +255,8 @@
 
 <div class="wrap">
   <nav class="toc">
-    <a href="#why">왜 논문인가</a>
-    <a href="#papers">논문 34편</a>
+    <a href="#why">읽는 방법</a>
+    <a href="#papers">논문 36편</a>
     <a href="#impl">구현 8개</a>
     <a href="#week">주차별</a>
     <a href="#map">전체 과목</a>
@@ -248,169 +268,161 @@
     <a href="#res">자료</a>
   </nav>
 
-  <!-- 왜 논문인가 -->
+  <!-- 읽는 방법 -->
   <section class="blk" id="why">
-    <h2>읽는 방법 <small>53편 · 우선순위 3단계 · 그중 10편은 코드까지</small></h2>
+    <h2>읽는 방법 <small>논문 36편 + 교과서 3권 · 그중 8개는 코드까지</small></h2>
     <div class="rule"></div>
     <div class="callout">
-      <p><b>목표 —</b> 한 분야를 깊게 파는 게 아니라 <b>머신러닝 전체의 지도를 그린다.</b> 통계학습(1995) → 비전 → 시퀀스 → 트랜스포머 → 생성모델 → LLM(2023)까지, 각 갈래가 무엇을 풀려고 나왔는지를 원문으로 확인한다. 대학원 수업에서 무엇이 나와도 "아, 그 논문"이 되는 상태가 목적.</p>
-      <p><b>원칙 —</b> 요약서는 남의 이해다. 원문은 왜 그렇게 했는지가 남아 있고, 구현은 이해했는지를 거짓말 못 하게 검증한다. 그래서 <b>읽기만 43편 + 코드까지 가는 10편(→ 구현 8개)</b>으로 나눈다.</p>
+      <p><b>기준 하나 —</b> <b>교과서에 코드 수준으로 들어간 것은 교과서로, 아직 못 들어간 것은 논문으로.</b> 랜덤포레스트·Adam·ResNet·word2vec·Seq2Seq·GPT-2는 혼공머신 · 밑바닥 1·2 · Raschka가 이미 코드로 다룬다. 원논문 33쪽에서 알고리즘은 반 쪽이고 나머지는 지금 아무도 안 쓰는 이론이다. 그래서 고전은 교과서로 보고 <b>구현만 한다</b>. 논문은 교과서가 아직 못 담은 것, 곧 2020년 이후 33편 + 원문이 여전히 표준인 고전 3편(Vaswani 2017 · VAE 2013 · DDPM 2020)만 읽는다.</p>
+      <p><b>목표 —</b> 한 분야를 깊게 파는 게 아니라 <b>지금 쓰이는 머신러닝의 지도를 그린다.</b> 표 데이터 → 비전 → 시퀀스 → 트랜스포머 → 생성모델 → LLM·추론·서빙까지, 각 갈래가 무엇을 풀려고 나왔는지를 원문으로 확인한다. 대학원 수업에서 무엇이 나와도 "아, 그 논문"이 되는 상태가 목적.</p>
+      <p><b>원칙 —</b> 요약서는 남의 이해다. 원문은 왜 그렇게 했는지가 남아 있고, 구현은 이해했는지를 거짓말 못 하게 검증한다. 구현 8개 중 <b>⑥ 트랜스포머와 ⑦ VAE만 논문을 보고 짜고</b>, 나머지 6개는 교과서를 보고 짠다.</p>
       <p><b>읽는 순서 (한 편당 40분~1시간) —</b> ① 초록 → ② 그림·표만 훑기 → ③ 결론 → ④ 그다음 본문. 처음부터 순서대로 읽지 않는다.</p>
-      <p><b>남기는 것 —</b> 논문 하나당 <b>세 줄</b>. ⓐ 이 논문 전에는 무엇이 안 됐나 ⓑ 무엇을 바꿨나 ⓒ 그래서 지금 뭐에 쓰이나. 이 세 줄이 그대로 면접 답변이 된다.</p>
-      <p><b>수식 —</b> 처음엔 넘긴다. 구현할 8편에서만 수식을 붙잡는다. 나머지는 "무엇을 최소화하는가" 한 줄만 알면 된다.</p>
+      <p><b>남기는 것 —</b> 논문 하나당 <b>세 줄</b>. ⓐ 이 논문 전에는 무엇이 안 됐나 ⓑ 무엇을 바꿨나 ⓒ 그래서 지금 뭐에 쓰이나. 이 세 줄이 그대로 면접 답변이 된다. 교과서로 본 고전도 <b>연도와 한 줄</b>은 남긴다. 계보 질문은 연도로 답한다.</p>
+      <p><b>수식 —</b> 처음엔 넘긴다. 구현할 ⑥⑦에서만 수식을 붙잡는다. 나머지는 "무엇을 최소화하는가" 한 줄만 알면 된다.</p>
     </div>
     <div class="callout">
-      <p><b>우선순위 — 대학원 리딩리스트처럼 세 단계.</b> <b>1순위 17편</b> = 구현 대상 10편 + 핵심 7편(Two Cultures · 역전파 · AlexNet · GPT-3 · RAG · InstructGPT · DeepSeek-R1). 시간이 모자라면 이것만 한다. <b>2순위 23편</b>은 수업과 면접을 받쳐주는 몸통. <b>3순위 13편</b>은 여유 있을 때 — 밀리면 입학 후로 넘긴다. 아래 표를 <b>우선순위순</b>으로 정렬하면 그대로 보인다.</p>
+      <p><b>우선순위 — 대학원 리딩리스트처럼 세 단계.</b> <b>1순위 8편</b> = 구현 대상 2편(Vaswani · VAE) + 핵심 6편(Grinsztajn · Latent Diffusion · GPT-3 · RAG · InstructGPT · DeepSeek-R1). 시간이 모자라면 이것만 한다. <b>2순위 17편</b>은 수업과 면접을 받쳐주는 몸통. <b>3순위 11편</b>은 여유 있을 때 — 밀리면 입학 후로 넘긴다. 아래 표를 <b>우선순위순</b>으로 정렬하면 그대로 보인다.</p>
     </div>
   </section>
 
   <!-- 논문 지도 -->
   <section class="blk" id="papers">
-    <h2>논문 53편 · 우선순위 3단계 <small>연도 = 처음 공개된 해 · 학회 = 실제 게재처</small></h2>
+    <h2>논문 36편 · 우선순위 3단계 <small>연도 = 처음 공개된 해 · 학회 = 실제 게재처</small></h2>
     <div class="rule"></div>
     <div class="sortbar">
       <span class="lbl">정렬</span>
-      <button id="sort-era" class="on" type="button">시대순</button>
-      <button id="sort-pri" type="button">우선순위순</button>
-      <span class="lbl">· 순위: <b class="k1">1</b> 필수 <b class="k2">2</b> 권장 <b class="k3">3</b> 여유(선택·※ 포함)</span>
+      <button id="sort-pri" class="on" type="button">우선순위순</button>
+      <button id="sort-era" type="button">갈래순</button>
+      <span class="sep"></span>
+      <span class="lbl">보기</span>
+      <button class="flt on" data-f="all" type="button">전체 36</button>
+      <button class="flt" data-f="1" type="button"><span class="pill p1">필수</span>8</button>
+      <button class="flt" data-f="2" type="button"><span class="pill p2">권장</span>17</button>
+      <button class="flt" data-f="3" type="button"><span class="pill p3">여유</span>11</button>
     </div>
     <div class="table-scroll">
     <table>
       <thead><tr><th></th><th>순위</th><th>연도</th><th>논문</th><th>학회</th><th>이 논문이 처음 한 것</th><th>할 일</th></tr></thead>
       <tbody>
-        <tr class="grp" data-g="e1"><td colspan="7">시대 1 · 통계학습과 일반화 <span>1995 – 2019 · 딥러닝 이전의 머신러닝, 그리고 그 상식이 깨지는 지점까지</span></td></tr>
-        <tr data-e="1" data-p="2" data-y="1995"><td class="ck"><input type="checkbox" id="r01"></td><td class="pr pr2">2</td><td class="yr">1995</td><td class="pt"><a href="https://link.springer.com/article/10.1007/BF00994018"><b>Support-Vector Networks</b></a><br><span class="who">Cortes · Vapnik</span></td><td class="pv"><span class="venue">Machine Learning</span></td><td>마진을 최대화한다는 발상. 커널 트릭</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="1" data-p="3" data-y="1996"><td class="ck"><input type="checkbox" id="r02"></td><td class="pr pr3">3</td><td class="yr">1996</td><td class="pt"><a href="https://tibshirani.su.domains/ftp/lasso-retro.pdf"><b>Regression Shrinkage and Selection via the Lasso</b></a><br><span class="who">Tibshirani</span></td><td class="pv"><span class="venue">JRSS-B</span></td><td>L1 규제가 계수를 0으로 만든다 = 변수 선택이 된다</td><td class="do"><span class="do-read">발췌</span></td></tr>
-        <tr data-e="1" data-p="1" data-y="2001"><td class="ck"><input type="checkbox" id="r03"></td><td class="pr pr1">1</td><td class="yr">2001</td><td class="pt"><a href="https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full"><b>Statistical Modeling: The Two Cultures</b></a><br><span class="who">Breiman</span></td><td class="pv"><span class="venue top">Statistical Science</span></td><td>수식이 없는 에세이. "모델이 맞느냐"와 "예측이 맞느냐"는 다른 질문이라는 선언. <b>가장 먼저 읽을 것</b></td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr data-e="1" data-p="1" data-y="2001"><td class="ck"><input type="checkbox" id="r04"></td><td class="pr pr1">1</td><td class="yr">2001</td><td class="pt"><a href="https://link.springer.com/article/10.1023/A:1010933404324"><b>Random Forests</b></a><br><span class="who">Breiman</span></td><td class="pv"><span class="venue top">Machine Learning</span></td><td>배깅 + 특성 무작위 선택. 표 데이터에서 25년째 강자</td><td class="do"><span class="do-impl">구현 ①</span></td></tr>
-        <tr data-e="1" data-p="3" data-y="2008"><td class="ck"><input type="checkbox" id="r05"></td><td class="pr pr3">3</td><td class="yr">2008</td><td class="pt"><a href="https://jmlr.org/papers/v9/vandermaaten08a.html"><b>Visualizing Data using t-SNE</b></a><br><span class="who">van der Maaten · Hinton</span></td><td class="pv"><span class="venue">JMLR</span></td><td>고차원 임베딩을 2차원 그림으로. 구현 ④의 결과를 이걸로 본다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="1" data-p="2" data-y="2016"><td class="ck"><input type="checkbox" id="r06"></td><td class="pr pr2">2</td><td class="yr">2016</td><td class="pt"><a href="https://arxiv.org/abs/1603.02754"><b>XGBoost: A Scalable Tree Boosting System</b></a><br><span class="who">Chen · Guestrin</span></td><td class="pv"><span class="venue top">KDD</span></td><td>Friedman(2001)의 부스팅 이론을 시스템 설계로 완성해 이긴 논문. <b>8년차 백엔드 경험이 그대로 읽히는 곳</b></td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr data-e="1" data-p="2" data-y="2017"><td class="ck"><input type="checkbox" id="r07"></td><td class="pr pr2">2</td><td class="yr">2017</td><td class="pt"><a href="https://arxiv.org/abs/1705.07874"><b>A Unified Approach to Interpreting Model Predictions</b></a> (SHAP)<br><span class="who">Lundberg · Lee</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>"이 모델이 왜 이렇게 판단했나"를 게임이론으로 답한다. <b>구현 ①에 그대로 붙여볼 것</b></td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr data-e="1" data-p="2" data-y="2019"><td class="ck"><input type="checkbox" id="r08"></td><td class="pr pr2">2</td><td class="yr">2019</td><td class="pt"><a href="https://arxiv.org/abs/1912.02292"><b>Deep Double Descent: Where Bigger Models and More Data Hurt</b></a><br><span class="who">Nakkiran 외 · OpenAI</span></td><td class="pv"><span class="venue top">ICLR 2020</span></td><td><b>편향-분산 트레이드오프가 깨진다.</b> 시대 1의 상식과 시대 2의 현실을 잇는 다리</td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr class="grp" data-g="e2"><td colspan="7">시대 2 · 신경망의 토대와 비전 <span>1986 – 2015 · 부품이 하나씩 등장하고, CNN이 완성된다</span></td></tr>
-        <tr data-e="2" data-p="1" data-y="1986"><td class="ck"><input type="checkbox" id="r09"></td><td class="pr pr1">1</td><td class="yr">1986</td><td class="pt"><b>Learning Representations by Back-Propagating Errors</b><br><span class="who">Rumelhart · Hinton · Williams</span></td><td class="pv"><span class="venue top">Nature</span></td><td>역전파. 지금 모든 학습의 원본. 밑바닥 1에서 손으로 짠 그 코드의 출처</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="2" data-p="2" data-y="1998"><td class="ck"><input type="checkbox" id="r10"></td><td class="pr pr2">2</td><td class="yr">1998</td><td class="pt"><a href="https://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf"><b>Gradient-Based Learning Applied to Document Recognition</b></a> (LeNet-5)<br><span class="who">LeCun · Bottou · Bengio · Haffner</span></td><td class="pv"><span class="venue">Proc. IEEE</span></td><td>합성곱 · 풀링 · 가중치 공유. CNN의 원형</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="2" data-p="2" data-y="2006"><td class="ck"><input type="checkbox" id="r11"></td><td class="pr pr2">2</td><td class="yr">2006</td><td class="pt"><a href="https://www.cs.toronto.edu/~hinton/absps/science.pdf"><b>Reducing the Dimensionality of Data with Neural Networks</b></a><br><span class="who">Hinton · Salakhutdinov</span></td><td class="pv"><span class="venue top">Science</span></td><td>4페이지. <b>신경망이 죽었다가 살아나는 지점</b>이자 오토인코더 — 구현 ⑦ VAE의 직계 조상</td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr data-e="2" data-p="1" data-y="2012"><td class="ck"><input type="checkbox" id="r12"></td><td class="pr pr1">1</td><td class="yr">2012</td><td class="pt"><a href="https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html"><b>ImageNet Classification with Deep CNNs</b></a> (AlexNet)<br><span class="who">Krizhevsky · Sutskever · Hinton</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>ReLU · 드롭아웃 · GPU 두 장. 딥러닝 시대가 여기서 시작된다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="2" data-p="2" data-y="2014"><td class="ck"><input type="checkbox" id="r13"></td><td class="pr pr2">2</td><td class="yr">2014</td><td class="pt"><a href="https://jmlr.org/papers/v15/srivastava14a.html"><b>Dropout</b></a><br><span class="who">Srivastava · Hinton 외</span></td><td class="pv"><span class="venue">JMLR</span></td><td>무작위로 끄는 것이 왜 앙상블과 같은가 — 시대 1의 배깅과 이어진다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="2" data-p="1" data-y="2014"><td class="ck"><input type="checkbox" id="r14"></td><td class="pr pr1">1</td><td class="yr">2014</td><td class="pt"><a href="https://arxiv.org/abs/1412.6980"><b>Adam: A Method for Stochastic Optimization</b></a><br><span class="who">Kingma · Ba</span></td><td class="pv"><span class="venue top">ICLR 2015</span></td><td>10년이 지나도 기본값인 옵티마이저. 알고리즘 1이 전부다</td><td class="do"><span class="do-impl">구현 ②</span></td></tr>
-        <tr data-e="2" data-p="2" data-y="2014"><td class="ck"><input type="checkbox" id="r15"></td><td class="pr pr2">2</td><td class="yr">2014</td><td class="pt"><a href="https://arxiv.org/abs/1409.1556"><b>Very Deep Convolutional Networks</b></a> (VGG)<br><span class="who">Simonyan · Zisserman</span></td><td class="pv"><span class="venue top">ICLR 2015</span></td><td>3×3만 쌓아서 깊게. 구현 ③의 <b>대조군이 바로 이 구조</b>. 1×1 conv는 여기 관련 연구에서 한 줄만</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="2" data-p="2" data-y="2015"><td class="ck"><input type="checkbox" id="r16"></td><td class="pr pr2">2</td><td class="yr">2015</td><td class="pt"><a href="https://arxiv.org/abs/1502.03167"><b>Batch Normalization</b></a><br><span class="who">Ioffe · Szegedy</span></td><td class="pv"><span class="venue top">ICML</span></td><td>깊은 망을 실제로 학습 가능하게 만든 정규화. Xavier 초기화(2010) · LayerNorm(2016)은 여기 딸린 한 줄로 충분하다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="2" data-p="2" data-y="2015"><td class="ck"><input type="checkbox" id="r17"></td><td class="pr pr2">2</td><td class="yr">2015</td><td class="pt"><a href="https://arxiv.org/abs/1505.04597"><b>U-Net: Convolutional Networks for Biomedical Image Segmentation</b></a><br><span class="who">Ronneberger · Fischer · Brox</span></td><td class="pv"><span class="venue top">MICCAI</span></td><td>인코더-디코더 + 스킵 연결. 초기 확산모델(DDPM · SD 1/2)의 백본 — 이후 DiT(2022)가 이어받는다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="2" data-p="1" data-y="2015"><td class="ck"><input type="checkbox" id="r18"></td><td class="pr pr1">1</td><td class="yr">2015</td><td class="pt"><a href="https://arxiv.org/abs/1512.03385"><b>Deep Residual Learning for Image Recognition</b></a> (ResNet)<br><span class="who">He · Zhang · Ren · Sun</span></td><td class="pv"><span class="venue top">CVPR 2016</span></td><td>스킵 연결. 152층이 가능해진 이유이자 트랜스포머 블록의 뼈대</td><td class="do"><span class="do-impl">구현 ③</span></td></tr>
-        <tr class="grp" data-g="e3"><td colspan="7">시대 3 · 시퀀스와 어텐션 <span>1997 – 2014 · 트랜스포머 직전, 무엇이 막혀 있었나</span></td></tr>
-        <tr data-e="3" data-p="2" data-y="1997"><td class="ck"><input type="checkbox" id="r19"></td><td class="pr pr2">2</td><td class="yr">1997</td><td class="pt"><a href="https://www.bioinf.jku.at/publications/older/2604.pdf"><b>Long Short-Term Memory</b></a><br><span class="who">Hochreiter · Schmidhuber</span></td><td class="pv"><span class="venue top">Neural Computation</span></td><td>게이트로 그래디언트 소실을 막는다. 20년간 시퀀스의 표준</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="3" data-p="1" data-y="2013"><td class="ck"><input type="checkbox" id="r20"></td><td class="pr pr1">1</td><td class="yr">2013</td><td class="pt"><a href="https://arxiv.org/abs/1301.3781"><b>Efficient Estimation of Word Representations in Vector Space</b></a> (word2vec)<br><span class="who">Mikolov 외</span></td><td class="pv"><span class="venue">ICLR 워크숍</span></td><td>단어를 벡터로. 임베딩이라는 개념 자체</td><td class="do"><span class="do-impl">구현 ④</span></td></tr>
-        <tr data-e="3" data-p="1" data-y="2013"><td class="ck"><input type="checkbox" id="r21"></td><td class="pr pr1">1</td><td class="yr">2013</td><td class="pt"><a href="https://arxiv.org/abs/1310.4546"><b>Distributed Representations of Words and Phrases</b></a> (네거티브 샘플링)<br><span class="who">Mikolov 외</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>어휘 전체 소프트맥스를 우회하는 학습 트릭</td><td class="do"><span class="do-impl">구현 ④</span></td></tr>
-        <tr data-e="3" data-p="1" data-y="2014"><td class="ck"><input type="checkbox" id="r22"></td><td class="pr pr1">1</td><td class="yr">2014</td><td class="pt"><a href="https://arxiv.org/abs/1409.3215"><b>Sequence to Sequence Learning with Neural Networks</b></a><br><span class="who">Sutskever · Vinyals · Le</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>인코더-디코더. 가변 길이 → 가변 길이</td><td class="do"><span class="do-impl">구현 ⑤</span></td></tr>
-        <tr data-e="3" data-p="1" data-y="2014"><td class="ck"><input type="checkbox" id="r23"></td><td class="pr pr1">1</td><td class="yr">2014</td><td class="pt"><a href="https://arxiv.org/abs/1409.0473"><b>Neural Machine Translation by Jointly Learning to Align and Translate</b></a><br><span class="who">Bahdanau · Cho · Bengio</span></td><td class="pv"><span class="venue top">ICLR 2015</span></td><td>어텐션의 최초 형태. 은닉상태 하나에 문장을 밀어넣던 병목을 푼다. dot-product 형태는 2017 논문에서 바로 만난다</td><td class="do"><span class="do-impl">구현 ⑤</span></td></tr>
-        <tr class="grp" data-g="e4"><td colspan="7">시대 4 · 트랜스포머와 그 이후 <span>2016 – 2023 · 하나의 구조가 언어·이미지·그래프로 퍼지고, 대안이 나오기 시작한다</span></td></tr>
-        <tr data-e="4" data-p="3" data-y="2016"><td class="ck"><input type="checkbox" id="r24"></td><td class="pr pr3">3</td><td class="yr">2016</td><td class="pt"><a href="https://arxiv.org/abs/1609.02907"><b>Semi-Supervised Classification with Graph Convolutional Networks</b></a> (GCN)<br><span class="who">Kipf · Welling</span></td><td class="pv"><span class="venue top">ICLR 2017</span></td><td>그래프 위의 딥러닝. 격자(이미지)도 시퀀스도 아닌 데이터</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="4" data-p="1" data-y="2017"><td class="ck"><input type="checkbox" id="r25"></td><td class="pr pr1">1</td><td class="yr">2017</td><td class="pt"><a href="https://arxiv.org/abs/1706.03762"><b>Attention Is All You Need</b></a><br><span class="who">Vaswani 외 · Google</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>순환을 버리고 어텐션만 남긴다. <b>이 로드맵의 본체</b></td><td class="do"><span class="do-impl">구현 ⑥ ★</span></td></tr>
-        <tr data-e="4" data-p="2" data-y="2018"><td class="ck"><input type="checkbox" id="r26"></td><td class="pr pr2">2</td><td class="yr">2018</td><td class="pt"><a href="https://arxiv.org/abs/1810.04805"><b>BERT</b></a><br><span class="who">Devlin 외 · Google</span></td><td class="pv"><span class="venue top">NAACL 2019</span></td><td>인코더만 · 양방향 사전학습 → 파인튜닝이라는 공식</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="4" data-p="3" data-y="2020"><td class="ck"><input type="checkbox" id="r27"></td><td class="pr pr3">3</td><td class="yr">2020</td><td class="pt"><a href="https://arxiv.org/abs/2002.05709"><b>A Simple Framework for Contrastive Learning</b></a> (SimCLR)<br><span class="who">Chen 외 · Google</span></td><td class="pv"><span class="venue top">ICML</span></td><td>레이블 없이 표현을 배운다. 자기지도학습의 표준 레시피</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="4" data-p="2" data-y="2020"><td class="ck"><input type="checkbox" id="r28"></td><td class="pr pr2">2</td><td class="yr">2020</td><td class="pt"><a href="https://arxiv.org/abs/2010.11929"><b>An Image is Worth 16x16 Words</b></a> (ViT)<br><span class="who">Dosovitskiy 외 · Google</span></td><td class="pv"><span class="venue top">ICLR 2021</span></td><td>이미지를 패치 토큰으로. CNN 없이 트랜스포머만</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="4" data-p="3" data-y="2021"><td class="ck"><input type="checkbox" id="r29"></td><td class="pr pr3">3</td><td class="yr">2021</td><td class="pt"><a href="https://www.nature.com/articles/s41586-021-03819-2"><b>Highly Accurate Protein Structure Prediction with AlphaFold</b></a> (AlphaFold 2)<br><span class="who">Jumper 외 · DeepMind</span></td><td class="pv"><span class="venue top">Nature</span></td><td>단백질 접힘 문제를 풀었다. 2024 노벨화학상 — ML이 과학의 도구가 됐다는 증거. 구조는 복잡하니 개요만</td><td class="do"><span class="do-read">발췌</span></td></tr>
-        <tr data-e="4" data-p="2" data-y="2021"><td class="ck"><input type="checkbox" id="r30"></td><td class="pr pr2">2</td><td class="yr">2021</td><td class="pt"><a href="https://arxiv.org/abs/2103.00020"><b>Learning Transferable Visual Models from Natural Language</b></a> (CLIP)<br><span class="who">Radford 외 · OpenAI</span></td><td class="pv"><span class="venue top">ICML</span></td><td>이미지와 텍스트를 같은 임베딩 공간에. 멀티모달의 토대</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="4" data-p="3" data-y="2022"><td class="ck"><input type="checkbox" id="r31"></td><td class="pr pr3">3</td><td class="yr">2022</td><td class="pt"><a href="https://arxiv.org/abs/2201.03545"><b>A ConvNet for the 2020s</b></a> (ConvNeXt)<br><span class="who">Liu 외 · Meta</span></td><td class="pv"><span class="venue top">CVPR</span></td><td>"CNN은 끝났나"에 대한 답. ViT 바로 뒤에 읽으면 대비가 선명하다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="4" data-p="3" data-y="2023"><td class="ck"><input type="checkbox" id="r32"></td><td class="pr pr3">3</td><td class="yr">2023</td><td class="pt"><a href="https://arxiv.org/abs/2304.02643"><b>Segment Anything</b></a> (SAM)<br><span class="who">Kirillov 외 · Meta</span></td><td class="pv"><span class="venue top">ICCV</span></td><td>파운데이션 모델이 비전으로. 프롬프트로 분할한다</td><td class="do"><span class="do-chk">읽기</span></td></tr>
-        <tr data-e="4" data-p="3" data-y="2023"><td class="ck"><input type="checkbox" id="r33"></td><td class="pr pr3">3</td><td class="yr">2023</td><td class="pt"><a href="https://arxiv.org/abs/2312.00752"><b>Mamba: Linear-Time Sequence Modeling with Selective State Spaces</b></a><br><span class="who">Gu · Dao</span></td><td class="pv"><span class="venue top">COLM 2024</span></td><td>어텐션의 O(n²)를 선형으로. 상태공간모델이라는 다른 갈래 — LSTM 이후 처음 나온 진짜 대안</td><td class="do"><span class="do-chk">읽기</span></td></tr>
-        <tr class="grp" data-g="e5"><td colspan="7">시대 5 · 생성모델과 강화학습 <span>2013 – 2022 · 판별이 아니라 만들어내는 쪽 · 그리고 보상으로 배우는 쪽</span></td></tr>
-        <tr data-e="5" data-p="1" data-y="2013"><td class="ck"><input type="checkbox" id="r34"></td><td class="pr pr1">1</td><td class="yr">2013</td><td class="pt"><a href="https://arxiv.org/abs/1312.6114"><b>Auto-Encoding Variational Bayes</b></a> (VAE)<br><span class="who">Kingma · Welling</span></td><td class="pv"><span class="venue top">ICLR 2014</span></td><td>잠재변수 + 재파라미터화 트릭. 확률과 딥러닝이 만나는 지점</td><td class="do"><span class="do-impl">구현 ⑦</span></td></tr>
-        <tr data-e="5" data-p="2" data-y="2014"><td class="ck"><input type="checkbox" id="r35"></td><td class="pr pr2">2</td><td class="yr">2014</td><td class="pt"><a href="https://arxiv.org/abs/1406.2661"><b>Generative Adversarial Nets</b></a> (GAN)<br><span class="who">Goodfellow 외</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>두 모델을 겨루게 해서 생성을 학습한다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="5" data-p="3" data-y="2015"><td class="ck"><input type="checkbox" id="r36"></td><td class="pr pr3">3</td><td class="yr">2015</td><td class="pt"><a href="https://www.nature.com/articles/nature14236"><b>Human-Level Control through Deep Reinforcement Learning</b></a> (DQN)<br><span class="who">Mnih 외 · DeepMind</span></td><td class="pv"><span class="venue top">Nature</span></td><td>강화학습 + 딥러닝. 리플레이 버퍼 · 타깃 네트워크</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="5" data-p="2" data-y="2017"><td class="ck"><input type="checkbox" id="r37"></td><td class="pr pr2">2</td><td class="yr">2017</td><td class="pt"><a href="https://arxiv.org/abs/1707.06347"><b>Proximal Policy Optimization</b></a> (PPO)<br><span class="who">Schulman 외 · OpenAI</span></td><td class="pv"><span class="venue">arXiv</span></td><td>정책경사를 안정적으로. 학회 게재 없이 표준이 됐다. <b>이걸 모르면 InstructGPT가 반쪽으로 읽힌다</b></td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr data-e="5" data-p="2" data-y="2020"><td class="ck"><input type="checkbox" id="r38"></td><td class="pr pr2">2</td><td class="yr">2020</td><td class="pt"><a href="https://arxiv.org/abs/2006.11239"><b>Denoising Diffusion Probabilistic Models</b></a> (DDPM)<br><span class="who">Ho · Jain · Abbeel</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>노이즈를 걷어내며 생성한다. U-Net(2015)을 백본으로 쓴다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="5" data-p="2" data-y="2021"><td class="ck"><input type="checkbox" id="r39"></td><td class="pr pr2">2</td><td class="yr">2021</td><td class="pt"><a href="https://arxiv.org/abs/2112.10752"><b>High-Resolution Image Synthesis with Latent Diffusion Models</b></a> (Stable Diffusion)<br><span class="who">Rombach 외</span></td><td class="pv"><span class="venue top">CVPR 2022</span></td><td>픽셀이 아니라 잠재공간에서 확산시킨다. <b>VAE + U-Net + 크로스어텐션이 한꺼번에 합쳐지는 자리</b> — 실제로 쓰이는 건 DDPM이 아니라 이것</td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr data-e="5" data-p="2" data-y="2022"><td class="ck"><input type="checkbox" id="r40"></td><td class="pr pr2">2</td><td class="yr">2022</td><td class="pt"><a href="https://arxiv.org/abs/2212.09748"><b>Scalable Diffusion Models with Transformers</b></a> (DiT)<br><span class="who">Peebles · Xie</span></td><td class="pv"><span class="venue top">ICCV 2023</span></td><td>확산의 백본을 U-Net에서 트랜스포머로. SD3 · Sora가 이 위에 서 있다 — 구현 ⑥이 생성모델과 만나는 자리</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr class="grp" data-g="e6"><td colspan="7">시대 6 · 대규모 언어모델 <span>2019 – 2025 · 본인 직무와 가장 가까운 구간 · 깊게 파지 않고 지형만 본다</span></td></tr>
-        <tr data-e="6" data-p="1" data-y="2019"><td class="ck"><input type="checkbox" id="r41"></td><td class="pr pr1">1</td><td class="yr">2019</td><td class="pt"><a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf"><b>Language Models are Unsupervised Multitask Learners</b></a> (GPT-2)<br><span class="who">Radford 외 · OpenAI</span></td><td class="pv"><span class="venue">OpenAI 기술보고서</span></td><td>디코더만으로 충분하다. 학회 논문이 아니라는 점도 알아둘 것</td><td class="do"><span class="do-impl">구현 ⑧</span></td></tr>
-        <tr data-e="6" data-p="1" data-y="2020"><td class="ck"><input type="checkbox" id="r42"></td><td class="pr pr1">1</td><td class="yr">2020</td><td class="pt"><a href="https://arxiv.org/abs/2005.14165"><b>Language Models are Few-Shot Learners</b></a> (GPT-3)<br><span class="who">Brown 외 · OpenAI</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>파인튜닝 없이 프롬프트만으로. 프롬프트 엔지니어링의 출발점</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="6" data-p="1" data-y="2020"><td class="ck"><input type="checkbox" id="r43"></td><td class="pr pr1">1</td><td class="yr">2020</td><td class="pt"><a href="https://arxiv.org/abs/2005.11401"><b>Retrieval-Augmented Generation</b></a> (RAG)<br><span class="who">Lewis 외 · Meta</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>검색을 생성에 붙인다. <b>업무 경험에 근거를 달아주는 논문</b></td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr data-e="6" data-p="3" data-y="2020"><td class="ck"><input type="checkbox" id="r44"></td><td class="pr pr3">3</td><td class="yr">2020</td><td class="pt"><a href="https://arxiv.org/abs/2001.08361"><b>Scaling Laws for Neural Language Models</b></a><br><span class="who">Kaplan 외 · OpenAI</span></td><td class="pv"><span class="venue">arXiv</span></td><td>성능이 모델·데이터·연산의 멱법칙을 따른다는 관측</td><td class="do"><span class="do-opt">선택</span></td></tr>
-<tr data-e="6" data-p="3" data-y="2021"><td class="ck"><input type="checkbox" id="r45"></td><td class="pr pr3">3</td><td class="yr">2021</td><td class="pt"><a href="https://arxiv.org/abs/2101.03961"><b>Switch Transformers</b></a> (Mixture of Experts)<br><span class="who">Fedus · Zoph · Shazeer · Google</span></td><td class="pv"><span class="venue top">JMLR 2022</span></td><td>토큰마다 다른 전문가만 켠다. 지금 프론티어 모델은 대부분 MoE. <b>시스템 설계 관점이 강한 논문</b></td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="6" data-p="2" data-y="2021"><td class="ck"><input type="checkbox" id="r46"></td><td class="pr pr2">2</td><td class="yr">2021</td><td class="pt"><a href="https://arxiv.org/abs/2106.09685"><b>LoRA: Low-Rank Adaptation</b></a><br><span class="who">Hu 외 · Microsoft</span></td><td class="pv"><span class="venue top">ICLR 2022</span></td><td>저랭크 행렬 두 개만 학습. 선형대수의 랭크가 여기서 돈이 된다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="6" data-p="1" data-y="2022"><td class="ck"><input type="checkbox" id="r47"></td><td class="pr pr1">1</td><td class="yr">2022</td><td class="pt"><a href="https://arxiv.org/abs/2203.02155"><b>Training Language Models to Follow Instructions</b></a> (InstructGPT · RLHF)<br><span class="who">Ouyang 외 · OpenAI</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>정렬(alignment). PPO(2017)가 언어모델로 돌아온다</td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr data-e="6" data-p="2" data-y="2022"><td class="ck"><input type="checkbox" id="r48"></td><td class="pr pr2">2</td><td class="yr">2022</td><td class="pt"><a href="https://arxiv.org/abs/2201.11903"><b>Chain-of-Thought Prompting</b></a><br><span class="who">Wei 외 · Google</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>중간 과정을 쓰게 하면 추론 성능이 뛴다</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="6" data-p="3" data-y="2022"><td class="ck"><input type="checkbox" id="r49"></td><td class="pr pr3">3</td><td class="yr">2022</td><td class="pt"><a href="https://arxiv.org/abs/2205.14135"><b>FlashAttention</b></a><br><span class="who">Dao 외 · Stanford</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>수식이 아니라 메모리 계층을 고쳐서 빨라진다. 시스템 전공자에게 가장 재미있는 논문</td><td class="do"><span class="do-opt">선택</span></td></tr>
-<tr data-e="6" data-p="2" data-y="2022"><td class="ck"><input type="checkbox" id="r50"></td><td class="pr pr2">2</td><td class="yr">2022</td><td class="pt"><a href="https://arxiv.org/abs/2210.03629"><b>ReAct: Synergizing Reasoning and Acting</b></a><br><span class="who">Yao 외 · Princeton · Google</span></td><td class="pv"><span class="venue top">ICLR 2023</span></td><td>추론과 도구 호출을 번갈아 한다. 지금 에이전트의 원형</td><td class="do"><span class="do-read">읽기</span></td></tr>
-        <tr data-e="6" data-p="3" data-y="2023"><td class="ck"><input type="checkbox" id="r51"></td><td class="pr pr3">3</td><td class="yr">2023</td><td class="pt"><a href="https://arxiv.org/abs/2305.18290"><b>Direct Preference Optimization</b></a> (DPO)<br><span class="who">Rafailov 외 · Stanford</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>보상모델도 강화학습도 없이 정렬한다. InstructGPT와 짝으로 읽을 것</td><td class="do"><span class="do-chk">읽기</span></td></tr>
-        <tr data-e="6" data-p="2" data-y="2024"><td class="ck"><input type="checkbox" id="r52"></td><td class="pr pr2">2</td><td class="yr">2024</td><td class="pt"><a href="https://arxiv.org/abs/2407.21783"><b>The Llama 3 Herd of Models</b></a><br><span class="who">Meta</span></td><td class="pv"><span class="venue">arXiv</span></td><td>공개된 것 중 가장 상세한 "요즘 LLM은 실제로 이렇게 만든다" 기록. 92쪽 — 데이터·인프라 장만 발췌해도 값어치가 있다</td><td class="do"><span class="do-read">발췌</span></td></tr>
-        <tr data-e="6" data-p="1" data-y="2025"><td class="ck"><input type="checkbox" id="r53"></td><td class="pr pr1">1</td><td class="yr">2025</td><td class="pt"><a href="https://arxiv.org/abs/2501.12948"><b>DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via RL</b></a><br><span class="who">DeepSeek-AI</span></td><td class="pv"><span class="venue top">Nature 2025</span></td><td>정답 여부만 보상으로 줘도 추론이 스스로 자란다(GRPO). LLM 논문 최초의 Nature 게재 — <b>"최근 본 논문" 질문의 답이 되는 한 편</b></td><td class="do"><span class="do-read">읽기 ★</span></td></tr>
-        <tr class="grp" data-g="p1" style="display:none"><td colspan="7">1순위 · 필수 <span>17편 · 구현 대상 10 + 핵심 7 — 시간이 모자라면 이것만 한다</span></td></tr>
-        <tr class="grp" data-g="p2" style="display:none"><td colspan="7">2순위 · 권장 <span>23편 · 수업과 면접을 받쳐주는 몸통</span></td></tr>
-        <tr class="grp" data-g="p3" style="display:none"><td colspan="7">3순위 · 여유 <span>13편 · 선택·※ 전부 여기 — 밀리면 입학 후로 넘긴다</span></td></tr>
+        <tr class="grp" data-g="e1"><td colspan="7">갈래 1 · 표 데이터와 일반화 <span>2019 – 2025 · 고전 ML은 혼공머신으로 보고, 논문은 "그 상식이 어디까지 맞나"만 읽는다</span></td></tr>
+        <tr class="pri-2" data-e="1" data-p="2" data-y="2019"><td class="ck"><input type="checkbox" id="r01"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2019</td><td class="pt" data-br="갈래 1 · 표 데이터"><a href="https://arxiv.org/abs/1912.02292"><b>Deep Double Descent: Where Bigger Models and More Data Hurt</b></a><br><span class="who">Nakkiran 외 · OpenAI</span></td><td class="pv"><span class="venue top">ICLR 2020</span></td><td><b>편향-분산 트레이드오프가 깨진다.</b> 교과서의 상식과 큰 모델의 현실을 잇는 다리</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-1" data-e="1" data-p="1" data-y="2022"><td class="ck"><input type="checkbox" id="r02"></td><td class="pr"><span class="pill p1">필수</span></td><td class="yr">2022</td><td class="pt" data-br="갈래 1 · 표 데이터"><a href="https://arxiv.org/abs/2207.08815"><b>Why do tree-based models still outperform deep learning on typical tabular data?</b></a><br><span class="who">Grinsztajn · Oyallon · Varoquaux</span></td><td class="pv"><span class="venue top">NeurIPS 2022 D&amp;B</span></td><td>수식이 거의 없는 실험 논문. 표 데이터에서 트리가 이기는 <b>이유 세 가지</b>(불규칙한 함수 · 무의미한 특성 · 회전 불변성). <b>가장 먼저 읽을 것</b> — 구현 ①이 이 논문의 축소 재현이다</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="1" data-p="3" data-y="2025"><td class="ck"><input type="checkbox" id="r03"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2025</td><td class="pt" data-br="갈래 1 · 표 데이터"><a href="https://www.nature.com/articles/s41586-024-08328-6"><b>Accurate predictions on small data with a tabular foundation model</b></a> (TabPFN)<br><span class="who">Hollmann 외 · Freiburg</span></td><td class="pv"><span class="venue top">Nature</span></td><td>표 데이터에도 파운데이션 모델이 왔다. 트랜스포머가 학습 없이 표를 "읽고" 예측한다 — Grinsztajn의 반대편 증거</td><td class="do"><span class="do-read">발췌</span></td></tr>
+        <tr class="grp" data-g="e2"><td colspan="7">갈래 2 · 비전과 멀티모달 <span>2020 – 2024 · CNN 계보(LeNet → ResNet)는 밑바닥 1의 7–8장으로 · 논문은 트랜스포머가 비전에 들어온 뒤부터</span></td></tr>
+        <tr class="pri-2" data-e="2" data-p="2" data-y="2020"><td class="ck"><input type="checkbox" id="r04"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2020</td><td class="pt" data-br="갈래 2 · 비전·멀티모달"><a href="https://arxiv.org/abs/2010.11929"><b>An Image is Worth 16x16 Words</b></a> (ViT)<br><span class="who">Dosovitskiy 외 · Google</span></td><td class="pv"><span class="venue top">ICLR 2021</span></td><td>이미지를 패치 토큰으로. CNN 없이 트랜스포머만. 구현 ③ ResNet 바로 뒤에 읽으면 대비가 선명하다</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="2" data-p="2" data-y="2021"><td class="ck"><input type="checkbox" id="r05"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2021</td><td class="pt" data-br="갈래 2 · 비전·멀티모달"><a href="https://arxiv.org/abs/2103.00020"><b>Learning Transferable Visual Models from Natural Language</b></a> (CLIP)<br><span class="who">Radford 외 · OpenAI</span></td><td class="pv"><span class="venue top">ICML</span></td><td>이미지와 텍스트를 같은 임베딩 공간에. 멀티모달의 토대이자 Stable Diffusion의 텍스트 조건</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="2" data-p="3" data-y="2022"><td class="ck"><input type="checkbox" id="r06"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2022</td><td class="pt" data-br="갈래 2 · 비전·멀티모달"><a href="https://arxiv.org/abs/2201.03545"><b>A ConvNet for the 2020s</b></a> (ConvNeXt)<br><span class="who">Liu 외 · Meta</span></td><td class="pv"><span class="venue top">CVPR</span></td><td>"CNN은 끝났나"에 대한 답. ViT의 설계를 CNN에 옮겨 심으면 따라잡는다</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="2" data-p="3" data-y="2023"><td class="ck"><input type="checkbox" id="r07"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2023</td><td class="pt" data-br="갈래 2 · 비전·멀티모달"><a href="https://arxiv.org/abs/2304.07193"><b>DINOv2: Learning Robust Visual Features without Supervision</b></a><br><span class="who">Oquab 외 · Meta</span></td><td class="pv"><span class="venue top">TMLR 2024</span></td><td>레이블 없이 배운 비전 특징이 범용이 된다. 자기지도학습의 현재 표준 — SimCLR(2020)의 후계</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="2" data-p="3" data-y="2023"><td class="ck"><input type="checkbox" id="r08"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2023</td><td class="pt" data-br="갈래 2 · 비전·멀티모달"><a href="https://arxiv.org/abs/2304.02643"><b>Segment Anything</b></a> (SAM)<br><span class="who">Kirillov 외 · Meta</span></td><td class="pv"><span class="venue top">ICCV</span></td><td>파운데이션 모델이 비전으로. 프롬프트로 분할한다</td><td class="do"><span class="do-chk">읽기</span></td></tr>
+        <tr class="pri-2" data-e="2" data-p="2" data-y="2023"><td class="ck"><input type="checkbox" id="r09"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2023</td><td class="pt" data-br="갈래 2 · 비전·멀티모달"><a href="https://arxiv.org/abs/2304.08485"><b>Visual Instruction Tuning</b></a> (LLaVA)<br><span class="who">Liu 외 · Wisconsin · Microsoft</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>CLIP 인코더 + 선형층 하나 + LLM. 멀티모달 LLM의 표준 레시피가 이렇게 단순하다는 것</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="2" data-p="3" data-y="2024"><td class="ck"><input type="checkbox" id="r10"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2024</td><td class="pt" data-br="갈래 2 · 비전·멀티모달"><a href="https://www.nature.com/articles/s41586-024-07487-w"><b>Accurate structure prediction of biomolecular interactions with AlphaFold 3</b></a><br><span class="who">Abramson 외 · DeepMind</span></td><td class="pv"><span class="venue top">Nature</span></td><td>2024 노벨화학상의 후속. 구조 생성이 확산모델로 바뀌었다 — 갈래 3이 과학의 도구가 된 증거. 개요만</td><td class="do"><span class="do-read">발췌</span></td></tr>
+        <tr class="grp" data-g="e3"><td colspan="7">갈래 3 · 생성모델 <span>2013 – 2024 · GAN은 개념 한 줄로 · 잠재변수 → 확산 → 잠재 확산 → 트랜스포머 백본 → 흐름</span></td></tr>
+        <tr class="pri-1" data-e="3" data-p="1" data-y="2013"><td class="ck"><input type="checkbox" id="r11"></td><td class="pr"><span class="pill p1">필수</span></td><td class="yr">2013</td><td class="pt" data-br="갈래 3 · 생성모델"><a href="https://arxiv.org/abs/1312.6114"><b>Auto-Encoding Variational Bayes</b></a> (VAE)<br><span class="who">Kingma · Welling</span></td><td class="pv"><span class="venue top">ICLR 2014</span></td><td>잠재변수 + 재파라미터화 트릭. 확률과 딥러닝이 만나는 지점. <b>교과서가 ELBO 유도를 단순화하기 때문에 원문으로 남긴 고전</b></td><td class="do"><span class="do-impl">구현 ⑦</span></td></tr>
+        <tr class="pri-2" data-e="3" data-p="2" data-y="2020"><td class="ck"><input type="checkbox" id="r12"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2020</td><td class="pt" data-br="갈래 3 · 생성모델"><a href="https://arxiv.org/abs/2006.11239"><b>Denoising Diffusion Probabilistic Models</b></a> (DDPM)<br><span class="who">Ho · Jain · Abbeel</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>노이즈를 걷어내며 생성한다. 손실이 결국 노이즈 예측 MSE 하나로 줄어드는 유도가 핵심</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-1" data-e="3" data-p="1" data-y="2021"><td class="ck"><input type="checkbox" id="r13"></td><td class="pr"><span class="pill p1">필수</span></td><td class="yr">2021</td><td class="pt" data-br="갈래 3 · 생성모델"><a href="https://arxiv.org/abs/2112.10752"><b>High-Resolution Image Synthesis with Latent Diffusion Models</b></a> (Stable Diffusion)<br><span class="who">Rombach 외</span></td><td class="pv"><span class="venue top">CVPR 2022</span></td><td>픽셀이 아니라 잠재공간에서 확산시킨다. <b>VAE + U-Net + 크로스어텐션(CLIP 텍스트)이 한꺼번에 합쳐지는 자리</b> — 실제로 쓰이는 건 DDPM이 아니라 이것</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="3" data-p="2" data-y="2022"><td class="ck"><input type="checkbox" id="r14"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2022</td><td class="pt" data-br="갈래 3 · 생성모델"><a href="https://arxiv.org/abs/2212.09748"><b>Scalable Diffusion Models with Transformers</b></a> (DiT)<br><span class="who">Peebles · Xie</span></td><td class="pv"><span class="venue top">ICCV 2023</span></td><td>확산의 백본을 U-Net에서 트랜스포머로. SD3 · Sora가 이 위에 서 있다 — 구현 ⑥이 생성모델과 만나는 자리</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="3" data-p="3" data-y="2024"><td class="ck"><input type="checkbox" id="r15"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2024</td><td class="pt" data-br="갈래 3 · 생성모델"><a href="https://arxiv.org/abs/2403.03206"><b>Scaling Rectified Flow Transformers for High-Resolution Image Synthesis</b></a> (Stable Diffusion 3)<br><span class="who">Esser 외 · Stability AI</span></td><td class="pv"><span class="venue top">ICML</span></td><td>확산 대신 직선 흐름(Flow Matching 2022)으로, 백본은 DiT로. 지금 이미지 생성이 실제로 쓰는 조합. 2장(흐름)과 그림만</td><td class="do"><span class="do-read">발췌</span></td></tr>
+        <tr class="grp" data-g="e4"><td colspan="7">갈래 4 · 트랜스포머와 그 후계 <span>2017 – 2023 · 이 로드맵의 본체 · RNN·LSTM·Seq2Seq·Bahdanau는 밑바닥 2의 5–8장으로</span></td></tr>
+        <tr class="pri-1" data-e="4" data-p="1" data-y="2017"><td class="ck"><input type="checkbox" id="r16"></td><td class="pr"><span class="pill p1">필수</span></td><td class="yr">2017</td><td class="pt" data-br="갈래 4 · 트랜스포머"><a href="https://arxiv.org/abs/1706.03762"><b>Attention Is All You Need</b></a><br><span class="who">Vaswani 외 · Google</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>순환을 버리고 어텐션만 남긴다. <b>교과서들이 풀어 쓰다 √d<sub>k</sub> 같은 이유를 흘리고, 면접에서 원문을 묻는 유일한 고전. 이 로드맵의 본체</b></td><td class="do"><span class="do-impl">구현 ⑥</span></td></tr>
+        <tr class="pri-2" data-e="4" data-p="2" data-y="2021"><td class="ck"><input type="checkbox" id="r17"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2021</td><td class="pt" data-br="갈래 4 · 트랜스포머"><a href="https://arxiv.org/abs/2104.09864"><b>RoFormer: Enhanced Transformer with Rotary Position Embedding</b></a> (RoPE)<br><span class="who">Su 외</span></td><td class="pv"><span class="venue">Neurocomputing 2024</span></td><td>위치를 더하지 않고 <b>회전</b>시킨다. 2017의 sin/cos는 지금 아무도 안 쓰고 Llama · DeepSeek · Qwen 전부 이것. 구현 ⑧에서 바꿔 끼워본다</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="4" data-p="2" data-y="2022"><td class="ck"><input type="checkbox" id="r18"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2022</td><td class="pt" data-br="갈래 4 · 트랜스포머"><a href="https://arxiv.org/abs/2205.14135"><b>FlashAttention</b></a><br><span class="who">Dao 외 · Stanford</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>수식이 아니라 메모리 계층을 고쳐서 빨라진다. <b>구현 ⑥에서 직접 짠 어텐션이 GPU에서 왜 느린지</b>를 이 논문이 답한다. 8년차 백엔드 경험이 그대로 읽히는 곳</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="4" data-p="3" data-y="2023"><td class="ck"><input type="checkbox" id="r19"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2023</td><td class="pt" data-br="갈래 4 · 트랜스포머"><a href="https://arxiv.org/abs/2312.00752"><b>Mamba: Linear-Time Sequence Modeling with Selective State Spaces</b></a><br><span class="who">Gu · Dao</span></td><td class="pv"><span class="venue top">COLM 2024</span></td><td>어텐션의 O(n²)를 선형으로. 상태공간모델이라는 다른 갈래 — LSTM 이후 처음 나온 진짜 대안</td><td class="do"><span class="do-chk">읽기</span></td></tr>
+        <tr class="grp" data-g="e5"><td colspan="7">갈래 5 · LLM 만들기 <span>2020 – 2025 · 본인 직무와 가장 가까운 구간 · 사전학습 → 스케일 → 정렬 → 추론</span></td></tr>
+        <tr class="pri-1" data-e="5" data-p="1" data-y="2020"><td class="ck"><input type="checkbox" id="r20"></td><td class="pr"><span class="pill p1">필수</span></td><td class="yr">2020</td><td class="pt" data-br="갈래 5 · LLM 만들기"><a href="https://arxiv.org/abs/2005.14165"><b>Language Models are Few-Shot Learners</b></a> (GPT-3)<br><span class="who">Brown 외 · OpenAI</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>파인튜닝 없이 프롬프트만으로. 프롬프트 엔지니어링의 출발점. GPT-2는 Raschka 책으로 구현 ⑧에서 짜니 논문은 이것부터</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="5" data-p="2" data-y="2021"><td class="ck"><input type="checkbox" id="r21"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2021</td><td class="pt" data-br="갈래 5 · LLM 만들기"><a href="https://arxiv.org/abs/2106.09685"><b>LoRA: Low-Rank Adaptation</b></a><br><span class="who">Hu 외 · Microsoft</span></td><td class="pv"><span class="venue top">ICLR 2022</span></td><td>저랭크 행렬 두 개만 학습. 선형대수의 랭크가 여기서 돈이 된다</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="5" data-p="2" data-y="2022"><td class="ck"><input type="checkbox" id="r22"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2022</td><td class="pt" data-br="갈래 5 · LLM 만들기"><a href="https://arxiv.org/abs/2203.15556"><b>Training Compute-Optimal Large Language Models</b></a> (Chinchilla)<br><span class="who">Hoffmann 외 · DeepMind</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>같은 연산이면 모델을 키우지 말고 <b>데이터를 20배로</b>. Kaplan(2020)의 스케일링 법칙을 고쳐 쓴 논문이라 이것만 읽으면 된다</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-1" data-e="5" data-p="1" data-y="2022"><td class="ck"><input type="checkbox" id="r23"></td><td class="pr"><span class="pill p1">필수</span></td><td class="yr">2022</td><td class="pt" data-br="갈래 5 · LLM 만들기"><a href="https://arxiv.org/abs/2203.02155"><b>Training Language Models to Follow Instructions</b></a> (InstructGPT · RLHF)<br><span class="who">Ouyang 외 · OpenAI</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>정렬(alignment). SFT → 보상모델 → PPO 세 단계. <b>PPO 자체는 OpenAI Spinning Up 문서로 본다</b> — 논문(2017)보다 그쪽이 코드가 있다</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="5" data-p="2" data-y="2023"><td class="ck"><input type="checkbox" id="r24"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2023</td><td class="pt" data-br="갈래 5 · LLM 만들기"><a href="https://arxiv.org/abs/2305.18290"><b>Direct Preference Optimization</b></a> (DPO)<br><span class="who">Rafailov 외 · Stanford</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>보상모델도 강화학습도 없이 정렬한다. InstructGPT와 짝으로 읽을 것 — 지금 오픈 모델 대부분이 이쪽</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="5" data-p="2" data-y="2024"><td class="ck"><input type="checkbox" id="r25"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2024</td><td class="pt" data-br="갈래 5 · LLM 만들기"><a href="https://arxiv.org/abs/2402.03300"><b>DeepSeekMath: Pushing the Limits of Mathematical Reasoning</b></a> (GRPO)<br><span class="who">Shao 외 · DeepSeek</span></td><td class="pv"><span class="venue">arXiv</span></td><td>PPO에서 가치망을 떼고 <b>그룹 평균을 기준선으로</b>. R1을 읽으려면 4장(GRPO)만은 먼저 봐야 한다</td><td class="do"><span class="do-read">발췌</span></td></tr>
+        <tr class="pri-2" data-e="5" data-p="2" data-y="2024"><td class="ck"><input type="checkbox" id="r26"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2024</td><td class="pt" data-br="갈래 5 · LLM 만들기"><a href="https://arxiv.org/abs/2407.21783"><b>The Llama 3 Herd of Models</b></a><br><span class="who">Meta</span></td><td class="pv"><span class="venue">arXiv</span></td><td>공개된 것 중 가장 상세한 "요즘 LLM은 실제로 이렇게 만든다" 기록. 92쪽 — 데이터·인프라 장만 발췌해도 값어치가 있다</td><td class="do"><span class="do-read">발췌</span></td></tr>
+        <tr class="pri-2" data-e="5" data-p="2" data-y="2024"><td class="ck"><input type="checkbox" id="r27"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2024</td><td class="pt" data-br="갈래 5 · LLM 만들기"><a href="https://arxiv.org/abs/2412.19437"><b>DeepSeek-V3 Technical Report</b></a><br><span class="who">DeepSeek-AI</span></td><td class="pv"><span class="venue">arXiv</span></td><td>MoE(토큰마다 전문가 일부만) + MLA(KV 캐시 압축) + FP8 학습 + 통신 스케줄링. <b>시스템 논문이라 백엔드 경험이 가장 잘 읽히는 한 편</b>. Switch Transformer(2021)는 이걸로 갈음</td><td class="do"><span class="do-read">발췌</span></td></tr>
+        <tr class="pri-1" data-e="5" data-p="1" data-y="2025"><td class="ck"><input type="checkbox" id="r28"></td><td class="pr"><span class="pill p1">필수</span></td><td class="yr">2025</td><td class="pt" data-br="갈래 5 · LLM 만들기"><a href="https://arxiv.org/abs/2501.12948"><b>DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via RL</b></a><br><span class="who">DeepSeek-AI</span></td><td class="pv"><span class="venue top">Nature 2025</span></td><td>정답 여부만 보상으로 줘도 추론이 스스로 자란다(GRPO). LLM 논문 최초의 Nature 게재 — <b>"최근 본 논문" 질문의 답이 되는 한 편</b></td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="grp" data-g="e6"><td colspan="7">갈래 6 · 추론 · RAG · 에이전트 · 서빙 <span>2020 – 2025 · 업무와 직결되는 구간 · 모델 밖에서 성능을 올리는 방법들</span></td></tr>
+        <tr class="pri-1" data-e="6" data-p="1" data-y="2020"><td class="ck"><input type="checkbox" id="r29"></td><td class="pr"><span class="pill p1">필수</span></td><td class="yr">2020</td><td class="pt" data-br="갈래 6 · 추론·RAG·서빙"><a href="https://arxiv.org/abs/2005.11401"><b>Retrieval-Augmented Generation</b></a> (RAG)<br><span class="who">Lewis 외 · Meta</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>검색을 생성에 붙인다. <b>업무 경험에 근거를 달아주는 논문</b></td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="6" data-p="2" data-y="2022"><td class="ck"><input type="checkbox" id="r30"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2022</td><td class="pt" data-br="갈래 6 · 추론·RAG·서빙"><a href="https://arxiv.org/abs/2201.11903"><b>Chain-of-Thought Prompting</b></a><br><span class="who">Wei 외 · Google</span></td><td class="pv"><span class="venue top">NeurIPS</span></td><td>중간 과정을 쓰게 하면 추론 성능이 뛴다. R1이 이걸 학습으로 만든다</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="6" data-p="2" data-y="2022"><td class="ck"><input type="checkbox" id="r31"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2022</td><td class="pt" data-br="갈래 6 · 추론·RAG·서빙"><a href="https://arxiv.org/abs/2210.03629"><b>ReAct: Synergizing Reasoning and Acting</b></a><br><span class="who">Yao 외 · Princeton · Google</span></td><td class="pv"><span class="venue top">ICLR 2023</span></td><td>추론과 도구 호출을 번갈아 한다. 지금 에이전트의 원형</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="6" data-p="3" data-y="2022"><td class="ck"><input type="checkbox" id="r32"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2022</td><td class="pt" data-br="갈래 6 · 추론·RAG·서빙"><a href="https://arxiv.org/abs/2211.17192"><b>Fast Inference from Transformers via Speculative Decoding</b></a><br><span class="who">Leviathan · Kalman · Matias · Google</span></td><td class="pv"><span class="venue top">ICML 2023</span></td><td>작은 모델이 먼저 쓰고 큰 모델이 검증한다. 출력 분포는 그대로인데 2~3배 빠르다 — 서빙 쪽 필수 상식</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="6" data-p="3" data-y="2023"><td class="ck"><input type="checkbox" id="r33"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2023</td><td class="pt" data-br="갈래 6 · 추론·RAG·서빙"><a href="https://arxiv.org/abs/2307.03172"><b>Lost in the Middle: How Language Models Use Long Contexts</b></a><br><span class="who">Liu 외 · Stanford</span></td><td class="pv"><span class="venue top">TACL 2024</span></td><td>긴 문맥의 <b>가운데</b>에 있는 근거는 놓친다. RAG에서 검색 결과를 어떻게 배치할지가 여기서 정해진다</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-2" data-e="6" data-p="2" data-y="2023"><td class="ck"><input type="checkbox" id="r34"></td><td class="pr"><span class="pill p2">권장</span></td><td class="yr">2023</td><td class="pt" data-br="갈래 6 · 추론·RAG·서빙"><a href="https://arxiv.org/abs/2309.06180"><b>Efficient Memory Management for LLM Serving with PagedAttention</b></a> (vLLM)<br><span class="who">Kwon 외 · Berkeley</span></td><td class="pv"><span class="venue top">SOSP</span></td><td>KV 캐시를 OS의 페이징처럼 관리한다. <b>운영체제 지식이 그대로 LLM 서빙 논문이 된 것</b> — 직무와 가장 가까운 한 편</td><td class="do"><span class="do-read">읽기</span></td></tr>
+        <tr class="pri-3" data-e="6" data-p="3" data-y="2024"><td class="ck"><input type="checkbox" id="r35"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2024</td><td class="pt" data-br="갈래 6 · 추론·RAG·서빙"><a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html"><b>Scaling Monosemanticity</b></a> (희소 오토인코더로 LLM 내부 읽기)<br><span class="who">Templeton 외 · Anthropic</span></td><td class="pv"><span class="venue">Anthropic 기술보고서</span></td><td>"모델이 왜 그렇게 판단했나"의 LLM판. 구현 ①의 SHAP가 표 데이터 해석이라면 이건 언어모델 해석. 개요와 그림만</td><td class="do"><span class="do-read">발췌</span></td></tr>
+        <tr class="pri-3" data-e="6" data-p="3" data-y="2025"><td class="ck"><input type="checkbox" id="r36"></td><td class="pr"><span class="pill p3">여유</span></td><td class="yr">2025</td><td class="pt" data-br="갈래 6 · 추론·RAG·서빙"><a href="https://arxiv.org/abs/2501.19393"><b>s1: Simple test-time scaling</b></a><br><span class="who">Muennighoff 외 · Stanford</span></td><td class="pv"><span class="venue">arXiv</span></td><td>예제 1,000개와 "Wait" 한 단어로 추론 시간을 늘린다. R1의 결과를 가장 작은 규모로 재현한 논문 — 추론 시간 스케일링이 무엇인지 여기서 감이 온다</td><td class="do"><span class="do-chk">읽기</span></td></tr>
+        <tr class="grp" data-g="p1" style="display:none"><td colspan="7"><span class="pill p1">필수</span> 1순위 <span>8편 · 구현 대상 2 + 핵심 6 — 시간이 모자라면 이것만 한다</span></td></tr>
+        <tr class="grp" data-g="p2" style="display:none"><td colspan="7"><span class="pill p2">권장</span> 2순위 <span>17편 · 수업과 면접을 받쳐주는 몸통</span></td></tr>
+        <tr class="grp" data-g="p3" style="display:none"><td colspan="7"><span class="pill p3">여유</span> 3순위 <span>11편 · 발췌·※ 전부 여기 — 밀리면 입학 후로 넘긴다</span></td></tr>
       </tbody>
     </table>
     </div>
     <div class="callout">
-      <p><b>※ 표시 3편 (SAM · Mamba · DPO) — 읽기 전에 확인할 것.</b> 2023년 이후는 아직 시간이 걸러주지 않은 구간이다. 최신 서베이를 먼저 훑고, 지금도 표준으로 인용되는지 확인한 뒤 읽는다. DeepSeek-R1(2025)과 Llama 3(2024)는 자리가 굳은 걸 확인하고 ※ 없이 넣었다.</p>
+      <p><b>※ 표시 3편 (SAM · Mamba · s1) — 읽기 전에 확인할 것.</b> 아직 시간이 걸러주지 않은 구간이다. 최신 서베이를 먼저 훑고, 지금도 표준으로 인용되는지 확인한 뒤 읽는다. DPO · DeepSeek-V3 · R1은 자리가 굳은 걸 확인하고 ※ 없이 넣었다.</p>
+      <p><b>교과서로 대체한 고전 —</b> SVM(1995) · 라쏘(1996) · 랜덤포레스트(2001) · XGBoost(2016)는 혼공머신 3–5장. 역전파(1986) · Dropout · Adam(2014) · BatchNorm(2015) · LeNet → AlexNet → VGG → ResNet(2015)은 밑바닥 1의 5–8장. LSTM(1997) · word2vec(2013) · Seq2Seq · Bahdanau(2014)는 밑바닥 2의 3–8장. GPT-2(2019)는 Raschka. <b>연도는 외운다.</b> 계보 질문은 연도로 답한다.</p>
       <p><b>솔직한 한계 —</b> 이 목록은 2026년 5월까지의 지식으로 만들었다. 그 뒤에 나온 것은 여기 없다. 원서 쓰기 전(2026년 11월)에 최신 구간 한두 편을 직접 채워 넣을 것 — 그 행위 자체가 좋은 훈련이다.</p>
     </div>
   </section>
 
   <!-- 구현 -->
   <section class="blk" id="impl">
-    <h2>직접 구현 8개 <small>갈래마다 하나씩 · 논문을 보고 짠다 · 남의 코드는 막힌 뒤에</small></h2>
+    <h2>직접 구현 8개 <small>갈래마다 하나씩 · ①~⑤⑧은 교과서를, ⑥⑦은 논문을 보고 짠다 · 남의 코드는 막힌 뒤에</small></h2>
     <div class="rule"></div>
     <div class="callout">
-      <p><b>규칙 —</b> 참고 구현은 <b>먼저 열지 않는다</b>. 논문 그림과 수식만 보고 짜다가 막히면 그때 연다. 여기서 늘어나는 게 실력이다. 각 구현은 <b>노트북 하나 + README 한 장</b>으로 끝낸다 — README에는 논문의 어느 수식이 코드 어느 줄인지 대조표를 넣는다.</p>
-      <p><b>배치 —</b> 고전 ML · 최적화 · 비전 · 표현학습 · 시퀀스 · 트랜스포머 · 생성모델 · LLM에 <b>하나씩</b>. 한 갈래도 손으로 안 짜본 채 넘어가지 않는다.</p>
+      <p><b>규칙 —</b> 참고 구현은 <b>먼저 열지 않는다</b>. 교과서의 설명(또는 논문의 그림과 수식)만 보고 짜다가 막히면 그때 연다. 여기서 늘어나는 게 실력이다. 각 구현은 <b>노트북 하나 + README 한 장</b>으로 끝낸다 — README에는 어느 수식이 코드 어느 줄인지 대조표를 넣는다.</p>
+      <p><b>배치 —</b> 고전 ML · 최적화 · 비전 · 표현학습 · 시퀀스 · 트랜스포머 · 생성모델 · LLM에 <b>하나씩</b>. 한 갈래도 손으로 안 짜본 채 넘어가지 않는다. 자기소개서의 프레임은 "논문 몇 편 읽었다"가 아니라 <b>"8개를 짜서 원본과 비교했다"</b>다.</p>
     </div>
     <ul class="checklist" data-group="impl">
-      <li><input type="checkbox" id="i1"><label><span class="lead"><b>① 결정트리 + 랜덤포레스트</b> — <b>NumPy</b> · 지니 불순도 · 재귀 분할 · 배깅 · 특성 무작위 선택</span><span class="pass">sklearn과 정확도를 맞춰본다. "랜덤포레스트가 왜 강한가"를 편향-분산으로 설명</span><span class="note">고전 ML을 한 번은 손으로 짜본다. 표 데이터 실무에서 제일 자주 만나는 모델</span></label></li>
-      <li><input type="checkbox" id="i2"><label><span class="lead"><b>② Adam</b> — 논문 알고리즘 1을 <b>NumPy 20줄</b>로. 간단한 회귀에 꽂아 쓴다</span><span class="pass">SGD → Momentum → RMSProp → Adam을 한 줄씩 차이로 말한다. 편향 보정이 왜 필요한지</span></label></li>
-      <li><input type="checkbox" id="i3"><label><span class="lead"><b>③ ResNet-18</b> — CIFAR-10 · <b>스킵 연결을 뺀 VGG 스타일 버전과 같이 학습</b></span><span class="pass">두 학습 곡선을 나란히 놓고 "깊게 쌓으면 왜 더 나빠졌는가"를 설명</span></label></li>
-      <li><input type="checkbox" id="i4"><label><span class="lead"><b>④ word2vec</b> — skip-gram + 네거티브 샘플링 · <b>NumPy</b> · 결과를 t-SNE로 찍는다</span><span class="pass">유사 단어 top-5가 말이 된다. 네거티브 샘플링이 무엇을 근사하는지 설명</span></label></li>
-      <li><input type="checkbox" id="i5"><label><span class="lead"><b>⑤ Seq2Seq + Bahdanau 어텐션</b> — <b>PyTorch</b> · 어텐션 없는 버전과 같이 학습하고 <b>정렬 히트맵</b></span><span class="pass">긴 입력에서 성능이 벌어지는 걸 그래프로 보여준다. 히트맵에 대각선이 생기는 이유</span></label></li>
-      <li><input type="checkbox" id="i6"><label><span class="tag">본체</span><span class="lead"><b>⑥ 트랜스포머 전체</b> — 논문만 보고 <b>PyTorch로 처음부터</b>. 멀티헤드 · 포지셔널 인코딩 · 마스킹 · 인코더-디코더</span><span class="pass">√d<sub>k</sub>로 나누는 이유, 마스킹 두 종류(패딩·미래)의 차이, PE가 왜 sin/cos인지 — 셋 다 노트 없이</span><span class="note">25주 중 5주를 여기에 쓴다. 이 하나가 지원서와 면접의 중심이 된다</span></label></li>
-      <li><input type="checkbox" id="i7"><label><span class="lead"><b>⑦ VAE</b> — MNIST · <b>재파라미터화 트릭을 직접</b> · 잠재공간 2차원으로 찍어보기</span><span class="pass">"왜 샘플링을 그냥 하면 역전파가 안 되는가"를 설명. KL 항이 무엇을 누르는지</span></label></li>
-      <li><input type="checkbox" id="i8"><label><span class="lead"><b>⑧ 미니 GPT</b> — 디코더만 · 문자 단위 · 작은 코퍼스로 학습</span><span class="pass">파라미터 수를 손으로 계산해서 코드 출력과 맞춘다. ⑥과 무엇이 다른지(디코더만·인과 마스킹) 설명</span></label></li>
+      <li><input type="checkbox" id="i1"><label><span class="lead"><b>① 결정트리 + 랜덤포레스트</b> — <b>NumPy</b> · 지니 불순도 · 재귀 분할 · 배깅 · 특성 무작위 선택 · 원본은 혼공머신 5장</span><span class="pass">sklearn과 정확도를 맞춘다. 같은 표 데이터에 MLP를 돌려 <b>Grinsztajn(2022)의 결론을 축소 재현</b>하고, <code>shap</code> 라이브러리를 붙여 feature importance와 비교</span><span class="note">고전 ML을 한 번은 손으로 짜본다. 표 데이터 실무에서 제일 자주 만나는 모델</span></label></li>
+      <li><input type="checkbox" id="i2"><label><span class="lead"><b>② Adam</b> — <b>NumPy 20줄</b>. 원본은 밑바닥 1의 6장. 간단한 회귀에 꽂아 쓴다</span><span class="pass">SGD → Momentum → RMSProp → Adam을 한 줄씩 차이로 말한다. 편향 보정이 왜 필요한지</span></label></li>
+      <li><input type="checkbox" id="i3"><label><span class="lead"><b>③ ResNet-18</b> — CIFAR-10 · <b>스킵 연결을 뺀 VGG 스타일 버전과 같이 학습</b> · 원본은 밑바닥 1의 8장 + PyTorch 튜토리얼</span><span class="pass">두 학습 곡선을 나란히 놓고 "깊게 쌓으면 왜 더 나빠졌는가"를 설명. 바로 뒤에 ViT(2020)를 읽는다</span></label></li>
+      <li><input type="checkbox" id="i4"><label><span class="lead"><b>④ word2vec</b> — skip-gram + 네거티브 샘플링 · <b>NumPy</b> · 원본은 밑바닥 2의 3–4장 · 결과는 sklearn의 t-SNE로 찍는다</span><span class="pass">유사 단어 top-5가 말이 된다. 네거티브 샘플링이 무엇을 근사하는지 설명</span></label></li>
+      <li><input type="checkbox" id="i5"><label><span class="lead"><b>⑤ Seq2Seq + 어텐션</b> — <b>PyTorch</b> · 원본은 밑바닥 2의 7–8장 · 어텐션 없는 버전과 같이 학습하고 <b>정렬 히트맵</b></span><span class="pass">긴 입력에서 성능이 벌어지는 걸 그래프로 보여준다. 히트맵에 대각선이 생기는 이유</span></label></li>
+      <li><input type="checkbox" id="i6"><label><span class="tag">본체</span><span class="lead"><b>⑥ 트랜스포머 전체</b> — <b>논문만 보고 PyTorch로 처음부터</b>. 멀티헤드 · 포지셔널 인코딩 · 마스킹 · 인코더-디코더</span><span class="pass">√d<sub>k</sub>로 나누는 이유, 마스킹 두 종류(패딩·미래)의 차이, PE가 왜 sin/cos인지 — 셋 다 노트 없이</span><span class="note">25주 중 5주를 여기에 쓴다. 이 하나가 지원서와 면접의 중심이 된다</span></label></li>
+      <li><input type="checkbox" id="i7"><label><span class="lead"><b>⑦ VAE</b> — <b>논문을 보고</b> · MNIST · <b>재파라미터화 트릭을 직접</b> · 잠재공간 2차원으로 찍어보기</span><span class="pass">"왜 샘플링을 그냥 하면 역전파가 안 되는가"를 설명. KL 항이 무엇을 누르는지</span></label></li>
+      <li><input type="checkbox" id="i8"><label><span class="lead"><b>⑧ 미니 GPT</b> — 디코더만 · 문자 단위 · 작은 코퍼스 · 원본은 Raschka 「Build a LLM (From Scratch)」</span><span class="pass">파라미터 수를 손으로 계산해서 코드 출력과 맞춘다. ⑥과 무엇이 다른지(디코더만·인과 마스킹) 설명. 여유가 있으면 <b>sin/cos를 RoPE(2021)로 바꿔 끼운다</b></span></label></li>
     </ul>
   </section>
 
   <!-- 주차별 -->
   <section class="blk" id="week">
-    <h2>주차별 <small>2026.09.07 – 2027.02.28 · 25주 · 주 3.7시간</small></h2>
+    <h2>주차별 <small>2026.09.07 – 2027.02.28 · 25주 · 주 3.4시간</small></h2>
     <div class="rule"></div>
     <div class="table-scroll">
     <table>
       <thead><tr><th>주</th><th>기간</th><th>논문 · 할 일</th></tr></thead>
       <tbody>
-        <tr class="grp"><td colspan="3">1부 · 통계학습과 일반화 <span>5주 · 논문 9편 + 구현 ① · 관점부터 세운다</span></td></tr>
-        <tr><td>W1</td><td>9/7–9/13</td><td class="hi">Two Cultures(2001) 읽기 — 수식 없는 에세이. 여기서 시작하는 게 맞다 · 혼공머신 1–2장</td></tr>
-        <tr><td>W2</td><td>9/14–9/20</td><td>SVM(1995) · LASSO(1996) 읽기 · 혼공머신 3–4장(회귀·분류)</td></tr>
-        <tr><td>W3</td><td>9/21–9/27</td><td>Random Forests(2001) 정독 · XGBoost(2016) 읽기 — Friedman의 부스팅 이론은 XGBoost 2장으로 갈음 · 혼공머신 5장</td></tr>
-        <tr><td>W4</td><td>9/28–10/4</td><td class="hi">구현 ① 결정트리 + 랜덤포레스트 (NumPy)</td></tr>
-        <tr><td>W5</td><td>10/5–10/11</td><td class="hi"><b>SHAP(2017)</b> 읽기 — 구현 ①에 SHAP를 붙여 feature importance와 비교 · t-SNE(2008) · 혼공 6장</td></tr>
+        <tr class="grp"><td colspan="3">1부 · 표 데이터와 일반화 <span>4주 · 혼공머신 1–6장 + 논문 3편 + 구현 ① · 관점부터 세운다</span></td></tr>
+        <tr><td>W1</td><td>9/7–9/13</td><td class="hi"><b>The Bitter Lesson</b>(Sutton 2019, 2쪽) 읽기 — "손으로 넣은 지식은 결국 연산에 진다"는 관점 · 혼공머신 1–3장(kNN·회귀·릿지·라쏘)</td></tr>
+        <tr><td>W2</td><td>9/14–9/20</td><td class="hi"><span class="pill p1">필수</span> <b>Grinsztajn(2022)</b> 읽기 — Bitter Lesson의 반례가 표 데이터라는 것 · 혼공머신 4–5장(로지스틱·트리·앙상블)</td></tr>
+        <tr><td>W3</td><td>9/21–9/27</td><td class="hi">구현 ① 결정트리 + 랜덤포레스트 (NumPy) · sklearn과 비교 · 같은 데이터에 MLP</td></tr>
+        <tr><td>W4</td><td>9/28–10/4</td><td>구현 ①에 SHAP 라이브러리 붙이기 · <b>Double Descent(2019)</b> 읽기 · TabPFN(2025) 발췌 · 혼공머신 6장(k-평균·PCA)</td></tr>
 
-        <tr class="grp"><td colspan="3">2부 · 신경망의 토대와 비전 <span>5주 · 논문 13편 + 구현 ②③</span></td></tr>
-        <tr><td>W6</td><td>10/12–10/18</td><td>역전파(1986) · LeNet-5(1998) · <b>Science 2006 오토인코더</b> 읽기 — 밑바닥 1 코드와 나란히 · 3B1B 선형대수 15편</td></tr>
-        <tr><td>W7</td><td>10/19–10/25</td><td>AlexNet(2012) · Dropout(2014) · <b>Double Descent(2019)</b> 읽기 — 편향-분산이 깨지는 지점</td></tr>
-        <tr><td>W8</td><td>10/26–11/1</td><td class="hi">Adam(2014) 정독 + 구현 ② Adam (NumPy) · BatchNorm(2015) 읽기</td></tr>
-        <tr><td>W9</td><td>11/2–11/8</td><td>VGG(2014) 읽기 · <b>ResNet(2015) 정독</b> · U-Net(2015) 읽기</td></tr>
-        <tr><td>W10</td><td>11/9–11/15</td><td class="hi">구현 ③ ResNet-18 · CIFAR-10 · 스킵 연결 뺀 VGG 스타일과 비교</td></tr>
+        <tr class="grp"><td colspan="3">2부 · 신경망 기초와 비전 <span>5주 · 밑바닥 1 복습 + 논문 4편 + 구현 ②③</span></td></tr>
+        <tr><td>W5</td><td>10/5–10/11</td><td>밑바닥 1의 5–6장 복습(역전파·옵티마이저·초기화·BatchNorm·Dropout) · 3B1B 선형대수 15편</td></tr>
+        <tr><td>W6</td><td>10/12–10/18</td><td class="hi">구현 ② Adam (NumPy) · 밑바닥 1의 6장 코드와 대조 · 미적분 6개 정리</td></tr>
+        <tr><td>W7</td><td>10/19–10/25</td><td>밑바닥 1의 7–8장(CNN · LeNet → AlexNet → VGG → ResNet 계보) · PyTorch 60분 블리츠</td></tr>
+        <tr><td>W8</td><td>10/26–11/1</td><td class="hi">구현 ③ ResNet-18 · CIFAR-10 · 스킵 연결 뺀 VGG 스타일과 비교</td></tr>
+        <tr><td>W9</td><td>11/2–11/8</td><td>ViT(2020) · ConvNeXt(2022) · DINOv2(2023) · <b>SAM(2023)</b>※ 읽기 — CNN과 트랜스포머의 결판</td></tr>
 
-        <tr class="grp"><td colspan="3">3부 · 시퀀스와 어텐션 <span>4주 · 논문 5편 + 구현 ④⑤</span></td></tr>
-        <tr><td>W11</td><td>11/16–11/22</td><td>LSTM(1997) 읽기 · word2vec 두 편(2013) 정독</td></tr>
-        <tr><td>W12</td><td>11/23–11/29</td><td class="hi">구현 ④ word2vec skip-gram + 네거티브 샘플링 (NumPy) · 결과를 t-SNE로</td></tr>
-        <tr><td>W13</td><td>11/30–12/6</td><td>Seq2Seq(2014) · Bahdanau(2014) 정독 · PyTorch 60분 블리츠</td></tr>
-        <tr><td>W14</td><td>12/7–12/13</td><td class="hi">구현 ⑤ Seq2Seq + 어텐션 (PyTorch) · 정렬 히트맵</td></tr>
+        <tr class="grp"><td colspan="3">3부 · 시퀀스와 어텐션 <span>4주 · 밑바닥 2 + 구현 ④⑤ · 논문 없음</span></td></tr>
+        <tr><td>W10</td><td>11/9–11/15</td><td>밑바닥 2의 2–4장(분산 표현 · word2vec · 네거티브 샘플링) 정독</td></tr>
+        <tr><td>W11</td><td>11/16–11/22</td><td class="hi">구현 ④ word2vec skip-gram + 네거티브 샘플링 (NumPy) · 결과를 t-SNE로</td></tr>
+        <tr><td>W12</td><td>11/23–11/29</td><td>밑바닥 2의 5–8장(RNN · LSTM · seq2seq · 어텐션) 정독 — 트랜스포머 직전 무엇이 막혀 있었나</td></tr>
+        <tr><td>W13</td><td>11/30–12/6</td><td class="hi">구현 ⑤ Seq2Seq + 어텐션 (PyTorch) · 정렬 히트맵</td></tr>
 
-        <tr class="grp"><td colspan="3">4부 · 트랜스포머 <span>5주 · 이 로드맵의 본체</span></td></tr>
-        <tr><td>W15</td><td>12/14–12/20</td><td class="hi">Attention Is All You Need(2017) 1회독 · Illustrated Transformer로 그림 먼저 · LayerNorm(2016)은 같이 본다</td></tr>
-        <tr><td>W16</td><td>12/21–12/27</td><td class="hi">2회독 — 논문 그림을 덮고 구조도를 직접 그린다. 차원을 전부 손으로 적는다</td></tr>
-        <tr><td>W17</td><td>12/28–1/3</td><td class="hi">구현 ⑥-a 멀티헤드 어텐션 + 포지셔널 인코딩 + 마스킹</td></tr>
-        <tr><td>W18</td><td>1/4–1/10</td><td class="hi">구현 ⑥-b 인코더-디코더 전체 조립 · 작은 번역 데이터로 학습</td></tr>
-        <tr><td>W19</td><td>1/11–1/17</td><td class="hi">정리 · GitHub 공개 · 논문 수식 ↔ 코드 줄 대조표 · BERT(2018) 읽기</td></tr>
+        <tr class="grp"><td colspan="3">4부 · 트랜스포머 <span>5주 · 논문 3편 + 구현 ⑥ · 이 로드맵의 본체</span></td></tr>
+        <tr><td>W14</td><td>12/7–12/13</td><td class="hi"><span class="pill p1">필수</span> Attention Is All You Need(2017) 1회독 · Illustrated Transformer로 그림 먼저 · LayerNorm은 같이 본다</td></tr>
+        <tr><td>W15</td><td>12/14–12/20</td><td class="hi">2회독 — 논문 그림을 덮고 구조도를 직접 그린다. 차원을 전부 손으로 적는다 · <b>RoPE(2021)</b> 읽기 — sin/cos 다음에 온 것</td></tr>
+        <tr><td>W16</td><td>12/21–12/27</td><td class="hi">구현 ⑥-a 멀티헤드 어텐션 + 포지셔널 인코딩 + 마스킹</td></tr>
+        <tr><td>W17</td><td>12/28–1/3</td><td class="hi">구현 ⑥-b 인코더-디코더 전체 조립 · 작은 번역 데이터로 학습</td></tr>
+        <tr><td>W18</td><td>1/4–1/10</td><td class="hi">정리 · GitHub 공개 · 논문 수식 ↔ 코드 줄 대조표 · <b>FlashAttention(2022)</b> 읽기 — 내가 짠 어텐션이 GPU에서 왜 느린가</td></tr>
 
-        <tr class="grp"><td colspan="3">5부 · 넓히기 <span>6주 · 논문 22편 + 구현 ⑦⑧ · <b>가장 빡빡한 구간</b> — 3순위는 여기서 유동</span></td></tr>
-        <tr><td>W20</td><td>1/18–1/24</td><td>ViT(2020) · ConvNeXt(2022) · CLIP(2021) · <b>SAM(2023)</b>※ 읽기 — CNN과 트랜스포머의 결판</td></tr>
-        <tr><td>W21</td><td>1/25–1/31</td><td>VAE(2013) 정독 · GAN(2014) · DDPM(2020) · <b>Latent Diffusion(2021)</b> · <b>DiT(2022)</b> 읽기 — U-Net과 VAE가 만나고, 백본이 트랜스포머로 넘어간다</td></tr>
-        <tr><td>W22</td><td>2/1–2/7</td><td class="hi">구현 ⑦ VAE · MNIST · 재파라미터화 트릭 · 잠재공간 2차원 시각화</td></tr>
-        <tr><td>W23</td><td>2/8–2/14</td><td><b>PPO(2017)</b> 정독 · DQN(2015) · GCN(2016) · SimCLR(2020) · AlphaFold 2(2021) 발췌 — 강화학습 · 그래프 · 자기지도 · 과학</td></tr>
-        <tr><td>W24</td><td>2/15–2/21</td><td class="hi">GPT-2(2019) · GPT-3(2020) 읽기 · Llama 3(2024) 발췌 + 구현 ⑧ 미니 GPT</td></tr>
-        <tr><td>W25</td><td>2/22–2/28</td><td>RAG(2020) · InstructGPT(2022) · <b>DeepSeek-R1(2025)</b> · CoT(2022) · ReAct(2022) 읽기 · 전체 복기 <span class="note" style="display:inline">— 3순위(MoE·SAM·DPO·Mamba 등)는 밀리면 입학 후로. R1은 "최근 본 논문" 질문의 답이니 버리지 않는다</span></td></tr>
+        <tr class="grp"><td colspan="3">5부 · 생성모델 <span>3주 · 논문 6편 + 구현 ⑦</span></td></tr>
+        <tr><td>W19</td><td>1/11–1/17</td><td class="hi"><span class="pill p1">필수</span> VAE(2013) 정독 · DDPM(2020) 읽기 · 확률통계 5개 정리</td></tr>
+        <tr><td>W20</td><td>1/18–1/24</td><td class="hi">구현 ⑦ VAE · MNIST · 재파라미터화 트릭 · 잠재공간 2차원 시각화</td></tr>
+        <tr><td>W21</td><td>1/25–1/31</td><td><span class="pill p1">필수</span> <b>Latent Diffusion(2021)</b> · DiT(2022) · SD3(2024) 발췌 · CLIP(2021) · AlphaFold 3(2024) 발췌 — VAE와 U-Net이 만나고, 백본이 트랜스포머로, 확산이 흐름으로 넘어간다</td></tr>
+
+        <tr class="grp"><td colspan="3">6부 · LLM · 추론 · 서빙 <span>4주 · 논문 17편 + 구현 ⑧ · <b>가장 빡빡한 구간</b> — 3순위는 여기서 유동</span></td></tr>
+        <tr><td>W22</td><td>2/1–2/7</td><td class="hi">구현 ⑧ 미니 GPT (Raschka 책) · <span class="pill p1">필수</span> GPT-3(2020) 읽기 · LLaVA(2023) — CLIP + LLM</td></tr>
+        <tr><td>W23</td><td>2/8–2/14</td><td>Chinchilla(2022) · LoRA(2021) 읽기 · Llama 3(2024) · <b>DeepSeek-V3(2024)</b> 발췌 · Mamba(2023)※ — 요즘 모델은 실제로 이렇게 만든다</td></tr>
+        <tr><td>W24</td><td>2/15–2/21</td><td class="hi"><span class="pill p1">필수</span> <b>InstructGPT(2022)</b> (PPO는 Spinning Up 문서로) · DPO(2023) · GRPO(2024) 발췌 · <span class="pill p1">필수</span> <b>DeepSeek-R1(2025)</b> · s1(2025)※ — 정렬에서 추론까지</td></tr>
+        <tr><td>W25</td><td>2/22–2/28</td><td><span class="pill p1">필수</span> <b>RAG(2020)</b> · CoT(2022) · ReAct(2022) · <b>vLLM(2023)</b> · Speculative Decoding(2022) · Lost in the Middle(2023) · Monosemanticity(2024) 발췌 · 전체 복기 <span class="note" style="display:inline">— 3순위는 밀리면 입학 후로. R1과 vLLM은 "최근 본 논문" 질문의 답이니 버리지 않는다</span></td></tr>
       </tbody>
     </table>
     </div>
@@ -422,46 +434,46 @@
     <div class="rule"></div>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>과목</th><th>목차 · 해당 논문</th><th>상태</th><th>시점</th></tr></thead>
+      <thead><tr><th>과목</th><th>목차 · 어디서 보나</th><th>상태</th><th>시점</th></tr></thead>
       <tbody>
         <tr class="grp"><td colspan="4">A. 수학</td></tr>
         <tr><td>A1 <b>선형대수</b></td><td>벡터·행렬, 선형변환, 행렬곱, <b>랭크·선형독립</b>, 역행렬, <b>고유값·고유벡터</b>, 대각화, <b>SVD</b>, 직교·정사영, 노름</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W5 · 6개만</td></tr>
-        <tr><td>A2 <b>미적분·최적화</b></td><td>편미분, <b>그래디언트</b>, <b>연쇄법칙</b>, 야코비안·헤시안, <b>경사하강법</b>, 학습률, <b>SGD·Momentum·Adam</b>, 볼록성</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W7–W8 · 구현 ②</td></tr>
-        <tr><td>A3 <b>확률·통계</b></td><td>확률변수, 분포, 기댓값·분산, <b>조건부확률·베이즈</b>, 공분산·상관, <b>MLE·MAP</b>, <b>KL divergence</b>, <b>편향-분산</b></td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W21 VAE와 같이</td></tr>
+        <tr><td>A2 <b>미적분·최적화</b></td><td>편미분, <b>그래디언트</b>, <b>연쇄법칙</b>, 야코비안·헤시안, <b>경사하강법</b>, 학습률, <b>SGD·Momentum·Adam</b>, 볼록성</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W5–W6 · 구현 ②</td></tr>
+        <tr><td>A3 <b>확률·통계</b></td><td>확률변수, 분포, 기댓값·분산, <b>조건부확률·베이즈</b>, 공분산·상관, <b>MLE·MAP</b>, <b>KL divergence</b>, <b>편향-분산</b></td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W19 VAE와 같이</td></tr>
 
         <tr class="grp"><td colspan="4">B. 프로그래밍 · 도구</td></tr>
         <tr><td>B1 파이썬 문법</td><td>—</td><td class="st"><span class="have">✓ 보유</span></td><td class="wh"><span class="wh-later">—</span></td></tr>
         <tr><td>B2 <b>데이터 스택</b></td><td>numpy(브로드캐스팅·벡터화), pandas, matplotlib</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> 구현 ①에서</td></tr>
-        <tr><td>B3 scikit-learn</td><td>파이프라인, 전처리, 교차검증, 그리드서치</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W2–W3</td></tr>
-        <tr><td>B4 <b>PyTorch</b></td><td>텐서, <b>autograd</b>, <code>nn.Module</code>, Dataset·DataLoader, 학습 루프</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W10 구현 ③에서</td></tr>
+        <tr><td>B3 scikit-learn</td><td>파이프라인, 전처리, 교차검증, 그리드서치 — 혼공머신 5장</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W2–W3</td></tr>
+        <tr><td>B4 <b>PyTorch</b></td><td>텐서, <b>autograd</b>, <code>nn.Module</code>, Dataset·DataLoader, 학습 루프</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W7–W8 구현 ③에서</td></tr>
         <tr><td>B5 자동미분 내부</td><td>계산그래프, Define-by-Run, 고차 미분 — PyTorch autograd 소스 읽기</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-later">[입학 후] 선택</span></td></tr>
 
-        <tr class="grp"><td colspan="4">C. 고전 머신러닝 — 논문으로 간다</td></tr>
-        <tr><td>C1 <b>관점</b></td><td><b>Two Cultures(2001)</b> — 설명하는 모델 vs 맞히는 모델</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금] ★</span> W1</td></tr>
-        <tr><td>C2 회귀·규제</td><td>선형회귀, 다항회귀, 릿지·<b>라쏘(1996)</b></td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W2</td></tr>
-        <tr><td>C3 분류</td><td>로지스틱 회귀, <b>SVM(1995)</b>, kNN, 나이브베이즈</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W2</td></tr>
-        <tr><td>C4 <b>트리·앙상블</b></td><td>결정트리, <b>랜덤포레스트(2001)</b>, 그래디언트 부스팅, <b>XGBoost(2016)</b></td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금] ★</span> 구현 ①</td></tr>
-        <tr><td>C5 비지도·차원축소</td><td>k-평균, <b>PCA</b>, <b>t-SNE(2008)</b>, 오토인코더(2006)</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W5</td></tr>
-        <tr><td>C6 평가·검증·해석</td><td>교차검증, 과적합·정규화, <b>precision·recall·F1·ROC-AUC</b>, 불균형 데이터, <b>SHAP(2017)</b>, <b>Double Descent(2019)</b></td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span></td></tr>
+        <tr class="grp"><td colspan="4">C. 고전 머신러닝 — 혼공머신으로 간다</td></tr>
+        <tr><td>C1 <b>관점</b></td><td><b>Bitter Lesson(2019)</b> — 연산이 이긴다 · <b>Grinsztajn(2022)</b> — 그런데 표 데이터에서는 트리가 이긴다</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금] ★</span> W1–W2</td></tr>
+        <tr><td>C2 회귀·규제</td><td>선형회귀, 다항회귀, 릿지·라쏘 — 혼공 3장</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W1</td></tr>
+        <tr><td>C3 분류</td><td>로지스틱 회귀, kNN, SGD 분류기 — 혼공 1·4장 · SVM은 대학원 수업에서</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W2</td></tr>
+        <tr><td>C4 <b>트리·앙상블</b></td><td>결정트리, 랜덤포레스트, 그래디언트 부스팅 — 혼공 5장 · XGBoost는 라이브러리로</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금] ★</span> 구현 ①</td></tr>
+        <tr><td>C5 비지도·차원축소</td><td>k-평균, <b>PCA</b> — 혼공 6장 · t-SNE는 sklearn 호출</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W4</td></tr>
+        <tr><td>C6 평가·검증·해석</td><td>교차검증, 과적합·정규화, <b>precision·recall·F1·ROC-AUC</b>, 불균형 데이터 — 혼공 · <b>SHAP</b>(라이브러리) · <b>Double Descent(2019)</b> · TabPFN(2025)</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W4</td></tr>
 
-        <tr class="grp"><td colspan="4">D. 딥러닝 — 전부 논문으로 간다</td></tr>
-        <tr><td>D1 신경망 기초</td><td>퍼셉트론, 활성화함수, 순전파, <b>역전파(1986)</b>, 부활기 <b>Science(2006)</b></td><td class="st"><span class="have">✓ 밑바닥 1</span></td><td class="wh"><span class="wh-now">[지금]</span> W6 논문으로 확인</td></tr>
-        <tr><td>D2 학습 기술</td><td>초기화(2010), 드롭아웃(2014), <b>Adam(2014)</b>, 배치정규화(2015), 층정규화(2016)</td><td class="st"><span class="doing">◐ 부분</span></td><td class="wh"><span class="wh-now">[지금]</span> W7–W8 · 구현 ②</td></tr>
-        <tr><td>D3 <b>CNN·비전</b></td><td>LeNet(1998) · AlexNet(2012) · <b>VGG(2014)</b> · GoogLeNet(2014) · <b>U-Net(2015)</b> · <b>ResNet(2015)</b> · ViT(2020) · ConvNeXt(2022)</td><td class="st"><span class="doing">◐ 밑바닥 1</span></td><td class="wh"><span class="wh-now">[지금]</span> 2부 · 구현 ③</td></tr>
-        <tr><td>D4 RNN 계열</td><td><b>LSTM(1997)</b> · Seq2Seq(2014)</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> 구현 ⑤</td></tr>
-        <tr><td>D5 <b>어텐션·트랜스포머</b></td><td>Bahdanau(2014) → Luong(2015) → <b>Vaswani(2017)</b> → BERT(2018) → ViT(2020)</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금] ★본체</span> 구현 ⑤⑥</td></tr>
-        <tr><td>D6 <b>생성모델</b></td><td><b>VAE(2013)</b> · GAN(2014) · DDPM(2020) · <b>Latent Diffusion(2021)</b> · DiT(2022)</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> 구현 ⑦</td></tr>
-        <tr><td>D7 강화학습</td><td>DQN(2015) · <b>PPO(2017)</b> — RLHF(2022)에서 다시 만난다</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W23 읽기만</td></tr>
-        <tr><td>D8 그래프·자기지도·과학</td><td><b>GCN(2016)</b> · SimCLR(2020) · CLIP(2021) · SAM(2023) · AlphaFold 2(2021)</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W20 · W23</td></tr>
+        <tr class="grp"><td colspan="4">D. 딥러닝 — 토대는 밑바닥 1·2로, 2020년 이후는 논문으로</td></tr>
+        <tr><td>D1 신경망 기초</td><td>퍼셉트론, 활성화함수, 순전파, <b>역전파</b> — 밑바닥 1의 3–5장</td><td class="st"><span class="have">✓ 밑바닥 1</span></td><td class="wh"><span class="wh-now">[지금]</span> W5 복습</td></tr>
+        <tr><td>D2 학습 기술</td><td>초기화, 드롭아웃, <b>Adam</b>, 배치정규화 — 밑바닥 1의 6장 · 층정규화는 Vaswani에서</td><td class="st"><span class="doing">◐ 부분</span></td><td class="wh"><span class="wh-now">[지금]</span> W5–W6 · 구현 ②</td></tr>
+        <tr><td>D3 <b>CNN·비전</b></td><td>LeNet(1998) → AlexNet(2012) → VGG(2014) → <b>ResNet(2015)</b>은 밑바닥 1의 7–8장 · <b>ViT(2020)</b> · ConvNeXt(2022) · DINOv2(2023) · SAM(2023)은 논문</td><td class="st"><span class="doing">◐ 밑바닥 1</span></td><td class="wh"><span class="wh-now">[지금]</span> 2부 · 구현 ③</td></tr>
+        <tr><td>D4 RNN·seq2seq</td><td>RNN · <b>LSTM(1997)</b> · Seq2Seq(2014) · Bahdanau 어텐션(2014) — 밑바닥 2의 5–8장</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> 구현 ④⑤</td></tr>
+        <tr><td>D5 <b>트랜스포머</b></td><td><b>Vaswani(2017)</b> → RoPE(2021) → FlashAttention(2022) → Mamba(2023) · 인코더만(BERT) · 디코더만(GPT) 구분은 개념으로</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금] ★본체</span> 구현 ⑥⑧</td></tr>
+        <tr><td>D6 <b>생성모델</b></td><td><b>VAE(2013)</b> · DDPM(2020) · <b>Latent Diffusion(2021)</b> · DiT(2022) · SD3(2024) · GAN(2014)은 개념 한 줄</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> 구현 ⑦</td></tr>
+        <tr><td>D7 강화학습</td><td>PPO는 <b>OpenAI Spinning Up</b> 문서 · GRPO(2024) — RLHF(2022)와 R1(2025)에서 만난다</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W24 읽기만</td></tr>
+        <tr><td>D8 멀티모달·과학</td><td><b>CLIP(2021)</b> · LLaVA(2023) · AlphaFold 3(2024)</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W21–W22</td></tr>
 
-        <tr class="grp"><td colspan="4">E. LLM — 지형만 본다</td></tr>
-        <tr><td>E1 LLM · 구조</td><td>GPT-2(2019) · GPT-3(2020) · <b>Llama 3(2024)</b> · MoE(2021) · Mamba(2023) · (선택) Scaling Laws</td><td class="st"><span class="doing">◐ 부분</span></td><td class="wh"><span class="wh-now">[지금]</span> 구현 ⑧</td></tr>
-        <tr><td>E2 RAG · 에이전트</td><td>RAG(2020) · CoT(2022) · ReAct(2023)</td><td class="st"><span class="doing">◐ 조사함</span></td><td class="wh"><span class="wh-now">[지금]</span> 논문으로 근거 보강</td></tr>
-        <tr><td>E3 정렬·효율</td><td>InstructGPT·RLHF(2022) · <b>DeepSeek-R1(2025)</b> · DPO(2023) · LoRA(2021) · (선택) FlashAttention</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W25 읽기만</td></tr>
-        <tr><td>E4 MLOps·서빙</td><td>모델 서빙, 배치·스트리밍, 모니터링</td><td class="st"><span class="have">✓ 실무 경험</span></td><td class="wh"><span class="wh-now">[지금]</span> 스토리로</td></tr>
+        <tr class="grp"><td colspan="4">E. LLM — 직무와 가장 가까운 구간</td></tr>
+        <tr><td>E1 구조·스케일</td><td>GPT-2는 Raschka로 구현 ⑧ · GPT-3(2020) · <b>Chinchilla(2022)</b> · Llama 3(2024) · <b>DeepSeek-V3(2024)</b> · LoRA(2021)</td><td class="st"><span class="doing">◐ 부분</span></td><td class="wh"><span class="wh-now">[지금]</span> W22–W23</td></tr>
+        <tr><td>E2 RAG · 에이전트 · 서빙</td><td>RAG(2020) · CoT(2022) · ReAct(2022) · Lost in the Middle(2023) · <b>vLLM(2023)</b> · Speculative Decoding(2022)</td><td class="st"><span class="doing">◐ 조사함</span></td><td class="wh"><span class="wh-now">[지금]</span> W25 논문으로 근거 보강</td></tr>
+        <tr><td>E3 정렬·추론·해석</td><td>InstructGPT·RLHF(2022) · DPO(2023) · GRPO(2024) · <b>DeepSeek-R1(2025)</b> · s1(2025) · Monosemanticity(2024)</td><td class="st"><span class="todo">○ 필요</span></td><td class="wh"><span class="wh-now">[지금]</span> W24–W25 읽기만</td></tr>
+        <tr><td>E4 MLOps·서빙</td><td>모델 서빙, 배치·스트리밍, 모니터링</td><td class="st"><span class="have">✓ 실무 경험</span></td><td class="wh"><span class="wh-now">[지금]</span> 스토리로 · vLLM 논문에 붙인다</td></tr>
 
         <tr class="grp"><td colspan="4">F. CS 기초</td></tr>
-        <tr><td>F1 CS 전반</td><td>자료구조, 알고리즘, DB, 네트워크, OS, 분산시스템 — XGBoost·FlashAttention을 읽을 때 강점이 된다</td><td class="st"><span class="have">✓ 8년차</span></td><td class="wh"><span class="wh-later">준비 대상 아님</span></td></tr>
+        <tr><td>F1 CS 전반</td><td>자료구조, 알고리즘, DB, 네트워크, OS, 분산시스템 — vLLM · FlashAttention · DeepSeek-V3를 읽을 때 강점이 된다</td><td class="st"><span class="have">✓ 8년차</span></td><td class="wh"><span class="wh-later">준비 대상 아님</span></td></tr>
       </tbody>
     </table>
     </div>
@@ -476,19 +488,19 @@
       <thead><tr><th>항목</th><th>시간</th><th>어디까지</th><th>자료</th></tr></thead>
       <tbody>
         <tr><td class="hi">트랜스포머 정독 + 구현 ⑥</td><td>12h</td><td>논문만 보고 처음부터 짠다</td><td>Vaswani 2017 · Annotated Transformer</td></tr>
-        <tr><td class="hi">나머지 구현 7개 (①②③④⑤⑦⑧)</td><td>24h</td><td>갈래마다 하나씩 · 각각 노트북 1개 + README</td><td>논문 · NumPy · PyTorch</td></tr>
-        <tr><td>핵심 논문 정독 12편</td><td>18h</td><td>그림 없이 구조를 다시 그린다 — 구현 대상 10편의 정독은 구현 시간에 포함</td><td>arXiv · 저널 원문</td></tr>
-        <tr><td>배경 논문 속독 31편</td><td>19h</td><td>초록·그림·결론 + 세 줄 요약</td><td>arXiv</td></tr>
-        <tr><td>고전 ML 선행 (혼공 1–6장)</td><td>4h</td><td>시대 1 논문 읽기 전 개념 잡기</td><td>혼공머신 · W1–W5</td></tr>
+        <tr><td class="hi">나머지 구현 7개 (①②③④⑤⑦⑧)</td><td>24h</td><td>갈래마다 하나씩 · 각각 노트북 1개 + README</td><td>교과서 · VAE 논문 · NumPy · PyTorch</td></tr>
+        <tr><td>교과서 3권 (구현 ①~⑤⑧의 원본)</td><td>12h</td><td>혼공 1–6장 · 밑바닥 1의 5–8장 복습 · 밑바닥 2의 2–8장 · Raschka는 구현 ⑧과 같이</td><td>혼공머신 · 밑바닥 1·2 · Raschka</td></tr>
+        <tr><td>핵심 논문 정독 8편 (1순위)</td><td>12h</td><td>그림 없이 구조를 다시 그린다 — Vaswani · VAE의 정독은 구현 시간에 포함</td><td>arXiv · 저널 원문</td></tr>
+        <tr><td>배경 논문 속독 28편 (2·3순위)</td><td>17h</td><td>초록·그림·결론 + 세 줄 요약 · 발췌는 해당 장만</td><td>arXiv</td></tr>
         <tr><td>선형대수</td><td>4h</td><td>개념 6개 두 문장씩</td><td>3B1B 15편 · W5</td></tr>
         <tr><td>확률·통계</td><td>2h</td><td>베이즈·MLE·KL·편향분산</td><td>VAE 논문과 같이</td></tr>
         <tr><td>면접 답변 정리</td><td>2h</td><td>논문별 세 줄 → 답변 한 문단</td><td>본인 구현</td></tr>
-        <tr><td><b>합</b></td><td><b>85h</b></td><td>2026.09.07 – 2027.02.28 · 3순위 13편을 미루면 <b>77h</b>까지 내려간다</td><td></td></tr>
+        <tr><td><b>합</b></td><td><b>85h</b></td><td>2026.09.07 – 2027.02.28 · 3순위 11편을 미루면 <b>78h</b>까지 내려간다</td><td></td></tr>
       </tbody>
     </table>
     </div>
     <div class="callout">
-      <p><b>못 지킬 때는 순위가 곧 버리는 순서다 —</b> ① 3순위 13편을 통째로 입학 후로(선택·※ 전부 여기 있다) → ② 2순위의 발췌(Llama 3 등) → ③ 구현 ⑧ 미니 GPT(구현 ⑥과 상당 부분 겹친다). <b>1순위 17편과 구현 ⑥·①은 마지막까지 남긴다.</b> Two Cultures · Double Descent · Latent Diffusion은 갈래를 잇는 다리라 같이 지킨다.</p>
+      <p><b>못 지킬 때는 순위가 곧 버리는 순서다 —</b> ① 3순위 11편을 통째로 입학 후로(발췌·※ 전부 여기 있다) → ② 2순위의 발췌(Llama 3 · DeepSeek-V3 · GRPO) → ③ 구현 ⑧ 미니 GPT(구현 ⑥과 상당 부분 겹친다). <b>1순위 8편과 구현 ⑥·①은 마지막까지 남긴다.</b> Grinsztajn · Double Descent · Latent Diffusion은 갈래를 잇는 다리라 같이 지킨다. 교과서 3권은 구현의 원본이라 버리는 대상이 아니다.</p>
     </div>
   </section>
 
@@ -500,12 +512,12 @@
     <table>
       <thead><tr><th>개념</th><th>직관</th><th>어느 논문에서 만나나</th></tr></thead>
       <tbody>
-        <tr><td class="hi">내적</td><td>두 벡터가 얼마나 같은 방향인가</td><td><b>Vaswani 2017의 QKᵀ</b>. word2vec의 유사도. SVM의 커널. CLIP의 이미지-텍스트 정렬</td></tr>
-        <tr><td class="hi">행렬곱</td><td>행렬은 숫자 표가 아니라 공간을 바꾸는 함수. 곱 = 변환의 합성</td><td>층을 쌓는다 = 변환을 합성한다. 멀티헤드가 왜 큰 행렬 하나로 합쳐지는가</td></tr>
-        <tr><td class="hi">랭크·선형독립</td><td>실제로 몇 차원어치 정보가 들어있나</td><td><b>LoRA 2021</b> — 가중치 갱신이 저랭크라는 가정 하나로 파인튜닝 비용이 1%가 된다</td></tr>
-        <tr><td class="hi">고유값·고유벡터</td><td>변환해도 방향이 안 바뀌는 벡터. 크기만 λ배</td><td>공분산행렬의 고유벡터 = 분산이 가장 큰 방향 → PCA. <b>GCN 2017의 그래프 라플라시안</b></td></tr>
+        <tr><td class="hi">내적</td><td>두 벡터가 얼마나 같은 방향인가</td><td><b>Vaswani 2017의 QKᵀ</b>. word2vec의 유사도. CLIP의 이미지-텍스트 정렬. RAG의 검색 점수</td></tr>
+        <tr><td class="hi">행렬곱</td><td>행렬은 숫자 표가 아니라 공간을 바꾸는 함수. 곱 = 변환의 합성</td><td>층을 쌓는다 = 변환을 합성한다. 멀티헤드가 왜 큰 행렬 하나로 합쳐지는가. FlashAttention은 이 곱을 어떤 순서로 쪼개느냐의 문제</td></tr>
+        <tr><td class="hi">랭크·선형독립</td><td>실제로 몇 차원어치 정보가 들어있나</td><td><b>LoRA 2021</b> — 가중치 갱신이 저랭크라는 가정 하나로 파인튜닝 비용이 1%가 된다. DeepSeek-V3의 MLA도 KV를 저랭크로 누른 것</td></tr>
+        <tr><td class="hi">고유값·고유벡터</td><td>변환해도 방향이 안 바뀌는 벡터. 크기만 λ배</td><td>공분산행렬의 고유벡터 = 분산이 가장 큰 방향 → PCA(혼공 6장). <b>RoPE 2021의 회전행렬</b>은 고유값이 복소수인 변환 — 크기는 그대로, 각도만 위치만큼</td></tr>
         <tr><td class="hi">SVD</td><td>어떤 행렬이든 회전 → 늘이기 → 회전으로 분해</td><td>저랭크 근사 = 압축. LoRA의 A·B 두 행렬이 여기서 나온 발상</td></tr>
-        <tr><td class="hi">그래디언트·야코비안</td><td>다변수에서의 기울기 = 가장 가파른 방향</td><td>역전파(1986)의 연쇄법칙 = 야코비안 행렬의 곱</td></tr>
+        <tr><td class="hi">그래디언트·야코비안</td><td>다변수에서의 기울기 = 가장 가파른 방향</td><td>역전파(밑바닥 1의 5장)의 연쇄법칙 = 야코비안 행렬의 곱</td></tr>
       </tbody>
     </table>
     </div>
@@ -514,44 +526,44 @@
       <li><input type="checkbox" id="l2"><label><span class="lead">개념 6개를 각각 <b>두 문장</b>으로 작성</span><span class="pass">노트 없이 여섯 개를 연속으로 말할 수 있다</span></label></li>
       <li><input type="checkbox" id="l3"><label><span class="lead">"내적이 뭐냐"에 <b>구현 ⑥ 경험으로 답하는 연습</b> — QKᵀ가 내적이고 그게 유사도다</span><span class="pass">수학 질문 하나를 본인 구현으로 되받는다</span></label></li>
       <li><input type="checkbox" id="l4"><label><span class="lead">"랭크가 뭐냐"에 <b>LoRA로 답하는 연습</b> — 저랭크 가정이 왜 돈이 되는가</span><span class="pass">개념 → 논문 → 실무 비용을 한 줄로 잇는다</span></label></li>
-      <li><input type="checkbox" id="l5"><label><span class="lead">손으로 2×2 계산 한 번씩 — 고유값, 행렬곱, 내적</span></label></li>
+      <li><input type="checkbox" id="l5"><label><span class="lead">손으로 2×2 계산 한 번씩 — 고유값, 행렬곱, 내적, <b>RoPE의 2차원 회전</b></span></label></li>
     </ul>
   </section>
 
   <!-- 미적분·최적화 -->
   <section class="blk" id="calc">
-    <h2>미적분·최적화 <small>구현 ②(Adam)와 같이 · W7–W8</small></h2>
+    <h2>미적분·최적화 <small>구현 ②(Adam)와 같이 · W5–W6</small></h2>
     <div class="rule"></div>
     <div class="table-scroll">
     <table>
       <thead><tr><th>개념</th><th>직관</th><th>어디에</th></tr></thead>
       <tbody>
-        <tr><td class="hi">연쇄법칙</td><td>합성함수의 미분 = 미분의 곱</td><td>역전파(1986) 그 자체. 층을 거슬러 올라가며 곱해 나간다</td></tr>
+        <tr><td class="hi">연쇄법칙</td><td>합성함수의 미분 = 미분의 곱</td><td>역전파 그 자체 — 밑바닥 1의 5장에서 이미 짠 것. 층을 거슬러 올라가며 곱해 나간다</td></tr>
         <tr><td class="hi">편미분·그래디언트</td><td>변수 하나씩 본 기울기를 모은 벡터</td><td>파라미터 수만큼의 그래디언트를 한 번에 구한다</td></tr>
-        <tr><td class="hi">경사하강법</td><td>기울기 <b>반대</b> 방향으로 조금씩 내려간다</td><td>모든 학습의 기본. <b>Gradient Boosting(2001)은 이걸 함수 공간에서 한다</b></td></tr>
-        <tr><td class="hi">학습률</td><td>한 걸음의 크기</td><td>크면 발산·진동, 작으면 안 움직인다. 트랜스포머 논문의 warmup 스케줄</td></tr>
-        <tr><td class="hi">SGD · Momentum · Adam</td><td>전체 대신 배치 → 관성 추가 → 변수별 학습률 적응</td><td>Adam(2014) 알고리즘 1. 구현 ②에서 직접 짠다</td></tr>
-        <tr><td class="hi">볼록 vs 비볼록</td><td>골짜기가 하나냐 여러 개냐</td><td>SVM은 볼록(전역해 보장), 딥러닝은 비볼록. 지역최솟값·안장점이 여기서 나온다</td></tr>
+        <tr><td class="hi">경사하강법</td><td>기울기 <b>반대</b> 방향으로 조금씩 내려간다</td><td>모든 학습의 기본. <b>그래디언트 부스팅(혼공 5장)은 이걸 함수 공간에서 한다</b></td></tr>
+        <tr><td class="hi">학습률</td><td>한 걸음의 크기</td><td>크면 발산·진동, 작으면 안 움직인다. 트랜스포머 논문의 warmup 스케줄 · Chinchilla의 코사인 스케줄</td></tr>
+        <tr><td class="hi">SGD · Momentum · Adam</td><td>전체 대신 배치 → 관성 추가 → 변수별 학습률 적응</td><td>밑바닥 1의 6장. 구현 ②에서 직접 짠다</td></tr>
+        <tr><td class="hi">볼록 vs 비볼록</td><td>골짜기가 하나냐 여러 개냐</td><td>로지스틱 회귀는 볼록(전역해 보장), 딥러닝은 비볼록. 지역최솟값·안장점이 여기서 나온다 — Double Descent가 그 위에 얹히는 이야기</td></tr>
       </tbody>
     </table>
     </div>
     <ul class="checklist" data-group="calc">
       <li><input type="checkbox" id="g1"><label><span class="lead">여섯 개를 <b>한 문장씩</b> 정리</span><span class="pass">"역전파 설명해보세요"에 연쇄법칙으로 시작해서 끝까지 간다</span></label></li>
-      <li><input type="checkbox" id="g2"><label><span class="lead"><b>밑바닥 1에서 구현한 역전파 코드를 1986 논문과 나란히 놓기</b> — 이론이 아니라 이미 짜본 것</span></label></li>
+      <li><input type="checkbox" id="g2"><label><span class="lead"><b>밑바닥 1에서 구현한 역전파 코드의 그래디언트를 PyTorch autograd 결과와 맞춰보기</b> — 이론이 아니라 이미 짜본 것</span></label></li>
       <li><input type="checkbox" id="g3"><label><span class="lead">SGD · Momentum · RMSProp · Adam <b>한 줄씩 차이</b> + 편향 보정의 이유</span></label></li>
     </ul>
   </section>
 
   <!-- 확률통계 -->
   <section class="blk" id="stat">
-    <h2>확률·통계 <small>5 · 시대 1과 VAE에서 계속 나온다</small></h2>
+    <h2>확률·통계 <small>5 · 갈래 1과 VAE에서 계속 나온다</small></h2>
     <div class="rule"></div>
     <ul class="checklist" data-group="stat">
       <li><input type="checkbox" id="s1"><label><span class="lead"><b>편향-분산 트레이드오프</b></span><span class="pass">랜덤포레스트(분산을 줄인다)와 부스팅(편향을 줄인다)의 차이를 구현 ①의 결과로 설명하고, <b>Double Descent(2019)로 그 상식이 깨지는 지점까지</b> 간다</span></label></li>
-      <li><input type="checkbox" id="s2"><label><span class="lead"><b>MLE (최대우도추정)</b></span><span class="pass">cross-entropy가 MLE에서 나온다는 걸 말할 수 있다 — 언어모델 손실이 그것</span></label></li>
+      <li><input type="checkbox" id="s2"><label><span class="lead"><b>MLE (최대우도추정)</b></span><span class="pass">cross-entropy가 MLE에서 나온다는 걸 말할 수 있다 — 언어모델 손실이 그것. DPO의 손실도 결국 이것</span></label></li>
       <li><input type="checkbox" id="s3"><label><span class="lead"><b>조건부확률 · 베이즈 정리</b></span><span class="pass">사전확률 → 관측 → 사후확률의 흐름을 예로 설명. VAE의 인코더가 근사하는 게 사후분포</span></label></li>
       <li><input type="checkbox" id="s4"><label><span class="lead"><b>공분산 · 상관</b></span><span class="pass">공분산행렬이 PCA로 이어지는 지점까지</span></label></li>
-      <li><input type="checkbox" id="s5"><label><span class="lead"><b>KL divergence</b></span><span class="pass">VAE의 손실 항, t-SNE의 목적함수, RLHF의 페널티가 전부 같은 물건임을 안다</span></label></li>
+      <li><input type="checkbox" id="s5"><label><span class="lead"><b>KL divergence</b></span><span class="pass">VAE의 손실 항, DDPM의 유도, RLHF와 GRPO의 페널티가 전부 같은 물건임을 안다</span></label></li>
     </ul>
   </section>
 
@@ -560,43 +572,49 @@
     <h2>말로 만들어 두는 것 <small>논문 세 줄 요약을 면접 답변으로</small></h2>
     <div class="rule"></div>
     <ul class="checklist" data-group="concept">
-      <li><input type="checkbox" id="m1"><label><span class="lead"><b>"머신러닝 전반을 한 번 짚어보세요"</b> — 1995 통계학습 → 2012 딥러닝 → 2017 트랜스포머 → 2020 대규모 세 번의 전환</span><span class="note">연도와 학회를 붙여 말하면 논문을 읽었다는 게 바로 드러난다</span></label></li>
-      <li><input type="checkbox" id="m2"><label><span class="lead"><b>"딥러닝만 쓰면 되지 않나"에 반박</b> — Two Cultures(2001) + XGBoost(2016) + 구현 ①의 결과로</span><span class="pass">표 데이터에서는 아직도 트리 앙상블이 이긴다는 걸 숫자로 말한다</span></label></li>
-      <li><input type="checkbox" id="m3"><label><span class="lead"><b>트랜스포머 한 문단</b> — 구현 ⑥ 경험으로. 셀프어텐션 · 마스킹 · √d<sub>k</sub></span><span class="pass">"직접 짜봤습니다"에서 끝나지 않고 막혔던 지점까지 말한다</span></label></li>
+      <li><input type="checkbox" id="m1"><label><span class="lead"><b>"머신러닝 전반을 한 번 짚어보세요"</b> — 1995 통계학습 → 2012 딥러닝 → 2017 트랜스포머 → 2020 대규모 → 2025 추론, 네 번의 전환</span><span class="note">연도와 학회를 붙여 말하면 논문을 읽었다는 게 바로 드러난다. 고전은 교과서로 봤어도 연도는 안다</span></label></li>
+      <li><input type="checkbox" id="m2"><label><span class="lead"><b>"딥러닝만 쓰면 되지 않나"에 반박</b> — Grinsztajn(2022) + 구현 ①의 결과로, 그리고 TabPFN(2025)으로 "그런데 바뀌고 있다"까지</span><span class="pass">표 데이터에서는 아직도 트리 앙상블이 이긴다는 걸 내 숫자로 말한다</span></label></li>
+      <li><input type="checkbox" id="m3"><label><span class="lead"><b>트랜스포머 한 문단</b> — 구현 ⑥ 경험으로. 셀프어텐션 · 마스킹 · √d<sub>k</sub> · 그리고 RoPE로 무엇이 바뀌었나</span><span class="pass">"직접 짜봤습니다"에서 끝나지 않고 막혔던 지점까지 말한다</span></label></li>
       <li><input type="checkbox" id="m4"><label><span class="lead"><b>어텐션이 무엇을 풀었나</b> — LSTM → Seq2Seq 병목 → Bahdanau → Vaswani</span><span class="pass">구현 ⑤의 학습 곡선 차이를 근거로</span></label></li>
-      <li><input type="checkbox" id="m5"><label><span class="lead"><b>CNN의 계보 한 문단</b> — LeNet → AlexNet → VGG → ResNet → ViT → ConvNeXt → SAM</span><span class="pass">"CNN은 이제 안 쓰나요"에 ConvNeXt로 답한다</span></label></li>
-      <li><input type="checkbox" id="m6"><label><span class="lead"><b>생성모델 세 갈래</b> — VAE(잠재변수) · GAN(적대) · Diffusion(노이즈 제거)</span><span class="pass">셋의 학습 목표가 어떻게 다른지 한 줄씩. <b>Latent Diffusion이 왜 셋을 합친 물건인지</b>까지</span></label></li>
-      <li><input type="checkbox" id="m10"><label><span class="lead"><b>"모델이 왜 그렇게 판단했나"</b> — SHAP(2017)을 구현 ①에 붙여본 경험으로</span><span class="pass">트리의 feature importance와 SHAP 값이 왜 다를 수 있는지 말한다</span><span class="note">삼성전자 실무에서도, 대학원 XAI 과목에서도 계속 나오는 질문</span></label></li>
-      <li><input type="checkbox" id="m7"><label><span class="lead"><b>과적합과 정규화</b> — 배깅(1996) · 라쏘(1996) · Dropout(2014) · BatchNorm(2015)</span></label></li>
-      <li><input type="checkbox" id="m8"><label><span class="lead"><b>LLM·RAG·에이전트 한 문단</b> — GPT-3 · RAG(2020) · ReAct(2023) 근거로</span><span class="note">본인 직무와 가장 가까운 답. 여기서 차별화된다</span></label></li>
-      <li><input type="checkbox" id="m9"><label><span class="lead"><b>"왜 대학원인가"</b> — 논문 53편을 읽고 8개를 구현한 뒤에도 남은 질문 하나</span><span class="note">자기소개서의 마지막 문단. 마지막 주에 쓴다</span></label></li>
+      <li><input type="checkbox" id="m5"><label><span class="lead"><b>CNN의 계보 한 문단</b> — LeNet → AlexNet → VGG → ResNet(교과서) → ViT → ConvNeXt → DINOv2 · SAM(논문)</span><span class="pass">"CNN은 이제 안 쓰나요"에 ConvNeXt로 답한다. 구현 ③의 두 곡선이 근거</span></label></li>
+      <li><input type="checkbox" id="m6"><label><span class="lead"><b>생성모델 세 갈래</b> — VAE(잠재변수) · GAN(적대) · Diffusion(노이즈 제거) → Flow(직선)</span><span class="pass">셋의 학습 목표가 어떻게 다른지 한 줄씩. <b>Latent Diffusion이 왜 셋을 합친 물건인지</b>, SD3가 왜 확산을 흐름으로 바꿨는지까지</span></label></li>
+      <li><input type="checkbox" id="m10"><label><span class="lead"><b>"모델이 왜 그렇게 판단했나"</b> — 구현 ①에 SHAP를 붙여본 경험으로, LLM은 Monosemanticity(2024)로</span><span class="pass">트리의 feature importance와 SHAP 값이 왜 다를 수 있는지 말한다</span><span class="note">삼성전자 실무에서도, 대학원 XAI 과목에서도 계속 나오는 질문</span></label></li>
+      <li><input type="checkbox" id="m7"><label><span class="lead"><b>과적합과 정규화</b> — 배깅 · 라쏘 · Dropout · BatchNorm(전부 교과서) → Double Descent(2019)로 "큰 모델은 다르다"까지</span></label></li>
+      <li><input type="checkbox" id="m8"><label><span class="lead"><b>LLM·RAG·에이전트·서빙 한 문단</b> — GPT-3 · RAG(2020) · ReAct(2022) · vLLM(2023) 근거로</span><span class="note">본인 직무와 가장 가까운 답. 서빙 논문을 실무 스토리에 붙이면 여기서 차별화된다</span></label></li>
+      <li><input type="checkbox" id="m11"><label><span class="lead"><b>"최근에 본 논문 하나"</b> — DeepSeek-R1(2025)을 세 줄로. GRPO가 PPO에서 무엇을 뺐는지, s1이 그걸 얼마나 작게 재현했는지</span><span class="pass">2025년 논문을 학회명(Nature)과 함께 말한다</span></label></li>
+      <li><input type="checkbox" id="m9"><label><span class="lead"><b>"왜 대학원인가"</b> — 8개를 짜고 논문 36편을 읽은 뒤에도 남은 질문 하나</span><span class="note">자기소개서의 마지막 문단. 마지막 주에 쓴다</span></label></li>
     </ul>
   </section>
 
   <!-- 자료 -->
   <section class="blk" id="res">
-    <h2>자료 <small>전부 무료</small></h2>
+    <h2>자료 <small>교과서 3권 빼고 전부 무료</small></h2>
     <div class="rule"></div>
     <div class="table-scroll">
     <table>
       <thead><tr><th>자료</th><th>어디에</th><th>쓰는 곳</th></tr></thead>
       <tbody>
+        <tr class="grp"><td colspan="3">교과서 3권 — 구현 ①~⑤⑧의 원본</td></tr>
+        <tr><td><a href="https://www.youtube.com/playlist?list=PLVsNizTWUw7E2RxZ4aspcR9vNamXccmFE">혼자 공부하는 머신러닝+딥러닝</a></td><td>박해선 · 유튜브 강의 무료</td><td>1–6장 · W1–W4 · 고전 ML 전부 여기서. 구현 ①의 원본</td></tr>
+        <tr><td><a href="https://github.com/WegraLee/deep-learning-from-scratch">밑바닥부터 시작하는 딥러닝 1</a> · <a href="https://github.com/WegraLee/deep-learning-from-scratch-2">2</a></td><td>사이토 고키 · 코드는 GitHub</td><td>1권 5–8장(역전파·옵티마이저·CNN·ResNet) · 2권 2–8장(word2vec·RNN·seq2seq·어텐션). 구현 ②③④⑤의 원본</td></tr>
+        <tr><td><a href="https://github.com/rasbt/LLMs-from-scratch">Build a Large Language Model (From Scratch)</a></td><td>Sebastian Raschka · 한국어판 있음 · 코드는 GitHub</td><td>GPT-2를 처음부터. 구현 ⑧의 원본 — 논문 대신 이 책</td></tr>
         <tr class="grp"><td colspan="3">논문 읽기</td></tr>
         <tr><td><a href="https://arxiv.org/">arXiv</a> · <a href="https://ar5iv.labs.arxiv.org/">ar5iv</a></td><td>—</td><td>원문. ar5iv는 같은 논문을 HTML로 — 폰에서 읽기 좋다</td></tr>
-        <tr><td><a href="https://www.semanticscholar.org/">Semantic Scholar</a></td><td>AI2</td><td>인용 관계로 논문 사이를 옮겨다닐 때. 시대 1 저널 논문 찾을 때도</td></tr>
+        <tr><td><a href="https://www.semanticscholar.org/">Semantic Scholar</a></td><td>AI2</td><td>인용 관계로 논문 사이를 옮겨다닐 때. ※ 논문이 지금도 인용되는지 확인할 때도</td></tr>
+        <tr><td><a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">The Bitter Lesson</a></td><td>Rich Sutton · 2019</td><td>W1 · 2쪽 · 논문 목록에는 안 세지만 관점은 여기서 잡는다</td></tr>
         <tr><td><a href="https://nlp.seas.harvard.edu/annotated-transformer/">The Annotated Transformer</a></td><td>Harvard NLP</td><td>2017 논문을 줄 단위로 코드와 붙여놓은 것. <b>막힌 뒤에</b> 연다</td></tr>
-        <tr><td><a href="https://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer</a></td><td>Jay Alammar</td><td>W15 1회독 전에 그림으로 감 잡기</td></tr>
-        <tr><td><a href="https://nn.labml.ai/">labml.ai annotated papers</a></td><td>labml</td><td>논문 60여 편의 주석 구현. 구현 ③⑦⑧ 대조용</td></tr>
-        <tr class="grp"><td colspan="3">고전 ML</td></tr>
-        <tr><td><a href="https://hastie.su.domains/ElemStatLearn/">The Elements of Statistical Learning</a></td><td>Hastie · Tibshirani · Friedman</td><td>시대 1 논문의 배경. PDF 무료. <b>사전으로만 쓴다</b></td></tr>
-        <tr><td><a href="https://www.youtube.com/playlist?list=PLVsNizTWUw7E2RxZ4aspcR9vNamXccmFE">혼자 공부하는 머신러닝+딥러닝</a></td><td>유튜브 · 박해선</td><td>1–6장 · W1–W5 · 논문 읽기 전 개념 잡기</td></tr>
+        <tr><td><a href="https://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer</a></td><td>Jay Alammar</td><td>W14 1회독 전에 그림으로 감 잡기</td></tr>
+        <tr><td><a href="https://spinningup.openai.com/en/latest/algorithms/ppo.html">Spinning Up — PPO</a></td><td>OpenAI</td><td>W24 InstructGPT 전에. PPO 논문 대신 이 문서 — 코드가 같이 있다</td></tr>
+        <tr><td><a href="https://nn.labml.ai/">labml.ai annotated papers</a></td><td>labml</td><td>논문 60여 편의 주석 구현. 구현 ⑥⑦ 대조용</td></tr>
         <tr class="grp"><td colspan="3">구현</td></tr>
-        <tr><td><a href="https://pytorch.org/tutorials/">PyTorch 공식 튜토리얼</a></td><td>PyTorch</td><td>W10 구현 ③ 시작할 때 60분 블리츠만</td></tr>
-        <tr><td><a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Neural Networks: Zero to Hero</a></td><td>유튜브 · Karpathy</td><td>구현 ⑧ 미니 GPT의 직행 경로</td></tr>
+        <tr><td><a href="https://pytorch.org/tutorials/">PyTorch 공식 튜토리얼</a></td><td>PyTorch</td><td>W7 구현 ③ 시작할 때 60분 블리츠만</td></tr>
+        <tr><td><a href="https://shap.readthedocs.io/">SHAP</a></td><td>라이브러리 문서</td><td>W4 구현 ①에 붙인다. 논문(2017) 대신 문서의 TreeExplainer 설명이면 된다</td></tr>
+        <tr><td><a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Neural Networks: Zero to Hero</a></td><td>유튜브 · Karpathy</td><td>구현 ⑧ 미니 GPT의 직행 경로. Raschka 책과 같이</td></tr>
         <tr><td><a href="https://github.com/karpathy/nanoGPT">nanoGPT</a></td><td>GitHub</td><td>300줄짜리 GPT. 구현 ⑧ 다 짠 뒤 대조</td></tr>
-        <tr class="grp"><td colspan="3">수학</td></tr>
+        <tr class="grp"><td colspan="3">수학 · 사전</td></tr>
         <tr><td><a href="https://www.youtube.com/playlist?list=PLkoaXOTFHiqhVDo0nWybNmihCP_4BjOFR">선형대수학의 본질</a></td><td>유튜브 · 3b1b 한국어 더빙</td><td>15편 · W5</td></tr>
         <tr><td><a href="https://www.deeplearningbook.org/">Deep Learning Book</a></td><td>Goodfellow · Bengio · Courville</td><td>논문에서 모르는 개념 나올 때 찾아보는 사전</td></tr>
+        <tr><td><a href="https://hastie.su.domains/ElemStatLearn/">The Elements of Statistical Learning</a></td><td>Hastie · Tibshirani · Friedman</td><td>혼공머신에서 부족할 때만. PDF 무료. <b>사전으로만 쓴다</b></td></tr>
       </tbody>
     </table>
     </div>
@@ -607,7 +625,7 @@
 
 <script>
 (function () {
-  var COOKIE_KEY = "career_roadmap_v11";
+  var COOKIE_KEY = "career_roadmap_v12";
   var EXPIRE_DAYS = 730;
 
   function setCookie(value) {
@@ -656,7 +674,7 @@
   };
   load();
 
-  // 논문 표 정렬: 시대순 ↔ 우선순위순
+  // 논문 표 정렬: 갈래순 ↔ 우선순위순
   (function () {
     var tbody = document.querySelector('#papers tbody');
     var be = document.getElementById('sort-era');
@@ -667,23 +685,35 @@
     Array.prototype.slice.call(tbody.querySelectorAll('tr[data-g]')).forEach(function (g) {
       groups[g.getAttribute('data-g')] = g;
     });
-    function apply(mode) {
+    var mode = 'pri', filter = 'all';
+    var flts = Array.prototype.slice.call(document.querySelectorAll('#papers .sortbar button.flt'));
+    function apply() {
       var pri = mode === 'pri';
       var keys = pri ? ['p1','p2','p3'] : ['e1','e2','e3','e4','e5','e6'];
       var attr = pri ? 'data-p' : 'data-e';
       Object.keys(groups).forEach(function (k) { groups[k].style.display = 'none'; });
       keys.forEach(function (k) {
         var g = groups[k]; if (!g) return;
-        g.style.display = ''; tbody.appendChild(g);
+        var vis = 0;
+        tbody.appendChild(g);
         rows.filter(function (r) { return r.getAttribute(attr) === k.slice(1); })
             .sort(function (a, b) { return (+a.getAttribute('data-y')) - (+b.getAttribute('data-y')); })
-            .forEach(function (r) { tbody.appendChild(r); });
+            .forEach(function (r) {
+              var show = filter === 'all' || r.getAttribute('data-p') === filter;
+              r.classList.toggle('hid', !show); if (show) vis++;
+              tbody.appendChild(r);
+            });
+        g.style.display = vis ? '' : 'none';
       });
+      tbody.classList.toggle('pri', pri);
       be.classList.toggle('on', !pri);
       bp.classList.toggle('on', pri);
+      flts.forEach(function (f) { f.classList.toggle('on', f.getAttribute('data-f') === filter); });
     }
-    be.addEventListener('click', function () { apply('era'); });
-    bp.addEventListener('click', function () { apply('pri'); });
+    be.addEventListener('click', function () { mode = 'era'; apply(); });
+    bp.addEventListener('click', function () { mode = 'pri'; apply(); });
+    flts.forEach(function (f) { f.addEventListener('click', function () { filter = f.getAttribute('data-f'); apply(); }); });
+    apply();
   })();
 
   var deadline = new Date(2027, 2, 2);
