@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<title>주간 뉴스레터 파이프라인 — 아키텍처와 전체 정리</title>
+<link rel="stylesheet" href="assets/summer.css">
+<style>
+:root{
+  --local:#FFF4DE;
+  --local-line:#D9B979;
+  --aws:#EAF3F4;
+  --code-bg:#F1F7F8;
+  --accent-soft:rgba(14,124,148,.10);
+}
+.hero{padding:72px 0 0}
+.hero .lead{max-width:60ch}
+.wrap-doc{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 96px}
+section{margin-top:56px}
+h2{font-size:1.3rem;font-weight:600;margin:0 0 16px;letter-spacing:-.02em}
+h3{font-size:1rem;font-weight:600;margin:0 0 6px}
+p{margin:0 0 12px;max-width:44em}
+.diagram{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;box-shadow:var(--shadow)}
+.diagram svg{display:block;min-width:820px;width:100%;height:auto}
+.legend{display:flex;gap:20px;flex-wrap:wrap;color:var(--ink-2);font-size:.9rem;margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid var(--line)}
+.legend .l1::before{background:var(--local);border-color:var(--local-line)}
+.legend .l2::before{background:var(--aws)}
+.flows{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.flow{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow)}
+.flow h3{color:var(--accent)}
+.flow ol{margin:0;padding-left:1.2em}
+.flow li{margin:4px 0;color:var(--ink);font-size:.95rem}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:.95rem}
+.tablewrap{overflow-x:auto;border-radius:10px}
+th,td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--accent-soft);color:var(--ink)}
+tr:last-child td{border-bottom:none}
+td.num{white-space:nowrap;font-family:var(--mono);font-size:.9rem}
+td.total{font-weight:600}
+code,pre{font-family:var(--mono)}
+code{background:var(--code-bg);padding:1px 6px;border-radius:4px;font-size:.9em}
+pre{background:var(--code-bg);border:1px solid var(--line);border-radius:10px;padding:16px 18px;overflow-x:auto;font-size:.88rem;line-height:1.55;margin:0}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px 28px}
+.check{padding:14px 0;border-top:1px solid var(--line)}
+.check p{margin:0;color:var(--ink-2);font-size:.93rem}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;max-width:44em}
+.steps li{counter-increment:s;position:relative;padding:12px 0 12px 48px;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:11px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:600;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.steps li strong{display:block;font-weight:600}
+.steps li span{color:var(--ink-2);font-size:.93rem}
+.note{background:var(--accent-soft);border-radius:10px;padding:16px 20px;max-width:44em}
+.note p:last-child{margin:0}
+footer.doc-foot{margin-top:64px;color:var(--ink-2);font-size:.85rem}
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:24px;align-items:start}
+@media (max-width:760px){.calc{grid-template-columns:1fr}}
+.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow)}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.field label{font-size:.9rem;color:var(--ink-2);display:flex;justify-content:space-between;gap:8px}
+.field label output{font-family:var(--mono);color:var(--ink);font-size:.9rem}
+.field input[type=range]{width:100%;accent-color:var(--accent);margin:2px 0}
+.field input[type=number]{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--code-bg);color:var(--ink);font-family:var(--mono);font-size:.9rem}
+.field input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.toggle{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink-2);margin:6px 0}
+.toggle input{accent-color:var(--accent);width:16px;height:16px}
+.result-head{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--accent-soft);border-radius:8px;padding:12px 14px}
+.kpi small{display:block;color:var(--ink-2);font-size:.8rem}
+.kpi b{display:block;font-family:var(--mono);font-weight:500;font-size:1.25rem;margin-top:2px}
+.kpi b em{font-style:normal;font-size:.85rem;color:var(--ink-2);margin-left:6px}
+.bar{height:6px;background:var(--accent-soft);border-radius:3px;overflow:hidden;min-width:60px}
+.bar i{display:block;height:100%;background:var(--accent)}
+td.pct{width:120px}
+.small{color:var(--ink-2);font-size:.85rem;margin-top:10px}
+/* SVG */
+.band-local{fill:var(--local);stroke:var(--local-line);stroke-dasharray:4 4}
+.band-aws{fill:var(--aws);stroke:none}
+.node rect{fill:#fff;stroke:var(--line);stroke-width:1.2}
+.node.you rect{stroke:var(--accent);stroke-width:1.6}
+.node text{fill:var(--ink)}
+.node .t{font-size:14px;font-weight:600}
+.node .s{font-size:11.5px;fill:var(--ink-2)}
+.lane{font-size:12px;fill:var(--ink-2)}
+.bandlabel{font-size:12px;font-weight:600;fill:var(--ink-2)}
+.edge{stroke:var(--accent);stroke-width:1.6;fill:none;marker-end:url(#arr)}
+.edge.dim{stroke:var(--ink-2);stroke-dasharray:5 4}
+.elabel{font-size:11px;fill:var(--ink-2)}
+.misc rect{fill:none;stroke:var(--line);stroke-dasharray:4 3}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="index.html">Portfolio</a>
+    <div class="links">
+      <a href="index.html">목록</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Architecture · AWS Serverless</span>
+    <h1 style="margin-top:12px">주간 뉴스레터 파이프라인</h1>
+    <p class="lead">Claude Code로 기사를 만들어 S3에 올리면, 매주 정해진 시각에 SES가 구독자 전원에게 보낸다. 서버는 한 대도 켜두지 않는다.</p>
+  </div>
+</header>
+
+<div class="wrap-doc">
+
+<section>
+  <h2>전체 아키텍처</h2>
+  <div class="diagram">
+  <svg viewBox="0 0 1040 550" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="뉴스레터 아키텍처 다이어그램">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+      </marker>
+    </defs>
+
+    <!-- bands -->
+    <rect class="band-local" x="80" y="36" width="950" height="108" rx="10"/>
+    <text class="bandlabel" x="94" y="54">내 컴퓨터 · Claude</text>
+    <rect class="band-aws" x="80" y="166" width="950" height="368" rx="10"/>
+    <text class="bandlabel" x="94" y="184">AWS (서울 리전)</text>
+
+    <!-- lane labels -->
+    <text class="lane" x="14" y="94">만들기</text>
+    <text class="lane" x="14" y="224">모으기</text>
+    <text class="lane" x="14" y="354">보내기</text>
+    <text class="lane" x="14" y="484">지키기</text>
+
+    <!-- Row 1: y 60-120 -->
+    <g class="node you">
+      <rect x="90" y="60" width="160" height="60" rx="6"/>
+      <text class="t" x="170" y="84" text-anchor="middle">Claude 앱 (remote)</text>
+      <text class="s" x="170" y="103" text-anchor="middle">생각날 때 화제·요약 던지기</text>
+    </g>
+    <g class="node you">
+      <rect x="280" y="60" width="160" height="60" rx="6"/>
+      <text class="t" x="360" y="84" text-anchor="middle">Claude Code</text>
+      <text class="s" x="360" y="103" text-anchor="middle">한 주 모아 기사 HTML 빌드</text>
+    </g>
+    <g class="node">
+      <rect x="470" y="60" width="160" height="60" rx="6"/>
+      <text class="t" x="550" y="84" text-anchor="middle">S3 · issues/</text>
+      <text class="s" x="550" y="103" text-anchor="middle">2026-09-21.html</text>
+    </g>
+    <path class="edge" d="M250 90 H275"/>
+    <path class="edge" d="M440 90 H465"/>
+    <text class="elabel" x="452" y="80" text-anchor="middle">s3 cp</text>
+
+    <!-- Row 2: y 190-250 -->
+    <g class="node">
+      <rect x="90" y="190" width="160" height="60" rx="6"/>
+      <text class="t" x="170" y="214" text-anchor="middle">방문자</text>
+      <text class="s" x="170" y="233" text-anchor="middle">이메일 입력 후 구독</text>
+    </g>
+    <g class="node">
+      <rect x="280" y="190" width="160" height="60" rx="6"/>
+      <text class="t" x="360" y="214" text-anchor="middle">CloudFront + S3</text>
+      <text class="s" x="360" y="233" text-anchor="middle">정적 구독 페이지 (mydomain.com)</text>
+    </g>
+    <g class="node">
+      <rect x="660" y="190" width="160" height="60" rx="6"/>
+      <text class="t" x="740" y="214" text-anchor="middle">API Gateway + Lambda</text>
+      <text class="s" x="740" y="233" text-anchor="middle">구독 · 확인 · 수신거부 API</text>
+    </g>
+    <path class="edge" d="M250 220 H275"/>
+    <path class="edge" d="M440 220 H520 A10 10 0 0 1 540 220 H655"/>
+    <text class="elabel" x="600" y="210" text-anchor="middle">POST /subscribe</text>
+    <!-- Lambda 구독 -> DynamoDB (down into top of DynamoDB at x=930) -->
+    <path class="edge" d="M820 220 H930 V315"/>
+
+    <!-- Row 3: y 320-380 -->
+    <g class="node">
+      <rect x="280" y="320" width="160" height="60" rx="6"/>
+      <text class="t" x="360" y="344" text-anchor="middle">EventBridge Scheduler</text>
+      <text class="s" x="360" y="363" text-anchor="middle">cron: 매주 월 09:00</text>
+    </g>
+    <g class="node">
+      <rect x="470" y="320" width="160" height="60" rx="6"/>
+      <text class="t" x="550" y="344" text-anchor="middle">Lambda · 발송</text>
+      <text class="s" x="550" y="363" text-anchor="middle">이번 주 HTML + 구독자 → 치환 → 발송</text>
+    </g>
+    <g class="node">
+      <rect x="660" y="320" width="160" height="60" rx="6"/>
+      <text class="t" x="740" y="344" text-anchor="middle">SES</text>
+      <text class="s" x="740" y="363" text-anchor="middle">news@mail.mydomain.com</text>
+    </g>
+    <g class="node">
+      <rect x="850" y="320" width="160" height="60" rx="6"/>
+      <text class="t" x="930" y="344" text-anchor="middle">DynamoDB</text>
+      <text class="s" x="930" y="363" text-anchor="middle">subscribers 테이블</text>
+    </g>
+    <path class="edge" d="M440 350 H465"/>
+    <path class="edge" d="M630 350 H655"/>
+    <!-- S3 -> Lambda 발송 -->
+    <path class="edge" d="M530 120 V315"/>
+    <text class="elabel" x="524" y="290" text-anchor="end">읽기</text>
+    <!-- Lambda 발송 <- DynamoDB, via top corridor joining x=930 -->
+    <path class="edge" d="M930 315 V290 H590 V315" marker-end="url(#arr)"/>
+    <text class="elabel" x="760" y="284" text-anchor="middle">활성 구독자 목록</text>
+
+    <!-- Row 4: y 450-510 -->
+    <g class="node">
+      <rect x="470" y="450" width="160" height="60" rx="6"/>
+      <text class="t" x="550" y="474" text-anchor="middle">구독자 수신함</text>
+      <text class="s" x="550" y="493" text-anchor="middle">수신거부 링크 → API로</text>
+    </g>
+    <g class="node">
+      <rect x="660" y="450" width="160" height="60" rx="6"/>
+      <text class="t" x="740" y="474" text-anchor="middle">SNS</text>
+      <text class="s" x="740" y="493" text-anchor="middle">바운스 · 스팸신고 알림</text>
+    </g>
+    <g class="node">
+      <rect x="850" y="450" width="160" height="60" rx="6"/>
+      <text class="t" x="930" y="474" text-anchor="middle">Lambda · 정리</text>
+      <text class="s" x="930" y="493" text-anchor="middle">해당 주소 비활성 처리</text>
+    </g>
+    <!-- SES -> inbox -->
+    <path class="edge" d="M700 380 V415 H550 V445"/>
+    <!-- SES -> SNS -->
+    <path class="edge dim" d="M760 380 V445"/>
+    <path class="edge" d="M820 480 H845"/>
+    <!-- Lambda 정리 -> DynamoDB -->
+    <path class="edge" d="M930 450 V385"/>
+
+    <!-- misc -->
+    <g class="node misc">
+      <rect x="90" y="320" width="160" height="60" rx="6"/>
+      <text class="t" x="170" y="344" text-anchor="middle">Route 53 + ACM</text>
+      <text class="s" x="170" y="363" text-anchor="middle">도메인 · DNS · SSL · DKIM</text>
+    </g>
+    <g class="node misc">
+      <rect x="90" y="450" width="160" height="60" rx="6"/>
+      <text class="t" x="170" y="474" text-anchor="middle">CloudWatch</text>
+      <text class="s" x="170" y="493" text-anchor="middle">결제 알람 · 발송 실패 알람</text>
+    </g>
+  </svg>
+  </div>
+  <div class="legend">
+    <span class="l1">내가 직접 하는 부분</span>
+    <span class="l2">AWS에서 자동으로 도는 부분</span>
+    <span>점선 상자는 전체를 받쳐주는 공통 서비스</span>
+  </div>
+</section>
+
+<section>
+  <h2>세 가지 흐름</h2>
+  <div class="flows">
+    <div class="flow">
+      <h3>만들기 (주중 수시 + 주말 1회)</h3>
+      <ol>
+        <li>평일에 Claude 앱으로 화제를 던지고 요약을 받아 <code>notes/2026-W38/</code>에 쌓는다.</li>
+        <li>주말에 Claude Code에게 "이번 주 노트로 기사 만들어" → 템플릿에 맞춘 이메일용 HTML 생성.</li>
+        <li><code>-test</code> 파일로 내 주소에 먼저 발송해 Gmail·네이버·아이폰에서 확인.</li>
+        <li>확정본을 <code>s3://…/issues/2026-09-21.html</code>로 업로드. 여기까지가 내 일.</li>
+      </ol>
+    </div>
+    <div class="flow">
+      <h3>모으기 (24시간 자동)</h3>
+      <ol>
+        <li>방문자가 mydomain.com에서 이메일 입력.</li>
+        <li>Lambda가 DynamoDB에 <code>pending</code> 상태로 저장하고 SES로 확인 메일 발송.</li>
+        <li>확인 링크 클릭 → <code>active</code>로 전환 (더블 옵트인).</li>
+        <li>수신거부 링크 클릭 → <code>unsubscribed</code>로 전환. 같은 Lambda가 처리.</li>
+      </ol>
+    </div>
+    <div class="flow">
+      <h3>보내기 (매주 월 09:00 자동)</h3>
+      <ol>
+        <li>EventBridge가 발송 Lambda를 깨운다.</li>
+        <li><code>issues/</code>에서 오늘 날짜 파일을 찾는다. 없으면 나에게 알림 후 종료.</li>
+        <li>DynamoDB에서 <code>active</code> 구독자를 읽고, 구독자별 수신거부 URL을 치환.</li>
+        <li>SES로 발송 후 <code>sent#2026-09-21</code> 마커를 기록해 중복 발송을 막는다.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>구성 요소와 비용</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>역할</th><th>서비스</th><th>왜 이걸로</th><th>월 비용 (구독자 1만 명 기준)</th></tr></thead>
+    <tbody>
+      <tr><td>구독 페이지</td><td>S3 + CloudFront</td><td>GitHub Pages와 같은 정적 호스팅. 1TB 전송·1천만 요청 상시 무료</td><td class="num">$0</td></tr>
+      <tr><td>구독·수신거부 API</td><td>API Gateway (HTTP) + Lambda</td><td>요청 있을 때만 실행. 월 100만 요청 무료</td><td class="num">$0</td></tr>
+      <tr><td>구독자 저장</td><td>DynamoDB (on-demand)</td><td>25GB 상시 무료. 서버 없음, 관리 없음. RDS는 유휴 비용이 나와 부적합</td><td class="num">$0</td></tr>
+      <tr><td>기사 보관</td><td>S3 (issues/)</td><td>HTML 파일 수백 개여도 GB 미만</td><td class="num">$0</td></tr>
+      <tr><td>주간 트리거</td><td>EventBridge Scheduler</td><td>cron 한 줄</td><td class="num">$0</td></tr>
+      <tr><td>발송</td><td>SES</td><td>1,000통당 $0.10. 43,333통/월</td><td class="num">$4.33</td></tr>
+      <tr><td>바운스·신고 처리</td><td>SNS + Lambda</td><td>SES 계정 정지를 막는 필수 장치</td><td class="num">$0</td></tr>
+      <tr><td>도메인·DNS·SSL</td><td>Route 53 + ACM</td><td>호스팅 존 $0.50/월. 인증서 무료. 도메인 등록비 연 $13~15 별도</td><td class="num">$0.50</td></tr>
+      <tr><td>알람</td><td>CloudWatch</td><td>10개 알람 무료</td><td class="num">$0</td></tr>
+      <tr><td class="total">합계</td><td></td><td>구독자 1,000명이면 $1 미만, 5만 명이면 약 $25</td><td class="num total">≈ $5 + 도메인 연 $15</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:12px;color:var(--ink-2);font-size:.9rem">신규 계정은 6개월간 최대 $200 크레딧을 받으므로 첫 반년은 실질 0원에 가깝습니다. 2023년 이전의 "SES 월 6.2만 통 무료"는 폐지되었으니 옛 글은 참고만 하세요.</p>
+</section>
+
+<section id="calc">
+  <h2>비용 계산기</h2>
+  <p>구독자 수와 트래픽을 바꿔 보면서 통당·방문당 비용이 어떻게 비례하는지 확인할 수 있습니다. SES는 HTML 본문 크기와 무관하게 통 수로만 과금되고, 본문 안 이미지는 구독자가 메일을 열 때 CloudFront 트래픽으로 잡힙니다.</p>
+  <div class="calc">
+    <div class="panel">
+      <div class="field">
+        <label>구독자 수 <output id="o_subs">10,000</output></label>
+        <input type="range" id="subs" min="2" max="5.3" step="0.01" value="4">
+      </div>
+      <div class="field">
+        <label>주당 발송 횟수 <output id="o_freq">1</output></label>
+        <input type="range" id="freq" min="1" max="7" step="1" value="1">
+      </div>
+      <div class="field">
+        <label>메일 열람률 <output id="o_open">40%</output></label>
+        <input type="range" id="open" min="5" max="90" step="5" value="40">
+      </div>
+      <div class="field">
+        <label>메일 안 이미지 총 용량 <output id="o_img">300 KB</output></label>
+        <input type="range" id="img" min="0" max="3000" step="50" value="300">
+      </div>
+      <div class="field">
+        <label>메일 안 이미지 개수 <output id="o_imgn">5</output></label>
+        <input type="range" id="imgn" min="0" max="30" step="1" value="5">
+      </div>
+      <div class="field">
+        <label>홈페이지 월 방문 수 <output id="o_visits">5,000</output></label>
+        <input type="range" id="visits" min="0" max="6" step="0.05" value="3.7">
+      </div>
+      <div class="field">
+        <label>구독 페이지 용량 <output id="o_page">300 KB</output></label>
+        <input type="range" id="page" min="50" max="3000" step="50" value="300">
+      </div>
+      <div class="field">
+        <label>방문 → 구독 전환율 <output id="o_conv">3%</output></label>
+        <input type="range" id="conv" min="0" max="20" step="0.5" value="3">
+      </div>
+      <div class="field">
+        <label>환율 (원/달러)</label>
+        <input type="number" id="fx" value="1380" min="900" max="2000" step="10">
+      </div>
+      <label class="toggle"><input type="checkbox" id="free" checked> 상시 무료 구간 적용 (CloudFront 1TB, Lambda, DynamoDB, 로그)</label>
+      <label class="toggle"><input type="checkbox" id="fixed" checked> 고정비 포함 (Route 53 $0.50 + 도메인 연 $15)</label>
+    </div>
+
+    <div class="panel">
+      <div class="result-head">
+        <div class="kpi"><small>월 총비용</small><b id="k_total">—</b></div>
+        <div class="kpi"><small>월 발송 통수</small><b id="k_emails">—</b></div>
+        <div class="kpi"><small>1통당 실질 비용</small><b id="k_per">—</b></div>
+        <div class="kpi"><small>구독자 1명당 월</small><b id="k_persub">—</b></div>
+      </div>
+      <div class="tablewrap">
+      <table id="breakdown">
+        <thead><tr><th>항목</th><th>산정 근거</th><th>월 비용</th><th class="pct"></th></tr></thead>
+        <tbody></tbody>
+      </table>
+      </div>
+      <p class="small">월 트래픽: 이메일 이미지 <span id="t_mail">—</span> + 홈페이지 <span id="t_web">—</span> = <span id="t_sum">—</span> · 요청 <span id="t_req">—</span></p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">같은 조건에서 구독자 규모별 비교</h3>
+  <div class="tablewrap">
+  <table id="scale">
+    <thead><tr><th>구독자</th><th>월 발송 통수</th><th>월 총비용 ($)</th><th>월 총비용 (원)</th><th>1통당</th><th>구독자 1명당 월</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  </div>
+  <p class="small">단가는 2026년 9월 서울 리전 공개 요금 기준: SES $0.10/천 통 · CloudFront $0.12/GB, $0.012/만 요청 · Lambda $0.20/백만 요청 + $0.0000167/GB-초 · API Gateway $1.20/백만 요청 · DynamoDB 쓰기 $1.43/백만, 읽기 $0.29/백만 · CloudWatch Logs $0.76/GB. 발송 Lambda는 통당 60ms·512MB로 가정. 12개월 한정 무료는 제외했고, DynamoDB 온디맨드 무료 요청 구간은 계정 조건에 따라 다를 수 있습니다.</p>
+</section>
+
+<section>
+  <h2>도메인은 하나면 된다</h2>
+  <div class="note">
+    <p>홈페이지와 이메일 주소에 도메인을 각각 사야 한다고 생각하셨는데, <strong>도메인 하나로 둘 다 처리</strong>됩니다. 같은 Route 53 호스팅 존에 레코드만 나눠 등록하면 됩니다.</p>
+    <p><code>mydomain.com</code> → CloudFront (홈페이지)<br>
+    <code>api.mydomain.com</code> → API Gateway (구독 API)<br>
+    <code>mail.mydomain.com</code> → SES 발송 도메인 (<code>news@mail.mydomain.com</code>)</p>
+    <p>발송은 서브도메인으로 분리해 두는 걸 권합니다. 만약 스팸 신고가 쌓여 발송 도메인 평판이 나빠져도 홈페이지 도메인은 영향을 받지 않습니다. 회신 받을 곳은 <code>Reply-To</code>에 기존 Gmail을 넣으면 비용 0입니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2>데이터 모델</h2>
+  <p>이메일 주소만 저장한다고 하셨지만, 상태와 토큰 두 가지는 함께 있어야 수신거부·더블 옵트인·바운스 처리가 됩니다. 테이블은 하나로 충분합니다.</p>
+<pre>테이블: newsletter   (파티션 키 pk, 정렬 키 sk)
+
+pk                       sk         속성
+sub#kim@example.com      meta       status=active | pending | unsubscribed | bounced
+                                    token=8f3a…(수신거부·확인용 랜덤 값)
+                                    created_at, confirmed_at
+sent#2026-09-21          meta       count=10432, finished_at   ← 중복 발송 방지 마커
+
+GSI: status-index (status) → 발송 Lambda가 active만 빠르게 조회</pre>
+</section>
+
+<section>
+  <h2>말씀하신 것 외에 꼭 필요한 것들</h2>
+  <div class="checks">
+    <div class="check"><h3>SES 샌드박스 해제</h3><p>신규 계정은 인증된 주소로만 발송됩니다. 콘솔에서 프로덕션 전환을 요청하면 1~3 영업일 소요. 용도와 수신거부 처리 방식을 적어 제출하세요.</p></div>
+    <div class="check"><h3>SPF · DKIM · DMARC</h3><p>SES가 알려주는 DNS 레코드를 Route 53에 등록. 이게 없으면 Gmail·네이버가 스팸함으로 보냅니다.</p></div>
+    <div class="check"><h3>더블 옵트인</h3><p>확인 메일을 거쳐야 active가 되게 합니다. 오타 주소·봇 가입으로 바운스율이 오르는 걸 막습니다.</p></div>
+    <div class="check"><h3>수신거부 링크와 발신자 표기</h3><p>모든 메일 하단에 원클릭 수신거부 링크, 발신자 이름·주소·연락처를 넣습니다. 정보통신망법 요건이자 SES 이용 조건입니다. <code>List-Unsubscribe</code> 헤더도 함께.</p></div>
+    <div class="check"><h3>바운스·신고 자동 처리</h3><p>SES → SNS → Lambda로 해당 주소를 즉시 비활성화. 바운스율 5%, 신고율 0.1%를 넘으면 SES가 발송을 정지시킵니다.</p></div>
+    <div class="check"><h3>개인정보처리방침 페이지</h3><p>이메일을 수집하는 순간 필요합니다. 수집 항목(이메일), 목적(뉴스레터 발송), 보관 기간, 위탁(AWS) 정도를 적은 정적 페이지 하나.</p></div>
+    <div class="check"><h3>테스트 발송 경로</h3><p>실제 구독자에게 나가기 전에 내 주소로만 보내는 경로. 발송 Lambda에 <code>dry_run</code> 인자 하나로 해결됩니다.</p></div>
+    <div class="check"><h3>결제 알람</h3><p>CloudWatch Billing Alarm을 $5에 하나 걸어두세요. 실수로 무한 루프가 돌아도 메일로 먼저 알게 됩니다.</p></div>
+    <div class="check"><h3>이메일 HTML 규칙</h3><p>폭 600px, 테이블 레이아웃, CSS 인라인, 이미지는 첨부 대신 S3/CloudFront URL. MJML로 쓰고 컴파일하면 이 규칙이 자동으로 지켜집니다.</p></div>
+    <div class="check"><h3>발송 속도와 분할</h3><p>SES 기본 한도는 초당 14통 안팎. 구독자 5만 명을 넘으면 Lambda 15분 제한에 걸리므로 그때 SQS 큐를 앞에 두고 나눠 보냅니다. 처음엔 필요 없습니다.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Claude Code 쪽 작업 구조</h2>
+  <p>로컬 저장소 하나에 노트·템플릿·발행물을 함께 두고, Claude Code가 빌드와 업로드까지 맡게 하면 매주 명령 한 줄로 끝납니다.</p>
+<pre>newsletter/
+├── notes/
+│   └── 2026-W38/            ← 주중에 Claude 앱으로 받은 요약을 여기에 저장
+│       ├── mon-ai-chips.md
+│       └── wed-fed-rate.md
+├── templates/
+│   └── issue.mjml           ← 헤더·푸터·{{unsubscribe_url}} 자리 고정
+├── dist/
+│   └── 2026-09-21.html      ← 빌드 결과물
+├── scripts/
+│   ├── build.sh             ← mjml 컴파일 + 인라인 CSS 검증
+│   └── publish.sh           ← aws s3 cp dist/2026-09-21.html s3://…/issues/
+└── CLAUDE.md                ← "notes/현재주차를 읽어 issue.mjml로 기사 작성, 톤·길이 규칙…"
+
+매주 하는 일:  claude → "이번 주 기사 만들어서 테스트 발송해줘" → 확인 → "발행해"</pre>
+  <p style="margin-top:12px">Claude 앱(remote)에서 던진 요약은 Claude Code가 접근할 수 있는 곳에 남아야 합니다. 가장 단순한 방법은 노트를 GitHub 저장소에 커밋하는 것이고, 그러면 <code>git push</code>에 GitHub Actions를 붙여 S3 업로드까지 자동화할 수도 있습니다.</p>
+</section>
+
+<section>
+  <h2>구축 순서</h2>
+  <ol class="steps">
+    <li><strong>도메인 등록 + Route 53 호스팅 존</strong><span>이후 모든 단계가 DNS에 의존하므로 가장 먼저. 전파에 시간이 걸립니다.</span></li>
+    <li><strong>SES 도메인 인증, 샌드박스 해제 요청</strong><span>승인 대기 1~3일 동안 나머지를 만듭니다. DKIM·SPF·DMARC 레코드 등록.</span></li>
+    <li><strong>DynamoDB 테이블 + 구독·확인·수신거부 Lambda</strong><span>API Gateway로 노출하고 <code>api.mydomain.com</code> 연결. curl로 먼저 검증.</span></li>
+    <li><strong>정적 구독 페이지 + 개인정보처리방침</strong><span>S3에 올리고 CloudFront에 <code>mydomain.com</code> 연결. 폼이 API를 호출하는지 확인.</span></li>
+    <li><strong>발송 Lambda + EventBridge 스케줄</strong><span>내 주소만 있는 상태에서 <code>dry_run</code>으로 한 번, 실제 스케줄로 한 번.</span></li>
+    <li><strong>SNS 바운스 처리 + CloudWatch 알람</strong><span>실제 구독자를 받기 전에 반드시. 빠뜨리면 첫 바운스부터 평판이 깎입니다.</span></li>
+    <li><strong>Claude Code 저장소와 CLAUDE.md 정비</strong><span>템플릿·빌드·업로드 스크립트를 넣고 첫 호를 실제로 만들어 본다.</span></li>
+    <li><strong>첫 발행</strong><span>지인 10~20명으로 시작해 도달함·렌더링을 확인한 뒤 공개 모집.</span></li>
+  </ol>
+</section>
+
+<footer class="doc-foot">가격은 2026년 9월 기준 AWS 공개 요금이며 리전·환율에 따라 달라질 수 있습니다. 구축 전 AWS 요금 페이지에서 한 번 더 확인하세요.</footer>
+
+</div>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var P = { // 단가 (USD)
+    sesPerK: 0.10,
+    cfGB: 0.12, cfReq10k: 0.012, cfFreeGB: 1024, cfFreeReq: 10e6,
+    lamReqM: 0.20, lamGBs: 0.0000166667, lamFreeReq: 1e6, lamFreeGBs: 400000,
+    apiReqM: 1.20,
+    ddbWriteM: 1.43, ddbReadM: 0.29, ddbFreeW: 1e6, ddbFreeR: 2.5e6,
+    logGB: 0.76, logFreeGB: 5,
+    snsM: 0.50,
+    r53: 0.50, domainYear: 15
+  };
+  function fmtN(n){ return Math.round(n).toLocaleString('ko-KR'); }
+  function fmtUSD(n){ return n < 0.01 && n > 0 ? '<$0.01' : '$' + (n >= 100 ? fmtN(n) : n.toFixed(2)); }
+  function fmtKRW(n, fx){ return fmtN(n*fx) + '원'; }
+  function fmtGB(gb){ return gb >= 1 ? gb.toFixed(1) + ' GB' : Math.round(gb*1024) + ' MB'; }
+
+  function compute(i){
+    var emails = i.subs * i.freq * 52/12;
+    var newSubs = i.visits * i.conv/100;
+    var confirmMails = newSubs;
+    var totalMails = emails + confirmMails;
+    var opens = emails * i.open/100;
+    var unsubs = emails * 0.002;
+
+    var mailGB = opens * i.img / 1048576;
+    var mailReq = opens * i.imgn;
+    var webGB = i.visits * i.page / 1048576;
+    var webReq = i.visits * 12;
+    var cfGB = mailGB + webGB, cfReq = mailReq + webReq;
+
+    var lamReq = totalMails/50 + newSubs*2 + unsubs;         // 발송은 50통 배치
+    var lamGBs = totalMails*0.06*0.5 + (newSubs*2+unsubs)*0.1;
+    var apiReq = newSubs*2 + unsubs + i.visits*0.05;
+    var ddbW = newSubs*2 + unsubs + emails*0.02 + i.freq*4.33;
+    var ddbR = totalMails/10 + newSubs*2;
+    var logGB = totalMails*0.5/1048576;
+    var sns = emails*0.02;
+
+    var f = i.free;
+    var rows = [];
+    function add(name, basis, cost){ rows.push({name:name, basis:basis, cost:Math.max(0,cost)}); }
+
+    add('SES 발송', fmtN(emails) + '통 + 확인 메일 ' + fmtN(confirmMails) + '통', totalMails/1000*P.sesPerK);
+    var cfCost = (Math.max(0, cfGB - (f?P.cfFreeGB:0)))*P.cfGB + Math.max(0, cfReq - (f?P.cfFreeReq:0))/10000*P.cfReq10k;
+    add('CloudFront 트래픽', fmtGB(cfGB) + ', ' + fmtN(cfReq) + ' 요청' + (f?' (1TB·1천만 요청 무료)':''), cfCost);
+    var lamCost = Math.max(0, lamReq-(f?P.lamFreeReq:0))/1e6*P.lamReqM + Math.max(0, lamGBs-(f?P.lamFreeGBs:0))*P.lamGBs;
+    add('Lambda 실행', fmtN(lamReq) + ' 호출, ' + fmtN(lamGBs) + ' GB-초', lamCost);
+    add('API Gateway', fmtN(apiReq) + ' 요청 (구독·확인·수신거부)', apiReq/1e6*P.apiReqM);
+    var ddbCost = Math.max(0, ddbW-(f?P.ddbFreeW:0))/1e6*P.ddbWriteM + Math.max(0, ddbR-(f?P.ddbFreeR:0))/1e6*P.ddbReadM;
+    add('DynamoDB', fmtN(ddbW) + ' 쓰기, ' + fmtN(ddbR) + ' 읽기', ddbCost);
+    add('CloudWatch Logs', fmtGB(logGB) + ' 로그 수집', Math.max(0, logGB-(f?P.logFreeGB:0))*P.logGB);
+    add('SNS 바운스 알림', fmtN(sns) + '건 (2% 가정)', sns/1e6*P.snsM);
+    if (i.fixed) add('Route 53 + 도메인', '호스팅 존 $0.50 + 연 $15 / 12', P.r53 + P.domainYear/12);
+
+    var total = rows.reduce(function(a,r){ return a + r.cost; }, 0);
+    return { rows:rows, total:total, emails:emails, totalMails:totalMails, mailGB:mailGB, webGB:webGB, cfGB:cfGB, cfReq:cfReq };
+  }
+
+  function read(){
+    return {
+      subs: Math.round(Math.pow(10, +$('subs').value)),
+      freq: +$('freq').value, open: +$('open').value, img: +$('img').value, imgn: +$('imgn').value,
+      visits: Math.round(Math.pow(10, +$('visits').value)), page: +$('page').value, conv: +$('conv').value,
+      fx: +$('fx').value || 1380, free: $('free').checked, fixed: $('fixed').checked
+    };
+  }
+
+  function render(){
+    var i = read();
+    $('o_subs').textContent = fmtN(i.subs);
+    $('o_freq').textContent = i.freq;
+    $('o_open').textContent = i.open + '%';
+    $('o_img').textContent = fmtN(i.img) + ' KB';
+    $('o_imgn').textContent = i.imgn;
+    $('o_visits').textContent = i.visits < 2 ? '0' : fmtN(i.visits);
+    if (i.visits < 2) i.visits = 0;
+    $('o_page').textContent = fmtN(i.page) + ' KB';
+    $('o_conv').textContent = i.conv + '%';
+
+    var r = compute(i);
+    $('k_total').innerHTML = fmtUSD(r.total) + '<em>' + fmtKRW(r.total, i.fx) + '</em>';
+    $('k_emails').textContent = fmtN(r.emails);
+    var per = r.totalMails ? r.total/r.totalMails : 0;
+    $('k_per').innerHTML = '$' + per.toFixed(5) + '<em>' + (per*i.fx).toFixed(2) + '원</em>';
+    var ps = i.subs ? r.total/i.subs : 0;
+    $('k_persub').innerHTML = '$' + ps.toFixed(4) + '<em>' + (ps*i.fx).toFixed(1) + '원</em>';
+
+    var tb = $('breakdown').querySelector('tbody'); tb.innerHTML = '';
+    r.rows.forEach(function(row){
+      var pct = r.total ? row.cost/r.total*100 : 0;
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>'+row.name+'</td><td style="color:var(--ink-2);font-size:.88rem">'+row.basis+'</td><td class="num">'+fmtUSD(row.cost)+'</td><td class="pct"><div class="bar"><i style="width:'+pct.toFixed(1)+'%"></i></div></td>';
+      tb.appendChild(tr);
+    });
+    $('t_mail').textContent = fmtGB(r.mailGB);
+    $('t_web').textContent = fmtGB(r.webGB);
+    $('t_sum').textContent = fmtGB(r.cfGB);
+    $('t_req').textContent = fmtN(r.cfReq) + '건';
+
+    var sc = $('scale').querySelector('tbody'); sc.innerHTML = '';
+    [1000, 5000, 10000, 50000, 100000, 200000].forEach(function(n){
+      var j = Object.assign({}, i, {subs:n});
+      var s = compute(j);
+      var tr = document.createElement('tr');
+      if (n === i.subs) tr.style.background = 'var(--accent-soft)';
+      tr.innerHTML = '<td class="num">'+fmtN(n)+'</td><td class="num">'+fmtN(s.emails)+'</td><td class="num">'+fmtUSD(s.total)+'</td><td class="num">'+fmtKRW(s.total, i.fx)+'</td><td class="num">'+(s.total/s.totalMails*i.fx).toFixed(2)+'원</td><td class="num">'+(s.total/n*i.fx).toFixed(1)+'원</td>';
+      sc.appendChild(tr);
+    });
+  }
+
+  ['subs','freq','open','img','imgn','visits','page','conv','fx','free','fixed'].forEach(function(id){
+    $(id).addEventListener('input', render);
+  });
+  render();
+})();
+</script>
+</body>
+</html>

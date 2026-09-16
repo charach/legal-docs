@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<title>Portfolio</title>
+<meta name="description" content="Claude Code로 같이 설계한 시스템들. 아키텍처, 비용, 구축 순서.">
+<link rel="stylesheet" href="assets/summer.css">
+<style>
+  .rows { border-top: 1px solid var(--line); }
+  a.row {
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: baseline;
+    padding: 26px 0; border-bottom: 1px solid var(--line);
+    color: inherit; text-decoration: none;
+  }
+  a.row .t { font-size: 21px; font-weight: 600; letter-spacing: -0.02em; transition: color .2s ease; }
+  a.row:hover .t { color: var(--accent); }
+  a.row .d { font-size: 15px; color: var(--ink-2); margin-top: 6px; max-width: 62ch; }
+  a.row .meta { text-align: right; white-space: nowrap; }
+  a.row .meta .tags { font-size: 13px; color: var(--ink-2); }
+  .empty { padding: 26px 0; font-size: 14px; color: var(--ink-2); }
+
+  @media (max-width: 640px) {
+    a.row { grid-template-columns: 1fr; gap: 8px; padding: 22px 0; }
+    a.row .t { font-size: 19px; }
+    a.row .meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="index.html">Portfolio</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Index</span>
+    <h1 style="margin-top:12px">Claude와 같이<br>설계한 시스템들</h1>
+    <p class="lead">아키텍처 다이어그램, 비용 계산, 구축 순서까지 한 페이지로 정리한다. 만들 때마다 여기 쌓는다.</p>
+  </div>
+  <div class="wrap">
+    <svg class="hero-wave" viewBox="0 0 1080 64" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,42 C120,42 150,18 270,18 C390,18 420,42 540,42 C660,42 690,18 810,18 C930,18 960,42 1080,42"/>
+      <path class="accent" d="M0,52 C120,52 150,30 270,30 C390,30 420,52 540,52 C660,52 690,30 810,30 C930,30 960,52 1080,52"/>
+    </svg>
+  </div>
+</header>
+
+<main>
+  <section class="band band-last">
+    <div class="wrap">
+      <div class="rows">
+
+        <a class="row" href="newsletter-architecture.html">
+          <div>
+            <div class="t">주간 뉴스레터 파이프라인</div>
+            <div class="d">Claude Code로 기사를 만들어 S3에 올리면 SES가 구독자 전원에게 매주 자동 발송. 서버리스 아키텍처, 구독자 규모별 비용 계산기, 구축 순서 8단계.</div>
+          </div>
+          <div class="meta"><span class="tags tnum">2026-09</span></div>
+        </a>
+
+      </div>
+      <div class="empty">다음 프로젝트는 여기 붙는다.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">Portfolio · 검색 비노출</div>
+</footer>
+
+</body>
+</html>
