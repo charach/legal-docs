@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ttomstudio</title>
+<meta name="description" content="ttomstudio — 개인, 포트폴리오, CS 교재, 푸드 R&D 노트 모음.">
+<style>
+  :root {
+    --bg: #FAFAF9;
+    --ink: #1C1B19;
+    --ink-2: #6B685F;
+    --line: #E6E3DC;
+    --shadow: 0 1px 3px rgba(28,27,25,.06);
+    --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+            system-ui, "Segoe UI", "Apple SD Gothic Neo", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 96px 0 8px; }
+  header .mark { font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+  header h1 { font-size: clamp(30px, 5vw, 40px); font-weight: 600; letter-spacing: -.02em; margin: 14px 0 12px; }
+  header p { font-size: 16px; color: var(--ink-2); max-width: 46ch; margin: 0; }
+
+  .cards { margin: 56px 0 96px; border-top: 1px solid var(--line); }
+  a.card {
+    display: grid; grid-template-columns: 20px 1fr auto; align-items: baseline; gap: 16px;
+    padding: 24px 0; border-bottom: 1px solid var(--line);
+    color: inherit; text-decoration: none;
+  }
+  a.card .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); margin-top: 6px; }
+  a.card .t { font-size: 19px; font-weight: 600; letter-spacing: -.01em; transition: color .2s ease; }
+  a.card:hover .t { color: var(--c); }
+  a.card .d { font-size: 14px; color: var(--ink-2); margin-top: 4px; max-width: 52ch; }
+  a.card .go { font-size: 13px; color: var(--ink-2); white-space: nowrap; align-self: center; }
+
+  footer { padding: 0 0 64px; font-size: 13px; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 24px; }
+
+  @media (max-width: 560px) {
+    header { padding-top: 64px; }
+    a.card { grid-template-columns: 16px 1fr; }
+    a.card .go { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="mark">ttomstudio</span>
+    <h1>흩어진 기록을<br>폴더별로 정리해 둔 곳</h1>
+    <p>개인 기록, 포트폴리오, CS 교재, 푸드 R&amp;D 노트. 각자 다른 결로 쌓이고 있다.</p>
+  </header>
+
+  <div class="cards">
+    <a class="card" href="personal/index.html" style="--c:#0E7C94">
+      <span class="dot"></span>
+      <span>
+        <span class="t">Personal</span>
+        <span class="d">훈련, 커리어, 대학원 입시까지 — 매일 들여다볼 것과 가끔 꺼내 볼 것.</span>
+      </span>
+      <span class="go">personal/ →</span>
+    </a>
+
+    <a class="card" href="portfolio/index.html" style="--c:#0E7C94">
+      <span class="dot"></span>
+      <span>
+        <span class="t">Portfolio</span>
+        <span class="d">Claude Code로 같이 설계한 시스템들. 아키텍처, 비용, 구축 순서.</span>
+      </span>
+      <span class="go">portfolio/ →</span>
+    </a>
+
+    <a class="card" href="cs/index.html" style="--c:#b68235">
+      <span class="dot"></span>
+      <span>
+        <span class="t">비전공자를 위한 컴퓨터과학</span>
+        <span class="d">자료구조와 알고리즘을, 코드 없이 움직이는 그림으로.</span>
+      </span>
+      <span class="go">cs/ →</span>
+    </a>
+
+    <a class="card" href="food/index.html" style="--c:#D9A21B">
+      <span class="dot"></span>
+      <span>
+        <span class="t">food</span>
+        <span class="d">소스류 R&amp;D 문서 모음. 배합표, 공정, 규격, 법규 체크리스트.</span>
+      </span>
+      <span class="go">food/ →</span>
+    </a>
+  </div>
+
+  <footer>ttomstudio.com</footer>
+
+</div>
+</body>
+</html>
