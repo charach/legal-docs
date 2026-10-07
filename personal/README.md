@@ -11,7 +11,7 @@ personal/
 ├── gurye_course.html       🗺 구례 코스 분석·시뮬레이터    (본인 · 종료)
 ├── gurye_fuel.html         🥤 구례 보급 전략·백 체크리스트  (본인 · 종료)
 ├── strength.html           🏋 전신 근력 21주 · 헬스장   (본인)
-├── bike_forces.html        🚲 안장 위의 힘 애니메이션      (본인)
+├── bike_forces.html        🚲 안장 위의 힘 애니메이션      (본인 · 종료)
 ├── career_roadmap.html     🚀 커리어 전환 로드맵          (본인)
 ├── grad_schools.html       🏛 직장인 특수대학원 42곳 비교  (함께)
 ├── ai_grad_prep.html       🎓 AI 대학원 입시 학습 로드맵   (아내)
@@ -94,7 +94,7 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 
 **2026-10-04 대회 완주 — 14:37:45** (수영 1:38:33 · 바이크 6:56:53 · 런 5:35:39, M30-34 60/71, 잠정 기록).
 세 페이지는 종료된 프로젝트로 표시하고 **대회 전 계획 그대로 보존**한다. 기록과 구간 분석(수영 바퀴·바이크 구간·런 바퀴·컷오프 여유)은 `exercise.html#result`,
-허브(`index.html`)에서는 「종료」 그룹으로 옮겼다. 계획 내용은 더 고치지 않는다.
+허브(`index.html`)에서는 「종료」 그룹으로 옮겼다(`bike_forces.html`도 함께 종료). 계획 내용은 더 고치지 않는다.
 
 `gurye_course.html`과 `gurye_fuel.html`은 `assets/gurye.js`의 `GURYE.simulate()`로 시계 시각을 계산한다.
 시뮬레이터 설정은 localStorage `gurye.sim.v1`에 저장되고 보급 페이지가 그대로 읽는다(보급 페이지에는 슬라이더 없음).
