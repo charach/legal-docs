@@ -100,6 +100,13 @@
   .badge { margin: 0; }
   .badge img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); }
   .badge figcaption { font-size: 11.5px; color: var(--muted); margin-top: 6px; text-align: center; }
+  .analysis { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.65; }
+  .analysis h3 { font-size: 17px; font-weight: 800; margin: 0 0 6px; letter-spacing: -.3px; }
+  .analysis h4 { font-size: 12px; font-weight: 800; color: var(--sky-deep); margin: 20px 0 8px; letter-spacing: .04em; }
+  .analysis p { margin: 0 0 11px; }
+  .analysis .result-note { margin-bottom: 11px; }
+  .analysis a { color: var(--accent); }
+  .analysis .verdict { margin-top: 18px; padding: 10px 13px; background: var(--bg-2); border-radius: 6px; }
   .result-note { font-size: 12.5px; color: var(--ink-soft); margin: 0; line-height: 1.6; }
   @media (max-width: 640px) {
     .result { padding: 18px 14px; }
@@ -393,14 +400,54 @@
         <div class="tw"><table>
           <tr><th>구간</th><th>계획</th><th>기록</th><th>시계</th></tr>
           <tr><td>수영 3.8km</td><td class="n">1:40</td><td class="n"><b>1:38:33</b> · 2:36/100m</td><td class="n">08:52:22</td></tr>
-          <tr><td>T1</td><td class="n">—</td><td class="n">15:24</td><td></td></tr>
+          <tr><td>T1</td><td class="n">—</td><td class="n">15:25</td><td></td></tr>
           <tr><td>바이크 176.7km</td><td class="n">6:25</td><td class="n"><b>6:56:53</b> · 25.33km/h</td><td class="n">16:04:39</td></tr>
-          <tr><td>T2</td><td class="n">—</td><td class="n">11:16</td><td></td></tr>
+          <tr><td>T2</td><td class="n">—</td><td class="n">11:17</td><td></td></tr>
           <tr><td>런 42.0km</td><td class="n">4:30~5:30</td><td class="n"><b>5:35:39</b> · 8:03/km</td><td class="n">21:51:34</td></tr>
           <tr class="hl"><td>완주</td><td class="n">약 13:15</td><td class="n">14:37:45</td><td class="n">21:51:34</td></tr>
         </table></div>
-        <p class="result-note">T1·T2는 배지의 누적 시간에서 역산한 값. 수영은 계획대로, 바이크 +32분 · 런 +6분(범위 상단 대비)으로 계획보다 1시간 23분 늦었고, 종료 시각 24:20보다 <b>2시간 28분 앞서</b> 들어왔습니다. 아래 캘린더와 전략은 대회 전 계획 그대로 남겨 둡니다.</p>
+        <p class="result-note">T1·T2는 RTRT 구간 기록 기준. 수영은 계획대로, 바이크 +32분 · 런 +6분(범위 상단 대비)으로 계획보다 1시간 23분 늦었고, 종료 시각 24:20보다 <b>2시간 28분 앞서</b> 들어왔습니다. 아래 캘린더와 전략은 대회 전 계획 그대로 남겨 둡니다.</p>
       </div>
+    </div>
+
+    <div class="analysis">
+      <h3>구간 분석</h3>
+      <p class="result-note">RTRT 구간 기록 37개로 계산(<a href="assets/gurye/rtrt-splits-2026-10-04.json">원본 JSON</a>). 거리는 RTRT 기준이라 바이크 175.98km, 런 41.73km — 배지의 런 페이스 8:03이 여기서 나옵니다.</p>
+
+      <h4>수영 1:38:33</h4>
+      <p>1바퀴 <b>48:02</b>(2:32/100m) → 2바퀴 <b>50:30</b>(2:40/100m). 2바퀴째 2분 28초 느려졌지만 계획 1:40 안.</p>
+
+      <h4>바이크 6:56:53</h4>
+      <div class="tw"><table>
+        <tr><th>구간</th><th>거리</th><th>시간</th><th>평속</th></tr>
+        <tr><td>0 → 86.1km</td><td class="n">86.1km</td><td class="n">3:10:06</td><td class="n"><b>27.2km/h</b> · 계획 페이스</td></tr>
+        <tr class="hl"><td>86.1 → 101.2km</td><td class="n">15.1km</td><td class="n">52:15</td><td class="n">17.3km/h</td></tr>
+        <tr><td>101.2km → T2</td><td class="n">74.8km</td><td class="n">2:54:31</td><td class="n">25.7km/h</td></tr>
+      </table></div>
+      <p><b>가장 크게 잃은 곳은 86~101km 한 구간.</b> 앞뒤처럼 27km/h였으면 약 33분인데 52분 — 이 구간에서만 약 19분. 90km 퍼스널니즈 정지가 여기에 있습니다. 같은 12.23km 순환 구간을 연달아 돈 기록은 27.4 → 28.8 → <b>24.7 → 25.6 → 24.0</b>km/h, 마지막 7.85km는 23.2km/h로 후반이 처졌습니다. 계획 대비 +32분 = <b>정지 구간 약 19분 + 후반 하락 약 13분</b>.</p>
+
+      <h4>런 5:35:39</h4>
+      <div class="tw"><table>
+        <tr><th>바퀴</th><th>거리</th><th>시간</th><th>페이스</th></tr>
+        <tr><td>1</td><td class="n">10.73km</td><td class="n">1:09:16</td><td class="n"><b>6:27/km</b></td></tr>
+        <tr><td>2</td><td class="n">9.87km</td><td class="n">1:12:12</td><td class="n">7:19/km</td></tr>
+        <tr><td>3</td><td class="n">9.87km</td><td class="n">1:24:25</td><td class="n">8:33/km</td></tr>
+        <tr><td>4</td><td class="n">9.87km</td><td class="n">1:32:59</td><td class="n">9:25/km</td></tr>
+        <tr><td>마지막</td><td class="n">1.36km</td><td class="n">16:46</td><td class="n">12:18/km</td></tr>
+      </table></div>
+      <p>1바퀴는 계획한 걷뛰 페이스(6:00/km 안팎) 근처, 이후 바퀴마다 1분/km 안팎씩 느려졌습니다. 일몰(18:11)은 2바퀴가 끝날 무렵이라 3·4바퀴는 어두울 때 뛰었고, 페이스가 크게 떨어진 시기와 겹칩니다 — 다만 어둠 때문인지는 이 데이터만으로는 알 수 없습니다. 마지막 1.36km는 피니시 구간 기록이라 지점 사이 거리를 그대로 믿기 어렵습니다.</p>
+
+      <h4>전환 · 컷오프</h4>
+      <div class="tw"><table>
+        <tr><th>항목</th><th>계획</th><th>실제</th></tr>
+        <tr><td>T1 + T2</td><td class="n">—</td><td class="n">15:25 + 11:17 = 26:42</td></tr>
+        <tr><td>컷오프 1차 13:45 (86.7km)</td><td class="n">여유 1:35</td><td class="n">약 1:27</td></tr>
+        <tr><td>컷오프 2차 16:40 (150.5km)</td><td class="n">여유 2:10</td><td class="n">약 1:39</td></tr>
+        <tr><td>런 컷오프 23:00 (31.9km)</td><td class="n">여유 3:48</td><td class="n">약 2:46</td></tr>
+      </table></div>
+      <p class="result-note">컷오프 지점을 정확히 지나간 기록은 없어서 앞뒤 기록 사이를 보간한 값.</p>
+
+      <p class="verdict"><b>정리.</b> 바이크 전반 86km와 런 첫 바퀴까지는 계획대로 갔습니다. 늦어진 1시간 23분은 대부분 <b>90km 전후의 정지(약 19분)</b>와 <b>런 2바퀴 이후의 페이스 하락(약 50분)</b>에서 나왔습니다.</p>
     </div>
   </section>
 

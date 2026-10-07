@@ -1,0 +1,380 @@
+{
+ "event": "IRM-GURYE-2026",
+ "source": "api.rtrt.me (IRONMAN Tracker), 2026-10-07 수집",
+ "pid": "RM3WA5R8",
+ "bib": "279",
+ "division": "M30-34",
+ "note": "km은 RTRT 누적 거리(수영 3.8 · 바이크 175.98 · 런 41.73). time은 출발 기준 누적, legTime은 종목 내 누적.",
+ "splits": [
+  {
+   "point": "START",
+   "label": "Start",
+   "km": 0.0,
+   "time": "00:00:00.00",
+   "timeOfDay": "7:13:49 am",
+   "legTime": null,
+   "kmh": null,
+   "kmPace": null
+  },
+  {
+   "point": "SWIMTURN",
+   "label": "Swim 1.9k",
+   "km": 1.9,
+   "time": "00:48:01.92",
+   "timeOfDay": "8:01:51 am",
+   "legTime": "00:48:01.92",
+   "kmh": "2.37",
+   "kmPace": "25:17"
+  },
+  {
+   "point": "SWIM",
+   "label": "Swim",
+   "km": 3.8,
+   "time": "01:38:32.253",
+   "timeOfDay": "8:52:22 am",
+   "legTime": "01:38:32.253",
+   "kmh": "2.26",
+   "kmPace": "26:35"
+  },
+  {
+   "point": "T1",
+   "label": "T1",
+   "km": 3.9,
+   "time": "01:53:57.13",
+   "timeOfDay": "9:07:46 am",
+   "legTime": "00:15:24.877",
+   "kmh": "2.31",
+   "kmPace": "25:56"
+  },
+  {
+   "point": "BIKE1",
+   "label": "Bike 4.9k",
+   "km": 8.86,
+   "time": "02:06:29.163",
+   "timeOfDay": "9:20:18 am",
+   "legTime": "00:12:32.033",
+   "kmh": "23.74",
+   "kmPace": "02:32"
+  },
+  {
+   "point": "BIKE2",
+   "label": "Bike 13.7k",
+   "km": 17.62778,
+   "time": "02:23:09.163",
+   "timeOfDay": "9:36:58 am",
+   "legTime": "00:29:12.033",
+   "kmh": "31.57",
+   "kmPace": "01:55"
+  },
+  {
+   "point": "BIKE3",
+   "label": "Bike 21.7k",
+   "km": 25.65222,
+   "time": "02:40:13.163",
+   "timeOfDay": "9:54:02 am",
+   "legTime": "00:46:16.033",
+   "kmh": "28.21",
+   "kmPace": "02:08"
+  },
+  {
+   "point": "BIKE4",
+   "label": "Bike 23k",
+   "km": 26.91284,
+   "time": "02:43:31.163",
+   "timeOfDay": "9:57:20 am",
+   "legTime": "00:49:34.033",
+   "kmh": "22.92",
+   "kmPace": "02:38"
+  },
+  {
+   "point": "BIKE5",
+   "label": "Bike 33.8k",
+   "km": 37.76598,
+   "time": "03:08:33.163",
+   "timeOfDay": "10:22:22 am",
+   "legTime": "01:14:36.033",
+   "kmh": "26.01",
+   "kmPace": "02:19"
+  },
+  {
+   "point": "BIKE6",
+   "label": "Bike 46.9k",
+   "km": 50.84,
+   "time": "03:34:37.163",
+   "timeOfDay": "10:48:26 am",
+   "legTime": "01:40:40.033",
+   "kmh": "30.09",
+   "kmPace": "02:00"
+  },
+  {
+   "point": "BIKE7",
+   "label": "Bike 62.06k",
+   "km": 65.96,
+   "time": "04:10:06.163",
+   "timeOfDay": "11:23:55 am",
+   "legTime": "02:16:09.033",
+   "kmh": "25.57",
+   "kmPace": "02:21"
+  },
+  {
+   "point": "BIKE8",
+   "label": "Bike 72.9k",
+   "km": 76.83571,
+   "time": "04:36:32.163",
+   "timeOfDay": "11:50:21 am",
+   "legTime": "02:42:35.033",
+   "kmh": "24.69",
+   "kmPace": "02:26"
+  },
+  {
+   "point": "BIKE9",
+   "label": "Bike 86k",
+   "km": 89.97695,
+   "time": "05:04:03.163",
+   "timeOfDay": "12:17:52 pm",
+   "legTime": "03:10:06.033",
+   "kmh": "28.65",
+   "kmPace": "02:06"
+  },
+  {
+   "point": "BIKE10",
+   "label": "Bike 101.1K",
+   "km": 105.07835,
+   "time": "05:56:18.163",
+   "timeOfDay": "1:10:07 pm",
+   "legTime": "04:02:21.033",
+   "kmh": "17.34",
+   "kmPace": "03:28"
+  },
+  {
+   "point": "BIKE11",
+   "label": "Bike 102.4K",
+   "km": 106.32838,
+   "time": "05:59:05.163",
+   "timeOfDay": "1:12:54 pm",
+   "legTime": "04:05:08.033",
+   "kmh": "26.95",
+   "kmPace": "02:14"
+  },
+  {
+   "point": "BIKE12",
+   "label": "Bike 106.9K",
+   "km": 110.88516,
+   "time": "06:09:22.163",
+   "timeOfDay": "1:23:11 pm",
+   "legTime": "04:15:25.033",
+   "kmh": "26.59",
+   "kmPace": "02:16"
+  },
+  {
+   "point": "BIKE13",
+   "label": "Bike 119.2K",
+   "km": 123.11985,
+   "time": "06:36:08.163",
+   "timeOfDay": "1:49:57 pm",
+   "legTime": "04:42:11.033",
+   "kmh": "27.43",
+   "kmPace": "02:12"
+  },
+  {
+   "point": "BIKE14",
+   "label": "Bike 131.4K",
+   "km": 135.35323,
+   "time": "07:01:38.163",
+   "timeOfDay": "2:15:27 pm",
+   "legTime": "05:07:41.033",
+   "kmh": "28.78",
+   "kmPace": "02:06"
+  },
+  {
+   "point": "BIKE15",
+   "label": "Bike15 143.6K",
+   "km": 147.58679,
+   "time": "07:31:23.163",
+   "timeOfDay": "2:45:12 pm",
+   "legTime": "05:37:26.033",
+   "kmh": "24.67",
+   "kmPace": "02:26"
+  },
+  {
+   "point": "BIKE16",
+   "label": "Bike16 155.9K",
+   "km": 159.80585,
+   "time": "08:00:01.163",
+   "timeOfDay": "3:13:50 pm",
+   "legTime": "06:06:04.033",
+   "kmh": "25.61",
+   "kmPace": "02:21"
+  },
+  {
+   "point": "BIKE17",
+   "label": "Bike17 168.1K",
+   "km": 172.03146,
+   "time": "08:30:33.163",
+   "timeOfDay": "3:44:22 pm",
+   "legTime": "06:36:36.033",
+   "kmh": "24.02",
+   "kmPace": "02:30"
+  },
+  {
+   "point": "BIKE",
+   "label": "Cycle",
+   "km": 179.88,
+   "time": "08:50:49.226",
+   "timeOfDay": "4:04:39 pm",
+   "legTime": "06:56:52.096",
+   "kmh": "23.23",
+   "kmPace": "02:35"
+  },
+  {
+   "point": "T2",
+   "label": "T2",
+   "km": 179.98,
+   "time": "09:02:06.406",
+   "timeOfDay": "4:15:56 pm",
+   "legTime": "00:11:17.18",
+   "kmh": "20.33",
+   "kmPace": "02:58"
+  },
+  {
+   "point": "RUN1",
+   "label": "Run 0.8k",
+   "km": 180.83312,
+   "time": "09:07:13.48",
+   "timeOfDay": "4:21:03 pm",
+   "legTime": "00:05:07.074",
+   "kmh": "10.00",
+   "kmPace": "06:00"
+  },
+  {
+   "point": "RUN2",
+   "label": "Run 5.4k",
+   "km": 185.38646,
+   "time": "09:36:49.803",
+   "timeOfDay": "4:50:39 pm",
+   "legTime": "00:34:43.397",
+   "kmh": "9.23",
+   "kmPace": "06:31"
+  },
+  {
+   "point": "RUN3",
+   "label": "Run 6.8k",
+   "km": 186.84741,
+   "time": "09:45:31.353",
+   "timeOfDay": "4:59:21 pm",
+   "legTime": "00:43:24.947",
+   "kmh": "10.08",
+   "kmPace": "05:57"
+  },
+  {
+   "point": "RUN4",
+   "label": "Run 10.7k",
+   "km": 190.71423,
+   "time": "10:11:22.816",
+   "timeOfDay": "5:25:12 pm",
+   "legTime": "01:09:16.41",
+   "kmh": "8.97",
+   "kmPace": "06:42"
+  },
+  {
+   "point": "RUN5",
+   "label": "Run 15.2k",
+   "km": 195.2671,
+   "time": "10:44:10.596",
+   "timeOfDay": "5:58:00 pm",
+   "legTime": "01:42:04.19",
+   "kmh": "8.33",
+   "kmPace": "07:13"
+  },
+  {
+   "point": "RUN6",
+   "label": "Run 16.7k",
+   "km": 196.72896,
+   "time": "10:54:02.076",
+   "timeOfDay": "6:07:51 pm",
+   "legTime": "01:51:55.67",
+   "kmh": "8.90",
+   "kmPace": "06:45"
+  },
+  {
+   "point": "RUN7",
+   "label": "Run 20.6k",
+   "km": 200.59116,
+   "time": "11:23:35.20",
+   "timeOfDay": "6:37:25 pm",
+   "legTime": "02:21:28.794",
+   "kmh": "7.84",
+   "kmPace": "07:40"
+  },
+  {
+   "point": "RUN8",
+   "label": "Run 25.1k",
+   "km": 205.14415,
+   "time": "12:03:07.44",
+   "timeOfDay": "7:16:57 pm",
+   "legTime": "03:01:01.034",
+   "kmh": "6.91",
+   "kmPace": "08:42"
+  },
+  {
+   "point": "RUN9",
+   "label": "Run 26.6K",
+   "km": 206.60633,
+   "time": "12:15:04.016",
+   "timeOfDay": "7:28:53 pm",
+   "legTime": "03:12:57.61",
+   "kmh": "7.35",
+   "kmPace": "08:11"
+  },
+  {
+   "point": "RUN10",
+   "label": "Run 30.4K",
+   "km": 210.46822,
+   "time": "12:47:59.723",
+   "timeOfDay": "8:01:49 pm",
+   "legTime": "03:45:53.317",
+   "kmh": "7.04",
+   "kmPace": "08:32"
+  },
+  {
+   "point": "RUN11",
+   "label": "Run 35K",
+   "km": 215.02163,
+   "time": "13:27:40.643",
+   "timeOfDay": "8:41:30 pm",
+   "legTime": "04:25:34.237",
+   "kmh": "6.88",
+   "kmPace": "08:43"
+  },
+  {
+   "point": "RUN12",
+   "label": "Run12 36.5K",
+   "km": 216.48334,
+   "time": "13:40:56.85",
+   "timeOfDay": "8:54:46 pm",
+   "legTime": "04:38:50.444",
+   "kmh": "6.61",
+   "kmPace": "09:05"
+  },
+  {
+   "point": "RUN13",
+   "label": "Run13 40.3",
+   "km": 220.34783,
+   "time": "14:20:58.433",
+   "timeOfDay": "9:34:48 pm",
+   "legTime": "05:18:52.027",
+   "kmh": "5.79",
+   "kmPace": "10:22"
+  },
+  {
+   "point": "RUN",
+   "label": "Run",
+   "km": 221.71,
+   "time": "14:37:44.596",
+   "timeOfDay": "9:51:34 pm",
+   "legTime": "05:35:38.19",
+   "kmh": "4.87",
+   "kmPace": "12:19"
+  }
+ ]
+}
