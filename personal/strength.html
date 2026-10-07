@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<!-- pwa -->
+<meta name="theme-color" content="#FAFDFD">
+<link rel="apple-touch-icon" href="assets/icons/strength-180.png">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/icons/strength-180.png">
+<link rel="manifest" href="assets/strength.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="근력">
+<!-- /pwa -->
+<title>전신 근력, 매일 최소만</title>
+<link rel="stylesheet" href="assets/summer.css">
+<style>
+  .today-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  .today-head .dt { font-size: clamp(28px, 5vw, 44px); font-weight: 600; letter-spacing: -0.02em; }
+  .today-head .ph { font-size: 14px; color: var(--ink-2); }
+  .today-head .min { margin-left: auto; font-size: 14px; color: var(--ink-2); }
+  .focus { font-size: 16px; color: var(--ink-2); margin-bottom: 28px; max-width: 62ch; }
+  .focus b { color: var(--ink); font-weight: 600; }
+  .flag { font-size: 14px; color: var(--accent); margin-bottom: 14px; }
+
+  ul.tasks { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  ul.tasks li { display: grid; grid-template-columns: 18px 1fr; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); align-items: start; }
+  ul.tasks label { cursor: pointer; display: block; }
+  ul.tasks .kind { font-size: 12px; color: var(--ink-2); letter-spacing: 0.04em; display: block; margin-bottom: 3px; }
+  ul.tasks .txt { font-size: 17px; line-height: 1.5; font-weight: 600; letter-spacing: -0.01em; }
+  ul.tasks .rx { font-weight: 400; color: var(--accent); margin-left: 6px; font-variant-numeric: tabular-nums; }
+  ul.tasks .sub { display: block; font-size: 14px; color: var(--ink-2); margin-top: 6px; line-height: 1.6; font-weight: 400; }
+  ul.tasks li.done .txt { color: var(--ink-2); }
+  ul.tasks li.done .sub { display: none; }
+  ul.tasks input.chk { margin-top: 4px; }
+  .more { font-size: 14px; color: var(--ink-2); margin-top: 16px; }
+  .more b { color: var(--ink); font-weight: 500; }
+  .tasks-foot { display: flex; align-items: center; gap: 16px; margin-top: 22px; font-size: 13px; color: var(--ink-2); }
+  .tasks-foot .meter { flex: 1; }
+
+  .calhead { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .calhead .m { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; min-width: 140px; }
+  .calhead .sp { margin-left: auto; }
+  .calhead .btn:disabled { opacity: .4; cursor: default; }
+  .cal { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .cal th { font-size: 12px; font-weight: 400; color: var(--ink-2); padding-bottom: 10px; text-align: center; border-bottom: 1px solid var(--line); }
+  .cal td { border-bottom: 1px solid var(--line); padding: 0; text-align: center; vertical-align: top; }
+  .cal button.day {
+    width: 100%; min-height: 70px; padding: 10px 2px 8px; background: none; border: 0; cursor: pointer;
+    font-family: var(--sans); display: flex; flex-direction: column; align-items: center; gap: 5px;
+    border-top: 2px solid transparent; transition: background-color .2s ease;
+  }
+  .cal button.day:hover { background: #F2F8F9; }
+  .cal button.day:disabled { cursor: default; }
+  .cal button.day:disabled:hover { background: none; }
+  .cal .n { font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .cal .out .n { color: #C9DDE1; }
+  .cal .light .n { color: var(--ink-2); }
+  .cal .today { border-top-color: var(--accent); }
+  .cal .today .n { background: var(--accent); color: #fff; font-weight: 600; border-radius: 4px; padding: 1px 7px; margin: -1px -5px; }
+  .cal .sel { background: #E7F2F4; box-shadow: inset 0 0 0 1px #CFE3E7; }
+  .cal .lb { font-size: 10.5px; color: var(--ink-2); line-height: 1.2; min-height: 13px; letter-spacing: -0.02em; }
+  .cal .test .lb { color: var(--accent); font-weight: 600; }
+  .cal .dot { width: 6px; height: 6px; border: 1px solid #CFE3E7; }
+  .cal .dot.done { background: var(--accent); border-color: var(--accent); }
+  .cal .dot.miss { border-color: #CFE3E7; background: transparent; }
+  .callegend { margin-top: 18px; font-size: 13px; color: var(--ink-2); display: flex; gap: 22px; flex-wrap: wrap; }
+  .callegend span { display: inline-flex; align-items: center; gap: 7px; }
+  .callegend i { width: 6px; height: 6px; border: 1px solid #CFE3E7; display: inline-block; }
+  .callegend i.d { background: var(--accent); border-color: var(--accent); }
+
+  .tally { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); margin-bottom: 48px; }
+  .tally > div { padding: 18px 20px 18px 0; border-bottom: 1px solid var(--line); }
+  .tally .n { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tally .l { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+
+  ol.prio { list-style: none; margin: 0; padding: 0; counter-reset: p; border-top: 1px solid var(--line); }
+  ol.prio > li { counter-increment: p; display: grid; grid-template-columns: 148px 1fr; gap: 32px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  ol.prio .k { font-size: 13px; color: var(--ink-2); }
+  ol.prio .k::before { content: "0" counter(p) "  "; color: var(--accent); font-variant-numeric: tabular-nums; }
+  ol.prio .k b { display: block; color: var(--ink); font-size: 17px; margin-top: 4px; letter-spacing: -0.02em; }
+  ol.prio .ev { font-size: 15px; color: var(--ink-2); margin-top: 6px; }
+  ol.prio .ev b { color: var(--ink); font-weight: 500; }
+  .note { font-size: 14px; color: var(--ink-2); margin-top: 20px; max-width: 72ch; }
+
+  .phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--line); }
+  .phases > div { padding: 20px 20px 20px 0; border-bottom: 1px solid var(--line); }
+  .phases .d { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .phases .t { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; margin-top: 4px; }
+  .phases .s { font-size: 14px; color: var(--ink-2); margin-top: 6px; line-height: 1.6; }
+
+  table.week { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 720px; }
+  table.week th, table.week td { text-align: left; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.week thead th { font-size: 12px; font-weight: 500; color: var(--ink-2); }
+  table.week td:first-child { white-space: nowrap; }
+  table.week td:first-child b { display: block; font-weight: 600; }
+  table.week td:first-child span { font-size: 12px; color: var(--ink-2); }
+  table.week .r { color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .gloss { border-top: 1px solid var(--line); }
+  .gloss > div { display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 16px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 80px; }
+  .gloss dt { font-size: 15px; font-weight: 600; margin: 0; }
+  .gloss dt span { display: block; font-size: 12px; font-weight: 400; color: var(--ink-2); margin-top: 2px; }
+  .gloss dd { margin: 0; font-size: 15px; color: var(--ink-2); }
+  .gloss > div:target { background: #F2F8F9; }
+
+  table.tests { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+  table.tests th, table.tests td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  table.tests thead th { font-size: 12px; font-weight: 500; color: var(--ink-2); white-space: nowrap; }
+  table.tests td:first-child b { display: block; font-weight: 600; }
+  table.tests td:first-child span { font-size: 12px; color: var(--ink-2); }
+  table.tests input {
+    width: 84px; height: 36px; padding: 0 8px; border: 1px solid var(--line); border-radius: 6px; background: #fff;
+    font-family: var(--sans); font-size: 14px; color: var(--ink); font-variant-numeric: tabular-nums; outline: none;
+    transition: border-color .2s ease;
+  }
+  table.tests input:focus { border-color: var(--accent); }
+
+  ul.rules { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  ul.rules li { padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  ul.rules li span { display: block; font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+
+  @media (max-width: 1024px) {
+    ol.prio > li { grid-template-columns: 110px 1fr; gap: 24px; }
+    .phases { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .today-head .min { margin-left: 0; width: 100%; }
+    .calhead .m { min-width: 0; font-size: 17px; flex: 1; }
+    .cal button.day { min-height: 60px; }
+    .cal .lb { font-size: 9.5px; }
+    .tally { grid-template-columns: 1fr 1fr 1fr; }
+    .tally > div { padding: 14px 8px 14px 0; }
+    .tally .n { font-size: 20px; }
+    ol.prio > li { grid-template-columns: 1fr; gap: 4px; padding: 20px 0; }
+    .phases { grid-template-columns: 1fr; }
+    .phases > div { padding: 16px 0; }
+    .gloss > div { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="index.html">Personal</a>
+    <div class="links">
+      <a href="strength.html" aria-current="page">근력</a>
+      <a href="exercise.html#result">구례 기록</a>
+      <a href="bike_forces.html">안장</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap-narrow">
+    <div class="eyebrow" style="margin-bottom:22px">Strength · 2026. 10. 8 – 2027. 2. 28</div>
+    <div class="today-head">
+      <span class="dt" id="dt">—</span>
+      <span class="ph" id="ph"></span>
+      <span class="min tnum" id="min"></span>
+    </div>
+    <p class="focus" id="focus"></p>
+    <div id="flag"></div>
+    <div id="taskbox"></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= 달력 ================= -->
+  <section class="band" id="calendar">
+    <div class="wrap-narrow">
+      <div class="tally" id="tally"></div>
+      <div class="calhead">
+        <span class="m" id="mlabel">—</span>
+        <button class="btn btn-ghost btn-sm" id="prev">이전</button>
+        <button class="btn btn-ghost btn-sm" id="next">다음</button>
+        <button class="btn btn-ghost btn-sm sp" id="gotoday">오늘</button>
+      </div>
+      <table class="cal">
+        <thead><tr id="calhead"></tr></thead>
+        <tbody id="calbody"></tbody>
+      </table>
+      <div class="callegend">
+        <span><i class="d"></i>다 한 날</span>
+        <span><i></i>아직 / 못 한 날</span>
+        <span>숫자가 흐린 날은 가볍게(헬스장 세트 2개)</span>
+        <span>날짜를 누르면 그날 할 일이 위에 뜬다</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 01 무엇을 키우나 ================= -->
+  <section class="band" id="why">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="idx">01</div>
+        <div>
+          <span class="eyebrow">What to build</span>
+          <h2>무엇을 키우나 — 기록이 가리키는 순서</h2>
+          <p class="lead">74일 훈련 동안 근력 운동은 <b>하체 뒤쪽(맨몸 RDL·브리지·런지·카프)과 코어(플랭크·데드버그·버드독)</b>만, 주 2회 하다가 9/6에 끊었습니다. <b>상체는 한 번도 안 했습니다.</b> 어떤 종목이든 잘하려면 밀기·당기기·무릎·엉덩이·한 다리·몸통·순간 힘, 일곱 가지가 다 있어야 합니다. 비어 있는 것부터 채웁니다.</p>
+        </div>
+      </div>
+      <div class="sec-body">
+        <ol class="prio">
+          <li><div class="k">당기기<b>등 · 광배 · 어깨 뒤</b></div>
+            <div><div>지금까지 <b>0회</b>. 가장 큰 빈칸.</div>
+            <div class="ev">구례 수영 2바퀴째가 <b>2:32 → 2:40/100m</b>로 느려졌습니다. 물을 뒤로 미는 건 광배입니다. 바이크에서는 손 저림과 어깨 뭉침이 계속 나왔고(<a href="bike_forces.html">안장 위의 힘</a>), 등 위쪽이 약하면 어깨가 앞으로 말려 그 하중이 손으로 갑니다. 구기·라켓·격투·클라이밍 어디서나 기본입니다.</div></div></li>
+          <li><div class="k">밀기<b>가슴 · 어깨 · 삼두</b></div>
+            <div><div>지금까지 <b>0회</b>.</div>
+            <div class="ev">넘어질 때 버티기, 던지기, 몸싸움, 수영 스트로크 마무리 — 지구력 종목만 하면 거의 안 쓰는 힘입니다. 당기기와 짝으로 키워야 어깨가 한쪽으로 쏠리지 않습니다.</div></div></li>
+          <li><div class="k">한 다리 · 착지<b>대퇴사두 · 종아리</b></div>
+            <div><div>런 페이스가 바퀴마다 떨어졌습니다.</div>
+            <div class="ev">1바퀴 <b>6:27</b> → 2바퀴 7:19 → 3바퀴 8:33 → 4바퀴 <b>9:25/km</b>. 후반 감속에는 보급·페이스도 섞여 있지만, 착지마다 충격을 받아내는 허벅지 앞·종아리의 <b>버티는(편심) 힘</b>이 떨어지면 보폭이 줄어듭니다. 달리기는 한 다리 운동의 연속이라, 두 다리 스쿼트보다 스플릿 스쿼트·스텝다운이 맞습니다.</div></div></li>
+          <li><div class="k">엉덩이 · 허벅지 뒤<b>햄스트링 · 둔근</b></div>
+            <div><div>기초는 있음 — 한 단계 올린다.</div>
+            <div class="ev">8월 롱라이드 <b>80km에서 햄스트링 경련</b>, 구례 바이크 순환 구간 속도는 <b>27.4·28.8 → 24.7·25.6·24.0km/h</b>로 후반이 처졌습니다. 7~8월 근력 A(맨몸 RDL·브리지)는 해 봤으니, 한 다리 RDL과 슬라이딩 레그컬로 부하를 올립니다.</div></div></li>
+          <li><div class="k">몸통<b>버티는 코어</b></div>
+            <div><div>플랭크는 해 봤음 — 옆과 회전으로.</div>
+            <div class="ev">손에 실리는 무게를 줄이는 건 결국 몸통과 엉덩이입니다(<a href="bike_forces.html">안장 위의 힘</a>). 앞 플랭크는 해 봤으니 사이드 플랭크, 버드독, 할로우처럼 옆으로 꺾이고 돌아가는 걸 버티는 쪽으로 넓힙니다.</div></div></li>
+          <li><div class="k">순간 힘<b>점프 · 폭발</b></div>
+            <div><div>지구력 훈련으로는 거의 안 생김.</div>
+            <div class="ev">NP 135~145W로 7시간 타는 몸은 빠르게 힘을 내는 쪽은 안 씁니다. 구기·라켓 종목에 필요한 마지막 조각이라, 근육과 힘줄이 준비된 <b>3단계(1월)</b>에 점프로 넣습니다.</div></div></li>
+        </ol>
+        <p class="note">이 순서는 구례 구간 기록과 훈련 캘린더에서 <b>추론한 것</b>이고, 근력을 직접 잰 숫자는 아직 없습니다. 그래서 10/19에 기준 테스트(04)를 하고, 단계마다 다시 잽니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 단계와 주간 리듬 ================= -->
+  <section class="band" id="plan">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="idx">02</div>
+        <div>
+          <span class="eyebrow">Phases & week</span>
+          <h2>네 단계, 아침 헬스장 두 동작</h2>
+          <p class="lead">평일 아침 헬스장 최소 과제는 <b>두 동작, 몸 풀기 포함 약 20분</b>. 수영 레슨이 있는 월·수는 아침에 하체를 둬서 상체가 겹치지 않게, 금요일은 주말 로라·달리기를 생각해 한 다리 운동을 적당히. 토요일 평로라, 일요일 달리기는 고정 일정 그대로 과제에 넣었습니다. 시간이 남으면 「시간이 남으면」 한 줄을 보거나 알아서 더하면 됩니다.</p>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="phases" id="phases"></div>
+        <div class="tbl-scroll" style="margin-top:48px">
+          <table class="week" id="week"></table>
+        </div>
+        <p class="note"><b>1단계는 덤벨·케이블·머신, 2단계부터 바벨.</b> 바벨 스쿼트·벤치는 혼자 할 때 안전바를 꼭 걸고, 처음 1~2주는 빈 바(20kg)로 자세부터. 기계가 차 있으면 같은 부위 다른 기구로 바꿔도 됩니다 — 랫풀다운↔어시스트 풀업, 케이블 로우↔덤벨 로우.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 03 동작 ================= -->
+  <section class="band" id="moves">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="idx">03</div>
+        <div>
+          <span class="eyebrow">Moves</span>
+          <h2>동작 설명</h2>
+          <p class="lead">무게는 <b>마지막 세트에서 2개쯤 더 할 수 있겠다 싶은 무게</b>. 모든 세트에서 범위 위쪽 횟수를 채우면 다음 주에 올립니다 — 상체 +1~2.5kg, 하체 +2.5~5kg. 반동은 쓰지 않고, 내려가는 쪽을 천천히. 본 세트 전에 같은 동작 가벼운 무게로 1~2세트 몸 풀기.</p>
+        </div>
+      </div>
+      <div class="sec-body">
+        <dl class="gloss" id="gloss"></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04 기준 테스트 ================= -->
+  <section class="band" id="tests">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="idx">04</div>
+        <div>
+          <span class="eyebrow">Baseline</span>
+          <h2>기준 테스트 — 단계마다 한 번</h2>
+          <p class="lead">테스트 날은 아침 헬스장에서 그게 그날 과제입니다. 15분, 다섯 가지를 몸 풀고 순서대로. 무게가 아니라 맨몸 숫자라 단계가 바뀌어도 비교가 됩니다. 숫자는 이 기기에 저장됩니다.</p>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="tbl-scroll"><table class="tests" id="testtbl"></table></div>
+        <p class="note">다음 단계 동작이 너무 어려우면(특히 바벨로 넘어갈 때) 이전 단계 동작을 한 주 더 합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 05 규칙 ================= -->
+  <section class="band band-last" id="rules">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="idx">05</div>
+        <div>
+          <span class="eyebrow">Rules</span>
+          <h2>지킬 것 다섯 가지</h2>
+        </div>
+      </div>
+      <div class="sec-body">
+        <ul class="rules">
+          <li><b>빠진 날은 메꾸지 않는다.</b><span>어제 걸 오늘 몰아서 하지 않고, 오늘 것만 합니다. 매일 하는 게 목적이라 하루 양을 늘리지 않습니다.</span></li>
+          <li><b>최소 과제가 끝나면 그날은 성공.</b><span>더 하는 건 자유. 다만 다음 날 같은 부위가 아프면 그날은 「시간이 남으면」을 건너뜁니다. 헬스장을 못 간 날은 푸시업·스쿼트 한 세트라도.</span></li>
+          <li><b>관절이 찌르듯 아프면 그 동작은 뺀다.</b><span>근육이 뻐근한 건 괜찮습니다. 무릎·어깨·허리가 날카롭게 아프면 그날은 모빌리티로 바꾸고, 사흘 넘게 가면 병원.</span></li>
+          <li><b>단백질은 체중 1kg당 1.6g.</b><span>82kg이면 하루 약 130g — 끼니마다 손바닥 한두 개 크기의 고기·생선·두부·계란. 운동보다 이게 먼저 막힙니다.</span></li>
+          <li><b>유산소는 편하게.</b><span>수영 레슨(월·수), 평로라(토), 달리기(일)로 지구력은 충분히 유지됩니다. 이 기간엔 근력이 우선이라 인터벌·장거리 욕심은 내지 않습니다 — 강한 유산소는 근육이 크는 걸 방해합니다.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a href="exercise.html#result">구례 기록과 구간 분석</a> · <a href="index.html">처음으로</a>
+    <div style="margin-top:8px">체크와 테스트 기록은 이 브라우저에만 저장된다</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var DONE_KEY = 'strength.done.v1', TEST_KEY = 'strength.tests.v1';
+  var START = '2026-10-08', END = '2027-02-28';
+  var WD = ['일','월','화','수','목','금','토'];
+  var GYM = '아침 헬스장';
+
+  /* ---------- 동작 ---------- */
+  var EX = {
+    mob:      { n:'모빌리티', g:'회복', how:'90/90 고관절 전환 1분씩 · 오픈북 흉추 회전 좌우 8회 · 종아리·햄스트링 스트레칭 좌우 1분. 숨 참지 않고 천천히.' },
+    ebike:    { n:'실내 자전거', g:'회복', how:'헬스장 자전거로 숨이 안 찰 만큼. 다리에 피를 돌리는 용도.' },
+    goblet:   { n:'고블릿 스쿼트', g:'무릎', how:'덤벨 하나를 가슴 앞에 세로로 안고 앉는다. 팔꿈치가 무릎 안쪽을 스칠 만큼 깊게, 상체는 세운다. 스쿼트 자세를 배우는 동작.' },
+    backsq:   { n:'바벨 백스쿼트', g:'무릎', how:'스쿼트 랙에서 바를 등 위쪽(승모근)에 얹고, 엉덩이를 뒤로 빼며 허벅지가 평행보다 조금 아래까지. 무릎은 발끝 방향, 발 전체로 민다. 안전바를 꼭 걸 것.' },
+    calf:     { n:'스탠딩 카프 레이즈', g:'무릎', how:'카프 머신이나 스미스 머신에서 발 앞꿈치를 발판 끝에 걸치고, 뒤꿈치를 끝까지 내렸다가 끝까지 올린다. 내려가는 데 2초.' },
+    calf1:    { n:'한 다리 카프 레이즈', g:'무릎', how:'한 손에 덤벨, 다른 손은 벽을 잡고 한 발로. 내려가는 데 3초. 아킬레스건이 당기면 범위를 줄인다.' },
+    boxjump:  { n:'박스 점프', g:'순간 힘', how:'무릎 높이 박스에 두 발로 뛰어올라 조용히 착지한다. 내려올 때는 걸어서. 높이보다 착지가 부드러운 게 먼저.' },
+    latpd:    { n:'랫풀다운', g:'당기기', how:'어깨너비보다 조금 넓게 잡고, 가슴을 들어 바를 쇄골 쪽으로 당긴다. 팔이 아니라 팔꿈치를 옆구리로 끌어내리는 느낌. 몸을 뒤로 젖히지 않는다.' },
+    apull:    { n:'어시스트 풀업', g:'당기기', how:'어시스트 머신에 무릎을 대고 한다. 보조 무게는 범위 위쪽이 겨우 되는 만큼, 매주 줄여 간다. 턱이 바를 넘을 때까지.' },
+    pullup:   { n:'풀업', g:'당기기', how:'어깨너비로 매달려 턱이 바를 넘을 때까지 당긴다. 반동 없이, 다 내려와 팔을 편 뒤 다음 회. 1개도 안 되면 어시스트 풀업, 쉽게 되면 벨트에 원판.' },
+    dbbench:  { n:'덤벨 벤치프레스', g:'밀기', how:'벤치에 누워 날개뼈를 모으고 덤벨을 가슴 옆까지 내렸다 민다. 팔꿈치는 몸통에서 45도쯤.' },
+    bench:    { n:'바벨 벤치프레스', g:'밀기', how:'날개뼈를 모아 벤치에 박고 발로 바닥을 민다. 바를 명치 위쪽 가슴에 살짝 닿게 내렸다 민다. 혼자면 안전바 높이를 맞출 것.' },
+    rdl_db:   { n:'덤벨 RDL', g:'엉덩이', how:'덤벨 두 개를 허벅지 앞에 들고, 무릎은 살짝 굽힌 채 엉덩이를 뒤로 빼며 덤벨을 정강이까지 내린다. 허리는 평평하게, 햄스트링이 당기면 거기까지.' },
+    rdl:      { n:'바벨 RDL', g:'엉덩이', how:'덤벨 RDL과 같은 동작을 바벨로. 바가 허벅지·정강이를 스치듯 몸에 붙여 내린다.' },
+    legcurl:  { n:'라잉 레그컬', g:'엉덩이', how:'레그컬 머신에 엎드려 뒤꿈치를 엉덩이 쪽으로 당긴다. 내리는 데 3초. 엉덩이가 들리지 않게.' },
+    backext:  { n:'45° 백 익스텐션', g:'엉덩이', how:'패드를 골반 바로 아래에 두고 엉덩이로 접었다 편다. 허리를 젖히지 말고 몸이 일직선이 되면 멈춤. 쉬우면 원판을 가슴에.' },
+    kbswing:  { n:'케틀벨 스윙', g:'순간 힘', how:'다리 사이로 케틀벨을 뒤로 보냈다가 엉덩이를 세게 펴서 가슴 높이까지 띄운다. 팔로 들지 않는다. 스쿼트가 아니라 힙 힌지.' },
+    cablerow: { n:'시티드 케이블 로우', g:'당기기', how:'가슴을 세우고 손잡이를 배꼽 쪽으로 당기며 날개뼈를 모은다. 상체를 앞뒤로 흔들지 않는다.' },
+    csrow:    { n:'체스트 서포티드 덤벨 로우', g:'당기기', how:'경사 벤치(30~45도)에 가슴을 대고 엎드려 덤벨을 옆구리로 당긴다. 허리 부담 없이 등만.' },
+    bbrow:    { n:'바벨 로우', g:'당기기', how:'RDL 자세로 상체를 45도쯤 숙이고 바를 배꼽 쪽으로 당긴다. 허리는 평평하게, 반동 없이.' },
+    dbohp:    { n:'덤벨 숄더 프레스', g:'밀기', how:'벤치에 앉거나 서서 덤벨을 귀 옆에서 머리 위로 민다. 허리를 젖히지 않는다.' },
+    ohp:      { n:'바벨 오버헤드 프레스', g:'밀기', how:'서서 바를 쇄골 앞에서 머리 위로 민다. 엉덩이·배에 힘을 줘 허리가 꺾이지 않게. 바가 지나가면 머리를 앞으로.' },
+    pushpress:{ n:'푸시 프레스', g:'순간 힘', how:'오버헤드 프레스 자세에서 무릎을 살짝 굽혔다가 다리로 튕기며 바를 머리 위로. 프레스보다 무겁게, 빠르게.' },
+    dblunge:  { n:'덤벨 리버스 런지', g:'한 다리', how:'양손에 덤벨을 들고 한 발을 뒤로 크게 내딛어 뒷무릎이 바닥 직전까지. 앞발 뒤꿈치로 밀고 돌아온다.' },
+    bss:      { n:'불가리안 스플릿 스쿼트', g:'한 다리', how:'뒷발 등을 벤치에 올리고 양손 덤벨로 앞다리로 앉았다 일어선다. 앞 무릎은 발끝 방향, 앞발 뒤꿈치로 민다.' },
+    pallof:   { n:'팔로프 프레스', g:'몸통', how:'케이블을 가슴 높이에 두고 옆으로 서서 손잡이를 가슴 앞에서 쭉 밀어 2초 버틴다. 몸이 케이블 쪽으로 돌아가지 않게 버티는 게 운동.' },
+    hkr:      { n:'행잉 니 레이즈', g:'몸통', how:'바에 매달려 무릎을 가슴 쪽으로 끌어올리며 골반을 만다. 반동 없이, 내릴 때 천천히.' },
+    skater:   { n:'스케이터 점프', g:'순간 힘', how:'옆으로 뛰어 반대쪽 한 발로 착지하고 2초 멈춘다. 좌우 번갈아. 거리보다 착지 안정.' },
+    swim:     { n:'수영 레슨', g:'고정', how:'정해진 레슨 그대로. 아침에 하체를 했으니 다리 킥은 무리하지 않아도 된다.' },
+    roller:   { n:'평로라', g:'고정', how:'대화 가능한 강도(NP 140W 안팎). 근력이 우선인 기간이라 인터벌은 넣지 않는다.' },
+    run:      { n:'달리기', g:'고정', how:'편한 페이스, 대화가 되는 속도. 근력 기간이라 길이·속도 욕심은 내지 않는다.' },
+    walk:     { n:'걷기 · 조깅', g:'회복', how:'대회 1주 차라 걷기나 아주 느린 조깅. 다리가 무거우면 걷기만.' },
+    test:     { n:'기준 테스트', g:'테스트', how:'몸 풀기 5분 후 04 기준 테스트 다섯 가지. 결과를 표에 적는다.' }
+  };
+
+  /* ---------- 단계 ---------- */
+  var PH = [
+    { id:'p0', from:'2026-10-08', to:'2026-10-18', name:'0 · 회복', s:'대회 후 2주는 근육 손상이 남아 있습니다. 첫 주는 헬스장에서 모빌리티와 가벼운 자전거만, 10/14부터 기초 동작을 가벼운 무게로 2세트.' },
+    { id:'p1', from:'2026-10-19', to:'2026-11-29', name:'1 · 기초', s:'덤벨·케이블·머신으로 일곱 가지 패턴을 배웁니다. 처음 해 보는 당기기·밀기가 핵심. 마지막 주는 가볍게.' },
+    { id:'p2', from:'2026-11-30', to:'2027-01-10', name:'2 · 증량', s:'바벨로 옮겨 무게를 올립니다 — 스쿼트·벤치·RDL·오버헤드 프레스. 연말 주(12/28–1/3)는 가볍게.' },
+    { id:'p3', from:'2027-01-11', to:'2027-02-28', name:'3 · 파워', s:'점프·스윙·푸시 프레스를 앞에, 무거운 동작을 뒤에. 풀업 맨몸 도전. 마지막 주 가볍게, 2/26 마지막 테스트.' }
+  ];
+  var LIGHT = [['2026-11-23','2026-11-29'],['2026-12-28','2027-01-03'],['2027-02-22','2027-02-28']];
+  var TESTS = ['2026-10-19','2026-11-30','2027-01-11','2027-02-26'];
+
+  /* 요일: [주제, 이유, 달력 라벨] */
+  var THEME = {
+    1:['하체 · 무릎', '런 후반 감속 — 착지를 받는 허벅지 앞·종아리. 저녁 수영은 상체라 겹치지 않는다', '하체'],
+    2:['상체 · 위로 당기고 앞으로 민다', '당기기·밀기 모두 지금까지 0회 — 수영 당기기, 바이크에서 상체 받치기', '상체'],
+    3:['엉덩이 · 허벅지 뒤', '8월 80km 햄스트링 경련, 바이크 후반 감속. 저녁 수영과 안 겹친다', '엉덩이'],
+    4:['상체 · 수평으로 당기고 위로 민다', '화요일과 다른 각도로 — 어깨가 한쪽으로 쏠리지 않게', '상체'],
+    5:['한 다리 · 몸통', '달리기는 한 다리 운동의 연속. 주말 로라·달리기를 위해 무게는 적당히', '한 다리'],
+    6:['평로라', '바이크 감각 유지 — 그 외 시간은 자율', '로라'],
+    0:['달리기', '러닝 유지 — 근력이 우선인 기간이라 편하게', '달리기']
+  };
+  /* 아침 헬스장 두 동작 + 고정 일정 */
+  var FIXED = { 1:[['swim','레슨','저녁']], 3:[['swim','레슨','저녁']], 6:[['roller','1시간 · 편하게','오전']], 0:[['run','30분 이상 · 편한 페이스','']] };
+  var WEEK = {
+    p1: {
+      1:[[['goblet','3×10'],['calf','3×15']], '레그 프레스 2×12'],
+      2:[[['latpd','3×10'],['dbbench','3×10']], '덤벨 컬·트라이셉스 푸시다운 2×12'],
+      3:[[['rdl_db','3×10'],['legcurl','3×12']], '45° 백 익스텐션 2×12'],
+      4:[[['cablerow','3×10'],['dbohp','3×10']], '페이스 풀 2×15'],
+      5:[[['dblunge','3×10 / 다리'],['pallof','3×10 / 쪽']], '사이드 플랭크 2×30초 / 쪽'],
+      6:[[], '오후는 자율 — 하고 싶은 운동'],
+      0:[[], '모빌리티 8분']
+    },
+    p2: {
+      1:[[['backsq','3×6~8'],['calf1','3×12 / 다리']], '고블릿 스쿼트 1×15'],
+      2:[[['apull','3×6~8'],['bench','3×6~8']], '덤벨 컬·트라이셉스 푸시다운 2×10'],
+      3:[[['rdl','3×6~8'],['backext','3×10']], '라잉 레그컬 2×10'],
+      4:[[['csrow','3×8~10'],['ohp','3×6~8']], '페이스 풀 2×15'],
+      5:[[['bss','3×8 / 다리'],['hkr','3×10']], '팔로프 프레스 2×10 / 쪽'],
+      6:[[], '오후는 자율 — 하고 싶은 운동'],
+      0:[[], '모빌리티 8분']
+    },
+    p3: {
+      1:[[['boxjump','3×5 · 매 회 내려와 리셋'],['backsq','3×5']], '한 다리 카프 레이즈 2×12'],
+      2:[[['pullup','3×(최대−1)'],['bench','3×5']], '행잉 니 레이즈 2×10'],
+      3:[[['kbswing','3×10'],['rdl','3×5~6']], '45° 백 익스텐션 2×10'],
+      4:[[['pushpress','3×5'],['bbrow','3×6~8']], '페이스 풀 2×15'],
+      5:[[['skater','3×6 / 쪽 · 착지 2초'],['bss','3×6 / 다리 · 무겁게']], '팔로프 프레스 2×10 / 쪽'],
+      6:[[], '오후는 자율 — 하고 싶은 운동'],
+      0:[[], '모빌리티 8분']
+    }
+  };
+
+  /* ---------- 날짜 ---------- */
+  function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function pd(s){ return new Date(s+'T00:00:00'); }
+  function el(id){ return document.getElementById(id); }
+  function inR(s,a,b){ return s>=a && s<=b; }
+  var today = new Date(); today.setHours(0,0,0,0);
+  var TODAY = iso(today);
+
+  function phaseOf(s){ for (var i=0;i<PH.length;i++) if (inR(s,PH[i].from,PH[i].to)) return PH[i]; return null; }
+  function isLight(s){ return LIGHT.some(function(r){ return inR(s,r[0],r[1]); }); }
+  function gym(list){ return list.map(function(x){ return [x[0], x[1], GYM]; }); }
+  function two(list, extra){ return list.map(function(x){ return [x[0], x[1].replace(/^3×/,'2×') + (extra||''), x[2]]; }); }
+  function minText(dow, hasGym){
+    var f = { 1:' + 저녁 수영', 3:' + 저녁 수영' }[dow] || '';
+    if (dow === 6) return '평로라 1시간';
+    if (dow === 0) return '달리기 30분+';
+    return hasGym ? '헬스장 약 20분' + f : '';
+  }
+
+  function plan(s){
+    var ph = phaseOf(s); if (!ph) return null;
+    var dow = pd(s).getDay(), fixed = (FIXED[dow] || []).slice();
+    var th = THEME[dow];
+    if (TESTS.indexOf(s) >= 0) {
+      return { ph:ph, theme:'기준 테스트', lb:'테스트', why: s===TESTS[0] ? '시작점을 숫자로 남긴다' : '지난 단계가 무엇을 바꿨는지 잰다',
+               tasks:[['test','15분',GYM]].concat(fixed), more:'테스트 후 그날 요일 동작을 가볍게 2세트', min:'헬스장 약 20분' + ({1:' + 저녁 수영'}[dow]||''), test:true };
+    }
+    if (ph.id === 'p0') {
+      var early = s < '2026-10-14';
+      if (dow === 6) fixed = [['roller', early ? '40~60분 · 아주 가볍게' : '1시간 · 편하게', '오전']];
+      if (dow === 0) fixed = early ? [['walk','20분','']] : [['run','30분 · 아주 편하게','']];
+      if (dow === 0 || dow === 6) {
+        return { ph:ph, theme: early ? '회복' : th[0], lb: early ? '회복' : th[2], why: early ? '대회 후 첫 주 — 부하 없이 움직임만' : th[1],
+                 tasks:fixed, more: early ? '모빌리티 8분' : WEEK.p1[dow][1], min: minText(dow,false) };
+      }
+      var t = early ? [['mob','8분',GYM],['ebike','15분 · 가볍게',GYM]]
+                    : two(gym(WEEK.p1[dow][0]), ' · 가벼운 무게');
+      return { ph:ph, theme: early ? '회복' : th[0], lb: early ? '회복' : th[2],
+               why: early ? '대회 후 첫 주 — 헬스장 가는 습관만, 부하 없이' : '기초 동작 맛보기 — 무게는 할 만하다 싶은 것의 절반',
+               tasks:t.concat(fixed), more: early ? '모빌리티를 더 길게' : '더 하지 않는다 — 회복 기간',
+               min: early ? '헬스장 약 25분' + ({1:' + 저녁 수영'}[dow]||'') : minText(dow,true), light: !early };
+    }
+    var w = WEEK[ph.id][dow], light = isLight(s);
+    var g = gym(w[0]); if (light) g = two(g);
+    return { ph:ph, theme:th[0], lb:th[2], why:th[1], tasks:g.concat(fixed),
+             more: light && g.length ? '가볍게 주 — 더 하지 않는다' : w[1], min:minText(dow, g.length>0), light:light };
+  }
+
+  /* ---------- 저장 ---------- */
+  var done = {};
+  try { done = JSON.parse(localStorage.getItem(DONE_KEY)) || {}; } catch(e){ done = {}; }
+  function save(){ try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch(e){} }
+  function dayDone(s){ var p = plan(s); if (!p) return false; var d = done[s] || [];
+    return p.tasks.every(function(_,i){ return !!d[i]; }); }
+
+  /* ---------- 오늘(선택한 날) ---------- */
+  var sel = (TODAY < START) ? START : (TODAY > END ? END : TODAY);
+
+  function renderDay(){
+    var p = plan(sel), d = pd(sel);
+    el('dt').textContent = (d.getMonth()+1)+'월 '+d.getDate()+'일 '+WD[d.getDay()]+'요일';
+    var rel = sel === TODAY ? '오늘' : (sel < TODAY ? '지난 날' : '미리 보기');
+    if (TODAY < START && sel === START) rel = '내일 시작';
+    el('ph').textContent = p ? (p.ph.name + ' · ' + rel) : rel;
+    el('min').textContent = p ? p.min : '';
+    if (!p) { el('focus').textContent = '계획 기간 밖의 날.'; el('taskbox').innerHTML = ''; el('flag').innerHTML=''; return; }
+    el('focus').innerHTML = '<b>'+p.theme+'</b> — '+p.why+'.';
+    el('flag').innerHTML = p.test ? '<p class="flag">테스트 날 — <a href="#tests">04 기준 테스트</a> 표에 숫자를 적는다.</p>'
+                        : (p.light ? '<p class="flag">가볍게 — 헬스장 동작은 세트 2개만.</p>' : '');
+    var dd = done[sel] || [];
+    var html = '<ul class="tasks">' + p.tasks.map(function(t,i){
+      var e = EX[t[0]];
+      return '<li class="'+(dd[i]?'done':'')+'"><input type="checkbox" class="chk" id="t'+i+'" data-i="'+i+'"'+(dd[i]?' checked':'')+'>' +
+        '<label for="t'+i+'">'+(t[2]?'<span class="kind">'+t[2]+'</span>':'')+'<span class="txt">'+e.n+'<span class="rx">'+t[1]+'</span></span>' +
+        '<span class="sub">'+e.how+'</span></label></li>';
+    }).join('') + '</ul>';
+    html += '<p class="more">시간이 남으면 — <b>'+p.more+'</b></p>';
+    var n = p.tasks.filter(function(_,i){ return dd[i]; }).length;
+    html += '<div class="tasks-foot"><span class="meter"><i style="width:'+Math.round(n/p.tasks.length*100)+'%"></i></span><span class="tnum">'+n+' / '+p.tasks.length+'</span></div>';
+    el('taskbox').innerHTML = html;
+    el('taskbox').querySelectorAll('input.chk').forEach(function(c){
+      c.addEventListener('change', function(){
+        var i = +c.dataset.i; var a = done[sel] || []; a[i] = c.checked; done[sel] = a; save();
+        renderDay(); renderCal(); renderTally();
+      });
+    });
+  }
+
+  /* ---------- 집계 ---------- */
+  function renderTally(){
+    var s, all = 0, ok = 0, streak = 0, wk = 0, wkOk = 0;
+    var end = TODAY < END ? TODAY : END;
+    var mon = new Date(today); mon.setDate(mon.getDate() - ((mon.getDay()+6)%7)); var MON = iso(mon);
+    var d = pd(START);
+    while (iso(d) <= end) { s = iso(d); all++; if (dayDone(s)) ok++; if (s >= MON) { wk++; if (dayDone(s)) wkOk++; } d.setDate(d.getDate()+1); }
+    d = pd(end); if (!dayDone(iso(d))) d.setDate(d.getDate()-1);
+    while (iso(d) >= START && dayDone(iso(d))) { streak++; d.setDate(d.getDate()-1); }
+    var total = Math.round((pd(END)-pd(START))/86400000)+1;
+    el('tally').innerHTML =
+      '<div><div class="n">'+streak+'일</div><div class="l">연속</div></div>' +
+      '<div><div class="n">'+(wk ? wkOk+' / '+wk : '—')+'</div><div class="l">'+(TODAY < START ? '10/8 시작' : '이번 주')+'</div></div>' +
+      '<div><div class="n">'+ok+' / '+total+'</div><div class="l">전체 21주</div></div>';
+  }
+
+  /* ---------- 달력 ---------- */
+  var view = pd(sel); view.setDate(1);
+  function renderCal(){
+    el('mlabel').textContent = view.getFullYear()+'년 '+(view.getMonth()+1)+'월';
+    el('calhead').innerHTML = ['월','화','수','목','금','토','일'].map(function(w){ return '<th>'+w+'</th>'; }).join('');
+    var first = new Date(view), lead = (first.getDay()+6)%7;
+    var cur = new Date(first); cur.setDate(1-lead);
+    var rows = '';
+    for (var r=0; r<6; r++) {
+      var tds = '';
+      for (var c=0; c<7; c++) {
+        var s = iso(cur), p = plan(s), inMonth = cur.getMonth() === view.getMonth();
+        var cls = ['day'];
+        if (!inMonth || !p) cls.push('out');
+        if (p && p.light) cls.push('light');
+        if (p && p.test) cls.push('test');
+        if (s === TODAY) cls.push('today');
+        if (s === sel) cls.push('sel');
+        var lb = '', dot = '';
+        if (p && inMonth) { lb = p.lb; dot = '<span class="dot'+(dayDone(s)?' done':'')+'"></span>'; }
+        tds += '<td><button class="'+cls.join(' ')+'" data-d="'+s+'"'+((!p||!inMonth)?' disabled':'')+'>' +
+               '<span class="n">'+cur.getDate()+'</span><span class="lb">'+lb+'</span>'+dot+'</button></td>';
+        cur.setDate(cur.getDate()+1);
+      }
+      rows += '<tr>'+tds+'</tr>';
+      if (cur.getMonth() !== view.getMonth() && r >= 3) break;
+    }
+    el('calbody').innerHTML = rows;
+    el('calbody').querySelectorAll('button.day:not(:disabled)').forEach(function(b){
+      b.addEventListener('click', function(){ sel = b.dataset.d; renderDay(); renderCal();
+        window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    var minM = pd(START); minM.setDate(1); var maxM = pd(END); maxM.setDate(1);
+    el('prev').disabled = view <= minM; el('next').disabled = view >= maxM;
+  }
+  el('prev').addEventListener('click', function(){ view.setMonth(view.getMonth()-1); renderCal(); });
+  el('next').addEventListener('click', function(){ view.setMonth(view.getMonth()+1); renderCal(); });
+  el('gotoday').addEventListener('click', function(){
+    sel = (TODAY < START) ? START : (TODAY > END ? END : TODAY);
+    view = pd(sel); view.setDate(1); renderDay(); renderCal();
+  });
+
+  /* ---------- 단계 · 주간표 ---------- */
+  function md(s){ var d = pd(s); return (d.getMonth()+1)+'/'+d.getDate(); }
+  el('phases').innerHTML = PH.map(function(p){
+    var days = Math.round((pd(p.to)-pd(p.from))/86400000)+1;
+    return '<div><div class="d">'+md(p.from)+' – '+md(p.to)+' · '+(days>14?Math.round(days/7)+'주':days+'일')+'</div><div class="t">'+p.name+'</div><div class="s">'+p.s+'</div></div>';
+  }).join('');
+
+  var order = [1,2,3,4,5,6,0];
+  function cell(list){ return list.length ? list.map(function(t){ return '<a href="#m-'+t[0]+'">'+EX[t[0]].n+'</a> <span class="r">'+t[1]+'</span>'; }).join('<br>') : '<span style="color:var(--ink-2)">—</span>'; }
+  function fx(dw){ return (FIXED[dw]||[]).map(function(t){ return (t[2]?t[2]+' ':'')+EX[t[0]].n+(t[0]==='swim'?'':' '+t[1].split(' · ')[0]); }).join('') || '—'; }
+  el('week').innerHTML = '<thead><tr><th>요일</th><th>고정 일정</th><th>1 · 기초</th><th>2 · 증량</th><th>3 · 파워</th></tr></thead><tbody>' +
+    order.map(function(dw){
+      return '<tr><td><b>'+WD[dw]+'</b><span>'+THEME[dw][2]+'</span></td><td>'+fx(dw)+'</td>' +
+        ['p1','p2','p3'].map(function(k){ return '<td>'+cell(WEEK[k][dw][0])+'</td>'; }).join('') + '</tr>';
+    }).join('') + '</tbody>';
+
+  /* ---------- 동작 사전 ---------- */
+  var gOrder = ['goblet','backsq','calf','calf1','boxjump','latpd','apull','pullup','cablerow','csrow','bbrow',
+                'dbbench','bench','dbohp','ohp','pushpress','rdl_db','rdl','legcurl','backext','kbswing',
+                'dblunge','bss','skater','pallof','hkr','mob','ebike'];
+  el('gloss').innerHTML = gOrder.map(function(k){
+    return '<div id="m-'+k+'"><dt>'+EX[k].n+'<span>'+EX[k].g+'</span></dt><dd>'+EX[k].how+'</dd></div>';
+  }).join('');
+
+  /* ---------- 테스트 표 ---------- */
+  var TROWS = [
+    ['pushup','푸시업 최대','개 · 자세 무너지면 끝'],
+    ['pull','풀업 최대','개 · 0개면 어시스트 머신 보조 kg을 적는다'],
+    ['sls','한 다리 박스 스쿼트','개 / 다리 · 벤치에 앉았다 한 발로 일어서기'],
+    ['side','사이드 플랭크','초 / 쪽 · 골반 처지면 끝'],
+    ['broad','제자리 멀리뛰기','cm · 3번 중 최고'],
+    ['bw','체중','kg · 아침 공복']
+  ];
+  var tv = {};
+  try { tv = JSON.parse(localStorage.getItem(TEST_KEY)) || {}; } catch(e){ tv = {}; }
+  el('testtbl').innerHTML = '<thead><tr><th>항목</th>' + TESTS.map(function(s){ return '<th>'+md(s)+'</th>'; }).join('') + '</tr></thead><tbody>' +
+    TROWS.map(function(r){
+      return '<tr><td><b>'+r[1]+'</b><span>'+r[2]+'</span></td>' + TESTS.map(function(s){
+        var k = s+'|'+r[0]; return '<td><input type="text" inputmode="decimal" data-k="'+k+'" value="'+(tv[k]||'').replace(/"/g,'')+'" aria-label="'+r[1]+' '+md(s)+'"></td>';
+      }).join('') + '</tr>';
+    }).join('') + '</tbody>';
+  el('testtbl').querySelectorAll('input').forEach(function(inp){
+    inp.addEventListener('input', function(){ tv[inp.dataset.k] = inp.value.trim(); try { localStorage.setItem(TEST_KEY, JSON.stringify(tv)); } catch(e){} });
+  });
+
+  renderDay(); renderCal(); renderTally();
+})();
+</script>
+</body>
+</html>

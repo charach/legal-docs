@@ -1,0 +1,23 @@
+{
+ "name": "전신 근력, 매일 최소만",
+ "short_name": "근력",
+ "start_url": "../strength.html",
+ "scope": "../",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#FAFDFD",
+ "theme_color": "#FAFDFD",
+ "icons": [
+  {
+   "src": "icons/strength-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/strength-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}

@@ -10,6 +10,7 @@ personal/
 ├── exercise.html           🏊 아이언맨 훈련 캘린더 + 결과  (본인 · 종료)
 ├── gurye_course.html       🗺 구례 코스 분석·시뮬레이터    (본인 · 종료)
 ├── gurye_fuel.html         🥤 구례 보급 전략·백 체크리스트  (본인 · 종료)
+├── strength.html           🏋 전신 근력 21주 · 헬스장   (본인)
 ├── bike_forces.html        🚲 안장 위의 힘 애니메이션      (본인)
 ├── career_roadmap.html     🚀 커리어 전환 로드맵          (본인)
 ├── grad_schools.html       🏛 직장인 특수대학원 42곳 비교  (함께)
@@ -102,6 +103,12 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 
 `gurye_geo.js`는 엑셀 랜드마크 사이를 OSRM(OSM 도로망)으로 이어 엑셀 누적 km에 매핑한 뒤 Open-Meteo(Copernicus DEM 90m)로 고도를 붙인 것. 공식 GPX가 나오면 같은 형식 `[km, lat, lon, elev]`으로 교체하면 지도·프로파일·언덕 표가 그대로 따라온다.
 
+## 근력 페이지
+
+`strength.html`은 데이터가 HTML 안에 있다(`EX` 동작 · `PH` 단계 · `WEEK` 요일별 처방). 2026-10-08 ~ 2027-02-28, 평일 아침 헬스장 두 동작 + 고정 일정(월·수 수영, 토 평로라, 일 달리기). 고정 일정은 `FIXED`.
+처방을 바꾸려면 `WEEK[단계][요일]`만 고치면 오늘 카드·달력·주간표가 같이 바뀐다. 가볍게 주는 `LIGHT`, 테스트 날은 `TESTS`.
+체크는 localStorage `strength.done.v1`, 테스트 숫자는 `strength.tests.v1`.
+
 ## 로컬에서 열기
 
 `file://` 로 직접 열면 브라우저 보안 정책 때문에 `fetch`가 막혀 JSON을 못 읽는다.
@@ -127,6 +134,7 @@ GitHub Pages에 올라가면 그냥 동작한다.
 | grad_schools | 대학원 | 연한 배경 | 대학원 |
 | exercise | 훈련 | 포인트 | 훈련 |
 | career_roadmap | 커리어 | 연한 배경 | 커리어 |
+| strength | 근력 | 잉크 | 근력 |
 
 `assets/*.webmanifest` 와 `<link rel="apple-touch-icon">` 이 함께 결정한다 —
 파비콘만 바꿔선 홈화면 아이콘이 안 바뀐다.
