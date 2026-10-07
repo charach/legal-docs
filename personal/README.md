@@ -7,9 +7,9 @@
 ```
 personal/
 ├── index.html              🏠 허브 — 카드 목록 + D-day
-├── exercise.html           🏊 아이언맨 훈련 캘린더        (본인)
-├── gurye_course.html       🗺 구례 코스 분석·시뮬레이터    (본인)
-├── gurye_fuel.html         🥤 구례 보급 전략·백 체크리스트  (본인)
+├── exercise.html           🏊 아이언맨 훈련 캘린더 + 결과  (본인 · 종료)
+├── gurye_course.html       🗺 구례 코스 분석·시뮬레이터    (본인 · 종료)
+├── gurye_fuel.html         🥤 구례 보급 전략·백 체크리스트  (본인 · 종료)
 ├── bike_forces.html        🚲 안장 위의 힘 애니메이션      (본인)
 ├── career_roadmap.html     🚀 커리어 전환 로드맵          (본인)
 ├── grad_schools.html       🏛 직장인 특수대학원 42곳 비교  (함께)
@@ -28,6 +28,7 @@ personal/
     ├── gurye.js            구례 코스 데이터(랜드마크 170곳)·레이스 시뮬레이터 — 코스·보급 페이지 공유
     ├── gurye_geo.js        바이크 코스 0.1km 간격 [km, 위도, 경도, 고도] 1,767점 — 지도·경사 색·고도 프로파일용
     ├── gurye/              구례 공식 코스도 13장(1100px) + SOURCE.md(카페 글 전문)
+    │                         + finish-2026-10-04.png(완주 기록 배지, RTRT)
     ├── *.webmanifest       페이지별 PWA 매니페스트 (홈화면 설치용)
     └── icons/              홈화면 아이콘 PNG (180·512px)
 ```
@@ -88,7 +89,11 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 - `study_calendar.html`과 `ai_grad_prep.html`은 체크 상태를 공유한다
   (localStorage 키 `aiGradPlan.v2`)
 
-## 구례 페이지
+## 구례 페이지 (종료)
+
+**2026-10-04 대회 완주 — 14:37:45** (수영 1:38:33 · 바이크 6:56:53 · 런 5:35:39, M30-34 60/71, 잠정 기록).
+세 페이지는 종료된 프로젝트로 표시하고 **대회 전 계획 그대로 보존**한다. 기록은 `exercise.html#result`,
+허브(`index.html`)에서는 「종료」 그룹으로 옮겼다. 계획 내용은 더 고치지 않는다.
 
 `gurye_course.html`과 `gurye_fuel.html`은 `assets/gurye.js`의 `GURYE.simulate()`로 시계 시각을 계산한다.
 시뮬레이터 설정은 localStorage `gurye.sim.v1`에 저장되고 보급 페이지가 그대로 읽는다(보급 페이지에는 슬라이더 없음).

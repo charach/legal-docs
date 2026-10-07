@@ -83,22 +83,29 @@
   header.hero h1 .run  { color: var(--teal); }
   header.hero p.sub { color: var(--ink-soft); margin: 0 auto; max-width: 560px; font-size: 14px; }
 
-  /* ---------- Countdown / stats ---------- */
-  .stats {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-    max-width: 640px; margin: 24px auto 8px;
+  /* ---------- Result (종료) ---------- */
+  .result {
+    max-width: 760px; margin: 24px auto 8px; padding: 22px 20px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow);
   }
-  .stat {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 8px; padding: 14px 8px; box-shadow: var(--shadow);
-    text-align: center;
+  .result-head { text-align: center; }
+  .done-tag {
+    display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em;
+    color: var(--ink-soft); border: 1px solid var(--line-strong); border-radius: 6px; padding: 4px 10px;
   }
-  .stat .num {
-    font-weight: 900; font-size: clamp(20px, 5.5vw, 30px);
-    line-height: 1; color: var(--accent);
-      
+  .result h2 { font-weight: 900; font-size: clamp(24px, 5vw, 34px); line-height: 1.15; margin: 12px 0 8px; letter-spacing: -.5px; }
+  .result h2 .tnum { color: var(--accent); }
+  .result-head p { color: var(--ink-soft); font-size: 13px; max-width: 560px; margin: 0 auto; }
+  .result-body { display: grid; grid-template-columns: 200px 1fr; gap: 20px; margin-top: 20px; align-items: start; }
+  .badge { margin: 0; }
+  .badge img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); }
+  .badge figcaption { font-size: 11.5px; color: var(--muted); margin-top: 6px; text-align: center; }
+  .result-note { font-size: 12.5px; color: var(--ink-soft); margin: 0; line-height: 1.6; }
+  @media (max-width: 640px) {
+    .result { padding: 18px 14px; }
+    .result-body { grid-template-columns: 1fr; }
+    .badge { max-width: 220px; margin: 0 auto; }
   }
-  .stat .lbl { font-size: 11px; color: var(--muted); margin-top: 6px; letter-spacing: .02em; }
 
   /* ---------- Legend ---------- */
   .legend {
@@ -299,8 +306,6 @@
     .cell { border-radius: 10px; padding: 5px 4px 4px; }
     .cell .mini { display: none; }
     .cell .dots { margin-top: auto; }
-    .stats { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-    .stat { padding: 11px 4px; }
   }
 
   /* ---------- Strategy reference ---------- */
@@ -373,12 +378,31 @@
     <p class="sub">수영 3.8km · 사이클 <b>176.7km</b> · 마라톤 42.0km — 제한시간 17시간(입수 기준) · 컷오프 13:45 / 16:40 / 23:00<br>대회일 <b>2026. 10. 4 (일) 07:00~07:19 롤링 스타트</b> · 지리산 호수공원 · <a href="gurye_course.html">코스</a> · <a href="gurye_fuel.html">보급</a></p>
   </header>
 
-  <div class="stats" id="stats">
-    <div class="stat"><div class="num" id="st-dday">–</div><div class="lbl">D-DAY 카운트다운</div></div>
-    <div class="stat"><div class="num">74</div><div class="lbl">총 훈련 일수</div></div>
-    <div class="stat"><div class="num">10<span style="font-size:.55em">주</span></div><div class="lbl">피리어다이제이션</div></div>
-    <div class="stat"><div class="num" id="st-prog">0%</div><div class="lbl">진행률</div></div>
-  </div>
+  <section class="result" id="result">
+    <div class="result-head">
+      <span class="done-tag">종료된 프로젝트</span>
+      <h2>완주 <span class="tnum">14:37:45</span></h2>
+      <p>2026. 10. 4 (일) 07:13:49 입수 → 21:51:34 피니시. M30-34 <b>60위</b>/71 · 남자 728위/871 · 전체 821위/993. 대회 측 잠정 기록(PRELIMINARY)이라 순위와 시간은 바뀔 수 있습니다.</p>
+    </div>
+    <div class="result-body">
+      <figure class="badge">
+        <a href="assets/gurye/finish-2026-10-04.png"><img src="assets/gurye/finish-2026-10-04.png" width="1220" height="1580" loading="lazy" alt="IRONMAN Gurye Korea 2026 완주 배지 — SUKHWAN YUN, Finish Time 14:37:45, M30-34 60위, 전체 821위"></a>
+        <figcaption>RTRT 라이브 결과 배지</figcaption>
+      </figure>
+      <div>
+        <div class="tw"><table>
+          <tr><th>구간</th><th>계획</th><th>기록</th><th>시계</th></tr>
+          <tr><td>수영 3.8km</td><td class="n">1:40</td><td class="n"><b>1:38:33</b> · 2:36/100m</td><td class="n">08:52:22</td></tr>
+          <tr><td>T1</td><td class="n">—</td><td class="n">15:24</td><td></td></tr>
+          <tr><td>바이크 176.7km</td><td class="n">6:25</td><td class="n"><b>6:56:53</b> · 25.33km/h</td><td class="n">16:04:39</td></tr>
+          <tr><td>T2</td><td class="n">—</td><td class="n">11:16</td><td></td></tr>
+          <tr><td>런 42.0km</td><td class="n">4:30~5:30</td><td class="n"><b>5:35:39</b> · 8:03/km</td><td class="n">21:51:34</td></tr>
+          <tr class="hl"><td>완주</td><td class="n">약 13:15</td><td class="n">14:37:45</td><td class="n">21:51:34</td></tr>
+        </table></div>
+        <p class="result-note">T1·T2는 배지의 누적 시간에서 역산한 값. 수영은 계획대로, 바이크 +32분 · 런 +6분(범위 상단 대비)으로 계획보다 1시간 23분 늦었고, 종료 시각 24:20보다 <b>2시간 28분 앞서</b> 들어왔습니다. 아래 캘린더와 전략은 대회 전 계획 그대로 남겨 둡니다.</p>
+      </div>
+    </div>
+  </section>
 
   <div style="text-align:center;margin:16px 0 0"><a class="jump" href="#strategy">보급 · 페이싱 전략 보기 ↓</a></div>
 
@@ -985,7 +1009,7 @@ const D = [
   ['2026-10-01','10주차 · 레이스 위크 ','race','train',['swim'],'<b>수영 1,000m</b> 가볍게 + 대회 페이스 4×50m','휴식 — <b>탄수 로딩 시작</b>(체중당 8~10g, 기름진 것 피하기) · 자작 분말 지퍼백 소분 · PN백 2개 최종 포장','탑튜브 메모 테이프 준비: "T자 ×2 → 102 · 용방 ×4 → 169 · 정장교 10".'],
   ['2026-10-02','10주차 · 레이스 위크 ','race','train',['run'],'이지 러닝 20분 + 스트라이드 3×20초 → <b>구례 이동</b>(약 4시간)','<b>공설운동장 체크인 10:00~17:00</b>(배번·칩·백 4개, 배번 거치대 위치 사진) → <b>16:15 의무 브리핑 한국어 · 지리산 둘레길 센터 2층</b> → 익숙한 저녁 → 21:00 취침','브리핑은 금요일에 듣는다 — 토요일 16:30 것은 검차·체크인과 겹침. 개회식(18:00 더케이 호텔)은 선택. 일정 전체는 <a href="gurye_course.html#schedule">코스 페이지</a>.'],
   ['2026-10-03','10주차 · 레이스 위크 ','race','train',['swim','bike','run'],'<b>운동장 검차 → 검차 스티커</b>(토요일 T1엔 메카닉 없음) → <b>지리산 호수공원 T1</b>: 바이크 체크인 + <b>바이크백</b>(헬멧·선글라스·배번 벨트·양말·여분 젤 2) · 신발은 페달에 → <b>13:00 공식 수영훈련 15분만</b>(칩 착용 · 수온·웻슈트·부이 확인)','<b>T2(둘레길 센터 옆 주차장)에 런 기어백</b>(러닝화·양말·모자·젤 1·캡슐 3·헤드램프·긴팔) → 이른 저녁(익숙한 탄수) → 물통 분말·PN백 2개 확인 → <b>21시 취침</b>','바이크백은 걸면 일요일 아침 못 엽니다. 일요일에 손대는 건 물통·젤·공기압뿐. 이동 순서: 운동장 → 호수공원 → 운동장. 오전에 끝내기.'],
-  ['2026-10-04','D-DAY · 대회 ','race','race',['race'],'04:00 기상·아침식사(못 먹으면 플랜 B) → 05:10 <b>T1</b>: 물통 2병·벤토박스 젤 7·공기압 · <b>스트리트백 + 바이크 PN백 + 런 PN백 제출</b>(~06:40) → 06:00 웜업 → 06:45 젤 1 → <b>07:00~07:19 롤링 스타트, 1:40 그룹 뒤쪽</b>',' 3.8km(1.9km × 2 · 1바퀴 25분 · 사이팅) →  <b>176.7km</b>(<b>NP 135~145W · 상한 150W</b>, 첫 40km 130W대 · U턴 14회 앉아서 · AS2부터 게토레이 · 90km PN · 3:30 후 젤만 · 마지막 20분 물 · <b>정장교 좌회전 10km/h</b>) →  42.0km(<b>1km부터 걷뛰 4:1 · 런 구간 6:00/km · 심박 135 이하 · 보급소 21곳 걸어서 · 18:11 헤드램프</b>) → <b>YOU ARE AN IRONMAN </b>','예상 완주 <b>약 13:15</b> (수영 1:40 · 바이크 6:25 · 런 4:30~5:30) — 시계 약 20:25. <b>컷오프는 시계 시각: 바이크 13:45(86.7km) · 16:40(150.5km) · 런 23:00(31.9km)</b> — 계획대로면 각각 1:35 · 2:10 · 3:48 여유. <b>런 출발 후 컷오프까지 7시간 23분이면 31.9km를 걸어도 됩니다.</b> <b>파워를 지키고 20분마다 마시고 30분마다 젤이면 완주합니다.</b> 초코바 금지 · 첫 400m 오버페이스 금지 · 시간당 탄수 75~85g+나트륨 700~1,000mg · 런은 1km부터 걷뛰. 보급소별 시각은 <a href="gurye_fuel.html">보급 페이지</a>.'],
+  ['2026-10-04','D-DAY · 대회 ','race','race',['race'],'04:00 기상·아침식사(못 먹으면 플랜 B) → 05:10 <b>T1</b>: 물통 2병·벤토박스 젤 7·공기압 · <b>스트리트백 + 바이크 PN백 + 런 PN백 제출</b>(~06:40) → 06:00 웜업 → 06:45 젤 1 → <b>07:00~07:19 롤링 스타트, 1:40 그룹 뒤쪽</b>',' 3.8km(1.9km × 2 · 1바퀴 25분 · 사이팅) →  <b>176.7km</b>(<b>NP 135~145W · 상한 150W</b>, 첫 40km 130W대 · U턴 14회 앉아서 · AS2부터 게토레이 · 90km PN · 3:30 후 젤만 · 마지막 20분 물 · <b>정장교 좌회전 10km/h</b>) →  42.0km(<b>1km부터 걷뛰 4:1 · 런 구간 6:00/km · 심박 135 이하 · 보급소 21곳 걸어서 · 18:11 헤드램프</b>) → <b>YOU ARE AN IRONMAN </b>','예상 완주 <b>약 13:15</b> (수영 1:40 · 바이크 6:25 · 런 4:30~5:30) — 시계 약 20:25. <b>컷오프는 시계 시각: 바이크 13:45(86.7km) · 16:40(150.5km) · 런 23:00(31.9km)</b> — 계획대로면 각각 1:35 · 2:10 · 3:48 여유. <b>런 출발 후 컷오프까지 7시간 23분이면 31.9km를 걸어도 됩니다.</b> <b>파워를 지키고 20분마다 마시고 30분마다 젤이면 완주합니다.</b> 초코바 금지 · 첫 400m 오버페이스 금지 · 시간당 탄수 75~85g+나트륨 700~1,000mg · 런은 1km부터 걷뛰. 보급소별 시각은 <a href="gurye_fuel.html">보급 페이지</a>. <b>결과: 완주 14:37:45</b> — 수영 1:38:33 · 바이크 6:56:53 · 런 5:35:39 (<a href="#result">기록</a>).'],
 ];
 
 /* ---------- build lookup ---------- */
@@ -1008,16 +1032,6 @@ const RACE = new Date(2026,9,4);
 const START = new Date(2026,6,22);
 const todayStr = ymd(new Date());
 
-/* countdown + progress */
-(function(){
-  const now = new Date(); now.setHours(0,0,0,0);
-  const dd = Math.ceil((RACE - now) / 86400000);
-  const el = document.getElementById('st-dday');
-  el.innerHTML = dd > 0 ? 'D-'+dd : (dd===0 ? 'D-DAY' : '완주');
-  const total = Math.round((RACE-START)/86400000);
-  const done = Math.min(Math.max(Math.round((now-START)/86400000),0),total);
-  document.getElementById('st-prog').textContent = Math.round(done/total*100)+'%';
-})();
 
 /* ---------- render calendar ---------- */
 const MONTHS = [

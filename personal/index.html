@@ -38,6 +38,8 @@
   a.row .meta { text-align: right; white-space: nowrap; }
   a.row .meta .dday { font-size: 14px; color: var(--ink-2); }
   a.row .meta .dday.near { color: var(--accent); }
+  a.row.done .t { color: var(--ink-2); }
+  a.row.done:hover .t { color: var(--accent); }
   a.row .bar { margin-top: 10px; width: 108px; margin-left: auto; }
   a.row .pc { font-size: 12px; color: var(--ink-2); margin-top: 6px; display: block; }
 
@@ -151,43 +153,15 @@
     </div>
   </section>
 
-  <section class="band band-last rise">
+  <section class="band rise">
     <div class="wrap">
       <div class="grouprow">
         <div class="side">
           <div class="who">남편</div>
           <div class="note">훈련과 커리어</div>
-          <div class="cnt tnum">05</div>
+          <div class="cnt tnum">03</div>
         </div>
         <div class="rows">
-
-          <a class="row" href="exercise.html" data-start="2026-07-22" data-race="2026-10-04" data-prog="1">
-            <div>
-              <div class="t">구례 아이언맨 훈련 캘린더</div>
-              <div class="d">74일 일자별 훈련. 아침과 저녁 운동을 그날마다 띄운다.</div>
-            </div>
-            <div class="meta">
-              <span class="dday tnum">—</span>
-              <span class="meter bar"><i></i></span>
-              <span class="pc tnum">—</span>
-            </div>
-          </a>
-
-          <a class="row" href="gurye_course.html" data-race="2026-10-04">
-            <div>
-              <div class="t">구례 코스 분석과 전략</div>
-              <div class="d">수영 1.9km × 2 · 바이크 176.7km · 런 9.92km × 4. 컷오프 세 개, U턴 열네 번, 나흘 일정. 내 페이스로 하루를 재생하는 시뮬레이터.</div>
-            </div>
-            <div class="meta"><span class="dday tnum">—</span></div>
-          </a>
-
-          <a class="row" href="gurye_fuel.html" data-race="2026-10-04">
-            <div>
-              <div class="t">구례 보급 전략</div>
-              <div class="d">보급소 8곳 + 퍼스널니즈 + 런 21곳을 예상 시각에 늘어놓고 무엇을 집을지 정해 둔 것. 연료 탱크 시뮬레이션과 백 5개 체크리스트.</div>
-            </div>
-            <div class="meta"><span class="dday tnum">—</span></div>
-          </a>
 
           <a class="row" href="bike_forces.html">
             <div>
@@ -211,6 +185,45 @@
               <div class="d">아주대 기계시스템공학과 대비. CS에 없는 것만 — 공업수학·4대 역학·유체·열전달·진동·제어 개념 70개를 식·직관·유비로, 22주 계획, 면접 25문항.</div>
             </div>
             <div class="meta"><span class="dday tnum">—</span></div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-last rise">
+    <div class="wrap">
+      <div class="grouprow">
+        <div class="side">
+          <div class="who">종료</div>
+          <div class="note">끝난 프로젝트</div>
+          <div class="cnt tnum">04</div>
+        </div>
+        <div class="rows">
+
+          <a class="row done" href="exercise.html#result">
+            <div>
+              <div class="t">구례 아이언맨 훈련 캘린더</div>
+              <div class="d">2026. 10. 4 완주. 수영 1:38:33 · 바이크 6:56:53 · 런 5:35:39, M30-34 60위. 74일 일자별 훈련과 전략은 그대로 남겨 둔다.</div>
+            </div>
+            <div class="meta"><span class="dday tnum">완주 14:37:45</span></div>
+          </a>
+
+          <a class="row done" href="gurye_course.html">
+            <div>
+              <div class="t">구례 코스 분석과 전략</div>
+              <div class="d">수영 1.9km × 2 · 바이크 176.7km · 런 9.92km × 4. 컷오프 세 개, U턴 열네 번, 나흘 일정. 내 페이스로 하루를 재생하는 시뮬레이터.</div>
+            </div>
+            <div class="meta"><span class="dday tnum">종료</span></div>
+          </a>
+
+          <a class="row done" href="gurye_fuel.html">
+            <div>
+              <div class="t">구례 보급 전략</div>
+              <div class="d">보급소 8곳 + 퍼스널니즈 + 런 21곳을 예상 시각에 늘어놓고 무엇을 집을지 정해 둔 것. 연료 탱크 시뮬레이션과 백 5개 체크리스트.</div>
+            </div>
+            <div class="meta"><span class="dday tnum">종료</span></div>
           </a>
 
         </div>
