@@ -1,0 +1,23 @@
+{
+ "name": "아주대 인공지능학과 면접 100문제",
+ "short_name": "100문제",
+ "start_url": "../ajou_ai_prep.html",
+ "scope": "../",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#FAFDFD",
+ "theme_color": "#FAFDFD",
+ "icons": [
+  {
+   "src": "icons/interview-180.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/interview-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}

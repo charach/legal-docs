@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<link rel="apple-touch-icon" href="assets/icons/interview-180.png">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/icons/interview-180.png">
+<link rel="manifest" href="assets/ajou_ai.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="100문제">
+<title>아주대 인공지능학과 면접 · 예상문제 100</title>
+<link rel="stylesheet" href="assets/summer.css">
+<style>
+  .hero { padding: 64px 0 0; }
+  .hero .lead { max-width: 62ch; }
+  .src { font-size: 13px; color: var(--ink-2); margin-top: 16px; line-height: 1.6; }
+  .src a { border-bottom: 1px solid rgba(14,124,148,.28); }
+  .warn { font-size: 14px; color: var(--ink-2); margin-top: 18px; padding: 13px 15px;
+          border: 1px solid var(--line); border-radius: 8px; background: #fff; line-height: 1.65; }
+  .warn b { color: var(--ink); }
+  .warn ul { margin: 8px 0 0; padding-left: 18px; }
+  .warn li { margin-bottom: 4px; }
+
+  /* 진행 바 — 상단 고정 */
+  .bar { position: sticky; top: 49px; z-index: 40; background: var(--bg);
+         border-bottom: 1px solid var(--line); padding: 10px 0; }
+  .bar .in { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad);
+             display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .bar .pct { font-size: 13px; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .bar .pct em { font-style: normal; color: var(--accent); }
+  .bar .track { flex: 1 1 160px; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .bar .track > i { display: block; height: 100%; background: var(--accent); width: 0; border-radius: 2px; transition: width .25s ease; }
+  .bar .btns { display: flex; gap: 6px; }
+  .bar button { font-family: inherit; font-size: 12.5px; color: var(--ink-2); background: #fff;
+                border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; cursor: pointer; white-space: nowrap; }
+  .bar button:hover { color: var(--ink); border-color: #CFE3E7; }
+  .bar button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+  /* 날짜 묶음 */
+  .day { padding-top: 64px; }
+  .day-head { border-top: 1px solid var(--line); padding-top: 20px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .day-head h2 { margin: 0; font-size: 22px; letter-spacing: -0.02em; }
+  .day-head .d { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .day-head .cnt { font-size: 12px; color: var(--accent); font-weight: 600; margin-left: auto; font-variant-numeric: tabular-nums; }
+  .day-note { font-size: 14.5px; color: var(--ink-2); margin: 10px 0 0; max-width: 64ch; line-height: 1.7; }
+
+  /* 단계 */
+  .stage { margin-top: 38px; }
+  .stage-head { display: flex; align-items: baseline; gap: 10px; }
+  .stage-head h3 { margin: 0; font-size: 15px; letter-spacing: -0.01em; }
+  .stage-head .rng { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .stage-note { font-size: 13px; color: var(--ink-2); margin: 4px 0 14px; max-width: 62ch; line-height: 1.6; }
+
+  /* 문제 */
+  .q { border: 1px solid var(--line); border-radius: 8px; background: #fff; margin-bottom: 8px; overflow: hidden; }
+  .q.done { background: #F7FBFB; border-color: #EDF5F6; }
+  .qtop { display: flex; gap: 11px; padding: 13px 14px; align-items: flex-start; }
+  .qn { flex: none; font-size: 12px; font-weight: 600; color: var(--accent);
+        font-variant-numeric: tabular-nums; padding-top: 2px; min-width: 22px; }
+  .q.done .qn { color: var(--ink-2); }
+  .qt { flex: 1; font-size: 15.5px; line-height: 1.55; }
+  .q.done .qt { color: var(--ink-2); }
+  .memo { flex: none; display: inline-flex; align-items: center; gap: 5px; font-size: 12px;
+          color: var(--ink-2); cursor: pointer; user-select: none; padding-top: 1px; }
+  .memo input { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; margin: 0; }
+  details { border-top: 1px solid var(--line); }
+  details > summary { list-style: none; cursor: pointer; padding: 9px 14px; font-size: 12.5px;
+                      color: var(--accent); font-weight: 500; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::after { content: " 답 보기"; }
+  details[open] > summary::after { content: " 답 닫기"; }
+  details > summary::before { content: "▸"; margin-right: 5px; font-size: 10px; }
+  details[open] > summary::before { content: "▾"; }
+  .ans { padding: 2px 14px 14px; }
+  .ans .a { font-size: 14.5px; line-height: 1.72; }
+  .ans .m { font-size: 13px; line-height: 1.65; color: var(--ink-2); margin-top: 9px;
+            padding-top: 9px; border-top: 1px dashed var(--line); }
+  .ans .m::before { content: "한 걸음 더 · "; color: var(--accent); font-weight: 600; }
+
+  .empty { font-size: 14px; color: var(--ink-2); padding: 18px 0; }
+  #loading, #loaderr { font-size: 14px; color: var(--ink-2); padding: 40px 0; }
+  #loaderr { display: none; }
+  footer { margin-top: 90px; border-top: 1px solid var(--line); padding: 26px 0 60px;
+           font-size: 13px; color: var(--ink-2); line-height: 1.7; }
+  footer a { border-bottom: 1px solid rgba(14,124,148,.28); }
+
+  @media (max-width: 640px) {
+    .bar { top: 45px; }
+    .qt { font-size: 15px; }
+    .memo span { display: none; }
+    .day { padding-top: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="index.html">Personal</a>
+    <div class="links"><a href="study_calendar.html">오늘</a><a href="ai_grad_prep.html">로드맵</a><a href="interview_prep.html">면접</a><a href="ajou_ai_prep.html" aria-current="page">100문제</a><a href="grad_schools.html">대학원</a></div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Ajou · AI · Interview drill</span>
+    <h1 style="margin-top:12px">아주대 인공지능학과<br>예상문제 100</h1>
+    <p class="lead"><b>10/9 ~ 10/11</b> 사흘치. 섞지 않았습니다 — <b>1번부터 순서대로</b> 풀면 선형대수에서 시작해 LLM까지 한 줄기로 이어지고, 뒤 문제의 답이 앞 문제에 이미 깔려 있습니다. 외우다 보면 CS와 인공지능의 뼈대가 같이 잡히도록 배치했습니다.</p>
+    <p class="src">답을 가린 상태가 기본입니다. 질문만 보고 소리내어 답한 다음 열어서 맞춰 보세요. <b>외움</b>에 체크한 것은 이 기기에 저장되고, 위의 <b>안 외운 것만</b>으로 걸러 다시 돌릴 수 있습니다.</p>
+    <div class="warn">
+      <b>먼저 알아둘 것</b>
+      <ul id="honesty"></ul>
+    </div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="in">
+    <span class="pct"><em id="pdone">0</em> / <span id="ptot">100</span></span>
+    <span class="track"><i id="ptrack"></i></span>
+    <span class="btns">
+      <button id="fOnly" aria-pressed="false">안 외운 것만</button>
+      <button id="fOpen">전부 펼치기</button>
+      <button id="fReset">초기화</button>
+    </span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div id="loading">문제를 불러오는 중…</div>
+  <div id="loaderr">문제 데이터를 불러오지 못했습니다. <code>data/ajou_ai_100.json</code> 을 확인하세요. (로컬 파일로 직접 열면 브라우저가 차단합니다 — 사이트 주소로 열어 주세요.)</div>
+  <div id="list"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    이 100문제는 CS·인공지능 표준 교과 범위에서 뽑은 <b>예상문제</b>이고 아주대 인공지능학과의 기출이 아닙니다. 지원동기·직장 병행처럼 학교별 후기가 붙은 질문은 <a href="interview_prep.html">면접 질문은행 201문제</a>에 따로 있습니다. 학교별 과정·학비·수업 형태는 <a href="grad_schools.html">대학원 비교</a>.
+  </div>
+</footer>
+
+<script>
+var STORE = 'ajou_ai_100_done_v1';
+var D = null, done = {}, onlyLeft = false;
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function el(id){ return document.getElementById(id); }
+function save(){ try{ localStorage.setItem(STORE, JSON.stringify(done)); }catch(e){} }
+
+fetch('data/ajou_ai_100.json', {cache:'no-store'})
+  .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+  .then(function(j){ D = j; init(); })
+  .catch(function(){ el('loading').style.display='none'; el('loaderr').style.display='block'; });
+
+function init(){
+  try { done = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e){ done = {}; }
+  el('honesty').innerHTML = D.meta.honesty_note.map(function(t){ return '<li>'+esc(t)+'</li>'; }).join('');
+  el('ptot').textContent = D.questions.length;
+  render();
+  el('loading').style.display = 'none';
+
+  el('fOnly').addEventListener('click', function(){
+    onlyLeft = !onlyLeft;
+    this.setAttribute('aria-pressed', onlyLeft ? 'true' : 'false');
+    this.textContent = onlyLeft ? '전체 보기' : '안 외운 것만';
+    render();
+  });
+  el('fOpen').addEventListener('click', function(){
+    var ds = document.querySelectorAll('#list details');
+    var anyClosed = false;
+    for (var i=0;i<ds.length;i++){ if(!ds[i].open){ anyClosed = true; break; } }
+    for (var k=0;k<ds.length;k++){ ds[k].open = anyClosed; }
+    this.textContent = anyClosed ? '전부 접기' : '전부 펼치기';
+  });
+  el('fReset').addEventListener('click', function(){
+    if(!confirm('외움 체크를 전부 지웁니다. 계속할까요?')) return;
+    done = {}; save(); render();
+  });
+}
+
+function progress(){
+  var n = D.questions.filter(function(q){ return done[q.n]; }).length;
+  el('pdone').textContent = n;
+  el('ptrack').style.width = (n / D.questions.length * 100) + '%';
+}
+
+function render(){
+  var h = '';
+  D.days.forEach(function(day){
+    var dayQs = D.questions.filter(function(q){ return q.day === day.id; });
+    var shown = dayQs.filter(function(q){ return !onlyLeft || !done[q.n]; });
+    var left = dayQs.filter(function(q){ return !done[q.n]; }).length;
+
+    h += '<section class="day" id="'+day.id+'"><div class="day-head">'
+      +  '<h2>'+esc(day.label)+' · '+esc(day.title)+'</h2>'
+      +  '<span class="d">'+esc(day.date.slice(5).replace('-','/'))+' · Q'+dayQs[0].n+'~'+dayQs[dayQs.length-1].n+'</span>'
+      +  '<span class="cnt">'+(left ? '남은 '+left+'문제' : '다 외움')+'</span>'
+      +  '</div><p class="day-note">'+esc(day.note)+'</p>';
+
+    if (!shown.length) {
+      h += '<p class="empty">이 날 문제는 전부 외웠습니다.</p>';
+    } else {
+      D.stages.filter(function(s){ return s.day === day.id; }).forEach(function(st){
+        var all = dayQs.filter(function(q){ return q.stage === st.id; });
+        var qs  = shown.filter(function(q){ return q.stage === st.id; });
+        if (!qs.length) return;
+        h += '<div class="stage"><div class="stage-head"><h3>'+esc(st.name)+'</h3>'
+          +  '<span class="rng">Q'+all[0].n+'~'+all[all.length-1].n+'</span></div>'
+          +  '<p class="stage-note">'+esc(st.note)+'</p>';
+        qs.forEach(function(q){
+          var dn = done[q.n];
+          h += '<div class="q'+(dn?' done':'')+'" data-n="'+q.n+'">'
+            +  '<div class="qtop"><span class="qn tnum">'+(q.n<10?'0':'')+q.n+'</span>'
+            +  '<div class="qt">'+esc(q.q)+'</div>'
+            +  '<label class="memo"><input type="checkbox" data-n="'+q.n+'"'+(dn?' checked':'')+'><span>외움</span></label></div>'
+            +  '<details><summary></summary><div class="ans"><div class="a">'+esc(q.a)+'</div>'
+            +  (q.more ? '<div class="m">'+esc(q.more)+'</div>' : '')
+            +  '</div></details></div>';
+        });
+        h += '</div>';
+      });
+    }
+    h += '</section>';
+  });
+  el('list').innerHTML = h;
+  progress();
+
+  var boxes = document.querySelectorAll('#list input[type="checkbox"]');
+  for (var i=0;i<boxes.length;i++){
+    boxes[i].addEventListener('change', function(){
+      var n = this.getAttribute('data-n');
+      if (this.checked) done[n] = 1; else delete done[n];
+      save();
+      var card = this.closest('.q');
+      if (card) card.classList.toggle('done', this.checked);
+      if (onlyLeft && this.checked) { setTimeout(render, 220); } else { progress(); refreshCounts(); }
+    });
+  }
+}
+
+function refreshCounts(){
+  var cnts = document.querySelectorAll('.day');
+  for (var i=0;i<cnts.length;i++){
+    var id = cnts[i].id;
+    var dayQs = D.questions.filter(function(q){ return q.day === id; });
+    var left = dayQs.filter(function(q){ return !done[q.n]; }).length;
+    var tag = cnts[i].querySelector('.cnt');
+    if (tag) tag.textContent = left ? '남은 '+left+'문제' : '다 외움';
+  }
+}
+</script>
+</body>
+</html>
