@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-title" content="근력">
 <!-- /pwa -->
 
-<title>전신 근력 21주 캘린더</title>
+<title>전신 근력 13주 캘린더</title>
 <link rel="stylesheet" href="assets/summer.css">
 <style>
   :root {
@@ -139,6 +139,12 @@
   }
   .cell.k-race .dnum { color: #0E7C94; }
   .cell.k-race .mini { color: #1A2E35; font-weight: 800; }
+
+  /* 공휴일 · 헬스장 휴무 */
+  .cell.k-closed { background: #E4EFF1; border-style: dashed; border-color: #5C7A85; }
+  .cell.k-closed .dnum { color: #1A2E35; }
+  .cell.k-closed .hol  { color: #1A2E35; font-weight: 800; }
+  .cell.k-closed .mini { color: #1A2E35; font-weight: 700; }
 
   /* today */
   .cell.today { border: 2px solid var(--sky); box-shadow: 0 1px 3px rgba(26,46,53,.06); }
@@ -295,15 +301,15 @@
 
   <header class="hero">
     <span class="kicker">GYM · SWIM · RUN</span>
-    <h1>전신 근력<br>21주 캘린더</h1>
-    <p class="sub">평일 아침 헬스장 · 월·수 저녁 수영 · 토 평로라 · 일 롱런<br><b>2026. 10. 8 ~ 2027. 2. 28</b></p>
+    <h1>전신 근력<br>13주 캘린더</h1>
+    <p class="sub">평일 아침 헬스장 · 월·수 저녁 수영 · 토 평로라 · 일 롱런<br><b>2026. 10. 8 ~ 2027. 1. 3</b> · 공휴일은 헬스장 휴무로 집 운동 전환</p>
   </header>
 
   <div class="legend" id="legend"></div>
 
   <div id="calendar"></div>
 
-  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 헬스장을 못 가는 날은 팝업 아래 <b>맨몸</b> 목록으로.</p>
+  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 헬스장을 못 가는 날은 팝업 아래 <b>맨몸</b> 목록으로.<br><b>공휴일</b>은 헬스장이 쉬므로 집 운동이 그날의 기본 계획으로 바뀝니다.</p>
 </div>
 
 <button class="fab" id="fab">오늘 운동</button>
@@ -367,6 +373,18 @@ const ALT_RX = {
   bss:'3×12 / 다리', pallof:'3×10 / 쪽', hkr:'3×12'
 };
 
+/* ---------- 모빌리티 8분 · [동작, 처방, 하는 법] · 동작당 1분 ---------- */
+const MOB = [
+  ['캣카우',                '10회',     '네발 자세. 등을 둥글게 말았다가 천천히 펴기'],
+  ['흉추 오픈북',            '좌우 8회',  '옆으로 눕고 무릎 포갠 채, 위쪽 팔을 뒤로 열어 가슴 펴기'],
+  ['90/90 고관절 전환',      '10회',     '앉아서 두 무릎 90도. 엉덩이 붙인 채 좌우로 넘기기'],
+  ['벽 월슬라이드',          '12회',     '등·팔꿈치·손등을 벽에 붙이고 팔을 위로 쭉 올렸다 내리기'],
+  ['무릎-벽 발목 밀기',      '좌우 12회', '발끝 벽에서 10cm. 뒤꿈치 붙인 채 무릎으로 벽 터치'],
+  ['한 다리 글루트 브리지',   '좌우 10회', '누워서 한 발만 딛고 엉덩이 들기. 위에서 1초 멈춤'],
+  ['버드독',                '좌우 8회',  '네발 자세에서 반대쪽 팔·다리를 동시에 뻗어 3초 유지'],
+  ['힙 플렉서 런지 스트레치', '좌우 30초', '무릎 대고 런지. 엉덩이 조이며 골반을 앞으로 밀기']
+];
+
 /* ---------- 주간 틀 ---------- */
 const TITLE = { 1:'하체', 2:'상체 + 로잉', 3:'하체 뒤쪽', 4:'상체 + 러닝', 5:'한 다리 · 몸통', 6:'평로라', 0:'롱런' };
 const W = {
@@ -402,13 +420,13 @@ const LIGHT_C = { 2:['로잉머신 이지 20분','이지 러닝 20분'], 4:['러
 
 const PHASES = [
   { id:'p0', from:'2026-10-08', to:'2026-10-18', name:'회복',  color:'#5C7A85' },
-  { id:'p1', from:'2026-10-19', to:'2026-11-29', name:'1단계 · 기초', color:'#0E7C94' },
-  { id:'p2', from:'2026-11-30', to:'2027-01-10', name:'2단계 · 증량', color:'#0E7C94' },
-  { id:'p3', from:'2027-01-11', to:'2027-02-28', name:'3단계 · 파워', color:'#0E7C94' }
+  { id:'p1', from:'2026-10-19', to:'2026-11-22', name:'1단계 · 기초', color:'#0E7C94' },
+  { id:'p2', from:'2026-11-23', to:'2026-12-20', name:'2단계 · 증량', color:'#0E7C94' },
+  { id:'p3', from:'2026-12-21', to:'2027-01-03', name:'3단계 · 파워', color:'#0E7C94' }
 ];
-const LIGHT = [['2026-11-23','2026-11-29'],['2026-12-28','2027-01-03'],['2027-02-22','2027-02-28']];
-const HOLIDAYS = { '2026-10-09':'한글날', '2026-12-25':'성탄절', '2027-01-01':'신정', '2027-02-05':'설 연휴', '2027-02-06':'설날', '2027-02-07':'설 연휴' };
-const START = '2026-10-08', END = '2027-02-28', WEEK0 = '2026-10-05';
+const LIGHT = [['2026-11-16','2026-11-22'],['2026-12-28','2027-01-03']];
+const HOLIDAYS = { '2026-10-09':'한글날', '2026-12-25':'성탄절', '2027-01-01':'신정' };
+const START = '2026-10-08', END = '2027-01-03', WEEK0 = '2026-10-05';
 
 /* ---------- 하루 만들기 ---------- */
 function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
@@ -441,12 +459,19 @@ function day(s){
     s4 = (w.s||[]).map(x => [x[0], light ? two(x[1]) : x[1]]);
     if (w.c) { c = light ? LIGHT_C[dow][0] : w.c; alt = light ? (LIGHT_C[dow][1]||null) : (w.alt||null); }
   }
-  if (s4.length && !(s4.length===1 && s4[0][0]==='mob')) tags.push('gym');
+  /* 공휴일엔 헬스장이 쉰다. 기구나 머신이 필요한 날이면 그날 계획을 집 운동으로 돌린다 */
+  const hol = HOLIDAYS[s] || null;
+  const mobOnly = s4.length === 1 && s4[0][0] === 'mob';
+  const needsGym = s4.some(x => x[0] !== 'mob') || /러닝머신|로잉머신/.test(c || '');
+  const closed = !!hol && needsGym;
+
+  if (closed) tags.push('closed');
+  else if (s4.length && !mobOnly) tags.push('gym');
   if (c) tags.push(/로잉|러닝|롱런|걷기|조깅/.test(c) ? 'run' : 'bike');
-  if (/로잉/.test(c||'')) { tags.pop(); tags.push('row'); }
-  if (pm) tags.push('swim');
-  if (s4.length===1 && s4[0][0]==='mob') tags.unshift('rest');
-  return { s, ph, week, dow, title, s4, c, alt, pm, light, tags };
+  if (/로잉/.test(c||'')) { tags.pop(); tags.push(closed ? 'run' : 'row'); }
+  if (pm && !closed) tags.push('swim');
+  if (mobOnly && !closed) tags.unshift('rest');
+  return { s, ph, week, dow, title, s4, c, alt, pm, light, tags, hol, closed, mobOnly };
 }
 
 /* ---------- 범례 ---------- */
@@ -456,7 +481,8 @@ const CAT = {
   run:  { color:'#0E7C94', label:'러닝' },
   swim: { color:'#0E7C94', label:'수영' },
   bike: { color:'#0E7C94', label:'평로라' },
-  rest: { color:'#CFE3E7', label:'회복' }
+  rest: { color:'#CFE3E7', label:'회복' },
+  closed: { color:'#1A2E35', label:'공휴일 · 집운동' }
 };
 const legendEl = document.getElementById('legend');
 Object.keys(CAT).forEach(k => {
@@ -467,12 +493,14 @@ Object.keys(CAT).forEach(k => {
 
 /* ---------- 달력 ---------- */
 const todayStr = ymd(new Date());
-const MONTHS = [ {y:2026,m:9,en:'October'}, {y:2026,m:10,en:'November'}, {y:2026,m:11,en:'December'}, {y:2027,m:0,en:'January'}, {y:2027,m:1,en:'February'} ];
+const MONTHS = [ {y:2026,m:9,en:'October'}, {y:2026,m:10,en:'November'}, {y:2026,m:11,en:'December'}, {y:2027,m:0,en:'January'} ];
 const DOW = ['월','화','수','목','금','토','일'];
 const cal = document.getElementById('calendar');
 
 function miniText(d){
-  if (d.s4.length && d.s4[0][0] !== 'mob') return d.title + (d.pm ? ' · 수영' : '');
+  if (d.closed) return (d.hol || '공휴일') + ' · 집운동';
+  if (d.mobOnly) return '모빌리티 8분';
+  if (d.s4.length) return d.title + (d.pm ? ' · 수영' : '');
   return d.c ? d.c.split(' · ')[0] : d.title;
 }
 
@@ -488,8 +516,8 @@ MONTHS.forEach(mo => {
   for (let n=1; n<=daysIn; n++){
     const ds = ymd(new Date(mo.y,mo.m,n)), d = day(ds), cell = document.createElement('div');
     if (!d) { cell.className='cell empty'; cell.innerHTML='<span class="dnum" style="color:#E4EFF1">'+n+'</span>'; grid.appendChild(cell); continue; }
-    const hol = HOLIDAYS[ds];
-    const kind = (d.dow===0||d.dow===6) ? 'k-long' : (d.light ? 'k-rest' : '');
+    const hol = d.hol;
+    const kind = d.closed ? 'k-closed' : ((d.dow===0||d.dow===6) ? 'k-long' : (d.light ? 'k-rest' : ''));
     cell.className = 'cell active '+kind+(ds===todayStr?' today':'')+(hol?' holiday':'');
     cell.dataset.date = ds;
     cell.innerHTML = '<span class="ph" style="background:'+d.ph.color+'"></span><span class="dnum">'+n+'</span>'+
@@ -506,29 +534,62 @@ MONTHS.forEach(mo => {
 const overlay = document.getElementById('overlay');
 const mc = document.getElementById('modalContent');
 
+/* 그날 동작을 맨몸 버전으로 바꾼 목록 */
+function homeRows(d){
+  return d.s4.filter(x => x[0] !== 'mob').map(x => {
+    const same = EX[x[0]][0] === EX[x[0]][1];
+    const altRx = (d.light || d.ph.id === 'p0') ? two(ALT_RX[x[0]] || x[1].split(' · ')[0]) : (ALT_RX[x[0]] || x[1]);
+    return '<li><b>'+EX[x[0]][1]+'</b> '+(same ? x[1].split(' · ')[0] : altRx)+'<span class="h">'+(same ? '그대로' : '대신 · '+EX[x[0]][0])+'</span></li>';
+  });
+}
+
 function openModal(ds){
   const d = day(ds); if(!d) return;
   const dObj = pd(ds), wd = ['일','월','화','수','목','금','토'][dObj.getDay()];
-  let h = '<div class="m-date">'+(dObj.getMonth()+1)+'월 '+dObj.getDate()+'일 · '+wd+'요일'+(ds===todayStr?' · 오늘':'')+(HOLIDAYS[ds]?' · '+HOLIDAYS[ds]:'')+'</div>';
+  let h = '<div class="m-date">'+(dObj.getMonth()+1)+'월 '+dObj.getDate()+'일 · '+wd+'요일'+(ds===todayStr?' · 오늘':'')+(d.hol?' · '+d.hol:'')+'</div>';
   h += '<div class="m-title">'+d.title+'</div>';
   h += '<span class="m-phase" style="background:'+d.ph.color+'">'+d.ph.name+' · '+d.week+'주차'+(d.light?' · 가볍게':'')+'</span>';
 
-  const gymDay = d.s4.length > 0;
-  const amLabel = gymDay ? '아침 · 헬스장' : (d.dow===6 ? '오전' : '운동');
-  const amTxt = gymDay
-    ? d.s4.map(x => '<b>'+EX[x[0]][0]+'</b> '+x[1]).join('<br>') + (d.c ? '<br><b>'+d.c+'</b>' : '')
-    : '<b>'+(d.c||'')+'</b>';
-  h += '<div class="slot am"><div class="ic am"></div><div class="body"><div class="when">'+amLabel+'</div><div class="txt">'+amTxt+'</div></div></div>';
-  h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.pm?'<b>'+d.pm+'</b>':'—')+'</div></div></div>';
+  if (d.hol) {
+    h += '<div class="m-vac"><b>'+d.hol+' · 헬스장 휴무</b><br>'+
+      (d.closed
+        ? '기구 없이 집에서 아래 목록 그대로 진행'+(d.alt ? ' + <b>'+d.alt+'</b>' : '')+'.'
+        : '기구가 필요 없는 날이라 계획 그대로 진행.')+
+      (d.pm ? '<br>저녁 수영 레슨도 쉽니다.' : '')+'</div>';
+  }
 
-  if (gymDay && d.s4[0][0] !== 'mob' || d.alt) {
-    const rows = d.s4.filter(x => x[0] !== 'mob').map(x => {
-      const same = EX[x[0]][0] === EX[x[0]][1];
-      const altRx = d.light || d.ph.id==='p0' ? two(ALT_RX[x[0]]||x[1].split(' · ')[0]) : (ALT_RX[x[0]] || x[1]);
-      return '<li><b>'+EX[x[0]][1]+'</b> '+(same ? x[1].split(' · ')[0] : altRx)+'<span class="h">'+(same ? '그대로' : '대신 · '+EX[x[0]][0])+'</span></li>';
-    });
+  const gymDay = d.s4.length > 0;
+  const amLabel = d.closed ? '오전 · 집' : (gymDay ? '아침 · 헬스장' : (d.dow===6 ? '오전' : '운동'));
+  let amTxt;
+  if (d.closed) {
+    const lifts = d.s4.filter(x => x[0] !== 'mob');
+    const parts = [];
+    if (d.mobOnly) parts.push('<b>모빌리티 8분</b> · 아래 목록');
+    if (lifts.length) parts.push('<b>맨몸 '+lifts.length+'동작</b> · 아래 목록');
+    if (d.alt) parts.push('<b>'+d.alt+'</b>');
+    amTxt = parts.join('<br>');
+  } else if (gymDay) {
+    amTxt = d.s4.map(x => '<b>'+EX[x[0]][0]+'</b> '+x[1]).join('<br>') + (d.c ? '<br><b>'+d.c+'</b>' : '');
+  } else {
+    amTxt = '<b>'+(d.c||'')+'</b>';
+  }
+  h += '<div class="slot am"><div class="ic am"></div><div class="body"><div class="when">'+amLabel+'</div><div class="txt">'+amTxt+'</div></div></div>';
+  h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+
+    (d.pm ? (d.closed ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
+
+  if (d.mobOnly) {
+    h += '<div class="m-routine"><div class="rt-head"><span>모빌리티 8분 · 순서대로</span><span class="t">동작당 1분</span></div><ul>'+
+      MOB.map(m => '<li><b>'+m[0]+'</b> '+m[1]+'<span class="h">'+m[2]+'</span></li>').join('')+'</ul>'+
+      '<div class="rt-note">통증 없는 범위에서 천천히. 숨 참지 말고, 각 동작 끝에서 1~2초 멈추기. 전부 맨몸이라 집에서 그대로 됩니다.</div>'+
+      (d.alt && !d.closed ? '<div class="rt-foot">헬스장 못 가는 날 · '+d.c.split(' ')[0]+' 대신 '+d.alt+'</div>' : '')+
+      '</div>';
+  }
+
+  const rows = homeRows(d);
+  if (rows.length) {
     if (d.alt) rows.push('<li><b>'+d.alt+'</b><span class="h">대신 · '+d.c.split(' ')[0]+'</span></li>');
-    h += '<div class="m-routine"><div class="rt-head"><span>헬스장 못 가는 날 · 맨몸</span><span class="t">집에서</span></div><ul>'+rows.join('')+'</ul></div>';
+    h += '<div class="m-routine"><div class="rt-head"><span>'+(d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+
+      '</span><span class="t">'+(d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+rows.join('')+'</ul></div>';
   }
 
   mc.innerHTML = h;
