@@ -295,7 +295,7 @@
 </style>
 </head>
 <body>
-<nav class="nav"><div class="inner"><a class="brand" href="index.html">Personal</a><div class="links"><a href="strength.html" aria-current="page">근력</a><a href="exercise.html#result">구례 기록</a></div></div></nav>
+<nav class="nav"><div class="inner"><a class="brand" href="index.html">Personal</a><div class="links"><a href="strength.html" aria-current="page">근력</a><a href="career_roadmap.html">공부 계획</a><a href="ajou_mech_prep.html">기계공학</a><a href="grad_schools.html">대학원</a></div></div></nav>
 
 <div class="wrap">
 
@@ -362,6 +362,12 @@ const EX = {
   sideplank:['사이드 플랭크',             '사이드 플랭크'],
   deadbug:  ['데드버그',                 '데드버그'],
   mob:      ['모빌리티',                 '모빌리티'],
+  /* 구례 회고 1~4순위 — 중둔근 · 내전근 · 햄스트링 편심 · 대둔근 */
+  clam:     ['밴드 클램쉘',              '클램쉘 (밴드 없으면 맨몸)'],
+  monster:  ['밴드 몬스터 워크',          '밴드 몬스터 워크'],
+  copen:    ['코펜하겐 플랭크',           '코펜하겐 플랭크'],
+  nordic:   ['노르딕 컬',                '노르딕 컬 · 소파 아래 발 걸고'],
+  hipthr:   ['바벨 힙 쓰러스트',          '한 다리 글루트 브리지 · 어깨 소파에'],
 };
 /* 맨몸 대체에서 처방이 달라지는 것 */
 const ALT_RX = {
@@ -370,7 +376,8 @@ const ALT_RX = {
   facepull:'2×8', dbcurl:'2×15', dbbench:'3×(최대−2)', bench:'3×10', incdb:'2×(최대−2)',
   dbohp:'3×8', ohp:'3×6~8', pushpress:'3×5', rdl_db:'3×10 / 다리', rdl:'3×8 / 다리', sl_rdl:'2×10 / 다리',
   legcurl:'3×8', backext:'2×15', kbswing:'5회', farmer:'3×30m', dblunge:'3×12 / 다리', stepup:'3×10 / 다리',
-  bss:'3×12 / 다리', pallof:'3×10 / 쪽', hkr:'3×12'
+  bss:'3×12 / 다리', pallof:'3×10 / 쪽', hkr:'3×12',
+  clam:'3×20 / 쪽', nordic:'3×5', hipthr:'3×15 / 다리'
 };
 
 /* ---------- 모빌리티 8분 · [동작, 처방, 하는 법] · 동작당 1분 ---------- */
@@ -389,29 +396,29 @@ const MOB = [
 const TITLE = { 1:'하체', 2:'상체 + 로잉', 3:'하체 뒤쪽', 4:'상체 + 러닝', 5:'한 다리 · 몸통', 6:'평로라', 0:'롱런' };
 const W = {
   p1: {
-    1:{ s:[['goblet','3×10'],['legpress','3×12'],['calf','3×15'],['sideplank','2×30초 / 쪽']] },
+    1:{ s:[['clam','3×15 / 쪽'],['goblet','3×10'],['legpress','3×12'],['calf','3×15'],['sideplank','2×30초 / 쪽']] },
     2:{ s:[['latpd','3×10'],['dbbench','3×10'],['facepull','2×15'],['dbcurl','2×12']], c:'로잉머신 3×6분 @RPE 7 · 사이 2분', alt:'이지 러닝 30분' },
-    3:{ s:[['rdl_db','3×10'],['legcurl','3×12'],['backext','2×12'],['deadbug','3×8 / 쪽']] },
+    3:{ s:[['rdl_db','3×10'],['nordic','3×5'],['hipthr','3×10'],['backext','2×12'],['deadbug','3×8 / 쪽']] },
     4:{ s:[['cablerow','3×10'],['dbohp','3×10'],['pushup','2×(최대−2)'],['facepull','2×15']], c:'러닝머신 이지 30분 + 스트라이드 4×20초', alt:'야외 이지 30분 + 스트라이드 4×20초' },
-    5:{ s:[['dblunge','3×10 / 다리'],['stepup','3×8 / 다리'],['pallof','3×10 / 쪽'],['sideplank','2×30초 / 쪽']] },
+    5:{ s:[['monster','3×15걸음 / 방향'],['copen','3×20초 / 쪽'],['dblunge','3×10 / 다리'],['stepup','3×8 / 다리'],['pallof','3×10 / 쪽'],['sideplank','2×30초 / 쪽']] },
     6:{ c:'평로라 존2 60분 · NP 140~150W' },
     0:{ c:'롱런 이지 60분 · 5:45~6:15/km · 심박 135 이하' }
   },
   p2: {
-    1:{ s:[['backsq','3×6~8'],['legpress','3×10'],['calf1','3×12 / 다리'],['hkr','3×10']] },
+    1:{ s:[['clam','3×15 / 쪽'],['backsq','3×6~8'],['legpress','3×10'],['calf1','3×12 / 다리'],['hkr','3×10']] },
     2:{ s:[['apull','3×6~8'],['bench','3×6~8'],['facepull','2×15'],['dbcurl','2×10']], c:'로잉머신 4×6분 @RPE 7 · 사이 2분', alt:'이지 러닝 35분' },
-    3:{ s:[['rdl','3×6~8'],['backext','3×10'],['legcurl','2×10'],['farmer','3×30m']] },
+    3:{ s:[['rdl','3×6~8'],['nordic','3×6'],['hipthr','3×8'],['backext','3×10'],['farmer','3×30m']] },
     4:{ s:[['csrow','3×8~10'],['ohp','3×6~8'],['incdb','2×10'],['facepull','2×15']], c:'러닝머신 이지 30분 + 4×1분 @4:50/km', alt:'야외 이지 30분 + 4×1분 @4:50/km' },
-    5:{ s:[['bss','3×8 / 다리'],['sl_rdl','2×8 / 다리'],['pallof','3×10 / 쪽'],['sideplank','2×40초 / 쪽']] },
+    5:{ s:[['monster','3×15걸음 / 방향'],['copen','3×25초 / 쪽'],['bss','3×8 / 다리'],['sl_rdl','2×8 / 다리'],['pallof','3×10 / 쪽'],['sideplank','2×40초 / 쪽']] },
     6:{ c:'평로라 존2 60분 · NP 140~150W' },
     0:{ c:'롱런 이지 75분 · 마지막 10분 5:20/km' }
   },
   p3: {
-    1:{ s:[['boxjump','3×5'],['backsq','3×5'],['legpress','2×10'],['calf1','2×12 / 다리']] },
+    1:{ s:[['clam','3×15 / 쪽'],['boxjump','3×5'],['backsq','3×5'],['legpress','2×10'],['calf1','2×12 / 다리']] },
     2:{ s:[['pullup','3×(최대−1)'],['bench','3×5'],['facepull','2×15'],['hkr','2×10']], c:'로잉머신 6×2분 @RPE 8 · 사이 2분', alt:'이지 러닝 30분 + 6×1분 빠르게' },
-    3:{ s:[['kbswing','3×10'],['rdl','3×5~6'],['backext','2×10'],['farmer','3×30m']] },
+    3:{ s:[['kbswing','3×10'],['rdl','3×5~6'],['nordic','3×6~8'],['hipthr','3×6'],['farmer','3×30m']] },
     4:{ s:[['pushpress','3×5'],['bbrow','3×6~8'],['incdb','2×10'],['facepull','2×15']], c:'러닝머신 이지 25분 + 템포 10분 @5:10/km', alt:'야외 이지 25분 + 템포 10분 @5:10/km' },
-    5:{ s:[['skater','3×6 / 쪽'],['bss','3×6 / 다리'],['pallof','3×10 / 쪽'],['sideplank','2×40초 / 쪽']] },
+    5:{ s:[['monster','3×15걸음 / 방향'],['copen','3×30초 / 쪽'],['skater','3×6 / 쪽'],['bss','3×6 / 다리'],['pallof','3×10 / 쪽'],['sideplank','2×40초 / 쪽']] },
     6:{ c:'평로라 존2 60분 · NP 140~150W' },
     0:{ c:'롱런 이지 90분 · 마지막 10분 5:20/km' }
   }
@@ -449,7 +456,7 @@ function day(s){
     else if (dow === 0) { title = early ? '걷기' : '이지 러닝'; c = early ? '걷기 · 조깅 20~30분' : '이지 러닝 45분'; }
     else if (early) { title = '회복'; s4 = [['mob','8분']]; c = '러닝머신 경사 걷기 20분 · 가볍게'; alt = '걷기 20분'; }
     else {
-      s4 = W.p1[dow].s.map(x => [x[0], two(x[1]) + (/^(pushup|sideplank|deadbug)$/.test(x[0]) ? '' : ' · 가벼운 무게')]);
+      s4 = W.p1[dow].s.map(x => [x[0], two(x[1]) + (/^(pushup|sideplank|deadbug|clam|monster|copen|nordic)$/.test(x[0]) ? '' : ' · 가벼운 무게')]);
       if (W.p1[dow].c) { c = (dow===2 ? '로잉머신' : '러닝머신') + ' 이지 25분'; alt = '이지 러닝 25분'; }
       light = true;
     }
