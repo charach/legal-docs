@@ -294,7 +294,7 @@
   }
 
   /* ---------- 페이스 패널 ---------- */
-  .panel { max-width: 760px; margin: 18px auto 0; background: var(--card); border: 1px solid var(--line); border-radius: 0; padding: 14px 16px; box-shadow: var(--shadow); }
+  .panel { max-width: 760px; margin: 14px auto 4px; background: var(--card); border: 1px solid var(--line); border-radius: 0; padding: 14px 16px; box-shadow: var(--shadow); }
   .panel .ph { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
   .panel .row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; margin-top: 8px; }
   .panel .row b { color: var(--ink); }
@@ -335,7 +335,11 @@
   .m-routine li:not(.must) b { color: var(--ink-soft); font-weight: 600; }
   .m-routine li.must b { color: var(--ink); }
   .m-routine li .st { font-style: normal; color: var(--red); margin-right: 3px; }
-  .topbtns { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 14px auto 0; }
+  .topbtns { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 18px auto 0; }
+  .tbtn[aria-expanded="true"] { background: #000; color: #fff; }
+  .panelwrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .38s cubic-bezier(.22,1,.36,1); }
+  .panelwrap.open { grid-template-rows: 1fr; }
+  .panelin { overflow: hidden; min-height: 0; }
   .tbtn { font-family: inherit; font-size: 12.5px; font-weight: 800; letter-spacing: .08em; color: #000; background: #fff; border: 2px solid #000; padding: 9px 16px; cursor: pointer; }
   .tbtn:active { background: #000; color: #fff; }
   .tnote { font-size: 12px; color: var(--muted); }
@@ -361,15 +365,17 @@
     <p class="sub">화·수·목 아침 러닝 · 월·금 아침 근력 · 월·수 저녁 수영 · 토 평로라 · 일 롱런<br><b>2026. 10. 12 ~ 2027. 3. 28</b> · 대회일은 3월 말~4월 초 가정, 확정되면 바꿀 것</p>
   </header>
 
-  <div class="panel" id="panel"></div>
-
-  <div class="topbtns"><button class="tbtn" id="stxBtn">스트레칭 루틴</button><span class="tnote">매일 같습니다 — 세션 종류별로만 다릅니다</span></div>
+  <div class="topbtns">
+    <button class="tbtn" id="paceBtn" aria-expanded="false">페이스 · 궤도</button>
+    <button class="tbtn" id="stxBtn">스트레칭 루틴</button>
+  </div>
+  <div class="panelwrap" id="panelwrap"><div class="panelin"><div class="panel" id="panel"></div></div></div>
 
   <div class="legend" id="legend"></div>
 
   <div id="calendar"></div>
 
-  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 모든 러닝 페이스는 위 패널의 <b>최근 10km 기록</b>에서 계산되고, 테스트 주(W1·7·13·19) 화요일에 결과를 넣으면 전부 다시 맞춰집니다. 러닝 팝업마다 <b>트레드밀 속도·경사</b> 표가 붙어 있고(경사 1%는 야외 공기저항 보정값), <b>스트레칭 루틴</b>은 매일 같아서 맨 위 버튼에 한 번만 뒀습니다.<br>근력일이 <b>공휴일</b>이면 헬스장 휴무로 집 운동이 그날의 기본 계획이 됩니다.</p>
+  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 모든 러닝 페이스는 위 <b>페이스 · 궤도</b> 버튼 안의 최근 10km 기록에서 계산되고, 테스트 주(W1·7·13·19) 화요일에 결과를 넣으면 전부 다시 맞춰집니다. 러닝 팝업마다 <b>트레드밀 속도·경사</b> 표가 붙어 있고(경사 1%는 야외 공기저항 보정값), <b>스트레칭 루틴</b>은 매일 같아서 맨 위 버튼에 한 번만 뒀습니다.<br>근력일이 <b>공휴일</b>이면 헬스장 휴무로 집 운동이 그날의 기본 계획이 됩니다.</p>
 </div>
 
 <button class="fab" id="fab">오늘 운동</button>
@@ -674,7 +680,7 @@ function onTT(e){
   if (e.target.value.trim() === '') { delete tt[w]; }
   else if (v) { tt[w] = v; }
   else { e.target.value = tt[w] ? pace(tt[w]) : ''; return; }
-  saveTT(); renderPanel(); buildCalendar();
+  saveTT(); renderPanel(); buildCalendar(); setPanel(true);
   if (overlay.classList.contains('open') && currentDs) openModal(currentDs);
 }
 renderPanel();
@@ -797,6 +803,10 @@ function openStretch(backDs){
   overlay.classList.add('open'); document.body.style.overflow = 'hidden';
 }
 document.getElementById('stxBtn').addEventListener('click', () => openStretch(null));
+const panelWrap = document.getElementById('panelwrap'), paceBtn = document.getElementById('paceBtn');
+function setPanel(open){ if (open) panelWrap.classList.add('open'); else panelWrap.classList.remove('open'); paceBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+paceBtn.addEventListener('click', () => setPanel(!panelWrap.classList.contains('open')));
+setPanel(false);   // 초기 상태를 JS가 소유 — 마크업과 어긋나지 않게
 function closeModal(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
 
 /* ---------- drag-to-dismiss (mobile bottom sheet) ---------- */
