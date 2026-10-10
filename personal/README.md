@@ -147,3 +147,11 @@ GitHub Pages에 올라가면 그냥 동작한다.
 아이콘을 바꾼 뒤에는 홈화면에서 **한 번 지우고 다시 추가**해야 한다. iOS가 캐시한다.
 
 PNG는 Chrome 헤드리스로 생성했다 (HTML 한 장을 180·512px로 스크린샷).
+
+## 네 가지 공부 계획
+
+- `steady_study.html`: 2026-10-12~2027-01-30, 하루 90분 기준 16주 계획.
+- `data/steady-study.js`: 정보처리기사 주차와 국어·살림 독서 진도.
+- `assets/steady-study.js`, `assets/steady-study.css`: 날짜별 할 일, 완료 체크와 화면.
+- 완료 기록은 브라우저 localStorage의 `steady-study-v1`에 저장된다. 기기 간 동기화는 없다.
+- 1월 30일은 학습 목표일이며 실제 시험일은 큐넷에서 확인한다.
