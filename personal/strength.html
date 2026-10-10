@@ -331,6 +331,8 @@
   .m-tm td.v { font-weight: 700; font-variant-numeric: tabular-nums; }
   .m-tm td.g { color: var(--ink-soft); white-space: nowrap; text-align: right; }
   .m-tm .tm-note { font-size: 12px; color: #5C7A85; padding: 9px 13px; background: #FAFDFD; border-top: 1px solid var(--line); line-height: 1.5; }
+  .m-routine li:not(.must) b { color: var(--ink-soft); font-weight: 600; }
+  .m-routine li.must b { color: var(--ink); }
   .m-fix { margin-top: 14px; font-size: 12.5px; color: var(--ink-soft); background: #F2F8F9; border: 1px solid var(--line); border-radius: 8px; padding: 10px 13px; line-height: 1.55; }
   .m-fix b { color: var(--sky-deep); }
 
@@ -446,55 +448,67 @@ const STR = {
 };
 const BIKE = { base:'평로라 존2 60분 · NP 140~150W', build:'평로라 존2 75분 · NP 140~150W', peak:'평로라 존2 60분 · NP 140~150W', taper:'평로라 존2 45분 · 가볍게' };
 
-/* ========== 스트레칭 · [이름, 처방, 요령] ========== */
-const DYN = [   // 러닝 전 · 동적 7분
-  ['사이드라잉 외전',        '좌우 15회',  '옆으로 누워 위쪽 다리 들기. 밴드 있으면 클램쉘 — 구례 회고의 런 직전 중둔근 활성화'],
-  ['레그 스윙 앞뒤',         '좌우 12회',  '벽 잡고, 반동 없이 점점 크게'],
-  ['레그 스윙 옆',           '좌우 12회',  '몸통은 고정, 다리만 좌우로'],
-  ['워킹 런지 + 상체 회전',   '10보',      '앞무릎 90도, 뒷무릎 바닥 가까이, 앞다리 쪽으로 상체 돌리기'],
-  ['힙 서클',               '좌우 8회',   '네발 자세에서 무릎으로 큰 원'],
-  ['카프 펌프',              '15회',      '벽 짚고 뒤꿈치 올렸다 천천히 내리기'],
-  ['하이니 → A스킵',          '각 20초',   '트레드밀이면 제자리에서. 발목 탄성 깨우기']
+/* ========== 스트레칭 · [이름, 처방, 요령, ★필수] ========== */
+const DYN = [   // 러닝 전 · 동적 7분 · ★만 3분
+  ['사이드라잉 외전',        '좌우 15회',  '옆으로 누워 위쪽 다리 들기. 밴드 있으면 클램쉘 — 구례 회고의 런 직전 중둔근 활성화', 1],
+  ['레그 스윙 앞뒤',         '좌우 12회',  '벽 잡고, 반동 없이 점점 크게', 1],
+  ['레그 스윙 옆',           '좌우 12회',  '몸통은 고정, 다리만 좌우로', 0],
+  ['워킹 런지 + 상체 회전',   '10보',      '앞무릎 90도, 뒷무릎 바닥 가까이, 앞다리 쪽으로 상체 돌리기', 1],
+  ['힙 서클',               '좌우 8회',   '네발 자세에서 무릎으로 큰 원', 0],
+  ['카프 펌프',              '15회',      '벽 짚고 뒤꿈치 올렸다 천천히 내리기', 0],
+  ['하이니 → A스킵',          '각 20초',   '트레드밀이면 제자리에서. 발목 탄성 깨우기', 0]
 ];
-const STATIC = [   // 러닝 후 · 정적 10분 · 각 좌우
-  ['힙플렉서 런지',           '좌우 45초',  '뒷무릎 바닥, 엉덩이 조이며 골반을 앞으로 — 구례 골반 후방경사 처방'],
-  ['햄스트링',               '좌우 45초',  '발 올리고 등 편 채로 접기. 무릎 살짝 굽혀도 됨'],
-  ['종아리 · 비복근',         '좌우 30초',  '벽 밀며 뒷다리 무릎 펴서'],
-  ['종아리 · 가자미근',        '좌우 30초',  '같은 자세에서 뒷무릎 굽혀서'],
-  ['이상근 · figure-4',       '좌우 45초',  '누워서 발목을 반대 무릎에 걸고 당기기'],
-  ['IT밴드 · 대퇴근막장근',    '좌우 45초',  '다리 교차하고 반대쪽으로 옆구리 굽히기. 오른쪽 한 세트 더'],
-  ['대퇴사두',               '좌우 30초',  '서서 발목 잡고 무릎 모아서, 골반 앞으로']
+const STATIC = [   // 러닝 후 · 정적 10분 · ★만 3분
+  ['힙플렉서 런지',           '좌우 45초',  '뒷무릎 바닥, 엉덩이 조이며 골반을 앞으로 — 구례 골반 후방경사 처방', 1],
+  ['햄스트링',               '좌우 45초',  '발 올리고 등 편 채로 접기. 무릎 살짝 굽혀도 됨', 0],
+  ['종아리 · 비복근',         '좌우 30초',  '벽 밀며 뒷다리 무릎 펴서', 1],
+  ['종아리 · 가자미근',        '좌우 30초',  '같은 자세에서 뒷무릎 굽혀서', 0],
+  ['이상근 · figure-4',       '좌우 45초',  '누워서 발목을 반대 무릎에 걸고 당기기', 0],
+  ['IT밴드 · 대퇴근막장근',    '좌우 45초',  '다리 교차하고 반대쪽으로 옆구리 굽히기. 오른쪽 한 세트 더', 1],
+  ['대퇴사두',               '좌우 30초',  '서서 발목 잡고 무릎 모아서, 골반 앞으로', 0]
 ];
-const ROLL = [   // 롱런 후 폼롤러 4분 추가
-  ['폼롤러 · IT밴드',         '좌우 60초',  '아픈 지점에서 10초 멈춤. 무릎 바로 위는 피하기'],
-  ['폼롤러 · 종아리',         '좌우 45초',  '발끝 안팎으로 돌려가며'],
-  ['폼롤러 · 대퇴사두',       '좌우 30초',  '']
+const ROLL = [   // 롱런 후 폼롤러 4분 · ★만 2분
+  ['폼롤러 · IT밴드',         '좌우 60초',  '아픈 지점에서 10초 멈춤. 무릎 바로 위는 피하기', 1],
+  ['폼롤러 · 종아리',         '좌우 45초',  '발끝 안팎으로 돌려가며', 0],
+  ['폼롤러 · 대퇴사두',       '좌우 30초',  '', 0]
 ];
-const MOB = [   // 근력 전 · 모빌리티 8분 · 동작당 1분
-  ['캣카우',                '10회',      '네발 자세. 등을 둥글게 말았다가 천천히 펴기'],
-  ['흉추 오픈북',            '좌우 8회',   '옆으로 눕고 무릎 포갠 채, 위쪽 팔을 뒤로 열어 가슴 펴기'],
-  ['90/90 고관절 전환',      '10회',      '앉아서 두 무릎 90도. 엉덩이 붙인 채 좌우로 넘기기'],
-  ['벽 월슬라이드',          '12회',      '등·팔꿈치·손등을 벽에 붙이고 팔을 위로 쭉'],
-  ['무릎-벽 발목 밀기',      '좌우 12회',  '발끝 벽에서 10cm. 뒤꿈치 붙인 채 무릎으로 벽 터치'],
-  ['한 다리 글루트 브리지',   '좌우 10회',  '누워서 한 발만 딛고 엉덩이 들기. 위에서 1초'],
-  ['버드독',                '좌우 8회',   '반대쪽 팔·다리 동시에 뻗어 3초 유지'],
-  ['힙 플렉서 런지 스트레치', '좌우 30초',  '무릎 대고 런지. 엉덩이 조이며 골반을 앞으로']
+const MOB = [   // 근력 전 · 모빌리티 8분 · ★만 3분
+  ['캣카우',                '10회',      '네발 자세. 등을 둥글게 말았다가 천천히 펴기', 0],
+  ['흉추 오픈북',            '좌우 8회',   '옆으로 눕고 무릎 포갠 채, 위쪽 팔을 뒤로 열어 가슴 펴기', 0],
+  ['90/90 고관절 전환',      '10회',      '앉아서 두 무릎 90도. 엉덩이 붙인 채 좌우로 넘기기', 1],
+  ['벽 월슬라이드',          '12회',      '등·팔꿈치·손등을 벽에 붙이고 팔을 위로 쭉', 0],
+  ['무릎-벽 발목 밀기',      '좌우 12회',  '발끝 벽에서 10cm. 뒤꿈치 붙인 채 무릎으로 벽 터치', 0],
+  ['한 다리 글루트 브리지',   '좌우 10회',  '누워서 한 발만 딛고 엉덩이 들기. 위에서 1초', 1],
+  ['버드독',                '좌우 8회',   '반대쪽 팔·다리 동시에 뻗어 3초 유지', 0],
+  ['힙 플렉서 런지 스트레치', '좌우 30초',  '무릎 대고 런지. 엉덩이 조이며 골반을 앞으로', 1]
 ];
-const POST_STR = [   // 근력 후 3분
-  ['힙플렉서 런지',           '좌우 30초',  ''],
-  ['햄스트링',               '좌우 30초',  ''],
-  ['이상근 · figure-4',       '좌우 30초',  '']
+const POST_STR = [   // 근력 후 3분 · 전부
+  ['힙플렉서 런지',           '좌우 30초',  '', 1],
+  ['햄스트링',               '좌우 30초',  '', 1],
+  ['이상근 · figure-4',       '좌우 30초',  '', 1]
 ];
-const POST_BIKE = [   // 평로라 후 5분
-  ['힙플렉서 런지',           '좌우 45초',  '자전거 자세로 짧아지는 곳'],
-  ['흉추 오픈북',            '좌우 8회',   '드롭 자세로 굳은 등'],
-  ['햄스트링',               '좌우 45초',  ''],
-  ['종아리 · 비복근',         '좌우 30초',  '']
+const POST_BIKE = [   // 평로라 후 5분 · ★만 2분
+  ['힙플렉서 런지',           '좌우 45초',  '자전거 자세로 짧아지는 곳', 1],
+  ['흉추 오픈북',            '좌우 8회',   '드롭 자세로 굳은 등', 1],
+  ['햄스트링',               '좌우 45초',  '', 0],
+  ['종아리 · 비복근',         '좌우 30초',  '', 0]
 ];
 const RACE_POST = [
-  ['걷기',                  '10분',      '멈추지 말고. 앉으면 못 일어난다'],
-  ['정적 스트레칭',           '저녁에 10분', '위 러닝 후 목록 그대로, 폼롤러는 다음 날']
+  ['걷기',                  '10분',      '멈추지 말고. 앉으면 못 일어난다', 1],
+  ['정적 스트레칭',           '저녁에 10분', '위 러닝 후 목록 그대로, 폼롤러는 다음 날', 0]
 ];
+/* 블록별 규칙 — 언제 빼도 되고 언제 빼면 안 되는지 */
+const RULE = {
+  dynRun:  '★ 셋은 질세션·테스트 전엔 빼지 않는다. 이지 러닝 전엔 몸이 이미 따뜻하면(출근 걷기 뒤 등) 걷기 5분으로 대체 가능. 정적 스트레칭은 러닝 전에 하지 않는다 — 힘이 빠진다.',
+  statRun: '★ 셋은 빼지 않는다. 나머지는 시간 없으면 저녁으로. 월·수는 수영 전에 해도 효과 같음. 아픈 쪽(오른쪽 IT밴드)은 한 세트 더.',
+  long:    '폼롤러 IT밴드는 빼지 않는다. 나머지 폼롤러는 피곤하면 다음 날 아침. 정적 ★ 셋은 그날 안에.',
+  mob:     '★ 셋은 빼지 않는다 — 고관절이 안 열리면 힙 쓰러스트·노르딕이 허리로 간다. 근력 전 정적 스트레칭은 하지 않는다.',
+  postStr: '3분이라 전부. 주말 롱런 전날(금)은 햄스트링을 45초로.',
+  bike:    '★ 둘만 해도 된다. 자전거는 다리보다 고관절·등이 굳는다.',
+  dynRace: '★ 셋만. 정적은 절대 금지. 출발 20분 전에 끝내고 가볍게 조깅 5분.',
+  postRace:'걷기는 선택이 아니다.',
+  rest:    '대회 주라 ★만 해도 된다. 새로 뭘 늘리지 않는다.'
+};
 
 /* ========== 페이스 ========== */
 function zones(tt){ const p = tt/10; return { E:[p+60, p+80], M:p+24, T:p+12, I:p-10, R:p-25 }; }
@@ -592,12 +606,12 @@ function day(s){
     else { kind = 'easy'; tags.push('easy'); }
   }
 
-  if (kind === 'easy' || kind === 'q' || kind === 'tt') { pre = { t:'러닝 전 · 동적', min:7, list:DYN }; post = { t:'러닝 후 · 정적', min:10, list:STATIC }; }
-  else if (kind === 'long') { pre = { t:'롱런 전 · 동적', min:7, list:DYN }; post = { t:'롱런 후 · 정적 + 폼롤러', min:14, list:STATIC.concat(ROLL) }; }
-  else if (kind === 'race') { pre = { t:'대회 전 · 동적', min:7, list:DYN }; post = { t:'대회 후', min:10, list:RACE_POST }; }
-  else if (kind === 'str') { pre = { t:'근력 전 · 모빌리티', min:8, list:MOB }; post = { t:'근력 후 · 정적', min:3, list:POST_STR }; }
-  else if (kind === 'bike') { post = { t:'평로라 후 · 정적', min:5, list:POST_BIKE }; }
-  else if (kind === 'rest') { pre = { t:'모빌리티', min:8, list:MOB }; }
+  if (kind === 'easy' || kind === 'q' || kind === 'tt') { pre = { t:'러닝 전 · 동적', min:7, must:3, list:DYN, rule:RULE.dynRun }; post = { t:'러닝 후 · 정적', min:10, must:3, list:STATIC, rule:RULE.statRun }; }
+  else if (kind === 'long') { pre = { t:'롱런 전 · 동적', min:7, must:3, list:DYN, rule:RULE.dynRun }; post = { t:'롱런 후 · 정적 + 폼롤러', min:14, must:5, list:STATIC.concat(ROLL), rule:RULE.long }; }
+  else if (kind === 'race') { pre = { t:'대회 전 · 동적', min:7, must:3, list:DYN, rule:RULE.dynRace }; post = { t:'대회 후', min:10, must:10, list:RACE_POST, rule:RULE.postRace }; }
+  else if (kind === 'str') { pre = { t:'근력 전 · 모빌리티', min:8, must:3, list:MOB, rule:RULE.mob }; post = { t:'근력 후 · 정적', min:3, must:3, list:POST_STR, rule:RULE.postStr }; }
+  else if (kind === 'bike') { post = { t:'평로라 후 · 정적', min:5, must:2, list:POST_BIKE, rule:RULE.bike }; }
+  else if (kind === 'rest') { pre = { t:'모빌리티', min:8, must:3, list:MOB, rule:RULE.rest }; }
   const needsGym = kind === 'str';
   const closed = !!hol && needsGym;
   if (closed) { tags = tags.filter(t => t!=='gym'); tags.unshift('closed'); }
@@ -690,7 +704,12 @@ buildCalendar();
 const overlay = document.getElementById('overlay');
 const mc = document.getElementById('modalContent');
 let currentDs = null;
-function stretchBlock(b){ return '<div class="m-routine"><div class="rt-head"><span>'+b.t+'</span><span class="t">'+b.min+'분</span></div><ul>'+b.list.map(x => '<li><b>'+x[0]+'</b> '+x[1]+(x[2] ? '<span class="h">'+x[2]+'</span>' : '')+'</li>').join('')+'</ul></div>'; }
+function stretchBlock(b){
+  const must = b.list.filter(x => x[3]).length;
+  return '<div class="m-routine"><div class="rt-head"><span>'+b.t+'</span><span class="t">'+b.min+'분 · ★만 '+b.must+'분</span></div><ul>'+
+    b.list.map(x => '<li'+(x[3]?' class="must"':'')+'><b>'+(x[3]?'★ ':'')+x[0]+'</b> '+x[1]+(x[2] ? '<span class="h">'+x[2]+'</span>' : '')+'</li>').join('')+
+    '</ul><div class="rt-note">'+(must < b.list.length ? '시간 없으면 <b>★ '+must+'개만</b> — '+b.must+'분. ' : '')+b.rule+'</div></div>';
+}
 function homeRows(d){
   return d.s4.map(x => {
     const same = EX[x[0]][0] === EX[x[0]][1];
