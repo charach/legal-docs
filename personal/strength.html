@@ -12,10 +12,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="근력">
+<meta name="apple-mobile-web-app-title" content="마라톤">
 <!-- /pwa -->
 
-<title>전신 근력 13주 캘린더</title>
+<title>2027 군산 마라톤 · 24주 계획</title>
 <link rel="stylesheet" href="assets/summer.css">
 <style>
   :root {
@@ -292,24 +292,57 @@
     .cell .dots { margin-top: auto; }
   }
 
+  /* ---------- 페이스 패널 ---------- */
+  .panel { max-width: 760px; margin: 18px auto 0; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .panel .ph { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .panel .row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; margin-top: 8px; }
+  .panel .row b { color: var(--ink); }
+  .panel .z { font-size: 13px; color: var(--ink-soft); }
+  .panel .z b { font-variant-numeric: tabular-nums; }
+  .panel .big { font-size: 15px; font-weight: 800; }
+  .panel .big b { color: var(--sky-deep); }
+  .panel table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12.5px; }
+  .panel th { text-align: left; font-weight: 700; color: var(--muted); font-size: 11px; letter-spacing: .06em; padding: 4px 6px 6px 0; border-bottom: 1px solid var(--line); }
+  .panel td { padding: 7px 6px 7px 0; border-bottom: 1px solid var(--line); vertical-align: middle; font-variant-numeric: tabular-nums; }
+  .panel tr:last-child td { border-bottom: none; }
+  .panel input.tt { width: 72px; font: inherit; font-size: 13px; font-variant-numeric: tabular-nums; padding: 4px 7px; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--ink); background: #fff; }
+  .panel input.tt:focus { outline: none; border-color: var(--sky); }
+  .panel .ok { color: var(--sky-deep); font-weight: 700; }
+  .panel .off { color: var(--slate); font-weight: 700; }
+  .panel .hint { font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+  .cell.k-tt { border: 2px solid var(--sky); }
+  .cell.k-tt .dnum { color: var(--sky-deep); }
+  .cell.k-easy { background: #F7FBFB; }
+  .cell.k-str { background: #FAFDFD; }
+  .m-tt { margin-top: 14px; border: 2px solid var(--sky); border-radius: 8px; padding: 12px 13px; }
+  .m-tt .t { font-size: 12px; font-weight: 800; color: var(--sky-deep); letter-spacing: .04em; }
+  .m-tt .r { display: flex; gap: 10px; align-items: center; margin-top: 8px; font-size: 13px; }
+  .m-tt input { width: 80px; font: inherit; font-size: 15px; font-variant-numeric: tabular-nums; padding: 6px 9px; border: 1px solid var(--line-strong); border-radius: 6px; }
+  .m-tt .h { font-size: 12px; color: var(--ink-soft); margin-top: 8px; line-height: 1.5; }
+  .m-fix { margin-top: 14px; font-size: 12.5px; color: var(--ink-soft); background: #F2F8F9; border: 1px solid var(--line); border-radius: 8px; padding: 10px 13px; line-height: 1.55; }
+  .m-fix b { color: var(--sky-deep); }
+
 </style>
 </head>
 <body>
-<nav class="nav"><div class="inner"><a class="brand" href="index.html">Personal</a><div class="links"><a href="strength.html" aria-current="page">근력</a><a href="career_roadmap.html">공부 계획</a><a href="ajou_mech_prep.html">기계공학</a><a href="grad_schools.html">대학원</a></div></div></nav>
+<nav class="nav"><div class="inner"><a class="brand" href="index.html">Personal</a><div class="links"><a href="strength.html" aria-current="page">마라톤</a><a href="career_roadmap.html">공부 계획</a><a href="ajou_mech_prep.html">기계공학</a><a href="grad_schools.html">대학원</a></div></div></nav>
 
 <div class="wrap">
 
   <header class="hero">
-    <span class="kicker">GYM · SWIM · RUN</span>
-    <h1>전신 근력<br>13주 캘린더</h1>
-    <p class="sub">평일 아침 헬스장 · 월·수 저녁 수영 · 토 평로라 · 일 롱런<br><b>2026. 10. 8 ~ 2027. 1. 3</b> · 공휴일은 헬스장 휴무로 집 운동 전환</p>
+    <span class="kicker">RUN · STRENGTH · SWIM · BIKE</span>
+    <h1>2027 군산 마라톤<br>24주 계획</h1>
+    <p class="sub">화·수·목 아침 러닝 · 월·금 아침 근력 · 월·수 저녁 수영 · 토 평로라 · 일 롱런<br><b>2026. 10. 12 ~ 2027. 3. 28</b> · 대회일은 3월 말~4월 초 가정, 확정되면 바꿀 것</p>
   </header>
+
+  <div class="panel" id="panel"></div>
 
   <div class="legend" id="legend"></div>
 
   <div id="calendar"></div>
 
-  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 헬스장을 못 가는 날은 팝업 아래 <b>맨몸</b> 목록으로.<br><b>공휴일</b>은 헬스장이 쉬므로 집 운동이 그날의 기본 계획으로 바뀝니다.</p>
+  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 모든 러닝 페이스는 위 패널의 <b>최근 10km 기록</b>에서 계산되고, 테스트 주(W1·7·13·19) 화요일에 결과를 넣으면 전부 다시 맞춰집니다.<br>근력일이 <b>공휴일</b>이면 헬스장 휴무로 집 운동이 그날의 기본 계획이 됩니다.</p>
 </div>
 
 <button class="fab" id="fab">오늘 운동</button>
@@ -323,283 +356,285 @@
 </div>
 
 <script>
-/* ---------- 동작: [헬스장 이름, 맨몸 대체] ---------- */
-const EX = {
-  goblet:   ['고블릿 스쿼트',            '맨몸 스쿼트 · 3초 내려가기'],
-  backsq:   ['바벨 백스쿼트',            '불가리안 스플릿 스쿼트(맨몸)'],
-  legpress: ['레그 프레스',              '워킹 런지'],
-  calf:     ['스탠딩 카프 레이즈',        '계단 카프 레이즈'],
-  calf1:    ['한 다리 카프 레이즈',       '한 다리 계단 카프 레이즈'],
-  boxjump:  ['박스 점프',                '점프 스쿼트'],
-  latpd:    ['랫풀다운',                 '식탁 인버티드 로우 (철봉 있으면 풀업)'],
-  apull:    ['어시스트 풀업',             '인버티드 로우 · 발 의자 위'],
-  pullup:   ['풀업',                     '인버티드 로우 · 발 의자 위'],
-  cablerow: ['시티드 케이블 로우',        '식탁 인버티드 로우'],
-  csrow:    ['체스트 서포티드 덤벨 로우',  '인버티드 로우 · 발 의자 위'],
-  bbrow:    ['바벨 로우',                '인버티드 로우 · 발 의자 위 · 1초 멈춤'],
-  facepull: ['페이스 풀',                '프론 YTW'],
-  dbcurl:   ['덤벨 컬',                  '배낭 컬 (책 넣은 배낭)'],
-  dbbench:  ['덤벨 벤치프레스',           '푸시업'],
-  bench:    ['바벨 벤치프레스',           '템포 푸시업 · 3초 내리기'],
-  incdb:    ['인클라인 덤벨 프레스',       '발 올린 푸시업'],
-  pushup:   ['푸시업',                   '푸시업'],
-  dbohp:    ['덤벨 숄더 프레스',          '파이크 푸시업'],
-  ohp:      ['바벨 오버헤드 프레스',       '파이크 푸시업 · 발 의자 위'],
-  pushpress:['푸시 프레스',              '폭발 푸시업'],
-  rdl_db:   ['덤벨 RDL',                 '한 다리 RDL(맨몸)'],
-  rdl:      ['바벨 RDL',                 '한 다리 RDL · 배낭'],
-  sl_rdl:   ['한 다리 덤벨 RDL',          '한 다리 RDL(맨몸)'],
-  legcurl:  ['라잉 레그컬',              '슬라이딩 레그컬 (수건·양말)'],
-  backext:  ['45° 백 익스텐션',          '엎드려 상체 들기'],
-  kbswing:  ['케틀벨 스윙',              '제자리 멀리뛰기'],
-  farmer:   ['파머스 워크',              '물통·장바구니 들고 걷기'],
-  dblunge:  ['덤벨 리버스 런지',          '리버스 런지'],
-  stepup:   ['박스 스텝업',              '계단·의자 스텝업'],
-  bss:      ['불가리안 스플릿 스쿼트',     '불가리안 스플릿 스쿼트(맨몸)'],
-  skater:   ['스케이터 점프',             '스케이터 점프'],
-  pallof:   ['팔로프 프레스',             '플랭크 숄더 탭'],
-  hkr:      ['행잉 니 레이즈',            '누워서 레그 레이즈'],
-  sideplank:['사이드 플랭크',             '사이드 플랭크'],
-  deadbug:  ['데드버그',                 '데드버그'],
-  mob:      ['모빌리티',                 '모빌리티'],
-  /* 구례 회고 1~4순위 — 중둔근 · 내전근 · 햄스트링 편심 · 대둔근 */
-  clam:     ['밴드 클램쉘',              '클램쉘 (밴드 없으면 맨몸)'],
-  monster:  ['밴드 몬스터 워크',          '밴드 몬스터 워크'],
-  copen:    ['코펜하겐 플랭크',           '코펜하겐 플랭크'],
-  nordic:   ['노르딕 컬',                '노르딕 컬 · 소파 아래 발 걸고'],
-  hipthr:   ['바벨 힙 쓰러스트',          '한 다리 글루트 브리지 · 어깨 소파에'],
-};
-/* 맨몸 대체에서 처방이 달라지는 것 */
-const ALT_RX = {
-  goblet:'3×20', backsq:'3×12 / 다리', legpress:'3×12 / 다리', calf:'3×20', calf1:'3×15 / 다리', boxjump:'3×6',
-  latpd:'3×10', apull:'3×8~10', pullup:'3×10', cablerow:'3×10', csrow:'3×10', bbrow:'3×10',
-  facepull:'2×8', dbcurl:'2×15', dbbench:'3×(최대−2)', bench:'3×10', incdb:'2×(최대−2)',
-  dbohp:'3×8', ohp:'3×6~8', pushpress:'3×5', rdl_db:'3×10 / 다리', rdl:'3×8 / 다리', sl_rdl:'2×10 / 다리',
-  legcurl:'3×8', backext:'2×15', kbswing:'5회', farmer:'3×30m', dblunge:'3×12 / 다리', stepup:'3×10 / 다리',
-  bss:'3×12 / 다리', pallof:'3×10 / 쪽', hkr:'3×12',
-  clam:'3×20 / 쪽', nordic:'3×5', hipthr:'3×15 / 다리'
-};
+/* ========== 설정 ========== */
+const START = '2026-10-12', WEEK0 = '2026-10-12';
+const RACE  = '2027-03-28';          // 가정. 대회일 확정되면 이 값만 바꾼다 (4/4면 테이퍼 한 주 추가)
+const END   = RACE;
+const DEFAULT_TT = 46*60;            // 테스트 전 추정 · 거북섬 10km 50:12(바이크 직후) → 단독 약 46분
+const SUB3_W19  = 39*60;             // W19 테스트에서 이 10km면 서브3 궤도
+const TT_WEEKS  = [1,7,13,19];
+const DELOAD    = [4,8,12,16,20];
+const STORE     = 'gunsan27_tt_v1';
 
-/* ---------- 모빌리티 8분 · [동작, 처방, 하는 법] · 동작당 1분 ---------- */
-const MOB = [
-  ['캣카우',                '10회',     '네발 자세. 등을 둥글게 말았다가 천천히 펴기'],
-  ['흉추 오픈북',            '좌우 8회',  '옆으로 눕고 무릎 포갠 채, 위쪽 팔을 뒤로 열어 가슴 펴기'],
-  ['90/90 고관절 전환',      '10회',     '앉아서 두 무릎 90도. 엉덩이 붙인 채 좌우로 넘기기'],
-  ['벽 월슬라이드',          '12회',     '등·팔꿈치·손등을 벽에 붙이고 팔을 위로 쭉 올렸다 내리기'],
-  ['무릎-벽 발목 밀기',      '좌우 12회', '발끝 벽에서 10cm. 뒤꿈치 붙인 채 무릎으로 벽 터치'],
-  ['한 다리 글루트 브리지',   '좌우 10회', '누워서 한 발만 딛고 엉덩이 들기. 위에서 1초 멈춤'],
-  ['버드독',                '좌우 8회',  '네발 자세에서 반대쪽 팔·다리를 동시에 뻗어 3초 유지'],
-  ['힙 플렉서 런지 스트레치', '좌우 30초', '무릎 대고 런지. 엉덩이 조이며 골반을 앞으로 밀기']
-];
-
-/* ---------- 주간 틀 ---------- */
-const TITLE = { 1:'하체', 2:'상체 + 로잉', 3:'하체 뒤쪽', 4:'상체 + 러닝', 5:'한 다리 · 몸통', 6:'평로라', 0:'롱런' };
-const W = {
-  p1: {
-    1:{ s:[['clam','3×15 / 쪽'],['goblet','3×10'],['legpress','3×12'],['calf','3×15'],['sideplank','2×30초 / 쪽']] },
-    2:{ s:[['latpd','3×10'],['dbbench','3×10'],['facepull','2×15'],['dbcurl','2×12']], c:'로잉머신 3×6분 @RPE 7 · 사이 2분', alt:'이지 러닝 30분' },
-    3:{ s:[['rdl_db','3×10'],['nordic','3×5'],['hipthr','3×10'],['backext','2×12'],['deadbug','3×8 / 쪽']] },
-    4:{ s:[['cablerow','3×10'],['dbohp','3×10'],['pushup','2×(최대−2)'],['facepull','2×15']], c:'러닝머신 이지 30분 + 스트라이드 4×20초', alt:'야외 이지 30분 + 스트라이드 4×20초' },
-    5:{ s:[['monster','3×15걸음 / 방향'],['copen','3×20초 / 쪽'],['dblunge','3×10 / 다리'],['stepup','3×8 / 다리'],['pallof','3×10 / 쪽'],['sideplank','2×30초 / 쪽']] },
-    6:{ c:'평로라 존2 60분 · NP 140~150W' },
-    0:{ c:'롱런 이지 60분 · 5:45~6:15/km · 심박 135 이하' }
-  },
-  p2: {
-    1:{ s:[['clam','3×15 / 쪽'],['backsq','3×6~8'],['legpress','3×10'],['calf1','3×12 / 다리'],['hkr','3×10']] },
-    2:{ s:[['apull','3×6~8'],['bench','3×6~8'],['facepull','2×15'],['dbcurl','2×10']], c:'로잉머신 4×6분 @RPE 7 · 사이 2분', alt:'이지 러닝 35분' },
-    3:{ s:[['rdl','3×6~8'],['nordic','3×6'],['hipthr','3×8'],['backext','3×10'],['farmer','3×30m']] },
-    4:{ s:[['csrow','3×8~10'],['ohp','3×6~8'],['incdb','2×10'],['facepull','2×15']], c:'러닝머신 이지 30분 + 4×1분 @4:50/km', alt:'야외 이지 30분 + 4×1분 @4:50/km' },
-    5:{ s:[['monster','3×15걸음 / 방향'],['copen','3×25초 / 쪽'],['bss','3×8 / 다리'],['sl_rdl','2×8 / 다리'],['pallof','3×10 / 쪽'],['sideplank','2×40초 / 쪽']] },
-    6:{ c:'평로라 존2 60분 · NP 140~150W' },
-    0:{ c:'롱런 이지 75분 · 마지막 10분 5:20/km' }
-  },
-  p3: {
-    1:{ s:[['clam','3×15 / 쪽'],['boxjump','3×5'],['backsq','3×5'],['legpress','2×10'],['calf1','2×12 / 다리']] },
-    2:{ s:[['pullup','3×(최대−1)'],['bench','3×5'],['facepull','2×15'],['hkr','2×10']], c:'로잉머신 6×2분 @RPE 8 · 사이 2분', alt:'이지 러닝 30분 + 6×1분 빠르게' },
-    3:{ s:[['kbswing','3×10'],['rdl','3×5~6'],['nordic','3×6~8'],['hipthr','3×6'],['farmer','3×30m']] },
-    4:{ s:[['pushpress','3×5'],['bbrow','3×6~8'],['incdb','2×10'],['facepull','2×15']], c:'러닝머신 이지 25분 + 템포 10분 @5:10/km', alt:'야외 이지 25분 + 템포 10분 @5:10/km' },
-    5:{ s:[['monster','3×15걸음 / 방향'],['copen','3×30초 / 쪽'],['skater','3×6 / 쪽'],['bss','3×6 / 다리'],['pallof','3×10 / 쪽'],['sideplank','2×40초 / 쪽']] },
-    6:{ c:'평로라 존2 60분 · NP 140~150W' },
-    0:{ c:'롱런 이지 90분 · 마지막 10분 5:20/km' }
-  }
-};
-const LIGHT_C = { 2:['로잉머신 이지 20분','이지 러닝 20분'], 4:['러닝머신 이지 25분','야외 이지 25분'], 6:['평로라 존2 45분'], 0:['롱런 이지 45분'] };
+const HOLIDAYS = { '2026-12-25':'성탄절', '2027-01-01':'신정', '2027-02-05':'설 연휴', '2027-02-06':'설날', '2027-02-07':'설 연휴', '2027-02-08':'설 대체휴일', '2027-03-01':'삼일절' };
 
 const PHASES = [
-  { id:'p0', from:'2026-10-08', to:'2026-10-18', name:'회복',  color:'#5C7A85' },
-  { id:'p1', from:'2026-10-19', to:'2026-11-22', name:'1단계 · 기초', color:'#0E7C94' },
-  { id:'p2', from:'2026-11-23', to:'2026-12-20', name:'2단계 · 증량', color:'#0E7C94' },
-  { id:'p3', from:'2026-12-21', to:'2027-01-03', name:'3단계 · 파워', color:'#0E7C94' }
+  { id:'base',  from:'2026-10-12', to:'2026-12-06', name:'1단계 · 기초',   color:'#5C7A85' },
+  { id:'build', from:'2026-12-07', to:'2027-01-31', name:'2단계 · 빌드',   color:'#0E7C94' },
+  { id:'peak',  from:'2027-02-01', to:'2027-03-07', name:'3단계 · 피크',   color:'#0E7C94' },
+  { id:'taper', from:'2027-03-08', to:'2027-03-28', name:'테이퍼 · 대회',  color:'#1A2E35' }
 ];
-const LIGHT = [['2026-11-16','2026-11-22'],['2026-12-28','2027-01-03']];
-const HOLIDAYS = { '2026-10-09':'한글날', '2026-12-25':'성탄절', '2027-01-01':'신정' };
-const START = '2026-10-08', END = '2027-01-03', WEEK0 = '2026-10-05';
 
-/* ---------- 하루 만들기 ---------- */
+/* ========== 주차별 러닝 처방 · [화, 수 이지(분), 목, 일 롱런 [분, 마지막 MP 분]] ========== */
+const WK = [
+  ['TT',       30, 'E30+S4', [50,0]],
+  ['I6x400',   35, 'E35+S6', [60,0]],
+  ['I8x400',   40, 'T15',    [80,0]],
+  ['I5x400',   30, 'E30+S4', [60,0]],
+  ['I6x600',   45, 'T20',    [90,0]],
+  ['I6x800',   45, 'T20',    [95,0]],
+  ['TT',       40, 'E40+S6', [100,0]],
+  ['I5x600',   35, 'E35',    [75,0]],
+  ['I5x1000',  50, 'T25',    [110,15]],
+  ['I6x1000',  50, 'T2x15',  [120,20]],
+  ['I4x1200',  50, 'M8',     [130,20]],
+  ['I5x800',   40, 'T20',    [90,0]],
+  ['TT',       45, 'E45+S6', [140,25]],
+  ['I5x1200',  50, 'M10',    [150,30]],
+  ['I4x1600',  55, 'T3x12',  [160,30]],
+  ['I6x800',   40, 'M6',     [100,0]],
+  ['I3x2000',  55, 'M12',    [170,40]],
+  ['I5x1200',  55, 'M14',    [180,45]],
+  ['TT',       45, 'E45+S6', [150,30]],
+  ['I5x1000',  40, 'M8',     [120,20]],
+  ['I4x1600',  50, 'M16',    [190,60]],
+  ['I5x800',   40, 'M10',    [130,20]],
+  ['I4x600',   30, 'M6',     [80,10]],
+  ['E30+S4',   25, 'E20+S4', ['RACE']]
+];
+
+/* ========== 근력 · [헬스장, 맨몸 대체] ========== */
+const EX = {
+  clam:     ['밴드 클램쉘',             '클램쉘 (밴드 없으면 맨몸)'],
+  hipthr:   ['바벨 힙 쓰러스트',         '한 다리 글루트 브리지 · 어깨 소파에'],
+  nordic:   ['노르딕 컬',               '노르딕 컬 · 소파 아래 발 걸고'],
+  copen:    ['코펜하겐 플랭크',          '코펜하겐 플랭크'],
+  sl_rdl:   ['한 다리 덤벨 RDL',         '한 다리 RDL(맨몸)'],
+  bss:      ['불가리안 스플릿 스쿼트',    '불가리안 스플릿 스쿼트(맨몸)'],
+  sideplank:['사이드 플랭크',            '사이드 플랭크'],
+  latpd:    ['랫풀다운',                '식탁 인버티드 로우 (철봉 있으면 풀업)'],
+  cablerow: ['시티드 케이블 로우',       '식탁 인버티드 로우'],
+  facepull: ['페이스 풀',               '프론 YTW'],
+  pallof:   ['팔로프 프레스',            '플랭크 숄더 탭'],
+  calf1:    ['한 다리 카프 레이즈',       '한 다리 계단 카프 레이즈'],
+  monster:  ['밴드 몬스터 워크',          '밴드 몬스터 워크'],
+  deadbug:  ['데드버그',                '데드버그']
+};
+const ALT_RX = { clam:'3×20 / 쪽', hipthr:'3×15 / 다리', nordic:'3×5', sl_rdl:'3×10 / 다리', bss:'3×12 / 다리',
+                 latpd:'3×10', cablerow:'3×10', facepull:'2×8', pallof:'3×10 / 쪽', calf1:'3×15 / 다리' };
+/* 월 A · 하체·골반 (구례 회고 1~4순위: 중둔근 · 내전근 · 햄스트링 편심 · 대둔근) / 금 B · 상체·코어·종아리 */
+const STR = {
+  A: { base:  [['clam','3×15 / 쪽'],['hipthr','3×8'],['nordic','3×5'],['copen','3×20초 / 쪽'],['sl_rdl','3×8 / 다리'],['sideplank','2×40초 / 쪽']],
+       build: [['clam','3×20 / 쪽'],['hipthr','3×6'],['nordic','3×6'],['copen','3×30초 / 쪽'],['sl_rdl','3×8 / 다리'],['sideplank','2×45초 / 쪽']],
+       peak:  [['clam','3×20 / 쪽'],['hipthr','3×6'],['nordic','3×6'],['copen','3×30초 / 쪽'],['bss','3×8 / 다리'],['sideplank','2×45초 / 쪽']],
+       taper: [['clam','2×15 / 쪽'],['hipthr','2×6'],['nordic','2×5'],['copen','2×20초 / 쪽'],['sideplank','2×30초 / 쪽']] },
+  B: { base:  [['latpd','3×10'],['cablerow','3×10'],['facepull','2×15'],['pallof','3×10 / 쪽'],['calf1','3×15 / 다리'],['monster','3×15걸음 / 방향']],
+       build: [['latpd','3×8'],['cablerow','3×8'],['facepull','2×15'],['pallof','3×10 / 쪽'],['calf1','3×20 / 다리'],['monster','3×20걸음 / 방향']],
+       peak:  [['latpd','3×8'],['cablerow','3×8'],['pallof','3×10 / 쪽'],['calf1','3×20 / 다리'],['monster','3×20걸음 / 방향'],['deadbug','3×8 / 쪽']],
+       taper: [['latpd','2×8'],['pallof','2×10 / 쪽'],['calf1','2×15 / 다리'],['monster','2×15걸음 / 방향']] }
+};
+const BIKE = { base:'평로라 존2 60분 · NP 140~150W', build:'평로라 존2 75분 · NP 140~150W', peak:'평로라 존2 60분 · NP 140~150W', taper:'평로라 존2 45분 · 가볍게' };
+
+/* ========== 페이스 ========== */
+function zones(tt){ const p = tt/10; return { E:[p+60, p+80], M:p+24, T:p+12, I:p-10, R:p-25 }; }
+function pace(s){ s = Math.round(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+function hms(s){ s = Math.round(s); return Math.floor(s/3600)+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+function parseTT(v){ const m = String(v||'').trim().match(/^(\d{1,2})[:.](\d{2})$/); if(!m) return null; const s = +m[1]*60 + +m[2]; return (s>=1500 && s<=4200) ? s : null; }
+let tt = {};
+try { tt = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e){ tt = {}; }
+function saveTT(){ try{ localStorage.setItem(STORE, JSON.stringify(tt)); }catch(e){} }
+function currentTT(){ let v = null; TT_WEEKS.forEach(w => { if (tt[w]) v = tt[w]; }); return v || DEFAULT_TT; }
+function isEstimate(){ return !TT_WEEKS.some(w => tt[w]); }
+/* 서브3 궤도: W1 결과(없으면 추정)에서 W19 39:00 까지 직선 */
+function trajectory(){ const a = tt[1] || DEFAULT_TT, b = SUB3_W19, out = {}; TT_WEEKS.forEach(w => { out[w] = a + (b-a) * (w-1)/18; }); return out; }
+
+/* ========== 세션 해석 ========== */
+const Z = () => zones(currentTT());
+function E(min){ const z = Z(); return { t:'이지 '+min+'분', l:['이지 '+min+'분 @ '+pace(z.E[0])+'~'+pace(z.E[1])+'/km · 심박 편하게'], km: min*60/((z.E[0]+z.E[1])/2) }; }
+function expand(code){
+  const z = Z(); let m;
+  if (code === 'TT') return { t:'10km 타임트라이얼', l:['워밍업 15분 이지 + 스트라이드 3×20초','<b>10km 최대 노력</b> · 평지 · 첫 2km는 목표보다 살짝 느리게','쿨다운 10분'], km: 10 + 25*60/z.E[0], tt:true };
+  if (code === 'RACE') return { t:'군산 마라톤', l:['<b>42.195km @ '+pace(z.M)+'/km</b> — 첫 5km는 이보다 5초 느리게','현재 궤도 기준 예상 '+hms(z.M*42.195)], km: 42.2, race:true };
+  if ((m = code.match(/^E(\d+)(?:\+S(\d+))?$/))) { const r = E(+m[1]); if (m[2]) { r.t += ' + 스트라이드'; r.l.push('스트라이드 '+m[2]+'×20초 @ '+pace(z.R)+'/km · 사이 걷기 60초'); r.km += 0.3; } return r; }
+  if ((m = code.match(/^I(\d+)x(\d+)$/))) { const n=+m[1], d=+m[2], rest = d<=600 ? '회복 조깅 '+Math.round(d/2)+'m' : '회복 조깅 2분'; return { t:'인터벌 '+n+'×'+d+'m', l:['워밍업 15분 이지 + 스트라이드 3×20초','<b>'+n+'×'+d+'m @ '+pace(z.I)+'/km</b> · '+rest,'쿨다운 10분'], km: n*d/1000 + n*(d<=600?d/2:400)/1000 + 25*60/z.E[0], q:true }; }
+  if ((m = code.match(/^T(\d+)x(\d+)$/))) { const n=+m[1], mn=+m[2]; return { t:'크루즈 인터벌 '+n+'×'+mn+'분', l:['워밍업 15분 이지','<b>'+n+'×'+mn+'분 @ '+pace(z.T)+'/km</b> · 사이 조깅 2분','쿨다운 10분'], km: n*mn*60/z.T + n*2*60/z.E[0] + 25*60/z.E[0], q:true }; }
+  if ((m = code.match(/^T(\d+)$/))) { const mn=+m[1]; return { t:'템포 '+mn+'분', l:['워밍업 15분 이지','<b>템포 '+mn+'분 @ '+pace(z.T)+'/km</b> · 20분 이상 말 못 할 정도','쿨다운 10분'], km: mn*60/z.T + 25*60/z.E[0], q:true }; }
+  if ((m = code.match(/^M(\d+)$/))) { const k=+m[1]; return { t:'마라톤 페이스 '+k+'km', l:['워밍업 15분 이지','<b>'+k+'km @ '+pace(z.M)+'/km</b> · 대회 당일 그 느낌으로, 보급도 같이','쿨다운 10분'], km: k + 25*60/z.E[0], q:true }; }
+  return { t: code, l:[code], km:0 };
+}
+function longRun(spec){
+  const z = Z(); const min = spec[0], mp = spec[1];
+  const eMin = min - mp;
+  const l = ['이지 '+eMin+'분 @ '+pace(z.E[0])+'~'+pace(z.E[1])+'/km'];
+  if (mp) l.push('<b>마지막 '+mp+'분 @ '+pace(z.M)+'/km</b> — 구례에서 무너진 그 구간을 여기서 산다');
+  l.push('20분마다 보급 · 대회 보급 레시피 그대로');
+  const km = eMin*60/((z.E[0]+z.E[1])/2) + mp*60/z.M;
+  return { t:'롱런 '+min+'분'+(mp?' · 마지막 '+mp+'분 MP':''), l, km, long:true, fade: !!mp };
+}
+
+/* ========== 하루 ========== */
 function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function pd(s){ return new Date(s+'T00:00:00'); }
 const inR = (s,a,b) => s>=a && s<=b;
 const phaseOf = s => PHASES.find(p => inR(s,p.from,p.to));
-const isLight = s => LIGHT.some(r => inR(s,r[0],r[1]));
 const two = rx => rx.replace(/^3×/,'2×');
 
 function day(s){
-  const ph = phaseOf(s); if(!ph) return null;
-  const dow = pd(s).getDay();
+  if (s < START || s > END) return null;
+  const ph = phaseOf(s), dow = pd(s).getDay();
   const week = Math.floor((pd(s)-pd(WEEK0))/86400000/7) + 1;
-  const pm = (dow===1||dow===3) ? '수영 레슨' : '';
-  let title = TITLE[dow], s4 = [], c = null, alt = null, light = false, tags = [];
-
-  if (ph.id === 'p0') {
-    const early = s < '2026-10-14';
-    if (dow === 6) { c = early ? '평로라 40~60분 · 아주 가볍게' : '평로라 존2 60분 · NP 130~140W'; }
-    else if (dow === 0) { title = early ? '걷기' : '이지 러닝'; c = early ? '걷기 · 조깅 20~30분' : '이지 러닝 45분'; }
-    else if (early) { title = '회복'; s4 = [['mob','8분']]; c = '러닝머신 경사 걷기 20분 · 가볍게'; alt = '걷기 20분'; }
-    else {
-      s4 = W.p1[dow].s.map(x => [x[0], two(x[1]) + (/^(pushup|sideplank|deadbug|clam|monster|copen|nordic)$/.test(x[0]) ? '' : ' · 가벼운 무게')]);
-      if (W.p1[dow].c) { c = (dow===2 ? '로잉머신' : '러닝머신') + ' 이지 25분'; alt = '이지 러닝 25분'; }
-      light = true;
-    }
-  } else {
-    const w = W[ph.id][dow];
-    light = isLight(s);
-    s4 = (w.s||[]).map(x => [x[0], light ? two(x[1]) : x[1]]);
-    if (w.c) { c = light ? LIGHT_C[dow][0] : w.c; alt = light ? (LIGHT_C[dow][1]||null) : (w.alt||null); }
-  }
-  /* 공휴일엔 헬스장이 쉰다. 기구나 머신이 필요한 날이면 그날 계획을 집 운동으로 돌린다 */
+  const wk = WK[week-1], deload = DELOAD.includes(week), raceWeek = week === 24;
   const hol = HOLIDAYS[s] || null;
-  const mobOnly = s4.length === 1 && s4[0][0] === 'mob';
-  const needsGym = s4.some(x => x[0] !== 'mob') || /러닝머신|로잉머신/.test(c || '');
+  const pm = (dow===1||dow===3) ? '수영 레슨' : '';
+  let title = '', lines = [], s4 = [], km = 0, tags = [], kind = '', fix = null, ttWeek = null;
+
+  if (dow === 0) {                                             // 일 · 롱런 / 대회
+    if (wk[3][0] === 'RACE') { const r = expand('RACE'); title = r.t; lines = r.l; km = r.km; kind = 'race'; tags.push('race'); }
+    else { const r = longRun(wk[3]); title = r.t; lines = r.l; km = r.km; kind = 'long'; tags.push('long'); if (r.fade) fix = '후반 페이드 보완 — 롱런 끝을 마라톤 페이스로 닫는 것이 이 계획에서 가장 중요한 세션이다.'; }
+  } else if (dow === 1 || dow === 5) {                         // 월 A · 금 B · 근력
+    if (raceWeek) { title = '휴식 · 모빌리티'; lines = ['모빌리티 10분 · 폼롤러 · 걷기 20분']; kind = 'rest'; tags.push('rest'); }
+    else {
+      const set = STR[dow===1?'A':'B'][ph.id];
+      s4 = set.map(x => [x[0], deload ? two(x[1]) : x[1]]);
+      title = dow===1 ? '근력 A · 하체·골반' : '근력 B · 상체·코어·종아리'; kind = 'str'; tags.push('gym');
+      fix = dow===1 ? '구례 회고 1~4순위 — 중둔근 · 내전근 · 햄스트링 편심 · 대둔근. IT밴드와 좌우 비대칭의 처방이 이 여섯 동작이다.' : '손 압박 분산(등) · 골반 기준점(코어) · 런 후반 추진(종아리). 몬스터 워크는 중둔근 주 2회째.';
+    }
+  } else if (dow === 6) {                                      // 토 · 평로라 (대회 주는 셰이크아웃)
+    if (raceWeek) { const r = expand('E15+S3'); title = '셰이크아웃 ' + r.t; lines = r.l; km = r.km; kind = 'easy'; tags.push('easy'); }
+    else { title = '평로라'; lines = [BIKE[ph.id], '러닝 다리 회복용 · 심박 올리지 않기']; kind = 'bike'; tags.push('bike'); }
+  } else {                                                     // 화 · 수 · 목 · 러닝
+    const code = dow===2 ? wk[0] : dow===4 ? wk[2] : 'E'+wk[1];
+    const r = expand(code); title = r.t; lines = r.l; km = r.km;
+    if (r.tt) { kind = 'tt'; tags.push('tt'); ttWeek = week; }
+    else if (r.q) { kind = 'q'; tags.push('run'); }
+    else { kind = 'easy'; tags.push('easy'); }
+  }
+
+  const needsGym = kind === 'str';
   const closed = !!hol && needsGym;
-
-  if (closed) tags.push('closed');
-  else if (s4.length && !mobOnly) tags.push('gym');
-  if (c) tags.push(/로잉|러닝|롱런|걷기|조깅/.test(c) ? 'run' : 'bike');
-  if (/로잉/.test(c||'')) { tags.pop(); tags.push(closed ? 'run' : 'row'); }
-  if (pm && !closed) tags.push('swim');
-  if (mobOnly && !closed) tags.unshift('rest');
-  return { s, ph, week, dow, title, s4, c, alt, pm, light, tags, hol, closed, mobOnly };
+  if (closed) { tags = tags.filter(t => t!=='gym'); tags.unshift('closed'); }
+  if (pm && !closed && !hol) tags.push('swim');
+  return { s, ph, week, dow, title, lines, s4, km, tags, kind, fix, hol, closed, deload, ttWeek, pm, raceWeek };
 }
+function weekKm(week){ let k = 0; for (let i=0;i<7;i++){ const d = day(ymd(new Date(pd(WEEK0).getTime() + ((week-1)*7+i)*86400000))); if (d) k += d.km; } return Math.round(k); }
 
-/* ---------- 범례 ---------- */
+/* ========== 범례 · 패널 ========== */
 const CAT = {
-  gym:  { color:'#5C7A85', label:'헬스장' },
-  row:  { color:'#0E7C94', label:'로잉' },
-  run:  { color:'#0E7C94', label:'러닝' },
-  swim: { color:'#0E7C94', label:'수영' },
-  bike: { color:'#0E7C94', label:'평로라' },
-  rest: { color:'#CFE3E7', label:'회복' },
-  closed: { color:'#1A2E35', label:'공휴일 · 집운동' }
+  run:   { color:'#0E7C94', label:'러닝 질세션' },
+  easy:  { color:'#CFE3E7', label:'이지' },
+  long:  { color:'#1A2E35', label:'롱런' },
+  gym:   { color:'#5C7A85', label:'근력' },
+  bike:  { color:'#0E7C94', label:'평로라' },
+  swim:  { color:'#0E7C94', label:'수영' },
+  tt:    { color:'#0E7C94', label:'10km 테스트' },
+  race:  { color:'#1A2E35', label:'대회' },
+  rest:  { color:'#CFE3E7', label:'휴식' },
+  closed:{ color:'#1A2E35', label:'공휴일 · 집운동' }
 };
 const legendEl = document.getElementById('legend');
-Object.keys(CAT).forEach(k => {
-  const el = document.createElement('span'); el.className = 'lg';
-  el.innerHTML = '<span class="dot" style="background:'+CAT[k].color+'"></span>'+CAT[k].label;
-  legendEl.appendChild(el);
-});
+Object.keys(CAT).forEach(k => { const el = document.createElement('span'); el.className = 'lg'; el.innerHTML = '<span class="dot" style="background:'+CAT[k].color+'"></span>'+CAT[k].label; legendEl.appendChild(el); });
 
-/* ---------- 달력 ---------- */
+function ttDate(w){ return ymd(new Date(pd(WEEK0).getTime() + ((w-1)*7+1)*86400000)); }
+function renderPanel(){
+  const z = Z(), cur = currentTT(), tr = trajectory();
+  let h = '<div class="ph">페이스 · 최근 10km '+pace(cur)+(isEstimate()?' <span style="color:var(--muted);font-weight:600">(테스트 전 추정)</span>':'')+'</div>';
+  h += '<div class="row"><span class="z">이지 <b>'+pace(z.E[0])+'~'+pace(z.E[1])+'</b></span><span class="z">마라톤 <b>'+pace(z.M)+'</b></span><span class="z">템포 <b>'+pace(z.T)+'</b></span><span class="z">인터벌 <b>'+pace(z.I)+'</b></span><span class="z">스트라이드 <b>'+pace(z.R)+'</b></span></div>';
+  h += '<div class="row big">이 페이스로 완주하면 <b>'+hms(z.M*42.195)+'</b>'+(z.M*42.195 <= 10800 ? ' · 서브3' : ' · 서브3까지 '+pace(z.M - 10800/42.195)+'/km')+'</div>';
+  h += '<table><tr><th>테스트</th><th>날짜</th><th>서브3 궤도</th><th>내 기록</th><th></th></tr>';
+  TT_WEEKS.forEach(w => {
+    const d = ttDate(w), mine = tt[w], tgt = tr[w];
+    let judge = '';
+    if (mine && w > 1) judge = mine <= tgt + 15 ? '<span class="ok">궤도 위</span>' : '<span class="off">궤도 아래 +'+pace(mine-tgt)+'</span>';
+    if (mine && w === 1) judge = '<span class="ok">기준점</span>';
+    h += '<tr><td>W'+w+'</td><td>'+d.slice(5).replace('-','/')+'</td><td>'+(w===1 ? '— (기준)' : pace(tgt))+'</td><td><input class="tt" data-w="'+w+'" placeholder="mm:ss" value="'+(mine?pace(mine):'')+'"></td><td>'+judge+'</td></tr>';
+  });
+  h += '</table><div class="hint">궤도는 W1 결과에서 W19 <b>39:00</b>까지 직선으로 그은 것이다. W1 테스트 전엔 46:00 추정값을 쓴다. 기록은 이 기기에 저장되고 모든 세션 페이스가 바로 다시 계산된다.</div>';
+  document.getElementById('panel').innerHTML = h;
+  document.querySelectorAll('#panel input.tt').forEach(inp => inp.addEventListener('change', onTT));
+}
+function onTT(e){
+  const w = +e.target.dataset.w, v = parseTT(e.target.value);
+  if (e.target.value.trim() === '') { delete tt[w]; }
+  else if (v) { tt[w] = v; }
+  else { e.target.value = tt[w] ? pace(tt[w]) : ''; return; }
+  saveTT(); renderPanel(); buildCalendar();
+  if (overlay.classList.contains('open') && currentDs) openModal(currentDs);
+}
+renderPanel();
+
+/* ========== 달력 ========== */
 const todayStr = ymd(new Date());
-const MONTHS = [ {y:2026,m:9,en:'October'}, {y:2026,m:10,en:'November'}, {y:2026,m:11,en:'December'}, {y:2027,m:0,en:'January'} ];
+const MONTHS = [ {y:2026,m:9,en:'October'}, {y:2026,m:10,en:'November'}, {y:2026,m:11,en:'December'}, {y:2027,m:0,en:'January'}, {y:2027,m:1,en:'February'}, {y:2027,m:2,en:'March'} ];
 const DOW = ['월','화','수','목','금','토','일'];
 const cal = document.getElementById('calendar');
-
-function miniText(d){
-  if (d.closed) return (d.hol || '공휴일') + ' · 집운동';
-  if (d.mobOnly) return '모빌리티 8분';
-  if (d.s4.length) return d.title + (d.pm ? ' · 수영' : '');
-  return d.c ? d.c.split(' · ')[0] : d.title;
-}
-
-MONTHS.forEach(mo => {
-  const wrap = document.createElement('div'); wrap.className = 'month';
-  const head = document.createElement('div'); head.className = 'month-head';
-  head.innerHTML = '<h2>'+(mo.m+1)+'월</h2><span class="en">'+mo.en+' '+mo.y+'</span>';
-  wrap.appendChild(head);
-  const grid = document.createElement('div'); grid.className = 'grid';
-  DOW.forEach((d,i) => { const h = document.createElement('div'); h.className = 'dow'+(i===5?' sat':'')+(i===6?' sun':''); h.textContent = d; grid.appendChild(h); });
-  const first = new Date(mo.y, mo.m, 1), offset = (first.getDay()+6)%7, daysIn = new Date(mo.y, mo.m+1, 0).getDate();
-  for (let i=0;i<offset;i++){ const p=document.createElement('div'); p.className='cell pad'; grid.appendChild(p); }
-  for (let n=1; n<=daysIn; n++){
-    const ds = ymd(new Date(mo.y,mo.m,n)), d = day(ds), cell = document.createElement('div');
-    if (!d) { cell.className='cell empty'; cell.innerHTML='<span class="dnum" style="color:#E4EFF1">'+n+'</span>'; grid.appendChild(cell); continue; }
-    const hol = d.hol;
-    const kind = d.closed ? 'k-closed' : ((d.dow===0||d.dow===6) ? 'k-long' : (d.light ? 'k-rest' : ''));
-    cell.className = 'cell active '+kind+(ds===todayStr?' today':'')+(hol?' holiday':'');
-    cell.dataset.date = ds;
-    cell.innerHTML = '<span class="ph" style="background:'+d.ph.color+'"></span><span class="dnum">'+n+'</span>'+
-      (hol?'<span class="hol">'+hol+'</span>':'')+
-      '<span class="dots">'+d.tags.map(t=>'<i style="background:'+CAT[t].color+'"></i>').join('')+'</span>'+
-      '<span class="mini">'+miniText(d)+'</span>';
-    cell.addEventListener('click', () => openModal(ds));
-    grid.appendChild(cell);
-  }
-  wrap.appendChild(grid); cal.appendChild(wrap);
-});
-
-/* ---------- 팝업 ---------- */
-const overlay = document.getElementById('overlay');
-const mc = document.getElementById('modalContent');
-
-/* 그날 동작을 맨몸 버전으로 바꾼 목록 */
-function homeRows(d){
-  return d.s4.filter(x => x[0] !== 'mob').map(x => {
-    const same = EX[x[0]][0] === EX[x[0]][1];
-    const altRx = (d.light || d.ph.id === 'p0') ? two(ALT_RX[x[0]] || x[1].split(' · ')[0]) : (ALT_RX[x[0]] || x[1]);
-    return '<li><b>'+EX[x[0]][1]+'</b> '+(same ? x[1].split(' · ')[0] : altRx)+'<span class="h">'+(same ? '그대로' : '대신 · '+EX[x[0]][0])+'</span></li>';
+function miniText(d){ if (d.closed) return (d.hol||'공휴일')+' · 집운동'; return d.title; }
+function buildCalendar(){
+  cal.innerHTML = '';
+  MONTHS.forEach(mo => {
+    const wrap = document.createElement('div'); wrap.className = 'month';
+    const head = document.createElement('div'); head.className = 'month-head';
+    head.innerHTML = '<h2>'+(mo.m+1)+'월</h2><span class="en">'+mo.en+' '+mo.y+'</span>';
+    wrap.appendChild(head);
+    const grid = document.createElement('div'); grid.className = 'grid';
+    DOW.forEach((d,i) => { const h = document.createElement('div'); h.className = 'dow'+(i===5?' sat':'')+(i===6?' sun':''); h.textContent = d; grid.appendChild(h); });
+    const first = new Date(mo.y, mo.m, 1), offset = (first.getDay()+6)%7, daysIn = new Date(mo.y, mo.m+1, 0).getDate();
+    for (let i=0;i<offset;i++){ const p=document.createElement('div'); p.className='cell pad'; grid.appendChild(p); }
+    for (let n=1; n<=daysIn; n++){
+      const ds = ymd(new Date(mo.y,mo.m,n)), d = day(ds), cell = document.createElement('div');
+      if (!d) { cell.className='cell empty'; cell.innerHTML='<span class="dnum" style="color:#E4EFF1">'+n+'</span>'; grid.appendChild(cell); continue; }
+      const kind = d.closed ? 'k-closed' : d.kind==='race' ? 'k-race' : d.kind==='tt' ? 'k-tt' : d.kind==='long' ? 'k-long' : d.kind==='easy' ? 'k-easy' : d.kind==='rest' ? 'k-rest' : d.kind==='str' ? 'k-str' : '';
+      cell.className = 'cell active '+kind+(ds===todayStr?' today':'')+(d.hol?' holiday':'');
+      cell.dataset.date = ds;
+      cell.innerHTML = '<span class="ph" style="background:'+d.ph.color+'"></span><span class="dnum">'+n+'</span>'+
+        (d.hol?'<span class="hol">'+d.hol+'</span>':'')+
+        '<span class="dots">'+d.tags.map(t=>'<i style="background:'+CAT[t].color+'"></i>').join('')+'</span>'+
+        '<span class="mini">'+miniText(d)+'</span>';
+      cell.addEventListener('click', () => openModal(ds));
+      grid.appendChild(cell);
+    }
+    wrap.appendChild(grid); cal.appendChild(wrap);
   });
 }
+buildCalendar();
 
+/* ========== 팝업 ========== */
+const overlay = document.getElementById('overlay');
+const mc = document.getElementById('modalContent');
+let currentDs = null;
+function homeRows(d){
+  return d.s4.map(x => {
+    const same = EX[x[0]][0] === EX[x[0]][1];
+    const rx = d.deload ? two(ALT_RX[x[0]] || x[1]) : (ALT_RX[x[0]] || x[1]);
+    return '<li><b>'+EX[x[0]][1]+'</b> '+(same ? x[1] : rx)+'<span class="h">'+(same ? '그대로' : '대신 · '+EX[x[0]][0])+'</span></li>';
+  });
+}
 function openModal(ds){
-  const d = day(ds); if(!d) return;
+  const d = day(ds); if(!d) return; currentDs = ds;
   const dObj = pd(ds), wd = ['일','월','화','수','목','금','토'][dObj.getDay()];
   let h = '<div class="m-date">'+(dObj.getMonth()+1)+'월 '+dObj.getDate()+'일 · '+wd+'요일'+(ds===todayStr?' · 오늘':'')+(d.hol?' · '+d.hol:'')+'</div>';
   h += '<div class="m-title">'+d.title+'</div>';
-  h += '<span class="m-phase" style="background:'+d.ph.color+'">'+d.ph.name+' · '+d.week+'주차'+(d.light?' · 가볍게':'')+'</span>';
+  h += '<span class="m-phase" style="background:'+d.ph.color+'">'+d.ph.name+' · '+d.week+'주차'+(d.deload?' · 디로드':'')+(d.raceWeek?' · 대회 주':'')+'</span>';
+  h += '<div class="m-goal">이번 주 러닝 약 <b>'+weekKm(d.week)+'km</b>'+(isEstimate()?' · 페이스는 테스트 전 추정값':'')+'</div>';
 
-  if (d.hol) {
-    h += '<div class="m-vac"><b>'+d.hol+' · 헬스장 휴무</b><br>'+
-      (d.closed
-        ? '기구 없이 집에서 아래 목록 그대로 진행'+(d.alt ? ' + <b>'+d.alt+'</b>' : '')+'.'
-        : '기구가 필요 없는 날이라 계획 그대로 진행.')+
-      (d.pm ? '<br>저녁 수영 레슨도 쉽니다.' : '')+'</div>';
-  }
+  if (d.hol) h += '<div class="m-vac"><b>'+d.hol+' · 헬스장 휴무</b><br>'+(d.closed ? '아래 맨몸 목록이 오늘의 계획.' : '야외라 계획 그대로.')+(d.pm ? '<br>저녁 수영 레슨도 쉽니다.' : '')+'</div>';
 
-  const gymDay = d.s4.length > 0;
-  const amLabel = d.closed ? '오전 · 집' : (gymDay ? '아침 · 헬스장' : (d.dow===6 ? '오전' : '운동'));
+  const amLabel = d.closed ? '오전 · 집' : (d.kind==='str' ? '아침 · 헬스장' : d.kind==='bike' ? '오전' : d.kind==='race' ? '대회' : '아침');
   let amTxt;
-  if (d.closed) {
-    const lifts = d.s4.filter(x => x[0] !== 'mob');
-    const parts = [];
-    if (d.mobOnly) parts.push('<b>모빌리티 8분</b> · 아래 목록');
-    if (lifts.length) parts.push('<b>맨몸 '+lifts.length+'동작</b> · 아래 목록');
-    if (d.alt) parts.push('<b>'+d.alt+'</b>');
-    amTxt = parts.join('<br>');
-  } else if (gymDay) {
-    amTxt = d.s4.map(x => '<b>'+EX[x[0]][0]+'</b> '+x[1]).join('<br>') + (d.c ? '<br><b>'+d.c+'</b>' : '');
-  } else {
-    amTxt = '<b>'+(d.c||'')+'</b>';
-  }
+  if (d.closed) amTxt = '<b>맨몸 '+d.s4.length+'동작</b> · 아래 목록';
+  else if (d.kind === 'str') amTxt = d.s4.map(x => '<b>'+EX[x[0]][0]+'</b> '+x[1]).join('<br>');
+  else amTxt = d.lines.join('<br>');
   h += '<div class="slot am"><div class="ic am"></div><div class="body"><div class="when">'+amLabel+'</div><div class="txt">'+amTxt+'</div></div></div>';
-  h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+
-    (d.pm ? (d.closed ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
+  h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.pm ? (d.hol ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
 
-  if (d.mobOnly) {
-    h += '<div class="m-routine"><div class="rt-head"><span>모빌리티 8분 · 순서대로</span><span class="t">동작당 1분</span></div><ul>'+
-      MOB.map(m => '<li><b>'+m[0]+'</b> '+m[1]+'<span class="h">'+m[2]+'</span></li>').join('')+'</ul>'+
-      '<div class="rt-note">통증 없는 범위에서 천천히. 숨 참지 말고, 각 동작 끝에서 1~2초 멈추기. 전부 맨몸이라 집에서 그대로 됩니다.</div>'+
-      (d.alt && !d.closed ? '<div class="rt-foot">헬스장 못 가는 날 · '+d.c.split(' ')[0]+' 대신 '+d.alt+'</div>' : '')+
-      '</div>';
+  if (d.ttWeek) {
+    const tr = trajectory(), w = d.ttWeek;
+    h += '<div class="m-tt"><div class="t">W'+w+' 테스트 결과</div><div class="r"><input class="ttm" data-w="'+w+'" placeholder="mm:ss" value="'+(tt[w]?pace(tt[w]):'')+'"><span>10km</span>'+(w>1?'<span style="color:var(--muted)">· 궤도 '+pace(tr[w])+'</span>':'')+'</div><div class="h">넣는 순간 이후 모든 세션 페이스가 이 기록으로 다시 계산됩니다.</div></div>';
   }
-
-  const rows = homeRows(d);
-  if (rows.length) {
-    if (d.alt) rows.push('<li><b>'+d.alt+'</b><span class="h">대신 · '+d.c.split(' ')[0]+'</span></li>');
-    h += '<div class="m-routine"><div class="rt-head"><span>'+(d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+
-      '</span><span class="t">'+(d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+rows.join('')+'</ul></div>';
-  }
+  if (d.fix) h += '<div class="m-fix"><b>구례 보완</b> · '+d.fix+'</div>';
+  if (d.s4.length) h += '<div class="m-routine"><div class="rt-head"><span>'+(d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+'</span><span class="t">'+(d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+homeRows(d).join('')+'</ul></div>';
 
   mc.innerHTML = h;
+  const ti = mc.querySelector('input.ttm'); if (ti) ti.addEventListener('change', onTT);
   const modalEl = document.getElementById('modal');
   modalEl.style.transform = ''; overlay.style.background = ''; modalEl.scrollTop = 0;
   overlay.classList.add('open'); document.body.style.overflow = 'hidden';
@@ -664,7 +699,6 @@ function closeModal(){ overlay.classList.remove('open'); document.body.style.ove
 document.getElementById('closeBtn').addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if(e.target===overlay) closeModal(); });
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
-
 
 /* ---------- 오늘 버튼 ---------- */
 function goToday(){
