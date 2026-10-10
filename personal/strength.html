@@ -353,7 +353,7 @@
 
   <div id="calendar"></div>
 
-  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 모든 러닝 페이스는 위 패널의 <b>최근 10km 기록</b>에서 계산되고, 테스트 주(W1·7·13·19) 화요일에 결과를 넣으면 전부 다시 맞춰집니다. 러닝 팝업마다 <b>트레드밀 속도·경사</b> 표가 붙어 있고, 경사 1%는 야외 공기저항 보정값입니다.<br>근력일이 <b>공휴일</b>이면 헬스장 휴무로 집 운동이 그날의 기본 계획이 됩니다.</p>
+  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 모든 러닝 페이스는 위 패널의 <b>최근 10km 기록</b>에서 계산되고, 테스트 주(W1·7·13·19) 화요일에 결과를 넣으면 전부 다시 맞춰집니다. 러닝 팝업마다 <b>트레드밀 속도·경사</b> 표와 <b>운동 전·후 스트레칭</b>(이름·횟수·시간)이 붙어 있고, 경사 1%는 야외 공기저항 보정값입니다.<br>근력일이 <b>공휴일</b>이면 헬스장 휴무로 집 운동이 그날의 기본 계획이 됩니다.</p>
 </div>
 
 <button class="fab" id="fab">오늘 운동</button>
@@ -446,6 +446,56 @@ const STR = {
 };
 const BIKE = { base:'평로라 존2 60분 · NP 140~150W', build:'평로라 존2 75분 · NP 140~150W', peak:'평로라 존2 60분 · NP 140~150W', taper:'평로라 존2 45분 · 가볍게' };
 
+/* ========== 스트레칭 · [이름, 처방, 요령] ========== */
+const DYN = [   // 러닝 전 · 동적 7분
+  ['사이드라잉 외전',        '좌우 15회',  '옆으로 누워 위쪽 다리 들기. 밴드 있으면 클램쉘 — 구례 회고의 런 직전 중둔근 활성화'],
+  ['레그 스윙 앞뒤',         '좌우 12회',  '벽 잡고, 반동 없이 점점 크게'],
+  ['레그 스윙 옆',           '좌우 12회',  '몸통은 고정, 다리만 좌우로'],
+  ['워킹 런지 + 상체 회전',   '10보',      '앞무릎 90도, 뒷무릎 바닥 가까이, 앞다리 쪽으로 상체 돌리기'],
+  ['힙 서클',               '좌우 8회',   '네발 자세에서 무릎으로 큰 원'],
+  ['카프 펌프',              '15회',      '벽 짚고 뒤꿈치 올렸다 천천히 내리기'],
+  ['하이니 → A스킵',          '각 20초',   '트레드밀이면 제자리에서. 발목 탄성 깨우기']
+];
+const STATIC = [   // 러닝 후 · 정적 10분 · 각 좌우
+  ['힙플렉서 런지',           '좌우 45초',  '뒷무릎 바닥, 엉덩이 조이며 골반을 앞으로 — 구례 골반 후방경사 처방'],
+  ['햄스트링',               '좌우 45초',  '발 올리고 등 편 채로 접기. 무릎 살짝 굽혀도 됨'],
+  ['종아리 · 비복근',         '좌우 30초',  '벽 밀며 뒷다리 무릎 펴서'],
+  ['종아리 · 가자미근',        '좌우 30초',  '같은 자세에서 뒷무릎 굽혀서'],
+  ['이상근 · figure-4',       '좌우 45초',  '누워서 발목을 반대 무릎에 걸고 당기기'],
+  ['IT밴드 · 대퇴근막장근',    '좌우 45초',  '다리 교차하고 반대쪽으로 옆구리 굽히기. 오른쪽 한 세트 더'],
+  ['대퇴사두',               '좌우 30초',  '서서 발목 잡고 무릎 모아서, 골반 앞으로']
+];
+const ROLL = [   // 롱런 후 폼롤러 4분 추가
+  ['폼롤러 · IT밴드',         '좌우 60초',  '아픈 지점에서 10초 멈춤. 무릎 바로 위는 피하기'],
+  ['폼롤러 · 종아리',         '좌우 45초',  '발끝 안팎으로 돌려가며'],
+  ['폼롤러 · 대퇴사두',       '좌우 30초',  '']
+];
+const MOB = [   // 근력 전 · 모빌리티 8분 · 동작당 1분
+  ['캣카우',                '10회',      '네발 자세. 등을 둥글게 말았다가 천천히 펴기'],
+  ['흉추 오픈북',            '좌우 8회',   '옆으로 눕고 무릎 포갠 채, 위쪽 팔을 뒤로 열어 가슴 펴기'],
+  ['90/90 고관절 전환',      '10회',      '앉아서 두 무릎 90도. 엉덩이 붙인 채 좌우로 넘기기'],
+  ['벽 월슬라이드',          '12회',      '등·팔꿈치·손등을 벽에 붙이고 팔을 위로 쭉'],
+  ['무릎-벽 발목 밀기',      '좌우 12회',  '발끝 벽에서 10cm. 뒤꿈치 붙인 채 무릎으로 벽 터치'],
+  ['한 다리 글루트 브리지',   '좌우 10회',  '누워서 한 발만 딛고 엉덩이 들기. 위에서 1초'],
+  ['버드독',                '좌우 8회',   '반대쪽 팔·다리 동시에 뻗어 3초 유지'],
+  ['힙 플렉서 런지 스트레치', '좌우 30초',  '무릎 대고 런지. 엉덩이 조이며 골반을 앞으로']
+];
+const POST_STR = [   // 근력 후 3분
+  ['힙플렉서 런지',           '좌우 30초',  ''],
+  ['햄스트링',               '좌우 30초',  ''],
+  ['이상근 · figure-4',       '좌우 30초',  '']
+];
+const POST_BIKE = [   // 평로라 후 5분
+  ['힙플렉서 런지',           '좌우 45초',  '자전거 자세로 짧아지는 곳'],
+  ['흉추 오픈북',            '좌우 8회',   '드롭 자세로 굳은 등'],
+  ['햄스트링',               '좌우 45초',  ''],
+  ['종아리 · 비복근',         '좌우 30초',  '']
+];
+const RACE_POST = [
+  ['걷기',                  '10분',      '멈추지 말고. 앉으면 못 일어난다'],
+  ['정적 스트레칭',           '저녁에 10분', '위 러닝 후 목록 그대로, 폼롤러는 다음 날']
+];
+
 /* ========== 페이스 ========== */
 function zones(tt){ const p = tt/10; return { E:[p+60, p+80], M:p+24, T:p+12, I:p-10, R:p-25 }; }
 function pace(s){ s = Math.round(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
@@ -518,13 +568,13 @@ function day(s){
   const wk = WK[week-1], deload = DELOAD.includes(week), raceWeek = week === 24;
   const hol = HOLIDAYS[s] || null;
   const pm = (dow===1||dow===3) ? '수영 레슨' : '';
-  let title = '', lines = [], s4 = [], km = 0, tags = [], kind = '', fix = null, ttWeek = null, tm = [], tmNote = null;
+  let title = '', lines = [], s4 = [], km = 0, tags = [], kind = '', fix = null, ttWeek = null, tm = [], tmNote = null, pre = null, post = null;
 
   if (dow === 0) {                                             // 일 · 롱런 / 대회
     if (wk[3][0] === 'RACE') { const r = expand('RACE'); title = r.t; lines = r.l; km = r.km; kind = 'race'; tags.push('race'); }
     else { const r = longRun(wk[3]); title = r.t; lines = r.l; km = r.km; tm = r.tm; tmNote = r.tmNote; kind = 'long'; tags.push('long'); if (r.fade) fix = '후반 페이드 보완 — 롱런 끝을 마라톤 페이스로 닫는 것이 이 계획에서 가장 중요한 세션이다.'; }
   } else if (dow === 1 || dow === 5) {                         // 월 A · 금 B · 근력
-    if (raceWeek) { title = '휴식 · 모빌리티'; lines = ['모빌리티 10분 · 폼롤러 · 걷기 20분']; kind = 'rest'; tags.push('rest'); }
+    if (raceWeek) { title = '휴식 · 모빌리티'; lines = ['모빌리티 8분 (아래 목록) · 걷기 20분 · 폼롤러는 하지 않음']; kind = 'rest'; tags.push('rest'); }
     else {
       const set = STR[dow===1?'A':'B'][ph.id];
       s4 = set.map(x => [x[0], deload ? two(x[1]) : x[1]]);
@@ -542,11 +592,17 @@ function day(s){
     else { kind = 'easy'; tags.push('easy'); }
   }
 
+  if (kind === 'easy' || kind === 'q' || kind === 'tt') { pre = { t:'러닝 전 · 동적', min:7, list:DYN }; post = { t:'러닝 후 · 정적', min:10, list:STATIC }; }
+  else if (kind === 'long') { pre = { t:'롱런 전 · 동적', min:7, list:DYN }; post = { t:'롱런 후 · 정적 + 폼롤러', min:14, list:STATIC.concat(ROLL) }; }
+  else if (kind === 'race') { pre = { t:'대회 전 · 동적', min:7, list:DYN }; post = { t:'대회 후', min:10, list:RACE_POST }; }
+  else if (kind === 'str') { pre = { t:'근력 전 · 모빌리티', min:8, list:MOB }; post = { t:'근력 후 · 정적', min:3, list:POST_STR }; }
+  else if (kind === 'bike') { post = { t:'평로라 후 · 정적', min:5, list:POST_BIKE }; }
+  else if (kind === 'rest') { pre = { t:'모빌리티', min:8, list:MOB }; }
   const needsGym = kind === 'str';
   const closed = !!hol && needsGym;
   if (closed) { tags = tags.filter(t => t!=='gym'); tags.unshift('closed'); }
   if (pm && !closed && !hol) tags.push('swim');
-  return { s, ph, week, dow, title, lines, s4, km, tags, kind, fix, hol, closed, deload, ttWeek, pm, raceWeek, tm, tmNote };
+  return { s, ph, week, dow, title, lines, s4, km, tags, kind, fix, hol, closed, deload, ttWeek, pm, raceWeek, tm, tmNote, pre, post };
 }
 function weekKm(week){ let k = 0; for (let i=0;i<7;i++){ const d = day(ymd(new Date(pd(WEEK0).getTime() + ((week-1)*7+i)*86400000))); if (d) k += d.km; } return Math.round(k); }
 
@@ -634,6 +690,7 @@ buildCalendar();
 const overlay = document.getElementById('overlay');
 const mc = document.getElementById('modalContent');
 let currentDs = null;
+function stretchBlock(b){ return '<div class="m-routine"><div class="rt-head"><span>'+b.t+'</span><span class="t">'+b.min+'분</span></div><ul>'+b.list.map(x => '<li><b>'+x[0]+'</b> '+x[1]+(x[2] ? '<span class="h">'+x[2]+'</span>' : '')+'</li>').join('')+'</ul></div>'; }
 function homeRows(d){
   return d.s4.map(x => {
     const same = EX[x[0]][0] === EX[x[0]][1];
@@ -658,6 +715,7 @@ function openModal(ds){
   else amTxt = d.lines.join('<br>');
   h += '<div class="slot am"><div class="ic am"></div><div class="body"><div class="when">'+amLabel+'</div><div class="txt">'+amTxt+'</div></div></div>';
   h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.pm ? (d.hol ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
+  if (d.pre) h += stretchBlock(d.pre);
 
   if (d.ttWeek) {
     const tr = trajectory(), w = d.ttWeek;
@@ -670,6 +728,7 @@ function openModal(ds){
   }
   if (d.fix) h += '<div class="m-fix"><b>구례 보완</b> · '+d.fix+'</div>';
   if (d.s4.length) h += '<div class="m-routine"><div class="rt-head"><span>'+(d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+'</span><span class="t">'+(d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+homeRows(d).join('')+'</ul></div>';
+  if (d.post) h += stretchBlock(d.post);
 
   mc.innerHTML = h;
   const ti = mc.querySelector('input.ttm'); if (ti) ti.addEventListener('change', onTT);
