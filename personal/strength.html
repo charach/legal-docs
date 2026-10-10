@@ -335,6 +335,16 @@
   .m-routine li:not(.must) b { color: var(--ink-soft); font-weight: 600; }
   .m-routine li.must b { color: var(--ink); }
   .m-routine li .st { font-style: normal; color: var(--red); margin-right: 3px; }
+  .topbtns { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 14px auto 0; }
+  .tbtn { font-family: inherit; font-size: 12.5px; font-weight: 800; letter-spacing: .08em; color: #000; background: #fff; border: 2px solid #000; padding: 9px 16px; cursor: pointer; }
+  .tbtn:active { background: #000; color: #fff; }
+  .tnote { font-size: 12px; color: var(--muted); }
+  .m-stx { margin-top: 14px; border: 1px solid var(--line); padding: 11px 13px; background: #F7F7F7; }
+  .m-stx .t { font-size: 11px; font-weight: 800; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+  .m-stx .r { font-size: 13px; margin-top: 6px; line-height: 1.5; }
+  .m-stx .r b { display: inline-block; min-width: 18px; color: var(--red); }
+  .m-stxbtn, .m-back { margin-top: 10px; font-family: inherit; font-size: 12.5px; font-weight: 800; letter-spacing: .06em; color: #fff; background: #000; border: 2px solid #000; padding: 8px 14px; cursor: pointer; }
+  .m-back { margin: 12px 0 0; background: #fff; color: #000; }
   .m-fix { margin-top: 14px; font-size: 12.5px; color: var(--ink-soft); background: #F4F4F4; border: 1px solid var(--line); border-radius: 0; padding: 10px 13px; line-height: 1.55; }
   .m-fix b { color: var(--sky-deep); }
 
@@ -353,11 +363,13 @@
 
   <div class="panel" id="panel"></div>
 
+  <div class="topbtns"><button class="tbtn" id="stxBtn">스트레칭 루틴</button><span class="tnote">매일 같습니다 — 세션 종류별로만 다릅니다</span></div>
+
   <div class="legend" id="legend"></div>
 
   <div id="calendar"></div>
 
-  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 모든 러닝 페이스는 위 패널의 <b>최근 10km 기록</b>에서 계산되고, 테스트 주(W1·7·13·19) 화요일에 결과를 넣으면 전부 다시 맞춰집니다. 러닝 팝업마다 <b>트레드밀 속도·경사</b> 표와 <b>운동 전·후 스트레칭</b>(이름·횟수·시간)이 붙어 있고, 경사 1%는 야외 공기저항 보정값입니다.<br>근력일이 <b>공휴일</b>이면 헬스장 휴무로 집 운동이 그날의 기본 계획이 됩니다.</p>
+  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 모든 러닝 페이스는 위 패널의 <b>최근 10km 기록</b>에서 계산되고, 테스트 주(W1·7·13·19) 화요일에 결과를 넣으면 전부 다시 맞춰집니다. 러닝 팝업마다 <b>트레드밀 속도·경사</b> 표가 붙어 있고(경사 1%는 야외 공기저항 보정값), <b>스트레칭 루틴</b>은 매일 같아서 맨 위 버튼에 한 번만 뒀습니다.<br>근력일이 <b>공휴일</b>이면 헬스장 휴무로 집 운동이 그날의 기본 계획이 됩니다.</p>
 </div>
 
 <button class="fab" id="fab">오늘 운동</button>
@@ -736,7 +748,6 @@ function openModal(ds){
   else amTxt = d.lines.join('<br>');
   h += '<div class="slot am"><div class="ic am"></div><div class="body"><div class="when">'+amLabel+'</div><div class="txt">'+amTxt+'</div></div></div>';
   h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.pm ? (d.hol ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
-  if (d.pre) h += stretchBlock(d.pre);
 
   if (d.ttWeek) {
     const tr = trajectory(), w = d.ttWeek;
@@ -749,14 +760,43 @@ function openModal(ds){
   }
   if (d.fix) h += '<div class="m-fix"><b>구례 보완</b> · '+d.fix+'</div>';
   if (d.s4.length) h += '<div class="m-routine"><div class="rt-head"><span>'+(d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+'</span><span class="t">'+(d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+homeRows(d).join('')+'</ul></div>';
-  if (d.post) h += stretchBlock(d.post);
+  if (d.pre || d.post) {
+    const lab = b => b.t.indexOf('· ') >= 0 ? b.t.slice(b.t.indexOf('· ')+2) : b.t;
+    const stars = b => b.list.filter(x => x[3]).map(x => x[0]).join(' · ');
+    h += '<div class="m-stx"><div class="t">스트레칭</div>'+
+      (d.pre  ? '<div class="r"><b>전</b> '+lab(d.pre)+' '+d.pre.min+'분 · ★ '+d.pre.must+'분 — '+stars(d.pre)+'</div>' : '')+
+      (d.post ? '<div class="r"><b>후</b> '+lab(d.post)+' '+d.post.min+'분 · ★ '+d.post.must+'분 — '+stars(d.post)+'</div>' : '')+
+      '<button class="m-stxbtn" data-ds="'+ds+'">루틴 보기</button></div>';
+  }
 
   mc.innerHTML = h;
   const ti = mc.querySelector('input.ttm'); if (ti) ti.addEventListener('change', onTT);
+  const sb = mc.querySelector('.m-stxbtn'); if (sb) sb.addEventListener('click', () => openStretch(sb.dataset.ds));
   const modalEl = document.getElementById('modal');
   modalEl.style.transform = ''; overlay.style.background = ''; modalEl.scrollTop = 0;
   overlay.classList.add('open'); document.body.style.overflow = 'hidden';
 }
+function openStretch(backDs){
+  const S = [
+    { t:'러닝 전 · 동적',        min:7,  must:3,  list:DYN,       rule:RULE.dynRun },
+    { t:'러닝 후 · 정적',        min:10, must:3,  list:STATIC,    rule:RULE.statRun },
+    { t:'롱런 후 추가 · 폼롤러',   min:4,  must:2,  list:ROLL,      rule:RULE.long },
+    { t:'근력 전 · 모빌리티',     min:8,  must:3,  list:MOB,       rule:RULE.mob },
+    { t:'근력 후 · 정적',        min:3,  must:3,  list:POST_STR,  rule:RULE.postStr },
+    { t:'평로라 후 · 정적',       min:5,  must:2,  list:POST_BIKE, rule:RULE.bike },
+    { t:'대회 당일',             min:10, must:10, list:RACE_POST, rule:'전: '+RULE.dynRace+' 후: '+RULE.postRace }
+  ];
+  let h = '<div class="m-date">STRETCHING</div><div class="m-title">스트레칭 루틴</div>'+
+    '<div class="m-goal">매일 같습니다 — 세션 종류별로만 다릅니다. <b>★</b>는 시간 없을 때 남길 것. 각 블록 아래 줄이 뺄 수 있을 때와 없을 때.</div>'+
+    (backDs ? '<button class="m-back" id="stxBack">← '+backDs.slice(5).replace('-','/')+' 운동으로</button>' : '');
+  S.forEach(b => { h += stretchBlock(b); });
+  mc.innerHTML = h;
+  const bk = mc.querySelector('#stxBack'); if (bk) bk.addEventListener('click', () => openModal(backDs));
+  const modalEl = document.getElementById('modal');
+  modalEl.style.transform = ''; overlay.style.background = ''; modalEl.scrollTop = 0;
+  overlay.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+document.getElementById('stxBtn').addEventListener('click', () => openStretch(null));
 function closeModal(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
 
 /* ---------- drag-to-dismiss (mobile bottom sheet) ---------- */
