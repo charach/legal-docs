@@ -375,7 +375,7 @@
 
   <div id="calendar"></div>
 
-  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 모든 러닝 페이스는 위 <b>페이스 · 궤도</b> 버튼 안의 최근 10km 기록에서 계산되고, 테스트 주(W1·7·13·19) 화요일에 결과를 넣으면 전부 다시 맞춰집니다. 러닝 팝업마다 <b>트레드밀 속도·경사</b> 표가 붙어 있고(경사 1%는 야외 공기저항 보정값), <b>스트레칭 루틴</b>은 매일 같아서 맨 위 버튼에 한 번만 뒀습니다.<br>근력일이 <b>공휴일</b>이면 헬스장 휴무로 집 운동이 그날의 기본 계획이 됩니다.</p>
+  <p class="foot">날짜를 누르면 그날 운동이 열립니다. 모든 러닝 페이스는 위 <b>페이스 · 궤도</b> 버튼 안의 10km 기준에서 계산됩니다. 예정된 테스트는 없고, 대회를 뛰면 그 기록으로 기준을 바꾸면 전부 다시 맞춰집니다. 러닝 팝업마다 <b>트레드밀 속도·경사</b> 표가 붙어 있고(경사 1%는 야외 공기저항 보정값), <b>스트레칭 루틴</b>은 매일 같아서 맨 위 버튼에 한 번만 뒀습니다.<br>근력일이 <b>공휴일</b>이면 헬스장 휴무로 집 운동이 그날의 기본 계획이 됩니다.</p>
 </div>
 
 <button class="fab" id="fab">오늘 운동</button>
@@ -393,11 +393,11 @@
 const START = '2026-10-12', WEEK0 = '2026-10-12';
 const RACE  = '2027-03-28';          // 가정. 대회일 확정되면 이 값만 바꾼다 (4/4면 테이퍼 한 주 추가)
 const END   = RACE;
-const DEFAULT_TT = 46*60;            // 테스트 전 추정 · 거북섬 10km 50:12(바이크 직후) → 단독 약 46분
-const SUB3_W19  = 39*60;             // W19 테스트에서 이 10km면 서브3 궤도
-const TT_WEEKS  = [1,7,13,19];
+const DEFAULT_TT = 43*60 + 30;       // 현재 기준 · 본인 설정 (10km 43~44분). 예정된 테스트는 없고 대회 기록으로 갱신한다
+const SUB3_W19  = 39*60;             // W19 시점(2/16)에 이 10km면 서브3 궤도
+const CHECK     = [7,13,19];         // 궤도 중간점 (주차)
 const DELOAD    = [4,8,12,16,20];
-const STORE     = 'gunsan27_tt_v1';
+const STORE     = 'gunsan27_base_v2';
 
 const HOLIDAYS = { '2026-12-25':'성탄절', '2027-01-01':'신정', '2027-02-05':'설 연휴', '2027-02-06':'설날', '2027-02-07':'설 연휴', '2027-02-08':'설 대체휴일', '2027-03-01':'삼일절' };
 
@@ -410,25 +410,25 @@ const PHASES = [
 
 /* ========== 주차별 러닝 처방 · [화, 수 이지(분), 목, 일 롱런 [분, 마지막 MP 분]] ========== */
 const WK = [
-  ['TT',       30, 'E30+S4', [50,0]],
+  ['I5x400',   30, 'E30+S4', [50,0]],
   ['I6x400',   35, 'E35+S6', [60,0]],
   ['I8x400',   40, 'T15',    [80,0]],
   ['I5x400',   30, 'E30+S4', [60,0]],
   ['I6x600',   45, 'T20',    [90,0]],
   ['I6x800',   45, 'T20',    [95,0]],
-  ['TT',       40, 'E40+S6', [100,0]],
+  ['I4x1000',  40, 'T20',    [100,0]],
   ['I5x600',   35, 'E35',    [75,0]],
   ['I5x1000',  50, 'T25',    [110,15]],
   ['I6x1000',  50, 'T2x15',  [120,20]],
   ['I4x1200',  50, 'M8',     [130,20]],
   ['I5x800',   40, 'T20',    [90,0]],
-  ['TT',       45, 'E45+S6', [140,25]],
+  ['I5x1200',  45, 'M8',     [140,25]],
   ['I5x1200',  50, 'M10',    [150,30]],
   ['I4x1600',  55, 'T3x12',  [160,30]],
   ['I6x800',   40, 'M6',     [100,0]],
   ['I3x2000',  55, 'M12',    [170,40]],
   ['I5x1200',  55, 'M14',    [180,45]],
-  ['TT',       45, 'E45+S6', [150,30]],
+  ['I3x2000',  45, 'M12',    [150,30]],
   ['I5x1000',  40, 'M8',     [120,20]],
   ['I4x1600',  50, 'M16',    [190,60]],
   ['I5x800',   40, 'M10',    [130,20]],
@@ -535,13 +535,14 @@ function zones(tt){ const p = tt/10; return { E:[p+60, p+80], M:p+24, T:p+12, I:
 function pace(s){ s = Math.round(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 function hms(s){ s = Math.round(s); return Math.floor(s/3600)+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
 function parseTT(v){ const m = String(v||'').trim().match(/^(\d{1,2})[:.](\d{2})$/); if(!m) return null; const s = +m[1]*60 + +m[2]; return (s>=1500 && s<=4200) ? s : null; }
-let tt = {};
-try { tt = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e){ tt = {}; }
-function saveTT(){ try{ localStorage.setItem(STORE, JSON.stringify(tt)); }catch(e){} }
-function currentTT(){ let v = null; TT_WEEKS.forEach(w => { if (tt[w]) v = tt[w]; }); return v || DEFAULT_TT; }
-function isEstimate(){ return !TT_WEEKS.some(w => tt[w]); }
-/* 서브3 궤도: W1 결과(없으면 추정)에서 W19 39:00 까지 직선 */
-function trajectory(){ const a = tt[1] || DEFAULT_TT, b = SUB3_W19, out = {}; TT_WEEKS.forEach(w => { out[w] = a + (b-a) * (w-1)/18; }); return out; }
+let base = null;
+try { base = JSON.parse(localStorage.getItem(STORE)); } catch(e){ base = null; }
+if (typeof base !== 'number') base = null;
+function saveBase(){ try{ localStorage.setItem(STORE, JSON.stringify(base)); }catch(e){} }
+function currentTT(){ return base || DEFAULT_TT; }
+function isEstimate(){ return !base; }   // true = 기본값 43:30 사용 중
+/* 서브3 궤도: 지금 기준(W1 시점)에서 W19 39:00 까지 직선 */
+function trajectory(){ const a = currentTT(), b = SUB3_W19, out = {}; CHECK.forEach(w => { out[w] = a + (b-a)*(w-1)/18; }); return out; }
 
 /* ========== 세션 해석 ========== */
 const Z = () => zones(currentTT());
@@ -648,7 +649,6 @@ const CAT = {
   gym:   { color:'#767677', label:'근력' },
   bike:  { color:'#767677', label:'평로라' },
   swim:  { color:'#767677', label:'수영' },
-  tt:    { color:'#C8102E', label:'10km 테스트' },
   race:  { color:'#C8102E', label:'대회' },
   rest:  { color:'#E6E6E6', label:'휴식' },
   closed:{ color:'#000000', label:'공휴일 · 집운동' }
@@ -656,31 +656,26 @@ const CAT = {
 const legendEl = document.getElementById('legend');
 Object.keys(CAT).forEach(k => { const el = document.createElement('span'); el.className = 'lg'; el.innerHTML = '<span class="dot" style="background:'+CAT[k].color+'"></span>'+CAT[k].label; legendEl.appendChild(el); });
 
-function ttDate(w){ return ymd(new Date(pd(WEEK0).getTime() + ((w-1)*7+1)*86400000)); }
+function wkDate(w){ return ymd(new Date(pd(WEEK0).getTime() + ((w-1)*7+1)*86400000)).slice(5).replace('-','/'); }
 function renderPanel(){
   const z = Z(), cur = currentTT(), tr = trajectory();
-  let h = '<div class="ph">페이스 · 최근 10km '+pace(cur)+(isEstimate()?' <span style="color:var(--muted);font-weight:600">(테스트 전 추정)</span>':'')+'</div>';
+  let h = '<div class="ph">10km 기준 <input class="tt" id="baseIn" placeholder="mm:ss" value="'+pace(cur)+'">'+
+    (isEstimate() ? ' <span style="color:var(--muted);font-weight:600">기본값 · 본인 설정</span>' : ' <span style="color:var(--muted);font-weight:600">직접 입력</span>')+'</div>';
   h += '<div class="row"><span class="z">이지 <b>'+pace(z.E[0])+'~'+pace(z.E[1])+'</b> <i>'+ezK(z)+'</i></span><span class="z">마라톤 <b>'+pace(z.M)+'</b> <i>'+kmh(z.M)+'</i></span><span class="z">템포 <b>'+pace(z.T)+'</b> <i>'+kmh(z.T)+'</i></span><span class="z">인터벌 <b>'+pace(z.I)+'</b> <i>'+kmh(z.I)+'</i></span><span class="z">스트라이드 <b>'+pace(z.R)+'</b> <i>'+kmh(z.R)+'</i></span></div>';
   h += '<div class="hint" style="margin-top:4px">굵은 글씨는 분/km, 옆 숫자는 트레드밀 km/h · 경사 1% 기준.</div>';
   h += '<div class="row big">이 페이스로 완주하면 <b>'+hms(z.M*42.195)+'</b>'+(z.M*42.195 <= 10800 ? ' · 서브3' : ' · 서브3까지 '+pace(z.M - 10800/42.195)+'/km')+'</div>';
-  h += '<table><tr><th>테스트</th><th>날짜</th><th>서브3 궤도</th><th>내 기록</th><th></th></tr>';
-  TT_WEEKS.forEach(w => {
-    const d = ttDate(w), mine = tt[w], tgt = tr[w];
-    let judge = '';
-    if (mine && w > 1) judge = mine <= tgt + 15 ? '<span class="ok">궤도 위</span>' : '<span class="off">궤도 아래 +'+pace(mine-tgt)+'</span>';
-    if (mine && w === 1) judge = '<span class="ok">기준점</span>';
-    h += '<tr><td>W'+w+'</td><td>'+d.slice(5).replace('-','/')+'</td><td>'+(w===1 ? '— (기준)' : pace(tgt))+'</td><td><input class="tt" data-w="'+w+'" placeholder="mm:ss" value="'+(mine?pace(mine):'')+'"></td><td>'+judge+'</td></tr>';
-  });
-  h += '</table><div class="hint">궤도는 W1 결과에서 W19 <b>39:00</b>까지 직선으로 그은 것이다. W1 테스트 전엔 46:00 추정값을 쓴다. 기록은 이 기기에 저장되고 모든 세션 페이스가 바로 다시 계산된다.</div>';
+  h += '<table><tr><th>서브3 궤도</th>'+CHECK.map(w => '<th>'+wkDate(w)+' · W'+w+'</th>').join('')+'</tr>'+
+       '<tr><td>10km</td>'+CHECK.map(w => '<td><b>'+pace(tr[w])+'</b></td>').join('')+'</tr></table>';
+  h += '<div class="hint">예정된 테스트는 없다. 한 달에 한 번쯤 대회를 뛰고 그 <b>10km 환산 기록</b>을 위 칸에 넣으면 모든 세션 페이스와 궤도가 다시 계산된다 — 대회를 넣는 주는 일정을 같이 바꾼다. 궤도는 지금 기준에서 W19 <b>39:00</b>까지 직선.</div>';
   document.getElementById('panel').innerHTML = h;
-  document.querySelectorAll('#panel input.tt').forEach(inp => inp.addEventListener('change', onTT));
+  const bi = document.getElementById('baseIn'); if (bi) bi.addEventListener('change', onBase);
 }
-function onTT(e){
-  const w = +e.target.dataset.w, v = parseTT(e.target.value);
-  if (e.target.value.trim() === '') { delete tt[w]; }
-  else if (v) { tt[w] = v; }
-  else { e.target.value = tt[w] ? pace(tt[w]) : ''; return; }
-  saveTT(); renderPanel(); buildCalendar(); setPanel(true);
+function onBase(e){
+  const raw = String(e.target.value || '').trim(), v = parseTT(raw);
+  if (raw === '') { base = null; }
+  else if (v) { base = v; }
+  else { e.target.value = pace(currentTT()); return; }
+  saveBase(); renderPanel(); buildCalendar(); setPanel(true);
   if (overlay.classList.contains('open') && currentDs) openModal(currentDs);
 }
 renderPanel();
@@ -743,7 +738,7 @@ function openModal(ds){
   let h = '<div class="m-date">'+(dObj.getMonth()+1)+'월 '+dObj.getDate()+'일 · '+wd+'요일'+(ds===todayStr?' · 오늘':'')+(d.hol?' · '+d.hol:'')+'</div>';
   h += '<div class="m-title">'+d.title+'</div>';
   h += '<span class="m-phase" style="background:'+d.ph.color+'">'+d.ph.name+' · '+d.week+'주차'+(d.deload?' · 디로드':'')+(d.raceWeek?' · 대회 주':'')+'</span>';
-  h += '<div class="m-goal">이번 주 러닝 약 <b>'+weekKm(d.week)+'km</b>'+(isEstimate()?' · 페이스는 테스트 전 추정값':'')+'</div>';
+  h += '<div class="m-goal">이번 주 러닝 약 <b>'+weekKm(d.week)+'km</b>'+(isEstimate()?' · 페이스는 기본값 43:30 기준':'')+'</div>';
 
   if (d.hol) h += '<div class="m-vac"><b>'+d.hol+' · 헬스장 휴무</b><br>'+(d.closed ? '아래 맨몸 목록이 오늘의 계획.' : '야외라 계획 그대로.')+(d.pm ? '<br>저녁 수영 레슨도 쉽니다.' : '')+'</div>';
 
@@ -755,10 +750,6 @@ function openModal(ds){
   h += '<div class="slot am"><div class="ic am"></div><div class="body"><div class="when">'+amLabel+'</div><div class="txt">'+amTxt+'</div></div></div>';
   h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.pm ? (d.hol ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
 
-  if (d.ttWeek) {
-    const tr = trajectory(), w = d.ttWeek;
-    h += '<div class="m-tt"><div class="t">W'+w+' 테스트 결과</div><div class="r"><input class="ttm" data-w="'+w+'" placeholder="mm:ss" value="'+(tt[w]?pace(tt[w]):'')+'"><span>10km</span>'+(w>1?'<span style="color:var(--muted)">· 궤도 '+pace(tr[w])+'</span>':'')+'</div><div class="h">넣는 순간 이후 모든 세션 페이스가 이 기록으로 다시 계산됩니다.</div></div>';
-  }
   if (d.tm && d.tm.length) {
     h += '<div class="m-tm"><div class="tm-head"><span>트레드밀</span><span class="t">속도 km/h · 경사</span></div><table>'+
       d.tm.map(r => '<tr><td>'+r[0]+'</td><td class="q">'+r[1]+'</td><td class="v">'+r[2]+'</td><td class="g">'+r[3]+'</td></tr>').join('')+
@@ -776,7 +767,6 @@ function openModal(ds){
   }
 
   mc.innerHTML = h;
-  const ti = mc.querySelector('input.ttm'); if (ti) ti.addEventListener('change', onTT);
   const sb = mc.querySelector('.m-stxbtn'); if (sb) sb.addEventListener('click', () => openStretch(sb.dataset.ds));
   const modalEl = document.getElementById('modal');
   modalEl.style.transform = ''; overlay.style.background = ''; modalEl.scrollTop = 0;
