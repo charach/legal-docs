@@ -29,3 +29,22 @@ tasks.forEach(([id,title,desc])=>{const label=document.createElement('label');la
 function update(){document.getElementById('done-count').textContent=[...target.querySelectorAll('input')].filter(i=>i.checked).length+' / '+tasks.length+' 완료'+(storageOK?'':' · 기록 저장 불가')}update()
 }
 picker.addEventListener('change',render);render();
+function saveRecords(){try{localStorage.setItem('steady-study-v1',JSON.stringify(records));storageOK=true;return true}catch{storageOK=false;return false}}
+function addPlanChecks(selector,prefix,labelText){
+document.querySelectorAll(selector).forEach((item,index)=>{
+const label=document.createElement('label');label.className='plan-check';
+const check=document.createElement('input');check.type='checkbox';const key=prefix+'-'+index;check.checked=!!records[key];
+const text=document.createElement('span');text.textContent=labelText;
+label.append(check,text);item.append(label);item.classList.toggle('plan-complete',check.checked);
+check.addEventListener('change',()=>{records[key]=check.checked;const saved=saveRecords();item.classList.toggle('plan-complete',check.checked);text.textContent=saved?labelText:labelText+' · 기록 저장 불가'})
+})
+}
+addPlanChecks('#weeks .week','week','이번 주 진도 완료');
+addPlanChecks('#home li','home','읽기 완료');
+addPlanChecks('#korean tr','korean','기간 목표 완료');
+document.querySelectorAll('#korean tr').forEach(row=>{const label=row.lastElementChild;if(label?.className==='plan-check'){const cell=document.createElement('td');cell.append(label);row.append(cell)}});
+const controls=document.createElement('div');controls.className='check-controls';
+[['이전 날',-1],['다음 날',1]].forEach(([title,offset])=>{const button=document.createElement('button');button.type='button';button.textContent=title;button.addEventListener('click',()=>{const stamp=Date.parse(picker.value+'T00:00:00Z')+offset*86400000;picker.value=iso(Math.max(start,Math.min(end,stamp)));render()});controls.append(button)});
+const allButton=document.createElement('button');allButton.type='button';allButton.textContent='이날 모두 완료';
+allButton.addEventListener('click',()=>{document.querySelectorAll('#tasks input').forEach(input=>{if(!input.checked){input.checked=true;input.dispatchEvent(new Event('change'))}})});
+controls.append(allButton);document.getElementById('tasks').before(controls);
