@@ -403,15 +403,14 @@ const DELOAD    = [4,8,12,16,20];
 
 const HOLIDAYS = { '2026-12-25':'성탄절', '2027-01-01':'신정', '2027-02-05':'설 연휴', '2027-02-06':'설날', '2027-02-07':'설 연휴', '2027-02-08':'설 대체휴일', '2027-03-01':'삼일절' };
 
-/* 홍콩 여행 10/16~18 — 러닝·헬스장 불가. 금 근력 B는 토요일 아침 호텔 방 1시간으로 옮기고, 일 롱런은 만회하지 않고 건너뛴다 */
+/* 홍콩 여행 10/16~18 — 러닝·헬스장 불가. 금 근력 B와 일 롱런은 만회하지 않고 건너뛰고, 토 아침은 야외 이지 40분 */
 const TRIP = {
-  '2026-10-16': { title:'홍콩 이동 · 휴식', msg:'러닝·헬스장 없음. 금요일 근력 B는 내일 아침 호텔 방으로 옮김.',
+  '2026-10-16': { title:'홍콩 이동 · 휴식', msg:'러닝·헬스장 없음. 금요일 근력 B는 건너뜀 (내일 아침은 야외 이지 러닝).',
     am:['낮 · 이동','운동 없음. 기내·대기 중 발목 돌리기, 가능하면 20분마다 일어나 걷기.'], pm:'호텔 도착 후 모빌리티 8분 (선택)',
     lines:['운동 없음 · 많이 걷는 날'], pre:'MOB', post:null, tag:'trip' },
-  '2026-10-17': { title:'근력 B · 호텔 방 맨몸 (1시간)', msg:'오전 1시간만 운동 가능. 낮에는 부모님과 도보 일정 — 세트 사이 쉬는 시간을 넉넉히, 무리해서 늘리지 않기.',
-    am:['아침 · 호텔 방 (1시간)',null], pm:null, s4:'B', pre:'MOB', post:'POST_STR', tag:'trip',
-    lines:['모빌리티 8분 → 맨몸 6동작 3세트 약 35분 → 정적 3분 → 남는 시간은 호텔 주변 걷기'],
-    fix:'밴드(몬스터 워크·클램쉘용)는 캐리어에. 손 압박 분산(등) · 골반 기준점(코어) · 런 후반 추진(종아리)은 맨몸으로도 같은 목적.' },
+  '2026-10-17': { title:'야외 이지 40분 · 완차이', msg:'호텔 방이 좁아 근력 대신 밖에서 달린다. 조식(08:00) 전에 끝내기. 낮에는 부모님과 도보 일정 — 늘리지 않는다. 근력 B는 이번 주 건너뜀 (다음 B는 10/23).',
+    am:['아침 · 06:30 출발 (약 1시간)',null], pm:null, run:'E40', pre:'DYN', post:'STATIC', tag:'trip',
+    extra:'<b>코스</b>: 호텔 → 완차이 해안 산책로(평지) 왕복. 대안은 빅토리아 공원 트랙. 어두우면 공원 쪽이 안전. 코스는 현지에서 확인.<br><b>더위</b>: 10월 홍콩은 습하다. 페이스는 표보다 10~20초 느리게, 심박 기준으로 편하게. 물 챙기기.<br>동적 7분 → 달리기 40분 → 정적 10분 = 약 1시간.' },
   '2026-10-18': { title:'귀국 · 저녁 가볍게', msg:'러닝은 하지 않음 (비행 후 다리 붓기). 롱런 50분은 건너뛰고 다음 주에 만회하지 않는다 — 1주차는 기초 단계.',
     am:['낮 · 귀국 이동','운동 없음.'], pm:'집 도착 후 <b>20~30분</b> — 걷기 10분 + 폼롤러 + 모빌리티. 땀 날 정도로 하지 않기.',
     lines:['걷기 10분 + 폼롤러 + 모빌리티'], pre:'MOB', post:'ROLL', tag:'trip' }
@@ -646,10 +645,11 @@ function day(s){
   else if (kind === 'rest') { pre = { t:'모빌리티', min:8, must:3, list:MOB, rule:RULE.rest }; }
   const T = TRIP[s];
   if (T) {
-    title = T.title; lines = T.lines; km = 0; tm = []; tmNote = null; kind = T.s4 ? 'str' : 'rest'; tags = [T.tag]; fix = T.fix || null;
-    s4 = T.s4 ? STR[T.s4].base.map(x => [x[0], x[1]]) : [];
-    pre  = T.pre ? { t:'모빌리티', min:8, must:3, list:MOB, rule:RULE.mob } : null;
-    post = T.post === 'POST_STR' ? { t:'근력 후 · 정적', min:3, must:3, list:POST_STR, rule:RULE.postStr } : T.post === 'ROLL' ? { t:'폼롤러', min:4, must:2, list:ROLL, rule:RULE.long } : null;
+    title = T.title; lines = T.lines; km = 0; tm = []; tmNote = null; kind = 'rest'; tags = [T.tag]; fix = null;
+    s4 = [];
+    if (T.run) { const r = expand(T.run); kind = 'easy'; tags = [T.tag, 'easy']; lines = r.l.concat([T.extra]); km = r.km; }
+    pre  = T.pre === 'MOB' ? { t:'모빌리티', min:8, must:3, list:MOB, rule:RULE.mob } : T.pre === 'DYN' ? { t:'러닝 전 · 동적', min:7, must:3, list:DYN, rule:RULE.dynRun } : null;
+    post = T.post === 'STATIC' ? { t:'러닝 후 · 정적', min:10, must:3, list:STATIC, rule:RULE.statRun } : T.post === 'ROLL' ? { t:'폼롤러', min:4, must:2, list:ROLL, rule:RULE.long } : null;
   }
   const needsGym = kind === 'str' && !T;
   const closed = !!hol && needsGym;
@@ -754,7 +754,7 @@ function openModal(ds){
 
   const amLabel = d.trip ? d.trip.am[0] : d.closed ? '오전 · 집' : (d.kind==='str' ? '아침 · 헬스장' : d.kind==='bike' ? '오전' : d.kind==='race' ? '대회' : '아침');
   let amTxt;
-  if (d.trip) amTxt = d.trip.am[1] || '<b>맨몸 '+d.s4.length+'동작</b> · 아래 목록';
+  if (d.trip) amTxt = d.trip.am[1] || d.lines.join('<br>');
   else if (d.closed) amTxt = '<b>맨몸 '+d.s4.length+'동작</b> · 아래 목록';
   else if (d.kind === 'str') amTxt = d.s4.map(x => '<b>'+EX[x[0]][0]+'</b> '+x[1]).join('<br>');
   else amTxt = d.lines.join('<br>');
@@ -767,7 +767,7 @@ function openModal(ds){
       '</table>'+(d.tmNote ? '<div class="tm-note">'+d.tmNote+'</div>' : '')+'</div>';
   }
   if (d.fix) h += '<div class="m-fix"><b>구례 보완</b> · '+d.fix+'</div>';
-  if (d.s4.length) h += '<div class="m-routine"><div class="rt-head"><span>'+(d.trip ? '호텔 방 · 맨몸' : d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+'</span><span class="t">'+(d.trip ? '약 35분' : d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+homeRows(d).join('')+'</ul></div>';
+  if (d.s4.length) h += '<div class="m-routine"><div class="rt-head"><span>'+(d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+'</span><span class="t">'+(d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+homeRows(d).join('')+'</ul></div>';
   if (d.pre || d.post) {
     const lab = b => b.t.indexOf('· ') >= 0 ? b.t.slice(b.t.indexOf('· ')+2) : b.t;
     const stars = b => b.list.filter(x => x[3]).map(x => x[0]).join(' · ');
