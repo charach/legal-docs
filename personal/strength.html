@@ -141,6 +141,10 @@
   .cell.k-race .mini { font-weight: 800; }
   .cell.k-long { border-color: #000; }
 
+  /* 여행 · 러닝 불가 */
+  .cell.k-trip { background: #F4F4F4; border-style: dashed; border-color: #767677; }
+  .cell.k-trip .mini { color: #000000; font-weight: 700; }
+
   /* 공휴일 · 헬스장 휴무 */
   .cell.k-closed { background: #E6E6E6; border-style: dashed; border-color: #767677; }
   .cell.k-closed .dnum { color: #000000; }
@@ -399,6 +403,20 @@ const DELOAD    = [4,8,12,16,20];
 
 const HOLIDAYS = { '2026-12-25':'성탄절', '2027-01-01':'신정', '2027-02-05':'설 연휴', '2027-02-06':'설날', '2027-02-07':'설 연휴', '2027-02-08':'설 대체휴일', '2027-03-01':'삼일절' };
 
+/* 홍콩 여행 10/16~18 — 러닝·헬스장 불가. 금 근력 B는 토요일 아침 호텔 방 1시간으로 옮기고, 일 롱런은 만회하지 않고 건너뛴다 */
+const TRIP = {
+  '2026-10-16': { title:'홍콩 이동 · 휴식', msg:'러닝·헬스장 없음. 금요일 근력 B는 내일 아침 호텔 방으로 옮김.',
+    am:['낮 · 이동','운동 없음. 기내·대기 중 발목 돌리기, 가능하면 20분마다 일어나 걷기.'], pm:'호텔 도착 후 모빌리티 8분 (선택)',
+    lines:['운동 없음 · 많이 걷는 날'], pre:'MOB', post:null, tag:'trip' },
+  '2026-10-17': { title:'근력 B · 호텔 방 맨몸 (1시간)', msg:'오전 1시간만 운동 가능. 낮에는 부모님과 도보 일정 — 세트 사이 쉬는 시간을 넉넉히, 무리해서 늘리지 않기.',
+    am:['아침 · 호텔 방 (1시간)',null], pm:null, s4:'B', pre:'MOB', post:'POST_STR', tag:'trip',
+    lines:['모빌리티 8분 → 맨몸 6동작 3세트 약 35분 → 정적 3분 → 남는 시간은 호텔 주변 걷기'],
+    fix:'밴드(몬스터 워크·클램쉘용)는 캐리어에. 손 압박 분산(등) · 골반 기준점(코어) · 런 후반 추진(종아리)은 맨몸으로도 같은 목적.' },
+  '2026-10-18': { title:'귀국 · 저녁 가볍게', msg:'러닝은 하지 않음 (비행 후 다리 붓기). 롱런 50분은 건너뛰고 다음 주에 만회하지 않는다 — 1주차는 기초 단계.',
+    am:['낮 · 귀국 이동','운동 없음.'], pm:'집 도착 후 <b>20~30분</b> — 걷기 10분 + 폼롤러 + 모빌리티. 땀 날 정도로 하지 않기.',
+    lines:['걷기 10분 + 폼롤러 + 모빌리티'], pre:'MOB', post:'ROLL', tag:'trip' }
+};
+
 const PHASES = [
   { id:'base',  from:'2026-10-12', to:'2026-12-06', name:'1단계 · 기초',   color:'#767677' },
   { id:'build', from:'2026-12-07', to:'2027-01-31', name:'2단계 · 빌드',   color:'#000000' },
@@ -626,11 +644,18 @@ function day(s){
   else if (kind === 'str') { pre = { t:'근력 전 · 모빌리티', min:8, must:3, list:MOB, rule:RULE.mob }; post = { t:'근력 후 · 정적', min:3, must:3, list:POST_STR, rule:RULE.postStr }; }
   else if (kind === 'bike') { post = { t:'평로라 후 · 정적', min:5, must:2, list:POST_BIKE, rule:RULE.bike }; }
   else if (kind === 'rest') { pre = { t:'모빌리티', min:8, must:3, list:MOB, rule:RULE.rest }; }
-  const needsGym = kind === 'str';
+  const T = TRIP[s];
+  if (T) {
+    title = T.title; lines = T.lines; km = 0; tm = []; tmNote = null; kind = T.s4 ? 'str' : 'rest'; tags = [T.tag]; fix = T.fix || null;
+    s4 = T.s4 ? STR[T.s4].base.map(x => [x[0], x[1]]) : [];
+    pre  = T.pre ? { t:'모빌리티', min:8, must:3, list:MOB, rule:RULE.mob } : null;
+    post = T.post === 'POST_STR' ? { t:'근력 후 · 정적', min:3, must:3, list:POST_STR, rule:RULE.postStr } : T.post === 'ROLL' ? { t:'폼롤러', min:4, must:2, list:ROLL, rule:RULE.long } : null;
+  }
+  const needsGym = kind === 'str' && !T;
   const closed = !!hol && needsGym;
   if (closed) { tags = tags.filter(t => t!=='gym'); tags.unshift('closed'); }
-  if (pm && !closed && !hol) tags.push('swim');
-  return { s, ph, week, dow, title, lines, s4, km, tags, kind, fix, hol, closed, deload, ttWeek, pm, raceWeek, tm, tmNote, pre, post };
+  if (pm && !closed && !hol && !T) tags.push('swim');
+  return { s, ph, week, dow, title, lines, s4, km, tags, kind, fix, hol, closed, deload, ttWeek, pm, raceWeek, tm, tmNote, pre, post, trip: T || null };
 }
 function weekKm(week){ let k = 0; for (let i=0;i<7;i++){ const d = day(ymd(new Date(pd(WEEK0).getTime() + ((week-1)*7+i)*86400000))); if (d) k += d.km; } return Math.round(k); }
 
@@ -644,7 +669,8 @@ const CAT = {
   swim:  { color:'#767677', label:'수영' },
   race:  { color:'#C8102E', label:'대회' },
   rest:  { color:'#E6E6E6', label:'휴식' },
-  closed:{ color:'#000000', label:'공휴일 · 집운동' }
+  closed:{ color:'#000000', label:'공휴일 · 집운동' },
+  trip:  { color:'#767677', label:'여행' }
 };
 const legendEl = document.getElementById('legend');
 Object.keys(CAT).forEach(k => { const el = document.createElement('span'); el.className = 'lg'; el.innerHTML = '<span class="dot" style="background:'+CAT[k].color+'"></span>'+CAT[k].label; legendEl.appendChild(el); });
@@ -683,7 +709,7 @@ function buildCalendar(){
     for (let n=1; n<=daysIn; n++){
       const ds = ymd(new Date(mo.y,mo.m,n)), d = day(ds), cell = document.createElement('div');
       if (!d) { cell.className='cell empty'; cell.innerHTML='<span class="dnum" style="color:#E6E6E6">'+n+'</span>'; grid.appendChild(cell); continue; }
-      const kind = d.closed ? 'k-closed' : d.kind==='race' ? 'k-race' : d.kind==='tt' ? 'k-tt' : d.kind==='long' ? 'k-long' : d.kind==='easy' ? 'k-easy' : d.kind==='rest' ? 'k-rest' : d.kind==='str' ? 'k-str' : '';
+      const kind = d.trip ? 'k-trip' : d.closed ? 'k-closed' : d.kind==='race' ? 'k-race' : d.kind==='tt' ? 'k-tt' : d.kind==='long' ? 'k-long' : d.kind==='easy' ? 'k-easy' : d.kind==='rest' ? 'k-rest' : d.kind==='str' ? 'k-str' : '';
       cell.className = 'cell active '+kind+(ds===todayStr?' today':'')+(d.hol?' holiday':'');
       cell.dataset.date = ds;
       cell.innerHTML = '<span class="ph" style="background:'+d.ph.color+'"></span><span class="dnum">'+n+'</span>'+
@@ -723,15 +749,17 @@ function openModal(ds){
   h += '<span class="m-phase" style="background:'+d.ph.color+'">'+d.ph.name+' · '+d.week+'주차'+(d.deload?' · 디로드':'')+(d.raceWeek?' · 대회 주':'')+'</span>';
   h += '<div class="m-goal">이번 주 러닝 약 <b>'+weekKm(d.week)+'km</b> · 10km 기준 '+pace(currentTT())+'</div>';
 
+  if (d.trip) h += '<div class="m-vac"><b>홍콩 여행</b><br>'+d.trip.msg+'</div>';
   if (d.hol) h += '<div class="m-vac"><b>'+d.hol+' · 헬스장 휴무</b><br>'+(d.closed ? '아래 맨몸 목록이 오늘의 계획.' : '야외라 계획 그대로.')+(d.pm ? '<br>저녁 수영 레슨도 쉽니다.' : '')+'</div>';
 
-  const amLabel = d.closed ? '오전 · 집' : (d.kind==='str' ? '아침 · 헬스장' : d.kind==='bike' ? '오전' : d.kind==='race' ? '대회' : '아침');
+  const amLabel = d.trip ? d.trip.am[0] : d.closed ? '오전 · 집' : (d.kind==='str' ? '아침 · 헬스장' : d.kind==='bike' ? '오전' : d.kind==='race' ? '대회' : '아침');
   let amTxt;
-  if (d.closed) amTxt = '<b>맨몸 '+d.s4.length+'동작</b> · 아래 목록';
+  if (d.trip) amTxt = d.trip.am[1] || '<b>맨몸 '+d.s4.length+'동작</b> · 아래 목록';
+  else if (d.closed) amTxt = '<b>맨몸 '+d.s4.length+'동작</b> · 아래 목록';
   else if (d.kind === 'str') amTxt = d.s4.map(x => '<b>'+EX[x[0]][0]+'</b> '+x[1]).join('<br>');
   else amTxt = d.lines.join('<br>');
   h += '<div class="slot am"><div class="ic am"></div><div class="body"><div class="when">'+amLabel+'</div><div class="txt">'+amTxt+'</div></div></div>';
-  h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.pm ? (d.hol ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
+  h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.trip ? (d.trip.pm || '—') : d.pm ? (d.hol ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
 
   if (d.tm && d.tm.length) {
     h += '<div class="m-tm"><div class="tm-head"><span>트레드밀</span><span class="t">속도 km/h · 경사</span></div><table>'+
@@ -739,7 +767,7 @@ function openModal(ds){
       '</table>'+(d.tmNote ? '<div class="tm-note">'+d.tmNote+'</div>' : '')+'</div>';
   }
   if (d.fix) h += '<div class="m-fix"><b>구례 보완</b> · '+d.fix+'</div>';
-  if (d.s4.length) h += '<div class="m-routine"><div class="rt-head"><span>'+(d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+'</span><span class="t">'+(d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+homeRows(d).join('')+'</ul></div>';
+  if (d.s4.length) h += '<div class="m-routine"><div class="rt-head"><span>'+(d.trip ? '호텔 방 · 맨몸' : d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+'</span><span class="t">'+(d.trip ? '약 35분' : d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+homeRows(d).join('')+'</ul></div>';
   if (d.pre || d.post) {
     const lab = b => b.t.indexOf('· ') >= 0 ? b.t.slice(b.t.indexOf('· ')+2) : b.t;
     const stars = b => b.list.filter(x => x[3]).map(x => x[0]).join(' · ');
