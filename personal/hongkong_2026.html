@@ -10,6 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="홍콩">
 <title>홍콩 3일 · 10/16–18 · 4인</title>
 <link rel="stylesheet" href="assets/summer.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <style>
   .hero { padding: 64px 0 0; }
   .hero .lead { max-width: 62ch; }
@@ -22,12 +23,20 @@
   .day-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 18px; }
   .day-head h2 { margin: 0; font-size: 22px; letter-spacing: -.02em; }
   .day-head .d { font-size: 13px; color: var(--ink-2); }
+  .map { height: 340px; margin-top: 18px; border: 1px solid var(--line); border-radius: 8px; background: #F2F8F9; }
+  .mapfb { display: none; font-size: 13px; color: var(--ink-2); margin: 8px 0 0; }
+  .mapnote { font-size: 12.5px; color: var(--ink-2); margin: 8px 0 0; }
+  .pin { background: var(--ink); color: #fff; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(26,46,53,.3); font-family: var(--sans); }
+  .pin-h { background: var(--accent); }
+  .leaflet-popup-content { font-family: var(--sans); font-size: 13px; line-height: 1.5; margin: 10px 12px; }
+  .leaflet-popup-content a { color: var(--accent); }
   .tl { margin-top: 14px; }
   .tl .row { display: grid; grid-template-columns: 64px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
   .tl .t { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; padding-top: 2px; }
   .tl .h { font-size: 15.5px; line-height: 1.55; }
   .tl .m { font-size: 13.5px; color: var(--ink-2); margin-top: 5px; line-height: 1.6; }
   .tl .alt { font-size: 13px; color: var(--ink-2); margin-top: 7px; padding-left: 10px; border-left: 2px solid var(--line); line-height: 1.6; }
+  .np { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 11px; font-weight: 700; margin-right: 6px; vertical-align: 1px; }
   a.pl { color: var(--ink); font-weight: 500; border-bottom: 1px solid rgba(14,124,148,.35); }
   a.tel { color: var(--accent); white-space: nowrap; border-bottom: 1px solid rgba(14,124,148,.35); }
   .rt { font-size: 12px; color: var(--ink-2); white-space: nowrap; }
@@ -42,7 +51,7 @@
   .chk .w { font-size: 15px; line-height: 1.5; }
   .chk .how { font-size: 13px; color: var(--ink-2); margin-top: 3px; line-height: 1.55; }
   .chk label.done .w { color: var(--ink-2); text-decoration: line-through; }
-  .chk .pri { padding-top: 2px; }
+  .chk .pri { padding-top: 2px; white-space: nowrap; }
   .tips { margin-top: 18px; }
   .tips p { margin: 0 0 10px; font-size: 14.5px; line-height: 1.7; }
   footer { margin-top: 90px; border-top: 1px solid var(--line); padding: 26px 0 60px; font-size: 13px; color: var(--ink-2); line-height: 1.7; }
@@ -51,6 +60,7 @@
     .tl .row { grid-template-columns: 52px 1fr; gap: 10px; }
     .chk label { grid-template-columns: 22px 1fr; }
     .chk .pri { grid-column: 2; padding-top: 0; }
+    .map { height: 300px; }
   }
 </style>
 </head>
@@ -60,46 +70,48 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow">Hong Kong · 2026. 10. 16 — 18 · 성인 4명</span>
+    <span class="eyebrow">🇭🇰 Hong Kong · 2026. 10. 16 — 18 · 성인 4명</span>
     <h1 style="margin-top:12px">홍콩 3일</h1>
-    <p class="lead">숙소는 <a class="pl" href="https://www.google.com/maps/search/?api=1&query=The+Harbourview+Hong+Kong+Wan+Chai" target="_blank" rel="noopener">The Harbourview</a>(YMCA 하버뷰, 완차이 컨벤션센터 옆). 호텔 앞 <b>완차이 페리 선착장(도보 5분)</b>에서 스타페리로 침사추이까지 10분, 센트럴은 택시 10분·트램 15분, 오션파크도 MTR로 15분이라 이동 시간이 짧습니다.</p>
+    <p class="lead">🏨 숙소는 <a class="pl" href="https://www.google.com/maps/search/?api=1&query=The+Harbourview+Hong+Kong+Wan+Chai" target="_blank" rel="noopener">The Harbourview</a>(YMCA 하버뷰, 완차이 컨벤션센터 옆). 호텔 앞 <b>완차이 페리 선착장(도보 5분)</b>에서 스타페리로 침사추이까지 10분, 센트럴은 택시 10분·트램 15분, 오션파크도 MTR로 15분이라 이동 시간이 짧습니다.</p>
     <div class="route">
-      <div class="card"><div class="n">10<small>분</small></div><div class="l">침사추이 · 스타페리</div></div>
-      <div class="card"><div class="n">10<small>분</small></div><div class="l">센트럴 · 택시 (트램 15분)</div></div>
-      <div class="card"><div class="n">15<small>분</small></div><div class="l">오션파크 · MTR</div></div>
-      <div class="card"><div class="n">35<small>분</small></div><div class="l">공항 · AEL 24분 + 택시 10분</div></div>
+      <div class="card"><div class="n">10<small>분</small></div><div class="l">⛴️ 침사추이 · 스타페리</div></div>
+      <div class="card"><div class="n">10<small>분</small></div><div class="l">🚕 센트럴 · 택시 (🚋 트램 15분)</div></div>
+      <div class="card"><div class="n">15<small>분</small></div><div class="l">🚇 오션파크 · MTR</div></div>
+      <div class="card"><div class="n">35<small>분</small></div><div class="l">✈️ 공항 · AEL 24분 + 택시 10분</div></div>
     </div>
   </div>
 </header>
 
 <section class="band">
   <div class="wrap">
-    <div class="day-head"><h2>Day 1 · 완차이 → 센트럴 → 피크</h2><span class="d">금 10/16</span></div>
+    <div class="day-head"><h2>📅 Day 1 · 완차이 → 센트럴 → 피크</h2><span class="d">금 10/16</span></div>
+    <div class="map" id="map1"></div><p class="mapfb" id="fb1">지도를 불러오지 못했습니다 — 아래 각 장소의 링크로 여세요.</p>
+    <p class="mapnote">📍 핀 번호 = 아래 순서. H가 호텔. 핀을 누르면 구글맵으로 열립니다.</p>
     <div class="tl">
       <div class="row"><div class="t">10:50</div><div>
-        <div class="h">홍콩 도착 → AEL 공항철도 4인 그룹권 → 홍콩역 24분 → 택시 10분 (HK$60)</div>
+        <div class="h">✈️ 홍콩 도착 → AEL 공항철도 4인 그룹권 → 홍콩역 24분 → 택시 10분 (HK$60)</div>
         <div class="m">Klook 사전구매가 현장보다 쌈. 또는 공항→호텔 택시 1대 HK$350~400 — 캐리어 4개면 빡빡, 7인승 앱 호출 권장.</div></div></div>
       <div class="row"><div class="t">12:45</div><div>
-        <div class="h">호텔 짐 맡기기</div>
+        <div class="h">🏨 호텔 짐 맡기기</div>
         <div class="m">체크인 전이면 프런트에.</div></div></div>
       <div class="row"><div class="t">13:15</div><div>
-        <div class="h">점심 · 도보 12분 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Kam's+Roast+Goose+Hennessy+Road+Wan+Chai" target="_blank" rel="noopener">Kam’s Roast Goose</a> <span class="rt">4.1 · 리뷰 6,366</span></div>
-        <div class="m">미쉐린 1스타 거위구이, Hennessy Rd. 예약 불가·번호표 대기 20~60분. 4명이면 <b>거위 반 마리 + 차슈 + 새우완탕면</b>.</div>
-        <div class="alt">대안 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Joy+Hing+Roasted+Meat+Wan+Chai" target="_blank" rel="noopener">Joy Hing</a> <span class="rt">3.8</span> 차슈 노포, 대기 짧음.</div></div></div>
+        <div class="h"><span class="np">1</span>🥟 점심 · 도보 12분 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Lei+Garden+CNT+Tower+338+Hennessy+Road+Wan+Chai" target="_blank" rel="noopener">Lei Garden 완차이점</a> 딤섬<span class="tag tag-solid">🔒 예약</span></div>
+        <div class="m">광둥 정통 딤섬 점심. 4명 예약 가능 — 도착 직후 대기 없이 앉는 게 장점. CNT Tower, Hennessy Rd.</div>
+        <div class="alt">대안 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Dim+Dim+Sum+Wan+Chai+Hong+Kong" target="_blank" rel="noopener">Dim Dim Sum</a> 가성비 딤섬, 예약 불가·대기 있을 수 있음. (지도 핀 없음 · 검색 링크)</div></div></div>
       <div class="row"><div class="t">14:45</div><div>
-        <div class="h">Johnston Rd에서 트램(딩딩) 타고 센트럴로 15분</div>
+        <div class="h"><span class="np">2</span>🚋 Johnston Rd에서 트램(딩딩) 타고 센트럴로 15분</div>
         <div class="m">2층 앞자리. HK$3 옥토퍼스.</div></div></div>
       <div class="row"><div class="t">15:15</div><div>
-        <div class="h">미드레벨 에스컬레이터 → 타이쿤 → PMQ → 만모사원 → <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Tai+Cheong+Bakery+Central+Hong+Kong" target="_blank" rel="noopener">Tai Cheong Bakery</a> <span class="rt">3.9</span> 에그타르트</div></div></div>
+        <div class="h"><span class="np">3</span>🚶 미드레벨 에스컬레이터 → 타이쿤 → PMQ → 만모사원 → <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Tai+Cheong+Bakery+Central+Hong+Kong" target="_blank" rel="noopener">Tai Cheong Bakery</a> <span class="rt">⭐3.9</span> 에그타르트</div></div></div>
       <div class="row"><div class="t">17:00</div><div>
-        <div class="h">피크트램(센트럴 Garden Rd 정류장) → 피크 · 일몰 18:05 → 야경<span class="tag tag-accent">사전예매</span></div>
+        <div class="h"><span class="np">4</span>🚠 피크트램(센트럴 Garden Rd 정류장) → 피크 · 🌇 일몰 18:05 → 야경<span class="tag tag-accent">🎫 사전예매</span></div>
         <div class="m">4인 사전예매.</div></div></div>
       <div class="row"><div class="t">19:45</div><div>
-        <div class="h">저녁 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Mott+32+Hong+Kong" target="_blank" rel="noopener">Mott 32</a> <span class="rt">4.4 · 리뷰 2,442</span><span class="tag tag-solid">예약</span></div>
-        <div class="m">북경오리 1마리(4명 적정) + 이베리코 차슈. <a class="tel" href="tel:+85228858688">+852 2885 8688</a></div>
-        <div class="alt">대안 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Ho+Lee+Fook+Soho+Hong+Kong" target="_blank" rel="noopener">Ho Lee Fook</a> <span class="rt">4.3</span> 소호 · 예약 필요.</div></div></div>
+        <div class="h"><span class="np">5</span>🍽️ 저녁 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Mott+32+Hong+Kong" target="_blank" rel="noopener">Mott 32</a> <span class="rt">⭐4.4 · 2,442</span><span class="tag tag-solid">🔒 예약</span></div>
+        <div class="m">🦆 북경오리 1마리(4명 적정) + 이베리코 차슈. 📞 <a class="tel" href="tel:+85228858688">+852 2885 8688</a></div>
+        <div class="alt">대안 🔒 <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Ho+Lee+Fook+Soho+Hong+Kong" target="_blank" rel="noopener">Ho Lee Fook</a> <span class="rt">⭐4.3</span> 소호</div></div></div>
       <div class="row"><div class="t">22:00</div><div>
-        <div class="h">란콰이퐁 한 잔 → 야식 <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Kau+Kee+Restaurant+Gough+Street+Hong+Kong" target="_blank" rel="noopener">Kau Kee</a> <span class="rt">3.6</span> 우육면 → 택시 10분 호텔</div>
+        <div class="h"><span class="np">6</span>🍺 란콰이퐁 한 잔 → <span class="np">7</span>🍜 야식 <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Kau+Kee+Restaurant+Gough+Street+Hong+Kong" target="_blank" rel="noopener">Kau Kee</a> <span class="rt">⭐3.6</span> 우육면 → 🚕 택시 10분 호텔</div>
         <div class="m">Kau Kee 22:30 마감. <b>일요일 휴무라 이날만</b> 갈 수 있음.</div></div></div>
     </div>
   </div>
@@ -107,98 +119,102 @@
 
 <section class="band">
   <div class="wrap">
-    <div class="day-head"><h2>Day 2 · 카오룽 하루 + 할로윈 첫 주말</h2><span class="d">토 10/17</span></div>
+    <div class="day-head"><h2>📅 Day 2 · 카오룽 하루 + 🎃 할로윈 첫 주말</h2><span class="d">토 10/17</span></div>
+    <div class="map" id="map2"></div><p class="mapfb" id="fb2">지도를 불러오지 못했습니다 — 아래 각 장소의 링크로 여세요.</p>
+    <p class="mapnote">📍 핀 번호 = 아래 순서. H가 호텔, 1은 아침 대안.</p>
     <div class="tl">
       <div class="row"><div class="t">08:00</div><div>
-        <div class="h">아침</div>
-        <div class="m">호텔 조식(리뷰에 "저렴하고 괜찮다"로 자주 언급) 또는 도보 10분 <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Capital+Cafe+Wan+Chai" target="_blank" rel="noopener">Capital Cafe</a> <span class="rt">3.8 · 리뷰 2,262</span> — 연예인 사진 가득한 차찬텡, 스크램블에그 토스트.</div></div></div>
+        <div class="h">🍳 아침</div>
+        <div class="m">호텔 조식(리뷰에 "저렴하고 괜찮다"로 자주 언급) 또는 <span class="np">1</span>도보 10분 <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Capital+Cafe+Wan+Chai" target="_blank" rel="noopener">Capital Cafe</a> <span class="rt">⭐3.8 · 2,262</span> — 연예인 사진 가득한 차찬텡, 스크램블에그 토스트.</div></div></div>
       <div class="row"><div class="t">09:15</div><div>
-        <div class="h">완차이 선착장 → 스타페리 → 침사추이 10분 (HK$5)</div>
+        <div class="h"><span class="np">2</span>⛴️ 완차이 선착장 → 스타페리 → <span class="np">3</span>침사추이 10분 (HK$5)</div>
         <div class="m">호텔에서 선착장 도보 5분.</div></div></div>
       <div class="row"><div class="t">09:30</div><div>
-        <div class="h">침사추이 해변 산책 → 시계탑 → MTR 몽콕</div></div></div>
+        <div class="h">🌊 침사추이 해변 산책 → <span class="np">4</span>시계탑 → 🚇 MTR 몽콕</div></div></div>
       <div class="row"><div class="t">10:30</div><div>
-        <div class="h">몽콕 레이디스마켓 · 스니커스트리트 · 금붕어거리</div>
-        <div class="m">현금 준비.</div></div></div>
+        <div class="h"><span class="np">5</span>🛍️ 몽콕 레이디스마켓 · 스니커스트리트 · 금붕어거리</div>
+        <div class="m">💵 현금 준비.</div></div></div>
       <div class="row"><div class="t">12:00</div><div>
-        <div class="h">점심 오픈런 · MTR 조던 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Mak+Man+Kee+Noodle+Shop+Jordan" target="_blank" rel="noopener">Mak Man Kee</a> <span class="rt">4.1 · 리뷰 3,995</span></div>
+        <div class="h"><span class="np">6</span>🍜 점심 오픈런 · MTR 조던 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Mak+Man+Kee+Noodle+Shop+Jordan" target="_blank" rel="noopener">Mak Man Kee</a> <span class="rt">⭐4.1 · 3,995</span></div>
         <div class="m">주윤발 단골 완탕면·족발국수, 미쉐린 빕구르망. <b>12시 오픈 직후 입장</b>.</div></div></div>
       <div class="row"><div class="t">12:45</div><div>
-        <div class="h">후식 · 바로 옆집 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Australia+Dairy+Company+Jordan" target="_blank" rel="noopener">Australia Dairy Company</a> <span class="rt">4.0</span></div>
+        <div class="h"><span class="np">7</span>🍮 후식 · 바로 옆집 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Australia+Dairy+Company+Jordan" target="_blank" rel="noopener">Australia Dairy Company</a> <span class="rt">⭐4.0</span></div>
         <div class="m">우유푸딩 · 밀크티.</div></div></div>
       <div class="row"><div class="t">14:00</div><div>
-        <div class="h">템플스트리트 → 침사추이 하버시티 · K11 Musea 실내 쇼핑</div>
-        <div class="m">한낮 더위 피하기.</div></div></div>
+        <div class="h"><span class="np">8</span>템플스트리트 → <span class="np">9</span>🛒 침사추이 하버시티 · K11 Musea 실내 쇼핑</div>
+        <div class="m">☀️ 한낮 더위 피하기.</div></div></div>
       <div class="row"><div class="t">16:30</div><div>
-        <div class="h">간식 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Mak's+Noodle+Lock+Road+Tsim+Sha+Tsui" target="_blank" rel="noopener">Mak’s Noodle</a> <span class="rt">3.9</span> Lock Rd 완탕면, 또는 K11 카페</div></div></div>
+        <div class="h"><span class="np">10</span>🥢 간식 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Mak's+Noodle+Lock+Road+Tsim+Sha+Tsui" target="_blank" rel="noopener">Mak’s Noodle</a> <span class="rt">⭐3.9</span> Lock Rd 완탕면, 또는 K11 카페</div></div></div>
       <div class="row"><div class="t">19:00</div><div>
-        <div class="h">저녁 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Hutong+Restaurant+Tsim+Sha+Tsui" target="_blank" rel="noopener">Hutong</a> <span class="rt">4.3 · 리뷰 1,411</span><span class="tag tag-solid">예약</span></div>
-        <div class="m">18층 하버뷰. <b>창가석이면 자리에서 20:00 심포니 오브 라이츠</b>. <a class="tel" href="tel:+85234288342">+852 3428 8342</a></div>
-        <div class="alt">대안 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Spring+Deer+Restaurant+Tsim+Sha+Tsui" target="_blank" rel="noopener">Spring Deer</a> <span class="rt">4.0</span> 전화예약만 <a class="tel" href="tel:+85223664012">+852 2366 4012</a></div></div></div>
+        <div class="h"><span class="np">11</span>🍽️ 저녁 — <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Hutong+Restaurant+Tsim+Sha+Tsui" target="_blank" rel="noopener">Hutong</a> <span class="rt">⭐4.3 · 1,411</span><span class="tag tag-solid">🔒 예약</span></div>
+        <div class="m">18층 하버뷰. <b>창가석이면 자리에서 20:00 ✨ 심포니 오브 라이츠</b>. 📞 <a class="tel" href="tel:+85234288342">+852 3428 8342</a></div>
+        <div class="alt">대안 🔒 <span class="np">12</span><a class="pl" href="https://www.google.com/maps/search/?api=1&query=Spring+Deer+Restaurant+Tsim+Sha+Tsui" target="_blank" rel="noopener">Spring Deer</a> <span class="rt">⭐4.0</span> 전화예약만 📞 <a class="tel" href="tel:+85223664012">+852 2366 4012</a></div></div></div>
       <div class="row"><div class="t">20:45</div><div>
-        <div class="h">스타페리 침사추이 → 완차이 호텔 복귀, 또는 택시 10분 센트럴 차터로드 할로윈 파티 · 란콰이퐁</div>
+        <div class="h">⛴️ 스타페리 침사추이 → 완차이 호텔 복귀, 또는 🚕 택시 10분 센트럴 차터로드 🎃 할로윈 파티 · 란콰이퐁</div>
         <div class="m">페리 막배 23시경. 코스튬 소품 있으면 파티트램 무료.</div></div></div>
     </div>
     <div class="note">
-      <div class="card"><h3>스릴 선호 시 Day 2 대안 — 오션파크</h3><p>호텔 → MTR 애드미럴티 환승 → 오션파크역 15분. <b>14:00부터 오션파크 할로윈 페스트</b>(귀신의 집 4곳) → 밤 폐장까지 → 택시로 센트럴 파티. 이 경우 <b>Hutong 예약은 취소</b>.</p></div>
-      <div class="card"><h3>추가 옵션 — Fine Art Asia 2026</h3><p>호텔 바로 옆 컨벤션센터, 10/15~18. 미술 관심 있으면 Day 1 짐 맡기고 1시간.</p></div>
+      <div class="card"><h3>🎢 스릴 선호 시 Day 2 대안 — 오션파크</h3><p>호텔 → MTR 애드미럴티 환승 → <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Ocean+Park+Hong+Kong" target="_blank" rel="noopener">오션파크역</a> 15분. <b>14:00부터 오션파크 할로윈 페스트</b>(귀신의 집 4곳) → 밤 폐장까지 → 택시로 센트럴 파티. 이 경우 <b>Hutong 예약은 취소</b>.</p></div>
+      <div class="card"><h3>🖼️ 추가 옵션 — Fine Art Asia 2026</h3><p>호텔 바로 옆 컨벤션센터, 10/15~18. 미술 관심 있으면 Day 1 짐 맡기고 1시간.</p></div>
     </div>
   </div>
 </section>
 
 <section class="band">
   <div class="wrap">
-    <div class="day-head"><h2>Day 3 · 출국</h2><span class="d">일 10/18</span></div>
+    <div class="day-head"><h2>📅 Day 3 · 출국</h2><span class="d">일 10/18</span></div>
     <div class="tl">
       <div class="row"><div class="t">05:15</div><div>
-        <div class="h">기상 · 호텔에 전날 테이크아웃 조식 박스 요청</div>
+        <div class="h">⏰ 기상 · 호텔에 전날 테이크아웃 조식 박스 요청</div>
         <div class="m">새벽이라 식당 없음.</div></div></div>
       <div class="row"><div class="t">05:40</div><div>
-        <div class="h">호텔 → 공항 · 7인승 택시/Uber 1대 35~40분 (HK$400~450)</div>
+        <div class="h">🚕 호텔 → 공항 · 7인승 택시/Uber 1대 35~40분 (HK$400~450)</div>
         <div class="m">전날 밤 앱으로 예약, 또는 일반 택시 2대.</div></div></div>
       <div class="row"><div class="t">06:30</div><div>
-        <div class="h">공항 도착 → 09:00 출발</div>
-        <div class="m">배고프면 공항 <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Tsui+Wah+Hong+Kong+International+Airport" target="_blank" rel="noopener">Tsui Wah</a> <span class="rt">3.5</span>.</div></div></div>
+        <div class="h">✈️ 공항 도착 → 09:00 출발</div>
+        <div class="m">배고프면 공항 <a class="pl" href="https://www.google.com/maps/search/?api=1&query=Tsui+Wah+Hong+Kong+International+Airport" target="_blank" rel="noopener">Tsui Wah</a> <span class="rt">⭐3.5</span>.</div></div></div>
     </div>
     <div class="note">
-      <div class="card"><h3>토요일 홍콩역 인타운 체크인</h3><p>AEL 승차권 보유 + 항공사 지원 시 출발 1일 전~90분 전까지 짐을 미리 부칠 수 있음. 몽콕 가는 길이 아니라 동선이 애매하니, 짐이 많으면 <b>Day 1 홍콩역 도착 직후 "내일 체크인 가능한지"만 확인</b>해 둘 것.</p></div>
+      <div class="card"><h3>💡 토요일 홍콩역 인타운 체크인</h3><p>AEL 승차권 보유 + 항공사 지원 시 출발 1일 전~90분 전까지 짐을 미리 부칠 수 있음. 몽콕 가는 길이 아니라 동선이 애매하니, 짐이 많으면 <b>Day 1 홍콩역 도착 직후 "내일 체크인 가능한지"만 확인</b>해 둘 것.</p></div>
     </div>
   </div>
 </section>
 
 <section class="band">
   <div class="wrap">
-    <div class="day-head"><h2>지금 예약·준비할 것</h2><span class="d">4인 기준 · 체크는 이 기기에만 저장</span></div>
+    <div class="day-head"><h2>📋 지금 예약·준비할 것</h2><span class="d">4인 기준 · 체크는 이 기기에만 저장</span></div>
     <div class="chk" id="chk">
-      <label><input type="checkbox" data-k="mott"><span><div class="w">Mott 32 · 금 19:45 · 4명</div><div class="how">홈페이지(mott32.com) 예약 + 북경오리 사전 주문 요청</div></span><span class="pri"><span class="tag tag-solid">오늘</span></span></label>
-      <label><input type="checkbox" data-k="hutong"><span><div class="w">Hutong · 토 19:00 · 4명 · 창가석(window table)</div><div class="how">홈페이지(hutong.com.hk) 예약 + 북경오리 사전 주문</div></span><span class="pri"><span class="tag tag-solid">오늘</span></span></label>
-      <label><input type="checkbox" data-k="peak"><span><div class="w">피크트램 · 금 17:00~17:30 · 4매</div><div class="how">공식 사이트 / Klook. 연휴 주말이라 매진 빠름</div></span><span class="pri"><span class="tag tag-solid">오늘</span></span></label>
-      <label><input type="checkbox" data-k="ael"><span><div class="w">AEL 4인 그룹권</div><div class="how">Klook / Trip.com 사전구매 — 현장가보다 저렴, QR 입장</div></span><span class="pri"><span class="tag tag-accent">이번 주</span></span></label>
-      <label><input type="checkbox" data-k="ocean"><span><div class="w">(오션파크 선택 시) 할로윈 페스트 입장권 4매</div><div class="how">공식 사이트</div></span><span class="pri"><span class="tag tag-accent">결정되면</span></span></label>
-      <label><input type="checkbox" data-k="octo"><span><div class="w">옥토퍼스 · 4명 각자 Apple Wallet 발급·충전</div><div class="how">출발 전</div></span><span class="pri"><span class="tag tag-accent">이번 주</span></span></label>
-      <label><input type="checkbox" data-k="taxi"><span><div class="w">Day 3 새벽 7인승 택시/Uber 예약</div><div class="how">토요일 밤 앱으로</div></span><span class="pri"><span class="tag">현지</span></span></label>
-      <label><input type="checkbox" data-k="walkin"><span><div class="w">Kam’s · Mak Man Kee · Kau Kee</div><div class="how">예약 불가 — 오픈 시간 맞춰 가기만</div></span><span class="pri"><span class="tag">—</span></span></label>
-      <label><input type="checkbox" data-k="esim"><span><div class="w">eSIM 4명 · HKO 날씨 앱</div><div class="how">출발 전</div></span><span class="pri"><span class="tag">출발 전</span></span></label>
+      <label><input type="checkbox" data-k="lei"><span><div class="w">🔒 Lei Garden 완차이 · 금 13:15 · 4명</div><div class="how">전화 또는 홈페이지 예약 — 점심 딤섬</div></span><span class="pri"><span class="tag tag-solid">🔴 오늘</span></span></label>
+      <label><input type="checkbox" data-k="mott"><span><div class="w">🔒 Mott 32 · 금 19:45 · 4명</div><div class="how">홈페이지(mott32.com) 예약 + 북경오리 사전 주문 요청</div></span><span class="pri"><span class="tag tag-solid">🔴 오늘</span></span></label>
+      <label><input type="checkbox" data-k="hutong"><span><div class="w">🔒 Hutong · 토 19:00 · 4명 · 창가석(window table)</div><div class="how">홈페이지(hutong.com.hk) 예약 + 북경오리 사전 주문</div></span><span class="pri"><span class="tag tag-solid">🔴 오늘</span></span></label>
+      <label><input type="checkbox" data-k="peak"><span><div class="w">🎫 피크트램 · 금 17:00~17:30 · 4매</div><div class="how">공식 사이트 / Klook. 연휴 주말이라 매진 빠름</div></span><span class="pri"><span class="tag tag-solid">🔴 오늘</span></span></label>
+      <label><input type="checkbox" data-k="ael"><span><div class="w">🚆 AEL 4인 그룹권</div><div class="how">Klook / Trip.com 사전구매 — 현장가보다 저렴, QR 입장</div></span><span class="pri"><span class="tag tag-accent">🟡 이번 주</span></span></label>
+      <label><input type="checkbox" data-k="ocean"><span><div class="w">🎢 (오션파크 선택 시) 할로윈 페스트 입장권 4매</div><div class="how">공식 사이트</div></span><span class="pri"><span class="tag tag-accent">🟡 결정되면</span></span></label>
+      <label><input type="checkbox" data-k="octo"><span><div class="w">💳 옥토퍼스 · 4명 각자 Apple Wallet 발급·충전</div><div class="how">출발 전</div></span><span class="pri"><span class="tag tag-accent">🟡 이번 주</span></span></label>
+      <label><input type="checkbox" data-k="taxi"><span><div class="w">🚕 Day 3 새벽 7인승 택시/Uber 예약</div><div class="how">토요일 밤 앱으로</div></span><span class="pri"><span class="tag">🟢 현지</span></span></label>
+      <label><input type="checkbox" data-k="walkin"><span><div class="w">🍜 Mak Man Kee · Kau Kee</div><div class="how">예약 불가 — 오픈 시간 맞춰 가기만</div></span><span class="pri"><span class="tag">—</span></span></label>
+      <label><input type="checkbox" data-k="esim"><span><div class="w">📱 eSIM 4명 · HKO 날씨 앱</div><div class="how">출발 전</div></span><span class="pri"><span class="tag">🟢 출발 전</span></span></label>
     </div>
   </div>
 </section>
 
 <section class="band band-last">
   <div class="wrap">
-    <div class="day-head"><h2>4명 팁</h2></div>
+    <div class="day-head"><h2>👥 4명 팁</h2></div>
     <div class="tips">
-      <p>홍콩 빨간 택시는 승객 <b>4명까지 딱 맞음</b>(5명 차량도 있음).</p>
-      <p>식당은 4명이면 Kam’s · Mak Man Kee 같은 노포에서 <b>합석 없이 한 테이블</b> 받을 확률이 높고, 북경오리는 4명이 한 마리를 나누기에 가장 좋은 인원.</p>
+      <p>🚕 홍콩 빨간 택시는 승객 <b>4명까지 딱 맞음</b>(5명 차량도 있음).</p>
+      <p>🍽️ 식당은 4명이면 Mak Man Kee 같은 노포에서 <b>합석 없이 한 테이블</b> 받을 확률이 높고, 북경오리는 4명이 한 마리를 나누기에 가장 좋은 인원.</p>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    2026-10-11 기준으로 정리한 계획입니다. 평점·리뷰 수·가격·영업시간은 정리 시점 값이라 현장에서 바뀔 수 있고, 지도 링크는 구글맵 검색으로 연결됩니다. 예약 가능 여부는 각 식당 홈페이지·전화로 확인하세요.
+    2026-10-11 기준으로 정리한 계획입니다. 평점·리뷰 수·가격·영업시간은 정리 시점 값이라 현장에서 바뀔 수 있고, 링크는 구글맵 검색으로 연결됩니다. 지도 핀 좌표는 OpenStreetMap 지오코딩으로 받아 동네를 대조한 것이라 몇십 m 오차가 있을 수 있습니다 — 입구는 구글맵으로 확인하세요. Lei Garden·Dim Dim Sum은 평점을 확인하지 못해 붙이지 않았습니다.
   </div>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
 (function(){
   var KEY = 'hk2026_chk', done = {};
@@ -214,6 +230,23 @@
       try { localStorage.setItem(KEY, JSON.stringify(done)); } catch(e){}
     });
   }
+})();
+(function(){
+  var P = {"d1": [{"n": "H", "label": "The Harbourview (호텔)", "lat": 22.2802, "lon": 114.17111, "g": "https://www.google.com/maps/search/?api=1&query=The+Harbourview+Hong+Kong+Wan+Chai", "h": true}, {"n": 1, "label": "Lei Garden 완차이 · 점심", "lat": 22.27827, "lon": 114.17869, "g": "https://www.google.com/maps/search/?api=1&query=Lei+Garden+CNT+Tower+Wan+Chai", "h": false}, {"n": 2, "label": "Johnston Rd 트램 승차", "lat": 22.27784, "lon": 114.17687, "g": "https://www.google.com/maps/search/?api=1&query=Johnston+Road+Wan+Chai+tram", "h": false}, {"n": 3, "label": "Tai Cheong Bakery", "lat": 22.28263, "lon": 114.15358, "g": "https://www.google.com/maps/search/?api=1&query=Tai+Cheong+Bakery+Central+Hong+Kong", "h": false}, {"n": 4, "label": "피크트램 Garden Rd 정류장", "lat": 22.2777, "lon": 114.15936, "g": "https://www.google.com/maps/search/?api=1&query=Peak+Tram+Lower+Terminus+Garden+Road", "h": false}, {"n": 5, "label": "Mott 32 · 저녁", "lat": 22.28034, "lon": 114.15915, "g": "https://www.google.com/maps/search/?api=1&query=Mott+32+Hong+Kong", "h": false}, {"n": 6, "label": "란콰이퐁", "lat": 22.28084, "lon": 114.15538, "g": "https://www.google.com/maps/search/?api=1&query=Lan+Kwai+Fong+Hong+Kong", "h": false}, {"n": 7, "label": "Kau Kee · 야식", "lat": 22.28423, "lon": 114.15254, "g": "https://www.google.com/maps/search/?api=1&query=Kau+Kee+Restaurant+Gough+Street", "h": false}], "d2": [{"n": "H", "label": "The Harbourview (호텔)", "lat": 22.2802, "lon": 114.17111, "g": "https://www.google.com/maps/search/?api=1&query=The+Harbourview+Hong+Kong+Wan+Chai", "h": true}, {"n": 1, "label": "Capital Cafe · 아침 대안", "lat": 22.27762, "lon": 114.17723, "g": "https://www.google.com/maps/search/?api=1&query=Capital+Cafe+Wan+Chai", "h": false}, {"n": 2, "label": "완차이 페리 선착장", "lat": 22.2821, "lon": 114.17603, "g": "https://www.google.com/maps/search/?api=1&query=Wan+Chai+Ferry+Pier", "h": false}, {"n": 3, "label": "침사추이 선착장", "lat": 22.29354, "lon": 114.16799, "g": "https://www.google.com/maps/search/?api=1&query=Tsim+Sha+Tsui+Star+Ferry+Pier", "h": false}, {"n": 4, "label": "시계탑", "lat": 22.29359, "lon": 114.16954, "g": "https://www.google.com/maps/search/?api=1&query=Clock+Tower+Tsim+Sha+Tsui", "h": false}, {"n": 5, "label": "몽콕 레이디스마켓", "lat": 22.31752, "lon": 114.17093, "g": "https://www.google.com/maps/search/?api=1&query=Ladies+Market+Mong+Kok", "h": false}, {"n": 6, "label": "Mak Man Kee · 점심", "lat": 22.30468, "lon": 114.17053, "g": "https://www.google.com/maps/search/?api=1&query=Mak+Man+Kee+Noodle+Shop+Jordan", "h": false}, {"n": 7, "label": "Australia Dairy Company", "lat": 22.30461, "lon": 114.17059, "g": "https://www.google.com/maps/search/?api=1&query=Australia+Dairy+Company+Jordan", "h": false}, {"n": 8, "label": "템플스트리트", "lat": 22.3064, "lon": 114.16997, "g": "https://www.google.com/maps/search/?api=1&query=Temple+Street+Night+Market", "h": false}, {"n": 9, "label": "K11 Musea", "lat": 22.29459, "lon": 114.17495, "g": "https://www.google.com/maps/search/?api=1&query=K11+Musea+Hong+Kong", "h": false}, {"n": 10, "label": "Mak’s Noodle · 간식", "lat": 22.29729, "lon": 114.17149, "g": "https://www.google.com/maps/search/?api=1&query=Mak's+Noodle+Lock+Road+Tsim+Sha+Tsui", "h": false}, {"n": 11, "label": "Hutong · 저녁", "lat": 22.29532, "lon": 114.17342, "g": "https://www.google.com/maps/search/?api=1&query=Hutong+Restaurant+Tsim+Sha+Tsui", "h": false}, {"n": 12, "label": "Spring Deer · 저녁 대안", "lat": 22.29757, "lon": 114.17696, "g": "https://www.google.com/maps/search/?api=1&query=Spring+Deer+Restaurant+Tsim+Sha+Tsui", "h": false}]};
+  function show(id){ var f = document.getElementById(id); if (f) f.style.display = 'block'; }
+  if (typeof L === 'undefined') { show('fb1'); show('fb2'); return; }
+  function mk(id, pts){
+    var m = L.map(id, { scrollWheelZoom: false });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(m);
+    var b = [];
+    pts.forEach(function(p){
+      var ll = [p.lat, p.lon]; b.push(ll);
+      L.marker(ll, { icon: L.divIcon({ className: 'pin' + (p.h ? ' pin-h' : ''), html: String(p.n), iconSize: [26,26], iconAnchor: [13,13], popupAnchor: [0,-10] }) })
+        .addTo(m).bindPopup('<b>' + p.label + '</b><br><a href="' + p.g + '" target="_blank" rel="noopener">📍 구글맵에서 열기</a>');
+    });
+    m.fitBounds(b, { padding: [28, 28] });
+  }
+  try { mk('map1', P.d1); mk('map2', P.d2); } catch(e) { show('fb1'); show('fb2'); }
 })();
 </script>
 </body>
