@@ -334,6 +334,18 @@
   .m-tm td.v { font-weight: 700; font-variant-numeric: tabular-nums; }
   .m-tm td.g { color: var(--ink-soft); white-space: nowrap; text-align: right; }
   .m-tm .tm-note { font-size: 12px; color: #767677; padding: 9px 13px; background: #FFFFFF; border-top: 1px solid var(--line); line-height: 1.5; }
+  .exb { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; -webkit-tap-highlight-color: transparent; }
+  .exb::after { content: ' ▸'; font-size: 10px; color: var(--muted); font-weight: 400; }
+  .lb { position: fixed; inset: 0; z-index: 90; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(60,60,60,.72); }
+  .lb.open { display: flex; animation: fade .15s ease; }
+  .lb-card { position: relative; background: #fff; width: 100%; max-width: 440px; max-height: 88vh; overflow-y: auto; padding: 16px 16px 14px; box-shadow: 0 8px 32px rgba(0,0,0,.35); }
+  .lb-x { position: absolute; top: 4px; right: 6px; width: 40px; height: 40px; border: 0; background: none; font-size: 26px; line-height: 1; color: #000; cursor: pointer; }
+  .lb-name { font-size: 16px; font-weight: 800; padding-right: 36px; margin: 0 0 10px; }
+  .lb-img { display: block; width: 100%; height: auto; aspect-ratio: 3/2; object-fit: contain; background: #F4F4F4; }
+  .lb-img[hidden] { display: none; }
+  .lb-cue { font-size: 13px; line-height: 1.55; margin: 10px 0 0; color: #000; }
+  .lb-src { font-size: 11px; color: #767677; margin: 6px 0 0; line-height: 1.45; }
+  .lb-yt { display: block; margin-top: 12px; padding: 11px; text-align: center; font-size: 13px; font-weight: 700; background: #000; color: #fff; text-decoration: none; }
   .m-routine li:not(.must) b { color: var(--ink-soft); font-weight: 600; }
   .m-routine li.must b { color: var(--ink); }
   .m-routine li .st { font-style: normal; color: var(--red); margin-right: 3px; }
@@ -390,6 +402,16 @@
   </div>
 </div>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbName">
+  <div class="lb-card">
+    <button class="lb-x" id="lbX" aria-label="닫기">×</button>
+    <h3 class="lb-name" id="lbName"></h3>
+    <img class="lb-img" id="lbImg" alt="" hidden>
+    <p class="lb-cue" id="lbCue"></p>
+    <p class="lb-src" id="lbSrc"></p>
+    <a class="lb-yt" id="lbYt" target="_blank" rel="noopener">영상으로 보기 (YouTube) ↗</a>
+  </div>
+</div>
 <script>
 /* ========== 설정 ========== */
 const START = '2026-10-12', WEEK0 = '2026-10-12';
@@ -731,14 +753,14 @@ let currentDs = null;
 function stretchBlock(b){
   const must = b.list.filter(x => x[3]).length;
   return '<div class="m-routine"><div class="rt-head"><span>'+b.t+'</span><span class="t">'+b.min+'분 · ★만 '+b.must+'분</span></div><ul>'+
-    b.list.map(x => '<li'+(x[3]?' class="must"':'')+'><b>'+(x[3]?'<i class="st">★</i>':'')+x[0]+'</b> '+x[1]+(x[2] ? '<span class="h">'+x[2]+'</span>' : '')+'</li>').join('')+
+    b.list.map(x => '<li'+(x[3]?' class="must"':'')+'>'+(x[3]?'<i class="st">★</i>':'')+xn(x[0])+' '+x[1]+(x[2] ? '<span class="h">'+x[2]+'</span>' : '')+'</li>').join('')+
     '</ul><div class="rt-note">'+(must < b.list.length ? '시간 없으면 <b>★ '+must+'개만</b> — '+b.must+'분. ' : '')+b.rule+'</div></div>';
 }
 function homeRows(d){
   return d.s4.map(x => {
     const same = EX[x[0]][0] === EX[x[0]][1];
     const rx = d.deload ? two(ALT_RX[x[0]] || x[1]) : (ALT_RX[x[0]] || x[1]);
-    return '<li><b>'+EX[x[0]][1]+'</b> '+(same ? x[1] : rx)+'<span class="h">'+(same ? '그대로' : '대신 · '+EX[x[0]][0])+'</span></li>';
+    return '<li>'+xn(EX[x[0]][1])+' '+(same ? x[1] : rx)+'<span class="h">'+(same ? '그대로' : '대신 · '+EX[x[0]][0])+'</span></li>';
   });
 }
 function openModal(ds){
@@ -756,7 +778,7 @@ function openModal(ds){
   let amTxt;
   if (d.trip) amTxt = d.trip.am[1] || d.lines.join('<br>');
   else if (d.closed) amTxt = '<b>맨몸 '+d.s4.length+'동작</b> · 아래 목록';
-  else if (d.kind === 'str') amTxt = d.s4.map(x => '<b>'+EX[x[0]][0]+'</b> '+x[1]).join('<br>');
+  else if (d.kind === 'str') amTxt = d.s4.map(x => xn(EX[x[0]][0])+' '+x[1]).join('<br>');
   else amTxt = d.lines.join('<br>');
   h += '<div class="slot am"><div class="ic am"></div><div class="body"><div class="when">'+amLabel+'</div><div class="txt">'+amTxt+'</div></div></div>';
   h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.trip ? (d.trip.pm || '—') : d.pm ? (d.hol ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
@@ -808,6 +830,88 @@ const panelWrap = document.getElementById('panelwrap'), paceBtn = document.getEl
 function setPanel(open){ if (open) panelWrap.classList.add('open'); else panelWrap.classList.remove('open'); paceBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
 paceBtn.addEventListener('click', () => setPanel(!panelWrap.classList.contains('open')));
 setPanel(false);   // 초기 상태를 JS가 소유 — 마크업과 어긋나지 않게
+/* ---------- 운동 설명 팝업 · 이미지 free-exercise-db (Unlicense) ---------- */
+const GUIDE = {
+  '밴드 클램쉘':[null,'옆으로 누워 무릎 90도, 발은 붙인 채 위쪽 무릎만 조개처럼 벌리기. 골반이 뒤로 구르지 않게 — 엉덩이 옆(중둔근)이 타는 느낌이면 정답.'],
+  '클램쉘 (밴드 없으면 맨몸)':'밴드 클램쉘',
+  '바벨 힙 쓰러스트':['Barbell_Hip_Thrust','등 윗부분을 벤치에 기대고 바벨을 골반에 얹기. 턱을 당기고, 위에서 엉덩이를 2초 조이기. 허리가 아니라 엉덩이로 올라가기.'],
+  '한 다리 글루트 브리지 · 어깨 소파에':'한 다리 글루트 브리지',
+  '한 다리 글루트 브리지':['Single_Leg_Glute_Bridge','한 발만 딛고 반대 다리는 펴서 든 채 엉덩이 들기. 골반이 한쪽으로 기울지 않게, 위에서 1초.'],
+  '노르딕 컬':[null,'무릎 꿇고 발목을 고정한 뒤, 몸을 일직선으로 유지하며 앞으로 천천히 쓰러지기(3~5초). 못 버티면 손으로 받고 팔 힘으로 되돌아오기 — 내려가는 구간이 핵심.'],
+  '노르딕 컬 · 소파 아래 발 걸고':'노르딕 컬',
+  '코펜하겐 플랭크':[null,'옆으로 누운 사이드 플랭크에서 위쪽 다리를 벤치·의자에 올리고, 아래 다리는 공중에. 골반이 내려가지 않게 — 안쪽 허벅지(내전근)가 타야 한다.'],
+  '한 다리 덤벨 RDL':['Kettlebell_One-Legged_Deadlift','한 다리로 서서 무릎은 살짝만 굽힌 채 엉덩이를 뒤로 밀며 상체를 숙이기. 뒷다리는 일직선으로 뻗고 골반은 바닥과 평행. (사진은 케틀벨 예시 — 덤벨도 동작 동일)'],
+  '한 다리 RDL(맨몸)':'한 다리 덤벨 RDL',
+  '불가리안 스플릿 스쿼트':[null,'뒷발을 벤치·의자에 올리고 앞발은 한 걸음 앞에. 상체를 세운 채 수직으로 내려가 앞무릎이 발끝을 넘지 않게. 앞발 뒤꿈치로 밀어 올라오기.'],
+  '불가리안 스플릿 스쿼트(맨몸)':'불가리안 스플릿 스쿼트',
+  '사이드 플랭크':['Side_Bridge','팔꿈치를 어깨 아래에 두고 머리부터 발까지 일직선. 골반이 처지지 않게 — 한쪽 30~45초.'],
+  '랫풀다운':['Wide-Grip_Lat_Pulldown','가슴을 살짝 내밀고 팔꿈치를 옆구리 쪽으로 끌어내리기. 어깨를 으쓱하지 말고 날개뼈를 아래로.'],
+  '시티드 케이블 로우':['Seated_Cable_Rows','상체는 고정, 팔꿈치를 뒤로 당겨 날개뼈를 모으기. 허리를 젖히며 반동 쓰지 않기.'],
+  '식탁 인버티드 로우 (철봉 있으면 풀업)':'식탁 인버티드 로우',
+  '식탁 인버티드 로우':['Inverted_Row','튼튼한 식탁 아래에 누워 가장자리를 잡고, 몸을 일직선으로 유지한 채 가슴을 식탁 쪽으로 당기기. (사진은 바벨 버전)'],
+  '페이스 풀':['Face_Pull','줄을 얼굴 쪽으로 당기며 팔꿈치를 높게 벌리기. 손은 귀 옆까지, 어깨 뒤쪽이 일하는 느낌.'],
+  '프론 YTW':[null,'엎드려 이마를 바닥에 두고, 팔을 Y→T→W 모양으로 차례로 들어올리기. 엄지가 천장을 향하게, 목에 힘 빼고 날개뼈로.'],
+  '팔로프 프레스':['Pallof_Press','밴드를 옆에서 당기게 세팅하고 가슴 앞에서 팔을 쭉 밀기. 밴드에 몸통이 돌아가지 않게 버티는 것이 목적.'],
+  '플랭크 숄더 탭':[null,'푸시업 자세(또는 팔꿈치 플랭크)에서 한 손씩 반대쪽 어깨를 터치. 골반이 좌우로 흔들리지 않게 발을 넓게.'],
+  '한 다리 카프 레이즈':[null,'계단 끝에 앞꿈치로 서서 한 발로 뒤꿈치를 끝까지 올렸다가 천천히 내리기(3초). 발목이 바깥으로 꺾이지 않게.'],
+  '한 다리 계단 카프 레이즈':'한 다리 카프 레이즈',
+  '밴드 몬스터 워크':['Monster_Walk','무릎 위 또는 발목에 밴드를 걸고 반 스쿼트 자세로 옆·앞으로 걷기. 무릎이 안으로 모이지 않게 — 엉덩이 옆이 타야 한다.'],
+  '데드버그':['Dead_Bug','누워서 팔·다리를 천장으로 든 뒤, 반대쪽 팔·다리를 천천히 내리기. 허리는 바닥에 붙인 채 — 떠오르면 범위를 줄이기.'],
+  '캣카우':['Cat_Stretch','네발 자세에서 등을 둥글게 말았다가(캣) 천천히 가슴을 열어 펴기(카우). 호흡과 같이.'],
+  '힙플렉서 런지':['Kneeling_Hip_Flexor','뒷무릎을 바닥에 대고 엉덩이를 조이며 골반을 앞으로 밀기. 허리를 꺾지 말 것 — 뒷다리 앞쪽 골반이 늘어나야 한다.'],
+  '힙 플렉서 런지 스트레치':'힙플렉서 런지',
+  '햄스트링':['Hamstring_Stretch','누워서 한 다리를 들고 밴드·수건으로 발 앞꿈치를 걸어 당기기. 무릎은 살짝 굽혀도 되고 반대 다리는 바닥에.'],
+  '종아리 · 비복근':['Calf_Stretch_Hands_Against_Wall','벽을 짚고 한 발을 뒤로. 뒤꿈치를 바닥에 붙이고 무릎은 편 채 앞으로 기대기.'],
+  '힙 서클':['Hip_Circles_prone','네발 자세에서 한쪽 무릎을 들어 큰 원 그리기. 골반은 최대한 고정.'],
+  '워킹 런지 + 상체 회전':['Bodyweight_Walking_Lunge','한 걸음씩 런지로 걸어가며 앞다리 쪽으로 상체를 돌리기. 앞무릎 90도, 뒷무릎은 바닥 가까이. (사진은 회전 없는 기본형)'],
+  '폼롤러 · IT밴드':['Iliotibial_Tract-SMR','옆으로 누워 허벅지 바깥쪽을 폼롤러 위에서 천천히 굴리기. 아픈 곳에서 10초 멈추고, 무릎 바로 위는 피하기.'],
+  '폼롤러 · 종아리':['Calves-SMR','폼롤러 위에 종아리를 얹고 엉덩이를 들어 천천히 굴리기. 발끝을 안팎으로 돌려가며.'],
+  '폼롤러 · 대퇴사두':['Quadriceps-SMR','엎드려 허벅지 앞쪽을 폼롤러에 얹고 팔로 몸을 밀어 굴리기.'],
+  '벽 월슬라이드':[null,'등·엉덩이·팔꿈치·손등을 벽에 붙이고 W 자세에서 팔을 위로 쭉 밀어 올리기. 허리가 뜨지 않게, 손등이 벽에서 떨어지지 않는 범위까지.'],
+  '무릎-벽 발목 밀기':[null,'발끝을 벽에서 10cm 띄우고 뒤꿈치를 붙인 채 무릎으로 벽 터치. 안 닿으면 발을 가깝게, 쉬우면 멀리.'],
+  '레그 스윙 앞뒤':[null,'벽을 잡고 서서 한 다리를 앞뒤로 흔들기. 반동 없이 점점 크게, 상체는 세운 채.'],
+  '레그 스윙 옆':[null,'벽을 마주 보고 서서 다리를 좌우로 흔들기. 몸통은 고정, 다리만 움직이기.'],
+  '카프 펌프':[null,'벽을 짚고 뒤꿈치를 빠르게 올렸다가 천천히 내리기. 종아리·발목 예열.'],
+  '하이니 → A스킵':[null,'제자리에서 무릎을 높이 올리며 빠르게 걷기(하이니) → 리듬을 타며 한 발씩 튕기는 A스킵. 발 앞쪽으로 가볍게 착지.'],
+  '종아리 · 가자미근':[null,'비복근 스트레치와 같은 자세에서 뒷무릎을 굽혀 체중을 아래로. 아킬레스건 위쪽이 늘어난다.'],
+  'IT밴드 · 대퇴근막장근':[null,'다리를 교차해 서서, 뒤쪽 다리 반대 방향으로 상체를 기울이며 골반을 옆으로 밀기. 바깥 허벅지·엉덩이 옆이 늘어난다.'],
+  '대퇴사두':[null,'서서 한 발목을 잡고 무릎을 모은 채 골반을 앞으로 밀기. 허리를 꺾지 말 것.'],
+  '90/90 고관절 전환':[null,'앉아서 두 무릎을 90도로 굽혀 한쪽은 앞, 한쪽은 옆으로. 엉덩이를 바닥에 붙인 채 무릎을 좌우로 넘기기.'],
+  '버드독':[null,'네발 자세에서 반대쪽 팔·다리를 동시에 뻗어 3초 유지. 허리가 꺾이거나 골반이 돌아가지 않게.'],
+  '흉추 오픈북':[null,'옆으로 눕고 무릎을 포갠 채, 위쪽 팔을 책 펴듯 뒤로 열어 시선이 손끝을 따라가게. 무릎은 붙여둔 채.'],
+  '사이드라잉 외전':[null,'옆으로 누워 위쪽 다리를 일직선으로 들었다 내리기. 발끝이 앞을 보게, 골반이 뒤로 굴러가지 않게.'],
+  '이상근 · figure-4':[null,'누워서 한쪽 발목을 반대쪽 무릎 위에 걸고, 아래 허벅지를 가슴 쪽으로 당기기. 엉덩이 깊은 곳이 늘어난다.']
+};
+Object.keys(GUIDE).forEach(k => { if (typeof GUIDE[k] === 'string') GUIDE[k] = GUIDE[GUIDE[k]]; });
+function xn(name){ return GUIDE[name] ? '<b class="exb" data-ex="'+name+'">'+name+'</b>' : '<b>'+name+'</b>'; }
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
+let lbTimer = null;
+function openGuide(name){
+  const g = GUIDE[name]; if(!g) return;
+  document.getElementById('lbName').textContent = name;
+  document.getElementById('lbCue').textContent = g[1];
+  document.getElementById('lbYt').href = 'https://www.youtube.com/results?search_query='+encodeURIComponent(name+' 운동 자세');
+  clearInterval(lbTimer);
+  if (g[0]) {
+    const f = ['assets/ex/'+g[0]+'/0.jpg','assets/ex/'+g[0]+'/1.jpg']; let i = 0;
+    lbImg.hidden = false; lbImg.alt = name+' 동작'; lbImg.src = f[0];
+    new Image().src = f[1];
+    lbTimer = setInterval(() => { i ^= 1; lbImg.src = f[i]; }, 900);
+    document.getElementById('lbSrc').textContent = '사진은 시작 ↔ 끝 동작이 번갈아 나옵니다 · 출처 free-exercise-db (퍼블릭 도메인)';
+  } else {
+    lbImg.hidden = true; lbImg.removeAttribute('src');
+    document.getElementById('lbSrc').textContent = '이 동작은 쓸 만한 무료 사진이 없어 설명과 영상 링크로 대신합니다.';
+  }
+  lb.classList.add('open');
+}
+function closeGuide(){ lb.classList.remove('open'); clearInterval(lbTimer); }
+document.addEventListener('click', e => {
+  const t = e.target.closest ? e.target.closest('.exb') : null;
+  if (t) { openGuide(t.getAttribute('data-ex')); return; }
+  if (e.target === lb) closeGuide();
+});
+document.getElementById('lbX').addEventListener('click', closeGuide);
+
 function closeModal(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
 
 /* ---------- drag-to-dismiss (mobile bottom sheet) ---------- */
@@ -867,7 +971,7 @@ function closeModal(){ overlay.classList.remove('open'); document.body.style.ove
 
 document.getElementById('closeBtn').addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if(e.target===overlay) closeModal(); });
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ if(lb.classList.contains('open')) closeGuide(); else closeModal(); } });
 
 /* ---------- 오늘 버튼 ---------- */
 function goToday(){
