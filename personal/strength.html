@@ -438,6 +438,17 @@ const TRIP = {
     lines:['걷기 10분 + 폼롤러 + 모빌리티'], pre:'MOB', post:'ROLL', tag:'trip' }
 };
 
+/* 11/21 아식스 고프리런 하프 — 6주차를 대회 주로 바꾼다. 일요일 롱런 95분은 하프가 대신하므로 만회하지 않는다 */
+const EVT = {
+  '2026-11-16': { label:'하프 대회 주', msg:'토요일 하프를 위해 이번 주는 줄인다. 근력 A는 세트를 2로 줄여 다리 피로를 남기지 않는다.', lite:true },
+  '2026-11-17': { label:'하프 대회 주', msg:'마지막 질세션. 양을 줄여 속도 감각만 남긴다 (4×800m).', run:'I4x800' },
+  '2026-11-18': { label:'하프 대회 주', msg:'이지 30분으로 줄임. 저녁 수영 레슨은 그대로.', run:'E30' },
+  '2026-11-19': { label:'하프 대회 주', msg:'템포 20분은 빼고 이지 + 스트라이드로. 다리를 가볍게 만드는 날.', run:'E30+S4' },
+  '2026-11-20': { label:'하프 대회 주', msg:'근력 B는 건너뜀 (종아리·코어 피로 방지). 대회 전날 셰이크아웃 20분 + 일찍 자기.', run:'E20+S3', pfx:'셰이크아웃 ' },
+  '2026-11-21': { label:'아식스 고프리런 하프', msg:'계획 외 대회가 아니라 이 계획의 6주차 시험. 결과로 10km 기준(BASE_10K)을 갱신한다.', race:true },
+  '2026-11-22': { label:'하프 다음 날', msg:'롱런 95분은 하프가 대신했다 — 만회하지 않는다. 걷기 + 이지 30분, 아프면 걷기만.', run:'E30', pfx:'회복 · ', plain:true }
+};
+
 const PHASES = [
   { id:'base',  from:'2026-10-12', to:'2026-12-06', name:'1단계 · 기초',   color:'#767677' },
   { id:'build', from:'2026-12-07', to:'2027-01-31', name:'2단계 · 빌드',   color:'#000000' },
@@ -644,7 +655,7 @@ function day(s){
     if (raceWeek) { title = '휴식 · 모빌리티'; lines = ['모빌리티 8분 (아래 목록) · 걷기 20분 · 폼롤러는 하지 않음']; kind = 'rest'; tags.push('rest'); }
     else {
       const set = STR[dow===1?'A':'B'][ph.id];
-      s4 = set.map(x => [x[0], deload ? two(x[1]) : x[1]]);
+      s4 = set.map(x => [x[0], (deload || (EVT[s] && EVT[s].lite)) ? two(x[1]) : x[1]]);
       title = dow===1 ? '근력 A · 하체·골반' : '근력 B · 상체·코어·종아리'; kind = 'str'; tags.push('gym');
       fix = dow===1 ? '구례 회고 1~4순위 — 중둔근 · 내전근 · 햄스트링 편심 · 대둔근. IT밴드와 좌우 비대칭의 처방이 이 여섯 동작이다.' : '손 압박 분산(등) · 골반 기준점(코어) · 런 후반 추진(종아리). 몬스터 워크는 중둔근 주 2회째.';
     }
@@ -659,6 +670,20 @@ function day(s){
     else { kind = 'easy'; tags.push('easy'); }
   }
 
+  const V = EVT[s]; let lite = false;
+  if (V) {
+    lite = !!V.lite;
+    if (V.race) {
+      const hm = BASE_10K * Math.pow(21.0975/10, 1.06), hp = hm/21.0975;
+      title = '아식스 고프리런 하프'; kind = 'race'; tags = ['race']; s4 = []; fix = null; tm = []; tmNote = null; km = 21.1;
+      lines = ['<b>21.1km</b> · 지금 10km 기준 예상 <b>'+hms(hm)+'</b> (약 '+pace(hp)+'/km)',
+               '첫 5km는 예상 페이스보다 5~8초 느리게 → 10km 이후 일정하게 → 15km 넘어 여유 있으면 올리기. 서브3 마라톤 연습이니 앞에서 쓰지 않는다',
+               '마라톤 보급 레시피를 시험하는 날 — 롱런에서 쓰는 것 그대로'];
+    } else if (V.run) {
+      const r = expand(V.run); kind = V.plain ? 'easy' : (r.q ? 'q' : 'easy'); tags = [r.q ? 'run' : 'easy']; s4 = []; fix = null;
+      title = (V.pfx || '') + r.t; lines = r.l; km = r.km; tm = r.tm || []; tmNote = r.tmNote || null;
+    }
+  }
   if (kind === 'easy' || kind === 'q' || kind === 'tt') { pre = { t:'러닝 전 · 동적', min:7, must:3, list:DYN, rule:RULE.dynRun }; post = { t:'러닝 후 · 정적', min:10, must:3, list:STATIC, rule:RULE.statRun }; }
   else if (kind === 'long') { pre = { t:'롱런 전 · 동적', min:7, must:3, list:DYN, rule:RULE.dynRun }; post = { t:'롱런 후 · 정적 + 폼롤러', min:14, must:5, list:STATIC.concat(ROLL), rule:RULE.long }; }
   else if (kind === 'race') { pre = { t:'대회 전 · 동적', min:7, must:3, list:DYN, rule:RULE.dynRace }; post = { t:'대회 후', min:10, must:10, list:RACE_POST, rule:RULE.postRace }; }
@@ -677,7 +702,7 @@ function day(s){
   const closed = !!hol && needsGym;
   if (closed) { tags = tags.filter(t => t!=='gym'); tags.unshift('closed'); }
   if (pm && !closed && !hol && !T) tags.push('swim');
-  return { s, ph, week, dow, title, lines, s4, km, tags, kind, fix, hol, closed, deload, ttWeek, pm, raceWeek, tm, tmNote, pre, post, trip: T || null };
+  return { s, ph, week, dow, title, lines, s4, km, tags, kind, fix, hol, closed, deload, lite, evt: V || null, ttWeek, pm, raceWeek, tm, tmNote, pre, post, trip: T || null };
 }
 function weekKm(week){ let k = 0; for (let i=0;i<7;i++){ const d = day(ymd(new Date(pd(WEEK0).getTime() + ((week-1)*7+i)*86400000))); if (d) k += d.km; } return Math.round(k); }
 
@@ -706,7 +731,7 @@ function renderPanel(){
   h += '<div class="row big">이 페이스로 완주하면 <b>'+hms(z.M*42.195)+'</b>'+(z.M*42.195 <= 10800 ? ' · 서브3' : ' · 서브3까지 '+pace(z.M - 10800/42.195)+'/km')+'</div>';
   h += '<table><tr><th>서브3 궤도</th>'+CHECK.map(w => '<th>'+wkDate(w)+' · W'+w+'</th>').join('')+'</tr>'+
        '<tr><td>10km</td>'+CHECK.map(w => '<td><b>'+pace(tr[w])+'</b></td>').join('')+'</tr></table>';
-  h += '<div class="hint">예정된 테스트는 없다. 한 달에 한 번쯤 대회를 뛰고, 그 <b>10km 환산 기록</b>으로 기준 상수를 갱신하면 모든 세션 페이스와 궤도가 다시 계산된다 — 대회를 넣는 주는 일정을 같이 바꾼다. 기기마다 값이 달라지지 않게 이 페이지는 아무것도 저장하지 않는다. 궤도는 지금 기준에서 W19 <b>39:00</b>까지 직선.</div>';
+  h += '<div class="hint">예정된 테스트는 없다. 한 달에 한 번쯤 대회를 뛰고, 그 <b>10km 환산 기록</b>으로 기준 상수를 갱신하면 모든 세션 페이스와 궤도가 다시 계산된다 — 대회를 넣는 주는 일정을 같이 바꾼다 (11/21 하프 주는 이미 반영됨). 기기마다 값이 달라지지 않게 이 페이지는 아무것도 저장하지 않는다. 궤도는 지금 기준에서 W19 <b>39:00</b>까지 직선.</div>';
   document.getElementById('panel').innerHTML = h;
 }
 renderPanel();
@@ -759,7 +784,7 @@ function stretchBlock(b){
 function homeRows(d){
   return d.s4.map(x => {
     const same = EX[x[0]][0] === EX[x[0]][1];
-    const rx = d.deload ? two(ALT_RX[x[0]] || x[1]) : (ALT_RX[x[0]] || x[1]);
+    const rx = (d.deload || d.lite) ? two(ALT_RX[x[0]] || x[1]) : (ALT_RX[x[0]] || x[1]);
     return '<li>'+xn(EX[x[0]][1])+' '+(same ? x[1] : rx)+'<span class="h">'+(same ? '그대로' : '대신 · '+EX[x[0]][0])+'</span></li>';
   });
 }
@@ -768,9 +793,10 @@ function openModal(ds){
   const dObj = pd(ds), wd = ['일','월','화','수','목','금','토'][dObj.getDay()];
   let h = '<div class="m-date">'+(dObj.getMonth()+1)+'월 '+dObj.getDate()+'일 · '+wd+'요일'+(ds===todayStr?' · 오늘':'')+(d.hol?' · '+d.hol:'')+'</div>';
   h += '<div class="m-title">'+d.title+'</div>';
-  h += '<span class="m-phase" style="background:'+d.ph.color+'">'+d.ph.name+' · '+d.week+'주차'+(d.deload?' · 디로드':'')+(d.raceWeek?' · 대회 주':'')+'</span>';
+  h += '<span class="m-phase" style="background:'+d.ph.color+'">'+d.ph.name+' · '+d.week+'주차'+(d.deload?' · 디로드':'')+(d.raceWeek?' · 대회 주':'')+(d.evt?' · '+d.evt.label:'')+'</span>';
   h += '<div class="m-goal">이번 주 러닝 약 <b>'+weekKm(d.week)+'km</b> · 10km 기준 '+pace(currentTT())+'</div>';
 
+  if (d.evt) h += '<div class="m-vac"><b>'+d.evt.label+'</b><br>'+d.evt.msg+'</div>';
   if (d.trip) h += '<div class="m-vac"><b>홍콩 여행</b><br>'+d.trip.msg+'</div>';
   if (d.hol) h += '<div class="m-vac"><b>'+d.hol+' · 헬스장 휴무</b><br>'+(d.closed ? '아래 맨몸 목록이 오늘의 계획.' : '야외라 계획 그대로.')+(d.pm ? '<br>저녁 수영 레슨도 쉽니다.' : '')+'</div>';
 
