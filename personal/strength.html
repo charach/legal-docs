@@ -443,8 +443,8 @@ const EVT = {
   '2026-11-16': { label:'하프 대회 주', msg:'토요일 하프를 위해 이번 주는 줄인다. 근력 A는 세트를 2로 줄여 다리 피로를 남기지 않는다.', lite:true },
   '2026-11-17': { label:'하프 대회 주', msg:'마지막 질세션. 양을 줄여 속도 감각만 남긴다 (4×800m).', run:'I4x800' },
   '2026-11-18': { label:'하프 대회 주', msg:'이지 30분으로 줄임. 저녁 수영 레슨은 그대로.', run:'E30' },
-  '2026-11-19': { label:'하프 대회 주', msg:'템포 20분은 빼고 이지 + 스트라이드로. 다리를 가볍게 만드는 날.', run:'E30+S4' },
-  '2026-11-20': { label:'하프 대회 주', msg:'근력 B는 건너뜀 (종아리·코어 피로 방지). 대회 전날 셰이크아웃 20분 + 일찍 자기.', run:'E20+S3', pfx:'셰이크아웃 ' },
+  '2026-11-19': { label:'하프 대회 주', msg:'템포 20분은 빼고 이지 + 마무리 가속으로. 다리를 가볍게 만드는 날.', run:'E30+B' },
+  '2026-11-20': { label:'하프 대회 주', msg:'근력 B는 건너뜀 (종아리·코어 피로 방지). 대회 전날 셰이크아웃 20분 + 일찍 자기.', run:'E20+B', pfx:'셰이크아웃 ' },
   '2026-11-21': { label:'아식스 고프리런 하프', msg:'계획 외 대회가 아니라 이 계획의 6주차 시험. 결과로 10km 기준(BASE_10K)을 갱신한다.', race:true },
   '2026-11-22': { label:'하프 다음 날', msg:'롱런 95분은 하프가 대신했다 — 만회하지 않는다. 걷기 + 이지 30분, 아프면 걷기만.', run:'E30', pfx:'회복 · ', plain:true }
 };
@@ -458,10 +458,10 @@ const PHASES = [
 
 /* ========== 주차별 러닝 처방 · [화, 수 이지(분), 목, 일 롱런 [분, 마지막 MP 분]] ========== */
 const WK = [
-  ['I5x400',   30, 'E30+S4', [50,0]],
-  ['I6x400',   35, 'E35+S6', [60,0]],
+  ['I5x400',   30, 'E30+B', [50,0]],
+  ['I6x400',   35, 'E35+B', [60,0]],
   ['I8x400',   40, 'T15',    [80,0]],
-  ['I5x400',   30, 'E30+S4', [60,0]],
+  ['I5x400',   30, 'E30+B', [60,0]],
   ['I6x600',   45, 'T20',    [90,0]],
   ['I6x800',   45, 'T20',    [95,0]],
   ['I4x1000',  40, 'T20',    [100,0]],
@@ -481,7 +481,7 @@ const WK = [
   ['I4x1600',  50, 'M16',    [190,60]],
   ['I5x800',   40, 'M10',    [130,20]],
   ['I4x600',   30, 'M6',     [80,10]],
-  ['E30+S4',   25, 'E20+S4', ['RACE']]
+  ['E30+B',   25, 'E20+B', ['RACE']]
 ];
 
 /* ========== 근력 · [헬스장, 맨몸 대체] ========== */
@@ -592,16 +592,16 @@ const Z = () => zones(currentTT());
 const kmh  = sec => (3600/sec).toFixed(1);
 const ezK  = z => kmh(z.E[1])+'~'+kmh(z.E[0]);                 // 이지 범위 · 느린→빠른
 const WU = z => ['워밍업','15분', ezK(z), '1%'], CD = z => ['쿨다운','10분', ezK(z), '1%'];
-const TM_HINT = '속도가 안 나오는 구간은 경사 +1%에 속도 −0.5 km/h. 스트라이드는 벨트 가속이 느리니 경사 3%에서 짧게 하거나 생략.';
+const TM_HINT = '속도가 안 나오는 구간은 경사 +1%에 속도 −0.5 km/h.';
 
 function E(min){ const z = Z(); return { t:'이지 '+min+'분', l:['이지 '+min+'분 @ '+pace(z.E[0])+'~'+pace(z.E[1])+'/km · 심박 편하게'], km: min*60/((z.E[0]+z.E[1])/2), tm:[['이지 · 꾸준', min+'분', ezK(z), '1%']] }; }
 function expand(code){
   const z = Z(); let m;
-  if (code === 'TT') { const p = currentTT()/10; return { t:'10km 타임트라이얼', l:['워밍업 15분 이지 + 스트라이드 3×20초','<b>10km 최대 노력</b> · 평지 · 첫 2km는 목표보다 살짝 느리게','쿨다운 10분'], km: 10 + 25*60/z.E[0], tt:true,
+  if (code === 'TT') { const p = currentTT()/10; return { t:'10km 타임트라이얼', l:['워밍업 15분 이지 (마지막 2분은 조금씩 속도 올리기)','<b>10km 최대 노력</b> · 평지 · 첫 2km는 목표보다 살짝 느리게','쿨다운 10분'], km: 10 + 25*60/z.E[0], tt:true,
     tm:[WU(z), ['10km 최대', '10km', '시작 '+kmh(p+8)+' → 2km부터 '+kmh(p)+' 이상', '1%'], CD(z)], tmNote:'테스트는 같은 조건으로 재야 비교가 된다. 야외면 늘 야외, 트레드밀이면 늘 경사 1%로.' }; }
   if (code === 'RACE') return { t:'군산 마라톤', l:['<b>42.195km @ '+pace(z.M)+'/km</b> — 첫 5km는 이보다 5초 느리게','현재 궤도 기준 예상 '+hms(z.M*42.195)], km: 42.2, race:true, tm:[] };
-  if ((m = code.match(/^E(\d+)(?:\+S(\d+))?$/))) { const r = E(+m[1]); if (m[2]) { r.t += ' + 스트라이드'; r.l.push('스트라이드 '+m[2]+'×20초 @ '+pace(z.R)+'/km · 사이 걷기 60초'); r.km += 0.3; r.tm.push(['스트라이드', m[2]+'×20초', kmh(z.R), '3%']); r.tm.push(['사이 걷기','60초','5.0','3%']); r.tmNote = TM_HINT; } return r; }
-  if ((m = code.match(/^I(\d+)x(\d+)$/))) { const n=+m[1], d=+m[2], rest = d<=600 ? '회복 조깅 '+Math.round(d/2)+'m' : '회복 조깅 2분'; return { t:'인터벌 '+n+'×'+d+'m', l:['워밍업 15분 이지 + 스트라이드 3×20초','<b>'+n+'×'+d+'m @ '+pace(z.I)+'/km</b> · '+rest,'쿨다운 10분'], km: n*d/1000 + n*(d<=600?d/2:400)/1000 + 25*60/z.E[0], q:true,
+  if ((m = code.match(/^E(\d+)(\+B)?$/))) { const r = E(+m[1]); if (m[2]) { const step = ((+kmh(z.M) - +kmh(z.E[0]))/2).toFixed(1); r.t += ' + 마무리 가속'; r.l.push('<b>마지막 3분 점진 가속</b> — 1분마다 조금씩 올려 끝에는 마라톤 페이스('+pace(z.M)+'/km) 정도. 전력 질주 아님, 숨은 편하게'); r.tm = [['이지 · 꾸준', (m[1]-3)+'분', ezK(z), '1%'], ['마무리 가속', '3분', kmh(z.E[0])+' → '+kmh(z.M)+' · 1분마다 +'+step, '1%']]; r.tmNote = '트레드밀은 벨트 가속이 느리니 1분마다 버튼으로 올린다. 야외는 시계 페이스를 보며 3분에 걸쳐 천천히.'; } return r; }
+  if ((m = code.match(/^I(\d+)x(\d+)$/))) { const n=+m[1], d=+m[2], rest = d<=600 ? '회복 조깅 '+Math.round(d/2)+'m' : '회복 조깅 2분'; return { t:'인터벌 '+n+'×'+d+'m', l:['워밍업 15분 이지 (마지막 2분은 조금씩 속도 올리기)','<b>'+n+'×'+d+'m @ '+pace(z.I)+'/km</b> · '+rest,'쿨다운 10분'], km: n*d/1000 + n*(d<=600?d/2:400)/1000 + 25*60/z.E[0], q:true,
     tm:[WU(z), ['질주', n+'×'+d+'m', kmh(z.I), '1%'], ['회복', d<=600 ? Math.round(d/2)+'m' : '2분', kmh(z.E[1]), '1%'], CD(z)], tmNote:'질주 속도 도달에 10~15초 걸리니 버튼은 구간 시작 직전에. '+TM_HINT }; }
   if ((m = code.match(/^T(\d+)x(\d+)$/))) { const n=+m[1], mn=+m[2]; return { t:'크루즈 인터벌 '+n+'×'+mn+'분', l:['워밍업 15분 이지','<b>'+n+'×'+mn+'분 @ '+pace(z.T)+'/km</b> · 사이 조깅 2분','쿨다운 10분'], km: n*mn*60/z.T + n*2*60/z.E[0] + 25*60/z.E[0], q:true,
     tm:[WU(z), ['크루즈', n+'×'+mn+'분', kmh(z.T), '1%'], ['사이 조깅','2분', kmh(z.E[1]), '1%'], CD(z)] }; }
@@ -660,7 +660,7 @@ function day(s){
       fix = dow===1 ? '구례 회고 1~4순위 — 중둔근 · 내전근 · 햄스트링 편심 · 대둔근. IT밴드와 좌우 비대칭의 처방이 이 여섯 동작이다.' : '손 압박 분산(등) · 골반 기준점(코어) · 런 후반 추진(종아리). 몬스터 워크는 중둔근 주 2회째.';
     }
   } else if (dow === 6) {                                      // 토 · 평로라 (대회 주는 셰이크아웃)
-    if (raceWeek) { const r = expand('E15+S3'); title = '셰이크아웃 ' + r.t; lines = r.l; km = r.km; tm = r.tm; tmNote = r.tmNote; kind = 'easy'; tags.push('easy'); }
+    if (raceWeek) { const r = expand('E15+B'); title = '셰이크아웃 ' + r.t; lines = r.l; km = r.km; tm = r.tm; tmNote = r.tmNote; kind = 'easy'; tags.push('easy'); }
     else { title = '평로라'; lines = [BIKE[ph.id], '러닝 다리 회복용 · 심박 올리지 않기']; kind = 'bike'; tags.push('bike'); }
   } else {                                                     // 화 · 수 · 목 · 러닝
     const code = dow===2 ? wk[0] : dow===4 ? wk[2] : 'E'+wk[1];
@@ -726,7 +726,7 @@ function wkDate(w){ return ymd(new Date(pd(WEEK0).getTime() + ((w-1)*7+1)*864000
 function renderPanel(){
   const z = Z(), cur = currentTT(), tr = trajectory();
   let h = '<div class="ph">10km 기준 <b style="color:var(--ink);font-size:14px">'+pace(cur)+'</b> <span style="font-weight:600">· 코드 상수</span></div>';
-  h += '<div class="row"><span class="z">이지 <b>'+pace(z.E[0])+'~'+pace(z.E[1])+'</b> <i>'+ezK(z)+'</i></span><span class="z">마라톤 <b>'+pace(z.M)+'</b> <i>'+kmh(z.M)+'</i></span><span class="z">템포 <b>'+pace(z.T)+'</b> <i>'+kmh(z.T)+'</i></span><span class="z">인터벌 <b>'+pace(z.I)+'</b> <i>'+kmh(z.I)+'</i></span><span class="z">스트라이드 <b>'+pace(z.R)+'</b> <i>'+kmh(z.R)+'</i></span></div>';
+  h += '<div class="row"><span class="z">이지 <b>'+pace(z.E[0])+'~'+pace(z.E[1])+'</b> <i>'+ezK(z)+'</i></span><span class="z">마라톤 <b>'+pace(z.M)+'</b> <i>'+kmh(z.M)+'</i></span><span class="z">템포 <b>'+pace(z.T)+'</b> <i>'+kmh(z.T)+'</i></span><span class="z">인터벌 <b>'+pace(z.I)+'</b> <i>'+kmh(z.I)+'</i></span></div>';
   h += '<div class="hint" style="margin-top:4px">굵은 글씨는 분/km, 옆 숫자는 트레드밀 km/h · 경사 1% 기준.</div>';
   h += '<div class="row big">이 페이스로 완주하면 <b>'+hms(z.M*42.195)+'</b>'+(z.M*42.195 <= 10800 ? ' · 서브3' : ' · 서브3까지 '+pace(z.M - 10800/42.195)+'/km')+'</div>';
   h += '<table><tr><th>서브3 궤도</th>'+CHECK.map(w => '<th>'+wkDate(w)+' · W'+w+'</th>').join('')+'</tr>'+
