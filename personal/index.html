@@ -43,6 +43,19 @@
   a.row .bar { margin-top: 10px; width: 108px; margin-left: auto; }
   a.row .pc { font-size: 12px; color: var(--ink-2); margin-top: 6px; display: block; }
 
+  .fold-btn {
+    margin-top: 14px; min-height: 44px; padding: 0; background: none; border: 0; cursor: pointer;
+    font-family: var(--sans); font-size: 13px; color: var(--accent); text-align: left;
+    transition: color .2s ease;
+  }
+  .fold-btn:hover { color: #0a5f72; }
+  .fold-btn::after { content: "+"; margin-left: 6px; }
+  .fold-btn[aria-expanded="true"]::after { content: "\2013"; }
+  .rows-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s ease; }
+  .rows-wrap.open { grid-template-rows: 1fr; }
+  .rows-inner { overflow: hidden; min-height: 0; }
+  .rows-wrap:not(.open) .rows { border-top-color: transparent; }
+
   @media (max-width: 1024px) { .grouprow { grid-template-columns: 110px 1fr; gap: 24px; } }
   @media (max-width: 640px) {
     .grouprow { grid-template-columns: 1fr; gap: 12px; }
@@ -54,6 +67,7 @@
     a.row .meta { text-align: left; display: flex; align-items: center; gap: 12px; }
     a.row .bar { margin: 0; width: 88px; }
     a.row .pc { margin-top: 0; }
+    .fold-btn { margin-top: 0; margin-left: auto; }
   }
 </style>
 </head>
@@ -62,7 +76,7 @@
 <nav class="nav">
   <div class="inner">
     <a class="brand" href="index.html">Personal</a>
-    <div class="links"><a href="hongkong_2026.html">홍콩</a><a href="strength.html">마라톤</a></div>
+    <div class="links"><a href="strength.html">마라톤</a></div>
   </div>
 </nav>
 
@@ -81,30 +95,6 @@
 </header>
 
 <main>
-
-  <section class="band rise">
-    <div class="wrap">
-      <div class="grouprow">
-        <div class="side">
-          <div class="who">함께</div>
-          <div class="note">같이 보는 자료</div>
-          <div class="cnt tnum">01</div>
-        </div>
-        <div class="rows">
-
-          <a class="row" href="hongkong_2026.html" data-start="2026-10-11" data-race="2026-10-16">
-            <div>
-              <div class="t">홍콩 3일 · 10/16~18</div>
-              <div class="d">성인 4명. 숙소 The Harbourview(완차이) 기준 동선 — 스타페리로 침사추이 10분. 날짜별 번호 핀 지도와 타임라인, 식당 전화, 예약·준비 체크리스트, 오션파크 대안.</div>
-            </div>
-            <div class="meta"><span class="dday tnum">—</span></div>
-          </a>
-
-
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="band rise">
     <div class="wrap">
@@ -150,6 +140,14 @@
 
 
 
+          <a class="row" href="ds_lv3.html">
+            <div>
+              <div class="t">DS Level 3 자격 공부</div>
+              <div class="d">삼성전자 DS 데이터사이언스 Level 3. 필기 28차시 핵심과 자가점검 20문항, 실기 21~26번 출제 빈도·회차별 기록, 실행해 확인한 코드 레시피, 6주 계획. 본인 엑셀 기반.</div>
+            </div>
+            <div class="meta"><span class="dday tnum">자격증</span></div>
+          </a>
+
         </div>
       </div>
     </div>
@@ -161,9 +159,20 @@
         <div class="side">
           <div class="who">종료</div>
           <div class="note">끝난 프로젝트</div>
-          <div class="cnt tnum">12</div>
+          <div class="cnt tnum">13</div>
+          <button class="fold-btn" id="doneBtn" type="button" aria-expanded="false" aria-controls="doneRows">13개 보기</button>
         </div>
+        <div class="rows-wrap" id="doneRows" inert>
+        <div class="rows-inner">
         <div class="rows">
+
+          <a class="row done" href="hongkong_2026.html">
+            <div>
+              <div class="t">홍콩 3일 · 10/16~18</div>
+              <div class="d">성인 4명. 숙소 The Harbourview(완차이) 기준 동선 — 스타페리로 침사추이 10분. 날짜별 번호 핀 지도와 타임라인, 식당 전화, 예약·준비 체크리스트, 오션파크 대안. 여행을 마쳤고 계획은 그대로 남겨 둔다.</div>
+            </div>
+            <div class="meta"><span class="dday tnum">종료</span></div>
+          </a>
 
           <a class="row done" href="gurye_review.html">
             <div>
@@ -262,6 +271,8 @@
           </a>
 
         </div>
+        </div>
+        </div>
       </div>
     </div>
   </section>
@@ -311,6 +322,17 @@
         if (pc) pc.textContent = p + '%';
       }
     }
+  });
+
+  var doneBtn = document.getElementById('doneBtn'), doneRows = document.getElementById('doneRows');
+  var doneCount = doneRows.querySelectorAll('a.row').length;
+  doneBtn.textContent = doneCount + '개 보기';
+  doneBtn.addEventListener('click', function(){
+    var open = !doneRows.classList.contains('open');
+    doneRows.classList.toggle('open', open);
+    if (open) doneRows.removeAttribute('inert'); else doneRows.setAttribute('inert', '');
+    doneBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    doneBtn.textContent = open ? '접기' : doneCount + '개 보기';
   });
 
   var io = new IntersectionObserver(function(es){

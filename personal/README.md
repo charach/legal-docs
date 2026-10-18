@@ -13,6 +13,7 @@ personal/
 ├── strength.html           🏋 전신 근력 21주 캘린더      (본인)
 ├── bike_forces.html        🚲 안장 위의 힘 애니메이션      (본인 · 종료)
 ├── career_roadmap.html     🚀 커리어 전환 로드맵          (본인)
+├── ds_lv3.html            📊 삼성 DS 데이터사이언스 Level 3 공부 (본인)
 ├── grad_schools.html       🏛 직장인 특수대학원 42곳 비교  (함께)
 ├── ai_grad_prep.html       🎓 AI 대학원 입시 학습 로드맵   (아내)
 ├── interview_prep.html     🎤 AI 대학원 면접 질문은행      (아내)
@@ -23,6 +24,7 @@ personal/
 │   └── interview_bank.json   면접 질문 201문항·학교 프로필·출처
 │
 ├── 구례 대회 정보 xlsx/     운영자 배포 거리표 원본 (2026 distance-0815-korea.xlsx)
+├── datasciencelevel3/      DS_LV3.xlsx — ds_lv3.html 의 근거 엑셀. 로컬 전용, 커밋 안 함 (공개 저장소 + 사내 시험 기출 복원 포함)
 │
 └── assets/
     ├── summer.css          공용 디자인 시스템 (모든 페이지가 이걸 먼저 로드)
@@ -113,6 +115,21 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 - 요일별 처방은 `W[단계][요일]` (`s` 근력 · `c` 유산소 · `alt` 맨몸 대체 유산소)
 - 단계 기간은 `PHASES`, 가볍게 주는 `LIGHT`(세트 2개 · 유산소는 `LIGHT_C`), 공휴일은 `HOLIDAYS`
 - 설명·테스트·체크 기능은 일부러 넣지 않는다. 운동 내용만.
+
+## DS Level 3 페이지
+
+`ds_lv3.html` — 삼성전자 DS 데이터사이언스 인증 Level 3 공부. **시험 정보의 근거는 로컬의 `datasciencelevel3/DS_LV3.xlsx` 뿐**이다(저장소에는 올리지 않는다).
+공식 요강·합격 기준·접수 일정은 공개 자료가 없어 페이지에도 「확인 못 함」으로 적었다. 지어내서 채우지 말 것.
+
+- 필기: 28차시 체크 · 영역별 핵심(접이식) · 엑셀 「필기 기출」에서 고른 20문항
+- 실기: 출제 빈도(샘플 8세트 키워드 집계) · 회차별 출제 기록 · 캐글형 전략 · 코드 레시피 · 버전 함정 표 · 제출 전 체크리스트
+- 코드 레시피는 scikit-learn 1.7 · SciPy 1.15 · statsmodels · imbalanced-learn 에서 실행해 확인했다(XGBoost 호출만 미실행). 고칠 때도 돌려 볼 것
+- 시험일과 체크 상태는 localStorage(`dsLv3.exam.v1`, `dsLv3.chk.v1`)에만 저장된다. 시험일을 넣으면 6주 계획에 주차별 날짜가 붙는다
+
+## 허브의 「종료」 그룹
+
+`index.html` 맨 아래 「종료」(끝난 프로젝트)는 기본으로 접혀 있고, 왼쪽의 「N개 보기」를 누르면 펼쳐진다
+(`grid-template-rows 0fr → 1fr`, 접힌 동안은 `inert`). 버튼의 개수 문구는 `.row` 수로 JS가 계산하므로(HTML의 초기 값은 첫 화면용) 항목만 추가하면 된다. 끝난 프로젝트는 행에 `done` 클래스를 붙여 이 그룹에 넣는다.
 
 ## 로컬에서 열기
 

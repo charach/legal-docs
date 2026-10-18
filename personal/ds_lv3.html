@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<title>DS Level 3 · 데이터사이언스 인증 공부</title>
+<link rel="stylesheet" href="assets/summer.css">
+<style>
+  .stamp { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; }
+  .hero h1 { max-width: 18ch; }
+
+  /* 시험일 · 진행 */
+  .ddbox { display: grid; grid-template-columns: auto 1fr; gap: 20px 40px; align-items: center; margin-top: 36px; max-width: 760px; }
+  .ddbox label { font-size: 13px; color: var(--ink-2); display: block; margin-bottom: 6px; }
+  .ddbox .field { width: 200px; }
+  .ddbox .out b { display: block; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+  .ddbox .out span { font-size: 14px; color: var(--ink-2); }
+  .ddbox .prog { grid-column: 1 / -1; }
+  .ddbox .prog .row { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-2); margin-bottom: 8px; }
+
+  /* 본문 공통 */
+  .sec-body h3 { margin: 56px 0 14px; }
+  .sec-body h3:first-child { margin-top: 0; }
+  .sec-body h3 small { font-size: 13px; font-weight: 400; color: var(--ink-2); margin-left: 8px; letter-spacing: 0; }
+  .sec-body p.note { font-size: 14px; color: var(--ink-2); margin: 10px 0 0; max-width: 72ch; }
+  .sec-body p.body { max-width: 72ch; margin: 0 0 12px; }
+  .sec-body p.note b, .sec-body p.body b { color: var(--ink); }
+  .tbl td.k, .tbl th.k { white-space: nowrap; }
+  .tbl td.m { font-size: 14px; color: var(--ink-2); }
+  .tbl code { white-space: nowrap; }
+  .tbl-scroll { margin-top: 4px; }
+  .tbl-scroll table { min-width: 560px; }
+
+  /* 접이식 */
+  details.fold { border-top: 1px solid var(--line); }
+  details.fold:last-of-type { border-bottom: 1px solid var(--line); }
+  details.fold > summary { list-style: none; cursor: pointer; padding: 18px 0; display: flex; gap: 14px; align-items: baseline; min-height: 44px; }
+  details.fold > summary::-webkit-details-marker { display: none; }
+  details.fold > summary .t { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
+  details.fold > summary .s { font-size: 13px; color: var(--ink-2); }
+  details.fold > summary::after { content: "+"; margin-left: auto; color: var(--ink-2); font-size: 18px; }
+  details.fold[open] > summary::after { content: "\2013"; }
+  details.fold > .in { padding: 0 0 28px; }
+  details.fold > .in ul { margin: 0; padding: 0; list-style: none; }
+  details.fold > .in li { padding: 8px 0 8px 22px; position: relative; font-size: 15px; border-bottom: 1px solid var(--line); }
+  details.fold > .in li:last-child { border-bottom: 0; }
+  details.fold > .in li::before { content: ""; position: absolute; left: 0; top: 21px; width: 12px; height: 1px; background: var(--ink-2); opacity: .5; }
+  details.fold > .in li b { font-weight: 600; }
+  details.fold > .in h4 { margin: 22px 0 6px; font-size: 14px; color: var(--ink-2); font-weight: 500; letter-spacing: 0; }
+  details.fold > .in h4:first-child { margin-top: 0; }
+  .tools { display: flex; justify-content: flex-end; margin-bottom: 6px; }
+
+  /* 코드 */
+  pre.code { margin: 0 0 6px; padding: 16px 18px; background: #F1F7F8; border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; font: 13px/1.7 var(--mono); color: var(--ink); tab-size: 4; -webkit-overflow-scrolling: touch; }
+  pre.code + h4 { margin-top: 22px; }
+
+  /* 체크 */
+  .chk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; border-top: 1px solid var(--line); }
+  .chk-grid.one { grid-template-columns: 1fr; }
+  .chk-row { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; border-bottom: 1px solid var(--line); }
+  .chk-row input.chk { margin-top: 4px; }
+  .chk-row label { cursor: pointer; flex: 1; font-size: 15px; }
+  .chk-row label small { display: block; font-size: 13px; color: var(--ink-2); }
+  .chk-row.on label { color: var(--ink-2); }
+  .chk-row .no { font-size: 12px; color: var(--ink-2); width: 22px; flex: none; padding-top: 4px; }
+  .grp { grid-column: 1 / -1; padding: 28px 0 8px; font-size: 13px; color: var(--ink-2); letter-spacing: .04em; border-bottom: 1px solid var(--line); }
+  .grp:first-child { padding-top: 14px; }
+
+  /* 막대 */
+  .bars { border-top: 1px solid var(--line); }
+  .bar { display: grid; grid-template-columns: 220px 1fr 130px; gap: 16px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .bar .track { height: 6px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .bar .track i { display: block; height: 100%; background: var(--accent); }
+  .bar .v { text-align: right; color: var(--ink-2); font-size: 13px; }
+
+  /* 문제 */
+  details.q { border-top: 1px solid var(--line); }
+  details.q:last-of-type { border-bottom: 1px solid var(--line); }
+  details.q > summary { list-style: none; cursor: pointer; padding: 15px 0; display: grid; grid-template-columns: 30px 1fr; gap: 6px; min-height: 44px; }
+  details.q > summary::-webkit-details-marker { display: none; }
+  details.q > summary .n { font-size: 12px; color: var(--ink-2); padding-top: 4px; }
+  details.q .a { padding: 0 0 18px 36px; font-size: 15px; color: var(--ink); max-width: 72ch; }
+  details.q .a .ans { display: inline-block; font-weight: 600; color: var(--accent); margin-right: 8px; }
+  details.q .a .why { color: var(--ink-2); }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .card h4 { margin-bottom: 8px; }
+  .card p { font-size: 14px; color: var(--ink-2); }
+
+  .wk { border-top: 1px solid var(--line); padding: 22px 0 8px; display: grid; grid-template-columns: 148px 1fr; gap: 32px; }
+  .wk:last-of-type { border-bottom: 1px solid var(--line); }
+  .wk .h b { display: block; font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
+  .wk .h span { font-size: 13px; color: var(--ink-2); }
+  .wk .chk-row:last-child { border-bottom: 0; }
+
+  .src li { padding: 10px 0; font-size: 14px; border-bottom: 1px solid var(--line); }
+  .src { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+
+  @media (max-width: 1024px) {
+    .wk { grid-template-columns: 110px 1fr; gap: 24px; }
+  }
+  @media (max-width: 760px) {
+    .chk-grid { grid-template-columns: 1fr; }
+    .two { grid-template-columns: 1fr; }
+    .bar { grid-template-columns: 1fr 110px; gap: 4px 12px; }
+    .bar .track { grid-column: 1 / -1; order: 3; }
+    .ddbox { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .wk { grid-template-columns: 1fr; gap: 6px; }
+    .ddbox .field { width: 100%; }
+    pre.code { font-size: 12px; padding: 14px; }
+    details.fold > summary .s { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="index.html">Personal</a>
+    <div class="links">
+      <a href="#scope">시험</a>
+      <a href="#written">필기</a>
+      <a href="#practical">실기</a>
+      <a href="#plan">계획</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="stamp"><span class="eyebrow">Samsung DS · Level 3</span></div>
+    <h1>데이터사이언스<br>Level 3 공부</h1>
+    <p class="lead">필기 28차시 범위와 실기 21~26번을 한 장에 묶었다. 시험 정보는 공개 요강이 없어서 본인 엑셀(DS_LV3.xlsx)의 후기·유형 분석·실수 기록을 근거로 삼았고, 코드는 실제로 돌려서 확인했다.</p>
+
+    <div class="ddbox">
+      <div>
+        <label for="examDate">시험일</label>
+        <input type="date" id="examDate" class="field">
+      </div>
+      <div class="out"><b id="ddText">—</b><span id="ddSub">시험일을 넣으면 남은 날과 주차별 날짜가 계산된다. 이 브라우저에만 저장된다.</span></div>
+      <div class="prog">
+        <div class="row"><span>체크한 항목</span><span class="tnum" id="allCnt">0 / 0</span></div>
+        <div class="meter"><i id="allBar"></i></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <svg class="hero-wave" viewBox="0 0 1080 64" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,42 C120,42 150,18 270,18 C390,18 420,42 540,42 C660,42 690,18 810,18 C930,18 960,42 1080,42"/>
+      <path class="accent" d="M0,52 C120,52 150,30 270,30 C390,30 420,52 540,52 C660,52 690,30 810,30 C930,30 960,52 1080,52"/>
+    </svg>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ 01 시험 ============================ -->
+<section class="band rise" id="scope">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">01</div>
+      <div>
+        <h2>무엇이 나오는가</h2>
+        <p class="lead">확인된 것과 확인하지 못한 것을 갈라 둔다. 합격선과 접수 일정은 공개 자료가 없었다.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+
+      <dl class="dl">
+        <div><dt>시험</dt><dd>삼성전자 DS 데이터사이언스 인증 Level 3. 필기와 실기로 나뉜다.</dd></div>
+        <div><dt>필기</dt><dd>6영역 28차시 커리큘럼이 범위다. 딥러닝(기본·확장 신경망)은 <b>필기에 한해서만</b> 나온다.</dd></div>
+        <div><dt>실기</dt><dd>파이썬. 21~25번은 번호마다 소문항 5~8개, 26번은 <b>캐글형 모델링 20점</b>이다. 지표는 회차마다 바뀐다(Macro F1, RMSE, F1, R²…).</dd></div>
+        <div><dt>배점</dt><dd class="muted">회차별로 달랐다 — 6·8·10·8·8 / 20, 8×5 / 20, 6·8·8·8·10 (엑셀 후기). 캐글 20점이 가장 큰 한 덩어리다.</dd></div>
+        <div><dt>합격 기준</dt><dd class="muted"><b style="color:var(--ink)">확인 못 함.</b> 웹 검색 5회, 공식·후기 어디에도 없다. 공고나 사내 안내로 확인할 것.</dd></div>
+        <div><dt>접수 일정</dt><dd class="muted"><b style="color:var(--ink)">확인 못 함.</b> 엑셀에 2025-06 ~ 2026-01 사이 7개 회차의 후기가 있어 자주 열리는 것으로 보이지만 확정은 아니다. 위 시험일 칸에 직접 넣는다.</dd></div>
+        <div><dt>실기 환경</dt><dd class="muted">라이브러리 버전은 모른다. 후기에 SMOTE·ROS, XGBoost, GridSearchCV 사용 사례가 있어 해당 패키지는 쓸 수 있었던 것으로 읽힌다. 시험 시작하자마자 <code>import sklearn; print(sklearn.__version__)</code>를 찍어 둘 것 — 아래 03의 버전 함정 표가 여기서 갈린다.</dd></div>
+      </dl>
+
+      <h3>Level 2 에서 빠진 것은 전부 Level 3 범위<small>엑셀 「DS3 범위」 시트</small></h3>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th class="k">영역</th><th>Level 2 에서 제외 → Level 3 에 포함</th><th>Level 3 에서 새로 추가</th></tr></thead>
+          <tbody>
+            <tr><td class="k">데이터 처리</td><td>데이터 샘플링, 수치형 비선형 변환, 구간 분할·순위 변환</td><td>—</td></tr>
+            <tr><td class="k">통계 분석</td><td>상관분석 유의성 검정, 회귀 변수 선택, 다항·비선형 회귀</td><td>가설 검정 · 분산 분석 · 교차 분석</td></tr>
+            <tr><td class="k">지도학습</td><td>—</td><td>GLM · Lasso/Ridge · 부스팅(GradientBoost, AdaBoost, XGBoost) · SVM</td></tr>
+            <tr><td class="k">비지도</td><td>PCA · MDS · t-SNE · LDA · PLS 회귀</td><td>K-medoids · 계층적 군집 · DBSCAN · 이상탐지 개요 · Isolation Forest</td></tr>
+            <tr><td class="k">평가·튜닝</td><td>—</td><td>하이퍼파라미터 튜닝</td></tr>
+            <tr><td class="k">딥러닝</td><td>—</td><td>기본 신경망 · CNN · RNN · Autoencoder (필기만)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">엑셀 메모: 「LDA, PCA, DL 파라미터 수, 계층적 군집분석, RNN」 — 필기에서 따로 챙기라고 적어 둔 다섯 개.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 02 필기 ============================ -->
+<section class="band rise" id="written">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">02</div>
+      <div>
+        <h2>필기</h2>
+        <p class="lead">28차시를 순서대로 지우고, 영역별 핵심을 접어 둔 목록에서 확인한다. 마지막은 엑셀 필기 기출에서 고른 문제들.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+
+      <h3>28차시 진도<small id="cnt-sess">0 / 28</small></h3>
+      <div class="chk-grid" data-group="sess">
+        <div class="grp">INTRO · 1 데이터 개론</div>
+        <div class="chk-row"><span class="no">1</span><input class="chk" type="checkbox" id="s01" data-g="sess"><label for="s01">0. Intro</label></div>
+        <div class="chk-row"><span class="no">2</span><input class="chk" type="checkbox" id="s02" data-g="sess"><label for="s02">1-1 데이터의 분류</label></div>
+        <div class="chk-row"><span class="no">3</span><input class="chk" type="checkbox" id="s03" data-g="sess"><label for="s03">1-2 결측치, 이상치 처리</label></div>
+        <div class="chk-row"><span class="no">4</span><input class="chk" type="checkbox" id="s04" data-g="sess"><label for="s04">1-3 데이터 변환</label></div>
+        <div class="chk-row"><span class="no">5</span><input class="chk" type="checkbox" id="s05" data-g="sess"><label for="s05">1-4 데이터 시각화</label></div>
+        <div class="grp">2 확률 &amp; 통계</div>
+        <div class="chk-row"><span class="no">6</span><input class="chk" type="checkbox" id="s06" data-g="sess"><label for="s06">2-1 확률 개론</label></div>
+        <div class="chk-row"><span class="no">7</span><input class="chk" type="checkbox" id="s07" data-g="sess"><label for="s07">2-2 확률 분포</label></div>
+        <div class="chk-row"><span class="no">8</span><input class="chk" type="checkbox" id="s08" data-g="sess"><label for="s08">2-3 가설 검정 개론</label></div>
+        <div class="chk-row"><span class="no">9</span><input class="chk" type="checkbox" id="s09" data-g="sess"><label for="s09">2-4 가설검정 — 모평균</label></div>
+        <div class="chk-row"><span class="no">10</span><input class="chk" type="checkbox" id="s10" data-g="sess"><label for="s10">2-5 가설검정 — 모분산, 정규성</label></div>
+        <div class="chk-row"><span class="no">11</span><input class="chk" type="checkbox" id="s11" data-g="sess"><label for="s11">2-6 범주형 자료 분석, 상관분석</label></div>
+        <div class="chk-row"><span class="no">12</span><input class="chk" type="checkbox" id="s12" data-g="sess"><label for="s12">2-7 회귀 분석</label></div>
+        <div class="chk-row"><span class="no">13</span><input class="chk" type="checkbox" id="s13" data-g="sess"><label for="s13">2-8 분산 분석</label></div>
+        <div class="grp">3 머신러닝</div>
+        <div class="chk-row"><span class="no">14</span><input class="chk" type="checkbox" id="s14" data-g="sess"><label for="s14">3-1 머신러닝</label></div>
+        <div class="chk-row"><span class="no">15</span><input class="chk" type="checkbox" id="s15" data-g="sess"><label for="s15">3-2 일반화</label></div>
+        <div class="chk-row"><span class="no">16</span><input class="chk" type="checkbox" id="s16" data-g="sess"><label for="s16">3-3 학습 알고리즘</label></div>
+        <div class="chk-row"><span class="no">17</span><input class="chk" type="checkbox" id="s17" data-g="sess"><label for="s17">3-4 클래스 불균형 해소</label></div>
+        <div class="grp">4 지도학습</div>
+        <div class="chk-row"><span class="no">18</span><input class="chk" type="checkbox" id="s18" data-g="sess"><label for="s18">4-1 선형 모델</label></div>
+        <div class="chk-row"><span class="no">19</span><input class="chk" type="checkbox" id="s19" data-g="sess"><label for="s19">4-2 의사 결정 나무</label></div>
+        <div class="chk-row"><span class="no">20</span><input class="chk" type="checkbox" id="s20" data-g="sess"><label for="s20">4-3 나이브 베이즈, K 최근접 이웃</label></div>
+        <div class="chk-row"><span class="no">21</span><input class="chk" type="checkbox" id="s21" data-g="sess"><label for="s21">4-4 SVM</label></div>
+        <div class="chk-row"><span class="no">22</span><input class="chk" type="checkbox" id="s22" data-g="sess"><label for="s22">4-5 앙상블 모델</label></div>
+        <div class="grp">5 비지도 학습 · 6 딥러닝</div>
+        <div class="chk-row"><span class="no">23</span><input class="chk" type="checkbox" id="s23" data-g="sess"><label for="s23">5-1 군집화</label></div>
+        <div class="chk-row"><span class="no">24</span><input class="chk" type="checkbox" id="s24" data-g="sess"><label for="s24">5-2 차원축소</label></div>
+        <div class="chk-row"><span class="no">25</span><input class="chk" type="checkbox" id="s25" data-g="sess"><label for="s25">5-3 이상치 탐색</label></div>
+        <div class="chk-row"><span class="no">26</span><input class="chk" type="checkbox" id="s26" data-g="sess"><label for="s26">6-1 퍼셉트론</label></div>
+        <div class="chk-row"><span class="no">27</span><input class="chk" type="checkbox" id="s27" data-g="sess"><label for="s27">6-2 인공 신경망</label></div>
+        <div class="chk-row"><span class="no">28</span><input class="chk" type="checkbox" id="s28" data-g="sess"><label for="s28">6-3 심층 신경망</label></div>
+      </div>
+
+      <h3>영역별 핵심<small>엑셀 필기·용어·카테고리 시트 + 보강</small></h3>
+      <div class="tools"><button class="btn-text" type="button" id="toggleAll">모두 펼치기</button></div>
+
+      <details class="fold">
+        <summary><span class="t">데이터 개론</span><span class="s">1-1 ~ 1-4</span></summary>
+        <div class="in">
+          <h4>분류와 결측·이상치</h4>
+          <ul>
+            <li><b>정형</b>은 질적(명목·서열)과 양적(연속·이산), <b>반정형</b>은 JSON·XML, <b>비정형</b>은 텍스트·음성·영상. 빅데이터는 3V(양·속도·다양성)에 정확성·가치를 더해 5V.</li>
+            <li><b>결측</b> 유형은 MCAR(완전 무작위) · MAR(관측된 다른 변수에 의존) · MNAR(값 자체에 의존). 결측 자체가 정보일 수 있어 무조건 삭제하는 것은 틀린 선택지다.</li>
+            <li><b>대치</b>: 평균·중앙값·최빈값, Hot-deck(현재 표본에서 비슷한 응답), Cold-deck(외부·이전 연구), 회귀, KNN, 다중 대치(MICE). Hot/Cold deck 을 헷갈리지 말 것.</li>
+            <li><b>이상치 탐지</b>: IQR(Q1−1.5·IQR, Q3+1.5·IQR), Z-score(|z|&gt;3), ESD, DBSCAN, Isolation Forest, LOF, One-Class SVM, 박스플롯. <b>VIF 는 다중공선성 진단이지 이상치 탐지가 아니다</b>(기출).</li>
+          </ul>
+          <h4>변환과 시각화</h4>
+          <ul>
+            <li><b>MinMax</b>는 [0,1], <b>Standard</b>는 평균 0·표준편차 1, <b>Robust</b>는 중앙값·IQR 기준. <b>Box-Cox</b>는 양수만, <b>Yeo-Johnson</b>은 음수도 가능. 거듭제곱 변환에서 λ=0 이면 로그.</li>
+            <li>범주형: One-Hot(k개) · 더미(k−1) · Label · Target · Frequency · Hashing. 회귀에서 더미를 k개 다 넣으면 완전 공선성.</li>
+            <li><b>바이올린</b>은 박스플롯+KDE, <b>줄기-잎</b>은 분포와 값을 함께, <b>평행좌표</b>는 다차원 패턴·군집, Q-Q plot 은 정규성을 눈으로.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">확률과 통계</span><span class="s">2-1 ~ 2-8</span></summary>
+        <div class="in">
+          <h4>분포 — 평균과 분산</h4>
+          <div class="tbl-scroll">
+            <table class="tbl">
+              <thead><tr><th class="k">분포</th><th>무엇을 세는가</th><th class="k">E(X)</th><th class="k">V(X)</th></tr></thead>
+              <tbody>
+                <tr><td class="k">베르누이(p)</td><td>한 번의 시행, 0 또는 1</td><td>p</td><td>p(1−p)</td></tr>
+                <tr><td class="k">이항(n,p)</td><td>n번 중 1이 나온 횟수</td><td>np</td><td>np(1−p)</td></tr>
+                <tr><td class="k">푸아송(λ)</td><td>단위 시간·공간의 사건 수</td><td>λ</td><td>λ</td></tr>
+                <tr><td class="k">초기하</td><td>비복원 추출에서 성공 수</td><td class="m" colspan="2">비복원이면 이항이 아니다</td></tr>
+                <tr><td class="k">지수(λ)</td><td>다음 사건까지의 시간. 무기억성</td><td>1/λ</td><td>1/λ²</td></tr>
+                <tr><td class="k">감마</td><td>α번째 사건까지의 시간(지수의 일반화)</td><td class="m" colspan="2">α=1 이면 지수</td></tr>
+                <tr><td class="k">카이제곱(n)</td><td>표준정규 n개의 제곱합. 감마의 특수한 경우</td><td>n</td><td>2n</td></tr>
+                <tr><td class="k">t(k)</td><td>모분산을 모를 때 표본평균. 자유도↑ → 정규분포</td><td>0</td><td>k/(k−2)</td></tr>
+                <tr><td class="k">F</td><td>카이제곱 둘의 비. 분산 비교·ANOVA</td><td class="m" colspan="2">비대칭, 양측 검정의 p 는 한쪽 확률의 2배</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h4>가설검정의 말</h4>
+          <ul>
+            <li><b>1종 오류(α)</b>: H0 가 참인데 기각. <b>2종 오류(β)</b>: H0 가 거짓인데 기각 못함. 검정력은 1−β. 표본이 늘면 둘 다 줄어드는 경향.</li>
+            <li>p-value &lt; α 이면 H0 기각. 신뢰수준은 1−α. 정규성 검정의 귀무가설은 <b>「정규분포를 따른다」</b>다.</li>
+            <li>베이즈: P(A|B) = P(B|A)·P(A) / P(B). 사전확률 · 우도 · 증거 · 사후확률 이름을 매칭할 것.</li>
+          </ul>
+          <h4>검정 선택표</h4>
+          <div class="tbl-scroll">
+            <table class="tbl">
+              <thead><tr><th class="k">비교</th><th>모수</th><th>비모수</th></tr></thead>
+              <tbody>
+                <tr><td class="k">한 집단 평균 vs 기준값</td><td>1표본 t (모분산을 알면 z)</td><td>부호검정 · 윌콕슨 부호순위</td></tr>
+                <tr><td class="k">같은 집단 전·후 (대응)</td><td>대응표본 t · 자유도 n−1</td><td>윌콕슨 부호순위</td></tr>
+                <tr><td class="k">독립 두 집단</td><td>독립표본 t (이분산이면 Welch)</td><td>윌콕슨 순위합 = Mann-Whitney U</td></tr>
+                <tr><td class="k">독립 세 집단 이상</td><td>일원 ANOVA (F)</td><td>Kruskal-Wallis</td></tr>
+                <tr><td class="k">같은 대상 반복 측정</td><td>반복측정 ANOVA (구형성)</td><td>Friedman</td></tr>
+                <tr><td class="k">범주형 두 변수</td><td colspan="2">카이제곱 — 적합도 df=범주−1 · 독립성 df=(r−1)(c−1) · 동질성. 기대도수 ≥ 5, 아니면 Fisher</td></tr>
+                <tr><td class="k">상관</td><td>Pearson</td><td>Spearman · Kendall</td></tr>
+                <tr><td class="k">무작위성</td><td>—</td><td>Run 검정</td></tr>
+                <tr><td class="k">등분산</td><td>Bartlett (정규성 필요)</td><td>Levene (정규성 불필요)</td></tr>
+                <tr><td class="k">정규성</td><td colspan="2">Shapiro-Wilk(소표본) · Kolmogorov-Smirnov(대표본) · Jarque-Bera · Anderson-Darling · Q-Q plot</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h4>회귀와 분산분석</h4>
+          <ul>
+            <li>가정은 선형성·독립성·등분산·정규성, 거기에 독립변수 간 다중공선성 없음. 진단은 VIF(통상 10 초과면 의심), 상관행렬.</li>
+            <li>SST = SSR + SSE, R² = SSR/SST = 1 − SSE/SST. 모형 유의성은 <b>F-검정</b>. 영향점은 레버리지 · Cook's distance · DFFITS · DFBETAS.</li>
+            <li><b>AIC = −2lnL + 2p</b>, <b>BIC = −2lnL + p·ln n</b> — 낮을수록 좋고 BIC 가 표본 수까지 벌점. 변수 선택은 전진·후진·단계적이며 <b>PCA 는 변수 선택이 아니다</b>. Mallow's Cp 는 p+1 에 가까운 것.</li>
+            <li>오즈 = p/(1−p), 오즈비 = exp(β). 로지스틱 회귀의 계수 해석은 <b>한 단위 증가 시 오즈가 exp(β)배</b>.</li>
+            <li>ANOVA 는 정규·등분산·독립. <b>표본 수가 같을 필요는 없다</b>. 요인이 둘이면 이원분산분석, 요인의 효과가 다른 요인의 수준에 따라 달라지면 <b>교호작용</b>(교호항마다 관측 2개 이상). 사후검정은 Tukey HSD 등.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">머신러닝 일반</span><span class="s">3-1 ~ 3-4</span></summary>
+        <div class="in">
+          <ul>
+            <li><b>모수 모델</b>은 분포·함수형을 가정하고 계수를 학습(선형·로지스틱·신경망), <b>비모수 모델</b>은 가정 없이 데이터로(결정트리·KNN).</li>
+            <li><b>일반화</b>가 목표다. 과대적합 대응: 규제(L1·L2), 조기 종료, 드롭아웃, 데이터 증가, 앙상블, 교차검증, 변수 축소.</li>
+            <li><b>검증</b>: hold-out · K-fold · Stratified(타깃 분포 유지) · Group(학습에 없는 범주를 평가에) · 시계열(T 이전 학습, T 이후 평가) · LOOCV. 데이터가 적고 정밀한 검증이 필요하면 교차검증.</li>
+            <li><b>하이퍼파라미터</b>는 그리드·랜덤·베이지안 탐색, <b>매개변수</b>는 경사하강법으로. 학습률이 크면 발산, 작으면 느림.</li>
+            <li><b>차원의 저주</b>: 차원이 늘면 데이터가 희소해지고 거리의 변별력이 떨어져 과대적합 위험이 커진다. 대응은 변수 선택·차원축소·규제.</li>
+            <li><b>변수 선택</b> — Filter(통계 특성: 상관·카이제곱·정보이득) · Wrapper(모델로 탐색: RFE·전진·후진·유전알고리즘) · Embedded(모델에 내장: Lasso·Ridge·Elastic Net·트리 중요도).</li>
+            <li><b>클래스 불균형</b> — 언더샘플링(랜덤·Tomek link·CNN·OSS), 오버샘플링(랜덤·SMOTE·Borderline·ADASYN), 비용 함수(<b>소수 클래스 손실 가중치를 더 크게</b>), 임계값 이동, 앙상블. SMOTE 는 소수 클래스 이웃 사이를 선형 보간해 합성하며 클래스 수를 정확히 맞추는 것은 아니다. MCMC 는 불균형과 무관.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">지도학습</span><span class="s">4-1 ~ 4-5</span></summary>
+        <div class="in">
+          <ul>
+            <li><b>Ridge</b>(L2)는 계수를 줄이지만 0 으로 만들지 않고 닫힌 해가 있다. <b>Lasso</b>(L1)는 일부 계수를 정확히 0 으로 만들어 변수 선택 효과가 있고 닫힌 해가 없다(좌표하강). <b>Elastic Net</b>은 둘의 혼합. 람다가 클수록 규제가 강하다.</li>
+            <li><b>GLM</b>: 반응변수 분포에 맞는 연결함수 — 이항은 logit(로지스틱 회귀), 푸아송은 log. 종속변수의 정규성이 없어도 쓴다.</li>
+            <li><b>결정트리</b>: 지니 = 1 − Σp², 엔트로피 = −Σp·log p, 정보이득이 큰 분할. 깊이를 키우면 과대적합 → 가지치기. 스케일링 불필요.</li>
+            <li><b>나이브 베이즈</b>는 특징 간 조건부 독립 가정, 라플라스 스무딩. <b>KNN</b>은 지도학습이며 학습이 없는 lazy 모델, K 가 작으면 과대적합, 스케일링 필수.</li>
+            <li><b>SVM</b>: 마진 최대화, 서포트 벡터만 결정에 관여. C 가 크면 마진이 좁고 과대적합, 비선형은 <b>커널 트릭</b>(RBF·poly)으로 고차원 매핑 없이 계산. 스케일링 필수.</li>
+            <li><b>배깅</b>: 부트스트랩 표본으로 병렬 학습해 분산을 줄임. <b>랜덤 포레스트</b>는 배깅 + 노드마다 변수 무작위 선택, 분류와 회귀(트리 예측 평균) 모두 가능, OOB 평가.</li>
+            <li><b>부스팅</b>: 순차 학습으로 편향을 줄임. <b>AdaBoost</b>는 이전 모델이 틀린 샘플의 가중치를 올리고, 약한 학습기는 「랜덤보다 약간 <u>나은</u>」 모델이며 신뢰도로 가중합한다. <b>Gradient Boosting</b>은 잔차(손실의 음의 기울기)에 다음 트리를 맞춘다. <b>XGBoost</b>는 정규화·2차 근사·subsample·colsample 을 더한 것.</li>
+            <li><b>Voting</b>은 hard(다수결)·soft(확률 평균), Stacking 은 메타 모델.</li>
+          </ul>
+          <h4>분류 지표</h4>
+          <div class="tbl-scroll">
+            <table class="tbl">
+              <thead><tr><th class="k">지표</th><th class="k">식</th><th>뜻</th></tr></thead>
+              <tbody>
+                <tr><td class="k">정확도</td><td class="k">(TP+TN) / 전체</td><td>맞춘 비율. 불균형에 약하다</td></tr>
+                <tr><td class="k">정밀도</td><td class="k">TP / (TP+FP)</td><td>양성으로 예측한 것 중 진짜 양성</td></tr>
+                <tr><td class="k">재현율 · 민감도</td><td class="k">TP / (TP+FN)</td><td>실제 양성 중 찾아낸 비율</td></tr>
+                <tr><td class="k">특이도</td><td class="k">TN / (TN+FP)</td><td>FP rate = 1 − 특이도</td></tr>
+                <tr><td class="k">F1</td><td class="k">2PR / (P+R)</td><td>정밀도·재현율의 조화평균. macro 는 클래스별 F1 의 단순 평균</td></tr>
+                <tr><td class="k">ROC · AUC</td><td class="k">x=FPR, y=TPR</td><td>왼쪽 위에 붙을수록 좋다. 0.5 는 무작위, 1.0 은 완벽</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h4>연관규칙</h4>
+          <ul>
+            <li>지지도 = P(A∩B), 신뢰도 = P(B|A), 향상도 = P(B|A)/P(B). 향상도 &gt;1 양의 관계, =1 독립, &lt;1 음의 관계. Apriori · FP-Growth.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">비지도학습</span><span class="s">5-1 ~ 5-3</span></summary>
+        <div class="in">
+          <ul>
+            <li><b>K-means</b>: SSE(distortion)는 반복마다 증가하지 않고 수렴하지만 <b>초기값에 따라 결과가 달라진다</b>(K-means++). 구형·비슷한 크기·비슷한 밀도를 가정해 이상치·밀도 차·비볼록 군집에 약하다.</li>
+            <li><b>K-medoids</b>는 중심을 실제 데이터 점으로 잡아 이상치에 강건하다.</li>
+            <li><b>계층적 군집</b>: 단일(최단) 연결은 사슬 효과, 완전(최장) 연결은 지름이 작은 군집, 평균 연결, 중심 연결, Ward(분산 증가 최소). 덴드로그램을 자르는 높이로 군집 수 결정.</li>
+            <li><b>DBSCAN</b>: eps 와 min_samples 두 개, 핵심·경계·잡음 점. <b>군집 수를 정하지 않아도</b> 되고 비구형도 찾으며 잡음을 분리한다. 밀도 차가 큰 데이터에는 약하다.</li>
+            <li><b>평가</b>: 실루엣(−1~1, 클수록 좋음), Dunn(군집 간 최소거리 / 군집 내 최대거리), Davies-Bouldin(낮을수록 좋음), elbow.</li>
+            <li><b>차원축소</b>: PCA(분산 최대 축, 비지도, 스케일링 필요) · 요인분석(잠재요인, 개수는 분석 중 결정, 요인은 대등) · <b>LDA</b>(지도, 클래스 간 분산 / 클래스 내 분산 최대화) · MDS(거리 보존) · t-SNE(시각화용, 비선형) · SVD · PLS.</li>
+            <li><b>이상탐지</b>: Isolation Forest 는 무작위 분할로 한 점이 고립되는 경로가 짧을수록 이상치(비지도·앙상블). LOF 는 이웃 대비 밀도. One-Class SVM, Autoencoder 재구성 오차.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">딥러닝 (필기만)</span><span class="s">6-1 ~ 6-3</span></summary>
+        <div class="in">
+          <ul>
+            <li><b>단일 퍼셉트론</b>은 선형 분리만(XOR 불가). 3클래스 이상은 다층 퍼셉트론·RNN·CNN 에 softmax 를 쓰면 가능하고, 오토인코더는 분류 모델이 아니다.</li>
+            <li><b>활성화</b>: 비선형 활성화가 없으면 층을 쌓아도 하나의 선형 변환이다(그래서 쓴다). sigmoid·tanh 는 기울기 소실, ReLU 는 dying ReLU. <b>출력층</b>은 이진 sigmoid, 다중 softmax — ReLU 는 부적절. 다중 분류 라벨은 원-핫.</li>
+            <li><b>학습</b>: 역전파, 경사하강법(SGD·Momentum·RMSProp·Adam). 과대적합 방지는 규제·드롭아웃·배치 정규화·조기 종료·Max pooling. 기울기 소실은 역전파에서 기울기가 매우 작아지는 현상.</li>
+            <li><b>CNN</b>: 합성곱·풀링. 출력 크기 = ⌊(W − K + 2P) / S⌋ + 1.</li>
+            <li><b>RNN</b>: 시퀀스, 긴 의존성은 LSTM(게이트)·GRU 로. <b>Autoencoder</b>: 인코더–디코더, 차원축소·잡음 제거·이상탐지.</li>
+          </ul>
+          <h4>파라미터 수 (엑셀 메모에 있던 항목)</h4>
+          <div class="tbl-scroll">
+            <table class="tbl">
+              <thead><tr><th class="k">층</th><th class="k">식</th><th>예</th></tr></thead>
+              <tbody>
+                <tr><td class="k">Dense</td><td class="k">(입력 + 1) × 출력</td><td>10→5 = 55</td></tr>
+                <tr><td class="k">Conv2D</td><td class="k">(K×K×입력채널 + 1) × 필터 수</td><td>3×3, 3→16 = 448</td></tr>
+                <tr><td class="k">SimpleRNN</td><td class="k">(입력 + 은닉 + 1) × 은닉</td><td>입력 8, 은닉 16 = 400</td></tr>
+                <tr><td class="k">LSTM</td><td class="k">SimpleRNN 의 4배</td><td>= 1,600 (GRU 는 3배, Keras 기본은 편향이 하나 더 있어 약간 큼)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <h3>자가점검<small>엑셀 「필기 기출」에서 고른 20문항 · 눌러서 답 확인</small></h3>
+      <p class="note" style="margin:0 0 16px">엑셀 해설 중 KNN 을 「비지도」라 적은 곳이 있었는데 KNN 은 지도학습이라 아래에서는 바로잡았다.</p>
+
+      <div id="quiz">
+        <details class="q"><summary><span class="n">1</span><span>차원의 저주에 해당하는 설명은? (a) 피처를 더 쓰면 항상 정확도가 오른다 (b) 차원이 커질수록 데이터가 희소해지고 거리가 멀어져 과대적합 위험이 커진다 (c) 차원이 커질수록 임의의 두 점 사이 거리가 가까워진다 (d) 고차원에서는 과대적합이 일어나기 어렵다</span></summary><div class="a"><span class="ans">(b)</span><span class="why">차원이 늘면 데이터가 희소해지고 거리의 변별력이 약해진다. 그래서 규제·차원축소가 필요하다.</span></div></details>
+        <details class="q"><summary><span class="n">2</span><span>3개 클래스를 구별할 수 있는 신경망을 모두 고르면? 퍼셉트론 · 다층 퍼셉트론 · 순환 신경망 · 오토인코더 · 합성곱 신경망</span></summary><div class="a"><span class="ans">다층 퍼셉트론, RNN, CNN</span><span class="why">출력층에 softmax 를 두면 된다. 단일 퍼셉트론은 이진, 오토인코더는 분류 모델이 아니다.</span></div></details>
+        <details class="q"><summary><span class="n">3</span><span>선형 분리가 안 될 때 데이터를 고차원으로 옮겨 최적의 초평면을 찾는 SVM 기법은? 커널 트릭 · 보로노이 분할 · 평균 이동 · 로버스트 피팅</span></summary><div class="a"><span class="ans">커널 트릭</span><span class="why">보로노이는 공간 분할, 평균 이동은 군집, 로버스트 피팅은 이상치에 강한 회귀.</span></div></details>
+        <details class="q"><summary><span class="n">4</span><span>비용 함수 기반 불균형 처리에서 소수 클래스의 손실 가중치를 다수 클래스보다 작게 준다. O / X</span></summary><div class="a"><span class="ans">X</span><span class="why">소수 클래스에 더 큰 가중치를 줘서 모델이 무시하지 못하게 한다.</span></div></details>
+        <details class="q"><summary><span class="n">5</span><span>랜덤 포레스트 설명으로 틀린 것은? (a) 학습 데이터 일부를 뽑아 트리를 만든다 (b) 결정트리 기반 앙상블이다 (c) 트리가 독립이라 멀티코어에서 빠르다 (d) 분류만 되고 회귀는 안 된다</span></summary><div class="a"><span class="ans">(d)</span><span class="why">회귀는 각 트리 예측값의 평균을 쓴다.</span></div></details>
+        <details class="q"><summary><span class="n">6</span><span>AdaBoost 설명 중 틀린 것은? (a) 다음 모델은 이전 모델이 틀린 샘플에 가중치를 준다 (b) weak learner 는 랜덤 분류기보다 약간 더 나쁜 모델이다 (c) 분류기의 신뢰도로 가중합해 sign 을 정한다</span></summary><div class="a"><span class="ans">(b)</span><span class="why">weak learner 는 랜덤보다 <b>약간 더 나은</b> 모델이다.</span></div></details>
+        <details class="q"><summary><span class="n">7</span><span>정규성 검정에 쓰지 않는 것은? QQ plot · Shapiro-Wilk · Kolmogorov-Smirnov · Levene</span></summary><div class="a"><span class="ans">Levene</span><span class="why">등분산 검정이다(귀무: 모든 집단의 분산이 같다).</span></div></details>
+        <details class="q"><summary><span class="n">8</span><span>Mann-Whitney U 검정 설명으로 옳지 않은 것은? (a) 순위합 검정이라고도 한다 (b) 두 집단의 독립성을 가정한다 (c) 두 집단의 정규성을 가정한다</span></summary><div class="a"><span class="ans">(c)</span><span class="why">비모수 검정이라 정규성을 가정하지 않는다. 정규성을 가정하는 쪽은 독립표본 t 검정.</span></div></details>
+        <details class="q"><summary><span class="n">9</span><span>라쏘 회귀에 대해 맞는 것은? (a) 영향이 적은 변수의 계수가 0 이 되어 변수 선택 효과가 있다 (b) 람다가 커지면 규제가 줄어든다 (c) 쓰면 항상 정확도가 오른다 (d) 닫힌 해가 존재한다</span></summary><div class="a"><span class="ans">(a)</span><span class="why">L1 규제라 계수가 정확히 0 이 된다. L1 은 미분 불가점이 있어 닫힌 해가 없고 좌표하강 등으로 푼다.</span></div></details>
+        <details class="q"><summary><span class="n">10</span><span>단일연결(single linkage) 계층적 군집. 거리: A-B 1, A-C 2, A-D 3, A-E 4, B-C 3, B-D 4, B-E 5, C-D 4, C-E 5, D-E 1. 군집 2개일 때의 군집은?</span></summary><div class="a"><span class="ans">{A,B,C} / {D,E}</span><span class="why">A-B 와 D-E 가 1 에서 먼저 묶이고, {A,B}–C 가 min(2,3)=2 로 합쳐진다. 남은 두 군집 사이는 3. scipy 로도 확인했다.</span></div></details>
+        <details class="q"><summary><span class="n">11</span><span>한 학년의 중간고사·기말고사 점수 평균 차이를 검정하려 한다. 가장 적당한 것은?</span></summary><div class="a"><span class="ans">대응표본 t 검정</span><span class="why">같은 학생의 두 시점이라 짝이 있다. 정규성 가정이 필요하고, 비모수 대안은 윌콕슨 부호순위.</span></div></details>
+        <details class="q"><summary><span class="n">12</span><span>10개의 쌍으로 된 두 집단의 평균 차이를 대응표본 t 로 검정할 때 자유도는?</span></summary><div class="a"><span class="ans">9</span><span class="why">쌍의 차이 n=10 개에 대한 1표본 t 라서 n−1.</span></div></details>
+        <details class="q"><summary><span class="n">13</span><span>0~9 숫자 이미지 분류에 적합하지 않은 모델은? CNN · KNN · 다층 퍼셉트론 · 오토인코더</span></summary><div class="a"><span class="ans">오토인코더</span><span class="why">입력을 복원하는 비지도 모델이다. KNN 은 지도학습이고 이미지에도 쓸 수 있다(느릴 뿐).</span></div></details>
+        <details class="q"><summary><span class="n">14</span><span>이미지 분류 CNN 의 출력층 활성화로 적절하지 않은 것은? Sigmoid · Softmax · ReLU</span></summary><div class="a"><span class="ans">ReLU</span><span class="why">확률로 해석할 수 없다. 이진은 sigmoid, 다중은 softmax. ReLU 는 은닉층용.</span></div></details>
+        <details class="q"><summary><span class="n">15</span><span>지수분포(λ=1)에 대해 옳지 않은 것은? (a) 평균은 1 (b) 분산은 1 (c) 0≤x≤1 구간의 면적은 1 (d) x→∞ 에서 값은 0 으로 수렴</span></summary><div class="a"><span class="ans">(c)</span><span class="why">∫₀¹ e^(−x) dx = 1 − e^(−1) ≈ 0.632. 전체 면적이 1 이다.</span></div></details>
+        <details class="q"><summary><span class="n">16</span><span>일원분산분석의 특징 중 틀린 것은? (a) 모분산이 같아야 한다 (b) 샘플 개수가 같아야 한다 (c) 독립이어야 한다 (d) 정규분포여야 한다</span></summary><div class="a"><span class="ans">(b)</span><span class="why">가정은 독립·정규·등분산. 표본 수가 달라도 된다.</span></div></details>
+        <details class="q"><summary><span class="n">17</span><span>K-means 의 distortion function(군집 내 제곱거리 합)은 반복 중 절대 증가하지 않는다. O / X</span></summary><div class="a"><span class="ans">O</span><span class="why">할당 단계와 중심 갱신 단계가 모두 값을 줄이거나 유지한다. 다만 수렴 지점은 초기값에 따라 달라진다.</span></div></details>
+        <details class="q"><summary><span class="n">18</span><span>세제 3종 × 세탁수 온도 3종으로 남은 먼지량을 측정했다. 각 세팅을 비교하는 검정은?</span></summary><div class="a"><span class="ans">이원분산분석</span><span class="why">요인 둘, 종속변수 하나(연속형). 두 요인의 효과와 교호작용을 같이 본다.</span></div></details>
+        <details class="q"><summary><span class="n">19</span><span>DBSCAN 설명으로 옳지 않은 것은? (a) 이상치 탐지에 쓸 수 있다 (b) 지역적 밀도를 이용한다 (c) 직선으로 분리 안 되는 그룹도 군집화한다 (d) 군집 개수를 지정해야 한다</span></summary><div class="a"><span class="ans">(d)</span><span class="why">군집 수 대신 eps 와 min_samples 를 정한다.</span></div></details>
+        <details class="q"><summary><span class="n">20</span><span>랜덤 오버샘플링으로 옳은 것은? (a) SMOTE·ADASYN 의 고도화판이다 (b) 소수 클래스의 개수를 늘린다 (c) 중복 없이 과대적합을 막는다 (d) 정보 손실이 생긴다</span></summary><div class="a"><span class="ans">(b)</span><span class="why">소수 클래스를 복제해 늘리므로 중복 때문에 오히려 과대적합 위험이 있고, 새 정보는 만들지 않는다(정보 손실은 언더샘플링의 문제).</span></div></details>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 03 실기 ============================ -->
+<section class="band rise" id="practical">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">03</div>
+      <div>
+        <h2>실기</h2>
+        <p class="lead">무엇이 얼마나 자주 나왔는지 세고, 그 순서대로 손에 익힌다. 코드는 이 페이지를 만들면서 직접 실행해 확인한 것만 실었다.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+
+      <h3>출제 빈도<small>샘플 8세트의 소문항 268칸에서 키워드 집계</small></h3>
+      <div class="bars" id="freq"></div>
+      <p class="note">막대는 8개 샘플 세트 중 몇 세트에 나왔는지, 오른쪽 숫자는 소문항 칸에서 등장한 횟수. 8세트는 제조 공정 · 전자제품 구매 · 페이먼트 앱 · 스마트폰 센서 · 스마트폰 만족도 · 스마트팩토리 · 태양광 · 조리 품질. 키워드 일치로 센 것이라 한 칸이 두 항목에 걸릴 수 있다.</p>
+      <p class="body" style="margin-top:16px"><b>읽는 법.</b> 데이터 분할·정규화·선형회귀는 8세트 모두에 있다. 문제 하나하나는 전처리(분할·결측·스케일링)가 앞에 깔리고 뒤에 모델·검정이 붙는 구조라, 전처리가 틀리면 뒤가 전부 틀린다. 「계산」은 라이브러리 호출이 아니라 식을 직접 쓰는 문항(신뢰구간·거리·지표)이다.</p>
+
+      <h3>회차별 출제 기록<small>엑셀 「실기 - 유형 분석」 후기 · 날짜순</small></h3>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th class="k">회차</th><th>기록</th></tr></thead>
+          <tbody>
+            <tr><td class="k">2025-06-13</td><td><code>np.matmul</code>, <code>np.linalg.inv</code> 직접 · K-S 검정(표준화 필요) · Box-Cox · 병합적 군집 · IsolationForest · PCA 로 유의미한 변수 선택</td></tr>
+            <tr><td class="k">2025-07-18</td><td>배점 6·8·10·8·8 / 20. 21 카이제곱·t-test(일별 누적값이 처음 기준을 넘는 날짜) · 22 백테스트 split 14개 + 랜덤포레스트 + MSE 가중평균 · 23 DBSCAN·KNN·실루엣으로 최적 모델, 코사인 유사도 · 24 카테고리별 R·F·M 8개씩(없으면 R=999, F·M=0) + L1 로지스틱(C=1/λ, class_weight) · 25 degree 연결중심성, VIF</td></tr>
+            <tr><td class="k">2025-08-22</td><td>6·8·8·8·10. 21 CV 계산 → Bartlett → Kruskal, 4개 조합 중 점추정이 가장 큰 것의 90% 신뢰구간 길이 · 22 이웃 변수로 결측 처리(현재·이웃 변수 1·2·3분위수), SSD 감소량 = 1 − SSD(k+1)/SSD(k) 중 0.5 가 최소가 되는 k · 23 다항 로지스틱 coef_ 평균, XGB 2개 비교(subsample 0.7, colsample_bytree) · 24 complete/incomplete 분리, 각도 계산 전처리 · 25 SVD 24→4차원, SVC 커널(poly·rbf·sigmoid) · 26 캐글 <b>Macro F1</b></td></tr>
+            <tr><td class="k">2025-10-17</td><td>21 Levene → p 값에 따라 일원분산분석 또는 Kruskal · 22 정규분포 PDF 유사 공식으로 치환 · 23 KMeans + <b>Dunn index</b> 직접 계산(<code>pdist</code>, <code>cdist</code>) · 24 다중 분류, Inverted Weighted F1 · 25 별도 회귀식이 주어진 다항 선형회귀 · 26 회귀 <b>RMSE</b>(20점). 필기 단서: 레이블 인코딩, LDA 강/약, 쌍 데이터 검정</td></tr>
+            <tr><td class="k">2025-11-15</td><td>8×5 / 20. 21 P(A∩B) / (P(A)·P(B)) 지표, 자카드 거리 · 22 16개 PCA · 23 DBSCAN <code>metric='precomputed'</code> · 24 Decision Tree · 25 <code>do_simul</code> 구현 · 26 <b>F1</b></td></tr>
+            <tr><td class="k">2025-12-12</td><td><code>t.ppf</code> 로 α/2, β 계산</td></tr>
+            <tr><td class="k">2026-01-23</td><td>1 <code>ttest_rel</code> 단측 · 3 군집분석 · 4 Lasso · 5 AdaBoost</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">월별 메모(연도 미기재): 2월 RF · DBSCAN 이상치 · min_samples · Bartlett · Random Over Sampler F1 · MAPE · 병합 군집(최장 거리) · KNN · Lasso/Ridge 규제식 / 4월 경사하강법·learning rate · Shapiro · Mann-Whitney U · PCA 후 inverse 복구 · 조건부 확률 / 8월 p-value·chi2 · KNN macro precision · AIC 후진선택 · Dunn index · XGBoost / 10월 신뢰구간 · KMeans 유클리드 · AUC · RMSE·MAE / 11월 사용 비율 · DBSCAN+Kmeans · PCA 후 MAPE · 오버샘플링+엔트로피 · weight 앙상블 F1.</p>
+
+      <h3>캐글형 26번 — 20점<small>연습 9세트 기록과 전략</small></h3>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th class="k">세트</th><th class="k">지표</th><th>처리</th><th>모델</th><th class="k">내 점수</th></tr></thead>
+          <tbody>
+            <tr><td class="k">lv3-1</td><td class="k">Macro Recall</td><td>불균형 SMOTE</td><td>XGB · RF · GB · KNN → Voting</td><td class="k">0.95 이상</td></tr>
+            <tr><td class="k">lv3-2</td><td class="k">MAE</td><td>표준화</td><td>선형회귀 · KNN · RF · ADA · XGB · XGB+변수선택 · XGB+PCA</td><td class="k">—</td></tr>
+            <tr><td class="k">lv3-3</td><td class="k">Precision</td><td>SMOTE · 표준화</td><td>로지스틱 · KNN · RF · ADA · XGB, RF+XGB+변수선택, XGB 2개 + RF 1개</td><td class="k">0.76</td></tr>
+            <tr><td class="k">lv3-4</td><td class="k">Macro F1</td><td>결측 선형회귀 · 그룹별 중앙값, 표준화, ROS</td><td>결정트리 · XGB</td><td class="k">0.933</td></tr>
+            <tr><td class="k">lv3-5</td><td class="k">F1</td><td>결측 RF · 중앙값</td><td>XGB</td><td class="k">0.82</td></tr>
+            <tr><td class="k">lv3-6</td><td class="k">F1</td><td>SMOTE</td><td>DTC · LR · ADA · XGB</td><td class="k">0.80</td></tr>
+            <tr><td class="k">lv3-7</td><td class="k">RMSE</td><td>결측 중앙값</td><td>DTC · XGB</td><td class="k">—</td></tr>
+            <tr><td class="k">lv3-8</td><td class="k">R²</td><td>—</td><td>XGB</td><td class="k">0.54</td></tr>
+            <tr><td class="k">lv3-9</td><td class="k">R²</td><td>이상치 제거 · 표준화</td><td>XGB</td><td class="k">0.43</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">다른 응시자 후기: SMOTE + XGB + GridSearch 로 캐글 14/20. 실기 21~25번에서는 새 유형이 거의 없었고, 캐글은 F1 macro 라서 SMOTE 를 했고 22번의 「영향도 기반 이상치 탐지 후 제거」가 주효했다고 한다.</p>
+
+      <div class="two" style="margin-top:28px">
+        <div class="card">
+          <h4>회귀 지표에 따른 방향</h4>
+          <p><b style="color:var(--ink)">MAE</b> 전반적 정확도, 이상치에 둔감 → 전체 오차를 줄이는 쪽. <b style="color:var(--ink)">MAPE</b> 상대 오차, 0 값 주의 → 로그 변환·비율 기반. <b style="color:var(--ink)">RMSE</b> 큰 오차에 민감 → 이상치 처리 + 강한 회귀 모델. <b style="color:var(--ink)">R²</b> 설명력 → 피처 공학과 적합한 모델 선택.</p>
+        </div>
+        <div class="card">
+          <h4>분류 지표에 따른 방향</h4>
+          <p>샘플링 <b style="color:var(--ink)">전/후</b>를 비교하고(변수명을 구분해 둘 것), 확률 임계값(threshold)을 정하기 <b style="color:var(--ink)">전/후</b>도 비교한다. 결측은 선형회귀·중앙값·평균. Macro 지표는 소수 클래스까지 똑같이 반영하므로 불균형 처리가 곧 점수다.</p>
+        </div>
+      </div>
+
+      <h4 style="margin:36px 0 10px;font-size:15px;color:var(--ink-2);font-weight:500">진행 순서 (엑셀 메모 그대로)</h4>
+      <div class="chk-grid one" data-group="kaggle">
+        <div class="chk-row"><span class="no">0</span><input class="chk" type="checkbox" id="k0" data-g="kaggle"><label for="k0">미리 import 를 복붙해 두고 틈틈이 파일 단위로 저장한다. 변수에서 <code>PRED</code> 같은 예측·타깃 열을 먼저 뺀다.</label></div>
+        <div class="chk-row"><span class="no">1</span><input class="chk" type="checkbox" id="k1" data-g="kaggle"><label for="k1">XGB 하나로 GridSearchCV 를 만들어 동작 확인 — train 과 valid 점수를 각각 따로 본다.</label></div>
+        <div class="chk-row"><span class="no">2</span><input class="chk" type="checkbox" id="k2" data-g="kaggle"><label for="k2">VotingClassifier 를 만들어 동작 확인.</label></div>
+        <div class="chk-row"><span class="no">3</span><input class="chk" type="checkbox" id="k3" data-g="kaggle"><label for="k3">모델을 하나씩 추가하고, 샘플링·threshold 전/후를 비교한다.</label></div>
+        <div class="chk-row"><span class="no">4</span><input class="chk" type="checkbox" id="k4" data-g="kaggle"><label for="k4">이상치 처리·<code>n_jobs</code>를 챙긴다. 원-핫은 train+test 를 합쳐서 해야 열이 맞는다. XGB·RF 는 스케일링이 필요 없고, 로지스틱·KNN·SVM 을 섞을 때만 쓴다.</label></div>
+      </div>
+      <pre class="code" style="margin-top:20px">y = train['target']; X = train.drop(columns=['target'])
+all_ = pd.get_dummies(pd.concat([X, test.drop(columns=['id'])]), drop_first=True)   # 원-핫은 합쳐서, id 는 변수가 아니다
+X, Xt = all_.iloc[:len(X)], all_.iloc[len(X):]
+med = X.median(); X = X.fillna(med); Xt = Xt.fillna(med)         # 대치값은 train 기준
+X_tr, X_va, y_tr, y_va = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+
+model = XGBClassifier(n_estimators=300, learning_rate=0.1, max_depth=4, random_state=42)
+model.fit(X_tr, y_tr)
+for name, (a, b) in {'train': (X_tr, y_tr), 'valid': (X_va, y_va)}.items():
+    print(name, f1_score(b, model.predict(a), average='macro'))   # 지표는 지문대로
+pd.DataFrame({'id': test['id'], 'pred': model.predict(Xt)}).to_csv('result.csv', index=False)  # 제출 형식은 지문대로</pre>
+
+      <h3>코드 레시피<small>scikit-learn 1.7 · SciPy 1.15 · statsmodels · imbalanced-learn 에서 실행 확인</small></h3>
+      <p class="note" style="margin:0 0 14px">XGBoost 호출만 로컬 환경에 OpenMP 가 없어 실행하지 못했다(표준 API). 나머지는 합성 데이터로 돌려서 결과를 대조했다.</p>
+
+      <details class="fold">
+        <summary><span class="t">전처리 · 분할</span><span class="s">8세트 모두에 나옴</span></summary>
+        <div class="in">
+<pre class="code">import numpy as np, pandas as pd
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, PowerTransformer
+from sklearn.model_selection import train_test_split
+from scipy import stats
+
+df.duplicated(subset=['id'], keep='first').sum()          # 중복 개수
+df = df.drop_duplicates(subset=['id'], keep='last')       # keep: 'first' | 'last' | False
+
+df['x'] = df['x'].fillna(df['x'].median())                # 한 열
+df[cols] = df[cols].fillna(df[cols].mean())               # 여러 열
+df['x'] = df.groupby('g')['x'].transform(lambda s: s.fillna(s.median()))   # 그룹별 중앙값
+
+df['d'] = pd.to_datetime(df['d'])                         # day 인지 yymmdd 인지: format='%y%m%d'
+df['dow'] = df['d'].dt.dayofweek                          # 월=0 … 일=6, 주말은 >= 5
+pd.get_dummies(df, columns=['cat'], drop_first=True)
+
+z_pd = (s - s.mean()) / s.std()                           # pandas 의 std 는 ddof=1
+z_sk = StandardScaler().fit_transform(s.to_frame())       # sklearn 은 ddof=0 → 두 값이 다르다
+MinMaxScaler(feature_range=(0, 1))                        # 범위가 지정되면 그대로
+stats.boxcox(x)                                           # (변환값, λ), 양수만
+PowerTransformer(method='yeo-johnson')                    # 음수 가능
+
+q1, q3 = s.quantile([.25, .75]); iqr = q3 - q1
+mask = (s &lt; q1 - 1.5*iqr) | (s &gt; q3 + 1.5*iqr)           # IQR 이상치
+
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+# 지문이 「정렬 후 앞 70%」면 shuffle=False 나 iloc — 지문이 우선</pre>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">검정 · 신뢰구간</span><span class="s">scipy.stats</span></summary>
+        <div class="in">
+<pre class="code">from scipy import stats
+
+stats.shapiro(a)                          # 귀무: 정규분포. 표본이 많으면 stats.kstest(표준화값, 'norm')
+stats.levene(a, b, c)                     # 등분산. center='median' 이 기본이라 정규성 불필요
+stats.bartlett(a, b, c)                   # 등분산. 정규성 가정
+stats.ttest_1samp(a, popmean=0)
+stats.ttest_ind(a, b, equal_var=True)     # 이분산이면 equal_var=False (Welch)
+stats.ttest_rel(before, after, alternative='less')   # 대응·단측: 「before 평균 &lt; after 평균」이 대립가설
+stats.f_oneway(a, b, c)                   # 일원 ANOVA
+stats.kruskal(a, b, c)                    # 비모수 대안
+stats.mannwhitneyu(a, b); stats.wilcoxon(x, y)
+
+tab = pd.crosstab(df['a'], df['b'])
+chi2, p, dof, exp = stats.chi2_contingency(tab, correction=False)   # 2x2 는 기본이 Yates 보정(True)
+stats.chisquare(f_obs, f_exp)             # 적합도
+
+n, m, sd = len(a), a.mean(), a.std(ddof=1)
+stats.t.interval(0.95, df=n-1, loc=m, scale=stats.sem(a))   # 95% 신뢰구간
+h = stats.t.ppf(0.975, n-1) * sd / np.sqrt(n)                 # 직접 쓰면 (m - h, m + h)
+stats.norm.pdf(x, loc=0, scale=1); stats.norm.cdf(1.96); stats.norm.ppf(0.975)</pre>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">회귀 · ANOVA</span><span class="s">statsmodels · 절편 주의</span></summary>
+        <div class="in">
+<pre class="code">import statsmodels.api as sm, statsmodels.formula.api as smf
+
+X = sm.add_constant(df[['x1', 'x2']])                 # add_constant 를 안 하면 절편이 없다
+m = sm.OLS(df['y'], X).fit()
+m.params; m.pvalues; m.rsquared; m.aic; m.bic; m.fvalue
+
+smf.ols('y ~ x1 + x2', data=df).fit()                 # formula 는 절편이 자동 포함
+smf.ols('y ~ x1 + x2 - 1', data=df).fit()             # 「절편 제외」
+sm.stats.anova_lm(smf.ols('value ~ C(group)', data=df).fit(), typ=2)   # 일원 ANOVA 표
+smf.ols('v ~ C(a) * C(b)', data=df).fit()             # 이원 + 교호작용
+
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+[variance_inflation_factor(X.values, i) for i in range(1, X.shape[1])]   # 0번은 const
+# AIC 후진선택: 변수를 하나씩 뺀 모델의 aic 를 비교해 가장 작아지는 변수를 제거, 더 안 줄면 중단
+
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
+LinearRegression(fit_intercept=False)                 # 절편 제외
+Ridge(alpha=1.0); Lasso(alpha=0.1)                    # 문제가 준 규제식과 sklearn 목적함수의 스케일이 다를 수 있다</pre>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">군집 · 이상치</span><span class="s">KMeans · DBSCAN · Dunn · IF · LOF</span></summary>
+        <div class="in">
+<pre class="code">from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering
+from sklearn.metrics import silhouette_score
+from scipy.spatial.distance import pdist, cdist, squareform
+
+km = KMeans(n_clusters=3, random_state=42, n_init=10).fit(X)
+km.labels_; km.cluster_centers_; km.inertia_          # inertia_ = 군집 내 제곱거리 합
+silhouette_score(X, km.labels_)
+
+DBSCAN(eps=0.5, min_samples=5).fit(X).labels_         # min_samples 에 자기 자신 포함, 잡음은 -1
+DBSCAN(eps=0.5, min_samples=5, metric='precomputed').fit(squareform(pdist(X)))   # 거리행렬을 직접 줄 때
+AgglomerativeClustering(n_clusters=3, linkage='complete')   # 최장 complete · 최단 single · average · ward
+
+def dunn(X, lab):                                     # 군집 간 최소거리 / 군집 내 최대거리
+    ks = np.unique(lab)
+    inter = min(cdist(X[lab == a], X[lab == b]).min() for i, a in enumerate(ks) for b in ks[i+1:])
+    intra = max(pdist(X[lab == k]).max() for k in ks if (lab == k).sum() &gt; 1)
+    return inter / intra
+
+from sklearn.ensemble import IsolationForest
+from sklearn.neighbors import LocalOutlierFactor
+IsolationForest(contamination=0.05, random_state=42).fit_predict(X)     # -1 이 이상치
+LocalOutlierFactor(n_neighbors=20, contamination=0.05).fit_predict(X)   # -1 이 이상치</pre>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">PCA · SVD</span><span class="s">차원 수는 지문 확인</span></summary>
+        <div class="in">
+<pre class="code">from sklearn.decomposition import PCA
+
+pca = PCA(n_components=2).fit(Xs)             # 스케일링 후
+pca.explained_variance_ratio_; pca.components_
+Xr = pca.inverse_transform(pca.transform(Xs))  # 복원
+((Xs - Xr) ** 2).mean()                        # 재구성 오차
+
+U, S, Vt = np.linalg.svd(Xs - Xs.mean(0), full_matrices=False)   # PCA = 중심화 후 SVD
+Z = (Xs - Xs.mean(0)) @ Vt[:k].T               # k 차원으로 축소 (np.matmul, np.linalg.inv 를 직접 쓰라는 문제도 있었다)</pre>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">모델 · 불균형 · 튜닝 · 지표</span><span class="s">캐글과 22~25번</span></summary>
+        <div class="in">
+<pre class="code">from imblearn.over_sampling import SMOTE, RandomOverSampler
+from imblearn.under_sampling import RandomUnderSampler
+X_res, y_res = SMOTE(random_state=42).fit_resample(X_tr, y_tr)   # train 에만. valid·test 는 그대로
+
+from sklearn.model_selection import GridSearchCV, StratifiedKFold
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, VotingClassifier
+from xgboost import XGBClassifier
+xgb = XGBClassifier(n_estimators=300, learning_rate=0.1, max_depth=4,
+                    subsample=0.7, colsample_bytree=0.7, random_state=42)
+gs = GridSearchCV(xgb, {'max_depth': [3, 5], 'learning_rate': [0.05, 0.1]},
+                  scoring='f1_macro', cv=StratifiedKFold(5, shuffle=True, random_state=42), n_jobs=-1)
+gs.fit(X_tr, y_tr); gs.best_params_, gs.best_score_      # 「선정한 모형을 재학습시키지 마라」 같은 지문이 있다
+vote = VotingClassifier([('xgb', xgb), ('rf', RandomForestClassifier(random_state=42))], voting='soft')
+
+from sklearn.linear_model import LogisticRegression
+lr = LogisticRegression(penalty='l1', solver='liblinear', C=1/lam, class_weight={0: 1, 1: w})   # C = 1/λ
+np.exp(lr.coef_)                          # 오즈비. 다중 클래스의 coef_ 는 (클래스, 변수)
+# sklearn 1.8 부터 penalty 는 deprecated → l1_ratio=1 (공식 문서 기준)
+
+from sklearn.metrics import (f1_score, precision_score, recall_score, roc_auc_score,
+                             mean_absolute_error, mean_absolute_percentage_error, root_mean_squared_error, r2_score)
+f1_score(y, p, average='macro')           # macro = 클래스별 F1 의 단순 평균
+roc_auc_score(y, proba[:, 1])             # 이진
+roc_auc_score(y, proba, multi_class='ovr')   # 다중 클래스. 0 번 확률은 proba[:, 0]
+mean_absolute_percentage_error(y, p)      # 0.1 = 10% (퍼센트가 아니라 비율)
+root_mean_squared_error(y, p)             # 구버전이면 np.sqrt(mean_squared_error(y, p))</pre>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><span class="t">자주 나온 계산</span><span class="s">RFM · 백테스트 · 중심성 · 거리</span></summary>
+        <div class="in">
+<pre class="code">t.pivot_table(index='cust', columns='cat', values='days', aggfunc='min', fill_value=999)   # 없는 칸은 R=999, F·M=0
+
+from sklearn.model_selection import TimeSeriesSplit
+list(TimeSeriesSplit(n_splits=14).split(X))     # 백테스트: 시간 순서 유지, 미래가 학습에 들어가지 않는다
+
+import networkx as nx
+nx.degree_centrality(G)                         # 정규화됨 = 차수 / (n-1).  G.degree(v) 는 그냥 차수
+
+from sklearn.metrics.pairwise import cosine_similarity
+from scipy.spatial.distance import jaccard, cdist
+cdist(A, B, metric='minkowski', p=3)            # 유클리드는 p=2, 맨해튼은 p=1</pre>
+        </div>
+      </details>
+
+      <h3>버전·기본값 함정<small>공식 문서에서 직접 확인</small></h3>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th class="k">대상</th><th>실제 동작</th><th class="k">문서</th></tr></thead>
+          <tbody>
+            <tr><td class="k">DBSCAN</td><td><code>min_samples</code>는 <b>자기 자신을 포함</b>한다. 기본 eps=0.5, min_samples=5. 잡음 라벨은 −1.</td><td><a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html">sklearn</a></td></tr>
+            <tr><td class="k">KMeans</td><td><code>n_init</code> 기본값이 1.4 부터 <code>'auto'</code>(k-means++ 이면 1회). 예전 기본(10회)과 결과가 다를 수 있으니 값을 명시한다.</td><td><a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">sklearn</a></td></tr>
+            <tr><td class="k">IsolationForest</td><td>이상치는 <b>−1</b>, 정상은 +1. <code>score_samples</code>는 <b>낮을수록</b> 이상. <code>random_state</code> 없으면 매번 다르다.</td><td><a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html">sklearn</a></td></tr>
+            <tr><td class="k">LogisticRegression</td><td>C 는 규제의 <b>역수</b>(기본 1.0). 1.8 문서에서는 <code>penalty</code>가 deprecated, L1 은 <code>l1_ratio=1</code>. 다중 클래스 L1 은 liblinear 가 아니라 saga.</td><td><a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">sklearn</a></td></tr>
+            <tr><td class="k">MAPE</td><td>비율로 반환(0.5 = 50%). y_true 가 0 이면 아주 큰 값이 나온다.</td><td><a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_percentage_error.html">sklearn</a></td></tr>
+            <tr><td class="k">RMSE</td><td><code>mean_squared_error</code>에 <code>squared</code> 인자가 더는 없다. <code>root_mean_squared_error</code>를 쓰거나 <code>np.sqrt</code>.</td><td><a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html">sklearn</a></td></tr>
+            <tr><td class="k">chi2_contingency</td><td><code>correction=True</code>가 기본이며 자유도가 1(2×2)일 때만 Yates 보정이 적용된다.</td><td><a class="link-u" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html">scipy</a></td></tr>
+            <tr><td class="k">levene</td><td><code>center='median'</code>이 기본(치우친 분포 권장). Bartlett 은 정규성 가정.</td><td><a class="link-u" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.levene.html">scipy</a></td></tr>
+            <tr><td class="k">표준편차</td><td>pandas <code>std()</code>는 ddof=1, numpy <code>std()</code>와 <code>StandardScaler</code>는 ddof=0. Z-score 값이 달라진다.</td><td class="m">직접 실행</td></tr>
+            <tr><td class="k">statsmodels OLS</td><td><code>sm.OLS</code>는 절편을 넣지 않는다(<code>add_constant</code>). formula API 는 자동 포함, <code>- 1</code> 로 제외.</td><td class="m">직접 실행</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>제출 전 체크리스트<small id="cnt-miss">0 / 0</small></h3>
+      <p class="note" style="margin:0 0 14px">엑셀 「실수정리」 — 시험에서 실제로 틀렸거나 틀릴 뻔한 것들. 풀이를 마친 뒤 위에서부터 훑는다.</p>
+      <div class="chk-grid one" data-group="miss">
+        <div class="grp">지문 읽기</div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m01" data-g="miss"><label for="m01">지시문을 적어가면서 푼다. 괄호를 쳐서 해석한다 — 「DF3 에서 ACTION 값이 ACT2 인 <u>대표 데이터가 할당된 군집</u>의 수」</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m02" data-g="miss"><label for="m02">정규화(표준화)한 변수인지, 이상치를 <b>판별만</b> 하는지 제거까지 하는지 확인한다.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m03" data-g="miss"><label for="m03">지문에서 <b>정렬</b>하라고 하는지, 분할 기준이 순번인지 본다. 임시 이름을 쓰지 않고 지시한 이름대로 쓴다.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m04" data-g="miss"><label for="m04">그룹별 값인지 전체 값인지 확인한다(quantile 등). 정의된 값(q1, q3)을 그대로 쓴다.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m05" data-g="miss"><label for="m05">변수명 — <code>df</code> 와 <code>df25</code> 를 섞지 않았는지, 훈련 데이터 이름이 맞는지.</label></div>
+        <div class="grp">계산</div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m06" data-g="miss"><label for="m06">반올림인지 올림인지, 소수점 몇 자리인지. 평균 계산에도 같은 규칙이 걸리는지.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m07" data-g="miss"><label for="m07">연산 순서를 지킨다 — <code>1000 * ENERGY / AREA</code>.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m08" data-g="miss"><label for="m08">유의 / 기각, alpha 값. 부등호 <code>&gt;=</code> 와 <code>&gt;</code> (AUC 문제).</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m09" data-g="miss"><label for="m09">선형모델 「<b>절편 제외</b>」 여부. 마무리는 「절대값의 평균」인지 「평균의 절대값」인지, 상관계수는 절대값인지.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m10" data-g="miss"><label for="m10">PCA 차원 수가 몇인지. PCA 결과에 다른 열을 붙이는 문제가 있다.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m11" data-g="miss"><label for="m11">날짜: <code>dayofweek &gt;= 5</code> 가 주말(0~4 가 평일). <code>day</code> 파싱인지 <code>yymmdd</code> 인지.</label></div>
+        <div class="grp">데이터 처리</div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m12" data-g="miss"><label for="m12">train 을 변환하면 <b>test 도 같은 변환</b>을 했는지. 다항(poly) 변환은 분할 전인지 후인지 지문대로.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m13" data-g="miss"><label for="m13">값을 바꾸는 <code>if</code> 에서 결측치까지 바꾸고 있지 않은지.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m14" data-g="miss"><label for="m14"><code>while</code> 로 누적할 때 어디서 누적하는지.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m15" data-g="miss"><label for="m15">필터링 기준이 무엇인지 자세히 본다.</label></div>
+        <div class="grp">제출 직전</div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m16" data-g="miss"><label for="m16">문제를 풀고 <b>즉시 재실행</b>해서 답이 그대로 나오는지 확인한다.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m17" data-g="miss"><label for="m17">선정한 모형을 재학습시키지 않았는지. 정렬 기준(순번)이 지문과 같은지.</label></div>
+        <div class="chk-row"><input class="chk" type="checkbox" id="m18" data-g="miss"><label for="m18">다중 클래스 ROC AUC 는 <code>multi_class='ovr'</code>, 라벨 0 에 대한 확률은 <code>predict_proba(X)[:, 0]</code>.</label></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 04 계획 ============================ -->
+<section class="band rise" id="plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">04</div>
+      <div>
+        <h2>6주 계획</h2>
+        <p class="lead">시험일에서 거꾸로 센 주차. 필기 28차시는 앞 5주에 나눠 담고, 마지막 주는 시간을 재고 실기를 통째로 푼다. 시험일이 아직이면 1~6주차로만 보인다.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+
+      <div class="wk">
+        <div class="h"><b>1주차</b><span class="wk-range" data-wk="1"></span></div>
+        <div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p11" data-g="plan"><label for="p11">필기 1~5차시 — 데이터 분류·결측·이상치·변환·시각화</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p12" data-g="plan"><label for="p12">필기 6~10차시 — 확률·분포·가설검정 개론·모평균·모분산·정규성</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p13" data-g="plan"><label for="p13">실기: 「전처리 · 분할」 레시피를 빈 노트북에서 다시 써 본다 (결측·ddof·datetime·분할)</label></div>
+        </div>
+      </div>
+      <div class="wk">
+        <div class="h"><b>2주차</b><span class="wk-range" data-wk="2"></span></div>
+        <div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p21" data-g="plan"><label for="p21">필기 11~13차시 — 범주형·상관·회귀·분산분석</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p22" data-g="plan"><label for="p22">실기: 「검정 · 신뢰구간」과 「회귀 · ANOVA」 — 검정 선택표를 보지 않고 고르기</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p23" data-g="plan"><label for="p23">샘플 세트 2개(제조 공정·전자제품 구매)를 21~25번까지 끝까지 풀기</label></div>
+        </div>
+      </div>
+      <div class="wk">
+        <div class="h"><b>3주차</b><span class="wk-range" data-wk="3"></span></div>
+        <div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p31" data-g="plan"><label for="p31">필기 14~22차시 — 머신러닝 일반·불균형·선형·트리·NB·KNN·SVM·앙상블</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p32" data-g="plan"><label for="p32">실기: 「모델 · 불균형 · 튜닝 · 지표」 — 지표 함수 인자를 외워서 쓰기</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p33" data-g="plan"><label for="p33">캐글 연습 lv3-1 ~ lv3-3 을 시간 재고 다시 풀기</label></div>
+        </div>
+      </div>
+      <div class="wk">
+        <div class="h"><b>4주차</b><span class="wk-range" data-wk="4"></span></div>
+        <div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p41" data-g="plan"><label for="p41">필기 23~25차시 — 군집·차원축소·이상치 탐색</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p42" data-g="plan"><label for="p42">실기: 「군집 · 이상치」와 「PCA · SVD」 — Dunn index·DBSCAN precomputed·inverse 복원</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p43" data-g="plan"><label for="p43">캐글 연습 lv3-4 ~ lv3-6</label></div>
+        </div>
+      </div>
+      <div class="wk">
+        <div class="h"><b>5주차</b><span class="wk-range" data-wk="5"></span></div>
+        <div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p51" data-g="plan"><label for="p51">필기 26~28차시 — 딥러닝, 파라미터 수 계산 손으로 5개</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p52" data-g="plan"><label for="p52">위 「회차별 출제 기록」 7개 회차를 문제로 복원해서 풀기 (특히 2025-07·08·10)</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p53" data-g="plan"><label for="p53">캐글 연습 lv3-7 ~ lv3-9, 자가점검 20문항 전부</label></div>
+        </div>
+      </div>
+      <div class="wk">
+        <div class="h"><b>6주차</b><span class="wk-range" data-wk="6"></span></div>
+        <div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p61" data-g="plan"><label for="p61">실기 전체(21~25번 + 캐글)를 시험 시간대로 두 번</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p62" data-g="plan"><label for="p62">제출 전 체크리스트로 자기 답안을 검수, 틀린 이유를 엑셀 「실수정리」에 추가</label></div>
+          <div class="chk-row"><input class="chk" type="checkbox" id="p63" data-g="plan"><label for="p63">시험 환경 점검 — 버전 확인 한 줄, 자주 쓰는 import 블록 준비</label></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 05 출처 ============================ -->
+<section class="band band-last rise" id="src">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">05</div>
+      <div>
+        <h2>출처와 한계</h2>
+        <p class="lead">무엇이 어디서 왔는지, 무엇을 못 찾았는지.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <ul class="src">
+        <li><b>본인 엑셀</b> personal/datasciencelevel3/DS_LV3.xlsx — 「DS3 범위」「실기 - 유형 분석」「빅분기마무리」(캐글 전략·실수정리)「필기」「필기 기출」「필기 요약」「용어 정리」「통계분석, 가설검정」「카테고리 정리」. 시험 구조·회차 기록·점수는 전부 이 파일이다.</li>
+        <li><b>찾지 못한 것</b> 삼성전자 DS 데이터사이언스 인증 Level 3 의 공식 요강·합격 기준·접수 일정. 검색으로는 채용 전형(GSAT 등) 자료만 나왔고 이 인증을 다룬 공개 글은 없었다. 사내 안내를 확인할 것.</li>
+        <li><b>공식 문서로 확인</b> <a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html">DBSCAN</a> · <a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">KMeans</a> · <a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html">IsolationForest</a> · <a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">LogisticRegression</a> · <a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_percentage_error.html">MAPE</a> · <a class="link-u" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html">mean_squared_error</a> · <a class="link-u" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html">chi2_contingency</a> · <a class="link-u" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.levene.html">levene</a></li>
+        <li><b>직접 실행해 확인</b> 위 코드 레시피 전부(scikit-learn 1.7.2, SciPy 1.15, statsmodels, imbalanced-learn, networkx). XGBoost 호출과 시험장 환경의 버전은 확인하지 못했다.</li>
+        <li><b>엑셀 해설의 오류</b> 「필기 기출」 일부 해설(KNN 을 비지도라 한 곳 등)은 틀려서 자가점검에서 바로잡았다. 엑셀의 GPT 풍 해설은 그대로 믿지 말 것.</li>
+        <li><b>유형 빈도</b>는 시트 셀의 키워드 일치로 센 것이라 정확한 문항 통계가 아니다. 방향을 보는 용도.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">개인용 · 검색 비노출 · 체크와 시험일은 이 브라우저에만 저장된다</div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---- 저장소 (막혀 있어도 동작) ---- */
+  var KC = "dsLv3.chk.v1", KD = "dsLv3.exam.v1";
+  function rd(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function wr(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  /* ---- 체크 ---- */
+  var boxes = [].slice.call(document.querySelectorAll("input.chk"));
+  var saved = {};
+  try { JSON.parse(rd(KC) || "[]").forEach(function (i) { saved[i] = 1; }); } catch (e) {}
+
+  function paintRow(b) { var r = b.closest(".chk-row"); if (r) r.classList.toggle("on", b.checked); }
+  function count(g) {
+    var list = g ? boxes.filter(function (b) { return b.dataset.g === g; }) : boxes;
+    return [list.filter(function (b) { return b.checked; }).length, list.length];
+  }
+  function refresh() {
+    var a = count();
+    document.getElementById("allCnt").textContent = a[0] + " / " + a[1];
+    document.getElementById("allBar").style.width = (a[1] ? Math.round(a[0] / a[1] * 100) : 0) + "%";
+    [["sess", "cnt-sess"], ["miss", "cnt-miss"]].forEach(function (p) {
+      var c = count(p[0]), el = document.getElementById(p[1]);
+      if (el) el.textContent = c[0] + " / " + c[1];
+    });
+  }
+  boxes.forEach(function (b) {
+    b.checked = !!saved[b.id]; paintRow(b);
+    b.addEventListener("change", function () {
+      paintRow(b);
+      wr(KC, JSON.stringify(boxes.filter(function (x) { return x.checked; }).map(function (x) { return x.id; })));
+      refresh();
+    });
+  });
+  refresh();
+
+  /* ---- 시험일 ---- */
+  var inp = document.getElementById("examDate");
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  function fmt(d) { return (d.getMonth() + 1) + "/" + d.getDate(); }
+  function paintDate() {
+    var v = inp.value, big = document.getElementById("ddText"), sub = document.getElementById("ddSub");
+    var ranges = document.querySelectorAll(".wk-range");
+    if (!v) {
+      big.textContent = "—";
+      sub.textContent = "시험일을 넣으면 남은 날과 주차별 날짜가 계산된다. 이 브라우저에만 저장된다.";
+      ranges.forEach(function (r) { r.textContent = ""; });
+      return;
+    }
+    var exam = new Date(v + "T00:00:00");
+    var n = Math.round((exam - today) / 864e5);
+    big.textContent = n > 0 ? "D-" + n : (n === 0 ? "오늘이 시험일" : "D+" + (-n));
+    sub.textContent = n > 0 ? "약 " + Math.ceil(n / 7) + "주 남았다. 6주 계획은 " + (n >= 42 ? "아직 여유가 있다." : "압축해서 가야 한다.")
+                            : (n === 0 ? "버전 확인부터." : "시험일이 지났다. 날짜를 다시 넣어도 된다.");
+    ranges.forEach(function (r) {
+      var k = +r.dataset.wk, s = new Date(exam); s.setDate(s.getDate() - 7 * (7 - k));
+      var e = new Date(s); e.setDate(e.getDate() + 6);
+      r.textContent = fmt(s) + " – " + fmt(e);
+    });
+  }
+  var sd = rd(KD); if (sd) inp.value = sd;
+  inp.addEventListener("change", function () { wr(KD, inp.value); paintDate(); });
+  paintDate();
+
+  /* ---- 출제 빈도 막대 ---- */
+  var F = [
+    ["데이터 분할", 32, 8], ["정규화 · 표준화", 20, 8], ["선형 회귀", 15, 8],
+    ["트리 · RF · 부스팅", 18, 7], ["이상치 (Z · LOF · IF)", 14, 7],
+    ["계산 (식 직접)", 31, 6], ["지표 (MAPE·F1·ROC·MSE)", 21, 6], ["결측치", 15, 6],
+    ["병합 · join · 피벗", 9, 6], ["DBSCAN · 병합군집 · 실루엣", 9, 6],
+    ["가설검정 · ANOVA · 정규성 · 상관", 15, 5], ["K-Means", 7, 5], ["KNN · SVM", 6, 5], ["PCA · 차원축소", 5, 5],
+    ["더미 · 원-핫", 8, 4], ["datetime", 5, 2], ["신뢰구간", 4, 2], ["로지스틱", 2, 2]
+  ];
+  var fr = document.getElementById("freq");
+  F.forEach(function (r) {
+    var d = document.createElement("div"); d.className = "bar";
+    d.innerHTML = '<span></span><span class="track"><i style="width:' + (r[2] / 8 * 100) + '%"></i></span><span class="v tnum">' + r[2] + '/8세트 · ' + r[1] + '회</span>';
+    d.firstChild.textContent = r[0];
+    fr.appendChild(d);
+  });
+
+  /* ---- 모두 펼치기 ---- */
+  var folds = [].slice.call(document.querySelectorAll("#written details.fold"));
+  var tg = document.getElementById("toggleAll");
+  tg.addEventListener("click", function () {
+    var open = folds.some(function (d) { return !d.open; });
+    folds.forEach(function (d) { d.open = open; });
+    tg.textContent = open ? "모두 접기" : "모두 펼치기";
+  });
+
+  /* ---- 스크롤 등장 ---- */
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".rise").forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
