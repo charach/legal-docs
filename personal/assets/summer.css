@@ -254,7 +254,7 @@ input.chk:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
   .rise { opacity: 1; transform: none; }
 }
 
-/* ---------- 그로밋 (아내 페이지 전용, 작게·드물게) ---------- */
+/* ---------- 그로밋 (아내 페이지 + 여행 페이지, 작게) ---------- */
 .gromit {
   display: block; width: 100%; height: auto; border-radius: 8px;
   border: 1px solid var(--line); background: #F2F8F9;
