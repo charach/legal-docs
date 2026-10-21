@@ -61,7 +61,7 @@ personal/
 
 ### 예외: 그로밋
 
-아내 페이지 세 곳과 `../travel/index.html`(11월 여행), `../travel/chungbuk_nov.html`(충북 4박 일정 — 아내 요청으로 하루마다 하나씩 + 머리와 맺음에 여러 개)에만 「월레스와 그로밋」 GIF를 둔다. 절제 기조와는 어긋나는
+아내 페이지 세 곳과 `../travel/nov_candidates.html`(11월 여행 후보), `../travel/chungbuk_nov.html`(충북 4박 일정 — 아내 요청으로 하루마다 하나씩 + 머리와 맺음에 여러 개)에만 「월레스와 그로밋」 GIF를 둔다. 절제 기조와는 어긋나는
 요소라 **작게(168px), 섹션 끝의 `.closing` 자리에만, 흑백 배경 위에** 올려 균형을 맞췄다.
 
 - `study_calendar` — 그날 상태에 따라 바뀐다. 마감·면접 같은 `hard` 앵커가 있는
@@ -133,8 +133,8 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 
 ## 11월 여행 페이지
 
-`../travel/index.html` — personal 바깥(`/travel/`)에 있지만 같은 디자인 시스템(`personal/assets/summer.css`)을 쓴다.
-허브 「함께」 그룹과 상단 내비에서 연결된다. 출발일(11/4)까지 D-day 표시.
+`../travel/nov_candidates.html` — personal 바깥(`/travel/`)에 있지만 같은 디자인 시스템(`personal/assets/summer.css`)을 쓴다.
+허브 「함께」 그룹(후보 비교·충북 4박 일정 두 줄)과 상단 내비(`../travel/index.html`, 여행 링크 모음)에서 연결된다. 출발일(11/4)까지 D-day 표시.
 
 - 가격은 2026-10-19 조회값(Google 항공편 · Agoda · 오피넷). 식비·현지 교통·일부 투어는 추정이라 페이지에 그렇게 적어 두었다
 - 비교표는 하나(`#rows`, 83곳, 2인 합계 싼 순). 국내 16곳은 자차 기름(1,853원/L · 12km/L · 왕복 + 현지 150km) + 통행료(도로공사 1종 요금식) + 숙소 5박, 제주는 항공 + 렌터카. 축제가 겹치는 행은 `fest` 태그와 `data-fest`(팝업에 표시). 행의 `data-tags`로 필터가 동작한다 — `star`(★ 추천) · `shoot` · `resort` · `cert` · `night` · 지역(`kr`(국내) · `sea` · `jp` · `ea` · `eu`(유럽·중동) · `am`(미국·캐나다) · `oc`(호주·뉴질랜드)) · 일본 규모(`big` · `small`)
