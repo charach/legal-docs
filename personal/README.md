@@ -174,6 +174,16 @@ GitHub Pages에 올라가면 그냥 동작한다.
 `assets/*.webmanifest` 와 `<link rel="apple-touch-icon">` 이 함께 결정한다 —
 파비콘만 바꿔선 홈화면 아이콘이 안 바뀐다.
 
+### 탭 파비콘 · 그로밋 (전 페이지 공통)
+
+브라우저 탭 아이콘은 전 페이지 공통으로 그로밋 사진이다. 그로밋 GIF(`data/gromit.json`의 `wait`, 안락의자에 팔짱 낀 장면) 한 프레임을 정사각형으로 잘라 만들었다(저장소 루트의 `favicon.ico`(16·32·48) · `favicon-32.png` · `apple-touch-icon.png`(180)). 위 「그로밋 예외」의 「저장소에 파일을 두지 않는다」에서 벗어나는 유일한 예외이고(Aardman 공식 장면의 작은 잘라낸 이미지 3개), 개수 제한에는 걸리지 않는다. 모든 `.html`과 Jekyll 레이아웃(`_layouts/default.html`)의 `<head>`에 같은 링크 세트가 들어 있다(하위 폴더는 `../` 상대경로, 레이아웃만 `/` 절대경로). 새 페이지를 만들면 이 줄들을 `<title>` 앞에 붙인다. 홈화면에 설치되는 페이지의 `apple-touch-icon`(글자 아이콘)은 그대로 둔다 — 탭 파비콘만 바뀌었다.
+
+```html
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">   <!-- 글자 아이콘이 없는 페이지만 -->
+```
+
 아이콘을 바꾼 뒤에는 홈화면에서 **한 번 지우고 다시 추가**해야 한다. iOS가 캐시한다.
 
 PNG는 Chrome 헤드리스로 생성했다 (HTML 한 장을 180·512px로 스크린샷).
