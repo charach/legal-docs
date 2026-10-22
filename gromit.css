@@ -1,0 +1,59 @@
+/* ============================================================
+   그로밋 장식 — 충북 여행 페이지(travel/chungbuk_nov.html) 전용 (요청: 배경 · 버튼 · 아이콘을 그로밋으로)
+   배경 GIF는 Giphy(Aardman 공식 채널) 핫링크, 아이콘 3종은 같은 GIF의 얼굴 프레임을 잘라 둔 작은 PNG.
+   그 페이지 <head> 끝에서 불러온다. 페이지 CSS보다 뒤에 와야 덮어쓴다.
+   ============================================================ */
+:root {
+  --gm-a: url("gromit-icon-a.png");
+  --gm-b: url("gromit-icon-b.png");
+  --gm-c: url("gromit-icon-c.png");
+}
+
+/* ---------- 배경: 은은하게 (투명도 14%, 가장자리를 부드럽게 지움) ---------- */
+html::before, html::after, body::before {
+  content: ""; position: fixed; z-index: -1; pointer-events: none; opacity: .14;
+  background-repeat: no-repeat; background-size: contain; background-position: center;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+html::before { right: 16px; bottom: 16px; width: 290px; height: 197px;
+  background-image: url("https://media.giphy.com/media/9VmGX8OLnMYUz8QPSW/200w.gif"); }
+html::after  { left: 16px; bottom: 16px; width: 270px; height: 184px;
+  background-image: url("https://media.giphy.com/media/wCuPw6hMlYM1TkJIS7/200w.gif"); }
+body::before { right: 40px; top: 90px; width: 250px; height: 170px;
+  background-image: url("https://media.giphy.com/media/yiNKyqrKi54kWLfttV/200w.gif"); }
+@media (max-width: 640px) {
+  html::after, body::before { display: none; }
+  html::before { right: 6px; bottom: 6px; width: 190px; height: 130px; }
+}
+@media (prefers-reduced-motion: reduce), print { html::before, html::after, body::before { display: none; } }
+
+/* ---------- 상단 내비 브랜드 ---------- */
+.nav .brand::before {
+  content: ""; display: inline-block; width: 22px; height: 22px; margin-right: 8px;
+  vertical-align: -5px; border-radius: 5px; background: var(--gm-a) center / cover no-repeat;
+}
+
+/* ---------- 버튼 · 칩 앞에 그로밋 얼굴 (3종 돌려쓰기) ---------- */
+.btn::before, .btn-sm::before, .btn-text::before, .tbtn::before, .fab::before,
+.chip::before, .fchip::before, .flt::before, .fold-btn::before, .gobtn::before, .navbtn::before,
+.fab-today::before, .m-stxbtn::before, .m-back::before, .reset::before, .xbtn::before {
+  content: ""; display: inline-block; flex: none; width: 1.35em; height: 1.35em; margin-right: .4em;
+  vertical-align: -.3em; border-radius: 4px; background: var(--gm-a) center / cover no-repeat;
+}
+.btn::before, .btn-sm::before, .fab::before, .fab-today::before { margin-right: 0; }
+.btn:nth-child(3n+2)::before, .btn-sm:nth-child(3n+2)::before, .btn-text:nth-child(3n+2)::before, .tbtn:nth-child(3n+2)::before,
+.chip:nth-child(3n+2)::before, .fchip:nth-child(3n+2)::before, .flt:nth-child(3n+2)::before { background-image: var(--gm-b); }
+.btn:nth-child(3n)::before, .btn-sm:nth-child(3n)::before, .btn-text:nth-child(3n)::before, .tbtn:nth-child(3n)::before,
+.chip:nth-child(3n)::before, .fchip:nth-child(3n)::before, .flt:nth-child(3n)::before, .fab::before, .fab-today::before { background-image: var(--gm-c); }
+.btn-text.x::before, .btn-text.sp::before { display: none; }
+
+/* ---------- 마우스 포인터: 동그란 그로밋 얼굴 (기본 / 누를 수 있는 것) ---------- */
+html, body {
+  cursor: url("gromit-cursor-a.png") 6 6, auto;
+  cursor: image-set(url("gromit-cursor-a.png") 1x, url("gromit-cursor-a@2x.png") 2x) 6 6, auto;
+}
+a, button, summary, label, [role="button"], input[type="checkbox"], select {
+  cursor: url("gromit-cursor-c.png") 6 6, pointer;
+  cursor: image-set(url("gromit-cursor-c.png") 1x, url("gromit-cursor-c@2x.png") 2x) 6 6, pointer;
+}
