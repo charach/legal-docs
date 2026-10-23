@@ -367,6 +367,30 @@
   .m-fix { margin-top: 14px; font-size: 12.5px; color: var(--ink-soft); background: #F4F4F4; border: 1px solid var(--line); border-radius: 0; padding: 10px 13px; line-height: 1.55; }
   .m-fix b { color: var(--sky-deep); }
 
+  /* ---------- 손기정 풀코스 · 코스/보급 팝업 ---------- */
+  .m-coursebtn { margin-top: 10px; font-family: inherit; font-size: 12.5px; font-weight: 800; letter-spacing: .06em; color: #fff; background: var(--red); border: 2px solid var(--red); padding: 8px 14px; cursor: pointer; }
+  .cx-h { margin: 20px 0 6px; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #000; }
+  .cx-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px; }
+  .cx-tile { border: 1px solid var(--line); padding: 10px 12px; background: #fff; }
+  .cx-tile .k { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+  .cx-tile .v { font-size: 19px; font-weight: 800; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .cx-tile .s { font-size: 11.5px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; }
+  .cx-img { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
+  .cx-cap { font-size: 11px; color: var(--muted); margin-top: 5px; line-height: 1.45; }
+  .cx-svg { width: 100%; height: auto; display: block; }
+  .cx-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cx-tbl { width: 100%; min-width: 440px; border-collapse: collapse; font-size: 12px; }
+  .cx-tbl th { text-align: left; font-size: 10.5px; font-weight: 800; letter-spacing: .05em; color: var(--muted); padding: 4px 6px 6px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .cx-tbl td { padding: 7px 6px 7px 0; border-top: 1px solid var(--line); vertical-align: top; line-height: 1.4; font-variant-numeric: tabular-nums; }
+  .cx-tbl tr:first-child td { border-top: none; }
+  .cx-tbl td.n { white-space: nowrap; }
+  .cx-tbl tr.hl td { background: #F7F7F7; }
+  .cx-tbl .gel { font-weight: 800; color: var(--red); }
+  .cx-note { font-size: 12.5px; line-height: 1.6; color: var(--ink-soft); background: #F4F4F4; border: 1px solid var(--line); padding: 10px 12px; margin-top: 10px; }
+  .cx-note b { color: #000; }
+  .cx-list { margin: 8px 0 0; padding-left: 18px; font-size: 12.5px; line-height: 1.6; color: var(--ink-soft); }
+  .cx-list a { color: inherit; }
+
 </style>
 </head>
 <body>
@@ -413,6 +437,7 @@
     <a class="lb-yt" id="lbYt" target="_blank" rel="noopener">영상으로 보기 (YouTube) ↗</a>
   </div>
 </div>
+<script src="assets/sohn_course.js"></script>
 <script>
 /* ========== 설정 ========== */
 const START = '2026-10-12', WEEK0 = '2026-10-12';
@@ -460,7 +485,7 @@ const EVT = {
   '2026-11-12': { label:'마라톤 대회 주', msg:'템포는 빼고 이지 + 마무리 가속으로. 다리를 가볍게 만드는 날.', run:'E30+B' },
   '2026-11-13': { label:'마라톤 대회 주', msg:'근력 B는 건너뜀 (종아리·코어 피로 방지). 이틀 뒤가 대회이니 일찍 자기.', rest:true, title:'휴식 · 모빌리티', lines:['모빌리티 8분 (아래 목록) · 걷기 20분 · 폼롤러는 하지 않음'] },
   '2026-11-14': { label:'마라톤 대회 주', msg:'대회 전날 셰이크아웃 20분. 번호표·보급·신발을 챙기고 일찍 자기.', run:'E20+B', pfx:'셰이크아웃 ' },
-  '2026-11-15': { label:'손기정 마라톤 풀코스', msg:'계획 외 대회가 아니라 이 계획의 마지막 실측. 목적은 기록이 아니라 상태 확인과 보급 점검이다. 풀코스 기록으로 10km 기준(BASE_10K)을 갱신하지 않는다 — 12/6에 직접 잰다.', race:true, title:'손기정 마라톤 풀코스', km:42.2,
+  '2026-11-15': { label:'손기정 마라톤 풀코스', msg:'계획 외 대회가 아니라 이 계획의 마지막 실측. 목적은 기록이 아니라 상태 확인과 보급 점검이다. 풀코스 기록으로 10km 기준(BASE_10K)을 갱신하지 않는다 — 12/6에 직접 잰다.', race:true, course:true, title:'손기정 마라톤 풀코스', km:42.2,
     lines:['<b>42.195km</b> · 목표 <b>3:25~3:35</b>, 기준 <b>5:00/km</b> (3:31)',
            '0~10km 5:05~5:08로 조심스럽게 → 10~30km 5:00 → 30km 이후 몸이 괜찮으면 4:55까지, 아니면 5:05~5:10으로 늦춘다',
            '하프 통과 1:46 이내가 정상. 1:42보다 빠르면 늦춘다',
@@ -843,6 +868,10 @@ function openModal(ds){
   }
   if (d.fix) h += '<div class="m-fix"><b>구례 보완</b> · '+d.fix+'</div>';
   if (d.s4.length) h += '<div class="m-routine"><div class="rt-head"><span>'+(d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+'</span><span class="t">'+(d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+homeRows(d).join('')+'</ul></div>';
+  if (d.evt && d.evt.course && window.SOHN) {
+    h += '<div class="m-stx"><div class="t">코스 · 보급</div><div class="r">임진각 출발·도착, U턴 2번, 고도 '+SOHN.zmin+'~'+SOHN.zmax+'m로 거의 평탄. 언덕은 17~20km와 34~36km 두 곳.</div>'+
+      '<button class="m-coursebtn" data-ds="'+ds+'">코스 분석 · 보급 전략</button></div>';
+  }
   if (d.pre || d.post) {
     const lab = b => b.t.indexOf('· ') >= 0 ? b.t.slice(b.t.indexOf('· ')+2) : b.t;
     const stars = b => b.list.filter(x => x[3]).map(x => x[0]).join(' · ');
@@ -854,10 +883,111 @@ function openModal(ds){
 
   mc.innerHTML = h;
   const sb = mc.querySelector('.m-stxbtn'); if (sb) sb.addEventListener('click', () => openStretch(sb.dataset.ds));
+  const cb = mc.querySelector('.m-coursebtn'); if (cb) cb.addEventListener('click', () => openCourse(cb.dataset.ds));
   const modalEl = document.getElementById('modal');
   modalEl.style.transform = ''; overlay.style.background = ''; modalEl.scrollTop = 0;
   overlay.classList.add('open'); document.body.style.overflow = 'hidden';
 }
+/* ========== 손기정 풀코스 · 코스 분석 · 보급 전략 팝업 ========== */
+function openCourse(backDs){
+  const S = window.SOHN; if (!S) return;
+  const LM = Object.assign({}, S.lm, {fox_back: S.ret.fox_back}), Z = S.z, ST = S.step, TOT = S.total;
+  const zAt = k => Z[Math.max(0, Math.min(Z.length-1, Math.round(k/ST)))];
+  const gl = (a,b) => { let g = 0, l = 0, ref = zAt(a); for (let k = a+ST; k <= b+1e-6; k += ST) { const v = zAt(k); if (v-ref > 1) { g += v-ref; ref = v; } else if (ref-v > 1) { l += ref-v; ref = v; } } return [Math.round(g), Math.round(l)]; };
+  const UT = 6;                                   // U턴 한 번에 잃는 시간(초)
+  const HILL1 = [16.9, S.crests[0][0]], HILL2 = [33.7, S.crests[1][0]];
+  /* 구간 계획: [from, to, 페이스(초/km), 구간, 바람, 메모] — 합계 약 3:32 (목표 3:25~3:35) */
+  const PL = [
+    [0, LM.J1, 310, '출발 → 마정교차로', '뒷바람', '붐비는 출발. 일부러 천천히'],
+    [LM.J1, LM.T1, 306, '마정 → 1차 반환점(도라산역 톨게이트)', '맞바람', '자유IC '+LM.jayu+'km · 통일대교 '+LM.tongil+'km · 군내삼거리 '+LM.gunnae+'km. 3.6~4.9km에 작은 오르막. 속도 말고 노력도를 일정하게'],
+    [LM.T1, LM.J2, 300, '1차 반환 → 마정 (복귀)', '뒷바람', 'U턴 뒤 뒷바람이라 빨라지기 쉬움. 5:00 유지'],
+    [LM.J2, HILL1[0], 300, '마정 → 여우고개 앞', '뒷바람', '여우고개사거리 '+LM.fox+'km. 오르막 시작 전 숨 고르기'],
+    [HILL1[0], HILL1[1], 310, '여우고개 오르막', '뒷→옆바람', '평균 약 2%. 페이스 말고 호흡·심박을 일정하게, 정상 '+HILL1[1]+'km'],
+    [HILL1[1], LM.T2, 297, '내리막 → 2차 반환점(리비삼거리)', '옆바람', '하프 21.1km가 내리막 구간. 여기서 올리지 말 것'],
+    [LM.T2, HILL2[0], 300, '2차 반환 → 두 번째 언덕 앞 (복귀)', '옆바람', '30km 지점이 판단점: 다리가 괜찮으면 그대로, 아니면 5:05로'],
+    [HILL2[0], HILL2[1], 312, '두 번째 언덕 (여우고개를 반대로)', '옆바람', '이 대회의 승부처. 보폭을 줄이고 팔을 크게 치기'],
+    [HILL2[1], LM.J3, 298, '내리막 → 마정교차로', '옆→맞바람', '내리막은 힘 빼고 따라 내려가기. 여우고개사거리('+LM.fox_back+'km) 이후는 맞바람이니 앞사람 뒤에 붙기. 여력이 있으면 4:55까지'],
+    [LM.J3, TOT, 295, '마정 → 결승', '맞바람', '마지막 1.2km 직선. 여력이 있으면 올리기']
+  ];
+  const tAt = k => { let t = 0; for (const p of PL) { if (k <= p[0]) break; t += (Math.min(k, p[1]) - p[0]) * p[2]; } if (k > LM.T1) t += UT; if (k > LM.T2) t += UT; return t; };
+  const [sh, sm] = S.start.split(':').map(Number), t0 = sh*3600 + sm*60;
+  const clk = sec => hms(t0 + sec).replace(/^(\d+):(\d\d):\d\d$/, '$1:$2');
+  const fin = tAt(TOT), half = tAt(21.0975);
+  const GEL = 22;                                 // g · 구례 계획과 같은 값 (GO·파워젤 표기값 확인)
+  /* 젤 계획: [km, 종류, 메모] */
+  const FUEL = [
+    [5,    'GO',     '맞바람 구간 끝자락. 첫 젤은 호흡이 편할 때'],
+    [10,   '파워젤', '급수대에서 물과 함께 (파워젤은 물 필수)'],
+    [15,   'GO',     '여우고개 오르막(17~19.6km) 앞 에너지'],
+    [20,   '파워젤', '오르막 정상 직후, 하프 바로 앞. 물과 함께'],
+    [25,   'GO',     '내리막 끝 · 2차 반환(27.8km) 전'],
+    [30,   '파워젤', '후반 시작. 카페인 젤이 있으면 이때'],
+    [33.5, 'GO',     '두 번째 언덕(33.7~36.2km) 직전'],
+    [38.5, '파워젤', '마지막 젤. 속이 안 좋으면 생략']
+  ];
+  const nG = FUEL.length + 1, gTot = nG*GEL, gRace = FUEL.length*GEL, perH = Math.round(gRace/(fin/3600));
+  // --- 고도 프로파일 (SVG) ---
+  const W = 640, H = 230, L = 38, Rr = 12, T = 22, B = 34, YMAX = 70, PW = W-L-Rr, PH = H-T-B;
+  const X = k => L + k/TOT*PW, Y = z => T + (1 - z/YMAX)*PH;
+  let area = 'M'+X(0)+','+Y(0), line = '';
+  Z.forEach((z,i) => { const k = Math.min(TOT, i*ST), x = X(k).toFixed(1), y = Y(z).toFixed(1); area += ' L'+x+','+y; line += (i ? ' L' : 'M')+x+','+y; });
+  area += ' L'+X(TOT)+','+Y(0)+' Z';
+  let svg = '<svg class="cx-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="고도 프로파일">';
+  [0,20,40,60].forEach(z => { svg += '<line x1="'+L+'" x2="'+(W-Rr)+'" y1="'+Y(z)+'" y2="'+Y(z)+'" stroke="#E6E6E6"/><text x="'+(L-5)+'" y="'+(Y(z)+3)+'" text-anchor="end" font-size="9" fill="#767677">'+z+'m</text>'; });
+  [HILL1, HILL2].forEach(h => { svg += '<rect x="'+X(h[0])+'" y="'+T+'" width="'+(X(h[1])-X(h[0]))+'" height="'+PH+'" fill="#C8102E" opacity=".10"/>'; });
+  svg += '<path d="'+area+'" fill="#E6E6E6"/><path d="'+line+'" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>';
+  const marks = [[0,'출발'],[LM.T1,'1차 반환'],[LM.J2,'마정'],[21.0975,'하프'],[LM.T2,'2차 반환'],[TOT,'결승']];
+  marks.forEach((m,i) => { const x = X(m[0]); svg += '<line x1="'+x+'" x2="'+x+'" y1="'+T+'" y2="'+(T+PH)+'" stroke="#999" stroke-dasharray="3 3"/><text x="'+Math.min(Math.max(x,18),W-16)+'" y="'+(T-7)+'" text-anchor="middle" font-size="9" font-weight="700" fill="#000">'+m[1]+'</text><text x="'+Math.min(Math.max(x,18),W-16)+'" y="'+(T+PH+13)+'" text-anchor="middle" font-size="9" fill="#767677">'+(+m[0].toFixed(1))+'</text>'; });
+  FUEL.forEach(f => { svg += '<circle cx="'+X(f[0])+'" cy="'+Y(zAt(f[0]))+'" r="4" fill="#C8102E" stroke="#fff" stroke-width="1.5"/>'; });
+  svg += '<text x="'+(W-Rr)+'" y="'+(H-4)+'" text-anchor="end" font-size="9" fill="#767677">km · 붉은 점 = 젤 · 붉은 띠 = 언덕</text></svg>';
+  // --- 구간표 ---
+  let segRows = '';
+  PL.forEach(p => {
+    const [g,l] = gl(p[0], p[1]), hl = (p[3].indexOf('오르막') >= 0 || p[3].indexOf('언덕') >= 0) ? ' class="hl"' : '';
+    segRows += '<tr'+hl+'><td class="n">'+(+p[0].toFixed(1))+'–'+(+p[1].toFixed(1))+'</td><td><b>'+p[3]+'</b><br><span style="color:#767677">'+p[5]+'</span></td><td class="n">'+zAt(p[0])+'→'+zAt(p[1])+'m<br><span style="color:#767677">+'+g+' / −'+l+'</span></td><td class="n">'+p[4]+'</td><td class="n"><b>'+pace(p[2])+'</b><br><span style="color:#767677">'+hms(tAt(p[1]))+'</span></td></tr>';
+  });
+  // --- 젤표 ---
+  let gelRows = '<tr class="hl"><td class="n">출발 15분 전</td><td class="n">'+clk(-900)+'</td><td class="gel n">GO</td><td>물 200ml와 함께. 화장실은 그 전에 (줄이 길 수 있음)</td></tr>';
+  FUEL.forEach(f => { gelRows += '<tr><td class="n">'+f[0]+'km</td><td class="n">'+clk(tAt(f[0]))+'</td><td class="gel n">'+f[1]+'</td><td>'+f[2]+'</td></tr>'; });
+  const w = S.weather;
+  let h = '<div class="m-date">COURSE · 2026.11.15 일 · '+S.start+' 출발(공식 확인)</div>';
+  h += '<div class="m-title">손기정평화마라톤 풀코스</div>';
+  h += '<span class="m-phase" style="background:#C8102E">임진각 평화누리공원 · 제한시간 5시간</span>';
+  h += '<div class="m-goal">공식 코스도의 빨간 선을 따라 거리와 고도를 계산했다. 출발 → 마정교차로 → <b>1차 반환 '+LM.T1+'km</b> → 마정 → 여우고개 → <b>2차 반환 '+LM.T2+'km</b> → 마정 → 결승.</div>';
+  h += '<div class="cx-h">코스도</div><a href="assets/sohn/course-2026.jpg" target="_blank" rel="noopener"><img class="cx-img" src="assets/sohn/course-2026.jpg" alt="2026 손기정평화마라톤 풀코스 코스도" loading="lazy"></a><div class="cx-cap">대회 공식 코스도. 누르면 크게 열린다.</div>';
+  h += '<div class="cx-tiles">'+
+    '<div class="cx-tile"><div class="k">거리</div><div class="v">'+TOT+' km</div><div class="s">반환점 2곳 · 왕복 구조</div></div>'+
+    '<div class="cx-tile"><div class="k">누적 상승 · 하강</div><div class="v">+'+S.gain+' / −'+S.loss+' m</div><div class="s">DEM 추정, 오차 ±30%. 사실상 평탄</div></div>'+
+    '<div class="cx-tile"><div class="k">고도 범위</div><div class="v">'+S.zmin+'~'+S.zmax+' m</div><div class="s">출발 '+zAt(0)+'m · 최고점 여우고개</div></div>'+
+    '<div class="cx-tile"><div class="k">계획대로면</div><div class="v">'+hms(fin)+'</div><div class="s">하프 '+hms(half)+' · 목표 3:25~3:35</div></div></div>';
+  h += '<div class="cx-h">고도 프로파일</div>'+svg;
+  h += '<div class="cx-note"><b>언덕은 두 곳, 같은 언덕이다.</b> 여우고개 '+HILL1[0]+'~'+HILL1[1]+'km(약 +'+(zAt(HILL1[1])-zAt(HILL1[0]))+'m)를 17km대에 한 번, 돌아오며 '+HILL2[0]+'~'+HILL2[1]+'km(+'+(zAt(HILL2[1])-zAt(HILL2[0]))+'m)에서 반대로 한 번 넘는다. 두 번째가 피로한 구간이라 <b>여기서 5:10~5:15로 줄여도 계획이 깨지지 않게</b> 앞쪽을 5:00 밑으로 쓰지 않는다.</div>';
+  h += '<div class="cx-h">구간별 계획</div><div class="cx-scroll"><table class="cx-tbl"><thead><tr><th>km</th><th>구간 · 메모</th><th>고도 · 오르내림</th><th>바람</th><th>페이스 · 누적</th></tr></thead><tbody>'+segRows+'</tbody></table></div>';
+  h += '<div class="cx-note">U턴 2번(1차 '+LM.T1+'km, 2차 '+LM.T2+'km): 바깥쪽으로 크게 돌지 말고 안쪽 라인으로 부드럽게. 한 번에 약 '+UT+'초씩 계산했다. 하프 통과 <b>'+hms(half)+'</b>가 이 계획의 기준이고, <b>1:42 이하로 지나가면 늦춘다</b>.</div>';
+  h += '<div class="cx-h">보급 전략 · SiS 젤</div>';
+  h += '<div class="cx-note" style="margin-top:0"><b>젤 '+nG+'개 ('+gTot+'g).</b> 출발 전 1개 + 대회 중 '+FUEL.length+'개 = 대회 중 시간당 약 <b>'+perH+'g</b>. 구례 때 목표(55~60g/h)에 못 미치므로 <b>km 17(오르막 앞)과 km 36.5(언덕 뒤)에 GO를 하나씩 더 넣어 '+(nG+2)+'개('+(gTot+2*GEL)+'g, 약 60g/h)</b>로 늘릴 수 있다. 위장이 받쳐 줄 때만. 젤 하나를 '+GEL+'g으로 계산했다(구례 계획과 같은 값, 실제 표기 확인).</div>';
+  h += '<div class="cx-scroll" style="margin-top:8px"><table class="cx-tbl"><thead><tr><th>지점</th><th>예상 시각</th><th>젤</th><th>메모</th></tr></thead><tbody>'+gelRows+'</tbody></table></div>';
+  h += '<ul class="cx-list">'+
+    '<li><b>GO(이소토닉)</b>는 물 없이 먹어도 되고, <b>파워젤</b>은 반드시 물과. 공식 급수대 위치를 모르니 파워젤은 급수대가 보일 때 먹는다.</li>'+
+    '<li><b>물</b>은 급수대마다 컵 반 정도(100~150ml). 기온이 낮아 땀이 적다. 마시는 양은 목마름 기준.</li>'+
+    '<li><b>전해질</b>은 서늘한 날이라 기본은 없음. 쥐가 잘 나면 25km에 캡슐 1개.</li>'+
+    '<li><b>리허설</b>: 11/1 롱런(135분)에서 같은 간격(5km마다) GO 2 + 파워젤 2로 위장 점검. 대회에서 처음 먹는 것은 하나도 없게.</li>'+
+    '<li><b>출발 전</b>: 3시간 전 아침(탄수 약 200g), 1시간 전 바나나 또는 에너지바(약 40g), 15분 전 GO 1개.</li>'+
+    '<li><b>소지</b>: 젤은 허리벨트·반바지 주머니에 '+nG+'개. 민통선 구간 소지품 규정은 공식 안내 확인.</li></ul>';
+  h += '<div class="cx-h">날씨 · 바람</div>';
+  h += '<div class="cx-note" style="margin-top:0">10년(2016~2025) 11월 15일 파주 평균 <b>10시 '+w.t10+'°C → 12시 '+w.t12+'°C → 14시 '+w.t14+'°C</b>(10시 범위 '+w.tmin+'~'+w.tmax+'°C), 바람 평균 '+w.wind+'km/h <b>'+w.dir+'</b>, 비는 '+w.years+'년 중 '+w.rainYears+'년. 출발 때 쌀쌀하니 팔토시·장갑을 끼고 5~7km에서 벗는다. 서북서풍이라 1차 반환 구간(1.2~7.9km)과 여우고개사거리 이후(37.8km~결승)는 맞바람, 7.9~17.9km는 뒷바람, 17.9~37.8km 왕복 구간은 옆바람이다.</div>';
+  h += '<div class="cx-h">아직 확인 못 한 것</div><ul class="cx-list">'+
+    '<li><b>출발 시각</b>: 안내에 집결 10:00·출발 10:00로 같이 적혀 있다. 풀코스는 더 일찍일 수 있어 공식 안내로 확인.</li>'+
+    '<li><b>공식 급수대 위치·품목</b>과 구간 컷오프, <b>민통선 입장 규정</b>(신분증, 입장 시간, 촬영·소지품, 셔틀)은 찾지 못했다. <a href="https://sonkeechungrun.com" target="_blank" rel="noopener">공식 홈페이지</a> 확인 후 이 팝업에 반영.</li>'+
+    '<li><b>코스 정확도</b>: 거리는 코스도의 선을 따라 그리고 42.195km로 축척을 맞췄고(마정교차로·여우고개사거리·통일대교 실제 위치와 0.1~0.2km 내 일치), 고도는 DEM(90m)이라 도로와 안 맞는 곳이 있다. 인증 거리와 다른 지점의 km 표지는 ±0.3km 어긋날 수 있다.</li></ul>';
+  h += (backDs ? '<button class="m-back" id="cxBack">← '+backDs.slice(5).replace('-','/')+' 운동으로</button>' : '');
+  mc.innerHTML = h;
+  const bk = mc.querySelector('#cxBack'); if (bk) bk.addEventListener('click', () => openModal(backDs));
+  const modalEl = document.getElementById('modal');
+  modalEl.style.transform = ''; overlay.style.background = ''; modalEl.scrollTop = 0;
+  overlay.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+
 function openStretch(backDs){
   const S = [
     { t:'러닝 전 · 동적',        min:7,  must:3,  list:DYN,       rule:RULE.dynRun },
