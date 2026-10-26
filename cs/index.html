@@ -52,6 +52,8 @@ a { color: inherit; text-decoration: none; }
 .rule { height: 1px; border: 0; background: var(--line); margin: 0; }
 
 /* ── 표지 ── */
+.up { display: inline-block; margin-bottom: 20px; font-size: 13px; color: #6b685f; text-decoration: none; }
+.up:hover { color: #7d5411; }
 header.cover { padding: clamp(56px, 11vh, 104px) 0 var(--s8); }
 .cover .mark { width: 62px; height: 55px; margin-bottom: var(--s6); }
 .cover .mark svg { width: 100%; height: 100%; display: block; }
@@ -121,6 +123,7 @@ footer p { font-size: 12.5px; color: var(--ink-3); }
 
 <header class="cover">
   <div class="wrap">
+    <a class="up" href="../index.html">← ttomstudio</a>
     <div class="mark">
       <svg viewBox="0 0 68 60" aria-hidden="true">
         <ellipse cx="9" cy="36" rx="6.5" ry="13" fill="#fffdf8" stroke="#7d5411" stroke-width="1.7"/>

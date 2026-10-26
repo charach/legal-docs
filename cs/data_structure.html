@@ -312,6 +312,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     // preserve ordering (React before ReactDOM before Babel before text/babel).
     const doc = new DOMParser().parseFromString(template, 'text/html');
     document.documentElement.replaceWith(doc.documentElement);
+    // ttomstudio: 상위 페이지로 가는 링크 (번들 교체 뒤에 다시 붙인다)
+    { const up = document.createElement('div');
+      up.style.cssText = 'position:fixed;top:8px;left:10px;z-index:2147483647;font:12px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;background:rgba(250,249,245,.92);padding:3px 8px;border-radius:6px';
+      up.innerHTML = '<a href="../index.html" style="color:#6b685f;text-decoration:none">ttomstudio</a> <span style="color:#aaa">/</span> <a href="index.html" style="color:#6b685f;text-decoration:none">CS</a>';
+      document.body.appendChild(up); }
 
     // Resolve page-frame markers: mint this document's own blob for each
     // framed page — from local text when this is the root, otherwise by
