@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<title>국가별 분석 프레임워크 — K-푸드 수출 유망국가 발굴 에이전트 시스템</title>
+<meta name="description" content="롯데웰푸드 과제를 국가 카드 6블록으로 쪼개고, 블록별 데이터 소스(공식·뉴스·SNS·법령)의 접근 가능성을 판정한 뒤, DB 축적·법령 RAG·주기적 인사이트 에이전트 시스템으로 묶는 설계.">
+<link rel="stylesheet" href="../personal/assets/summer.css">
+<style>
+:root{
+  --red:#B42318; --red-soft:#FBEAE7; --red-line:#E3A69E;
+  --ok:#0F5C47; --ok-soft:#E6F4EF; --ok-line:#5FA98C;
+  --mid:#7A4F12; --mid-soft:#FBF1DF; --mid-line:#D9A21B;
+  --accent-soft:rgba(14,124,148,.10);
+  --code-bg:#F1F7F8;
+  --llm:#EEEDF8; --llm-line:#8F88D1;
+}
+.hero{padding:72px 0 0}
+.hero .lead{max-width:60ch}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:24px;font-size:14px;color:var(--ink-2)}
+.hero-meta a{color:var(--accent)}
+.wrap-doc{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 96px}
+section{margin-top:64px}
+h2{font-size:1.3rem;font-weight:600;margin:0 0 16px;letter-spacing:-.02em}
+h3{font-size:1rem;font-weight:600;margin:22px 0 8px}
+p{margin:0 0 12px;max-width:46em}
+.note{font-size:.9rem;color:var(--ink-2);max-width:46em}
+.callout{border-left:3px solid var(--accent);background:#fff;padding:14px 18px;border-radius:0 8px 8px 0;box-shadow:var(--shadow);max-width:46em;margin:14px 0}
+.callout.warn{border-left-color:var(--red)}
+.callout p:last-child{margin-bottom:0}
+
+.tablewrap{overflow-x:auto;border-radius:10px;border:1px solid var(--line);background:#fff}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--accent-soft);color:var(--ink);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td:first-child{min-width:8em}
+tr.sub th{background:#F6FAFB;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+.ok,.mid,.no{display:inline-block;border-radius:3px;padding:1px 7px;font-size:.78rem;font-weight:500;white-space:nowrap;border:1px solid}
+.ok{background:var(--ok-soft);border-color:var(--ok-line);color:var(--ok)}
+.mid{background:var(--mid-soft);border-color:var(--mid-line);color:var(--mid)}
+.no{background:var(--red-soft);border-color:var(--red-line);color:var(--red)}
+
+/* 판정 카드 */
+.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.v{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow)}
+.v h3{margin:0 0 8px;display:flex;gap:10px;align-items:baseline}
+.v p{font-size:.93rem;margin:0}
+
+/* 블록 매핑 */
+.map{display:grid;grid-template-columns:1fr 40px 1fr;gap:12px;align-items:stretch}
+.map .req,.map .blk{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.map .req{border-left:3px solid var(--red)}
+.map .blk{border-left:3px solid var(--accent)}
+.map .ar{display:flex;align-items:center;justify-content:center;color:var(--ink-2)}
+.map h4{margin:0 0 4px;font-size:.95rem}
+.map p{margin:0;font-size:.88rem;color:var(--ink-2)}
+.map .k{font-family:var(--mono);font-size:.8rem;color:var(--accent);margin-right:6px}
+
+/* 다이어그램 */
+.diagram{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;box-shadow:var(--shadow)}
+.diagram svg{display:block;min-width:980px;width:100%;height:auto}
+.diagram .box.dec{fill:var(--mid-soft);stroke:var(--mid-line)}
+.diagram .band{fill:#F6FAFB;stroke:none}
+.diagram .band:nth-of-type(even){fill:#fff}
+.diagram .l{font-size:11px;fill:var(--ink-2);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.diagram .lay{font-size:12px;font-weight:600;fill:var(--ink-2);letter-spacing:.04em}
+#software table td:first-child{min-width:2.5em}
+#sources table td:last-child{min-width:7em}
+figure.fig{margin:0 0 28px}
+figure.fig figcaption{font-size:.88rem;color:var(--ink-2);margin-top:10px;max-width:60em}
+.diagram text{font-family:var(--sans);fill:var(--ink)}
+.diagram .box{fill:#fff;stroke:var(--line);stroke-width:1.2;rx:8}
+.diagram .box.code{fill:var(--code-bg)}
+.diagram .box.llm{fill:var(--llm);stroke:var(--llm-line)}
+.diagram .box.db{fill:#F6FAFB;stroke:#9FB6BC}
+.diagram .box.human{fill:var(--red-soft);stroke:var(--red-line)}
+.diagram .t{font-size:13px;font-weight:600}
+.diagram .s{font-size:11px;fill:var(--ink-2)}
+.diagram .arrow{stroke:var(--ink-2);stroke-width:1.2;fill:none;marker-end:url(#ah)}
+.legend{display:flex;gap:20px;flex-wrap:wrap;color:var(--ink-2);font-size:.88rem;margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid var(--line)}
+.legend .l-code::before{background:var(--code-bg)}
+.legend .l-llm::before{background:var(--llm);border-color:var(--llm-line)}
+.legend .l-db::before{background:#F6FAFB;border-color:#9FB6BC}
+.legend .l-human::before{background:var(--red-soft);border-color:var(--red-line)}
+
+/* 국가 카드 */
+.ccard{background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.ccard .head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;padding:16px 20px;border-bottom:1px solid var(--line);background:var(--accent-soft)}
+.ccard .head b{font-size:1.05rem}
+.ccard .head span{font-size:.85rem;color:var(--ink-2)}
+.ccard .blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.ccard .b{padding:16px 20px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.ccard .b h4{margin:0 0 8px;font-size:.9rem;color:var(--accent)}
+.ccard .b dl{margin:0;font-size:.88rem}
+.ccard .b dl div{display:grid;grid-template-columns:9em 1fr;gap:8px;padding:4px 0;border-top:1px dashed var(--line)}
+.ccard .b dl div:first-child{border-top:none}
+.ccard .b dt{color:var(--ink-2)}
+.ccard .b dd{margin:0}
+.ccard .b .src{font-size:.75rem;color:var(--ink-2)}
+.ccard .b .todo{color:var(--red)}
+.pre{font-family:var(--mono);font-size:.82rem;background:var(--code-bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;line-height:1.5;margin:0;white-space:pre}
+
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;max-width:46em}
+.steps li{counter-increment:s;position:relative;padding:12px 0 12px 48px;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:11px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:600;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps .sub{display:block;color:var(--ink-2);font-size:.9rem;margin-top:3px}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.tier{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow)}
+.tier h3{margin:0 0 6px}
+.tier .when{font-size:.8rem;color:var(--ink-2);margin-bottom:10px}
+.tier ul{margin:0;padding-left:1.1em;font-size:.92rem}
+.tier li{margin:4px 0}
+ul.src{margin:0;padding-left:1.1em;font-size:.92rem;max-width:46em}
+ul.src li{margin:5px 0}
+ul.plain > li{display:block;position:relative;padding-left:28px}
+ul.plain > li::before{position:absolute;left:0;top:24px;margin-top:0}
+@media (max-width:760px){.map{grid-template-columns:1fr}.map .ar{transform:rotate(90deg);height:24px}}
+@media (max-width:640px){section{margin-top:48px}.hero{padding-top:48px}.ccard .b dl div{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <span class="crumb"><a class="home" href="../index.html">ttomstudio</a><span class="sep" aria-hidden="true">/</span><a class="brand" href="index.html">Lotte AX</a><span class="sep" aria-hidden="true">/</span><a class="brand" href="framework.html" aria-current="page">프레임워크</a></span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">롯데웰푸드 · K-푸드 수출 유망국가 발굴</span>
+    <h1 style="margin-top:12px">국가별 분석<br>프레임워크</h1>
+    <p class="lead">어느 나라든 같은 틀(국가 카드 6블록)로 읽는다. 블록마다 어떤 데이터를 어디서 어떻게 가져오는지, 특히 뉴스와 SNS·커뮤니티는 실제로 긁을 수 있는지 판정하고, 그걸 DB에 쌓아 법령 RAG와 함께 주기적으로 인사이트를 내는 에이전트 시스템으로 묶는다.</p>
+    <div class="hero-meta">
+      <span>대회 규칙·전략은 <a href="index.html">대회 정리 페이지</a></span>
+      <span>작성 2026-11-01</span>
+    </div>
+  </div>
+  <div class="wrap">
+    <svg class="hero-wave" viewBox="0 0 1080 64" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,42 C120,42 150,18 270,18 C390,18 420,42 540,42 C660,42 690,18 810,18 C930,18 960,42 1080,42"/>
+      <path class="accent" d="M0,52 C120,52 150,30 270,30 C390,30 420,52 540,52 C660,52 690,30 810,30 C930,30 960,52 1080,52"/>
+    </svg>
+  </div>
+</header>
+
+<main class="wrap-doc">
+
+<!-- ============ 0. 판정 ============ -->
+<section id="verdict">
+  <h2>0. 제안에 대한 판정</h2>
+  <p>방향은 맞다. "국가별 프레임워크 → DB 축적 → 법령 RAG → 주기적 인사이트"는 심사 기준 ①(현업 적용·확산)과 ②(완성도)를 동시에 때리는 구조다. 다만 네 군데를 조정해야 3일 안에 돌아가고 본선에서도 살아남는다.</p>
+  <div class="verdict">
+    <div class="v"><h3><span class="ok">동의</span>국가 카드 하나로 통일</h3><p>나라마다 다른 방식으로 조사하면 비교가 안 된다. 같은 6블록·같은 지표·같은 출처 등급을 강제하는 스키마가 프레임워크의 실체다. 아래 2절.</p></div>
+    <div class="v"><h3><span class="mid">조정</span>SNS·커뮤니티는 "원문 수집"이 아니라 "신호 지표"</h3><p>TikTok 공식 API는 학술기관 전용, Instagram 해시태그는 주 30개 제한, X는 유료다. 대신 YouTube·Reddit·Google Trends·플랫폼 공개 트렌드 도구·이커머스 판매 수는 열려 있다. 세대는 플랫폼이 대리변수다. 아래 3-B.</p></div>
+    <div class="v"><h3><span class="ok">동의</span>법령은 RAG가 가장 잘 맞는 영역</h3><p>양이 적고 자주 안 바뀌며, 틀리면 손해가 큰 영역이라 "출처 조문 인용 필수"로 설계할 가치가 있다. 1순위 코퍼스는 aT KATI 수입규정·비관세장벽 DB(한국어로 이미 정리됨). 아래 3-D, 5절.</p></div>
+    <div class="v"><h3><span class="mid">조정</span>"주기적 인사이트" = 지난달 대비 diff</h3><p>매달 같은 TOP3를 내면 가치가 없다. 순위 변동·새 규제·급등 신호·데이터 갱신만 보고하는 diff 리포트로 정의해야 현업이 쓴다. 아래 6절.</p></div>
+    <div class="v"><h3><span class="mid">조정</span>예선은 전체 시스템의 세로 슬라이스</h3><p>12개국 × 공개 데이터 5개 + 규정 문서 10건 RAG가 3일 범위다. 전체 비전은 기획서 아키텍처 장에, 작동 증거는 슬라이스로. 아래 7절.</p></div>
+    <div class="v"><h3><span class="ok">동의</span>전 세계 193국, 소스 수백~천 개</h3><p>단, 소스는 손으로 붙이는 목록이 아니라 커넥터 패밀리 8종 × 인스턴스 레지스트리로, 나라는 같은 깊이가 아니라 193 → 40 → 12 깔때기로 본다. 아래 2-0.</p></div>
+    <div class="v"><h3><span class="ok">동의</span>정합성·실효성 판단 LLM, 단 규칙 뒤에</h3><p>데이터 심사관(LLM ⑧)은 꼭 필요하다. 다만 값의 95%는 규칙·교차 검증(코드)이 처리하고, 불일치·신규 10~15%만 LLM이 "어느 값을 믿을지, 왜"를 판정한다. 값을 정하지는 않는다. 아래 4c.</p></div>
+    <div class="v"><h3><span class="ok">동의</span>경쟁사 블록(G)을 따로 둔다</h3><p>경쟁 강도를 수입 집중도 하나로 보면 Pocky가 10년 먼저 들어간 나라와 빈 나라가 같은 점수가 된다. 직접 경쟁 브랜드 입점·현지 생산·가격 지수·상표 출원·경쟁 뉴스를 G 블록으로 모은다. 아래 2-G.</p></div>
+    <div class="v"><h3><span class="ok">동의</span>DB는 "사실 테이블 + 원문 + 벡터" 세 층</h3><p>숫자는 as-of 날짜가 붙은 사실 테이블에만 넣고 LLM은 거기서만 읽는다. 원문(뉴스·리포트·법령)은 따로 저장하고 벡터는 원문의 색인일 뿐이다. 아래 5절.</p></div>
+  </div>
+</section>
+
+<!-- ============ 1. 요구사항 → 블록 매핑 ============ -->
+<section id="map">
+  <h2>1. 과제 3요소를 국가 카드 6블록으로</h2>
+  <p>과제 문구는 세 줄이지만, 실제로 한 나라를 평가하려면 여섯 가지가 필요하다. 세 번째 줄(TOP3 도출)은 별도 데이터가 아니라 앞 블록들의 <b>가중합 + 근거 조립</b>이라는 점을 분명히 한다.</p>
+  <div class="map">
+    <div class="req"><h4>① 국가별 식품시장 성장성</h4><p>시장이 얼마나 크고 얼마나 빨리 크는가</p></div>
+    <div class="ar">→</div>
+    <div class="blk"><h4><span class="k">A</span>시장 성장성</h4><p>과자·초콜릿·빙과 시장 규모와 CAGR, 인구·소득·도시화, 뉴스에서 뽑은 성장 신호</p></div>
+
+    <div class="req"><h4>② 소비 트렌드</h4><p>누가 무엇을 왜 사는가, 한국 간식이 거기서 어떤 위치인가</p></div>
+    <div class="ar">→</div>
+    <div class="blk"><h4><span class="k">B</span>소비 트렌드</h4><p>공식 리포트의 정성 테마 + 검색·영상·커뮤니티·이커머스에서 나온 정량 신호(세대별은 플랫폼으로 대리)</p></div>
+
+    <div class="req"><h4>③ 수출입 현황</h4><p>이미 얼마나 들어가고 있고 누가 경쟁자인가</p></div>
+    <div class="ar">→</div>
+    <div class="blk"><h4><span class="k">C</span>수출입 현황</h4><p>한국→해당국 품목별 수출액·증가율, 해당국 총수입과 한국 점유율, 경쟁국·단가</p></div>
+
+    <div class="req"><h4>(과제에 없지만 필수)</h4><p>들어갈 수 있는가, 롯데가 이길 수 있는가</p></div>
+    <div class="ar">→</div>
+    <div class="blk"><h4><span class="k">D</span>규제·법령 <span class="k" style="margin-left:10px">E</span>롯데 접근성 <span class="k" style="margin-left:10px">G</span>경쟁사</h4><p>D: 관세·FTA, 인증(할랄 등), 라벨·첨가물 규정, 등록 절차 → RAG. E: 거점 거리, 법인·대리점, 기존 실적. G: 누가 이미 그 선반에 있고(Pocky·오리온·현지 브랜드), 얼마에 팔며, 공장을 지었는가</p></div>
+
+    <div class="req"><h4>④ 유망국가 TOP3 + 근거</h4><p>결론</p></div>
+    <div class="ar">→</div>
+    <div class="blk"><h4><span class="k">F</span>점수·근거</h4><p>A~E·G의 z-점수 가중합, 가중치 시나리오별 순위, 모든 문장에 출처가 붙은 근거 문단</p></div>
+  </div>
+</section>
+
+<!-- ============ 2. 블록별 데이터 소스 ============ -->
+<section id="sources">
+  <h2>2. 블록별 데이터 소스와 접근 판정</h2>
+  <p>판정 기준: <span class="ok">열림</span> 공식 API나 다운로드로 바로 쓸 수 있음 · <span class="mid">조건부</span> 가능하지만 비공식 방법·약관·비용·수작업이 따름 · <span class="no">막힘</span> 현실적으로 불가. "예선" 열은 3일 안에 쓸 것인지다.</p>
+
+  <h3 id="registry">2-0. 전 세계로 넓히기 — 소스 레지스트리와 커버리지 깔때기</h3>
+  <p>"소스 수백 개"는 코드 수백 개가 아니다. 커넥터는 <b>패밀리</b>(같은 방식으로 긁는 소스 묶음) 단위로 8개만 짜고, 어느 나라의 어느 URL을 긁을지는 <b>레지스트리 테이블</b>의 행으로 관리한다. 193국 × 패밀리의 빈칸은 소스 발굴 에이전트(⑦)가 채우고 사람이 승인한다.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>패밀리</th><th>인스턴스 예</th><th>수(추정)</th><th>접근 방식 (커넥터 1개)</th><th>갱신</th><th>발굴 방법</th></tr></thead>
+    <tbody>
+      <tr><td>글로벌 통계 API</td><td>Comtrade · WDI · IMF · FAO · GDELT · WTO ePing · ITC</td><td>≈10</td><td>공식 REST, 국가 코드 파라미터로 193국 순회</td><td>월</td><td>고정</td></tr>
+      <tr><td>국가별 정부·세관</td><td>각국 통계청 가계지출, 세관 수입 통계, 중앙은행 환율·물가</td><td>193 × 2 ≈ 390</td><td>HTML 표·엑셀·CSV 다운로드. 파서는 "표 찾기 → 열 매핑" 범용 1개 + 국가별 열 매핑 설정</td><td>분기</td><td>⑦ 탐색 → 시험 수집 → 승인</td></tr>
+      <tr><td>규제기관·관보</td><td>식품안전청, 할랄 인증기관, 관세청, 관보·법령 DB</td><td>193 + 원문 ≈ 250</td><td>공식 페이지 변경 감시(해시) + PDF 수집 → 조문 청킹</td><td>변경 시</td><td>KATI·GAIN 목록에서 시드 → ⑦ 보강</td></tr>
+      <tr><td>매체 RSS</td><td>식품 전문지(글로벌 20), 국가별 일간·경제지 2~5</td><td>≈400</td><td>RSS·사이트맵. 기사 해시로 중복 제거 후 ①로</td><td>일</td><td>⑦이 국가별 상위 매체 탐색</td></tr>
+      <tr><td>플랫폼 API</td><td>YouTube · Reddit · Google Trends · TikTok Creative Center</td><td>5</td><td>공식 API, regionCode·geo로 국가 순회</td><td>주</td><td>고정</td></tr>
+      <tr><td>리포트</td><td>USDA GAIN(국가별 연 2~3건), KOTRA·KATI 시장 리포트</td><td>연 300+</td><td>목록 페이지 크롤 → PDF → 청킹·벡터</td><td>발행 시</td><td>목록 자동</td></tr>
+      <tr><td>기업 공시·뉴스룸·상표·전시회</td><td>경쟁사 연차보고서·IR(지역별 매출·공장), 기업 뉴스룸 RSS, WIPO 상표 DB, Gulfood·SIAL·FHA 전시사 목록, 커리어 페이지</td><td>경쟁사 60 × 4 ≈ 240</td><td>IR PDF 크롤 → 청킹, RSS, 상표 DB 조회, 전시회 디렉터리 크롤</td><td>분기 · 일(RSS)</td><td>경쟁사 마스터 60곳 고정 + ⑦이 현지 브랜드 보강</td></tr>
+      <tr><td>롯데 자료·현장</td><td>DART · IR · 본선 CSV</td><td>소수</td><td>수작업 적재</td><td>분기</td><td>고정</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="margin-top:10px">레지스트리 행: {family, country, instance_url, parser_config, schedule, license, reliability_prior, status(active|failing|blacklisted), added_by(⑦|사람), approved_at}. 커넥터는 이 행을 읽어 돈다. 새 나라를 추가하는 일 = 행을 추가하는 일.</p>
+  <figure class="fig" style="margin-top:18px">
+    <div class="diagram"><svg viewBox="0 0 1000 300" role="img" aria-label="커버리지 깔때기: 193국 전부를 글로벌 API로 스크리닝(Tier 0), 상위 40국에 국가별 소스와 법령 RAG를 붙이고(Tier 1), 12국은 SNS·이커머스·현장 데이터로 심층 분석(Tier 2)해 TOP3를 낸다. 매달 승격·강등."><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C7A85"/></marker></defs><rect class="box db" x="20" y="40" width="320" height="200" rx="8"/><text class="t" x="34" y="64">Tier 0 · 193국 전부</text><text class="s" x="34" y="84">글로벌 API만 (Comtrade·WDI·GDELT·ePing)</text><text class="s" x="34" y="100">자동 스크리닝 · 사람 손 안 탐</text><text class="s" x="34" y="116">비용 ≈ 0, 월 1회</text><path class="arrow" d="M340,140 L360,140"/><rect class="box " x="360" y="60" width="260" height="160" rx="8"/><text class="t" x="374" y="84">Tier 1 · 상위 40국</text><text class="s" x="374" y="104">+ 국가별 정부·세관·규제기관·관보</text><text class="s" x="374" y="120">+ 매체 RSS 2~5 · GAIN·KOTRA 리포트</text><text class="s" x="374" y="136">법령 RAG 5문항 · 월 1회</text><path class="arrow" d="M620,140 L640,140"/><rect class="box llm" x="640" y="80" width="200" height="120" rx="8"/><text class="t" x="654" y="104">Tier 2 · 12국 심층</text><text class="s" x="654" y="124">+ SNS·커뮤니티·이커머스 신호</text><text class="s" x="654" y="140">+ 현장 데이터 결합 · 거점 거리</text><text class="s" x="654" y="156">주간 갱신 · 담당자 지정</text><path class="arrow" d="M840,140 L860,140"/><rect class="box human" x="860" y="100" width="120" height="80" rx="8"/><text class="t" x="874" y="124">TOP3</text><text class="s" x="874" y="144">추천 +</text><text class="s" x="874" y="160">근거</text><text class="l" x="180" y="268" text-anchor="start">승격: 점수 상위 · 급등 신호 · 담당자 지정  |  강등: 3개월 연속 하위 · 소스 실패</text><text class="l" x="500" y="290" text-anchor="start">매달 인사이트 에이전트가 승격·강등을 제안하고 담당자가 확정한다. 깊이는 다르지만 193국 전부가 매달 점수를 받는다.</text></svg></div>
+    <figcaption>그림 0. 커버리지 깔때기. "모든 나라를 본다"는 193국 전부가 매달 점수를 받는다는 뜻이고, 깊이는 Tier에 따라 다르다. Tier 0은 사람 손이 안 가고 비용이 거의 없다. 깊은 소스(SNS·커뮤니티·현장)는 12국에만 붙인다.</figcaption>
+  </figure>
+  <div class="tablewrap"><table>
+    <thead><tr><th>규모 추정 (월)</th><th>Tier 0 · 193국</th><th>Tier 1 · 40국</th><th>Tier 2 · 12국</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td>수집 호출</td><td>≈ 2,000 (API)</td><td>≈ 6,000 (국가별 소스·RSS)</td><td>≈ 3,000 (플랫폼·마켓)</td><td>해시 비교로 바뀐 것만 파싱</td></tr>
+      <tr><td>LLM 호출 ①② (분류)</td><td>0</td><td>≈ 20,000 기사</td><td>≈ 5,000 기사 + 샘플 600묶음</td><td>소형 모델 · 배치 API</td></tr>
+      <tr><td>LLM 호출 ⑧ (심사관)</td><td>≈ 300 (불일치만)</td><td>≈ 1,500</td><td>≈ 500</td><td>전체 값의 10~15%</td></tr>
+      <tr><td>LLM 호출 ③④⑥</td><td>0</td><td>40 × 5문항 + 근거 40</td><td>12 × 서술</td><td>중형 모델</td></tr>
+      <tr><td>사람 검토</td><td>0</td><td>C등급·충돌 ≈ 50건</td><td>≈ 30건 + 신규 소스 승인</td><td>월 반나절</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="margin-top:10px">숫자는 설계용 추정이다. 예선 슬라이스는 Tier 2의 12국만 돌리고, 193국 스크리닝은 본선 이후 "레지스트리에 행만 추가하면 된다"는 것을 기획서에서 보여준다.</p>
+
+  <h3>A. 시장 성장성 — 공식 통계와 리포트, 그리고 뉴스</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>소스</th><th>무엇을 주나</th><th>접근</th><th>갱신</th><th>판정</th><th>예선</th></tr></thead>
+    <tbody>
+      <tr><td>KOTRA 해외시장뉴스</td><td>국가정보(경제·시장 개요), 상품·산업 동향 리포트, 현지 뉴스. 국가정보는 공공데이터포털 오픈API 등록</td><td>오픈API(국가정보) + 리포트 페이지 크롤</td><td>수시</td><td><span class="ok">열림</span></td><td>○ 국가 개요·정성 신호</td></tr>
+      <tr><td>aT KATI 농식품수출정보</td><td>국가별 수출 통계, 해외시장 리포트, 소비 트렌드, 수입규정·비관세장벽</td><td>사이트 다운로드(엑셀·PDF). 오픈API는 미확인 → 공공데이터포털 재검색 필요</td><td>월·수시</td><td><span class="mid">조건부</span></td><td>○ 리포트 10건은 수작업 저장</td></tr>
+      <tr><td>USDA FAS GAIN</td><td>국가별 "Retail Foods", "Exporter Guide", "Food Processing" 보고서. 소매 채널 구조·시장 규모·소비 특성이 영문으로 정리됨</td><td>무료 PDF, 검색 API 비공식</td><td>연 1회</td><td><span class="ok">열림</span></td><td>○ 후보국 12개 보고서 → RAG 코퍼스</td></tr>
+      <tr><td>World Bank WDI · IMF WEO · UN Population</td><td>인구, 1인당 GDP, 성장률, 도시화율, 연령 구조</td><td>공식 REST API, 무료</td><td>연</td><td><span class="ok">열림</span></td><td>○ 성장성 축의 뼈대</td></tr>
+      <tr><td>UN Comtrade</td><td>각국의 품목별(HS 1704·1806·1905·2105) 수입액과 수입 상대국 → 시장 규모 대리변수, 3년 CAGR</td><td>공식 API, 무료 키(일 500회)</td><td>월·연</td><td><span class="ok">열림</span></td><td>○ 핵심</td></tr>
+      <tr><td>FAOSTAT</td><td>식품 소비·공급 밸런스, 설탕·유지 소비량</td><td>공식 API, 무료</td><td>연</td><td><span class="ok">열림</span></td><td>△ 보조</td></tr>
+      <tr><td>Euromonitor · Statista · Mintel</td><td>카테고리별 시장 규모·예측, 브랜드 점유율</td><td>유료 구독</td><td>연</td><td><span class="no">막힘</span></td><td>× 본선에서 롯데가 줄 가능성. 스키마에 자리만 비워 둠</td></tr>
+      <tr class="sub"><th colspan="6">뉴스 — "해외 뉴스 전체"를 긁는 대신 소스를 세 층으로</th></tr>
+      <tr><td>GDELT 2.0 DOC API</td><td>전 세계 뉴스를 15분 단위로 색인. 국가·언어·키워드(예: "Korean snack", "Pepero", "confectionery import")로 기사 목록·톤·양 조회</td><td>무료 API, 키 불필요</td><td>15분</td><td><span class="ok">열림</span></td><td>○ 뉴스 양·톤 추세 지표</td></tr>
+      <tr><td>Google News RSS</td><td>국가·언어 파라미터로 키워드 검색 결과 RSS</td><td>RSS, 무료, 비공식</td><td>실시간</td><td><span class="mid">조건부</span></td><td>○ 원문 샘플링</td></tr>
+      <tr><td>현지·업계 매체 RSS 목록</td><td>FoodNavigator(Asia·USA·Europe), Just Food, Gulf News·Khaleej Times(UAE), Arab News(사우디), VnExpress(베트남), Jakarta Post·Antara(인도네시아), 각국 식품 협회 보도자료</td><td>RSS·크롤</td><td>일</td><td><span class="mid">조건부</span></td><td>△ 국가당 2~3개만</td></tr>
+      <tr><td>국내 매체·빅카인즈</td><td>K-푸드 수출 보도, 경쟁사(오리온·농심·삼양) 해외 동향</td><td>네이버 뉴스 API, 빅카인즈</td><td>일</td><td><span class="ok">열림</span></td><td>○</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="margin-top:12px">뉴스는 원문을 저장하는 게 아니라 <b>LLM이 기사마다 구조화된 "신호"를 뽑아 사실 테이블에 넣는다</b>: {국가, 날짜, 유형(수요·규제·경쟁·유통·물류), 방향(+/−), 근거 한 줄, URL}. 성장성 축에는 "최근 90일 긍정 신호 수 − 부정 신호 수"가 지표로 들어간다. 원문은 링크로만 남긴다.</p>
+
+  <h3 id="sns">B. 소비 트렌드 — 공식 자료와 SNS·커뮤니티, 그리고 "가능한가"</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>소스</th><th>무엇을 주나</th><th>접근</th><th>세대 정보</th><th>판정</th><th>예선</th></tr></thead>
+    <tbody>
+      <tr class="sub"><th colspan="6">공식·반공식 분석 자료</th></tr>
+      <tr><td>USDA GAIN Retail Foods</td><td>소매 채널(현대식 유통·전통시장·편의점·이커머스) 비중, 소비자 선호, 수입 식품 트렌드</td><td>무료 PDF</td><td>일부</td><td><span class="ok">열림</span></td><td>○</td></tr>
+      <tr><td>aT 소비 트렌드·시장 리포트</td><td>국가별 한국 식품 인지도·구매 경험 조사, 품목별 트렌드</td><td>다운로드</td><td>일부(설문 연령대)</td><td><span class="mid">조건부</span></td><td>○</td></tr>
+      <tr><td>DataReportal "Digital 2026"</td><td>국가별 SNS 플랫폼 이용률·연령 구조 → 어떤 플랫폼이 어느 세대를 대표하는지</td><td>무료 PDF·웹</td><td><b>핵심</b></td><td><span class="ok">열림</span></td><td>○ 세대 대리변수 표의 근거</td></tr>
+      <tr><td>각국 통계청 가계지출 조사</td><td>식품·과자 지출 비중, 연령대별 지출</td><td>국가별 상이</td><td>있음</td><td><span class="mid">조건부</span></td><td>× 본선 이후</td></tr>
+      <tr><td>NIQ(닐슨) · Kantar · Mintel</td><td>실구매 패널, 브랜드별 점유</td><td>유료</td><td>있음</td><td><span class="no">막힘</span></td><td>× 자리만</td></tr>
+      <tr class="sub"><th colspan="6">검색·영상·커뮤니티·이커머스 — 정량 신호</th></tr>
+      <tr><td>Google Trends</td><td>국가별 "Pepero" "Korean snack" "초코파이 현지 표기" 관심도 지수(0~100), 관련 검색어 급상승, 하위 지역</td><td>비공식 라이브러리(pytrends), 속도 제한</td><td>없음</td><td><span class="mid">조건부</span></td><td>○ 가장 싸고 빠른 신호</td></tr>
+      <tr><td>YouTube Data API</td><td>regionCode·언어별 검색: 관련 영상 수, 조회·좋아요, 업로드 추세, 댓글 샘플. 먹방·리뷰·챌린지 영상이 한국 간식 확산의 주 경로</td><td>공식 API, 무료 할당(일 1만 유닛)</td><td>없음(채널 성격으로 추정)</td><td><span class="ok">열림</span></td><td>○ 핵심</td></tr>
+      <tr><td>Reddit API</td><td>국가 서브레딧(r/dubai, r/singapore, r/vietnam, r/indonesia, r/Polska 등)과 r/snacks·r/KoreanFood에서 키워드 언급 수·반응·댓글 테마</td><td>공식 API, 비상업 무료(분당 100회)</td><td>20~30대 편향</td><td><span class="ok">열림</span></td><td>○ 영미·유럽·중동 교민권</td></tr>
+      <tr><td>TikTok Creative Center</td><td>국가별 인기 해시태그·급상승 키워드·인기 영상(공개 트렌드 도구)</td><td>브라우저 공개, 로그인 필요, 비공식 조회</td><td><b>Z세대 대리</b></td><td><span class="mid">조건부</span></td><td>△ 수작업 캡처 12개국</td></tr>
+      <tr><td>TikTok Research API</td><td>영상·댓글 원문 대량 조회</td><td>학술기관 승인 과제만(2026-09 기준), 상업 불가</td><td>있음</td><td><span class="no">막힘</span></td><td>×</td></tr>
+      <tr><td>Instagram Graph API</td><td>해시태그 검색(비즈니스 계정, 7일 30개 해시태그 제한), 공개 게시물 수</td><td>공식 API, 제한 심함</td><td>MZ 대리</td><td><span class="mid">조건부</span></td><td>× 본선 이후</td></tr>
+      <tr><td>X(트위터) API</td><td>키워드 검색</td><td>유료 플랜, 고가</td><td>있음</td><td><span class="no">막힘</span></td><td>×</td></tr>
+      <tr><td>Facebook 그룹 · Zalo · 카카오류 현지 메신저</td><td>베트남·인도네시아·중동 커뮤니티의 실제 입소문</td><td>API 없음, 스크랩 약관 위반</td><td>30대+ 대리</td><td><span class="no">막힘</span></td><td>×</td></tr>
+      <tr><td>현지 커뮤니티 포럼</td><td>Kaskus(인도네시아), Voz·Webtretho(베트남), ExpatWoman(UAE), Mumsnet(영국) 등 공개 게시판</td><td>공개 HTML, robots.txt 확인 후 샘플 크롤</td><td>포럼마다 다름</td><td><span class="mid">조건부</span></td><td>△ 국가당 1개 샘플</td></tr>
+      <tr><td>이커머스 검색·판매 수·리뷰</td><td>Amazon(미·유럽) 리뷰 수·평점, Shopee·Lazada·Tokopedia "판매 수", Noon·Carrefour UAE 입점 여부와 가격. 실제 구매 신호</td><td>공개 페이지, 약관상 자동 수집 제한 → 수작업 샘플 또는 공식 셀러 데이터</td><td>없음</td><td><span class="mid">조건부</span></td><td>○ 12개국 × 3개 상품 수작업 표</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout" style="margin-top:14px">
+    <p><b>"특정 세대별로 유행하는 SNS·커뮤니티를 뒤지는 것"은 가능한가.</b> 원문을 대량으로 긁는 방식은 막혀 있다(TikTok·Instagram·X·Facebook). 하지만 질문을 바꾸면 된다. 세대별 원문 대신 <b>세대를 대표하는 플랫폼의 공개 집계치</b>를 신호로 쓴다. DataReportal로 "이 나라에서 Z세대는 TikTok, 30대는 Facebook, 전 연령은 YouTube"를 먼저 고정하고, 각 플랫폼에서 열려 있는 숫자(영상 수·조회 추세·해시태그 수·검색 지수·판매 수)를 모은다. 원문은 YouTube 댓글·Reddit 스레드·포럼 게시물을 <b>국가당 수백 건만 샘플링</b>해 LLM이 테마(맛·가격·선물용·할랄·구하기 어려움 등)로 분류하고, 집계만 DB에 남긴다. 개인 식별 정보는 저장하지 않는다. 이렇게 하면 심사위원의 "약관·개인정보는?" 질문에도 답이 된다.</p>
+  </div>
+  <div class="tablewrap" style="margin-top:14px"><table>
+    <thead><tr><th>세대 대리 플랫폼(예시)</th><th>베트남</th><th>인도네시아</th><th>UAE·사우디</th><th>미국</th><th>폴란드·독일</th></tr></thead>
+    <tbody>
+      <tr><td>Z세대(10~20대)</td><td>TikTok</td><td>TikTok · Instagram</td><td>TikTok · Snapchat</td><td>TikTok · Instagram</td><td>TikTok · Instagram</td></tr>
+      <tr><td>밀레니얼(30대)</td><td>Facebook · Zalo</td><td>Instagram · WhatsApp</td><td>Instagram · WhatsApp</td><td>Reddit · Instagram</td><td>Instagram · Facebook</td></tr>
+      <tr><td>전 연령</td><td>YouTube</td><td>YouTube</td><td>YouTube</td><td>YouTube</td><td>YouTube</td></tr>
+      <tr><td>구매 신호</td><td>Shopee · Lazada</td><td>Shopee · Tokopedia</td><td>Noon · Carrefour</td><td>Amazon · Costco</td><td>Amazon · 현지 마트 온라인</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="margin-top:10px">이 표의 플랫폼 배정은 일반적으로 알려진 이용 패턴이다. 기획서에 넣기 전에 DataReportal 2026 국가 보고서의 연령별 이용률로 교체한다.</p>
+
+  <h3>C. 수출입 현황 — 양쪽 세관을 다 본다</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>소스</th><th>무엇을 주나</th><th>접근</th><th>갱신</th><th>판정</th><th>예선</th></tr></thead>
+    <tbody>
+      <tr><td>관세청 수출입무역통계</td><td>한국→국가별 HS 10단위 월별 수출액·중량 → 빼빼로(HS 1806.90 등)·초코파이·빙과의 국가별 추세, 단가</td><td>사이트 조회·엑셀 다운로드, 오픈API(공공데이터포털)</td><td>월</td><td><span class="ok">열림</span></td><td>○ 핵심</td></tr>
+      <tr><td>무역협회 K-stat</td><td>같은 데이터의 편한 조회, 품목·국가 교차</td><td>회원 무료</td><td>월</td><td><span class="ok">열림</span></td><td>○</td></tr>
+      <tr><td>aT KATI 수출 통계</td><td>농식품 기준 국가·품목 수출(과자류 분류가 롯데 보고 단위와 비슷)</td><td>다운로드</td><td>월</td><td><span class="mid">조건부</span></td><td>○</td></tr>
+      <tr><td>UN Comtrade (수입국 측)</td><td>해당국이 전 세계에서 수입한 과자·초콜릿 총액과 상대국별 금액 → 한국 점유율, 경쟁국(일본·중국·말레이시아·유럽) 점유율, HHI</td><td>공식 API</td><td>월·연</td><td><span class="ok">열림</span></td><td>○ 핵심</td></tr>
+      <tr><td>Eurostat Comext · US Census USA Trade Online</td><td>EU·미국 측의 더 빠르고 세밀한 수입 통계</td><td>공식 API·다운로드</td><td>월</td><td><span class="ok">열림</span></td><td>△ 유럽·미국만</td></tr>
+      <tr><td>ITC Trade Map</td><td>Comtrade 가공본, 성장률·점유율 자동 계산</td><td>무료 가입</td><td>연</td><td><span class="mid">조건부</span></td><td>△ 검산용</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="margin-top:12px">두 세관이 다르게 말하는 지점이 분석의 핵심이다. 한국 통계에서 UAE·싱가포르로 나간 물량이 상대국 통계에는 재수출로 사라진다. 두 수치의 차이를 "허브 왜곡 계수"로 저장해 두면 심사위원의 첫 질문에 답이 된다.</p>
+
+  <h3 id="law">D. 규제·법령 — RAG 코퍼스</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>층</th><th>문서</th><th>국가</th><th>접근</th><th>판정</th><th>예선</th></tr></thead>
+    <tbody>
+      <tr><td><b>1층 · 한국어 정리본</b></td><td>aT KATI 수입규정·비관세장벽 DB, 식약처 해외식품규제정보, KOTRA 통관·인증 안내. 국가별로 라벨·첨가물·인증·등록 절차가 이미 요약돼 있음</td><td>전체</td><td>다운로드·크롤</td><td><span class="ok">열림</span></td><td>○ <b>RAG 1순위</b>. 12개국 × 2~3문서</td></tr>
+      <tr><td><b>2층 · 공식 원문(영문)</b></td><td>미국 FDA: 식품시설등록, FSVP(수입자 검증), 21 CFR 101 라벨 · EU: 1169/2011 라벨, 1333/2008 첨가물, 2023/915 오염물질 · GCC: GSO 2055-1 할랄, GSO 9 라벨 · 사우디 SFDA 등록 · UAE MOIAT 할랄 · 인도네시아 BPJPH 할랄(수입 식품 2026-10-17 의무화, 외국 인증기관 MRA로 대체 가능)·BPOM 등록 · 베트남 Decree 15/2018 자기공표 · 일본 식품표시법</td><td>국가별</td><td>공식 사이트 PDF·HTML</td><td><span class="ok">열림</span></td><td>△ 후보 TOP5만</td></tr>
+      <tr><td><b>3층 · 관세·FTA</b></td><td>한-EU FTA(0%), 한-미 FTA, 한-베트남 FTA, 한-UAE CEPA(2024 서명, 발효 여부 확인), 한-GCC FTA(2023 서명, 발효 여부 확인), 한-인니 CEPA. 품목별 양허 세율</td><td>국가별</td><td>FTA 통합플랫폼(관세청), ITC Market Access Map</td><td><span class="ok">열림</span></td><td>○ 표 하나</td></tr>
+      <tr><td><b>4층 · 변경 감시</b></td><td>WTO TBT/SPS 통보문(새 규제 사전 통보), 각국 관보, ChemLinked·FoodNavigator 규제 뉴스</td><td>전체</td><td>ePing API(무료)·RSS</td><td><span class="ok">열림</span></td><td>× 본선 이후, 월간 diff용</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn" style="margin-top:14px">
+    <p><b>법령 RAG에서 꼭 지킬 것.</b> ① 청크는 조문·항 단위로 자르고 메타데이터(국가·품목군·시행일·출처 URL·수집일)를 붙인다. ② 검색은 키워드(BM25) + 벡터 하이브리드. 법령은 고유명사·번호가 중요해 벡터만으로는 놓친다. ③ 답변은 반드시 조문을 인용하고, 시행일이 질의 시점보다 미래이거나 수집일이 1년 넘었으면 "확인 필요" 표시. ④ 한국어 정리본(1층)과 원문(2층)이 다르면 원문 우선, 차이를 로그로 남긴다. ⑤ 평가셋: 국가당 5문항(관세율·할랄 필요 여부·라벨 언어·등록 기관·첨가물 제한)을 정답과 함께 만들어 두고 매 배포마다 돌린다.</p>
+  </div>
+
+  <h3>E. 롯데 접근성 — 예선은 공개 자료, 본선은 현장 데이터</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>소스</th><th>무엇을 주나</th><th>판정</th><th>예선</th></tr></thead>
+    <tbody>
+      <tr><td>롯데웰푸드 사업보고서·IR 자료(DART)</td><td>해외 법인 목록·매출, 수출 지역 비중, 생산 거점(인도 하리아나·푸네, 카자흐스탄, 벨기에, 러시아, 파키스탄), 싱가포르 JV</td><td><span class="ok">열림</span></td><td>○</td></tr>
+      <tr><td>해운 거리·리드타임</td><td>거점 항구 → 후보국 주요 항구 거리(Sea-Distances 등 공개 계산기), 상온·냉장 구분</td><td><span class="mid">조건부</span></td><td>○ 수작업 표</td></tr>
+      <tr><td>본선 현장 데이터(예상)</td><td>국가별·월별·SKU별 수출 실적, 거래선·유통 채널, 법인별 손익</td><td>본선 당일</td><td>스키마에 자리만</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="competitors">G. 경쟁사 — 누가 이미 그 선반에 있나</h3>
+  <p>유망한 시장은 대개 이미 누군가 들어가 있다. 질문은 "시장이 비었나"가 아니라 "<b>빼빼로가 Pocky 옆에서, 초코파이가 오리온 옆에서 이길 수 있나</b>"다. 경쟁사 정보는 경쟁 강도 축을 채우는 동시에, 근거 문단에서 "왜 가능한가"를 쓰는 재료가 된다.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>소스</th><th>무엇을 주나</th><th>접근</th><th>갱신</th><th>판정</th><th>예선</th></tr></thead>
+    <tbody>
+      <tr class="sub"><th colspan="6">구조 — 누가 어디에 어떻게 있나</th></tr>
+      <tr><td>경쟁사 연차보고서·IR</td><td>지역별 매출 비중, 해외 공장 위치·증설, 브랜드별 언급, 중기 전략(어느 나라를 키운다고 말하는지)</td><td>공식 IR PDF, 상장사만 (Glico·Meiji·Mondelez·Nestlé·오리온 등). Mars·Ferrero는 비상장 → 보도로 대체</td><td>분기·연</td><td><span class="ok">열림</span></td><td>○ 직접 경쟁 6개사</td></tr>
+      <tr><td>UN Comtrade 파트너별 수입</td><td>해당국이 과자·초콜릿을 어느 나라에서 얼마나 수입하는지 → 경쟁국 점유율, HHI. 국가 단위라 브랜드는 안 보임</td><td>공식 API</td><td>월·연</td><td><span class="ok">열림</span></td><td>○ 이미 C 블록에 있음</td></tr>
+      <tr><td>현지 생산 유무</td><td>경쟁사 공장이 그 나라(또는 FTA 권역)에 있으면 가격·물류에서 수입품이 불리. 오리온(베트남·러시아·인도·중국), Glico(태국·인도네시아·중국 — 확인 필요), Mondelez·Nestlé(거의 전 권역)</td><td>IR + 보도 + 공장 주소</td><td>연</td><td><span class="ok">열림</span></td><td>○ 후보 12국 표</td></tr>
+      <tr><td>WIPO Global Brand Database · 각국 상표청</td><td>경쟁사의 최근 24개월 상표 출원국 → <b>진출 선행 지표</b>. 제품 출시 1~2년 전에 보통 상표부터 낸다</td><td>무료 조회, API 제한적 → 분기 1회 수작업·반자동</td><td>분기</td><td><span class="mid">조건부</span></td><td>△ 6개사 × 12국</td></tr>
+      <tr><td>전시회 참가사 목록</td><td>Gulfood(두바이)·SIAL(파리)·FHA(싱가포르)·ANUGA(쾰른) 전시사 디렉터리 → 어느 경쟁사가 어느 권역에 영업 중인지</td><td>공개 디렉터리 크롤</td><td>연</td><td><span class="ok">열림</span></td><td>△</td></tr>
+      <tr><td>채용 공고</td><td>경쟁사 커리어 페이지의 현지 영업·마케팅·물류 채용 = 진출 또는 확장 신호</td><td>커리어 페이지 크롤 (LinkedIn은 API 제한)</td><td>주</td><td><span class="mid">조건부</span></td><td>× 본선 이후</td></tr>
+      <tr class="sub"><th colspan="6">가격·채널 — 실제 선반에서 어떻게 붙나</th></tr>
+      <tr><td>이커머스 리스팅·가격</td><td>같은 마켓(Amazon·Shopee·Noon·Carrefour)에서 Pepero vs Pocky vs 현지 스틱 과자의 가격·용량·리뷰 수·판매 수 → <b>가격 지수</b>(Pepero 단가 / Pocky 단가)와 리뷰 수 비율</td><td>공개 페이지, 약관상 자동 수집 제한 → 분기 수작업 12국 × 3 마켓 × 5 SKU</td><td>분기</td><td><span class="mid">조건부</span></td><td>○ 예선 핵심 표</td></tr>
+      <tr><td>GAIN Retail Foods</td><td>국가별 상위 소매업체·수입 브랜드 목록, 수입 식품 가격대</td><td>무료 PDF</td><td>연</td><td><span class="ok">열림</span></td><td>○</td></tr>
+      <tr><td>Euromonitor 브랜드 점유</td><td>카테고리별 브랜드 점유율 추이</td><td>유료</td><td>연</td><td><span class="no">막힘</span></td><td>× 본선에서 롯데 제공 가능성</td></tr>
+      <tr><td>수입 선적 기록 (Panjiva·ImportGenius)</td><td>경쟁사의 해당국 수입 물량·수입자</td><td>유료</td><td>월</td><td><span class="no">막힘</span></td><td>× 자리만</td></tr>
+      <tr><td>현지 매장 조사</td><td>진열 위치·페이싱·판촉 — 롯데 현지 법인·대리점이 사진으로</td><td>본선 현장 데이터 또는 현업</td><td>분기</td><td><span class="mid">조건부</span></td><td>× 본선 이후</td></tr>
+      <tr class="sub"><th colspan="6">움직임 — 무엇이 바뀌고 있나 (뉴스 신호 ①의 "경쟁" 유형)</th></tr>
+      <tr><td>기업 뉴스룸 RSS · GDELT</td><td>신제품 출시, 공장 투자, 가격 인상, 프로모션(Pocky Day 11/11 등), 리콜, M&amp;A, 유통 계약</td><td>RSS + GDELT 키워드(회사명·브랜드명 별칭 표)</td><td>일</td><td><span class="ok">열림</span></td><td>○ 이미 ①에 포함, 경쟁사 별칭 표만 추가</td></tr>
+      <tr><td>SNS 비교 언급</td><td>YouTube·Reddit에서 "Pocky vs Pepero" 류 비교 영상·스레드 수와 반응 → 인지도 격차</td><td>공식 API</td><td>주</td><td><span class="ok">열림</span></td><td>○ B 블록 쿼리에 경쟁 브랜드 추가</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>후보 권역별 경쟁 구도 (예선에서 채울 표의 뼈대)</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>권역</th><th>빼빼로 직접 경쟁</th><th>초코파이 직접 경쟁</th><th>글로벌 대형</th><th>현지 강자</th><th>롯데에 유리한 점 / 불리한 점</th></tr></thead>
+    <tbody>
+      <tr><td>동남아</td><td>Glico Pocky (태국·인도네시아 현지 생산 — 확인 필요)</td><td>오리온 초코파이 (베트남 공장 2곳)</td><td>Mondelez(오레오 현지 생산) · Nestlé</td><td>Mayora·Garudafood(인니), Kinh Do(베트남, Mondelez 소유)</td><td>유리: 한류·11/11 데이. 불리: Pocky 가격, 오리온 선점</td></tr>
+      <tr><td>중동 GCC</td><td>Pocky 수입 유통 (확인 필요)</td><td>오리온 진출 초기 (확인 필요)</td><td>Mondelez · Mars · Ferrero · Nestlé</td><td>Ülker(터키, GCC 대형) · Al Ain · IFFCO</td><td>유리: 인도 공장 근접, 고온 사양. 불리: 할랄 인증 경쟁사도 보유</td></tr>
+      <tr><td>북미</td><td>Pocky (Glico USA, 아시안 마트 + 메인스트림)</td><td>오리온 초코파이(H-Mart 중심)</td><td>Mondelez · Hershey · Mars</td><td>—</td><td>유리: 라면이 연 코스트코·월마트 채널. 불리: Pocky가 10년 이상 먼저, 관세·물류비</td></tr>
+      <tr><td>유럽</td><td>Pocky (수입, 아시안 마트 중심)</td><td>오리온 초코파이 (러시아 공장 2곳, 동유럽)</td><td>Ferrero · Mondelez · Nestlé · Lotus</td><td>Bahlsen(독), Wedel(폴), Milka</td><td>유리: 벨기에 길리안 법인·FTA 0%. 불리: 프리미엄 초콜릿 문화, 라벨 언어</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="margin-top:10px">"확인 필요"는 내가 공장 위치·진출 여부를 지금 확정하지 못한 칸이다. 예선 1일차에 각 사 IR과 보도로 채운다. 틀린 경쟁사 정보는 심사위원(롯데웰푸드 현업)이 가장 먼저 잡아내는 부분이다.</p>
+
+  <h3>경쟁 강도 축을 다시 정의</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>하위 지표</th><th>계산</th><th>소스</th><th>방향</th></tr></thead>
+    <tbody>
+      <tr><td>수입 집중도</td><td>상위 3개 수입국 점유율 · HHI</td><td>Comtrade</td><td>높을수록 −</td></tr>
+      <tr><td>직접 경쟁 브랜드 존재</td><td>Pocky·오리온 등 동일 포맷 브랜드의 입점 마켓 수 / 조사 마켓 수</td><td>이커머스 수작업 표</td><td>높을수록 −</td></tr>
+      <tr><td>현지 생산</td><td>직접 경쟁사 공장이 해당국 또는 FTA 권역 안에 있으면 1</td><td>IR · 보도</td><td>1이면 −</td></tr>
+      <tr><td>가격 지수</td><td>빼빼로 100g당 가격 / Pocky 100g당 가격 (같은 마켓)</td><td>이커머스</td><td>1.2 초과 −, 0.9 미만 +</td></tr>
+      <tr><td>경쟁 움직임</td><td>최근 90일 경쟁사 "진출·투자·출시" 신호 수 + 24개월 상표 출원</td><td>신호 ① · WIPO</td><td>많을수록 − (단, 시장이 열린다는 +신호로도 해석 → 근거 문단에 양면 기술)</td></tr>
+      <tr><td>인지도 격차</td><td>"Pepero" 검색·영상 수 / "Pocky" 검색·영상 수</td><td>Trends · YouTube</td><td>낮을수록 −</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="margin-top:10px">경쟁이 세다고 무조건 감점이 아니다. Pocky가 이미 선반을 열어 둔 나라는 "스틱 과자" 카테고리 자체는 검증된 시장이다. 그래서 점수는 −로 두되, 근거 문단에는 "선점자가 만든 카테고리에 2위로 들어가는 전략"을 함께 쓰도록 ④ 근거 작성 프롬프트에 규칙을 둔다.</p>
+</section>
+
+<!-- ============ 3. 국가 카드 ============ -->
+<section id="card">
+  <h2>3. 국가 카드 — 스키마와 예시(UAE)</h2>
+  <p>모든 나라가 이 틀로 저장된다. 값마다 <b>출처·기준 시점·신뢰 등급</b>이 붙고, 비어 있으면 비어 있다고 저장한다. 아래 예시는 지금까지 확인된 공개 수치로 채웠고, 빨간 항목은 프로토타입이 채워야 할 자리다.</p>
+  <div class="ccard">
+    <div class="head"><b>🇦🇪 아랍에미리트 (UAE)</b><span>as-of 2026-11-01 · 품목 기준: 초콜릿 과자(빼빼로)</span></div>
+    <div class="blocks">
+      <div class="b"><h4>A · 시장 성장성</h4><dl>
+        <div><dt>인구 · 1인당 GDP</dt><dd><span class="todo">World Bank API로 채움</span></dd></div>
+        <div><dt>과자·초콜릿 수입 3년 CAGR</dt><dd><span class="todo">Comtrade HS 1806·1905</span></dd></div>
+        <div><dt>K-푸드 수출 증가율</dt><dd>+49.9% (2026 상반기) <span class="src">농식품부 2026-07</span></dd></div>
+        <div><dt>GCC 권역 증가율</dt><dd>+25.2%, 지역 1위 <span class="src">농식품부 2026-07</span></dd></div>
+        <div><dt>뉴스 신호(90일)</dt><dd><span class="todo">GDELT 집계</span></dd></div>
+      </dl></div>
+      <div class="b"><h4>B · 소비 트렌드</h4><dl>
+        <div><dt>소매 구조</dt><dd>현대식 유통 중심, 수입 식품 의존 <span class="src">USDA GAIN Retail Foods · 확인 필요</span></dd></div>
+        <div><dt>한국 채널</dt><dd>한국 편의점 진출(GS25 등) <span class="src">보도 · 확인 필요</span></dd></div>
+        <div><dt>검색 관심도</dt><dd><span class="todo">Google Trends "Pepero"</span></dd></div>
+        <div><dt>영상 신호</dt><dd><span class="todo">YouTube regionCode=AE</span></dd></div>
+        <div><dt>커뮤니티 테마</dt><dd><span class="todo">r/dubai 샘플 → LLM 분류</span></dd></div>
+        <div><dt>구매 신호</dt><dd><span class="todo">Noon·Carrefour 입점·가격</span></dd></div>
+      </dl></div>
+      <div class="b"><h4>C · 수출입 현황</h4><dl>
+        <div><dt>한국→UAE 과자 수출</dt><dd><span class="todo">관세청 HS 1806·1905 월별</span></dd></div>
+        <div><dt>UAE 총수입 · 한국 점유</dt><dd><span class="todo">Comtrade 수입국 측</span></dd></div>
+        <div><dt>경쟁국 점유</dt><dd><span class="todo">상위 3개국·HHI</span></dd></div>
+        <div><dt>허브 왜곡 계수</dt><dd>두바이 재수출 비중 높음 → 보정 필요 <span class="src">정성</span></dd></div>
+        <div><dt>빼빼로 중동 비중</dt><dd>수출의 10% (2025) <span class="src">보도 2026-05</span></dd></div>
+      </dl></div>
+      <div class="b"><h4>D · 규제·법령</h4><dl>
+        <div><dt>관세</dt><dd>GCC 공통관세 5% 기본 · 한-UAE CEPA 양허 여부 <span class="src">확인 필요</span></dd></div>
+        <div><dt>할랄</dt><dd>필수. GSO 2055-1, MOIAT 인정 인증기관 <span class="src">RAG 조문 인용</span></dd></div>
+        <div><dt>라벨</dt><dd>아랍어 필수(GSO 9), 유통기한 표기 규격 <span class="src">RAG</span></dd></div>
+        <div><dt>등록</dt><dd>두바이 시청 식품 등록 <span class="src">RAG · 확인 필요</span></dd></div>
+      </dl></div>
+      <div class="b"><h4>E · 롯데 접근성</h4><dl>
+        <div><dt>최근접 거점</dt><dd>인도 하리아나 빼빼로 라인(2025.7) → 해상 약 1주 <span class="src">보도 · 거리 계산 필요</span></dd></div>
+        <div><dt>현지 법인·대리점</dt><dd><span class="todo">사업보고서 확인</span></dd></div>
+        <div><dt>기후 적합</dt><dd>인도향 고온 사양(녹지 않는 초콜릿) 적용 가능 <span class="src">보도 2025-07</span></dd></div>
+      </dl></div>
+      <div class="b"><h4>G · 경쟁사</h4><dl>
+        <div><dt>직접 경쟁(스틱)</dt><dd>Pocky 입점 여부·가격 <span class="todo">Noon·Carrefour 조사</span></dd></div>
+        <div><dt>직접 경쟁(파이)</dt><dd>오리온 초코파이 GCC 진출 여부 <span class="src">확인 필요</span></dd></div>
+        <div><dt>글로벌·현지 강자</dt><dd>Mondelez · Mars · Ferrero · Ülker · IFFCO <span class="src">GAIN Retail Foods · 확인 필요</span></dd></div>
+        <div><dt>현지 생산</dt><dd><span class="todo">경쟁사 GCC 공장 유무 (IR)</span></dd></div>
+        <div><dt>가격 지수</dt><dd><span class="todo">빼빼로/Pocky 100g 단가비</span></dd></div>
+        <div><dt>경쟁 움직임(90일)</dt><dd><span class="todo">신호 ① "경쟁" 유형 집계 · WIPO 상표</span></dd></div>
+      </dl></div>
+      <div class="b"><h4>F · 점수·근거</h4><dl>
+        <div><dt>점수(균등 가중)</dt><dd><span class="todo">파이프라인 산출</span></dd></div>
+        <div><dt>순위 안정성</dt><dd><span class="todo">가중치 4세트 중 TOP3 유지 횟수</span></dd></div>
+        <div><dt>근거 문단</dt><dd><span class="todo">LLM 생성, 각 문장에 [출처 id]</span></dd></div>
+        <div><dt>리스크</dt><dd>할랄 인증 비용·기간, 재수출 통계 왜곡</dd></div>
+      </dl></div>
+    </div>
+  </div>
+
+  <h3>저장 스키마(요지)</h3>
+  <pre class="pre">country_card            country_code, as_of, category(초콜릿과자|비스킷|빙과), score, rank, rank_stability
+fact                    id, country, block(A..E), metric, value, unit, period, source_id, confidence(A|B|C), collected_at
+signal                  id, country, date, type(수요|규제|경쟁|유통|물류), direction(+|-), summary, source_id
+sns_aggregate           country, platform, generation_proxy, metric(영상수|조회증가율|해시태그수|검색지수|판매수), value, window
+competitor              country, brand, company, format(스틱|파이|비스킷|초콜릿), presence(입점|현지생산|없음), price_index, markets[], last_signal_at, source_id
+regulation_chunk        id, country, category, article_ref, text, effective_from, source_id, embedding
+source                  id, name, url, tier(공식|반공식|뉴스|SNS|이커머스), fetched_at, license_note
+insight_report          month, country, delta_rank, new_regulations[], top_signals[], recommended_actions[]</pre>
+  <p class="note" style="margin-top:10px">LLM은 fact·signal·competitor·regulation_chunk에서만 읽는다. 어떤 숫자도 LLM이 "기억"으로 만들지 못하게 프롬프트가 아니라 <b>구조</b>로 막는다.</p>
+</section>
+
+<!-- ============ 4. 시스템 아키텍처 ============ -->
+<section id="system">
+  <h2>4. 에이전트 시스템 아키텍처</h2>
+  <p>수집 에이전트들이 스케줄대로 돌며 세 층의 저장소를 채우고, 스코어링은 결정론적으로, 인사이트 에이전트는 월 1회 diff를 쓰고, 사람이 가중치와 후보국을 조정한다.</p>
+  <figure class="fig">
+    <div class="diagram"><svg viewBox="0 0 1000 1410" role="img" aria-label="소스 레지스트리(7패밀리·1,000+ 인스턴스·193국)의 행을 수집 에이전트 4종이 순회하고 발굴 에이전트가 행을 추가한다. 모든 수집 결과는 품질 게이트(규칙 검사·교차 검증·LLM 데이터 심사관·사람)를 거쳐 세 층 저장소에 등급과 함께 쌓이고, 스코어링·인사이트·법령 RAG가 그 위에서 돌아 대시보드와 월간 diff 리포트를 만들며, 담당자의 조정과 라벨이 되돌아온다."><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C7A85"/></marker></defs><rect class="band" x="0" y="0" width="1000" height="200"/><rect class="band" x="0" y="220" width="1000" height="180"/><rect class="band" x="0" y="420" width="1000" height="130"/><rect class="band" x="0" y="560" width="1000" height="210"/><rect class="band" x="0" y="790" width="1000" height="220"/><rect class="band" x="0" y="1030" width="1000" height="210"/><rect class="band" x="0" y="1260" width="1000" height="140"/><text class="lay" x="20" y="24" text-anchor="start">① 소스 레지스트리  ·  커넥터 패밀리 8종 × 인스턴스 1,000+  ·  전 세계 193국</text><rect class="box db" x="20" y="40" width="130" height="80" rx="8"/><text class="t" x="34" y="64">글로벌 통계 API</text><text class="s" x="34" y="84">Comtrade · WDI · FAO</text><text class="s" x="34" y="100">GDELT · ePing  (≈10)</text><rect class="box db" x="158" y="40" width="130" height="80" rx="8"/><text class="t" x="172" y="64">국가별 정부·세관</text><text class="s" x="172" y="84">통계청 · 세관 · 중앙은행</text><text class="s" x="172" y="100">193국 × 2  (≈390)</text><rect class="box db" x="296" y="40" width="130" height="80" rx="8"/><text class="t" x="310" y="64">규제기관·관보</text><text class="s" x="310" y="84">식품청 · 할랄청 · 관보</text><text class="s" x="310" y="100">193국 + 원문  (≈250)</text><rect class="box db" x="434" y="40" width="130" height="80" rx="8"/><text class="t" x="448" y="64">매체 RSS</text><text class="s" x="448" y="84">식품 전문지 · 현지 일간지</text><text class="s" x="448" y="100">국가당 2~5  (≈400)</text><rect class="box db" x="572" y="40" width="130" height="80" rx="8"/><text class="t" x="586" y="64">플랫폼 API</text><text class="s" x="586" y="84">YouTube · Reddit · Trends</text><text class="s" x="586" y="100">TikTok CC  (5)</text><rect class="box db" x="710" y="40" width="130" height="80" rx="8"/><text class="t" x="724" y="64">리포트 · 경쟁사</text><text class="s" x="724" y="84">GAIN · KOTRA · KATI</text><text class="s" x="724" y="100">경쟁사 IR · 상표 · 전시회</text><rect class="box human" x="848" y="40" width="130" height="80" rx="8"/><text class="t" x="862" y="64">롯데 자료·현장</text><text class="s" x="862" y="84">DART · IR</text><text class="s" x="862" y="100">본선 CSV</text><rect class="box db" x="20" y="132" width="960" height="36" rx="6"/><text class="t" x="34" y="155">source_registry 테이블</text><text class="s" x="200" y="155">family · country · instance_url · parser_config · schedule · license · reliability_prior · status(active|failing|blacklisted) · added_by · approved_at   —   1,000+ 행</text><text class="lay" x="20" y="244" text-anchor="start">② 수집 에이전트 4종 + 발굴 에이전트  (LLM + 툴, 스케줄 실행 · 레지스트리 행을 순회)</text><rect class="box llm" x="20" y="260" width="185" height="120" rx="8"/><text class="t" x="34" y="284">무역·거시 수집 · 월</text><text class="s" x="34" y="304">fetch_*(family, instance)</text><text class="s" x="34" y="320">parse_dart · load_csv(현장)</text><text class="s" x="34" y="336">→ 정규화 (코드·통화·연도)</text><rect class="box llm" x="215" y="260" width="185" height="120" rx="8"/><text class="t" x="229" y="284">뉴스 신호 추출 · 일</text><text class="s" x="229" y="304">search_gdelt · fetch_rss</text><text class="s" x="229" y="320">해시 비교 → 새 기사만</text><text class="s" x="229" y="336">extract_signal → JSON  ①</text><rect class="box llm" x="410" y="260" width="185" height="120" rx="8"/><text class="t" x="424" y="284">SNS·이커머스 · 주</text><text class="s" x="424" y="304">yt · reddit · trends · market</text><text class="s" x="424" y="320">샘플링 → classify_theme  ②</text><text class="s" x="424" y="336">집계만 저장</text><rect class="box llm" x="605" y="260" width="185" height="120" rx="8"/><text class="t" x="619" y="284">법령 수집 · 변경 시</text><text class="s" x="619" y="304">fetch_reg(country) · 관보 감시</text><text class="s" x="619" y="320">diff_vs_previous → 변경만</text><text class="s" x="619" y="336">chunk_by_article</text><rect class="box llm" x="800" y="260" width="180" height="120" rx="8"/><text class="t" x="814" y="284">소스 발굴 에이전트  ⑦</text><text class="s" x="814" y="304">국가 × 패밀리 빈칸 탐색</text><text class="s" x="814" y="320">후보 URL → 유형·접근 판정</text><text class="s" x="814" y="336">시험 수집 → 사람 승인 후 등록</text><path class="arrow" d="M112,168 L112,260"/><text class="l" x="118" y="212" text-anchor="start">통계 · 국가별 · 롯데</text><path class="arrow" d="M307,168 L307,260"/><text class="l" x="313" y="212" text-anchor="start">RSS · 리포트 · 경쟁사</text><path class="arrow" d="M502,168 L502,260"/><text class="l" x="508" y="212" text-anchor="start">플랫폼 API</text><path class="arrow" d="M697,168 L697,260"/><text class="l" x="703" y="212" text-anchor="start">규제기관 · 관보</text><path class="arrow" d="M890,260 L890,168" stroke-dasharray="5 4"/><text class="l" x="884" y="212" text-anchor="end">행 추가 (승인 후)</text><path class="arrow" d="M112,380 L112,412" style="marker-end:none"/><path class="arrow" d="M307,380 L307,412" style="marker-end:none"/><path class="arrow" d="M502,380 L502,412" style="marker-end:none"/><path class="arrow" d="M697,380 L697,412" style="marker-end:none"/><path class="arrow" d="M112,412 L697,412" style="marker-end:none"/><path class="arrow" d="M135,412 L135,460"/><text class="l" x="400" y="406" text-anchor="start">모든 수집 결과 → 게이트  (원문 + 파싱값 + 출처 id)</text><text class="lay" x="160" y="444" text-anchor="start">②b 품질 게이트  ·  저장 전에 전부 통과  (규칙·교차 검증은 프로그램, 심사관만 LLM)</text><rect class="box code" x="20" y="460" width="230" height="66" rx="8"/><text class="t" x="34" y="484">1 규칙 검사  (프로그램)</text><text class="s" x="34" y="504">스키마 · 단위 · 범위 · 전월 ±50% · 중복</text><rect class="box code" x="270" y="460" width="230" height="66" rx="8"/><text class="t" x="284" y="484">2 교차 검증  (프로그램)</text><text class="s" x="284" y="504">미러 통계 · 두 소스 일치율 · 환산</text><rect class="box llm" x="520" y="460" width="250" height="66" rx="8"/><text class="t" x="534" y="484">3 데이터 심사관  (LLM ⑧)</text><text class="s" x="534" y="504">출처 신뢰 · 정의 일치 · 시의성 · 충돌 해결</text><rect class="box human" x="790" y="460" width="190" height="66" rx="8"/><text class="t" x="804" y="484">4 사람  (C등급·충돌만)</text><text class="s" x="804" y="504">승인 · 기각 · 소스 블랙리스트</text><path class="arrow" d="M250,493 L270,493"/><path class="arrow" d="M500,493 L520,493"/><path class="arrow" d="M770,493 L790,493"/><text class="l" x="510" y="542" text-anchor="middle">불일치·신규만 →</text><text class="l" x="780" y="542" text-anchor="middle">C·충돌만 →</text><text class="lay" x="20" y="584" text-anchor="start">③ 저장소  (세 층 · 덮어쓰기 없음 · 모든 행에 confidence A/B/C + validity_flags)</text><rect class="box db" x="20" y="600" width="280" height="150" rx="8"/><text class="t" x="34" y="624">원문 저장소</text><text class="s" x="34" y="644">PDF · HTML · CSV 원본 그대로</text><text class="s" x="34" y="660">source(id, url, family, instance,</text><text class="s" x="34" y="676">  fetched_at, license, reliability)</text><text class="s" x="34" y="692">용도: 출처 클릭 시 원문 확인</text><rect class="box db" x="330" y="600" width="340" height="150" rx="8"/><text class="t" x="344" y="624">사실 테이블  (Postgres)</text><text class="s" x="344" y="644">fact(country, block, metric, value, period,</text><text class="s" x="344" y="660">  source_id, confidence, flags[], as_of)</text><text class="s" x="344" y="676">signal · sns_aggregate · country_card</text><text class="s" x="344" y="692">insight_report · review_label · quarantine</text><rect class="box db" x="700" y="600" width="280" height="150" rx="8"/><text class="t" x="714" y="624">벡터 색인  (pgvector)</text><text class="s" x="714" y="644">regulation_chunk(country, category,</text><text class="s" x="714" y="660">  article_ref, text, effective_from,</text><text class="s" x="714" y="676">  source_id, embedding)</text><text class="s" x="714" y="692">+ BM25 색인 (하이브리드)</text><path class="arrow" d="M135,526 L135,600"/><text class="l" x="141" y="560" text-anchor="start">원문 + 등급</text><path class="arrow" d="M440,526 L440,600"/><text class="l" x="434" y="564" text-anchor="end">fact · signal · sns 행 + confidence</text><path class="arrow" d="M640,526 L640,570 L560,570 L560,600" stroke-dasharray="5 4"/><text class="l" x="566" y="560" text-anchor="start">C → quarantine</text><path class="arrow" d="M720,526 L720,580 L840,580 L840,600"/><text class="l" x="846" y="570" text-anchor="start">청크 + embedding</text><text class="lay" x="20" y="814" text-anchor="start">④ 처리</text><rect class="box code" x="20" y="830" width="270" height="160" rx="8"/><text class="t" x="34" y="854">스코어링 엔진  (코드)</text><text class="s" x="34" y="874">6축 z-점수 → 0~5 → 가중합</text><text class="s" x="34" y="890">가중치 세트 4개 × 전 국가 순위</text><text class="s" x="34" y="906">민감도 ±20%, 순위 안정성</text><text class="s" x="34" y="922">C등급 값은 가중치 절반 · 결측은 0</text><rect class="box llm" x="360" y="830" width="280" height="160" rx="8"/><text class="t" x="374" y="854">인사이트 에이전트  · 월 1회</text><text class="s" x="374" y="874">이번 달 vs 지난달 스냅샷 diff</text><text class="s" x="374" y="890">순위 변동 · 새 규제 · 2σ 급등 신호</text><text class="s" x="374" y="906">Tier 승격·강등 제안 (193 → 40 → 12)</text><text class="s" x="374" y="922">근거 문단 생성 (fact/signal id만)</text><rect class="box llm" x="700" y="830" width="280" height="160" rx="8"/><text class="t" x="714" y="854">법령 RAG 에이전트</text><text class="s" x="714" y="874">국가당 고정 5문항(관세·인증·</text><text class="s" x="714" y="890">라벨·등록·첨가물) → 조문 인용</text><text class="s" x="714" y="906">시행일·수집일 검사 → &#x27;확인 필요&#x27;</text><text class="s" x="714" y="922">답변 → 진입 장벽 축 점수 0~5</text><path class="arrow" d="M400,750 L400,790 L155,790 L155,830"/><text class="l" x="280" y="780" text-anchor="middle">SELECT fact WHERE as_of = 이번 달</text><path class="arrow" d="M500,750 L500,830" marker-start="url(#ah)"/><text class="l" x="506" y="776" text-anchor="start">읽기: 두 달 스냅샷 · signal</text><text class="l" x="506" y="792" text-anchor="start">쓰기: insight_report · country_card</text><path class="arrow" d="M840,750 L840,830"/><text class="l" x="846" y="790" text-anchor="start">hybrid search (국가·품목 필터)</text><path class="arrow" d="M720,830 L720,770 L640,770 L640,750"/><text class="l" x="726" y="818" text-anchor="start">장벽 축 점수 → fact 행</text><path class="arrow" d="M290,910 L360,910"/><text class="l" x="325" y="896" text-anchor="middle">점수·순위</text><text class="lay" x="20" y="1054" text-anchor="start">⑤ 출력 · 사람</text><rect class="box " x="20" y="1070" width="270" height="150" rx="8"/><text class="t" x="34" y="1094">국가 카드 · TOP3 대시보드</text><text class="s" x="34" y="1114">가중치 슬라이더 → 즉시 재계산</text><text class="s" x="34" y="1130">축별 점수, 근거 문단, 출처 링크</text><text class="s" x="34" y="1146">Tier 필터 (193 / 40 / 12)</text><rect class="box " x="360" y="1070" width="280" height="150" rx="8"/><text class="t" x="374" y="1094">월간 diff 리포트</text><text class="s" x="374" y="1114">1 순위 변동  2 새 규제  3 급등 신호</text><text class="s" x="374" y="1130">4 실적 대비  5 추천 액션 3개</text><text class="s" x="374" y="1146">6 데이터 상태 (실패·격리·C등급·신규 소스)</text><rect class="box human" x="700" y="1070" width="280" height="150" rx="8"/><text class="t" x="714" y="1094">담당자 검토</text><text class="s" x="714" y="1114">가중치·후보국·Tier 조정</text><text class="s" x="714" y="1130">신호·데이터 승인 / 기각 + 사유</text><text class="s" x="714" y="1146">신규 소스 승인 → 레지스트리</text><path class="arrow" d="M155,990 L155,1070"/><text class="l" x="161" y="1028" text-anchor="start">점수·근거</text><path class="arrow" d="M500,990 L500,1070"/><text class="l" x="506" y="1028" text-anchor="start">리포트 초안</text><path class="arrow" d="M640,1145 L700,1145"/><text class="l" x="670" y="1130" text-anchor="middle">검토 요청</text><path class="arrow" d="M840,1070 L840,990"/><text class="l" x="846" y="1022" text-anchor="start">승인/기각 + 사유</text><text class="l" x="846" y="1038" text-anchor="start">→ review_label (few-shot)</text><path class="arrow" d="M840,1220 L840,1240 L10,1240 L10,910 L20,910" stroke-dasharray="5 4"/><text class="l" x="420" y="1230" text-anchor="middle">가중치·Tier 변경 → ④ 스코어링부터 재계산 (수집 재실행 없음)</text><text class="lay" x="20" y="1284" text-anchor="start">⑥ 평가  (매 배포 · CI)</text><rect class="box " x="20" y="1300" width="230" height="90" rx="8"/><text class="t" x="34" y="1324">백테스트</text><text class="s" x="34" y="1344">2021~23 → 2024~25</text><text class="s" x="34" y="1360">수출 급증국 재현율</text><rect class="box " x="270" y="1300" width="230" height="90" rx="8"/><text class="t" x="284" y="1324">RAG 정답셋</text><text class="s" x="284" y="1344">12개국 × 5문항</text><text class="s" x="284" y="1360">조문 일치율</text><rect class="box " x="520" y="1300" width="230" height="90" rx="8"/><text class="t" x="534" y="1324">신호 추출 정밀도</text><text class="s" x="534" y="1344">샘플 50건 수작업 채점</text><text class="s" x="534" y="1360">유형·방향 ≥ 0.85</text><rect class="box " x="770" y="1300" width="210" height="90" rx="8"/><text class="t" x="784" y="1324">심사관 정밀도</text><text class="s" x="784" y="1344">사람 라벨 200건 대비</text><text class="s" x="784" y="1360">A/B/C 일치 ≥ 0.9</text></svg></div>
+    <div class="legend"><span class="l-llm">LLM 에이전트 (툴 호출)</span><span class="l-code">결정론적 코드</span><span class="l-db">저장소</span><span class="l-human">사람 · 현장 데이터</span></div>
+    <figcaption>그림 1. 전체 아키텍처. 일곱 층을 위에서 아래로 읽는다. 맨 위는 소스 "목록"이 아니라 레지스트리(패밀리 7종 × 인스턴스 1,000+)이고, 저장소 앞에 품질 게이트가 끼어 모든 값이 등급을 달고 들어간다. 화살표 라벨이 "무엇이 어떤 형태로 넘어가는지"다. 되돌아오는 점선 두 개(가중치 변경, 승인·기각 라벨)가 이 시스템이 몇 달 쓰면 좋아지는 이유다.</figcaption>
+  </figure>
+
+  <h3>왜 이렇게 나누나</h3>
+  <ul class="plain">
+    <li><b>수집과 판단을 분리.</b> 수집 에이전트는 "가져와서 구조화"만 한다. 유망도 판단은 스코어링 엔진(코드)이 하고, LLM은 그 결과를 설명한다. 환각이 섞일 자리가 근거 문단뿐이고, 그 문단은 출처 id 없는 문장을 거부하도록 검증한다.</li>
+    <li><b>as-of 스냅샷.</b> 사실 테이블은 덮어쓰지 않고 시점별로 쌓는다. 그래야 "지난달 대비"가 가능하고, 백테스트도 같은 테이블로 한다.</li>
+    <li><b>법령은 별도 에이전트.</b> 점수 계산의 "진입 장벽" 축은 RAG 에이전트가 국가당 정해진 5개 질문(관세율·인증·라벨·등록·첨가물)에 답한 결과를 숫자로 바꾼 것이다. 질문을 고정하면 답변 품질을 평가셋으로 잴 수 있다.</li>
+    <li><b>소스는 코드가 아니라 데이터다.</b> 커넥터 8종만 코드이고 "어느 나라의 어느 URL"은 레지스트리 행이다. 193국을 보는 비용은 행 수에 비례하지 코드 양에 비례하지 않는다. 품질 게이트가 저장소 앞에 있어서 레지스트리가 커져도 쓰레기가 점수에 섞이지 않는다.</li>
+    <li><b>사람의 기각 사유가 데이터가 된다.</b> 담당자가 신호를 기각하면 그 사유가 저장되고 다음 달 추출 프롬프트의 few-shot에 들어간다. 몇 달 쓰면 회사 전용 분류기가 생긴다.</li>
+  </ul>
+</section>
+
+<!-- ============ 4a. 소프트웨어 아키텍처 ============ -->
+<section id="software">
+  <h2>4a. 소프트웨어 아키텍처 — 무엇이 LLM이고 무엇이 프로그램인가</h2>
+  <p>앞 그림이 "데이터가 어디로 흐르나"라면 이 그림은 "코드가 어떻게 나뉘고 어느 프로세스에서 도나"다. 보라색 상자만 LLM을 부른다. 나머지는 전부 단위 테스트가 가능한 보통의 파이썬이다. 비율로 보면 모듈 8개 중 LLM이 들어가는 건 에이전트 정의(①~⑧) 하나뿐이고, 그마저도 툴·가드레일이라는 프로그램 사이에 끼어 있다.</p>
+  <figure class="fig">
+    <div class="diagram"><svg viewBox="0 0 1000 1080" role="img" aria-label="소프트웨어 아키텍처: 클라이언트, FastAPI 서버, 스케줄러 워커, OpenAI Agents SDK 런타임(에이전트 6종은 LLM, 툴과 가드레일은 프로그램), LLM 없는 핵심 모듈 8종, PostgreSQL·객체 저장소·설정, 외부 데이터 API와 LLM API. 생성 호출은 에이전트에서만, 임베딩은 청킹·검색에서만 나간다."><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C7A85"/></marker></defs><rect class="band" x="0" y="0" width="1000" height="130"/><rect class="band" x="0" y="150" width="1000" height="140"/><rect class="band" x="0" y="310" width="1000" height="310"/><rect class="band" x="0" y="640" width="1000" height="160"/><rect class="band" x="0" y="820" width="1000" height="190"/><rect class="band" x="0" y="1010" width="1000" height="70"/><text class="lay" x="20" y="24" text-anchor="start">클라이언트</text><rect class="box " x="20" y="40" width="300" height="70" rx="8"/><text class="t" x="34" y="64">웹 대시보드  (프로그램)</text><text class="s" x="34" y="84">국가 카드 · 슬라이더 · 출처 링크 · 검토 화면</text><rect class="box " x="350" y="40" width="300" height="70" rx="8"/><text class="t" x="364" y="64">월간 리포트 수신</text><text class="s" x="364" y="84">이메일 · 사내 메신저 (Markdown/PDF)</text><rect class="box " x="680" y="40" width="300" height="70" rx="8"/><text class="t" x="694" y="64">CLI · 노트북  (개발·평가)</text><text class="s" x="694" y="84">수동 실행, 백테스트, 평가셋 채점</text><text class="lay" x="20" y="174" text-anchor="start">API 서버  ·  FastAPI  (프로그램, LLM 직접 호출 없음)</text><rect class="box code" x="20" y="190" width="960" height="80" rx="8"/><text class="t" x="34" y="214">엔드포인트</text><text class="s" x="34" y="234">GET /cards?category   POST /score {weights}   POST /ask {question}   POST /review {signal_id, verdict, reason}   GET /report/{month}   POST /jobs/run</text><text class="l" x="560" y="254" text-anchor="start">사내 SSO · 역할: 담당자(쓰기) / 열람(읽기)  ·  /score 는 1초 내 동기 응답, /ask 는 스트리밍</text><path class="arrow" d="M170,110 L170,190"/><text class="l" x="176" y="148" text-anchor="start">HTTPS / JSON</text><path class="arrow" d="M500,190 L500,110"/><text class="l" x="506" y="148" text-anchor="start">월 1회 발송</text><path class="arrow" d="M830,110 L830,190"/><text class="l" x="836" y="148" text-anchor="start">CLI → 같은 모듈 직접 호출</text><text class="lay" x="20" y="334" text-anchor="start">스케줄러 워커  ·  APScheduler + 작업 큐  (프로그램)</text><rect class="box" x="20" y="344" width="460" height="260" rx="10" stroke-dasharray="6 4"/><text class="l" x="36" y="368" text-anchor="start">잡 5종: 월간 수집 · 일간 뉴스 · 주간 SNS · 규제 감시 · 월간 인사이트</text><rect class="box code" x="36" y="390" width="100" height="50" rx="8"/><text class="t" x="86.0" y="412.0" text-anchor="middle">커넥터</text><text class="s" x="86.0" y="428.0" text-anchor="middle">프로그램 · 레지스트리 순회</text><path class="arrow" d="M136,415 L148,415"/><rect class="box code" x="148" y="390" width="100" height="50" rx="8"/><text class="t" x="198.0" y="412.0" text-anchor="middle">정규화</text><text class="s" x="198.0" y="428.0" text-anchor="middle">프로그램</text><path class="arrow" d="M248,415 L260,415"/><rect class="box code" x="260" y="390" width="100" height="50" rx="8"/><text class="t" x="310.0" y="412.0" text-anchor="middle">규칙·교차 검증</text><text class="s" x="310.0" y="428.0" text-anchor="middle">프로그램</text><path class="arrow" d="M360,415 L372,415"/><rect class="box llm" x="372" y="390" width="100" height="50" rx="8"/><text class="t" x="422.0" y="412.0" text-anchor="middle">데이터 심사관</text><text class="s" x="422.0" y="428.0" text-anchor="middle">LLM ⑧</text><rect class="box llm" x="36" y="464" width="100" height="50" rx="8"/><text class="t" x="86.0" y="486.0" text-anchor="middle">신호·테마</text><text class="s" x="86.0" y="502.0" text-anchor="middle">LLM ①②</text><path class="arrow" d="M136,489 L148,489"/><rect class="box code" x="148" y="464" width="100" height="50" rx="8"/><text class="t" x="198.0" y="486.0" text-anchor="middle">지표·스코어링</text><text class="s" x="198.0" y="502.0" text-anchor="middle">프로그램</text><path class="arrow" d="M248,489 L260,489"/><rect class="box llm" x="260" y="464" width="100" height="50" rx="8"/><text class="t" x="310.0" y="486.0" text-anchor="middle">근거 생성</text><text class="s" x="310.0" y="502.0" text-anchor="middle">LLM ④⑥</text><path class="arrow" d="M360,489 L372,489"/><rect class="box code" x="372" y="464" width="100" height="50" rx="8"/><text class="t" x="422.0" y="486.0" text-anchor="middle">인용 검증 · 조립</text><text class="s" x="422.0" y="502.0" text-anchor="middle">프로그램</text><path class="arrow" d="M422,440 L422,452 L86,452 L86,464"/><text class="l" x="36" y="560" text-anchor="start">재시도 3회 · 멱등 (국가·지표·as_of 키) · 실패 소스는 C등급 표시 · LLM 단계는 런타임에 위임</text><text class="l" x="36" y="580" text-anchor="start">인스턴스 1,000+ 순회 ≈ 2시간 (병렬 20) · LLM은 바뀐 것·불일치만 → 월 수만 건, 소형 모델 배치</text><text class="lay" x="510" y="334" text-anchor="start">에이전트 런타임  ·  OpenAI Agents SDK  (라이브러리, 워커와 API가 함께 사용)</text><rect class="box" x="510" y="344" width="470" height="260" rx="10" stroke-dasharray="6 4"/><rect class="box llm" x="526" y="364" width="212" height="120" rx="8"/><text class="t" x="540" y="388">에이전트 정의  (LLM)</text><text class="s" x="540" y="408">① 뉴스 신호  ② SNS 테마  ③ 법령 RAG</text><text class="s" x="540" y="424">④ 근거 작성  ⑤ 질의 라우터  ⑥ 인사이트</text><text class="s" x="540" y="440">⑦ 소스 발굴  ⑧ 데이터 심사관</text><text class="s" x="540" y="456">각각 system prompt + 출력 스키마</text><rect class="box code" x="752" y="364" width="212" height="120" rx="8"/><text class="t" x="766" y="388">툴 레지스트리  (프로그램)</text><text class="s" x="766" y="408">query_fact · hybrid_search</text><text class="s" x="766" y="424">score(weights) · fetch_*</text><text class="s" x="766" y="440">순수 함수, 부작용 없음</text><text class="s" x="766" y="456">툴 = 핵심 모듈의 얇은 래퍼</text><rect class="box code" x="526" y="498" width="438" height="90" rx="8"/><text class="t" x="540" y="522">가드레일  (프로그램)</text><text class="s" x="540" y="542">structured output 스키마 검증 · 인용 검증기(출처 id 존재? 숫자 = 테이블?)</text><text class="s" x="540" y="558">재시도 최대 2회 · 토큰·비용 한도 · 모든 툴 호출 트레이스 기록</text><path class="arrow" d="M632,484 L632,498"/><path class="arrow" d="M858,484 L858,498"/><path class="arrow" d="M480,415 L510,415"/><text class="l" x="495" y="398" text-anchor="middle">LLM 단계 위임</text><path class="arrow" d="M230,270 L230,344"/><text class="l" x="236" y="306" text-anchor="start">POST /jobs/run · /score</text><path class="arrow" d="M700,270 L700,344"/><text class="l" x="706" y="306" text-anchor="start">/ask · /review</text><text class="lay" x="20" y="664" text-anchor="start">핵심 모듈  ·  Python 패키지  (전부 프로그램 · LLM 없음 · 단위 테스트 대상)</text><rect class="box code" x="36" y="684" width="108" height="66" rx="8"/><text class="t" x="90.0" y="714.0" text-anchor="middle">커넥터 8종</text><text class="s" x="90.0" y="730.0" text-anchor="middle">httpx · 재시도</text><rect class="box code" x="154" y="684" width="108" height="66" rx="8"/><text class="t" x="208.0" y="714.0" text-anchor="middle">정규화</text><text class="s" x="208.0" y="730.0" text-anchor="middle">pandas · ISO 코드</text><rect class="box code" x="272" y="684" width="108" height="66" rx="8"/><text class="t" x="326.0" y="714.0" text-anchor="middle">지표 계산</text><text class="s" x="326.0" y="730.0" text-anchor="middle">pandas · z-점수</text><rect class="box code" x="390" y="684" width="108" height="66" rx="8"/><text class="t" x="444.0" y="714.0" text-anchor="middle">스코어링</text><text class="s" x="444.0" y="730.0" text-anchor="middle">numpy · 가중합</text><rect class="box code" x="508" y="684" width="108" height="66" rx="8"/><text class="t" x="562.0" y="714.0" text-anchor="middle">백테스트</text><text class="s" x="562.0" y="730.0" text-anchor="middle">과거 as_of 재생</text><rect class="box code" x="626" y="684" width="108" height="66" rx="8"/><text class="t" x="680.0" y="714.0" text-anchor="middle">청킹·검색</text><text class="s" x="680.0" y="730.0" text-anchor="middle">BM25 + 벡터</text><rect class="box code" x="744" y="684" width="108" height="66" rx="8"/><text class="t" x="798.0" y="714.0" text-anchor="middle">인용 검증기</text><text class="s" x="798.0" y="730.0" text-anchor="middle">정규식 + SQL</text><rect class="box code" x="862" y="684" width="108" height="66" rx="8"/><text class="t" x="916.0" y="714.0" text-anchor="middle">리포트 빌더</text><text class="s" x="916.0" y="730.0" text-anchor="middle">Jinja2 · diff</text><path class="arrow" d="M250,604 L250,684"/><text class="l" x="256" y="642" text-anchor="start">직접 import</text><path class="arrow" d="M858,588 L858,684"/><text class="l" x="864" y="642" text-anchor="start">툴이 호출</text><text class="lay" x="20" y="844" text-anchor="start">저장소 · 설정 · 외부</text><rect class="box db" x="20" y="860" width="230" height="120" rx="8"/><text class="t" x="34" y="884">PostgreSQL + pgvector</text><text class="s" x="34" y="904">fact · signal · sns_aggregate</text><text class="s" x="34" y="920">regulation_chunk(embedding)</text><text class="s" x="34" y="936">country_card · insight_report</text><text class="s" x="34" y="952">review_label · as_of 스냅샷</text><rect class="box db" x="270" y="860" width="180" height="120" rx="8"/><text class="t" x="284" y="884">객체 저장소</text><text class="s" x="284" y="904">원문 PDF·HTML·CSV</text><text class="s" x="284" y="920">S3 또는 로컬 디스크</text><text class="s" x="284" y="936">source_id ↔ 경로</text><rect class="box db" x="470" y="860" width="180" height="120" rx="8"/><text class="t" x="484" y="884">설정 · 평가셋  (Git)</text><text class="s" x="484" y="904">weights.yaml (세트 4개)</text><text class="s" x="484" y="920">regulation_questions.yaml</text><text class="s" x="484" y="936">eval/ 정답셋 60문항</text><rect class="box" x="670" y="860" width="140" height="120" rx="8" stroke-dasharray="5 4"/><text class="t" x="684" y="884">외부 데이터 API</text><text class="s" x="684" y="904">Comtrade · WDI</text><text class="s" x="684" y="920">GDELT · RSS</text><text class="s" x="684" y="936">YouTube · Reddit</text><text class="s" x="684" y="952">Trends · KATI</text><rect class="box llm" x="830" y="860" width="150" height="120" rx="8" stroke-dasharray="5 4"/><text class="t" x="844" y="884">LLM API</text><text class="s" x="844" y="904">Responses API (생성)</text><text class="s" x="844" y="920">  호출 지점 ①~⑧</text><text class="s" x="844" y="936">Embeddings (벡터)</text><text class="s" x="844" y="952">  청크·질의 임베딩</text><path class="arrow" d="M135,750 L135,860"/><text class="l" x="141" y="804" text-anchor="start">SQL 읽기/쓰기</text><path class="arrow" d="M360,750 L360,860"/><text class="l" x="366" y="804" text-anchor="start">원문 저장·조회</text><path class="arrow" d="M560,750 L560,860"/><text class="l" x="566" y="804" text-anchor="start">가중치·질문 로드</text><path class="arrow" d="M90,750 L90,790 L740,790 L740,860"/><text class="l" x="600" y="780" text-anchor="middle">커넥터 → HTTP</text><path class="arrow" d="M632,588 L632,620 L995,620 L995,840 L905,840 L905,860"/><text class="l" x="905" y="828" text-anchor="end">생성 호출 (에이전트만)</text><path class="arrow" d="M680,750 L680,800 L880,800 L880,860"/><text class="l" x="780" y="790" text-anchor="middle">임베딩 호출 (청킹·검색만)</text><rect class="box" x="20" y="1020" width="960" height="44" rx="8" stroke-dasharray="6 4"/><text class="l" x="36" y="1047" text-anchor="start">운영: CI 평가 러너 (백테스트 · RAG 정답셋 · 신호 정밀도, PR마다) · 툴 호출 트레이스/로그 · 월 LLM 비용 리포트 · 시크릿은 환경변수</text></svg></div>
+    <div class="legend"><span class="l-llm">LLM 호출 (생성)</span><span class="l-code">결정론적 프로그램</span><span class="l-db">저장소 · 설정</span><span>점선 = 프로세스·외부 경계</span></div>
+    <figcaption>그림 1b. 소프트웨어 아키텍처. 프로세스는 셋(API 서버, 스케줄러 워커, 그리고 둘이 함께 쓰는 에이전트 런타임 라이브러리). 생성 호출은 에이전트 정의 ①~⑧에서만 LLM API로 나가고, 임베딩 호출은 청킹·검색 모듈에서만 나간다. 그 외 어떤 모듈도 LLM API 키를 갖지 않는다.</figcaption>
+  </figure>
+
+  <h3>LLM 호출 지점 8개 — 입력·출력·왜 LLM인가</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>#</th><th>에이전트</th><th>입력 → 출력 (전부 structured output)</th><th>왜 LLM인가</th><th>실패 시</th><th>모델 크기</th></tr></thead>
+    <tbody>
+      <tr><td>①</td><td>뉴스 신호 추출</td><td>기사 제목·본문(현지어) → {country, type(수요|규제|경쟁|유통|물류), direction(+|−), competitor?(별칭 표로 정규화된 회사·브랜드), summary_ko, confidence}</td><td>비정형 다국어 텍스트의 분류·요약. 규칙으로 못 한다.</td><td>스키마 검증 실패 → 폐기. confidence &lt; 0.6 → C등급.</td><td>소형 (건수 많음, 비용)</td></tr>
+      <tr><td>②</td><td>SNS 테마 분류</td><td>댓글·게시물 샘플 50건 묶음 → {theme: 비율} (맛·가격·선물용·할랄·구하기 어려움·기타)</td><td>짧고 은어 섞인 텍스트의 주제 분류.</td><td>묶음 단위 재시도 1회, 실패 시 해당 주 결측.</td><td>소형</td></tr>
+      <tr><td>③</td><td>법령 RAG</td><td>고정 질문 5개 + 검색 청크 k=8 → {answer, citations[article_ref], needs_check, barrier_score 0~5}</td><td>조문을 읽고 질문에 맞는 부분을 골라 요약. 인용은 검색기가 준 id만 허용.</td><td>인용 id가 청크 집합 밖이면 폐기·재시도. 시행일 미래면 needs_check.</td><td>중형</td></tr>
+      <tr><td>④</td><td>근거 작성</td><td>국가 카드 fact·signal 행(id 포함) → 근거 문단, 문장마다 [id]</td><td>표를 사람이 읽을 문장으로. 숫자는 입력에 있는 것만.</td><td>인용 검증기 실패 문장만 재생성, 2회 실패 → 사람 플래그.</td><td>중형</td></tr>
+      <tr><td>⑤</td><td>질의 라우터</td><td>사용자 질문 → {intent(수치|규정|추천), country, category, metric?}</td><td>자연어 질문의 의도·슬롯 추출.</td><td>intent 불명 → 사용자에게 선택지 제시.</td><td>소형</td></tr>
+      <tr><td>⑥</td><td>인사이트 서술</td><td>diff JSON(순위 변동·새 규제·급등 신호, 전부 id 포함) → 리포트 서술 섹션 1·2·3·5</td><td>변화를 "왜"로 엮어 쓰는 일. diff 계산 자체는 코드.</td><td>④와 같은 검증기. 변동 없음이면 호출 안 함.</td><td>중형</td></tr>
+      <tr><td>⑦</td><td>소스 발굴</td><td>{country, family, 기존 인스턴스} → {candidate_url[], type, access(API|RSS|HTML|PDF), parser_hint, license_note}</td><td>193국 × 7패밀리 빈칸을 사람이 다 찾을 수 없다. 검색·페이지 읽기·분류는 LLM 몫.</td><td>시험 수집 실패 → 후보 폐기. 등록은 사람 승인 후.</td><td>중형 + 웹 검색 툴</td></tr>
+      <tr><td>⑧</td><td>데이터 심사관</td><td>불일치·신규 값 + 출처 메타 + 지표 정의서 → {confidence A/B/C, reliability, definition_match, timeliness, adopt_source_id, flags[], reason, needs_human}</td><td>출처 신뢰·정의 일치·시의성·충돌 해결은 문맥 읽기다. 값은 출력에 없다.</td><td>needs_human 또는 C → quarantine. 사람 라벨로 정밀도 ≥ 0.9 유지.</td><td>중형</td></tr>
+      <tr><td>—</td><td>임베딩</td><td>청크·질의 텍스트 → 벡터</td><td>생성이 아니라 모델 호출. 청킹·검색 모듈만 사용.</td><td>실패 시 BM25만으로 검색(저하 운전).</td><td>임베딩 모델</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>일부러 LLM을 쓰지 않는 곳</h3>
+  <ul class="plain">
+    <li><b>수치가 나오는 모든 곳.</b> 지표 계산, z-점수, 가중합, 민감도, 순위, 백테스트, 지난달 대비 diff. 전부 pandas·numpy. 같은 입력이면 같은 출력이고, 1초 안에 끝나며, 테스트로 고정한다.</li>
+    <li><b>검색 랭킹.</b> BM25와 벡터 유사도의 하이브리드 점수는 코드다. LLM은 상위 k개를 받아 읽기만 한다.</li>
+    <li><b>인용 검증.</b> 생성된 문장에서 [id]를 정규식으로 뽑아 DB에 존재하는지, 문장 안 숫자가 그 행의 값과 같은지 SQL로 확인한다. LLM이 LLM을 검증하지 않는다.</li>
+    <li><b>리포트 조립.</b> 목차·표·그래프는 Jinja2 템플릿. LLM은 서술 섹션의 문단만 채운다.</li>
+    <li><b>스케줄·재시도·멱등.</b> 평범한 작업 큐 문제다.</li>
+  </ul>
+
+  <h3>기술 스택 (예선 슬라이스 기준)</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>층</th><th>선택</th><th>이유</th><th>본선·현업에서 바뀌는 것</th></tr></thead>
+    <tbody>
+      <tr><td>언어·패키지</td><td>Python 3.12, pandas, numpy, httpx, pydantic</td><td>데이터 작업 표준. pydantic 모델이 곧 LLM 출력 스키마.</td><td>없음</td></tr>
+      <tr><td>에이전트 런타임</td><td>OpenAI Agents SDK + Responses API (structured output)</td><td>본선 환경이 OpenAI 제공이라는 공지. Agent Builder는 2026-11-30 종료 공지라 SDK가 안전.</td><td>모델 교체는 설정 한 줄</td></tr>
+      <tr><td>API</td><td>FastAPI</td><td>pydantic과 같은 타입, 스트리밍 응답.</td><td>사내 SSO 연동</td></tr>
+      <tr><td>스케줄</td><td>APScheduler (단일 프로세스)</td><td>예선·본선은 수동 실행이면 충분.</td><td>Airflow/Prefect 또는 사내 배치</td></tr>
+      <tr><td>DB</td><td>SQLite(예선) → PostgreSQL + pgvector(본선)</td><td>예선은 파일 하나로 재현 가능해야 심사가 편하다.</td><td>pgvector로 벡터·관계 데이터 한 곳에</td></tr>
+      <tr><td>검색</td><td>rank_bm25 + 코사인 (예선), pg_trgm/tsvector + pgvector (본선)</td><td>하이브리드는 필수. 법령은 번호·고유명사 검색이 중요.</td><td>리랭커 추가 검토</td></tr>
+      <tr><td>UI</td><td>정적 HTML + fetch (이 저장소 방식) 또는 Streamlit</td><td>슬라이더·표·출처 링크면 충분.</td><td>사내 포털 임베드</td></tr>
+      <tr><td>평가·CI</td><td>pytest + 평가셋 YAML, GitHub Actions</td><td>PR마다 백테스트·RAG 정답셋·신호 정밀도 자동 채점.</td><td>비용 상한 게이트</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ 4c. 품질 게이트 ============ -->
+<section id="quality">
+  <h2>4c. 데이터 정합성·실효성 심사 — 규칙이 먼저, LLM은 판정만</h2>
+  <p>소스가 천 개가 되면 틀린 값, 정의가 다른 값, 오래된 값, 서로 모순되는 값이 반드시 섞인다. 그걸 거르는 LLM(데이터 심사관 ⑧)은 필요하다. 다만 순서가 중요하다. 코드로 걸러지는 것은 코드가 걸러서 LLM이 보는 양을 10~15%로 줄이고, LLM은 <b>"어느 값을 믿을지와 그 이유"</b>만 정한다. 값을 고치거나 만들지 않는다.</p>
+  <figure class="fig">
+    <div class="diagram"><svg viewBox="0 0 1000 330" role="img" aria-label="품질 게이트 4단: 규칙 검사와 교차 검증(코드)을 통과한 값은 A등급으로 바로 저장되고, 불일치·신규 10~15%만 LLM 데이터 심사관이 출처 신뢰·정의 일치·시의성·충돌 해결을 판정해 A/B/C 등급과 사유를 붙이며, C등급과 충돌 1~2%만 사람이 본다."><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C7A85"/></marker></defs><rect class="box db" x="20" y="60" width="120" height="80" rx="8"/><text class="t" x="80.0" y="89.0" text-anchor="middle">수집 결과</text><text class="s" x="80.0" y="105.0" text-anchor="middle">원문 + 파싱값</text><text class="s" x="80.0" y="121.0" text-anchor="middle">+ 출처 id</text><path class="arrow" d="M140,100 L170,100"/><text class="l" x="155" y="28" text-anchor="middle">100%</text><rect class="box code" x="170" y="40" width="190" height="120" rx="8"/><text class="t" x="184" y="64">1 규칙 검사  (코드)</text><text class="s" x="184" y="84">스키마 · 단위 · 범위</text><text class="s" x="184" y="100">전월 대비 ±50% · 중복</text><text class="s" x="184" y="116">통화·연도 누락</text><path class="arrow" d="M360,100 L390,100"/><text class="l" x="375" y="28" text-anchor="middle">95% 통과</text><rect class="box code" x="390" y="40" width="200" height="120" rx="8"/><text class="t" x="404" y="64">2 교차 검증  (코드)</text><text class="s" x="404" y="84">미러 통계: 관세청 ↔ Comtrade</text><text class="s" x="404" y="100">두 소스 일치율 · 단위 환산</text><text class="s" x="404" y="116">정의 태그 비교 (소매/도매)</text><path class="arrow" d="M590,100 L620,100"/><text class="l" x="605" y="28" text-anchor="middle">불일치·신규 10~15%만</text><rect class="box llm" x="620" y="40" width="210" height="120" rx="8"/><text class="t" x="634" y="64">3 데이터 심사관  (LLM ⑧)</text><text class="s" x="634" y="84">출처 신뢰 · 정의 일치 · 시의성</text><text class="s" x="634" y="100">충돌 시 채택 소스 + 사유</text><text class="s" x="634" y="116">→ A/B/C · flags[] · reason</text><path class="arrow" d="M830,100 L860,100"/><text class="l" x="845" y="28" text-anchor="middle">C등급·충돌 1~2%</text><rect class="box human" x="860" y="60" width="120" height="80" rx="8"/><text class="t" x="920.0" y="89.0" text-anchor="middle">4 사람</text><text class="s" x="920.0" y="105.0" text-anchor="middle">승인 · 기각</text><text class="s" x="920.0" y="121.0" text-anchor="middle">블랙리스트</text><path class="arrow" d="M265,160 L265,200"/><text class="l" x="271" y="178" text-anchor="start">탈락 → quarantine</text><path class="arrow" d="M490,160 L490,200"/><text class="l" x="496" y="178" text-anchor="start">일치 → A등급 저장</text><path class="arrow" d="M725,160 L725,200"/><text class="l" x="731" y="178" text-anchor="start">A/B 저장 · C 격리</text><path class="arrow" d="M920,140 L920,200"/><text class="l" x="914" y="178" text-anchor="end">라벨 → 심사관 평가셋</text><rect class="box db" x="20" y="200" width="960" height="60" rx="8"/><text class="t" x="34" y="224">사실 테이블 · quarantine</text><text class="s" x="34" y="244">모든 행: value · source_id · confidence(A/B/C) · validity_flags[] · judge_reason · judged_at   —   스코어링은 C등급 가중치 절반, quarantine 은 읽지 않음</text><text class="l" x="20" y="300" text-anchor="start">LLM은 &quot;값이 얼마인가&quot;를 정하지 않는다. &quot;어느 값을 믿을 것인가&quot;와 &quot;왜&quot;만 정한다. 비율은 예상치이며 운영 후 실측으로 교체한다.</text></svg></div>
+    <figcaption>그림 1c. 품질 게이트 4단. 규칙 검사와 교차 검증은 프로그램이고, 그걸 통과한 값은 LLM을 거치지 않고 A등급으로 저장된다. 불일치·신규 소스·정의 불명만 심사관에게 가고, 심사관이 C를 주거나 소스끼리 충돌한 것만 사람이 본다.</figcaption>
+  </figure>
+
+  <h3>심사관(⑧)이 보는 네 가지와 출력</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>판정 항목</th><th>질문</th><th>입력으로 주는 것</th><th>출력</th></tr></thead>
+    <tbody>
+      <tr><td><b>출처 신뢰</b></td><td>1차 자료인가(통계청·세관) 2차인가(매체 인용), 기관 성격, 갱신 이력, 레지스트리의 reliability_prior</td><td>source 행 + 원문 첫 페이지</td><td>reliability 0~1</td></tr>
+      <tr><td><b>정의 일치</b></td><td>같은 "초콜릿 과자 시장 규모"인데 소매가/도매가, 포함 품목(HS 1806 vs 1704 포함), 통화·연도·명목/실질이 우리 지표 정의와 맞는가</td><td>지표 정의서 + 값 주변 문맥 500자</td><td>definition_match: exact / convertible / mismatch + 환산 제안</td></tr>
+      <tr><td><b>시의성·실효성</b></td><td>2019년 보고서가 2026년 판단에 유효한가, 규제는 시행됐나·유예됐나·적용 범위가 수입품인가, 코로나·환율 급변 구간인가</td><td>period, effective_from, 관련 signal 행</td><td>timeliness: current / stale / superseded + 사유</td></tr>
+      <tr><td><b>충돌 해결</b></td><td>두 소스가 다를 때(관세청 vs 상대국 세관, GAIN vs 현지 통계) 어느 쪽을 채택하고 차이를 어떻게 설명하나(재수출·집계 기준·시차)</td><td>충돌하는 값들 + 각 출처 메타</td><td>adopt: source_id + conflict_reason + 보정 계수 제안</td></tr>
+    </tbody>
+  </table></div>
+  <pre class="pre" style="margin-top:14px">judge_output  = { confidence: "A"|"B"|"C", reliability: 0.0~1.0, definition_match, timeliness,
+                  adopt_source_id, flags: ["mirror_gap_30pct","stale_2019","unit_converted",…],
+                  reason: "...", needs_human: bool }
+규칙:  값(value)은 출력 스키마에 없다 → LLM이 숫자를 바꿀 수 없다
+      confidence=C 또는 needs_human=true → quarantine, 스코어링이 읽지 않음
+      사람의 최종 라벨은 judge_eval 셋에 쌓여 심사관 정밀도(≥0.9)를 매 배포마다 잰다</pre>
+
+  <h3>스코어링이 등급을 쓰는 법</h3>
+  <ul class="plain">
+    <li><b>A</b>: 그대로. <b>B</b>: 그대로 쓰되 카드에 표시. <b>C</b>: 가중치 절반, 근거 문단에 "신뢰 낮음" 문구 강제. <b>quarantine</b>: 읽지 않음, 결측 처리(0점이 아니라 축 제외 후 재정규화).</li>
+    <li>같은 지표에 A등급 소스가 둘이면 평균이 아니라 <b>심사관이 채택한 쪽</b>을 쓰고 다른 쪽은 flags에 남긴다. 평균은 재수출 왜곡을 숨긴다.</li>
+    <li>한 나라의 축 하나가 전부 C·격리면 그 나라는 Tier 강등 후보로 올라간다. 데이터가 없는 나라를 유망하다고 말하지 않기 위해서다.</li>
+  </ul>
+
+  <h3>왜 LLM 심사관을 규칙 뒤에 두나</h3>
+  <ul class="plain">
+    <li><b>비용과 속도.</b> 값 수만 건을 전부 LLM에 보내면 월 수만 호출이 수십만이 된다. 규칙이 95%를 처리하면 심사관은 수천 건이다.</li>
+    <li><b>판정의 일관성.</b> 범위·단위·중복은 규칙이 더 정확하고 재현된다. LLM은 "정의가 같은가", "이 규제가 지금 유효한가" 같은 읽기와 문맥 판단에만 강하다.</li>
+    <li><b>평가 가능성.</b> 심사관의 입력이 "불일치 케이스"로 좁혀지면 사람 라벨 200건으로 정밀도를 잴 수 있다. 전체 값을 다 보게 하면 평가셋을 만들 수 없다.</li>
+    <li><b>심사위원 질문 대비.</b> "LLM이 LLM을 검증하는 것 아닌가?"에 "아니다. 숫자는 코드가 검증하고, LLM은 출처와 정의를 읽고 등급을 매기며, 그 등급은 사람 라벨로 평가된다"로 답한다.</li>
+  </ul>
+</section>
+
+<!-- ============ 4b. 플로우차트 ============ -->
+<section id="flows">
+  <h2>4b. 플로우차트 — 매달 한 번 도는 흐름과 질문 하나가 처리되는 흐름</h2>
+  <p>아키텍처는 "무엇이 어디에 있나"고, 플로우차트는 "순서대로 무슨 일이 일어나고 어디서 갈라지나"다. 기획서에는 둘 다 넣되, 심사위원 질문은 대부분 분기(마름모)에서 나온다.</p>
+  <figure class="fig">
+    <div class="diagram"><svg viewBox="0 0 1000 1560" role="img" aria-label="월간 실행 흐름: 스케줄 트리거 → 수집 → 검증 분기 → as-of insert → 지표·RAG·스코어링 → 변화 유무 분기 → 근거 생성 → 출처 검증 분기(재생성 최대 2회) → diff 리포트 → 담당자 검토 → 가중치 변경 시 스코어링부터 재계산 → 저장·발송"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C7A85"/></marker></defs><rect class="box " x="160.0" y="20" width="400" height="44" rx="22.0"/><text class="t" x="360.0" y="47.0" text-anchor="middle">스케줄 트리거 · 매월 1일 02:00 (수동 실행 가능)</text><path class="arrow" d="M360,64 L360,100"/><rect class="box llm" x="160.0" y="100" width="400" height="56" rx="8"/><text class="t" x="360.0" y="125.0" text-anchor="middle">레지스트리 순회: 수집 에이전트 4종 병렬</text><text class="s" x="360.0" y="141.0" text-anchor="middle">해시 비교로 바뀐 인스턴스만 (원문 저장)</text><path class="arrow" d="M360,156 L360,200"/><polygon class="box dec" points="360,186.0 580.0,234.0 360,282.0 140.0,234.0"/><text class="t" x="360" y="231.0" text-anchor="middle">품질 게이트 통과?</text><text class="s" x="360" y="247.0" text-anchor="middle">규칙 → 교차 검증 → LLM 심사관 ⑧ → C등급·충돌은 사람</text><path class="arrow" d="M580.0,231 L700,231"/><text class="l" x="640" y="219" text-anchor="middle">아니오</text><rect class="box " x="700" y="205" width="270" height="52" rx="8"/><text class="t" x="835.0" y="228.0" text-anchor="middle">격리(quarantine) 또는 C등급</text><text class="s" x="835.0" y="244.0" text-anchor="middle">지난달 값 유지, 소스 상태 기록</text><path class="arrow" d="M835,257 L835,300 L560.0,300"/><path class="arrow" d="M360,288.0 L360,320"/><text class="l" x="368" y="308.0" text-anchor="start">예</text><rect class="box db" x="160.0" y="320" width="400" height="56" rx="8"/><text class="t" x="360.0" y="345.0" text-anchor="middle">사실 테이블 insert  (as_of = 이번 달)</text><text class="s" x="360.0" y="361.0" text-anchor="middle">덮어쓰기 없음 → 시계열 스냅샷</text><path class="arrow" d="M360,376 L360,410"/><rect class="box code" x="160.0" y="410" width="400" height="56" rx="8"/><text class="t" x="360.0" y="435.0" text-anchor="middle">지표 산출  6축 × 12개국</text><text class="s" x="360.0" y="451.0" text-anchor="middle">z-점수 → 0~5 압축</text><path class="arrow" d="M360,466 L360,500"/><rect class="box llm" x="160.0" y="500" width="400" height="56" rx="8"/><text class="t" x="360.0" y="525.0" text-anchor="middle">법령 RAG  국가당 5문항 질의</text><text class="s" x="360.0" y="541.0" text-anchor="middle">답변 → 진입 장벽 축 점수</text><path class="arrow" d="M360,556 L360,590"/><rect class="box code" x="160.0" y="590" width="400" height="56" rx="8"/><text class="t" x="360.0" y="615.0" text-anchor="middle">스코어링  가중치 세트 4개 × 순위</text><text class="s" x="360.0" y="631.0" text-anchor="middle">민감도 ±20%, 순위 안정성 계산</text><path class="arrow" d="M360,646 L360,690"/><polygon class="box dec" points="360,676.0 580.0,724.0 360,772.0 140.0,724.0"/><text class="t" x="360" y="721.0" text-anchor="middle">지난달 대비 변화 있나?</text><text class="s" x="360" y="737.0" text-anchor="middle">TOP3 변동 · 3계단 이동 · 새 규제 · 2σ 신호</text><path class="arrow" d="M580.0,721 L700,721"/><text class="l" x="640" y="709" text-anchor="middle">아니오</text><rect class="box " x="700" y="695" width="250" height="52" rx="8"/><text class="t" x="825.0" y="718.0" text-anchor="middle">&#x27;변동 없음&#x27; 한 줄 리포트</text><text class="s" x="825.0" y="734.0" text-anchor="middle">데이터 상태 표만 첨부</text><path class="arrow" d="M950,721 L985,721 L985,1168 L560.0,1168"/><path class="arrow" d="M360,752 L360,810"/><text class="l" x="368" y="785.0" text-anchor="start">예</text><rect class="box llm" x="160.0" y="810" width="400" height="56" rx="8"/><text class="t" x="360.0" y="835.0" text-anchor="middle">근거 문단 생성  (LLM)</text><text class="s" x="360.0" y="851.0" text-anchor="middle">fact · signal · regulation_chunk id만 참조</text><path class="arrow" d="M360,866 L360,910"/><polygon class="box dec" points="360,896.0 580.0,944.0 360,992.0 140.0,944.0"/><text class="t" x="360" y="941.0" text-anchor="middle">검증 통과?</text><text class="s" x="360" y="957.0" text-anchor="middle">모든 문장에 [출처 id] · 숫자가 테이블과 일치</text><path class="arrow" d="M580.0,941 L700,941"/><text class="l" x="640" y="929" text-anchor="middle">아니오</text><rect class="box llm" x="700" y="915" width="270" height="52" rx="8"/><text class="t" x="835.0" y="938.0" text-anchor="middle">재생성  (최대 2회)</text><text class="s" x="835.0" y="954.0" text-anchor="middle">실패 문장만 다시</text><path class="arrow" d="M835,915 L835,890 L560.0,890 L560.0,866"/><text class="l" x="850" y="885" text-anchor="start">다시 ⑨로</text><rect class="box human" x="700" y="985" width="270" height="44" rx="8"/><text class="t" x="835.0" y="1012.0" text-anchor="middle">2회 실패 → 사람 검토 플래그</text><path class="arrow" d="M835,967 L835,985"/><path class="arrow" d="M700,1007 L590.0,1007 L590.0,1040 L560.0,1040"/><path class="arrow" d="M360,972 L360,1040"/><text class="l" x="368" y="1010.0" text-anchor="start">예</text><rect class="box " x="160.0" y="1040" width="400" height="56" rx="8"/><text class="t" x="360.0" y="1065.0" text-anchor="middle">월간 diff 리포트 조립</text><text class="s" x="360.0" y="1081.0" text-anchor="middle">순위 변동 · 규제 · 신호 · 액션 3개 · 데이터 상태</text><path class="arrow" d="M360,1096 L360,1140"/><rect class="box human" x="160.0" y="1140" width="400" height="56" rx="8"/><text class="t" x="360.0" y="1165.0" text-anchor="middle">담당자 검토</text><text class="s" x="360.0" y="1181.0" text-anchor="middle">가중치·후보국 조정, 신호 승인/기각 + 사유</text><path class="arrow" d="M360,1196 L360,1240"/><polygon class="box dec" points="360,1226.0 580.0,1274.0 360,1322.0 140.0,1274.0"/><text class="t" x="360" y="1279.0" text-anchor="middle">가중치나 후보국을 바꿨나?</text><path class="arrow" d="M140.0,1271 L60,1271 L60,618 L160.0,618"/><text class="l" x="70" y="1260" text-anchor="start">예 → 스코어링부터 재계산 (수집 재실행 없음)</text><path class="arrow" d="M360,1302 L360,1360"/><text class="l" x="368" y="1335.0" text-anchor="start">아니오</text><rect class="box db" x="160.0" y="1360" width="400" height="56" rx="8"/><text class="t" x="360.0" y="1385.0" text-anchor="middle">country_card · insight_report 저장</text><text class="s" x="360.0" y="1401.0" text-anchor="middle">기각 사유 → review_label → 다음 달 few-shot</text><path class="arrow" d="M360,1416 L360,1460"/><rect class="box " x="160.0" y="1460" width="400" height="44" rx="22.0"/><text class="t" x="360.0" y="1487.0" text-anchor="middle">승인된 리포트 발송 · 대시보드 갱신</text><text class="l" x="990" y="1540" text-anchor="end">마름모 = 분기 · 보라 = LLM 단계 · 회색 = 결정론적 코드 · 붉은 = 사람</text></svg></div>
+    <figcaption>그림 2. 월간 실행 흐름. 분기가 네 개다: 수집 실패(지난달 값 유지·C등급), 변화 없음(한 줄 리포트), 출처 검증 실패(재생성 최대 2회 후 사람 플래그), 가중치 변경(스코어링부터만 재계산). 수집을 다시 돌리지 않아도 되는 구조라 담당자가 슬라이더를 움직여도 1초 안에 결과가 나온다.</figcaption>
+  </figure>
+  <figure class="fig">
+    <div class="diagram"><svg viewBox="0 0 1000 640" role="img" aria-label="질의 처리 흐름: 사용자 질문을 수치·규정·추천으로 분류해 각각 SQL 툴·RAG 툴·스코어링 결과 조회로 보내고, 합성 단계에서 출처 인용을 검증한 뒤 응답한다."><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C7A85"/></marker></defs><rect class="box human" x="20" y="250" width="200" height="120" rx="8"/><text class="t" x="120.0" y="291.0" text-anchor="middle">사용자 질문</text><text class="s" x="120.0" y="307.0" text-anchor="middle">&quot;UAE에 빼빼로 수출하려면</text><text class="s" x="120.0" y="323.0" text-anchor="middle">할랄 인증 필요해? 관세는?</text><text class="s" x="120.0" y="339.0" text-anchor="middle">추천 순위는?&quot;</text><polygon class="box dec" points="330,250.0 420.0,310 330,370.0 240.0,310"/><text class="t" x="330" y="307" text-anchor="middle">의도 분류</text><text class="s" x="330" y="323" text-anchor="middle">수치 · 규정 · 추천</text><path class="arrow" d="M220,310 L240,310"/><rect class="box code" x="460" y="40" width="300" height="120" rx="8"/><text class="t" x="474" y="64">수치 질의  → SQL 툴</text><text class="s" x="474" y="84">query_fact(country, metric)</text><text class="s" x="474" y="100">fact 테이블만 읽기 (as_of 최신)</text><text class="s" x="474" y="116">값 + 단위 + 출처 id + as_of 반환</text><rect class="box llm" x="460" y="250" width="300" height="120" rx="8"/><text class="t" x="474" y="274">규정 질의  → RAG 툴</text><text class="s" x="474" y="294">hybrid_search(국가·품목 필터, k=8)</text><text class="s" x="474" y="310">effective_from · fetched_at 검사</text><text class="s" x="474" y="326">조문 인용 답변, 오래되면 &#x27;확인 필요&#x27;</text><rect class="box code" x="460" y="460" width="300" height="120" rx="8"/><text class="t" x="474" y="484">추천 질의  → 스코어링 결과</text><text class="s" x="474" y="504">country_card 최신 스냅샷 조회</text><text class="s" x="474" y="520">가중치 세트별 순위 · 안정성</text><text class="s" x="474" y="536">근거 문단 (fact/signal id 포함)</text><path class="arrow" d="M330,250 L330,100 L460,100"/><text class="l" x="395" y="88" text-anchor="middle">수치</text><path class="arrow" d="M420,310 L460,310"/><text class="l" x="440" y="294" text-anchor="middle">규정</text><path class="arrow" d="M330,370 L330,520 L460,520"/><text class="l" x="395" y="508" text-anchor="middle">추천</text><rect class="box llm" x="800" y="250" width="180" height="120" rx="8"/><text class="t" x="890.0" y="291.0" text-anchor="middle">합성 + 인용 검증</text><text class="s" x="890.0" y="307.0" text-anchor="middle">출처 id 없는 문장 폐기</text><text class="s" x="890.0" y="323.0" text-anchor="middle">숫자 ↔ 테이블 재대조</text><text class="s" x="890.0" y="339.0" text-anchor="middle">&#x27;확인 필요&#x27; 표시 유지</text><path class="arrow" d="M760,100 L800,100 L800,250"/><path class="arrow" d="M760,310 L800,310"/><path class="arrow" d="M760,520 L800,520 L800,370"/><path class="arrow" d="M890,370 L890,440"/><rect class="box " x="800" y="440" width="180" height="120" rx="8"/><text class="t" x="890.0" y="481.0" text-anchor="middle">응답</text><text class="s" x="890.0" y="497.0" text-anchor="middle">할랄: 필수 [GSO 2055-1 §4.2]</text><text class="s" x="890.0" y="513.0" text-anchor="middle">관세: 5% [GCC CET · 확인 필요]</text><text class="s" x="890.0" y="529.0" text-anchor="middle">순위: 2위 (4세트 중 3) [card#…]</text><text class="l" x="20" y="600" text-anchor="start">툴은 각각 한 저장소만 읽는다. 수치는 사실 테이블, 규정은 벡터 색인, 추천은 country_card. LLM이 숫자를 지어낼 경로가 없다.</text></svg></div>
+    <figcaption>그림 3. 질의 처리 흐름. 본선 데모의 뼈대다. 질문을 수치·규정·추천으로 나눠 각각 다른 저장소만 읽는 툴로 보내고, 합성 단계에서 출처 없는 문장과 테이블과 다른 숫자를 걸러낸다. 응답의 각 줄 뒤에 붙는 대괄호가 심사위원이 클릭해 확인할 수 있는 근거다.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 5. 주기적 인사이트 ============ -->
+<section id="insight">
+  <h2>5. 주기적 인사이트 — "무엇이 바뀌었나"만 쓴다</h2>
+  <p>월간 리포트의 고정 목차. 변화가 없는 항목은 "변동 없음" 한 줄로 끝낸다. 그래야 수출팀이 5분 안에 읽는다.</p>
+  <ol class="steps">
+    <li><b>순위 변동</b> <span class="sub">TOP3 진입·이탈, 3계단 이상 움직인 나라와 어느 축이 움직였는지. 가중치 4세트 모두에서의 변동만 "유의"로 표시.</span></li>
+    <li><b>새 규제·규제 변경</b> <span class="sub">WTO 통보문·관보·규제 뉴스에서 잡힌 것. 조문 인용, 시행일, 영향 품목, 대응 기한.</span></li>
+    <li><b>급등 신호</b> <span class="sub">검색 지수·영상 수·판매 수가 3개월 평균 대비 2σ 이상 벗어난 국가와 품목. 원문 샘플 3건 링크.</span></li>
+    <li><b>수출 실적 대비</b> <span class="sub">(본선 이후) 롯데 실제 수출과 모델 예측의 차이가 큰 나라. 모델이 틀린 건지 영업이 못 간 건지 질문으로 남긴다.</span></li>
+    <li><b>추천 액션 3개</b> <span class="sub">"UAE 할랄 인증 착수", "폴란드 Amazon 입점 테스트"처럼 담당 부서와 기한이 있는 문장. 근거 id 첨부.</span></li>
+    <li><b>데이터 상태</b> <span class="sub">갱신 실패한 소스, 1년 넘은 값, 신뢰 등급 C 비중. 숨기지 않는다.</span></li>
+  </ol>
+</section>
+
+<!-- ============ 6. 예선 슬라이스 ============ -->
+<section id="slice">
+  <h2>6. 범위 나누기 — 예선 · 본선 · 현업</h2>
+  <p>전체 시스템은 기획서의 아키텍처 장에 그리고, 3일 안에는 세로로 얇게 한 번 관통시킨다. 심사위원은 "그려진 것"보다 "돌아간 것"에 점수를 준다.</p>
+  <div class="tiers">
+    <div class="tier"><h3>예선 슬라이스</h3><div class="when">11/1 ~ 11/3, 공개 데이터만</div><ul>
+      <li>후보국 12개, 품목 1개(초콜릿 과자)</li>
+      <li>A·C: Comtrade + World Bank + 관세청 엑셀 → 사실 테이블(SQLite/Postgres)</li>
+      <li>B: Google Trends + YouTube API + Reddit 샘플 200건 LLM 분류 → sns_aggregate</li>
+      <li>D: KATI 수입규정 12개국 문서 RAG, 국가당 5문항 평가셋</li>
+      <li>G: 직접 경쟁 6개사 IR 요약 + 12국 × 3마켓 가격·입점 수작업 표</li>
+      <li>스코어링 + 가중치 4세트 + 백테스트 1회</li>
+      <li>근거 문단 생성(출처 id 검증) → TOP3 리포트 1부</li>
+      <li>화면 캡처 5장, 노트북·저장소 링크</li>
+    </ul></div>
+    <div class="tier"><h3>본선 48시간</h3><div class="when">11/24 ~ 25, 현장 데이터 결합</div><ul>
+      <li>현장 CSV 적재 → 블록 E와 C에 롯데 실제 실적 추가</li>
+      <li>품목을 빙과·건과로 확장(카테고리 스위치)</li>
+      <li>"모델 vs 실적" 괴리 분석 화면</li>
+      <li>월간 diff 리포트 1회분을 과거 두 시점으로 시연</li>
+      <li>OpenAI 환경(Agents SDK 추정)으로 툴 호출 흐름이 보이는 데모</li>
+    </ul></div>
+    <div class="tier"><h3>현업 비전</h3><div class="when">기획서 9장 "배포 시나리오"</div><ul>
+      <li>스케줄러로 수집 자동화, 월간 리포트 자동 발송</li>
+      <li>유료 데이터(Euromonitor·NIQ) 슬롯 연결</li>
+      <li>WTO ePing·관보 변경 감시 → 규제 알림</li>
+      <li>담당자 기각 사유 축적 → 분류기 개선</li>
+      <li>카테고리·브랜드별 카드(빼빼로·초코파이·빙과)</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ============ 7. 리스크 ============ -->
+<section id="risks">
+  <h2>7. 미리 답해 둘 질문</h2>
+  <ul class="plain">
+    <li><b>SNS 약관과 개인정보.</b> 공식 API와 공개 집계 도구만 쓰고, 원문은 샘플링 후 테마 집계만 저장한다. 사용자 id·원문은 저장하지 않는다. 포럼 크롤은 robots.txt 준수.</li>
+    <li><b>재수출 허브 왜곡.</b> 한국 세관과 상대국 세관의 차이를 계수로 저장하고 UAE·싱가포르·네덜란드는 보정값으로 평가한다.</li>
+    <li><b>번역 품질.</b> 현지어 뉴스·포럼은 LLM이 원문 그대로 읽고 한국어 요약을 만들되, 원문 링크를 남겨 검증 가능하게 한다.</li>
+    <li><b>LLM이 숫자를 틀리면.</b> 숫자는 사실 테이블에서만 나오고 근거 문단은 [출처 id] 없는 문장을 거부한다. 생성 후 숫자 재대조 단계를 둔다.</li>
+    <li><b>비용.</b> 예선 슬라이스는 API 무료 할당 안에서 끝난다. 현업 규모는 월 수집 호출 수와 LLM 토큰을 표로 제시한다(본선 이후).</li>
+    <li><b>데이터 시차.</b> Comtrade 연간 데이터는 1년 늦다. 월별 관세청·Eurostat·US Census로 최신 구간을 보완하고 시차를 카드에 표기한다.</li>
+  </ul>
+</section>
+
+<!-- ============ 출처 ============ -->
+<section id="refs">
+  <h2>출처·확인한 것</h2>
+  <ul class="src">
+    <li><a href="https://www.data.go.kr/data/15116876/openapi.do" target="_blank" rel="noopener">공공데이터포털 · KOTRA 국가정보 오픈API</a> — 국가정보는 오픈API, 해외시장뉴스 본문은 사이트 크롤 대상. aT KATI 오픈API는 포털 검색에서 확인되지 않음(2026-11-01)</li>
+    <li><a href="https://developers.tiktok.com/docs/en/research-api-faq" target="_blank" rel="noopener">TikTok Research API FAQ</a> — 승인된 연구 과제만 접근 가능, 상업 이용 불가</li>
+    <li><a href="https://food.chemlinked.com/news/food-news/indonesia-confirms-no-delay-to-mandatory-halal-certification-from-october-18-2026" target="_blank" rel="noopener">ChemLinked · 인도네시아 수입 식품 할랄 의무화</a> — 2026-10-17/18 시행, 외국 인증기관 MRA로 대체 가능. 선적 전 검사(2026-09 보도)는 공식 확인 필요</li>
+    <li><a href="https://www.mafra.go.kr/bbs/home/792/578357/artclView.do" target="_blank" rel="noopener">농림축산식품부 2026-07-05</a> — UAE +49.9%, GCC +25.2% 등 국가 카드 예시 수치</li>
+    <li><a href="index.html#sources" target="_blank">대회 정리 페이지의 롯데웰푸드 관련 출처</a> — 빼빼로 지역 비중, 인도 공장, 수출 목표</li>
+    <li>확인 필요로 남긴 것: 한-UAE CEPA·한-GCC FTA 발효 여부와 과자류 양허 세율, UAE 식품 등록 절차, GS25 UAE 진출 현황, DataReportal 2026 국가별 연령 이용률</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="foot"><div class="wrap">ttomstudio · lotte-ax/framework.html · 2026-11-01 작성</div></footer>
+</body>
+</html>

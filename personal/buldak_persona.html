@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="페르소나">
+<title>불닭볶음면 페르소나 4인과 고객 여정</title>
+<meta name="description" content="불닭볶음면 판매를 위한 페르소나 4개를 만들고, 인지부터 재구매까지 전체 흐름을 페르소나별 고객여정지도로 따라가 보는 예시. AI 페르소나 시뮬레이션으로 옮기는 법까지.">
+<link rel="stylesheet" href="assets/summer.css">
+<style>
+:root{
+  --red:#B42318; --red-soft:#FBEAE7; --red-line:#E3A69E;
+  --accent-soft:rgba(14,124,148,.10);
+  --pa:#0E7C94; --pb:#7A4F12; --pc:#0F5C47; --pd:#5B3F8E;
+}
+.hero{padding:72px 0 0}
+.hero .lead{max-width:60ch}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:24px;font-size:14px;color:var(--ink-2)}
+.wrap-doc{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 96px}
+section{margin-top:64px}
+h2{font-size:1.3rem;font-weight:600;margin:0 0 16px;letter-spacing:-.02em}
+h3{font-size:1rem;font-weight:600;margin:22px 0 8px}
+p{margin:0 0 12px;max-width:46em}
+.note{font-size:.9rem;color:var(--ink-2);max-width:46em}
+.callout{border-left:3px solid var(--accent);background:#fff;padding:14px 18px;border-radius:0 8px 8px 0;box-shadow:var(--shadow);max-width:46em;margin:14px 0}
+.callout.warn{border-left-color:var(--red)}
+.callout p:last-child{margin-bottom:0}
+.tablewrap{overflow-x:auto;border-radius:10px;border:1px solid var(--line);background:#fff}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--accent-soft);color:var(--ink);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td:first-child{min-width:6em;color:var(--ink-2)}
+.diagram{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;box-shadow:var(--shadow)}
+.diagram svg{display:block;min-width:900px;width:100%;height:auto}
+.diagram text{font-family:var(--sans);fill:var(--ink)}
+.diagram .box{fill:#fff;stroke:var(--line);stroke-width:1.2}
+.diagram .t{font-size:13px;font-weight:600}
+.diagram .s{font-size:11px;fill:var(--ink-2)}
+.diagram .arrow{stroke:var(--ink-2);stroke-width:1.2;fill:none;marker-end:url(#ah)}
+.diagram .tag{font-size:11px;font-weight:600}
+figure.fig{margin:0 0 28px}
+figure.fig figcaption{font-size:.88rem;color:var(--ink-2);margin-top:10px;max-width:60em}
+
+/* 페르소나 카드 */
+.personas{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:18px}
+.persona{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;border-top:4px solid var(--pc)}
+.persona.a{border-top-color:var(--pa)}.persona.b{border-top-color:var(--pb)}.persona.c{border-top-color:var(--pc)}.persona.d{border-top-color:var(--pd)}
+.persona .head{padding:18px 20px 12px;border-bottom:1px solid var(--line)}
+.persona .head .k{display:inline-block;width:26px;height:26px;border-radius:50%;color:#fff;font-weight:600;font-size:.85rem;text-align:center;line-height:26px;margin-right:8px;background:var(--pc)}
+.persona.a .k{background:var(--pa)}.persona.b .k{background:var(--pb)}.persona.c .k{background:var(--pc)}.persona.d .k{background:var(--pd)}
+.persona .head b{font-size:1.05rem}
+.persona .head .sub{display:block;font-size:.85rem;color:var(--ink-2);margin-top:4px}
+.persona .quote{margin:12px 20px 0;padding:10px 14px;background:var(--accent-soft);border-radius:8px;font-size:.92rem;line-height:1.55}
+.persona dl{margin:12px 20px 18px;font-size:.9rem}
+.persona dl div{display:grid;grid-template-columns:6.5em 1fr;gap:8px;padding:5px 0;border-top:1px dashed var(--line)}
+.persona dl div:first-child{border-top:none}
+.persona dt{color:var(--ink-2)}.persona dd{margin:0}
+
+/* 여정 지도 */
+.journey{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:22px}
+.journey .jh{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.journey .jh b{font-size:1rem}
+.journey .jh span{font-size:.85rem;color:var(--ink-2)}
+.journey .curve{padding:10px 12px 0}
+.journey .curve svg{display:block;width:100%;height:auto;min-width:720px}
+.journey .curve .ax{stroke:var(--line);stroke-width:1}
+.journey .curve .ln{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round}
+.journey .curve .mk{fill:#fff;stroke:var(--accent);stroke-width:2}
+.journey .curve .lbl{font-family:var(--sans);font-size:11px;fill:var(--ink-2)}
+.journey .curve .val{font-family:var(--sans);font-size:11px;fill:var(--ink);font-weight:600}
+.journey .tablewrap{border:0;border-radius:0;border-top:1px solid var(--line)}
+.journey table{font-size:.86rem}
+.journey th{font-size:.8rem}
+.journey td{min-width:9.5em}
+.journey td:first-child{min-width:5.5em;white-space:nowrap;font-weight:600;color:var(--ink)}
+.journey td.pain{color:var(--red)}
+.journey td.opp{color:var(--pc)}
+
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;max-width:46em}
+.steps li{counter-increment:s;position:relative;padding:12px 0 12px 48px;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:11px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:600;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps .sub{display:block;color:var(--ink-2);font-size:.9rem;margin-top:3px}
+.pre{font-family:var(--mono);font-size:.82rem;background:#F1F7F8;border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;line-height:1.5;margin:0;white-space:pre}
+ul.plain > li{display:block;position:relative;padding-left:28px}
+ul.plain > li::before{position:absolute;left:0;top:24px;margin-top:0}
+ul.src{margin:0;padding-left:1.1em;font-size:.92rem;max-width:46em}
+ul.src li{margin:5px 0}
+@media (max-width:640px){section{margin-top:48px}.hero{padding-top:48px}.persona dl div{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <span class="crumb"><a class="home" href="../index.html">ttomstudio</a><span class="sep" aria-hidden="true">/</span><a class="brand" href="index.html">Personal</a><span class="sep" aria-hidden="true">/</span><a class="brand" href="buldak_persona.html" aria-current="page">페르소나</a></span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">예시 · 페르소나와 고객 여정</span>
+    <h1 style="margin-top:12px">불닭볶음면을<br>누가, 어떻게 사는가</h1>
+    <p class="lead">판매를 위한 페르소나 4인을 만들고, 인지에서 재구매까지 전체 흐름을 한 사람씩 따라간다. 각 페르소나의 여정 지도(행동·접점·감정·불편·기회·지표)를 그리고, 마지막에 이 페르소나를 AI 에이전트로 돌리는 법까지 적는다.</p>
+    <div class="hero-meta">
+      <span>제품: 삼양식품 불닭볶음면 시리즈</span>
+      <span>페르소나는 공개 보도와 일반 소비 패턴으로 만든 <b>가상 인물</b></span>
+      <span>작성 2026-11-01</span>
+    </div>
+  </div>
+  <div class="wrap">
+    <svg class="hero-wave" viewBox="0 0 1080 64" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,42 C120,42 150,18 270,18 C390,18 420,42 540,42 C660,42 690,18 810,18 C930,18 960,42 1080,42"/>
+      <path class="accent" d="M0,52 C120,52 150,30 270,30 C390,30 420,52 540,52 C660,52 690,30 810,30 C930,30 960,52 1080,52"/>
+    </svg>
+  </div>
+</header>
+
+<main class="wrap-doc">
+
+<!-- ============ 0 ============ -->
+<section id="why">
+  <h2>0. 왜 불닭인가, 왜 페르소나인가</h2>
+  <p>불닭볶음면은 2012년에 나와 2014년 무렵 유튜브 "파이어 누들 챌린지"로 해외에 퍼졌고, 2017년 까르보불닭이 매운맛 진입장벽을 낮추면서 대중 제품이 됐다. 2024년에는 덴마크 식품당국이 매운 정도를 이유로 일부 제품을 리콜했다가 뒤에 일부를 해제하는 일도 있었다. 즉 이 제품은 <b>같은 봉지를 전혀 다른 이유로 사는 사람들</b>이 여러 나라에 있다. 그래서 페르소나가 필요하다. "소비자"라는 평균 인물은 존재하지 않는다.</p>
+  <p>페르소나는 세그먼트 통계가 아니라 <b>한 사람의 이야기</b>다. 목표·불편·채널·구매 트리거가 구체적이어야 여정 지도가 그려지고, 여정 지도가 있어야 "어느 접점에서 무엇을 바꾸면 되는지"가 나온다. 이 페이지는 그 순서를 그대로 따라간다.</p>
+</section>
+
+<!-- ============ 1 전체 flow ============ -->
+<section id="flow">
+  <h2>1. 전체 판매 흐름 — 여섯 단계와 네 사람의 경로</h2>
+  <p>모든 페르소나가 같은 여섯 단계를 지나지만 들어오는 문과 막히는 지점이 다르다. 단계 아래 글자(A·B·C·D)가 그 페르소나의 주된 접점이다.</p>
+  <figure class="fig">
+    <div class="diagram">
+      <svg viewBox="0 0 1000 420" role="img" aria-label="판매 흐름 여섯 단계: 인지, 탐색, 구매, 조리·시식, 공유, 재구매·확장. 각 단계의 접점과 네 페르소나의 주된 경로, 그리고 공유에서 인지로 되돌아가는 루프.">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C7A85"/></marker></defs>
+        <!-- 단계 상자 -->
+        <g>
+          <rect class="box" x="20" y="40" width="150" height="70" rx="8"/><text class="t" x="35" y="66">1 인지</text><text class="s" x="35" y="86">처음 보는 순간</text>
+          <rect class="box" x="186" y="40" width="150" height="70" rx="8"/><text class="t" x="201" y="66">2 탐색</text><text class="s" x="201" y="86">뭘 사지, 어디서 사지</text>
+          <rect class="box" x="352" y="40" width="150" height="70" rx="8"/><text class="t" x="367" y="66">3 구매</text><text class="s" x="367" y="86">결제 · 선반 · 장바구니</text>
+          <rect class="box" x="518" y="40" width="150" height="70" rx="8"/><text class="t" x="533" y="66">4 조리·시식</text><text class="s" x="533" y="86">첫 입이 판가름</text>
+          <rect class="box" x="684" y="40" width="150" height="70" rx="8"/><text class="t" x="699" y="66">5 공유</text><text class="s" x="699" y="86">찍고 올리고 권한다</text>
+          <rect class="box" x="850" y="40" width="130" height="70" rx="8"/><text class="t" x="865" y="66">6 재구매</text><text class="s" x="865" y="86">다른 맛 · 묶음</text>
+        </g>
+        <path class="arrow" d="M170,75 L186,75"/><path class="arrow" d="M336,75 L352,75"/><path class="arrow" d="M502,75 L518,75"/><path class="arrow" d="M668,75 L684,75"/><path class="arrow" d="M834,75 L850,75"/>
+        <!-- 루프 -->
+        <path class="arrow" d="M759,110 L759,130 L95,130 L95,110" stroke-dasharray="5 4"/>
+        <text class="s" x="427" y="126" text-anchor="middle">공유가 다음 사람의 인지가 된다 (UGC 루프)</text>
+        <!-- 접점 행 -->
+        <text class="s" x="20" y="170" font-weight="600">접점</text>
+        <text class="s" x="35" y="192">TikTok · YouTube 챌린지</text><text class="s" x="35" y="208">편의점 신상 진열</text><text class="s" x="35" y="224">친구 · 가족 추천</text><text class="s" x="35" y="240">K-드라마 · 먹방</text>
+        <text class="s" x="201" y="192">검색 "buldak where to buy"</text><text class="s" x="201" y="208">리뷰 · 매운맛 등급 비교</text><text class="s" x="201" y="224">할랄 · 성분 확인</text><text class="s" x="201" y="240">가격 비교 (마켓 3곳)</text>
+        <text class="s" x="367" y="192">Walmart · Tesco · 편의점</text><text class="s" x="367" y="208">Amazon · 쿠팡 · Shopee</text><text class="s" x="367" y="224">아시안 마트 (H-Mart 등)</text><text class="s" x="367" y="240">묶음 vs 낱개</text>
+        <text class="s" x="533" y="192">봉지 뒷면 조리법</text><text class="s" x="533" y="208">물 버리는 양 · 소스 양</text><text class="s" x="533" y="224">치즈 · 계란 · 우유 토핑</text><text class="s" x="533" y="240">첫 입의 매운 정도</text>
+        <text class="s" x="699" y="192">숏폼 리액션 영상</text><text class="s" x="699" y="208">인스타 스토리 · 단톡</text><text class="s" x="699" y="224">리뷰 작성 (마켓)</text><text class="s" x="699" y="240">"다음엔 이 맛" 추천</text>
+        <text class="s" x="865" y="192">새 맛 (로제 · 탕면)</text><text class="s" x="865" y="208">멀티팩 · 구독</text><text class="s" x="865" y="224">소스 · 컵 확장</text><text class="s" x="865" y="240">시즌 한정</text>
+        <!-- 페르소나 경로 -->
+        <text class="s" x="20" y="280" font-weight="600">주된 경로</text>
+        <g class="tag">
+          <text x="35" y="304" fill="#0E7C94">A 챌린지 → 친구</text><text x="35" y="322" fill="#7A4F12">B 편의점 진열</text><text x="35" y="340" fill="#0F5C47">C 가족·지인 권유</text><text x="35" y="358" fill="#5B3F8E">D K-드라마 · 먹방</text>
+          <text x="201" y="304" fill="#0E7C94">A 검색 "어디서"</text><text x="201" y="322" fill="#7A4F12">B 거의 생략</text><text x="201" y="340" fill="#0F5C47">C 할랄 · 매운 정도</text><text x="201" y="358" fill="#5B3F8E">D 리콜 뉴스 · 성분</text>
+          <text x="367" y="304" fill="#0E7C94">A Walmart · Amazon</text><text x="367" y="322" fill="#7A4F12">B 편의점 · 쿠팡</text><text x="367" y="340" fill="#0F5C47">C Shopee · Indomaret</text><text x="367" y="358" fill="#5B3F8E">D Tesco · 아시안 마트</text>
+          <text x="533" y="304" fill="#0E7C94">A 너무 맵다 → 우유</text><text x="533" y="322" fill="#7A4F12">B 치즈 · 계란 루틴</text><text x="533" y="340" fill="#0F5C47">C 아이용은 까르보</text><text x="533" y="358" fill="#5B3F8E">D 로제 · 야채 추가</text>
+          <text x="699" y="304" fill="#0E7C94">A 리액션 영상</text><text x="699" y="322" fill="#7A4F12">B 거의 안 함</text><text x="699" y="340" fill="#0F5C47">C 가족 단톡 · 리뷰</text><text x="699" y="358" fill="#5B3F8E">D 인스타 · 친구</text>
+          <text x="865" y="304" fill="#0E7C94">A 2x · 까르보</text><text x="865" y="322" fill="#7A4F12">B 신상 돌아가며</text><text x="865" y="340" fill="#0F5C47">C 멀티팩</text><text x="865" y="358" fill="#5B3F8E">D 로제 · 탕면</text>
+        </g>
+        <text class="s" x="20" y="400">막히는 지점: A 탐색(어디서 사지) · B 재구매(질림) · C 탐색(할랄 확인) · D 탐색(안전 우려)  →  네 사람 중 셋이 "탐색"에서 막힌다. 접점 개선의 1순위.</text>
+      </svg>
+    </div>
+    <figcaption>그림 1. 전체 판매 흐름. 공유가 다음 사람의 인지가 되는 루프가 이 제품의 성장 엔진이고, 네 페르소나 중 셋이 탐색 단계에서 막힌다. 여정 지도는 이 그림의 각 열을 한 사람 기준으로 깊게 판 것이다.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 2 페르소나 ============ -->
+<section id="personas">
+  <h2>2. 페르소나 4인</h2>
+  <p>시장 넷(미국·한국·인도네시아·영국), 동기 넷(재미·일상·가족·취향), 막히는 지점 넷. 서로 겹치지 않게 골랐다. 이름과 수치는 가상이다.</p>
+  <div class="personas">
+
+    <div class="persona a">
+      <div class="head"><span class="k">A</span><b>테일러 (Taylor), 19</b><span class="sub">미국 텍사스 오스틴 · 대학 1학년 · 기숙사 · 용돈 + 알바</span></div>
+      <div class="quote">"친구가 2x 먹고 우는 영상 보고 바로 샀어요. 근데 Walmart에 없어서 Amazon으로. 까르보가 제일 맛있는데 2x로 또 찍을 거예요."</div>
+      <dl>
+        <div><dt>목표</dt><dd>친구들과 재미있는 걸 같이 하기, 올릴 거리 만들기</dd></div>
+        <div><dt>동기</dt><dd>도전·웃음·소속감. 맛은 두 번째</dd></div>
+        <div><dt>불편</dt><dd>어디서 파는지 모름, 너무 매워서 다 못 먹음, 정품인지 불안(Amazon 셀러)</dd></div>
+        <div><dt>채널</dt><dd>TikTok · YouTube Shorts · Discord. 하루 2시간 이상</dd></div>
+        <div><dt>구매처</dt><dd>Walmart · Amazon · H-Mart(차 있는 친구와)</dd></div>
+        <div><dt>선호 SKU</dt><dd>까르보(일상) · 2x(콘텐츠용)</dd></div>
+        <div><dt>가격 민감도</dt><dd>중. 5팩 10달러 안팎이면 OK, 낱개 3달러면 망설임</dd></div>
+        <div><dt>트리거</dt><dd>친구 영상 · 챌린지 해시태그 · 새 맛 출시 소식</dd></div>
+      </dl>
+    </div>
+
+    <div class="persona b">
+      <div class="head"><span class="k">B</span><b>지민, 27</b><span class="sub">서울 마포 · 스타트업 마케터 · 1인 가구 · 야근 잦음</span></div>
+      <div class="quote">"퇴근하고 편의점 들러서 치즈불닭에 계란 하나. 스트레스 풀리는 맛인데, 솔직히 요즘은 좀 질려서 신상 나오면 그걸로 갈아타요."</div>
+      <dl>
+        <div><dt>목표</dt><dd>빠르고 확실한 야식, 하루 끝의 보상</dd></div>
+        <div><dt>동기</dt><dd>스트레스 해소 · 습관 · 혼밥 편의</dd></div>
+        <div><dt>불편</dt><dd>질림, 나트륨·건강 걱정, 신상이 너무 많아 뭘 고를지 피로</dd></div>
+        <div><dt>채널</dt><dd>인스타 · 유튜브 · 당근·네이버 블로그 리뷰</dd></div>
+        <div><dt>구매처</dt><dd>편의점(GS25·CU) · 쿠팡 로켓</dd></div>
+        <div><dt>선호 SKU</dt><dd>치즈 · 까르보 · 로제, 컵 비중 높음</dd></div>
+        <div><dt>가격 민감도</dt><dd>낮음. 1+1·2+1 행사는 챙김</dd></div>
+        <div><dt>트리거</dt><dd>편의점 신상 진열 · 행사 스티커 · 먹방 유튜버 신상 리뷰</dd></div>
+      </dl>
+    </div>
+
+    <div class="persona c">
+      <div class="head"><span class="k">C</span><b>아이샤 (Aisha), 32</b><span class="sub">인도네시아 자카르타 · 두 아이 엄마 · 재택 온라인 판매업 · 무슬림</span></div>
+      <div class="quote">"할랄 로고부터 봐요. 동생이 한국 라면 좋아해서 알게 됐는데, 아이들은 까르보만 먹고 남편은 오리지널. Shopee에서 묶음으로 사요."</div>
+      <dl>
+        <div><dt>목표</dt><dd>가족 모두 먹을 수 있는 간식·간편식, 믿을 수 있는 제품</dd></div>
+        <div><dt>동기</dt><dd>가족 · 신뢰 · 한국 콘텐츠 호감</dd></div>
+        <div><dt>불편</dt><dd>할랄 인증 확인이 번거로움, 수입품 가격, 가품·유통기한 불안(온라인)</dd></div>
+        <div><dt>채널</dt><dd>WhatsApp 가족·동네 그룹 · Instagram · TikTok Shop</dd></div>
+        <div><dt>구매처</dt><dd>Shopee · Tokopedia · Indomaret(급할 때)</dd></div>
+        <div><dt>선호 SKU</dt><dd>까르보(아이) · 오리지널(남편) · 멀티팩</dd></div>
+        <div><dt>가격 민감도</dt><dd>높음. 현지 라면 대비 3~4배면 특별한 날만</dd></div>
+        <div><dt>트리거</dt><dd>지인 추천 · 할랄 인증 명시 · 번들 할인 · 라이브 커머스</dd></div>
+      </dl>
+    </div>
+
+    <div class="persona d">
+      <div class="head"><span class="k">D</span><b>소피아 (Sofia), 35</b><span class="sub">영국 런던 · 브랜드 마케터 · 파트너와 둘 · K-드라마 5년차</span></div>
+      <div class="quote">"드라마에서 하도 먹길래 아시안 마트에서 샀는데, 작년에 덴마크에서 리콜됐다는 기사 보고 잠깐 멈칫했어요. 로제는 괜찮더라고요. 야채 넣어서 저녁으로."</div>
+      <dl>
+        <div><dt>목표</dt><dd>좋아하는 콘텐츠의 경험을 집에서, 단 너무 자극적이지 않게</dd></div>
+        <div><dt>동기</dt><dd>취향 · 문화 체험 · 요리의 재미</dd></div>
+        <div><dt>불편</dt><dd>안전·매운 정도 정보 부족, 나트륨, 조리 설명이 영어로 불친절, Tesco에 맛 종류가 적음</dd></div>
+        <div><dt>채널</dt><dd>Instagram · Netflix · Reddit r/KoreanFood · 팟캐스트</dd></div>
+        <div><dt>구매처</dt><dd>Tesco · Ocado · 아시안 마트(Oseyo 등)</dd></div>
+        <div><dt>선호 SKU</dt><dd>로제 · 탕면 · 까르보</dd></div>
+        <div><dt>가격 민감도</dt><dd>낮음. 품질·정보가 우선</dd></div>
+        <div><dt>트리거</dt><dd>드라마 장면 · 레시피 콘텐츠(야채·단백질 추가) · 매운 정도 표시가 명확한 패키지</dd></div>
+      </dl>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 3 여정 지도 ============ -->
+<section id="journey">
+  <h2>3. 고객여정지도 — 한 사람씩 여섯 단계</h2>
+  <p>각 표의 행은 같다. 행동, 접점, 생각·감정, 불편, 기회(우리가 할 일), 지표. 위의 곡선은 감정(1 나쁨 ~ 5 좋음)이고, 곡선이 꺼지는 칸이 바로 손댈 곳이다.</p>
+
+  <!-- A -->
+  <div class="journey">
+    <div class="jh"><b>A · 테일러 — 챌린지로 들어와 콘텐츠로 나간다</b><span>막히는 곳: 탐색(어디서 사지) · 시식(너무 맵다)</span></div>
+    <div class="curve"><svg viewBox="0 0 900 150" role="img" aria-label="테일러의 감정 곡선: 인지 5, 탐색 2, 구매 4, 조리·시식 3, 공유 5, 재구매 4">
+      <line class="ax" x1="60" y1="120" x2="880" y2="120"/>
+      <polyline class="ln" points="110,24 262,96 414,48 566,72 718,24 870,48"/>
+      <circle class="mk" cx="110" cy="24" r="5"><title>인지 · 5 · 친구 영상이 웃겨서</title></circle><circle class="mk" cx="262" cy="96" r="5"><title>탐색 · 2 · Walmart에 없음</title></circle><circle class="mk" cx="414" cy="48" r="5"><title>구매 · 4 · Amazon 5팩</title></circle><circle class="mk" cx="566" cy="72" r="5"><title>조리·시식 · 3 · 너무 매움, 우유</title></circle><circle class="mk" cx="718" cy="24" r="5"><title>공유 · 5 · 리액션 영상 반응</title></circle><circle class="mk" cx="870" cy="48" r="5"><title>재구매 · 4 · 까르보로</title></circle>
+      <text class="val" x="110" y="12" text-anchor="middle">5</text><text class="val" x="262" y="112" text-anchor="middle">2</text><text class="val" x="414" y="36" text-anchor="middle">4</text><text class="val" x="566" y="60" text-anchor="middle">3</text><text class="val" x="718" y="12" text-anchor="middle">5</text><text class="val" x="870" y="36" text-anchor="middle">4</text>
+      <text class="lbl" x="110" y="140" text-anchor="middle">인지</text><text class="lbl" x="262" y="140" text-anchor="middle">탐색</text><text class="lbl" x="414" y="140" text-anchor="middle">구매</text><text class="lbl" x="566" y="140" text-anchor="middle">조리·시식</text><text class="lbl" x="718" y="140" text-anchor="middle">공유</text><text class="lbl" x="870" y="140" text-anchor="middle">재구매</text>
+      <text class="lbl" x="20" y="124">감정</text>
+    </svg></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th></th><th>인지</th><th>탐색</th><th>구매</th><th>조리·시식</th><th>공유</th><th>재구매</th></tr></thead>
+      <tbody>
+        <tr><td>행동</td><td>친구 리액션 영상 시청, 댓글로 "나도"</td><td>"buldak where to buy" 검색, 캠퍼스 근처 마트 확인</td><td>Amazon 5팩 주문, 친구와 나눔</td><td>기숙사 전자레인지, 물 조절 실패, 우유 투입</td><td>본인 리액션 숏폼, 친구 태그</td><td>2주 뒤 까르보 재주문, 2x는 콘텐츠용</td></tr>
+        <tr><td>접점</td><td>TikTok · YouTube Shorts</td><td>Google · TikTok 댓글 · Walmart 앱</td><td>Amazon 상품 페이지 · 셀러 평점</td><td>봉지 뒷면 · 유튜브 "how to cook"</td><td>TikTok · Discord</td><td>Amazon 재주문 · 새 맛 알림</td></tr>
+        <tr><td>생각·감정</td><td>"이거 진짜 그렇게 매워?" 설렘</td><td>"왜 없지" 짜증, 가품 걱정</td><td>"드디어" 기대</td><td>"죽겠다" 웃음 반 고통 반</td><td>"반응 왔다" 뿌듯</td><td>"이번엔 맛으로" 안정</td></tr>
+        <tr><td class="pain">불편</td><td class="pain">—</td><td class="pain">오프라인 재고 없음, 어떤 맛이 뭔지 모름</td><td class="pain">셀러 신뢰, 배송 3일</td><td class="pain">조리법 영어 불친절, 매운 정도 예고 없음</td><td class="pain">—</td><td class="pain">같은 맛 반복의 지루함</td></tr>
+        <tr><td class="opp">기회</td><td class="opp">챌린지 해시태그를 브랜드가 직접 운영, 크리에이터 시딩</td><td class="opp">"내 근처 매장" 페이지, 맛 등급 한눈에(스코빌 바)</td><td class="opp">공식 Amazon 스토어 배지, 대학가 Walmart 입점 확대</td><td class="opp">QR → 30초 조리 영상, "처음이면 까르보" 안내</td><td class="opp">리액션 템플릿·스티커 제공, 베스트 영상 리포스트</td><td class="opp">맛 로테이션 번들(3종), 신제품 우선 체험</td></tr>
+        <tr><td>지표</td><td>해시태그 조회수, 크리에이터 영상 수</td><td>검색량, 매장 찾기 클릭</td><td>Amazon 전환율, 공식 스토어 비중</td><td>QR 스캔율, "너무 맵다" 리뷰 비율</td><td>UGC 생성 수, 태그 비율</td><td>60일 재구매율, 맛 교차 구매율</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- B -->
+  <div class="journey">
+    <div class="jh"><b>B · 지민 — 습관으로 사고 질림으로 떠난다</b><span>막히는 곳: 공유(안 함) · 재구매(질림)</span></div>
+    <div class="curve"><svg viewBox="0 0 900 150" role="img" aria-label="지민의 감정 곡선: 인지 3, 탐색 4, 구매 4, 조리·시식 4, 공유 2, 재구매 3">
+      <line class="ax" x1="60" y1="120" x2="880" y2="120"/>
+      <polyline class="ln" points="110,72 262,48 414,48 566,48 718,96 870,72"/>
+      <circle class="mk" cx="110" cy="72" r="5"><title>인지 · 3 · 편의점 진열, 익숙함</title></circle><circle class="mk" cx="262" cy="48" r="5"><title>탐색 · 4 · 거의 생략, 행사만 확인</title></circle><circle class="mk" cx="414" cy="48" r="5"><title>구매 · 4 · 2+1</title></circle><circle class="mk" cx="566" cy="48" r="5"><title>조리·시식 · 4 · 치즈 계란 루틴</title></circle><circle class="mk" cx="718" cy="96" r="5"><title>공유 · 2 · 올릴 이유 없음</title></circle><circle class="mk" cx="870" cy="72" r="5"><title>재구매 · 3 · 질림, 신상으로 이동</title></circle>
+      <text class="val" x="110" y="60" text-anchor="middle">3</text><text class="val" x="262" y="36" text-anchor="middle">4</text><text class="val" x="414" y="36" text-anchor="middle">4</text><text class="val" x="566" y="36" text-anchor="middle">4</text><text class="val" x="718" y="112" text-anchor="middle">2</text><text class="val" x="870" y="60" text-anchor="middle">3</text>
+      <text class="lbl" x="110" y="140" text-anchor="middle">인지</text><text class="lbl" x="262" y="140" text-anchor="middle">탐색</text><text class="lbl" x="414" y="140" text-anchor="middle">구매</text><text class="lbl" x="566" y="140" text-anchor="middle">조리·시식</text><text class="lbl" x="718" y="140" text-anchor="middle">공유</text><text class="lbl" x="870" y="140" text-anchor="middle">재구매</text>
+      <text class="lbl" x="20" y="124">감정</text>
+    </svg></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th></th><th>인지</th><th>탐색</th><th>구매</th><th>조리·시식</th><th>공유</th><th>재구매</th></tr></thead>
+      <tbody>
+        <tr><td>행동</td><td>퇴근길 편의점 신상 코너 훑기</td><td>행사 스티커 확인, 가끔 유튜브 신상 리뷰</td><td>2+1로 세 개, 컵 하나는 사무실용</td><td>치즈·계란 추가, 10분</td><td>거의 없음. 가끔 단톡에 "신상 먹어봄"</td><td>3주 간격, 질리면 다른 브랜드 신상으로</td></tr>
+        <tr><td>접점</td><td>편의점 진열대 · 인스타 광고</td><td>행사 안내 · 유튜브 먹방</td><td>GS25 · CU · 쿠팡</td><td>집 부엌</td><td>카카오톡</td><td>편의점 · 쿠팡 정기배송 미사용</td></tr>
+        <tr><td>생각·감정</td><td>"아, 이거 또 나왔네"</td><td>"행사하네" 소소한 만족</td><td>"오늘은 이걸로"</td><td>"역시" 안도</td><td>"굳이 올릴 건 아님"</td><td>"요즘 좀 질려"</td></tr>
+        <tr><td class="pain">불편</td><td class="pain">신상이 너무 많아 차이를 모름</td><td class="pain">—</td><td class="pain">—</td><td class="pain">나트륨 걱정, 설거지</td><td class="pain">올릴 동기가 없음</td><td class="pain">같은 맛 반복, 건강 죄책감</td></tr>
+        <tr><td class="opp">기회</td><td class="opp">신상 "뭐가 다른지" 한 줄 POP, 매운 정도 표시 통일</td><td class="opp">편의점 앱 쿠폰, 먹방 유튜버 협업</td><td class="opp">컵+봉지 혼합 2+1, 구독 할인(쿠팡)</td><td class="opp">저나트륨·야채 버전, 토핑 제안 QR</td><td class="opp">직장인 야식 밈·캐릭터 굿즈, 리뷰 포인트</td><td class="opp">시즌 로테이션 캘린더, "한 달에 한 맛" 큐레이션</td></tr>
+        <tr><td>지표</td><td>신상 인지율, POP 접촉</td><td>쿠폰 사용률</td><td>편의점 회전율, 행사 매출 비중</td><td>저나트륨 SKU 비중</td><td>리뷰 작성률</td><td>90일 유지율, 이탈 시 이동 브랜드</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- C -->
+  <div class="journey">
+    <div class="jh"><b>C · 아이샤 — 할랄이 확인돼야 장바구니에 들어간다</b><span>막히는 곳: 탐색(할랄·가품) · 가격</span></div>
+    <div class="curve"><svg viewBox="0 0 900 150" role="img" aria-label="아이샤의 감정 곡선: 인지 3, 탐색 2, 구매 3, 조리·시식 4, 공유 4, 재구매 4">
+      <line class="ax" x1="60" y1="120" x2="880" y2="120"/>
+      <polyline class="ln" points="110,72 262,96 414,72 566,48 718,48 870,48"/>
+      <circle class="mk" cx="110" cy="72" r="5"><title>인지 · 3 · 동생 추천, 반신반의</title></circle><circle class="mk" cx="262" cy="96" r="5"><title>탐색 · 2 · 할랄 확인 번거로움</title></circle><circle class="mk" cx="414" cy="72" r="5"><title>구매 · 3 · 비싸지만 묶음</title></circle><circle class="mk" cx="566" cy="48" r="5"><title>조리·시식 · 4 · 아이들이 까르보 좋아함</title></circle><circle class="mk" cx="718" cy="48" r="5"><title>공유 · 4 · 가족 단톡</title></circle><circle class="mk" cx="870" cy="48" r="5"><title>재구매 · 4 · 멀티팩 정기</title></circle>
+      <text class="val" x="110" y="60" text-anchor="middle">3</text><text class="val" x="262" y="112" text-anchor="middle">2</text><text class="val" x="414" y="60" text-anchor="middle">3</text><text class="val" x="566" y="36" text-anchor="middle">4</text><text class="val" x="718" y="36" text-anchor="middle">4</text><text class="val" x="870" y="36" text-anchor="middle">4</text>
+      <text class="lbl" x="110" y="140" text-anchor="middle">인지</text><text class="lbl" x="262" y="140" text-anchor="middle">탐색</text><text class="lbl" x="414" y="140" text-anchor="middle">구매</text><text class="lbl" x="566" y="140" text-anchor="middle">조리·시식</text><text class="lbl" x="718" y="140" text-anchor="middle">공유</text><text class="lbl" x="870" y="140" text-anchor="middle">재구매</text>
+      <text class="lbl" x="20" y="124">감정</text>
+    </svg></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th></th><th>인지</th><th>탐색</th><th>구매</th><th>조리·시식</th><th>공유</th><th>재구매</th></tr></thead>
+      <tbody>
+        <tr><td>행동</td><td>동생이 집에 가져옴, 아이들이 관심</td><td>Shopee에서 할랄 로고·인증번호 확인, 셀러 평점 비교</td><td>5개 묶음 2종(까르보·오리지널), 무료배송 맞춤</td><td>아이용은 소스 반만, 남편은 그대로</td><td>가족·동네 WhatsApp에 사진, Shopee 리뷰(포인트)</td><td>월 1회 멀티팩, 라이브 커머스 할인 때</td></tr>
+        <tr><td>접점</td><td>가족 · WhatsApp 그룹</td><td>Shopee 상품 페이지 · 할랄 인증 사이트</td><td>Shopee · Tokopedia · TikTok Shop</td><td>집 · 봉지 뒷면(인도네시아어 라벨)</td><td>WhatsApp · Shopee 리뷰</td><td>Shopee 알림 · 라이브</td></tr>
+        <tr><td>생각·감정</td><td>"한국 라면, 아이들이 먹을 수 있나"</td><td>"할랄 맞아? 가품 아냐?" 불안</td><td>"비싸지만 묶음이면" 타협</td><td>"아이들이 잘 먹네" 안심</td><td>"우리 집 간식" 소속감</td><td>"믿고 사는 것" 안정</td></tr>
+        <tr><td class="pain">불편</td><td class="pain">정보가 지인 말뿐</td><td class="pain">할랄 로고 위치·인증기관 불명, 셀러마다 가격 제각각</td><td class="pain">현지 라면 대비 비쌈, 유통기한 불안</td><td class="pain">아이용 매운 정도 조절법 없음</td><td class="pain">—</td><td class="pain">할인 없으면 미룸</td></tr>
+        <tr><td class="opp">기회</td><td class="opp">현지 패밀리 크리에이터, 모스크 주변 커뮤니티 시식</td><td class="opp">공식 스토어에 할랄 인증서 이미지·번호 고정, "정품 보장" 배지</td><td class="opp">가족 번들(까르보 3 + 오리지널 2), 현지 생산·소분으로 가격 인하</td><td class="opp">"아이와 함께" 소스 반 레시피 라벨, 할랄 표시 전면</td><td class="opp">리뷰 포인트, 가족 사진 이벤트</td><td class="opp">정기 구독 할인, 라마단 패키지</td></tr>
+        <tr><td>지표</td><td>추천 유입 비율</td><td>공식 스토어 체류시간, 인증 이미지 클릭</td><td>번들 전환율, 평균 객단가</td><td>"아이가 먹음" 리뷰 비율</td><td>리뷰 수, 사진 리뷰 비율</td><td>구독 유지율, 라마단 기간 매출</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- D -->
+  <div class="journey">
+    <div class="jh"><b>D · 소피아 — 콘텐츠로 끌리고 정보 부족으로 멈칫한다</b><span>막히는 곳: 탐색(안전·매운 정도) · 재구매(선택지 적음)</span></div>
+    <div class="curve"><svg viewBox="0 0 900 150" role="img" aria-label="소피아의 감정 곡선: 인지 4, 탐색 2, 구매 3, 조리·시식 4, 공유 3, 재구매 3">
+      <line class="ax" x1="60" y1="120" x2="880" y2="120"/>
+      <polyline class="ln" points="110,48 262,96 414,72 566,48 718,72 870,72"/>
+      <circle class="mk" cx="110" cy="48" r="5"><title>인지 · 4 · 드라마 장면</title></circle><circle class="mk" cx="262" cy="96" r="5"><title>탐색 · 2 · 리콜 기사, 성분 불명</title></circle><circle class="mk" cx="414" cy="72" r="5"><title>구매 · 3 · 아시안 마트에서 로제</title></circle><circle class="mk" cx="566" cy="48" r="5"><title>조리·시식 · 4 · 야채 넣어 저녁</title></circle><circle class="mk" cx="718" cy="72" r="5"><title>공유 · 3 · 인스타 스토리 한 번</title></circle><circle class="mk" cx="870" cy="72" r="5"><title>재구매 · 3 · Tesco엔 로제가 없음</title></circle>
+      <text class="val" x="110" y="36" text-anchor="middle">4</text><text class="val" x="262" y="112" text-anchor="middle">2</text><text class="val" x="414" y="60" text-anchor="middle">3</text><text class="val" x="566" y="36" text-anchor="middle">4</text><text class="val" x="718" y="60" text-anchor="middle">3</text><text class="val" x="870" y="60" text-anchor="middle">3</text>
+      <text class="lbl" x="110" y="140" text-anchor="middle">인지</text><text class="lbl" x="262" y="140" text-anchor="middle">탐색</text><text class="lbl" x="414" y="140" text-anchor="middle">구매</text><text class="lbl" x="566" y="140" text-anchor="middle">조리·시식</text><text class="lbl" x="718" y="140" text-anchor="middle">공유</text><text class="lbl" x="870" y="140" text-anchor="middle">재구매</text>
+      <text class="lbl" x="20" y="124">감정</text>
+    </svg></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th></th><th>인지</th><th>탐색</th><th>구매</th><th>조리·시식</th><th>공유</th><th>재구매</th></tr></thead>
+      <tbody>
+        <tr><td>행동</td><td>드라마에서 반복 노출, Reddit에서 "뭐 먹는 거야" 검색</td><td>리콜 기사 읽음, 매운 정도·성분 검색, 로제 추천 발견</td><td>아시안 마트에서 로제·까르보 각 1</td><td>야채·두부 추가, 평일 저녁</td><td>인스타 스토리 한 장, 친구 DM "이거 괜찮아"</td><td>Tesco에 로제가 없어 마트 갈 때만</td></tr>
+        <tr><td>접점</td><td>Netflix · Reddit r/KoreanFood</td><td>Google 뉴스 · 브랜드 사이트(영문) · 리뷰 블로그</td><td>Oseyo 등 아시안 마트 · Ocado</td><td>집 · 레시피 블로그</td><td>Instagram</td><td>Tesco · Ocado</td></tr>
+        <tr><td>생각·감정</td><td>"저게 뭐길래" 호기심</td><td>"안전한 건가, 얼마나 매운 건가" 주저</td><td>"로제면 괜찮겠지" 조심스러운 선택</td><td>"생각보다 요리 같네" 만족</td><td>"추천할 만은 한데 호들갑은 아님"</td><td>"있으면 사고 없으면 말고"</td></tr>
+        <tr><td class="pain">불편</td><td class="pain">—</td><td class="pain">공식 정보가 영어로 부족, 리콜 뉴스가 검색 상단, 매운 등급 모름</td><td class="pain">대형마트 구색 부족</td><td class="pain">조리 설명 불친절, 나트륨 표시 눈에 안 띔</td><td class="pain">—</td><td class="pain">선택지 적음, 묶음 없음</td></tr>
+        <tr><td class="opp">기회</td><td class="opp">드라마 PPL 연계 레시피 콘텐츠, 플랫폼 제휴</td><td class="opp">영문 공식 페이지에 매운 등급·성분·안전 FAQ 상단 배치, 리콜 Q&amp;A 정면 대응</td><td class="opp">Tesco·Ocado에 로제·탕면 입점, 2팩 소포장</td><td class="opp">"요리로 먹는 불닭" 레시피 카드, 저나트륨 안내</td><td class="opp">레시피 챌린지(야채·단백질), 리그램</td><td class="opp">맛 3종 샘플러, 온라인 전용 구색</td></tr>
+        <tr><td>지표</td><td>드라마 방영 후 검색 증가율</td><td>공식 페이지 FAQ 조회, 이탈률</td><td>대형마트 SKU 수, 입점 매장 수</td><td>레시피 콘텐츠 조회, 재조리 리뷰</td><td>레시피 UGC 수</td><td>맛 교차 구매율, 온라인 재구매</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ 4 비교와 액션 ============ -->
+<section id="actions">
+  <h2>4. 한 표로 비교, 그리고 액션 우선순위</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th></th><th>A 테일러</th><th>B 지민</th><th>C 아이샤</th><th>D 소피아</th></tr></thead>
+    <tbody>
+      <tr><td>들어오는 문</td><td>챌린지 영상</td><td>편의점 진열</td><td>가족 추천</td><td>드라마·콘텐츠</td></tr>
+      <tr><td>막히는 곳</td><td>탐색(어디서) · 시식(너무 맵다)</td><td>재구매(질림)</td><td>탐색(할랄·가품)</td><td>탐색(안전·매운 정도)</td></tr>
+      <tr><td>결정 요인</td><td>재미 · 친구</td><td>습관 · 행사</td><td>신뢰 · 가족 · 가격</td><td>정보 · 품질</td></tr>
+      <tr><td>첫 SKU</td><td>2x → 까르보</td><td>치즈</td><td>까르보(아이) · 오리지널</td><td>로제</td></tr>
+      <tr><td>공유 성향</td><td>매우 높음</td><td>낮음</td><td>중(가족 그룹)</td><td>중(선별적)</td></tr>
+      <tr><td>생애 가치 레버</td><td>맛 로테이션 · 콘텐츠 참여</td><td>신제품 주기 · 저나트륨</td><td>번들 · 구독 · 라마단</td><td>구색 확대 · 레시피</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>공통으로 보이는 것</h3>
+  <ul class="plain">
+    <li><b>탐색에서 셋이 막힌다.</b> 어디서 사는지(A), 할랄·정품(C), 안전·매운 정도(D). 셋 다 "정보"의 문제고 제품의 문제가 아니다. 공식 채널(국가별 페이지·공식 스토어)에 매운 등급·인증·FAQ·매장 찾기를 한 화면에 두는 것이 가장 싼 개선이다.</li>
+    <li><b>까르보가 관문이다.</b> 네 명 중 셋이 까르보로 시작하거나 돌아온다. "처음이면 까르보" 안내가 첫 시식 실패(A의 3점)를 줄인다.</li>
+    <li><b>공유는 A가 만들고 나머지는 소비한다.</b> UGC 루프의 연료는 A 한 사람이다. A의 공유를 쉽게(템플릿·리포스트) 만드는 투자가 B·C·D의 인지 비용을 낮춘다.</li>
+    <li><b>재구매 레버가 다 다르다.</b> 로테이션(A), 신제품 주기(B), 번들·구독(C), 구색(D). 하나의 리텐션 캠페인으로 넷을 잡을 수 없다.</li>
+  </ul>
+
+  <h3>액션 8개, 우선순위</h3>
+  <ol class="steps">
+    <li><b>국가별 공식 페이지 상단: 매운 등급 바 · 할랄/성분 · 안전 FAQ · 매장 찾기</b> <span class="sub">A·C·D의 탐색 이탈을 한 번에. 지표: 탐색 단계 이탈률, FAQ 조회.</span></li>
+    <li><b>공식 스토어 "정품·인증" 배지 (Amazon · Shopee)</b> <span class="sub">A·C. 지표: 공식 스토어 비중, 가품 문의 수.</span></li>
+    <li><b>패키지 QR → 30초 조리 영상 + "처음이면 까르보"</b> <span class="sub">A·D. 지표: QR 스캔율, "너무 맵다" 리뷰 비율.</span></li>
+    <li><b>챌린지 해시태그 운영 + 리액션 템플릿</b> <span class="sub">A. 지표: UGC 수, 태그 비율.</span></li>
+    <li><b>가족 번들 · 구독 할인 (인도네시아·동남아)</b> <span class="sub">C. 지표: 번들 전환율, 구독 유지율.</span></li>
+    <li><b>대형마트 구색 확대 (로제·탕면) + 2팩 소포장 (영국·유럽)</b> <span class="sub">D. 지표: 입점 SKU 수, 교차 구매율.</span></li>
+    <li><b>저나트륨·야채 버전과 토핑 제안</b> <span class="sub">B·D. 지표: 해당 SKU 비중, 90일 유지율.</span></li>
+    <li><b>맛 로테이션 캘린더 · 신제품 우선 체험</b> <span class="sub">A·B. 지표: 교차 구매율, 이탈 시 이동 브랜드.</span></li>
+  </ol>
+</section>
+
+<!-- ============ 5 AI 페르소나 ============ -->
+<section id="ai">
+  <h2>5. 이 페르소나를 AI 에이전트로 돌리기</h2>
+  <p>페르소나를 문서로만 두면 회의 자료다. 각 페르소나를 시스템 프롬프트로 만들어 신제품 컨셉·패키지·가격을 "보여 주고" 반응을 받으면 가상 시장 검증이 된다. 롯데칠성 과제("AI 페르소나 기반 신제품 시장 검증")가 정확히 이것이다.</p>
+  <pre class="pre">persona_C = {
+  identity:  "아이샤, 32, 자카르타, 두 아이 엄마, 무슬림, 온라인 판매업",
+  goals:     ["가족 모두 먹을 수 있는 간식", "믿을 수 있는 제품"],
+  pains:     ["할랄 확인 번거로움", "수입품 가격", "가품·유통기한 불안"],
+  channels:  ["Shopee", "WhatsApp 가족 그룹", "TikTok Shop"],
+  heuristics:["할랄 로고 없으면 탐색 종료", "현지 라면 3배 이상이면 특별한 날만", "묶음·무료배송이면 결제"],
+  voice:     "실용적, 가족 중심, 과장 없음"
+}
+질문 예:  "로제불닭 멀티팩(5개, 할랄 인증 전면 표기, 현지 라면 2.5배 가격)을 Shopee에서 봤다. 장바구니에 넣겠는가? 이유 세 가지."
+출력 스키마: { decision: 구매|보류|거절, confidence, reasons[3], what_would_change_mind, stage_where_stuck }</pre>
+  <ol class="steps">
+    <li><b>페르소나 × 자극의 매트릭스</b> <span class="sub">4 페르소나 × 컨셉 3개 × 가격 3단 = 36회 질의. 같은 자극에 네 명이 다르게 반응해야 페르소나가 제대로 만들어진 것이다. 다 같이 "좋다"고 하면 페르소나가 아니라 응원단이다.</span></li>
+    <li><b>여정 단계마다 묻기</b> <span class="sub">"이 광고를 봤다 → 검색하겠나", "이 상품 페이지다 → 사겠나", "먹어 봤다 → 올리겠나". 단계별 전환율의 상대값을 뽑으면 위 여정 지도의 곡선이 모델에서도 재현되는지 확인할 수 있다.</span></li>
+    <li><b>캘리브레이션</b> <span class="sub">실제 리뷰·설문 데이터가 있는 질문(예: 매운 정도 만족도)으로 먼저 돌려 모델 응답과 실제 분포를 맞춘다. 합성 응답은 실제 조사를 대체하지 못하고, 순서를 정하는 데만 쓴다.</span></li>
+    <li><b>한계를 적어 둔다</b> <span class="sub">LLM 페르소나는 평균으로 수렴하는 경향(개성이 뭉개짐), 최신 유행 반영 지연, 프롬프트에 쓴 편견의 반복. 그래서 페르소나 정의에 "heuristics"처럼 행동 규칙을 명시해 개성을 고정한다.</span></li>
+  </ol>
+</section>
+
+<!-- ============ 출처 ============ -->
+<section id="refs">
+  <h2>전제와 출처</h2>
+  <ul class="src">
+    <li>페르소나 4인과 여정 지도의 모든 수치(감정 점수, 가격, 구매 주기)는 <b>가상</b>이다. 실제 리서치 전 가설 정리용.</li>
+    <li>제품 사실: 2012년 출시, 2014년경 유튜브 파이어 누들 챌린지로 해외 확산, 2017년 까르보불닭 출시, 2024년 덴마크 식품당국의 일부 제품 리콜과 이후 일부 해제. 세부 날짜·품목은 기사로 재확인 필요.</li>
+    <li>채널·플랫폼(Shopee·Indomaret·Tesco·Oseyo·H-Mart 등)은 각 나라에서 일반적으로 쓰이는 유통을 예로 든 것이며 실제 입점 현황은 확인하지 않았다.</li>
+    <li>관련 페이지: <a href="../lotte-ax/framework.html#sns">K-푸드 수출 유망국가 프레임워크의 SNS·소비 트렌드 소스 판정</a>, <a href="../lotte-ax/index.html#tasks">롯데 AX 챌린지 7개 과제</a>.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="foot"><div class="wrap">ttomstudio · personal/buldak_persona.html · 2026-11-01 작성</div></footer>
+</body>
+</html>
