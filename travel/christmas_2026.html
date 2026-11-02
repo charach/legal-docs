@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0C3B29">
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<title>크리스마스 여행지 57곳 · 12/23–28</title>
+<link rel="stylesheet" href="../personal/assets/summer.css">
+<style>
+  /* 이 페이지만 크리스마스 + 그로밋 디자인 (요청). 기본 5색 규칙에서 벗어난다. */
+  :root {
+    --bg: #FFF8EF; --ink: #1F2D26; --ink-2: #66705F; --accent: #C1272D; --line: #E7D9BF;
+    --green: #165B3F; --green-d: #0C3B29; --red: #C1272D; --gold: #D6A23A; --gold-l: #F5E3B8; --snow: #FFFFFF;
+    --gm-a: url("../gromit-icon-a.png"); --gm-b: url("../gromit-icon-b.png"); --gm-c: url("../gromit-icon-c.png");
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: 130px; }
+  body { background: var(--bg); color: var(--ink); }
+  html, body { cursor: url("../gromit-cursor-a.png") 6 6, auto; cursor: image-set(url("../gromit-cursor-a.png") 1x, url("../gromit-cursor-a@2x.png") 2x) 6 6, auto; }
+  a, button, select, label, summary, [role="button"] { cursor: url("../gromit-cursor-c.png") 6 6, pointer; cursor: image-set(url("../gromit-cursor-c.png") 1x, url("../gromit-cursor-c@2x.png") 2x) 6 6, pointer; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .nav { border-bottom: 0; background: var(--bg); position: sticky; top: 0; z-index: 60; }
+  .nav::after { content: ""; display: block; height: 6px; background: repeating-linear-gradient(135deg, var(--red) 0 14px, var(--snow) 14px 24px, var(--green) 24px 38px, var(--snow) 38px 48px); }
+  .nav .home::before { content: ""; display: inline-block; width: 22px; height: 22px; margin-right: 8px; vertical-align: -5px; border-radius: 5px; background: var(--gm-a) center / cover no-repeat; }
+  .nav .links a[aria-current="page"] { color: var(--red); }
+
+  /* ---------- 눈 ---------- */
+  .snow { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .snow i { position: absolute; top: -10px; width: 6px; height: 6px; border-radius: 50%; background: #fff; opacity: .85; animation: fall linear infinite; }
+  @keyframes fall { to { transform: translate3d(var(--dx, 20px), 560px, 0); } }
+  @media (prefers-reduced-motion: reduce) { .snow i { animation: none; top: calc(var(--y, 40) * 1%); } }
+
+  /* ---------- 히어로 ---------- */
+  .xhero { position: relative; background: var(--green-d); color: #FFF8EF; overflow: hidden; }
+  .xhero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 15% 20%, rgba(214,162,58,.20), transparent 38%), radial-gradient(circle at 85% 10%, rgba(193,39,45,.25), transparent 34%); }
+  .xhero .wrap { position: relative; padding-top: 56px; padding-bottom: 56px; }
+  .xhero .eyebrow { color: var(--gold); letter-spacing: .14em; }
+  .xhero h1 { color: #FFF8EF; max-width: 18ch; }
+  .xhero h1 em { font-style: normal; color: var(--gold); }
+  .xhero .lead { color: #DDEBDD; max-width: 56ch; margin-top: 18px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .chips span { border: 1px solid rgba(255,248,239,.35); border-radius: 6px; padding: 5px 12px; font-size: 13px; color: #FFF8EF; }
+  .gms { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 34px; align-items: flex-end; }
+  .gm { display: block; max-width: 100%; height: auto; border-radius: 10px; border: 3px solid #FFF8EF; background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+  .hero-gm { width: 230px; }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0; margin-top: 34px; border-top: 1px solid rgba(255,248,239,.25); }
+  .stats > div { padding: 16px 12px 0 0; }
+  .stats b { display: block; font-size: 28px; color: var(--gold); line-height: 1.2; }
+  .stats span { font-size: 13px; color: #DDEBDD; }
+
+  /* ---------- 섹션 ---------- */
+  .xsec { padding: 56px 0 8px; }
+  .xsec h2 { font-size: clamp(22px, 3vw, 30px); }
+  .xsec h2::after { content: ""; display: block; width: 46px; height: 4px; background: var(--red); margin-top: 10px; border-radius: 2px; }
+  .xsec .sub { color: var(--ink-2); margin-top: 12px; max-width: 64ch; font-size: 15px; }
+  .picks { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-top: 24px; }
+  .pick { display: flex; gap: 12px; align-items: center; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
+  .pick:hover { border-color: var(--red); transform: translateY(-2px); }
+  .pick .no { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--red); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+  .pick b { display: block; font-size: 17px; }
+  .pick .s, .city .s { display: block; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; margin-top: 2px; }
+  .gm-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
+
+  /* ---------- 필터 ---------- */
+  .ctl { position: sticky; top: 66px; z-index: 40; background: rgba(255,248,239,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); margin-top: 40px; }
+  .ctl .in { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding: 10px 0; }
+  .ctl .grp { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .ctl .lbl { font-size: 12px; color: var(--ink-2); margin-right: 2px; }
+  .fchip { display: inline-flex; align-items: center; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 6px; padding: 6px 11px; font: inherit; font-size: 13px; min-height: 36px; }
+  .fchip::before { content: ""; width: 1.3em; height: 1.3em; margin-right: .4em; border-radius: 4px; background: var(--gm-a) center / cover no-repeat; }
+  .fchip:nth-child(3n+2)::before { background-image: var(--gm-b); }
+  .fchip:nth-child(3n)::before { background-image: var(--gm-c); }
+  .fchip[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #fff; }
+  .ctl select { font: inherit; font-size: 13px; border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; background: #fff; min-height: 36px; }
+  .ctl .cnt { margin-left: auto; font-size: 13px; color: var(--ink-2); }
+
+  /* ---------- 목록 ---------- */
+  .thead, .city { display: grid; grid-template-columns: 1.05fr 1.7fr 1.05fr 1.35fr 1.1fr 1.8fr; gap: 18px; }
+  .thead { padding: 14px 0 8px; font-size: 12px; letter-spacing: .06em; color: var(--ink-2); border-bottom: 2px solid var(--green); }
+  .region-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 34px 0 12px; border-bottom: 1px solid var(--line); }
+  .region-head h2 { font-size: 22px; color: var(--green); }
+  .region-head p { color: var(--ink-2); font-size: 14px; margin-top: 6px; max-width: 60ch; }
+  .rg { margin: 0; flex: none; }
+  .rg .gm { width: 150px; border-width: 2px; }
+  .city { padding: 18px 0; border-bottom: 1px solid var(--line); align-items: start; }
+  .city:hover { background: rgba(214,162,58,.08); }
+  .city h3 { font-size: 19px; }
+  .ctry { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
+  .mood { display: inline-block; font-size: 12.5px; font-weight: 700; padding: 3px 10px; border-radius: 5px; letter-spacing: .02em; }
+  .mood.m2 { background: var(--red); color: #fff; }
+  .mood.m1 { background: var(--gold-l); color: #7A5410; border: 1px solid var(--gold); }
+  .mood.m0 { background: #ECEEE8; color: #5E665A; }
+  .c-mood p { font-size: 13.5px; line-height: 1.6; margin-top: 8px; color: var(--ink); }
+  .c-cost b, .c-fly b, .c-wx b { font-size: 19px; font-weight: 700; }
+  .c-cost b i { font-style: normal; font-size: 13px; font-weight: 500; margin-left: 2px; }
+  .c-cost b { color: var(--red); }
+  .c-pc p { font-size: 13.5px; line-height: 1.6; }
+  .c-pc .p { color: var(--green); }
+  .c-pc .m { color: #8A3A33; margin-top: 4px; }
+  .city.flash { animation: flash 1.6s ease; }
+  @keyframes flash { 0%,60% { background: rgba(193,39,45,.14); } 100% { background: transparent; } }
+  .empty { padding: 40px 0; color: var(--ink-2); display: none; }
+
+  /* ---------- 방법 ---------- */
+  .notes { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px 28px; margin-top: 24px; }
+  .notes .n { border-top: 2px solid var(--green); padding-top: 12px; }
+  .notes b { display: block; margin-bottom: 4px; }
+  .notes p { font-size: 14px; color: var(--ink-2); line-height: 1.7; }
+  .xfoot { margin-top: 56px; background: var(--green-d); color: #DDEBDD; position: relative; overflow: hidden; }
+  .xfoot .wrap { position: relative; padding-top: 40px; padding-bottom: 40px; }
+  .xfoot .gm { width: 200px; }
+
+  @media (max-width: 1000px) {
+    .picks { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .thead { display: none; }
+    .city { grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+    .c-name { grid-column: 1 / 2; } .c-cost { grid-column: 2 / 3; }
+    .c-mood { grid-column: 1 / -1; } .c-pc { grid-column: 1 / -1; }
+    .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .notes { grid-template-columns: 1fr; }
+    .c-fly::before, .c-wx::before { display: block; font-size: 11px; letter-spacing: .06em; color: var(--ink-2); margin-bottom: 2px; }
+    .c-fly::before { content: "항공 (2인)"; } .c-wx::before { content: "날씨 · 호텔"; }
+  }
+  @media (max-width: 560px) {
+    .xhero .wrap { padding-top: 40px; padding-bottom: 40px; }
+    .hero-gm { width: 160px; }
+    .picks { grid-template-columns: 1fr; }
+    .region-head { flex-direction: column; align-items: flex-start; }
+    .rg .gm { width: 120px; }
+    .ctl { position: static; }
+    .city { grid-template-columns: 1fr 1fr; }
+    .c-name, .c-cost { grid-column: 1 / -1; }
+    .ctl .cnt { margin-left: 0; width: 100%; }
+    .xfoot .gm { width: 150px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <span class="crumb"><a class="home" href="../index.html">ttomstudio</a><span class="sep" aria-hidden="true">/</span><a class="brand" href="index.html">Travel</a></span>
+    <div class="links"><a href="#picks">추천 8곳</a><a href="#list">전체 비교</a><a href="#notes">계산 방법</a></div>
+  </div>
+</nav>
+
+<header class="xhero" id="top">
+  <div class="snow" id="snowA" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow">Travel · 12/23–12/28 · 2인</div>
+    <h1>크리스마스에는 <em>어디로</em> 갈까, 57곳 비교</h1>
+    <p class="lead">인천 출발, 12/23부터 12/28까지 5박 6일 기준. 나라·도시마다 예상 비용(항공·호텔·현지), 크리스마스 분위기가 나는지, 장단점을 한 줄씩 적었다. 정하는 건 천천히.</p>
+    <div class="chips"><span>2인 · 인천 출발</span><span>12/23 출발 → 12/28 귀국</span><span>항공·호텔은 2026-11-02 조회</span></div>
+    <div class="gms"><img class="gm hero-gm" src="https://media.giphy.com/media/jedcj9y8ReiAqZB34Z/200w.gif" width="200" height="112" alt="크리스마스 스웨터를 입은 월레스 옆에서 순록 뿔을 단 그로밋이 손을 흔드는 장면" loading="lazy" decoding="async"><img class="gm hero-gm" src="https://media.giphy.com/media/nfg6YjmpdL4fI1SGVb/200w.gif" width="200" height="113" alt="크리스마스 트리와 선물 옆에 월레스, 순록 뿔을 쓴 그로밋, 양들이 서 있는 장면" loading="lazy" decoding="async"><img class="gm hero-gm" src="https://media.tenor.com/8Q5ref9VN-YAAAAM/wallace-gromit.gif" width="220" height="123" alt="눈 오는 밤 순록 뿔을 쓴 그로밋과 월레스" loading="lazy" decoding="async"></div>
+    <div class="stats">
+      <div><b class="tnum">57곳</b><span>28개 나라·지역 (홍콩·마카오·괌·사이판 포함, 주권국가로는 24개국)</span></div>
+      <div><b class="tnum">24곳</b><span>크리스마스 분위기 난다</span></div>
+      <div><b class="tnum">21 / 12곳</b><span>보통 / 안 난다</span></div>
+      <div><b class="tnum">133만</b><span>분위기 나는 곳 중 최저가 (하노이)</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="xsec" id="picks">
+  <div class="wrap">
+    <h2>분위기 나는 곳 중 싼 순서 8곳</h2>
+    <p class="sub">'난다'로 분류한 곳 가운데 2인 합계가 낮은 순이다. 눌러서 자세한 내용으로 이동한다.</p>
+    <div class="picks">
+        <a class="pick" href="#c-hanoi" data-key="hanoi"><span class="no tnum">1</span><div><b>하노이</b><span class="s">베트남 · 133만 · 22° / 13°</span></div></a>
+        <a class="pick" href="#c-seoul" data-key="seoul"><span class="no tnum">2</span><div><b>서울</b><span class="s">한국 · 134만 · 1° / -8°</span></div></a>
+        <a class="pick" href="#c-busan" data-key="busan"><span class="no tnum">3</span><div><b>부산</b><span class="s">한국 · 142만 · 6° / -4°</span></div></a>
+        <a class="pick" href="#c-hcmc" data-key="hcmc"><span class="no tnum">4</span><div><b>호치민</b><span class="s">베트남 · 148만 · 31° / 23°</span></div></a>
+        <a class="pick" href="#c-osaka" data-key="osaka"><span class="no tnum">5</span><div><b>오사카</b><span class="s">일본 · 174만 · 10° / 2°</span></div></a>
+        <a class="pick" href="#c-manila" data-key="manila"><span class="no tnum">6</span><div><b>마닐라</b><span class="s">필리핀 · 176만 · 29° / 24°</span></div></a>
+        <a class="pick" href="#c-hongkong" data-key="hongkong"><span class="no tnum">7</span><div><b>홍콩</b><span class="s">홍콩 · 184만 · 19° / 12°</span></div></a>
+        <a class="pick" href="#c-taipei" data-key="taipei"><span class="no tnum">8</span><div><b>타이베이</b><span class="s">대만 · 195만 · 19° / 13°</span></div></a>
+    </div>
+    <div class="gm-row"><img class="gm" src="https://media.tenor.com/8rWXYXMG45oAAAAM/gromit-wallace-and-gromit.gif" width="165" height="142" alt="산타 모자와 HO 스웨터를 입은 월레스와 그로밋 인형" loading="lazy" decoding="async"><img class="gm" src="https://media.tenor.com/A8iMlkJzMGQAAAAM/snowman-snowmanotron.gif" width="220" height="123" alt="눈사람 곁의 그로밋" loading="lazy" decoding="async"><img class="gm" src="https://media.tenor.com/83V7P-flWrAAAAAM/wallace-and.gif" width="220" height="165" alt="여행 책자를 읽는 월레스" loading="lazy" decoding="async"></div>
+  </div>
+</section>
+
+<div class="ctl" id="ctl"><div class="wrap"><div class="in">
+  <div class="grp" id="gMood"><span class="lbl">분위기</span>
+    <button class="fchip" type="button" data-v="all" aria-pressed="true">전체</button>
+    <button class="fchip" type="button" data-v="2" aria-pressed="false">난다</button>
+    <button class="fchip" type="button" data-v="1" aria-pressed="false">보통</button>
+    <button class="fchip" type="button" data-v="0" aria-pressed="false">안 난다</button>
+  </div>
+  <div class="grp"><span class="lbl">지역</span>
+    <select id="selReg" aria-label="지역"><option value="all">전체</option></select>
+  </div>
+  <div class="grp"><span class="lbl">정렬</span>
+    <select id="selSort" aria-label="정렬"><option value="region">지역별</option><option value="total">비용 낮은 순</option><option value="mood">분위기 좋은 순</option><option value="warm">따뜻한 순</option></select>
+  </div>
+  <div class="cnt tnum" id="cnt"></div>
+</div></div></div>
+
+<section class="xsec" id="list" style="padding-top:12px">
+  <div class="wrap">
+    <div class="thead"><div>여행지</div><div>크리스마스 분위기</div><div>2인 합계</div><div>항공 (2인)</div><div>날씨 · 호텔</div><div>장단점</div></div>
+    <div id="rows">
+      <div class="region-head" data-region="일본"><div><h2>일본</h2><p>12월 말 일본은 일루미네이션의 계절. 삿포로만 눈과 크리스마스 마켓을 함께 즐긴다.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/51iQIE8OC7MAAAAM/snowing-wallace.gif" width="220" height="123" alt="눈 쌓인 집 앞마당의 월레스와 그로밋" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-osaka" data-i="0" data-total="1738025" data-mood="2" data-region="일본" data-hi="10">
+        <div class="c-name"><h3>오사카</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>미도스지·우메다 일루미네이션, 유니버설 스튜디오 재팬 크리스마스(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">174<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 75 · 호텔 34 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">75만</b><span class="s">2인 항공 · 1인 38만</span><span class="s">에어부산 · 직항 · 1시간 55분</span></div>
+        <div class="c-wx"><b class="tnum">10° / 2°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 34만 · 1박 7만</span></div>
+        <div class="c-pc"><p class="p">+ 먹거리, 항공·호텔이 일본에서 가장 쌈</p><p class="m">− 인파, 눈 없음, 마켓 분위기는 약함</p></div>
+      </article>
+      <article class="city" id="c-kyoto" data-i="1" data-total="1757090" data-mood="1" data-region="일본" data-hi="9">
+        <div class="c-name"><h3>교토</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>교토역 대형 트리 정도, 전통 도시라 크리스마스 장식은 적다. 겨울 사찰의 조용한 맛.</p></div>
+        <div class="c-cost"><b class="tnum">176<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 75 · 호텔 36 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">75만</b><span class="s">2인 항공 · 1인 38만</span><span class="s">에어부산 · 직항 · 1시간 55분</span></div>
+        <div class="c-wx"><b class="tnum">9° / 0°</b><span class="s">비 21%</span><span class="s">호텔 5박 36만 · 1박 7만</span></div>
+        <div class="c-pc"><p class="p">+ 사찰·정원, 조용함, 오사카 항공 이용</p><p class="m">− 크리스마스 분위기 약함, 관광객 많음, 영하 가까움</p></div>
+      </article>
+      <article class="city" id="c-hiroshima" data-i="2" data-total="1813500" data-mood="1" data-region="일본" data-hi="9">
+        <div class="c-name"><h3>히로시마</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>평화대로 일루미네이션이 매년 열린다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">181<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 68 · 호텔 48 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">68만</b><span class="s">2인 항공 · 1인 34만</span><span class="s">제주항공 · 직항 · 1시간 45분</span></div>
+        <div class="c-wx"><b class="tnum">9° / 1°</b><span class="s">비 17%</span><span class="s">호텔 5박 48만 · 1박 10만</span></div>
+        <div class="c-pc"><p class="p">+ 미야지마 굴, 항공 저렴, 한적함</p><p class="m">− 소도시, 크리스마스 행사 규모 작음</p></div>
+      </article>
+      <article class="city" id="c-tokyo" data-i="3" data-total="2179607" data-mood="2" data-region="일본" data-hi="10">
+        <div class="c-name"><h3>도쿄</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>마루노우치·롯폰기·에비스 일루미네이션이 매년 열린다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">218<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 106 · 호텔 47 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">106만</b><span class="s">2인 항공 · 1인 53만</span><span class="s">제주항공 · 직항 · 2시간 20분</span></div>
+        <div class="c-wx"><b class="tnum">10° / 2°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 47만 · 1박 9만</span></div>
+        <div class="c-pc"><p class="p">+ 볼거리 최다, 항공 편수 많음, 일루미네이션</p><p class="m">− 호텔 좁고 비쌈, 인파, 눈은 거의 없음</p></div>
+      </article>
+      <article class="city" id="c-okinawa" data-i="4" data-total="2269760" data-mood="0" data-region="일본" data-hi="19">
+        <div class="c-name"><h3>오키나와</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>따뜻한 리조트 분위기라 크리스마스 장식은 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">227<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 113 · 호텔 49 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">113만</b><span class="s">2인 항공 · 1인 56만</span><span class="s">Trinity Airways · 직항 · 2시간 35분</span></div>
+        <div class="c-wx"><b class="tnum">19° / 16°</b><span class="s">비 29%</span><span class="s">호텔 5박 49만 · 1박 10만</span></div>
+        <div class="c-pc"><p class="p">+ 바다·렌터카, 따뜻함, 호텔 저렴</p><p class="m">− 흐리고 바람, 분위기 약함, 항공 선택지 적음</p></div>
+      </article>
+      <article class="city" id="c-nagoya" data-i="5" data-total="2290905" data-mood="1" data-region="일본" data-hi="9">
+        <div class="c-name"><h3>나고야</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>사카에 일대 일루미네이션과 크리스마스 마켓이 열리는 해가 많다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">229<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 101 · 호텔 63 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">101만</b><span class="s">2인 항공 · 1인 50만</span><span class="s">진에어 · 직항 · 1시간 45분</span></div>
+        <div class="c-wx"><b class="tnum">9° / 1°</b><span class="s">비 17%</span><span class="s">호텔 5박 63만 · 1박 13만</span></div>
+        <div class="c-pc"><p class="p">+ 레고랜드·성·히쓰마부시, 한적함</p><p class="m">− 크리스마스 행사 규모는 작음, 항공 편수 적음</p></div>
+      </article>
+      <article class="city" id="c-fukuoka" data-i="6" data-total="2423744" data-mood="1" data-region="일본" data-hi="9">
+        <div class="c-name"><h3>후쿠오카</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>하카타역 일루미네이션 등 소소한 장식(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">242<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 95 · 호텔 83 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">95만</b><span class="s">2인 항공 · 1인 47만</span><span class="s">진에어 · 직항</span></div>
+        <div class="c-wx"><b class="tnum">9° / 3°</b><span class="s">비 33%</span><span class="s">호텔 5박 83만 · 1박 17만</span></div>
+        <div class="c-pc"><p class="p">+ 1시간 20분 비행, 라멘·모츠나베, 유후인 온천 연계</p><p class="m">− 호텔이 비싼 편, 분위기는 보통</p></div>
+      </article>
+      <article class="city" id="c-yokohama" data-i="7" data-total="2540602" data-mood="2" data-region="일본" data-hi="10">
+        <div class="c-name"><h3>요코하마</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>붉은 벽돌 창고 크리스마스 마켓이 매년 12/25경까지 열린다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">254<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 106 · 호텔 83 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">106만</b><span class="s">2인 항공 · 1인 53만</span><span class="s">제주항공 · 직항 · 2시간 20분</span></div>
+        <div class="c-wx"><b class="tnum">10° / 2°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 83만 · 1박 17만</span></div>
+        <div class="c-pc"><p class="p">+ 항구 야경, 도쿄까지 30분</p><p class="m">− 관광지가 한정적, 호텔 비쌈</p></div>
+      </article>
+      <article class="city" id="c-sendai" data-i="8" data-total="2679100" data-mood="2" data-region="일본" data-hi="6">
+        <div class="c-name"><h3>센다이</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>조젠지도리 &#x27;빛의 페전트&#x27;가 12월 내내 열리는 유명 행사(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">268<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 143 · 호텔 60 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">143만</b><span class="s">2인 항공 · 1인 72만</span><span class="s">아시아나항공 · 직항 · 2시간 10분</span></div>
+        <div class="c-wx"><b class="tnum">6° / -1°</b><span class="s">비 33%</span><span class="s">호텔 5박 60만 · 1박 12만</span></div>
+        <div class="c-pc"><p class="p">+ 빛 축제, 우설·센다이 맛집, 도호쿠 온천</p><p class="m">− 항공이 비쌈, 눈·추위</p></div>
+      </article>
+      <article class="city" id="c-sapporo" data-i="9" data-total="3149005" data-mood="2" data-region="일본" data-hi="-1">
+        <div class="c-name"><h3>삿포로</h3><span class="ctry">일본</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>오도리 공원 독일 크리스마스 마켓과 화이트 일루미네이션이 12/25까지(공식 일정). 눈까지 와서 분위기 최고.</p></div>
+        <div class="c-cost"><b class="tnum">315<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 170 · 호텔 80 · 현지 65</span></div>
+        <div class="c-fly"><b class="tnum">170만</b><span class="s">2인 항공 · 1인 85만</span><span class="s">진에어 직접 조회 · 12/23 14:10 → 12/28 12:15 · 직항 약 2시간 45분 (구글 최저 80.4만 에어프레미아)</span></div>
+        <div class="c-wx"><b class="tnum">-1° / -8°</b><span class="s">눈 46% · 비 46%</span><span class="s">호텔 5박 80만 · 1박 16만</span></div>
+        <div class="c-pc"><p class="p">+ 눈·온천·게·스프카레, 크리스마스 마켓</p><p class="m">− 12/25에 마켓 종료, 영하라 러닝 어려움, 항공·호텔 비쌈</p></div>
+      </article>
+      <div class="region-head" data-region="대만·홍콩"><div><h2>대만·홍콩</h2><p>따뜻하고 가깝다. 대만은 행사, 홍콩은 야경이 중심.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/pq0rA9vVbi4AAAAM/wallace-and-gromit-shoulder-pat.gif" width="220" height="124" alt="커피잔을 든 그로밋" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-taichung" data-i="10" data-total="1786965" data-mood="1" data-region="대만·홍콩" data-hi="20">
+        <div class="c-name"><h3>타이중</h3><span class="ctry">대만</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>쇼핑몰·거리 장식 정도.</p></div>
+        <div class="c-cost"><b class="tnum">179<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 80 · 호텔 48 · 현지 50</span></div>
+        <div class="c-fly"><b class="tnum">80만</b><span class="s">2인 항공 · 1인 40만</span><span class="s">홍콩 익스프레스항공 · 경유 1회 · 12시간 40분 · 직항 최저 45만(진에어)</span></div>
+        <div class="c-wx"><b class="tnum">20° / 11°</b><span class="s">비 38%</span><span class="s">호텔 5박 48만 · 1박 10만</span></div>
+        <div class="c-pc"><p class="p">+ 한적함, 물가 저렴, 디저트</p><p class="m">− 직항 선택지 적음, 분위기 보통</p></div>
+      </article>
+      <article class="city" id="c-hongkong" data-i="11" data-total="1840697" data-mood="2" data-region="대만·홍콩" data-hi="19">
+        <div class="c-name"><h3>홍콩</h3><span class="ctry">홍콩</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>빅토리아 하버 조명과 쇼핑몰 장식이 화려하다. 다만 10월에 다녀옴.</p></div>
+        <div class="c-cost"><b class="tnum">184<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 67 · 호텔 42 · 현지 75</span></div>
+        <div class="c-fly"><b class="tnum">67만</b><span class="s">2인 항공 · 1인 34만</span><span class="s">홍콩 익스프레스항공 · 직항 · 4시간 5분</span></div>
+        <div class="c-wx"><b class="tnum">19° / 12°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 42만 · 1박 8만</span></div>
+        <div class="c-pc"><p class="p">+ 항공이 가장 쌈, 쾌적한 날씨, 야경</p><p class="m">− 최근에 방문, 호텔 좁음, 12/25은 일부 휴업</p></div>
+      </article>
+      <article class="city" id="c-taipei" data-i="12" data-total="1947583" data-mood="2" data-region="대만·홍콩" data-hi="19">
+        <div class="c-name"><h3>타이베이</h3><span class="ctry">대만</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>신베이시 크리스마스랜드가 매년 12/25경까지 열린다(올해 일정 미확인), 101타워 장식.</p></div>
+        <div class="c-cost"><b class="tnum">195<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 72 · 호텔 73 · 현지 50</span></div>
+        <div class="c-fly"><b class="tnum">72만</b><span class="s">2인 항공 · 1인 36만</span><span class="s">스쿳항공 · 직항 · 2시간 40분</span></div>
+        <div class="c-wx"><b class="tnum">19° / 13°</b><span class="s">비 42%</span><span class="s">호텔 5박 73만 · 1박 15만</span></div>
+        <div class="c-pc"><p class="p">+ 따뜻함, 야시장, 항공 저렴</p><p class="m">− 비 잦음, 호텔 평점 좋은 곳은 비쌈</p></div>
+      </article>
+      <article class="city" id="c-kaohsiung" data-i="13" data-total="2053090" data-mood="1" data-region="대만·홍콩" data-hi="23">
+        <div class="c-name"><h3>가오슝</h3><span class="ctry">대만</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>항구 조명과 쇼핑몰 장식 정도.</p></div>
+        <div class="c-cost"><b class="tnum">205<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 110 · 호텔 45 · 현지 50</span></div>
+        <div class="c-fly"><b class="tnum">110만</b><span class="s">2인 항공 · 1인 55만</span><span class="s">홍콩 익스프레스항공 · 경유 1회 · 8시간 25분 · 직항 최저 63만(중화항공)</span></div>
+        <div class="c-wx"><b class="tnum">23° / 15°</b><span class="s">비 29%</span><span class="s">호텔 5박 45만 · 1박 9만</span></div>
+        <div class="c-pc"><p class="p">+ 따뜻함(남부), 물가 저렴</p><p class="m">− 직항이 없거나 경유가 길다, 분위기 보통</p></div>
+      </article>
+      <article class="city" id="c-macau" data-i="14" data-total="2449954" data-mood="1" data-region="대만·홍콩" data-hi="19">
+        <div class="c-name"><h3>마카오</h3><span class="ctry">마카오</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>베네시안·시티오브드림스 등 카지노 리조트의 대형 트리와 장식.</p></div>
+        <div class="c-cost"><b class="tnum">245<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 102 · 호텔 68 · 현지 75</span></div>
+        <div class="c-fly"><b class="tnum">102만</b><span class="s">2인 항공 · 1인 51만</span><span class="s">심천항공 · 경유 1회 · 22시간 50분 · 직항 최저 60만(제주항공)</span></div>
+        <div class="c-wx"><b class="tnum">19° / 13°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 68만 · 1박 14만</span></div>
+        <div class="c-pc"><p class="p">+ 유럽풍 거리, 에그타르트</p><p class="m">− 직항이 거의 없어 경유가 길다, 분위기는 상업적</p></div>
+      </article>
+      <div class="region-head" data-region="중국·몽골"><div><h2>중국·몽골</h2><p>크리스마스보다는 겨울 풍경. 춥고 싸다.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/fXHFc2JJiI0AAAAM/snowmanotron-snow.gif" width="220" height="123" alt="눈사람과 껴안은 그로밋" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-beijing" data-i="15" data-total="1271100" data-mood="0" data-region="중국·몽골" data-hi="2">
+        <div class="c-name"><h3>베이징</h3><span class="ctry">중국</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>크리스마스는 평일, 설경은 가능하지만 장식은 적다.</p></div>
+        <div class="c-cost"><b class="tnum">127<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 55 · 호텔 32 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">55만</b><span class="s">2인 항공 · 1인 27만</span><span class="s">중국남방항공 · 경유 1회 · 13시간 5분 · 직항 최저 30만(중국남방항공)</span></div>
+        <div class="c-wx"><b class="tnum">2° / -7°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 32만 · 1박 6만</span></div>
+        <div class="c-pc"><p class="p">+ 고궁·만리장성, 물가 저렴</p><p class="m">− 경유가 길다, 영하, 대기질</p></div>
+      </article>
+      <article class="city" id="c-shanghai" data-i="16" data-total="1329755" data-mood="1" data-region="중국·몽골" data-hi="9">
+        <div class="c-name"><h3>상하이</h3><span class="ctry">중국</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>와이탄·신톈디 상업 장식, 크리스마스는 평일 취급.</p></div>
+        <div class="c-cost"><b class="tnum">133<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 67 · 호텔 26 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">67만</b><span class="s">2인 항공 · 1인 33만</span><span class="s">중국남방항공 · 경유 1회 · 7시간 15분 · 직항 최저 46만(중국남방항공)</span></div>
+        <div class="c-wx"><b class="tnum">9° / 1°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 26만 · 1박 5만</span></div>
+        <div class="c-pc"><p class="p">+ 항공 저렴, 볼거리, 야경</p><p class="m">− 경유가 많고 길다, 비자 규정 확인 필요</p></div>
+      </article>
+      <article class="city" id="c-harbin" data-i="17" data-total="1465710" data-mood="1" data-region="중국·몽골" data-hi="-11">
+        <div class="c-name"><h3>하얼빈</h3><span class="ctry">중국</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>빙설대세계 등 겨울 축제가 12월에 열린다(올해 일정 미확인). 크리스마스보다 겨울왕국.</p></div>
+        <div class="c-cost"><b class="tnum">147<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 80 · 호텔 27 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">80만</b><span class="s">2인 항공 · 1인 40만</span><span class="s">산둥항공 · 경유 1회 · 7시간 20분 · 직항 최저 49만(중국남방항공)</span></div>
+        <div class="c-wx"><b class="tnum">-11° / -20°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 27만 · 1박 5만</span></div>
+        <div class="c-pc"><p class="p">+ 얼음 조각, 러시아풍 건축, 물가 저렴</p><p class="m">− 영하 20도 안팎, 경유가 길다</p></div>
+      </article>
+      <article class="city" id="c-qingdao" data-i="18" data-total="1485350" data-mood="1" data-region="중국·몽골" data-hi="4">
+        <div class="c-name"><h3>칭다오</h3><span class="ctry">중국</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>독일 조계지 건축이 있지만 크리스마스 행사는 작다.</p></div>
+        <div class="c-cost"><b class="tnum">149<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 70 · 호텔 39 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">70만</b><span class="s">2인 항공 · 1인 35만</span><span class="s">진에어 · 직항 · 1시간 55분</span></div>
+        <div class="c-wx"><b class="tnum">4° / -2°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 39만 · 1박 8만</span></div>
+        <div class="c-pc"><p class="p">+ 직항 1시간 55분, 맥주·해산물</p><p class="m">− 춥고 건조, 분위기 보통, 비자 규정 확인 필요</p></div>
+      </article>
+      <article class="city" id="c-ulaanbaatar" data-i="19" data-total="2384575" data-mood="0" data-region="중국·몽골" data-hi="-13">
+        <div class="c-name"><h3>울란바토르</h3><span class="ctry">몽골</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>영하 20도의 설원, 크리스마스 분위기는 거의 없다.</p></div>
+        <div class="c-cost"><b class="tnum">238<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 156 · 호텔 43 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">156만</b><span class="s">2인 항공 · 1인 78만</span><span class="s">대한항공 · 직항</span></div>
+        <div class="c-wx"><b class="tnum">-13° / -22°</b><span class="s">눈 17% · 비 17%</span><span class="s">호텔 5박 43만 · 1박 9만</span></div>
+        <div class="c-pc"><p class="p">+ 설원·겨울 체험, 색다름</p><p class="m">− 항공 비쌈, 혹한, 볼거리 한정</p></div>
+      </article>
+      <div class="region-head" data-region="베트남"><div><h2>베트남</h2><p>호텔이 압도적으로 싸다. 하노이·호치민은 성탄 이브가 떠들썩하다.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/1s0iyl5Dr5gAAAAM/clapping-wallace.gif" width="220" height="149" alt="박수 치는 월레스" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-hanoi" data-i="20" data-total="1334808" data-mood="2" data-region="베트남" data-hi="22">
+        <div class="c-name"><h3>하노이</h3><span class="ctry">베트남</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>크리스마스 이브에 성 요셉 대성당 앞이 인파로 가득 차는 도시.</p></div>
+        <div class="c-cost"><b class="tnum">133<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 88 · 호텔 11 · 현지 35</span></div>
+        <div class="c-fly"><b class="tnum">88만</b><span class="s">2인 항공 · 1인 44만</span><span class="s">홍콩 익스프레스항공 · 경유 1회 · 8시간 25분 · 직항 최저 45만(비엣젯항공)</span></div>
+        <div class="c-wx"><b class="tnum">22° / 13°</b><span class="s">비 17%</span><span class="s">호텔 5박 11만 · 1박 2만</span></div>
+        <div class="c-pc"><p class="p">+ 물가·호텔 저렴, 크리스마스 이브 인파 구경</p><p class="m">− 경유가 많음(직항은 비쌈), 쌀쌀하고 흐림</p></div>
+      </article>
+      <article class="city" id="c-hcmc" data-i="21" data-total="1477315" data-mood="2" data-region="베트남" data-hi="31">
+        <div class="c-name"><h3>호치민</h3><span class="ctry">베트남</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>노트르담 성당·응우옌후에 거리 장식과 크리스마스 이브 인파가 유명하다.</p></div>
+        <div class="c-cost"><b class="tnum">148<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 104 · 호텔 9 · 현지 35</span></div>
+        <div class="c-fly"><b class="tnum">104만</b><span class="s">2인 항공 · 1인 52만</span><span class="s">에어프레미아 · 직항 · 5시간 40분</span></div>
+        <div class="c-wx"><b class="tnum">31° / 23°</b><span class="s">비 25%</span><span class="s">호텔 5박 9만 · 1박 2만</span></div>
+        <div class="c-pc"><p class="p">+ 호텔 가장 저렴, 따뜻함, 직항</p><p class="m">− 덥다(30도대), 교통 혼잡</p></div>
+      </article>
+      <article class="city" id="c-danang" data-i="22" data-total="1510895" data-mood="1" data-region="베트남" data-hi="23">
+        <div class="c-name"><h3>다낭</h3><span class="ctry">베트남</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>다낭 대성당(분홍 성당) 성탄 미사와 조명, 거리 장식은 소소하다.</p></div>
+        <div class="c-cost"><b class="tnum">151<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 96 · 호텔 20 · 현지 35</span></div>
+        <div class="c-fly"><b class="tnum">96만</b><span class="s">2인 항공 · 1인 48만</span><span class="s">제주항공 · 직항 · 5시간 10분</span></div>
+        <div class="c-wx"><b class="tnum">23° / 20°</b><span class="s">비 88%</span><span class="s">호텔 5박 20만 · 1박 4만</span></div>
+        <div class="c-pc"><p class="p">+ 따뜻함(20도대), 호텔 저렴, 항공 5시간</p><p class="m">− 우기라 흐리고 비, 눈 없음</p></div>
+      </article>
+      <article class="city" id="c-nhatrang" data-i="23" data-total="1528628" data-mood="0" data-region="베트남" data-hi="26">
+        <div class="c-name"><h3>나트랑</h3><span class="ctry">베트남</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>휴양지 해변 분위기, 장식은 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">153<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 101 · 호텔 17 · 현지 35</span></div>
+        <div class="c-fly"><b class="tnum">101만</b><span class="s">2인 항공 · 1인 51만</span><span class="s">에어부산 · 직항 · 5시간 30분</span></div>
+        <div class="c-wx"><b class="tnum">26° / 22°</b><span class="s">비 50%</span><span class="s">호텔 5박 17만 · 1박 3만</span></div>
+        <div class="c-pc"><p class="p">+ 호텔 저렴, 바다</p><p class="m">− 크리스마스 분위기 약함, 직항 한정</p></div>
+      </article>
+      <article class="city" id="c-phuquoc" data-i="24" data-total="1932223" data-mood="0" data-region="베트남" data-hi="30">
+        <div class="c-name"><h3>푸꾸옥</h3><span class="ctry">베트남</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>리조트 섬이라 장식이 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">193<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 112 · 호텔 47 · 현지 35</span></div>
+        <div class="c-fly"><b class="tnum">112만</b><span class="s">2인 항공 · 1인 56만</span><span class="s">비엣젯항공 · 직항 · 5시간 50분</span></div>
+        <div class="c-wx"><b class="tnum">30° / 23°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 47만 · 1박 9만</span></div>
+        <div class="c-pc"><p class="p">+ 해변, 직항, 따뜻함</p><p class="m">− 호텔이 비싼 편, 분위기 약함</p></div>
+      </article>
+      <div class="region-head" data-region="태국·캄보디아"><div><h2>태국·캄보디아</h2><p>성수기라 항공이 비싸고 크리스마스 분위기는 약하다.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/Mm_9T4MAM0IAAAAM/wallace-gromit.gif" width="220" height="134" alt="턱을 괴고 생각하는 그로밋" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-bangkok" data-i="25" data-total="1721451" data-mood="1" data-region="태국·캄보디아" data-hi="31">
+        <div class="c-name"><h3>방콕</h3><span class="ctry">태국</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>센트럴월드 등 쇼핑몰 장식이 화려하지만 더운 크리스마스.</p></div>
+        <div class="c-cost"><b class="tnum">172<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 118 · 호텔 14 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">118만</b><span class="s">2인 항공 · 1인 59만</span><span class="s">홍콩 익스프레스항공 · 경유 1회 · 14시간 15분 · 직항 최저 72만(비엣젯에어 타이)</span></div>
+        <div class="c-wx"><b class="tnum">31° / 22°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 14만 · 1박 3만</span></div>
+        <div class="c-pc"><p class="p">+ 호텔 저렴, 먹거리, 건기</p><p class="m">− 덥다, 직항 비쌈(경유 길다)</p></div>
+      </article>
+      <article class="city" id="c-chiangmai" data-i="26" data-total="1942650" data-mood="0" data-region="태국·캄보디아" data-hi="27">
+        <div class="c-name"><h3>치앙마이</h3><span class="ctry">태국</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>선선한 건기지만 크리스마스 분위기는 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">194<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 140 · 호텔 15 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">140만</b><span class="s">2인 항공 · 1인 70만</span><span class="s">에어부산 · 직항 · 6시간 10분</span></div>
+        <div class="c-wx"><b class="tnum">27° / 16°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 15만 · 1박 3만</span></div>
+        <div class="c-pc"><p class="p">+ 선선함, 호텔 저렴, 카페</p><p class="m">− 분위기 약함, 항공 비쌈</p></div>
+      </article>
+      <article class="city" id="c-siemreap" data-i="27" data-total="2080418" data-mood="0" data-region="태국·캄보디아" data-hi="29">
+        <div class="c-name"><h3>시엠립</h3><span class="ctry">캄보디아</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>앙코르와트 관광 도시, 크리스마스는 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">208<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 160 · 호텔 18 · 현지 30</span></div>
+        <div class="c-fly"><b class="tnum">160만</b><span class="s">2인 항공 · 1인 80만</span><span class="s">비엣젯항공 · 경유 1회 · 9시간</span></div>
+        <div class="c-wx"><b class="tnum">29° / 20°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 18만 · 1박 4만</span></div>
+        <div class="c-pc"><p class="p">+ 앙코르와트, 호텔 저렴</p><p class="m">− 경유가 필수, 항공 비쌈, 더움</p></div>
+      </article>
+      <article class="city" id="c-phuket" data-i="28" data-total="2397075" data-mood="0" data-region="태국·캄보디아" data-hi="30">
+        <div class="c-name"><h3>푸켓</h3><span class="ctry">태국</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>성수기 휴양지, 장식은 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">240<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 162 · 호텔 38 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">162만</b><span class="s">2인 항공 · 1인 81만</span><span class="s">홍콩 익스프레스항공 · 경유 1회 · 9시간 50분 · 직항 최저 103만(대한항공)</span></div>
+        <div class="c-wx"><b class="tnum">30° / 24°</b><span class="s">비 33%</span><span class="s">호텔 5박 38만 · 1박 8만</span></div>
+        <div class="c-pc"><p class="p">+ 해변</p><p class="m">− 항공 매우 비쌈, 분위기 약함</p></div>
+      </article>
+      <div class="region-head" data-region="말레이시아·싱가포르"><div><h2>말레이시아·싱가포르</h2><p>쇼핑몰 장식은 화려하지만 덥고 비가 많다.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/OfY01kdsqGsAAAAM/shame-gromit.gif" width="220" height="123" alt="의자에 앉아 책을 읽는 그로밋" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-kk" data-i="29" data-total="1795115" data-mood="0" data-region="말레이시아·싱가포르" data-hi="29">
+        <div class="c-name"><h3>코타키나발루</h3><span class="ctry">말레이시아</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>리조트 도시라 분위기가 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">180<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 108 · 호텔 32 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">108만</b><span class="s">2인 항공 · 1인 54만</span><span class="s">홍콩 익스프레스항공 · 경유 1회 · 18시간 50분 · 직항 최저 73만(에어아시아)</span></div>
+        <div class="c-wx"><b class="tnum">29° / 24°</b><span class="s">비 88%</span><span class="s">호텔 5박 32만 · 1박 6만</span></div>
+        <div class="c-pc"><p class="p">+ 바다, 일몰, 호텔 저렴</p><p class="m">− 경유가 길다, 분위기 약함</p></div>
+      </article>
+      <article class="city" id="c-kl" data-i="30" data-total="2138481" data-mood="1" data-region="말레이시아·싱가포르" data-hi="31">
+        <div class="c-name"><h3>쿠알라룸푸르</h3><span class="ctry">말레이시아</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>쇼핑몰 크리스마스 장식은 화려한 편이지만 더운 나라.</p></div>
+        <div class="c-cost"><b class="tnum">214<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 138 · 호텔 36 · 현지 40</span></div>
+        <div class="c-fly"><b class="tnum">138만</b><span class="s">2인 항공 · 1인 69만</span><span class="s">스쿳항공 · 경유 1회 · 10시간 35분 · 직항 최저 85만(에어아시아)</span></div>
+        <div class="c-wx"><b class="tnum">31° / 24°</b><span class="s">비 92%</span><span class="s">호텔 5박 36만 · 1박 7만</span></div>
+        <div class="c-pc"><p class="p">+ 호텔 저렴, 쇼핑몰, 먹거리</p><p class="m">− 덥고 비, 항공 경유가 길다</p></div>
+      </article>
+      <article class="city" id="c-singapore" data-i="31" data-total="2597759" data-mood="2" data-region="말레이시아·싱가포르" data-hi="30">
+        <div class="c-name"><h3>싱가포르</h3><span class="ctry">싱가포르</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>오차드로드 라이트업과 가든스 바이 더 베이 크리스마스 행사가 유명하다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">260<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 122 · 호텔 52 · 현지 85</span></div>
+        <div class="c-fly"><b class="tnum">122만</b><span class="s">2인 항공 · 1인 61만</span><span class="s">비엣젯항공 · 경유 1회 · 27시간 50분 · 직항 최저 71만(스쿳항공)</span></div>
+        <div class="c-wx"><b class="tnum">30° / 23°</b><span class="s">비 96%</span><span class="s">호텔 5박 52만 · 1박 10만</span></div>
+        <div class="c-pc"><p class="p">+ 깔끔·안전, 야경, 크리스마스 조명</p><p class="m">− 덥고 비, 항공·호텔 비쌈</p></div>
+      </article>
+      <div class="region-head" data-region="필리핀·인도네시아"><div><h2>필리핀·인도네시아</h2><p>필리핀은 세계에서 가장 긴 크리스마스 시즌을 가진 나라.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/8rWXYXMG45oAAAAM/gromit-wallace-and-gromit.gif" width="165" height="142" alt="산타 모자와 HO 스웨터를 입은 월레스와 그로밋 인형" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-manila" data-i="32" data-total="1759792" data-mood="2" data-region="필리핀·인도네시아" data-hi="29">
+        <div class="c-name"><h3>마닐라</h3><span class="ctry">필리핀</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>세계에서 가장 긴 크리스마스 시즌을 가진 나라의 수도, 쇼핑몰·거리 장식이 화려하다.</p></div>
+        <div class="c-cost"><b class="tnum">176<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 123 · 호텔 18 · 현지 35</span></div>
+        <div class="c-fly"><b class="tnum">123만</b><span class="s">2인 항공 · 1인 62만</span><span class="s">세부퍼시픽 · 직항 · 4시간 30분</span></div>
+        <div class="c-wx"><b class="tnum">29° / 24°</b><span class="s">비 54%</span><span class="s">호텔 5박 18만 · 1박 4만</span></div>
+        <div class="c-pc"><p class="p">+ 직항 4시간 30분, 크리스마스 문화, 물가 저렴</p><p class="m">− 교통체증, 치안 주의, 더움</p></div>
+      </article>
+      <article class="city" id="c-cebu" data-i="33" data-total="2049140" data-mood="2" data-region="필리핀·인도네시아" data-hi="29">
+        <div class="c-name"><h3>세부</h3><span class="ctry">필리핀</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>필리핀은 9월부터 크리스마스, 12/24 가족 만찬 문화와 파롤(별 등) 장식.</p></div>
+        <div class="c-cost"><b class="tnum">205<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 155 · 호텔 15 · 현지 35</span></div>
+        <div class="c-fly"><b class="tnum">155만</b><span class="s">2인 항공 · 1인 78만</span><span class="s">캐세이패시픽항공 · 경유 1회 · 23시간 45분 · 직항 최저 89만(세부퍼시픽)</span></div>
+        <div class="c-wx"><b class="tnum">29° / 24°</b><span class="s">비 92%</span><span class="s">호텔 5박 15만 · 1박 3만</span></div>
+        <div class="c-pc"><p class="p">+ 크리스마스 문화 체험, 호텔 저렴, 바다</p><p class="m">− 직항은 비쌈(경유 길다), 치안 주의</p></div>
+      </article>
+      <article class="city" id="c-bali" data-i="34" data-total="2226368" data-mood="0" data-region="필리핀·인도네시아" data-hi="29">
+        <div class="c-name"><h3>발리</h3><span class="ctry">인도네시아</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>휴양지, 크리스마스 분위기는 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">223<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 152 · 호텔 36 · 현지 35</span></div>
+        <div class="c-fly"><b class="tnum">152만</b><span class="s">2인 항공 · 1인 76만</span><span class="s">제주항공 · 직항 · 7시간 40분</span></div>
+        <div class="c-wx"><b class="tnum">29° / 24°</b><span class="s">비 96%</span><span class="s">호텔 5박 36만 · 1박 7만</span></div>
+        <div class="c-pc"><p class="p">+ 빌라·해변, 직항</p><p class="m">− 우기, 항공 비쌈, 분위기 약함</p></div>
+      </article>
+      <article class="city" id="c-boracay" data-i="35" data-total="2306970" data-mood="1" data-region="필리핀·인도네시아" data-hi="28">
+        <div class="c-name"><h3>보라카이</h3><span class="ctry">필리핀</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>해변 리조트, 장식은 소소하다.</p></div>
+        <div class="c-cost"><b class="tnum">231<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 169 · 호텔 26 · 현지 35</span></div>
+        <div class="c-fly"><b class="tnum">169만</b><span class="s">2인 항공 · 1인 85만</span><span class="s">세부퍼시픽 · 경유 1회 · 15시간 50분 · 직항 최저 87만(Trinity Airways)</span></div>
+        <div class="c-wx"><b class="tnum">28° / 25°</b><span class="s">비 100%</span><span class="s">호텔 5박 26만 · 1박 5만</span></div>
+        <div class="c-pc"><p class="p">+ 바다, 파티 분위기</p><p class="m">− 항공 매우 비쌈, 경유 15시간</p></div>
+      </article>
+      <div class="region-head" data-region="괌·하와이·호주"><div><h2>괌·하와이·호주</h2><p>따뜻한 크리스마스. 호텔과 물가가 비싸다.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/CbKp4SBzTr0AAAAM/wallace-and-gromit-gromit.gif" width="220" height="181" alt="소파에서 책을 읽는 그로밋" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-guam" data-i="36" data-total="3629435" data-mood="1" data-region="괌·하와이·호주" data-hi="30">
+        <div class="c-name"><h3>괌</h3><span class="ctry">괌(미국령)</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>미국령이라 크리스마스 장식과 12/25 공휴일 분위기는 있지만 여름 날씨.</p></div>
+        <div class="c-cost"><b class="tnum">363<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 119 · 호텔 134 · 현지 110</span></div>
+        <div class="c-fly"><b class="tnum">119만</b><span class="s">2인 항공 · 1인 59만</span><span class="s">에어서울 · 직항 · 4시간 35분</span></div>
+        <div class="c-wx"><b class="tnum">30° / 25°</b><span class="s">비 75%</span><span class="s">호텔 5박 134만 · 1박 27만</span></div>
+        <div class="c-pc"><p class="p">+ 직항 4시간, 치안, 따뜻함</p><p class="m">− 호텔·물가 비쌈, 새벽 도착 항공</p></div>
+      </article>
+      <article class="city" id="c-saipan" data-i="37" data-total="3706430" data-mood="0" data-region="괌·하와이·호주" data-hi="28">
+        <div class="c-name"><h3>사이판</h3><span class="ctry">사이판(미국령)</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>휴양지, 장식은 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">371<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 223 · 호텔 57 · 현지 90</span></div>
+        <div class="c-fly"><b class="tnum">223만</b><span class="s">2인 항공 · 1인 112만</span><span class="s">필리핀항공 · 경유 1회</span></div>
+        <div class="c-wx"><b class="tnum">28° / 25°</b><span class="s">비 58%</span><span class="s">호텔 5박 57만 · 1박 11만</span></div>
+        <div class="c-pc"><p class="p">+ 바다, 따뜻함</p><p class="m">− 항공 매우 비쌈, 분위기 약함</p></div>
+      </article>
+      <article class="city" id="c-sydney" data-i="38" data-total="4719454" data-mood="1" data-region="괌·하와이·호주" data-hi="26">
+        <div class="c-name"><h3>시드니</h3><span class="ctry">호주</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>여름 크리스마스(해변·바비큐), 마틴플레이스 대형 트리와 장식.</p></div>
+        <div class="c-cost"><b class="tnum">472<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 274 · 호텔 87 · 현지 110</span></div>
+        <div class="c-fly"><b class="tnum">274만</b><span class="s">2인 항공 · 1인 137만</span><span class="s">젯스타 · 직항</span></div>
+        <div class="c-wx"><b class="tnum">26° / 17°</b><span class="s">비 29%</span><span class="s">호텔 5박 87만 · 1박 17만</span></div>
+        <div class="c-pc"><p class="p">+ 계절이 반대인 이색 경험, 직항</p><p class="m">− 항공 비쌈, 12/25 대부분 휴업, 눈 분위기는 없음</p></div>
+      </article>
+      <article class="city" id="c-honolulu" data-i="39" data-total="6479515" data-mood="2" data-region="괌·하와이·호주" data-hi="26">
+        <div class="c-name"><h3>호놀룰루</h3><span class="ctry">미국 하와이</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>호놀룰루 시티 라이트(시청 앞 트리와 조명)와 산타 서핑 등 하와이식 크리스마스.</p></div>
+        <div class="c-cost"><b class="tnum">648<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 317 · 호텔 191 · 현지 140</span></div>
+        <div class="c-fly"><b class="tnum">317만</b><span class="s">2인 항공 · 1인 158만</span><span class="s">에어프레미아 · 직항 · 8시간</span></div>
+        <div class="c-wx"><b class="tnum">26° / 20°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 191만 · 1박 38만</span></div>
+        <div class="c-pc"><p class="p">+ 직항, 따뜻함, 이색 크리스마스</p><p class="m">− 항공·호텔이 전 후보 중 최고가</p></div>
+      </article>
+      <div class="region-head" data-region="유럽"><div><h2>유럽</h2><p>분위기는 최상급이지만 12/25~26에는 문 닫는 곳이 많고 마켓이 막바지다. 6일 일정에는 이동이 길다.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/83V7P-flWrAAAAAM/wallace-and.gif" width="220" height="165" alt="여행 책자를 읽는 월레스" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-istanbul" data-i="40" data-total="2478110" data-mood="0" data-region="유럽" data-hi="12">
+        <div class="c-name"><h3>이스탄불</h3><span class="ctry">튀르키예</span></div>
+        <div class="c-mood"><span class="mood m0">안 난다</span><p>무슬림 다수 국가라 크리스마스보다 신년 장식 중심.</p></div>
+        <div class="c-cost"><b class="tnum">248<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 168 · 호텔 30 · 현지 50</span></div>
+        <div class="c-fly"><b class="tnum">168만</b><span class="s">2인 항공 · 1인 84만</span><span class="s">중국남방항공 · 경유 1회 · 27시간 15분 · 직항 최저 99만(대한항공)</span></div>
+        <div class="c-wx"><b class="tnum">12° / 6°</b><span class="s">비 50%</span><span class="s">호텔 5박 30만 · 1박 6만</span></div>
+        <div class="c-pc"><p class="p">+ 이색 풍경, 물가 저렴</p><p class="m">− 경유 길다, 분위기 약함</p></div>
+      </article>
+      <article class="city" id="c-prague" data-i="41" data-total="3857290" data-mood="2" data-region="유럽" data-hi="5">
+        <div class="c-name"><h3>프라하</h3><span class="ctry">체코</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>구시가지 광장 크리스마스 마켓이 12/24 이후에도 이어지는 해가 많다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">386<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 237 · 호텔 73 · 현지 75</span></div>
+        <div class="c-fly"><b class="tnum">237만</b><span class="s">2인 항공 · 1인 119만</span><span class="s">LOT 폴란드항공 · 경유 1회 · 18시간 15분</span></div>
+        <div class="c-wx"><b class="tnum">5° / 0°</b><span class="s">비 25%</span><span class="s">호텔 5박 73만 · 1박 15만</span></div>
+        <div class="c-pc"><p class="p">+ 마켓 분위기, 물가 유럽 중 저렴</p><p class="m">− 경유 18시간대, 영하 가까움, 항공 비쌈</p></div>
+      </article>
+      <article class="city" id="c-paris" data-i="42" data-total="3888105" data-mood="2" data-region="유럽" data-hi="9">
+        <div class="c-name"><h3>파리</h3><span class="ctry">프랑스</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>갈르리 라파예트 대형 트리와 쇼윈도, 샹젤리제 조명이 유명하다.</p></div>
+        <div class="c-cost"><b class="tnum">389<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 216 · 호텔 63 · 현지 110</span></div>
+        <div class="c-fly"><b class="tnum">216만</b><span class="s">2인 항공 · 1인 108만</span><span class="s">에티하드항공 · 경유 1회 · 32시간 35분 · 직항 최저 157만(Trinity Airways)</span></div>
+        <div class="c-wx"><b class="tnum">9° / 5°</b><span class="s">비 33%</span><span class="s">호텔 5박 63만 · 1박 13만</span></div>
+        <div class="c-pc"><p class="p">+ 쇼윈도·조명, 분위기 최상급</p><p class="m">− 경유가 길다(30시간대), 12/25 상점·식당 휴업 많음, 항공 비쌈</p></div>
+      </article>
+      <article class="city" id="c-london" data-i="43" data-total="4085951" data-mood="2" data-region="유럽" data-hi="9">
+        <div class="c-name"><h3>런던</h3><span class="ctry">영국</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>리젠트·코벤트가든 조명과 윈터 원더랜드(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">409<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 217 · 호텔 66 · 현지 125</span></div>
+        <div class="c-fly"><b class="tnum">217만</b><span class="s">2인 항공 · 1인 109만</span><span class="s">심천항공 · 경유 1회 · 38시간 35분 · 직항 최저 164만(아시아나항공)</span></div>
+        <div class="c-wx"><b class="tnum">9° / 6°</b><span class="s">비 29%</span><span class="s">호텔 5박 66만 · 1박 13만</span></div>
+        <div class="c-pc"><p class="p">+ 조명·마켓, 영어권</p><p class="m">− 12/25 대중교통·상점 거의 휴업, 경유 매우 김</p></div>
+      </article>
+      <article class="city" id="c-budapest" data-i="44" data-total="4142360" data-mood="2" data-region="유럽" data-hi="7">
+        <div class="c-name"><h3>부다페스트</h3><span class="ctry">헝가리</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>성 이슈트반 대성당 앞 마켓이 연말까지 이어지는 해가 많다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">414<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 256 · 호텔 83 · 현지 75</span></div>
+        <div class="c-fly"><b class="tnum">256만</b><span class="s">2인 항공 · 1인 128만</span><span class="s">에미레이트항공 · 경유 1회 · 22시간 45분</span></div>
+        <div class="c-wx"><b class="tnum">7° / 1°</b><span class="s">비 38%</span><span class="s">호텔 5박 83만 · 1박 17만</span></div>
+        <div class="c-pc"><p class="p">+ 마켓 + 온천, 물가 유럽 중 저렴</p><p class="m">− 경유 22시간대, 12/25 휴업 많음</p></div>
+      </article>
+      <article class="city" id="c-munich" data-i="45" data-total="4163310" data-mood="2" data-region="유럽" data-hi="6">
+        <div class="c-name"><h3>뮌헨</h3><span class="ctry">독일</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>마리엔플라츠 마켓이 보통 12/24에 끝난다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">416<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 252 · 호텔 54 · 현지 110</span></div>
+        <div class="c-fly"><b class="tnum">252만</b><span class="s">2인 항공 · 1인 126만</span><span class="s">LOT 폴란드항공 · 경유 1회 · 18시간 10분 · 직항 최저 172만(루프트한자)</span></div>
+        <div class="c-wx"><b class="tnum">6° / 0°</b><span class="s">비 38%</span><span class="s">호텔 5박 54만 · 1박 11만</span></div>
+        <div class="c-pc"><p class="p">+ 독일식 마켓, 소시지·글뤼바인</p><p class="m">− 12/25~26 대부분 휴업, 마켓 마지막 날, 경유 김</p></div>
+      </article>
+      <article class="city" id="c-vienna" data-i="46" data-total="4271615" data-mood="2" data-region="유럽" data-hi="7">
+        <div class="c-name"><h3>비엔나</h3><span class="ctry">오스트리아</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>시청 광장 마켓 등 크리스트킨들마르크트, 다만 대부분 12/23~26에 끝난다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">427<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 223 · 호텔 94 · 현지 110</span></div>
+        <div class="c-fly"><b class="tnum">223만</b><span class="s">2인 항공 · 1인 112만</span><span class="s">LOT 폴란드항공 · 경유 1회 · 16시간 10분 · 직항 최저 253만(대한항공)</span></div>
+        <div class="c-wx"><b class="tnum">7° / 1°</b><span class="s">비 25%</span><span class="s">호텔 5박 94만 · 1박 19만</span></div>
+        <div class="c-pc"><p class="p">+ 마켓 도시, 음악회</p><p class="m">− 마켓이 막바지, 호텔 비쌈, 경유 김</p></div>
+      </article>
+      <article class="city" id="c-rome" data-i="47" data-total="4460895" data-mood="1" data-region="유럽" data-hi="14">
+        <div class="c-name"><h3>로마</h3><span class="ctry">이탈리아</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>나보나 광장 마켓과 바티칸 성탄 미사, 구유 장식(올해 일정 미확인). 마켓은 작은 편.</p></div>
+        <div class="c-cost"><b class="tnum">446<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 271 · 호텔 65 · 현지 110</span></div>
+        <div class="c-fly"><b class="tnum">271만</b><span class="s">2인 항공 · 1인 135만</span><span class="s">에미레이트항공 · 경유 1회 · 22시간 20분</span></div>
+        <div class="c-wx"><b class="tnum">14° / 6°</b><span class="s">비 17%</span><span class="s">호텔 5박 65만 · 1박 13만</span></div>
+        <div class="c-pc"><p class="p">+ 성탄 미사, 따뜻한 겨울(10도대)</p><p class="m">− 12/25 휴업, 경유 22시간대, 항공 비쌈</p></div>
+      </article>
+      <article class="city" id="c-strasbourg" data-i="48" data-total="5314065" data-mood="2" data-region="유럽" data-hi="7">
+        <div class="c-name"><h3>스트라스부르</h3><span class="ctry">프랑스</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>&#x27;크리스마스의 수도&#x27;로 불리는 마켓 도시(올해 일정 미확인, 12/24경 종료되는 해가 많음).</p></div>
+        <div class="c-cost"><b class="tnum">531<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 279 · 호텔 142 · 현지 110</span></div>
+        <div class="c-fly"><b class="tnum">279만</b><span class="s">2인 항공 · 1인 140만</span><span class="s">에티하드항공 · 경유 4회</span></div>
+        <div class="c-wx"><b class="tnum">7° / 2°</b><span class="s">비 29%</span><span class="s">호텔 5박 142만 · 1박 28만</span></div>
+        <div class="c-pc"><p class="p">+ 마켓 분위기 최상급, 알자스 와인</p><p class="m">− 직항이 없어 환승 4회, 호텔 매우 비쌈</p></div>
+      </article>
+      <div class="region-head" data-region="북미·중동"><div><h2>북미·중동</h2><p>뉴욕은 크리스마스의 정점, 대신 가장 비싸다.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/Mm_9T4MAM0IAAAAM/wallace-gromit.gif" width="220" height="134" alt="턱을 괴고 생각하는 그로밋" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-dubai" data-i="49" data-total="3882050" data-mood="1" data-region="북미·중동" data-hi="26">
+        <div class="c-name"><h3>두바이</h3><span class="ctry">아랍에미리트</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>쇼핑몰 안 장식은 화려하지만 사막 도시의 크리스마스.</p></div>
+        <div class="c-cost"><b class="tnum">388<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 228 · 호텔 60 · 현지 100</span></div>
+        <div class="c-fly"><b class="tnum">228만</b><span class="s">2인 항공 · 1인 114만</span><span class="s">카타르항공 · 경유 1회 · 41시간 35분 · 직항 최저 166만(에미레이트항공)</span></div>
+        <div class="c-wx"><b class="tnum">26° / 17°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 60만 · 1박 12만</span></div>
+        <div class="c-pc"><p class="p">+ 따뜻함(20도대), 쇼핑몰, 안전</p><p class="m">− 경유가 길다(대기 41시간대), 항공 비쌈</p></div>
+      </article>
+      <article class="city" id="c-la" data-i="50" data-total="4555000" data-mood="1" data-region="북미·중동" data-hi="19">
+        <div class="c-name"><h3>로스앤젤레스</h3><span class="ctry">미국</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>따뜻한 크리스마스, 할리우드 대로 장식 정도.</p></div>
+        <div class="c-cost"><b class="tnum">456<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 245 · 호텔 86 · 현지 125</span></div>
+        <div class="c-fly"><b class="tnum">245만</b><span class="s">2인 항공 · 1인 122만</span><span class="s">유나이티드항공 · 경유 1회 · 23시간 35분 · 직항 최저 137만(에어프레미아)</span></div>
+        <div class="c-wx"><b class="tnum">19° / 10°</b><span class="s">비 25%</span><span class="s">호텔 5박 86만 · 1박 17만</span></div>
+        <div class="c-pc"><p class="p">+ 따뜻함, 대형 테마파크</p><p class="m">− 항공 비쌈, 차가 필수, 분위기 보통</p></div>
+      </article>
+      <article class="city" id="c-vancouver" data-i="51" data-total="5232983" data-mood="2" data-region="북미·중동" data-hi="7">
+        <div class="c-name"><h3>밴쿠버</h3><span class="ctry">캐나다</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>크리스마스 마켓과 시내 조명(올해 일정 미확인), 직항으로 갈 수 있다.</p></div>
+        <div class="c-cost"><b class="tnum">523<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 307 · 호텔 106 · 현지 110</span></div>
+        <div class="c-fly"><b class="tnum">307만</b><span class="s">2인 항공 · 1인 154만</span><span class="s">에어캐나다 · 직항 · 9시간 50분</span></div>
+        <div class="c-wx"><b class="tnum">7° / 2°</b><span class="s">눈 17% · 비 79%</span><span class="s">호텔 5박 106만 · 1박 21만</span></div>
+        <div class="c-pc"><p class="p">+ 직항, 눈과 산, 마켓</p><p class="m">− 항공 매우 비쌈, 비 오는 겨울, 12/25 휴업</p></div>
+      </article>
+      <article class="city" id="c-newyork" data-i="52" data-total="5966450" data-mood="2" data-region="북미·중동" data-hi="4">
+        <div class="c-name"><h3>뉴욕</h3><span class="ctry">미국</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>록펠러 센터 트리, 5번가 쇼윈도, 센트럴파크 스케이트. 크리스마스 분위기의 정점.</p></div>
+        <div class="c-cost"><b class="tnum">597<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 247 · 호텔 200 · 현지 150</span></div>
+        <div class="c-fly"><b class="tnum">247만</b><span class="s">2인 항공 · 1인 124만</span><span class="s">에어캐나다 · 경유 2회 · 직항 최저 134만(유나이티드항공)</span></div>
+        <div class="c-wx"><b class="tnum">4° / -4°</b><span class="s">눈 17% · 비 33%</span><span class="s">호텔 5박 200만 · 1박 40만</span></div>
+        <div class="c-pc"><p class="p">+ 분위기 최상급, 쇼윈도·트리</p><p class="m">− 항공·호텔 전 후보 중 최고가권, 경유 2회, 12/25 많이 휴업</p></div>
+      </article>
+      <div class="region-head" data-region="한국"><div><h2>한국</h2><p>가깝고 간편하다. 크리스마스 장식은 서울이 최고.</p></div><figure class="rg"><img class="gm" src="https://media.tenor.com/fQvGckFfzYsAAAAM/knit-knitting.gif" width="220" height="133" alt="침대에서 뜨개질하는 그로밋" loading="lazy" decoding="async"></figure></div>
+      <article class="city" id="c-gangneung" data-i="53" data-total="1254675" data-mood="1" data-region="한국" data-hi="5">
+        <div class="c-name"><h3>강릉</h3><span class="ctry">한국</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>겨울 바다와 카페 중심이라 크리스마스 장식은 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">125<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 10 · 호텔 55 · 현지 60</span></div>
+        <div class="c-fly"><b class="tnum">10만</b><span class="s">2인 교통 · 1인 5만</span><span class="s">자차 기름·통행료(추정, 2인 합계)</span></div>
+        <div class="c-wx"><b class="tnum">5° / -4°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 55만 · 1박 11만</span></div>
+        <div class="c-pc"><p class="p">+ 겨울 바다, 커피, 한적함</p><p class="m">− 차로 3시간, 분위기 보통</p></div>
+      </article>
+      <article class="city" id="c-seoul" data-i="54" data-total="1335280" data-mood="2" data-region="한국" data-hi="1">
+        <div class="c-name"><h3>서울</h3><span class="ctry">한국</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>롯데월드몰 대형 트리, 더현대 서울, 신세계 본점 미디어 파사드 등 국내 최고의 크리스마스.</p></div>
+        <div class="c-cost"><b class="tnum">134<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 10 · 호텔 52 · 현지 72</span></div>
+        <div class="c-fly"><b class="tnum">10만</b><span class="s">2인 교통 · 1인 5만</span><span class="s">지하철·버스(추정)</span></div>
+        <div class="c-wx"><b class="tnum">1° / -8°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 52만 · 1박 10만</span></div>
+        <div class="c-pc"><p class="p">+ 가깝고 교통 편함, 일루미네이션</p><p class="m">− 연말 호텔 비쌈, 인파, 당일도 가능</p></div>
+      </article>
+      <article class="city" id="c-busan" data-i="55" data-total="1418225" data-mood="2" data-region="한국" data-hi="6">
+        <div class="c-name"><h3>부산</h3><span class="ctry">한국</span></div>
+        <div class="c-mood"><span class="mood m2">난다</span><p>광복로 크리스마스 트리 축제와 해운대 빛 축제가 매년 열린다(올해 일정 미확인).</p></div>
+        <div class="c-cost"><b class="tnum">142<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 24 · 호텔 52 · 현지 66</span></div>
+        <div class="c-fly"><b class="tnum">24만</b><span class="s">2인 교통 · 1인 12만</span><span class="s">KTX 왕복(추정)</span></div>
+        <div class="c-wx"><b class="tnum">6° / -4°</b><span class="s">대체로 맑음</span><span class="s">호텔 5박 52만 · 1박 10만</span></div>
+        <div class="c-pc"><p class="p">+ KTX로 이동, 바다 + 트리</p><p class="m">− KTX 예매 경쟁, 호텔 비쌈</p></div>
+      </article>
+      <article class="city" id="c-jeju" data-i="56" data-total="1561825" data-mood="1" data-region="한국" data-hi="8">
+        <div class="c-name"><h3>제주</h3><span class="ctry">한국</span></div>
+        <div class="c-mood"><span class="mood m1">보통</span><p>따뜻한 겨울 섬이라 크리스마스 장식은 약하다.</p></div>
+        <div class="c-cost"><b class="tnum">156<i>만</i></b><span class="s">2인 합계 · 6일</span><span class="s">항공 25 · 호텔 31 · 현지 100</span></div>
+        <div class="c-fly"><b class="tnum">25만</b><span class="s">2인 항공 · 1인 13만</span><span class="s">에어서울 · 직항 · 1시간 15분</span></div>
+        <div class="c-wx"><b class="tnum">8° / 4°</b><span class="s">비 46%</span><span class="s">호텔 5박 31만 · 1박 6만</span></div>
+        <div class="c-pc"><p class="p">+ 항공 저렴(김포 왕복 12.7만), 따뜻함</p><p class="m">− 렌터카 필요, 분위기 약함, 연말 바람과 비</p></div>
+      </article>
+    </div>
+    <p class="empty" id="empty">조건에 맞는 곳이 없다. 필터를 바꿔 본다.</p>
+  </div>
+</section>
+
+<section class="xsec" id="notes">
+  <div class="wrap">
+    <h2>계산 방법과 주의</h2>
+    <div class="notes">
+      <div class="n"><b>2인 합계</b><p>항공 2인 + 호텔 5박(방 1개) + 현지 비용(식비·교통·입장료). 해외는 현지 5일, 한국은 6일로 계산했다.</p></div>
+      <div class="n"><b>항공</b><p>Google 항공권에서 12/23→12/28 왕복 최저가(1인)를 2026-11-02에 조회했다. 삿포로만 진에어 사이트에서 직접 조회한 값(12/23 14:10 · 12/28 12:15)을 썼다. 항공사 사이트와 어긋나는 경우가 있었으니(매진 편이 남아 있기도 함) 가기 전에 항공사 사이트에서 다시 확인한다. 경유 편은 대기 시간이 길어 총 소요가 24시간을 넘는 곳도 있다.</p></div>
+      <div class="n"><b>호텔</b><p>Google 호텔에서 같은 날짜 목록 중 평점 4.0 이상인 숙소의 1박 가격 중앙값 × 5박. 호스텔이 섞여 있을 수 있고, 깨끗한 호텔을 고르려면 별도로 확인해야 한다.</p></div>
+      <div class="n"><b>현지 비용</b><p>나라별 1일 식비·교통·입장료 추정치(2인)를 곱했다. 렌터카·쇼핑·액티비티는 빠져 있고, 제주만 렌터카 28만 원을 더했다. 환율은 따로 반영하지 않았다.</p></div>
+      <div class="n"><b>날씨</b><p>2022~2025년 12/23~28 평균 최고·최저 기온(ERA5, Open-Meteo)과 비·눈이 온 날 비율이다.</p></div>
+      <div class="n"><b>분위기</b><p>제 판단이다. 삿포로 마켓·일루미네이션만 공식 일정(11/20–12/25)을 확인했고, 나머지 행사는 매년 열리는 것으로 알려져 있어도 올해 일정은 확인하지 못했다. 서양 도시는 12/25~26에 상점·식당·교통이 쉬는 곳이 많고 마켓이 12/24경 끝나기도 한다.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="xfoot">
+  <div class="snow" id="snowB" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="gm-row" style="margin-top:0"><img class="gm" src="https://media.giphy.com/media/nfg6YjmpdL4fI1SGVb/200w.gif" width="200" height="113" alt="크리스마스 트리와 선물 옆에 월레스, 순록 뿔을 쓴 그로밋, 양들이 서 있는 장면" loading="lazy" decoding="async"><img class="gm" src="https://media.tenor.com/8Q5ref9VN-YAAAAM/wallace-gromit.gif" width="220" height="123" alt="눈 오는 밤 순록 뿔을 쓴 그로밋과 월레스" loading="lazy" decoding="async"><img class="gm" src="https://media.giphy.com/media/jedcj9y8ReiAqZB34Z/200w.gif" width="200" height="112" alt="크리스마스 스웨터를 입은 월레스 옆에서 순록 뿔을 단 그로밋이 손을 흔드는 장면" loading="lazy" decoding="async"></div>
+    <p style="margin-top:22px;font-size:13px">ttomstudio · travel · 비용은 모두 추정이며 예약 전에 다시 확인한다</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // 눈
+  function snow(id, n){
+    var el=document.getElementById(id); if(!el) return;
+    for(var i=0;i<n;i++){ var s=document.createElement('i'), sz=3+Math.random()*5;
+      s.style.left=(Math.random()*100)+'%'; s.style.width=s.style.height=sz+'px'; s.style.opacity=(.4+Math.random()*.5).toFixed(2);
+      s.style.animationDuration=(7+Math.random()*9).toFixed(1)+'s'; s.style.animationDelay=(-Math.random()*14).toFixed(1)+'s';
+      s.style.setProperty('--dx',(Math.random()*60-20)+'px'); s.style.setProperty('--y',Math.round(Math.random()*90)); el.appendChild(s); }
+  }
+  snow('snowA',46); snow('snowB',22);
+
+  // 필터·정렬
+  var rowsEl=document.getElementById('rows');
+  var cities=[].slice.call(rowsEl.querySelectorAll('.city'));
+  var heads=[].slice.call(rowsEl.querySelectorAll('.region-head'));
+  var selReg=document.getElementById('selReg'), selSort=document.getElementById('selSort'), cnt=document.getElementById('cnt'), empty=document.getElementById('empty');
+  heads.forEach(function(h){ var o=document.createElement('option'); o.value=h.dataset.region; o.textContent=h.dataset.region; selReg.appendChild(o); });
+  var mood='all';
+  function render(){
+    var reg=selReg.value, sort=selSort.value;
+    var vis=cities.filter(function(c){ return (mood==='all'||c.dataset.mood===mood) && (reg==='all'||c.dataset.region===reg); });
+    var ordered;
+    if(sort==='region') ordered=cities.slice().sort(function(a,b){return a.dataset.i-b.dataset.i;});
+    else if(sort==='total') ordered=cities.slice().sort(function(a,b){return a.dataset.total-b.dataset.total;});
+    else if(sort==='mood') ordered=cities.slice().sort(function(a,b){return (b.dataset.mood-a.dataset.mood)||(a.dataset.total-b.dataset.total);});
+    else ordered=cities.slice().sort(function(a,b){return b.dataset.hi-a.dataset.hi;});
+    if(sort==='region'){
+      heads.forEach(function(h){ rowsEl.appendChild(h); var g=h.dataset.region; var mine=ordered.filter(function(c){return c.dataset.region===g;}); mine.forEach(function(c){rowsEl.appendChild(c);}); });
+    } else { heads.forEach(function(h){ rowsEl.appendChild(h); }); ordered.forEach(function(c){rowsEl.appendChild(c);}); }
+    cities.forEach(function(c){ c.hidden = vis.indexOf(c)<0; });
+    heads.forEach(function(h){ h.hidden = sort!=='region' || !vis.some(function(c){return c.dataset.region===h.dataset.region;}); });
+    cnt.textContent = vis.length+'곳 표시 / 전체 '+cities.length+'곳';
+    empty.style.display = vis.length? 'none':'block';
+  }
+  [].forEach.call(document.querySelectorAll('#gMood .fchip'), function(b){ b.addEventListener('click', function(){
+    mood=b.dataset.v; [].forEach.call(document.querySelectorAll('#gMood .fchip'), function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); render(); }); });
+  selReg.addEventListener('change',render); selSort.addEventListener('change',render);
+  [].forEach.call(document.querySelectorAll('.pick'), function(a){ a.addEventListener('click', function(e){
+    e.preventDefault(); mood='all'; selReg.value='all'; selSort.value='region';
+    [].forEach.call(document.querySelectorAll('#gMood .fchip'), function(x){ x.setAttribute('aria-pressed', x.dataset.v==='all'?'true':'false'); });
+    render(); var t=document.getElementById('c-'+a.dataset.key); if(t){ t.scrollIntoView({behavior:'smooth',block:'center'}); t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash'); } }); });
+  render();
+})();
+</script>
+</body>
+</html>
