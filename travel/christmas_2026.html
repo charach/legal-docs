@@ -182,6 +182,7 @@
 
   .trees { position: absolute; left: 0; right: 0; bottom: 0; height: 64px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='64' viewBox='0 0 120 64'%3E%3Cg fill='%230A2D1F'%3E%3Cpath d='M30 6L48 30H40L54 50H6L20 30H12Z'/%3E%3Crect x='27' y='50' width='6' height='14'/%3E%3Cpath d='M88 14L104 36H97L110 54H66L79 36H72Z'/%3E%3Crect x='85' y='54' width='6' height='10'/%3E%3C/g%3E%3Cg fill='%23fff' opacity='.9'%3E%3Cpath d='M30 6L36 14L30 12L24 14Z'/%3E%3Cpath d='M88 14L93 21L88 19L83 21Z'/%3E%3C/g%3E%3C/svg%3E") repeat-x bottom left; z-index: 1; pointer-events: none; }
   .xhero .wrap { padding-bottom: 92px; }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .rv, .xhero h1 .w { opacity: 1 !important; transform: none !important; }
@@ -884,6 +885,9 @@
       s.style.left=e.clientX+'px'; s.style.top=e.clientY+'px'; s.style.setProperty('--c',cols[i%5]); s.style.setProperty('--x',Math.cos(a)*d+'px'); s.style.setProperty('--y',Math.sin(a)*d+'px'); document.body.appendChild(s); setTimeout(function(el){el.remove();},850,s); } });
   })();
 
+
+
 </script>
+<script src="../gromit-cursor.js" defer></script>
 </body>
 </html>
