@@ -114,6 +114,81 @@
   .xfoot .wrap { position: relative; padding-top: 40px; padding-bottom: 40px; }
   .xfoot .gm { width: 200px; }
 
+
+  /* ============ 크리스마스 애니메이션 ============ */
+  #snowCv { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
+  /* 전구 줄 */
+  .lights { position: absolute; left: 0; right: 0; top: 0; height: 34px; z-index: 3; pointer-events: none; }
+  .lights::before { content: ""; position: absolute; left: -2%; right: -2%; top: 2px; height: 14px; border-top: 2px solid #1c2a22; border-radius: 0 0 50% 50% / 0 0 100% 100%; opacity: .75; }
+  .lights b { position: absolute; top: 9px; width: 10px; height: 15px; border-radius: 50% 50% 50% 50% / 35% 35% 65% 65%; background: var(--c); box-shadow: 0 0 10px 3px var(--c); animation: blink 1.6s ease-in-out infinite; animation-delay: var(--d); transform-origin: 50% 0; }
+  .lights b::before { content: ""; position: absolute; left: 50%; top: -4px; width: 5px; height: 5px; margin-left: -2.5px; background: #1c2a22; border-radius: 1px; }
+  @keyframes blink { 0%, 100% { opacity: 1; filter: brightness(1.15); } 50% { opacity: .28; filter: brightness(.7); } }
+  /* 별 · 달 · 오너먼트 */
+  .stars i { position: absolute; width: 3px; height: 3px; background: #fff7cf; border-radius: 50%; animation: twinkle 2.8s ease-in-out infinite; animation-delay: var(--d); opacity: .3; }
+  @keyframes twinkle { 0%, 100% { opacity: .15; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 8px 2px rgba(255,247,207,.7); } }
+  .moon { position: absolute; right: 9%; top: 52px; width: 64px; height: 64px; border-radius: 50%; background: #FFF4C9; box-shadow: 0 0 40px 12px rgba(255,244,201,.35), inset -10px -6px 0 0 #F0DFA2; animation: bob 6s ease-in-out infinite; }
+  .orns { position: absolute; left: 0; right: 0; top: 0; height: 0; z-index: 3; pointer-events: none; }
+  .orn { position: absolute; top: 20px; width: 0; height: 0; transform-origin: 50% 0; animation: swing 3.6s ease-in-out infinite; animation-delay: var(--d); }
+  .orn::before { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: var(--l); background: rgba(255,248,239,.55); }
+  .orn::after { content: ""; position: absolute; left: calc(var(--s) / -2); top: var(--l); width: var(--s); height: var(--s); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff9 0 12%, var(--c) 13% 100%); box-shadow: 0 4px 10px rgba(0,0,0,.3); }
+  @keyframes swing { 0%, 100% { transform: rotate(7deg); } 50% { transform: rotate(-7deg); } }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  /* 산타 썰매 */
+  .sleigh { position: absolute; top: 14%; left: -230px; width: 190px; height: auto; z-index: 2; pointer-events: none; animation: fly 26s linear infinite; animation-delay: 2s; filter: drop-shadow(0 0 10px rgba(255,236,160,.45)); }
+  @keyframes fly { 0% { transform: translate(0, 40px) rotate(4deg); } 50% { transform: translate(60vw, -20px) rotate(-2deg); } 100% { transform: translate(115vw, 30px) rotate(3deg); } }
+  /* 제목 · 카운트다운 */
+  .xhero h1 .w { display: inline-block; opacity: 0; transform: translateY(18px); animation: up .7s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: var(--d); }
+  @keyframes up { to { opacity: 1; transform: none; } }
+  .xhero h1 em { background: linear-gradient(90deg, #D6A23A 0%, #FFF1B8 45%, #D6A23A 90%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 3.2s linear infinite; }
+  @keyframes shine { to { background-position: -220% 0; } }
+  .cd { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .cd div { background: rgba(255,248,239,.1); border: 1px solid rgba(255,248,239,.35); border-radius: 10px; padding: 8px 16px; animation: glow 3s ease-in-out infinite; }
+  .cd b { font-size: 26px; color: var(--gold); font-variant-numeric: tabular-nums; margin-right: 6px; }
+  .cd span { font-size: 13px; color: #FFF8EF; }
+  @keyframes glow { 0%, 100% { box-shadow: 0 0 0 rgba(214,162,58,0); } 50% { box-shadow: 0 0 18px rgba(214,162,58,.45); } }
+  /* 그로밋: 둥실둥실 + 살짝 기울인 폴라로이드 */
+  .gms .gm:nth-child(1) { animation: bob 5s ease-in-out infinite; transform-origin: 50% 90%; }
+  .gms .gm:nth-child(2) { animation: bob 5.6s ease-in-out infinite .6s; }
+  .gms .gm:nth-child(3) { animation: bob 6.2s ease-in-out infinite 1.2s; }
+  .gm { transition: transform .25s ease, box-shadow .25s ease; }
+  .gm-row .gm:nth-child(odd) { transform: rotate(-2deg); } .gm-row .gm:nth-child(even) { transform: rotate(2deg); }
+  .gm:hover { transform: rotate(0deg) scale(1.07); box-shadow: 0 10px 24px rgba(0,0,0,.28); }
+  .rg .gm { animation: tilt 5s ease-in-out infinite; } @keyframes tilt { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2.5deg); } }
+  /* 섹션 제목: 움직이는 사탕 줄무늬 */
+  .xsec h2::after { height: 6px; width: 70px; background: repeating-linear-gradient(135deg, var(--red) 0 8px, #fff 8px 16px); background-size: 22.6px 22.6px; animation: candy 1s linear infinite; border: 1px solid var(--red); box-sizing: border-box; }
+  @keyframes candy { to { background-position: 22.6px 0; } }
+  /* 분위기 뱃지 */
+  .mood.m2 { position: relative; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(193,39,45,.5); } 60% { box-shadow: 0 0 0 7px rgba(193,39,45,0); } }
+  .mood.m2::after { content: "\2726"; margin-left: 6px; display: inline-block; animation: spin 3.4s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .pick .no { animation: pulse 2.8s ease-in-out infinite; }
+  .pick:hover .no { animation: wob .5s ease; } @keyframes wob { 30% { transform: rotate(-18deg) scale(1.15); } 70% { transform: rotate(14deg) scale(1.15); } }
+  .city { position: relative; transition: background .25s ease, padding-left .25s ease; }
+  .city::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 0; background: var(--red); border-radius: 2px; transition: width .25s ease; }
+  .city:hover::before { width: 4px; } .city:hover { padding-left: 12px; }
+  .fchip { transition: transform .15s ease, background .2s ease; } .fchip:hover { transform: translateY(-2px) rotate(-1.5deg); } .fchip:active { transform: scale(.94); }
+  .fchip[aria-pressed="true"] { animation: pop .35s ease; } @keyframes pop { 50% { transform: scale(1.12); } }
+  /* 스크롤 등장 */
+  .rv { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
+  .rv.in { opacity: 1; transform: none; }
+  .city.rv { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1), background .25s ease, padding-left .25s ease; }
+  /* 클릭 반짝이 */
+  .spark { position: fixed; z-index: 90; width: 8px; height: 8px; pointer-events: none; border-radius: 50%; background: var(--c); animation: burst .8s ease-out forwards; }
+  @keyframes burst { to { transform: translate(var(--x), var(--y)) scale(.2); opacity: 0; } }
+  /* 푸터 눈 쌓인 언덕 */
+  .xfoot::before { content: ""; position: absolute; left: -5%; right: -5%; top: -24px; height: 48px; background: var(--bg); border-radius: 0 0 50% 50% / 0 0 100% 100%; }
+  .xfoot .wrap { padding-top: 56px; padding-bottom: 90px; }
+
+  .trees { position: absolute; left: 0; right: 0; bottom: 0; height: 64px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='64' viewBox='0 0 120 64'%3E%3Cg fill='%230A2D1F'%3E%3Cpath d='M30 6L48 30H40L54 50H6L20 30H12Z'/%3E%3Crect x='27' y='50' width='6' height='14'/%3E%3Cpath d='M88 14L104 36H97L110 54H66L79 36H72Z'/%3E%3Crect x='85' y='54' width='6' height='10'/%3E%3C/g%3E%3Cg fill='%23fff' opacity='.9'%3E%3Cpath d='M30 6L36 14L30 12L24 14Z'/%3E%3Cpath d='M88 14L93 21L88 19L83 21Z'/%3E%3C/g%3E%3C/svg%3E") repeat-x bottom left; z-index: 1; pointer-events: none; }
+  .xhero .wrap { padding-bottom: 92px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .rv, .xhero h1 .w { opacity: 1 !important; transform: none !important; }
+    #snowCv, .sleigh { display: none; }
+  }
+  @media (max-width: 560px) { .sleigh { width: 130px; } .moon { width: 44px; height: 44px; right: 6%; } .orn:nth-child(n+5) { display: none; } .orn { --l: 14px !important; } .xhero .wrap { padding-top: 64px; } }
+
   @media (max-width: 1000px) {
     .picks { grid-template-columns: repeat(2, minmax(0,1fr)); }
     .thead { display: none; }
@@ -126,7 +201,7 @@
     .c-fly::before { content: "항공 (2인)"; } .c-wx::before { content: "날씨 · 호텔"; }
   }
   @media (max-width: 560px) {
-    .xhero .wrap { padding-top: 40px; padding-bottom: 40px; }
+    .xhero .wrap { padding-top: 76px; padding-bottom: 92px; }
     .hero-gm { width: 160px; }
     .picks { grid-template-columns: 1fr; }
     .region-head { flex-direction: column; align-items: flex-start; }
@@ -140,6 +215,7 @@
 </style>
 </head>
 <body>
+<canvas id="snowCv" aria-hidden="true"></canvas>
 
 <nav class="nav">
   <div class="inner">
@@ -149,11 +225,29 @@
 </nav>
 
 <header class="xhero" id="top">
+  <div class="stars" id="stars" aria-hidden="true"></div>
+  <div class="moon" aria-hidden="true"></div>
+  <svg class="sleigh" viewBox="0 0 210 72" aria-hidden="true">
+      <g fill="none" stroke="#D6A23A" stroke-width="1.4"><path d="M58 38 L118 40"/><path d="M20 40 L58 38"/></g>
+      <g fill="#8A5A2B"><ellipse cx="62" cy="36" rx="14" ry="7"/><circle cx="80" cy="29" r="5"/><ellipse cx="24" cy="38" rx="14" ry="7"/><circle cx="42" cy="31" r="5"/></g>
+      <g stroke="#8A5A2B" stroke-width="2.4" stroke-linecap="round"><path d="M52 42 l-4 14 M72 42 l4 14 M14 44 l-4 14 M34 44 l4 14"/></g>
+      <g stroke="#E9D7A8" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M80 24 l-3 -9 m3 9 l5 -8 M42 26 l-3 -9 m3 9 l5 -8"/></g>
+      <circle cx="85" cy="30" r="2.2" fill="#FF4A4A"/><circle cx="47" cy="32" r="2.2" fill="#FF4A4A"/>
+      <path d="M116 40 Q116 56 132 56 H176 Q190 56 192 42 L184 42 Q182 50 172 50 H136 Q126 50 124 40Z" fill="#C1272D"/>
+      <path d="M112 62 H188 Q202 62 202 48" stroke="#D6A23A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="144" y="30" width="18" height="16" rx="4" fill="#C1272D"/><circle cx="153" cy="24" r="6" fill="#F5D7B8"/>
+      <path d="M146 22 L153 8 L161 22Z" fill="#C1272D"/><circle cx="153" cy="8" r="2.6" fill="#fff"/><rect x="146" y="21" width="15" height="3" fill="#fff"/>
+      <rect x="164" y="34" width="14" height="14" rx="2" fill="#165B3F"/><path d="M164 41 H178 M171 34 V48" stroke="#D6A23A" stroke-width="1.6"/>
+    </svg>
   <div class="snow" id="snowA" aria-hidden="true"></div>
+  <div class="trees" aria-hidden="true"></div>
+  <div class="lights" id="lights" aria-hidden="true"></div>
+  <div class="orns" id="orns" aria-hidden="true"></div>
   <div class="wrap">
     <div class="eyebrow">Travel · 12/23–12/28 · 2인</div>
-    <h1>크리스마스에는 <em>어디로</em> 갈까, 57곳 비교</h1>
+    <h1 id="ttl"><span class="w" style="--d:.1s">크리스마스에는</span> <span class="w" style="--d:.3s"><em>어디로</em></span> <span class="w" style="--d:.5s">갈까,</span> <span class="w" style="--d:.7s">57곳</span> <span class="w" style="--d:.9s">비교</span></h1>
     <p class="lead">인천 출발, 12/23부터 12/28까지 5박 6일 기준. 나라·도시마다 예상 비용(항공·호텔·현지), 크리스마스 분위기가 나는지, 장단점을 한 줄씩 적었다. 정하는 건 천천히.</p>
+    <div class="cd" id="cd" aria-live="off"><div><b id="cdDep">–</b><span>12/23 출발까지(일)</span></div><div><b id="cdXmas">–</b><span>크리스마스까지(일)</span></div></div>
     <div class="chips"><span>2인 · 인천 출발</span><span>12/23 출발 → 12/28 귀국</span><span>항공·호텔은 2026-11-02 조회</span></div>
     <div class="gms"><img class="gm hero-gm" src="https://media.giphy.com/media/jedcj9y8ReiAqZB34Z/200w.gif" width="200" height="112" alt="크리스마스 스웨터를 입은 월레스 옆에서 순록 뿔을 단 그로밋이 손을 흔드는 장면" loading="lazy" decoding="async"><img class="gm hero-gm" src="https://media.giphy.com/media/nfg6YjmpdL4fI1SGVb/200w.gif" width="200" height="113" alt="크리스마스 트리와 선물 옆에 월레스, 순록 뿔을 쓴 그로밋, 양들이 서 있는 장면" loading="lazy" decoding="async"><img class="gm hero-gm" src="https://media.tenor.com/8Q5ref9VN-YAAAAM/wallace-gromit.gif" width="220" height="123" alt="눈 오는 밤 순록 뿔을 쓴 그로밋과 월레스" loading="lazy" decoding="async"></div>
     <div class="stats">
@@ -691,6 +785,7 @@
 
 <footer class="xfoot">
   <div class="snow" id="snowB" aria-hidden="true"></div>
+  <div class="trees" aria-hidden="true" style="opacity:.55"></div>
   <div class="wrap">
     <div class="gm-row" style="margin-top:0"><img class="gm" src="https://media.giphy.com/media/nfg6YjmpdL4fI1SGVb/200w.gif" width="200" height="113" alt="크리스마스 트리와 선물 옆에 월레스, 순록 뿔을 쓴 그로밋, 양들이 서 있는 장면" loading="lazy" decoding="async"><img class="gm" src="https://media.tenor.com/8Q5ref9VN-YAAAAM/wallace-gromit.gif" width="220" height="123" alt="눈 오는 밤 순록 뿔을 쓴 그로밋과 월레스" loading="lazy" decoding="async"><img class="gm" src="https://media.giphy.com/media/jedcj9y8ReiAqZB34Z/200w.gif" width="200" height="112" alt="크리스마스 스웨터를 입은 월레스 옆에서 순록 뿔을 단 그로밋이 손을 흔드는 장면" loading="lazy" decoding="async"></div>
     <p style="margin-top:22px;font-size:13px">ttomstudio · travel · 비용은 모두 추정이며 예약 전에 다시 확인한다</p>
@@ -741,6 +836,54 @@
     render(); var t=document.getElementById('c-'+a.dataset.key); if(t){ t.scrollIntoView({behavior:'smooth',block:'center'}); t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash'); } }); });
   render();
 })();
+
+
+  // 전구 · 별 · 오너먼트
+  (function(){
+    var L=document.getElementById('lights'), cols=['#FF3B3B','#FFC83B','#3BD16F','#4DA3FF'];
+    if(L){ var n=Math.ceil(window.innerWidth/38)+2; for(var i=0;i<n;i++){ var b=document.createElement('b'); b.style.left=(i*38+8)+'px'; b.style.setProperty('--c',cols[i%4]); b.style.setProperty('--d',((i%4)*.4)+'s'); b.style.top=(8+Math.round(Math.sin(i/(n/Math.PI))*6))+'px'; L.appendChild(b);} }
+    var S=document.getElementById('stars'); if(S){ for(var j=0;j<46;j++){ var s=document.createElement('i'); s.style.left=(Math.random()*100)+'%'; s.style.top=(Math.random()*70)+'%'; s.style.setProperty('--d',(Math.random()*3).toFixed(1)+'s'); S.appendChild(s);} }
+    var O=document.getElementById('orns'); if(O){ var oc=['#C1272D','#D6A23A','#3BD16F','#4DA3FF','#C1272D','#D6A23A','#E9E3D0','#C1272D'];
+      for(var k=0;k<8;k++){ var o=document.createElement('div'); o.className='orn'; o.style.left=(6+k*12.5)+'%'; o.style.setProperty('--l',(16+((k*37)%26))+'px'); o.style.setProperty('--s',(16+((k*13)%10))+'px'); o.style.setProperty('--c',oc[k]); o.style.setProperty('--d',(k*.45)+'s'); O.appendChild(o);} }
+  })();
+  // 카운트다운
+  (function(){
+    var now=new Date(), y=now.getFullYear(); var t0=new Date(y,now.getMonth(),now.getDate());
+    function days(m,d){ var x=new Date(y,m-1,d); return Math.round((x-t0)/86400000); }
+    function count(el,to){ if(!el) return; if(to<0){ el.textContent='종료'; return; } var cur=0, step=Math.max(1,Math.ceil(to/30)); var iv=setInterval(function(){ cur=Math.min(to,cur+step); el.textContent=cur; if(cur>=to) clearInterval(iv); },24); }
+    count(document.getElementById('cdDep'),days(12,23)); count(document.getElementById('cdXmas'),days(12,25));
+  })();
+  // 눈송이 캔버스 (화면 전체)
+  (function(){
+    var cv=document.getElementById('snowCv'); if(!cv||window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cx=cv.getContext('2d'), W,H,fl=[],dpr=Math.min(2,window.devicePixelRatio||1), run=true;
+    function size(){ W=innerWidth; H=innerHeight; cv.width=W*dpr; cv.height=H*dpr; cx.setTransform(dpr,0,0,dpr,0,0); }
+    size(); addEventListener('resize',size);
+    var N=W<600?36:70;
+    for(var i=0;i<N;i++) fl.push({x:Math.random()*W,y:Math.random()*H,r:1.2+Math.random()*3.2,v:.4+Math.random()*1.1,p:Math.random()*6.28,a:.3+Math.random()*.5});
+    document.addEventListener('visibilitychange',function(){ run=!document.hidden; if(run) loop(); });
+    function loop(){ if(!run) return; cx.clearRect(0,0,W,H);
+      for(var i=0;i<fl.length;i++){ var f=fl[i]; f.y+=f.v; f.p+=.015; f.x+=Math.sin(f.p)*.5+.12; if(f.y>H+6){f.y=-6;f.x=Math.random()*W;} if(f.x>W+6)f.x=-6;
+        cx.beginPath(); cx.arc(f.x,f.y,f.r,0,6.283); cx.fillStyle='rgba(255,255,255,'+f.a+')'; cx.shadowColor='rgba(120,170,200,.8)'; cx.shadowBlur=4; cx.fill(); }
+      requestAnimationFrame(loop); }
+    loop();
+  })();
+  // 스크롤 등장
+  (function(){
+    var targets=[].slice.call(document.querySelectorAll('.city,.pick,.notes .n,.region-head,.stats > div'));
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce||!('IntersectionObserver' in window)) return;
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -6% 0px'});
+    targets.forEach(function(t,i){ t.classList.add('rv'); t.style.transitionDelay=((i%4)*70)+'ms'; io.observe(t); });
+  })();
+  // 클릭 반짝이
+  (function(){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols=['#FF5A5A','#FFC83B','#59D98A','#6DB7FF','#FFFFFF'];
+    document.addEventListener('click',function(e){ for(var i=0;i<9;i++){ var s=document.createElement('i'); s.className='spark'; var a=Math.random()*6.28, d=24+Math.random()*34;
+      s.style.left=e.clientX+'px'; s.style.top=e.clientY+'px'; s.style.setProperty('--c',cols[i%5]); s.style.setProperty('--x',Math.cos(a)*d+'px'); s.style.setProperty('--y',Math.sin(a)*d+'px'); document.body.appendChild(s); setTimeout(function(el){el.remove();},850,s); } });
+  })();
+
 </script>
 </body>
 </html>
