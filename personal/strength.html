@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <!-- pwa -->
 <meta name="theme-color" content="#FFFFFF">
-<link rel="apple-touch-icon" href="assets/icons/strength-180.png">
+<link rel="apple-touch-icon" href="../assets/img/app-icons/strength-180.png">
 <link rel="manifest" href="assets/strength.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14,10 +14,10 @@
 <meta name="apple-mobile-web-app-title" content="마라톤">
 <!-- /pwa -->
 
-<link rel="icon" href="../favicon.ico" sizes="48x48">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" href="../assets/img/favicon/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
 <title>2027 군산 마라톤 · 24주 계획</title>
-<link rel="stylesheet" href="assets/summer.css">
+<link rel="stylesheet" href="../assets/css/summer.css">
 <style>
   :root {
     --bg: #FFFFFF;
@@ -437,7 +437,7 @@
     <a class="lb-yt" id="lbYt" target="_blank" rel="noopener">영상으로 보기 (YouTube) ↗</a>
   </div>
 </div>
-<script src="assets/sohn_course.js"></script>
+<script src="data/sohn_course.js"></script>
 <script>
 /* ========== 설정 ========== */
 const START = '2026-10-12', WEEK0 = '2026-10-12';
@@ -954,7 +954,7 @@ function openCourse(backDs){
   h += '<div class="m-title">손기정평화마라톤 풀코스</div>';
   h += '<span class="m-phase" style="background:#C8102E">임진각 평화누리공원 · 제한시간 5시간</span>';
   h += '<div class="m-goal">공식 코스도의 빨간 선을 따라 거리와 고도를 계산했다. 출발 → 마정교차로 → <b>1차 반환 '+LM.T1+'km</b> → 마정 → 여우고개 → <b>2차 반환 '+LM.T2+'km</b> → 마정 → 결승.</div>';
-  h += '<div class="cx-h">코스도</div><a href="assets/sohn/course-2026.jpg" target="_blank" rel="noopener"><img class="cx-img" src="assets/sohn/course-2026.jpg" alt="2026 손기정평화마라톤 풀코스 코스도" loading="lazy"></a><div class="cx-cap">대회 공식 코스도. 누르면 크게 열린다.</div>';
+  h += '<div class="cx-h">코스도</div><a href="../assets/img/sohn/course-2026.jpg" target="_blank" rel="noopener"><img class="cx-img" src="../assets/img/sohn/course-2026.jpg" alt="2026 손기정평화마라톤 풀코스 코스도" loading="lazy"></a><div class="cx-cap">대회 공식 코스도. 누르면 크게 열린다.</div>';
   h += '<div class="cx-tiles">'+
     '<div class="cx-tile"><div class="k">거리</div><div class="v">'+TOT+' km</div><div class="s">반환점 2곳 · 왕복 구조</div></div>'+
     '<div class="cx-tile"><div class="k">누적 상승 · 하강</div><div class="v">+'+S.gain+' / −'+S.loss+' m</div><div class="s">DEM 추정, 오차 ±30%. 사실상 평탄</div></div>'+
@@ -1076,7 +1076,7 @@ function openGuide(name){
   document.getElementById('lbYt').href = 'https://www.youtube.com/results?search_query='+encodeURIComponent(name+' 운동 자세');
   clearInterval(lbTimer);
   if (g[0]) {
-    const f = ['assets/ex/'+g[0]+'/0.jpg','assets/ex/'+g[0]+'/1.jpg']; let i = 0;
+    const f = ['../assets/img/exercises/'+g[0]+'/0.jpg','../assets/img/exercises/'+g[0]+'/1.jpg']; let i = 0;
     lbImg.hidden = false; lbImg.alt = name+' 동작'; lbImg.src = f[0];
     new Image().src = f[1];
     lbTimer = setInterval(() => { i ^= 1; lbImg.src = f[i]; }, 900);

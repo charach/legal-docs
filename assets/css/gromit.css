@@ -4,9 +4,9 @@
    그 페이지 <head> 끝에서 불러온다. 페이지 CSS보다 뒤에 와야 덮어쓴다.
    ============================================================ */
 :root {
-  --gm-a: url("gromit-icon-a.png");
-  --gm-b: url("gromit-icon-b.png");
-  --gm-c: url("gromit-icon-c.png");
+  --gm-a: url("../img/gromit/gromit-icon-a.png");
+  --gm-b: url("../img/gromit/gromit-icon-b.png");
+  --gm-c: url("../img/gromit/gromit-icon-c.png");
 }
 
 /* ---------- 배경: 은은하게 (투명도 14%, 가장자리를 부드럽게 지움) ---------- */
@@ -50,10 +50,10 @@ body::before { right: 40px; top: 90px; width: 250px; height: 170px;
 
 /* ---------- 마우스 포인터: 동그란 그로밋 얼굴 (기본 / 누를 수 있는 것) ---------- */
 html, body {
-  cursor: url("gromit-cursor-a.png") 6 6, auto;
-  cursor: image-set(url("gromit-cursor-a.png") 1x, url("gromit-cursor-a@2x.png") 2x) 6 6, auto;
+  cursor: url("../img/gromit/gromit-cursor-a.png") 6 6, auto;
+  cursor: image-set(url("../img/gromit/gromit-cursor-a.png") 1x, url("../img/gromit/gromit-cursor-a@2x.png") 2x) 6 6, auto;
 }
 a, button, summary, label, [role="button"], input[type="checkbox"], select {
-  cursor: url("gromit-cursor-c.png") 6 6, pointer;
-  cursor: image-set(url("gromit-cursor-c.png") 1x, url("gromit-cursor-c@2x.png") 2x) 6 6, pointer;
+  cursor: url("../img/gromit/gromit-cursor-c.png") 6 6, pointer;
+  cursor: image-set(url("../img/gromit/gromit-cursor-c.png") 1x, url("../img/gromit/gromit-cursor-c@2x.png") 2x) 6 6, pointer;
 }

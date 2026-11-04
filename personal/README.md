@@ -20,22 +20,27 @@ personal/
 ├── interview_prep.html     🎤 AI 대학원 면접 질문은행      (아내)
 ├── study_calendar.html     📅 오늘 할 일 + 월간 학습 달력  (아내)
 │
-├── data/                   페이지가 fetch 하는 원본 데이터
+├── data/                   데이터 — 페이지가 fetch 하거나 <script>로 읽는 원본
 │   ├── study_plan.json       로드맵·주차별 계획·강의·지원 후보
-│   └── interview_bank.json   면접 질문 201문항·학교 프로필·출처
+│   ├── interview_bank.json   면접 질문 201문항·학교 프로필·출처
+│   ├── ajou_ai_100.json · gromit.json · steady-study.js
+│   ├── grad-programs.js      대학원 추가 328개 (window.GRAD_EXTRA, 자동 생성)
+│   ├── gurye_geo.js          바이크 코스 0.1km 간격 [km, 위도, 경도, 고도] 1,767점 — 지도·경사 색·고도 프로파일용
+│   ├── sohn_course.js        손기정 풀코스 고도·랜드마크·날씨 (window.SOHN)
+│   └── gurye/                SOURCE.md(카페 글 전문) · rtrt-splits-2026-10-04.json(RTRT 구간 기록 37개)
+│                               · 2026-distance-0815-korea.xlsx(운영자 배포 거리표 원본)
 │
-├── 구례 대회 정보 xlsx/     운영자 배포 거리표 원본 (2026 distance-0815-korea.xlsx)
-├── datasciencelevel3/      DS_LV3.xlsx — ds_lv3.html 의 근거 엑셀. 로컬 전용, 커밋 안 함 (공개 저장소 + 사내 시험 기출 복원 포함)
+├── datasciencelevel3/      DS_LV3.xlsx — ds_lv3.html 의 근거 엑셀. 로컬 전용, .gitignore 로 제외 (공개 저장소 + 사내 시험 기출 복원 포함)
 │
-└── assets/
-    ├── summer.css          공용 디자인 시스템 (모든 페이지가 이걸 먼저 로드)
+└── assets/                 이 폴더 전용 코드와 매니페스트
     ├── gurye.js            구례 코스 데이터(랜드마크 170곳)·레이스 시뮬레이터 — 코스·보급 페이지 공유
-    ├── gurye_geo.js        바이크 코스 0.1km 간격 [km, 위도, 경도, 고도] 1,767점 — 지도·경사 색·고도 프로파일용
-    ├── gurye/              구례 공식 코스도 13장(1100px) + SOURCE.md(카페 글 전문)
-    │                         + finish-2026-10-04.png(완주 기록 배지) · rtrt-splits-2026-10-04.json(RTRT 구간 기록 37개)
-    ├── *.webmanifest       페이지별 PWA 매니페스트 (홈화면 설치용)
-    └── icons/              홈화면 아이콘 PNG (180·512px)
+    ├── steady-study.js · steady-study.css
+    └── *.webmanifest       페이지별 PWA 매니페스트 (홈화면 설치용, 아이콘은 /assets/img/app-icons/)
 ```
+
+**이미지와 공용 CSS·JS는 여기 없다.** 저장소 루트 `assets/`에 모여 있다 — 디자인 시스템은 `../assets/css/summer.css`,
+이미지는 `../assets/img/<주제>/`(구례 코스도 `gurye/`, 근력 동작 사진 `exercises/`, 손기정 코스도 `sohn/`, 홈화면 아이콘 `app-icons/`).
+새 이미지도 그쪽에만 둔다. 루트 구조는 `../README.md`.
 
 ## 디자인 규칙
 
@@ -101,7 +106,7 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 
 `gurye_course.html`과 `gurye_fuel.html`은 `assets/gurye.js`의 `GURYE.simulate()`로 시계 시각을 계산한다.
 시뮬레이터 설정은 localStorage `gurye.sim.v1`에 저장되고 보급 페이지가 그대로 읽는다(보급 페이지에는 슬라이더 없음).
-백 체크리스트는 `gurye.pack.v1`. 거리·컷오프·보급소 품목의 출처는 `assets/gurye/SOURCE.md`.
+백 체크리스트는 `gurye.pack.v1`. 거리·컷오프·보급소 품목의 출처는 `data/gurye/SOURCE.md`.
 영문 AIG가 나오면 `gurye.js`의 `BIKE`/`RUN_LAP`/`CUTOFFS`만 고치면 두 페이지와 표가 같이 바뀐다.
 
 `gurye_geo.js`는 엑셀 랜드마크 사이를 OSRM(OSM 도로망)으로 이어 엑셀 누적 km에 매핑한 뒤 Open-Meteo(Copernicus DEM 90m)로 고도를 붙인 것. 공식 GPX가 나오면 같은 형식 `[km, lat, lon, elev]`으로 교체하면 지도·프로파일·언덕 표가 그대로 따라온다.
@@ -121,7 +126,7 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 
 `strength.html`에서 11/15(대회일)을 누르면 「코스 · 보급」 칸과 **코스 분석 · 보급 전략** 버튼이 있다. 팝업 내용: 공식 코스도, 거리·누적 고도·예상 완주, 고도 프로파일(SVG, 젤 위치·언덕 표시), 구간별 계획(고도·바람·페이스·누적), SiS 젤 계획표, 날씨, 아직 확인 못 한 것.
 
-- 데이터: `assets/sohn_course.js`(`window.SOHN` — 0.2km 간격 고도, 랜드마크 km, 언덕 정상, 구간 통계, 날씨). 지도: `assets/sohn/course-2026.jpg`(공식 코스도 1400px)
+- 데이터: `data/sohn_course.js`(`window.SOHN` — 0.2km 간격 고도, 랜드마크 km, 언덕 정상, 구간 통계, 날씨). 지도: `../assets/img/sohn/course-2026.jpg`(공식 코스도 1400px)
 - **거리**는 코스도의 빨간 선을 이미지에서 따라 그렸다. 출발 → 마정교차로 → 1차 반환(도라산역 톨게이트) → 마정 → 여우고개 → 2차 반환(리비삼거리) → 마정 → 도착의 왕복 구조이고(화살표 방향으로 확인), 42.195km 인증 거리에 축척을 맞췄다(151.8px/km). 마정교차로·여우고개사거리·통일대교의 실제 좌표와 0.1~0.2km 안에서 맞는다
 - **고도**는 Copernicus DEM 90m(Open-Meteo)를 100m 간격으로 읽어 ±0.4km 이동평균. 누적 상승·하강 +176/−176m는 평활 범위에 따라 120~175m로 달라지고 오차 ±30%로 본다. 사실상 평탄하고 언덕은 여우고개 한 곳(17~19.6km, 돌아올 때 34~36km)
 - **날씨**는 Open-Meteo ERA5 2016–2025년 11월 15일 파주 평균
@@ -153,7 +158,7 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 
 ## 11월 여행 페이지
 
-`../travel/nov_candidates.html` — personal 바깥(`/travel/`)에 있지만 같은 디자인 시스템(`personal/assets/summer.css`)을 쓴다.
+`../travel/nov_candidates.html` — personal 바깥(`/travel/`)에 있지만 같은 디자인 시스템(저장소 루트 `assets/css/summer.css`)을 쓴다.
 허브 「함께」 그룹(후보 비교·충북 4박 일정 두 줄)과 상단 내비(`../travel/index.html`, 여행 링크 모음)에서 연결된다. 출발일(11/4)까지 D-day 표시.
 
 - 가격은 2026-10-19 조회값(Google 항공편 · Agoda · 오피넷). 식비·현지 교통·일부 투어는 추정이라 페이지에 그렇게 적어 두었다
@@ -169,8 +174,8 @@ HTML에 내용이 없다. `data/*.json`을 `fetch` 해서 그린다.
 `file://` 로 직접 열면 브라우저 보안 정책 때문에 `fetch`가 막혀 JSON을 못 읽는다.
 
 ```bash
-cd personal && python3 -m http.server 8000
-# http://localhost:8000/index.html
+python3 -m http.server 8000   # 저장소 루트에서 (페이지가 ../assets/ 를 읽으므로 personal/ 에서 띄우면 CSS·이미지가 빠진다)
+# http://localhost:8000/personal/index.html
 ```
 
 GitHub Pages에 올라가면 그냥 동작한다.
@@ -196,19 +201,23 @@ GitHub Pages에 올라가면 그냥 동작한다.
 
 ### 탭 파비콘 · 그로밋 (전 페이지 공통)
 
-브라우저 탭 아이콘은 전 페이지 공통으로 그로밋 사진이다. 그로밋 GIF(`data/gromit.json`의 `wait`, 안락의자에 팔짱 낀 장면) 한 프레임을 정사각형으로 잘라 만들었다(저장소 루트의 `favicon.ico`(16·32·48) · `favicon-32.png` · `apple-touch-icon.png`(180)). 위 「그로밋 예외」의 「저장소에 파일을 두지 않는다」에서 벗어나는 유일한 예외이고(Aardman 공식 장면의 작은 잘라낸 이미지 3개), 개수 제한에는 걸리지 않는다. 모든 `.html`과 Jekyll 레이아웃(`_layouts/default.html`)의 `<head>`에 같은 링크 세트가 들어 있다(하위 폴더는 `../` 상대경로, 레이아웃만 `/` 절대경로). 새 페이지를 만들면 이 줄들을 `<title>` 앞에 붙인다. 홈화면에 설치되는 페이지의 `apple-touch-icon`(글자 아이콘)은 그대로 둔다 — 탭 파비콘만 바뀌었다.
+브라우저 탭 아이콘은 전 페이지 공통으로 그로밋 사진이다. 그로밋 GIF(`data/gromit.json`의 `wait`, 안락의자에 팔짱 낀 장면) 한 프레임을 정사각형으로 잘라 만들었다(`assets/img/favicon/`의 `favicon.ico`(16·32·48) · `favicon-32.png` · `apple-touch-icon.png`(180)). 위 「그로밋 예외」의 「저장소에 파일을 두지 않는다」에서 벗어나는 유일한 예외이고(Aardman 공식 장면의 작은 잘라낸 이미지 3개), 개수 제한에는 걸리지 않는다. 모든 `.html`과 Jekyll 레이아웃(`_layouts/default.html`)의 `<head>`에 같은 링크 세트가 들어 있다(하위 폴더는 `../` 상대경로, 레이아웃만 `/` 절대경로). 새 페이지를 만들면 이 줄들을 `<title>` 앞에 붙인다. 홈화면에 설치되는 페이지의 `apple-touch-icon`(글자 아이콘)은 그대로 둔다 — 탭 파비콘만 바뀌었다.
 
 ```html
+<link rel="icon" href="../assets/img/favicon/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
+```
 
 ### 충북 여행 페이지의 그로밋 장식 (`gromit.css`)
 
-`../travel/chungbuk_nov.html` 한 페이지에만 쓴다(요청: 사이트 전체가 아니라 이 여행 페이지만). 저장소 루트의 `gromit.css`를 그 페이지 `<head>` 끝에서 불러온다. 페이지 자체 CSS보다 뒤에 와야 덮어쓴다.
+`../travel/chungbuk_nov.html` 한 페이지에만 쓴다(요청: 사이트 전체가 아니라 이 여행 페이지만). `assets/css/gromit.css`(저장소 루트)를 그 페이지 `<head>` 끝에서 불러온다. 페이지 자체 CSS보다 뒤에 와야 덮어쓴다.
 
 - **배경**: 화면 모서리 세 곳에 그로밋 GIF, 투명도 14%에 가장자리를 부드럽게 지움. GIF는 Giphy 핫링크(`wait` · `cheer` · `goal`). 모바일에서는 하나만, 「동작 줄이기」 설정과 인쇄에서는 숨김
-- **아이콘**: `gromit-icon-a/b/c.png`(64px) — `wait` · `goal` · `hello` GIF의 얼굴 프레임을 잘라 저장. 내비 브랜드와 버튼류(`.btn` · `.chip` · `.fab` 등) 앞에 붙고 형제 순서에 따라 돌려쓴다
+- **아이콘**: `assets/img/gromit/gromit-icon-a/b/c.png`(64px) — `wait` · `goal` · `hello` GIF의 얼굴 프레임을 잘라 저장. 내비 브랜드와 버튼류(`.btn` · `.chip` · `.fab` 등) 앞에 붙고 형제 순서에 따라 돌려쓴다
 - **마우스 포인터**: 동그란 그로밋 얼굴 — 기본은 `gromit-cursor-a.png`, 링크·버튼 위에서는 `gromit-cursor-c.png`(32px, 고해상도용 `@2x` 64px, 핫스팟 6,6). 아이콘 PNG를 흰 테두리 원으로 잘라 만들었다
-- 이 PNG(아이콘 3종, 포인터 4종)와 위 파비콘 3종이 저장소에 두는 공식 장면 이미지의 전부로, 기존 「저장소에 파일을 두지 않는다」 규칙의 예외다
-- 다른 페이지에 쓰려면 `<link rel="stylesheet" href="../gromit.css">`(깊이만큼 `../`)를 `</head>` 앞에 붙이면 된다. 기본 디자인 시스템의 「이모지·그라데이션·글로우 금지」와는 어긋나는 예외다
+- 이 PNG(아이콘 3종, 포인터 4종 — 모두 `assets/img/gromit/`)와 위 파비콘 3종이 저장소에 두는 공식 장면 이미지의 전부로, 기존 「저장소에 파일을 두지 않는다」 규칙의 예외다
+- 다른 페이지에 쓰려면 `<link rel="stylesheet" href="../assets/css/gromit.css">`(깊이만큼 `../`)를 `</head>` 앞에 붙이면 된다. 기본 디자인 시스템의 「이모지·그라데이션·글로우 금지」와는 어긋나는 예외다
 
 ## 네 가지 공부 계획
 
@@ -228,14 +237,14 @@ GitHub Pages에 올라가면 그냥 동작한다.
 
 ## 상단 내비(빵부스러기)
 
-모든 페이지 머리에 `ttomstudio / 섹션`이 있다. `ttomstudio`는 사이트 첫 화면(`../index.html`), 섹션 이름(Personal · Travel · Portfolio · food · CS)은 그 폴더의 `index.html`로 간다. 공통 마크업은 `<span class="crumb"><a class="home">…</a><span class="sep">/</span><a class="brand">…</a></span>`이고 스타일은 `assets/summer.css`(`.nav .crumb`)에 있다. 모바일(560px 이하)에서는 첫 줄에 빵부스러기, 둘째 줄에 페이지 링크가 놓인다.
+모든 페이지 머리에 `ttomstudio / 섹션`이 있다. `ttomstudio`는 사이트 첫 화면(`../index.html`), 섹션 이름(Personal · Travel · Portfolio · food · CS)은 그 폴더의 `index.html`로 간다. 공통 마크업은 `<span class="crumb"><a class="home">…</a><span class="sep">/</span><a class="brand">…</a></span>`이고 스타일은 `/assets/css/summer.css`(`.nav .crumb`)에 있다. 모바일(560px 이하)에서는 첫 줄에 빵부스러기, 둘째 줄에 페이지 링크가 놓인다.
 자체 머리를 쓰는 페이지(`edge_study` · `steady_study` · `food/*` · `cs/*`)는 각자 스타일로 같은 링크를 넣었다. `cs/data_structure.html`은 번들 파일이라 문서 교체 직후(`replaceWith` 다음 줄)에 링크를 붙이는 코드를 넣었다 — 번들을 다시 내보내면 이 줄을 다시 넣어야 한다. 그로밋 아이콘(`gromit.css`)은 이제 `.nav .home`에 붙는다.
 
 ## 크리스마스 여행지 비교 페이지
 
 `../travel/christmas_2026.html` — 12/23~28(5박 6일) 2인 크리스마스 여행지 57곳(28개 나라·지역)을 비용, 크리스마스 분위기(난다·보통·안 난다), 날씨, 장단점으로 비교. 허브 「함께」 그룹과 `../travel/index.html`에서 연결된다.
 
-- **디자인:** 이 페이지만 크리스마스 + 그로밋(요청). 기본 5색 규칙을 벗어나 초록·빨강·금색, 눈 내리는 히어로(JS가 `<i>` 입자를 만들고 `prefers-reduced-motion`이면 멈춘다), 사탕 줄무늬. 그로밋은 실제 GIF 핫링크 — Giphy(Aardman 계정) 크리스마스 GIF 2개와 Tenor 13개, 모두 프레임을 확인해 밈 글자·워터마크가 없는 것만 썼다. 둥근 그로밋 마우스 포인터와 얼굴 아이콘(`gromit-*.png`)은 충북 페이지와 같은 파일을 쓴다. 그로밋을 그려 넣지 않았다. **애니메이션(2026-11-02 추가):** 반짝이는 전구 줄, 흔들리는 오너먼트, 깜빡이는 별과 달, 하늘을 나는 산타 썰매(SVG), 제목 단어별 등장과 금색 반짝임, 12/23·크리스마스 카운트다운, 화면 전체에 내리는 눈(`<canvas>`, 탭이 숨겨지면 멈춤), 스크롤 등장, 움직이는 사탕 줄무늬 제목선, '난다' 뱃지 맥박과 별 회전, 그로밋 둥실둥실, 클릭하면 터지는 반짝이. 전부 `prefers-reduced-motion`이면 꺼지고 내용은 그대로 보인다. **마우스 포인터(2026-11-02):** 브라우저는 움직이는 커서 파일을 지원하지 않아서(GIF를 커서로 지정해도 첫 장면만 나온다), 실제 커서를 숨기고 GIF가 따라오게 만들었다. 코드는 저장소 루트의 `gromit-cursor.js` 하나에 있고 크리스마스 페이지와 충북 페이지가 같이 쓴다(그 두 페이지 `</body>` 앞에서 불러온다). 정확한 위치는 점(색은 페이지의 `--accent`), 그 오른쪽 아래를 Tenor의 달리는 그로밋(위대한 바지 열차 장면)이 늦게 따라오고, 멈추면 책 읽는 그로밋으로 바뀐다. 이동 방향에 따라 좌우가 뒤집힌다. 터치 기기와 동작 줄이기 설정에서는 쓰지 않고 `html, body { cursor }`의 정적 그로밋 커서로 돌아간다.
+- **디자인:** 이 페이지만 크리스마스 + 그로밋(요청). 기본 5색 규칙을 벗어나 초록·빨강·금색, 눈 내리는 히어로(JS가 `<i>` 입자를 만들고 `prefers-reduced-motion`이면 멈춘다), 사탕 줄무늬. 그로밋은 실제 GIF 핫링크 — Giphy(Aardman 계정) 크리스마스 GIF 2개와 Tenor 13개, 모두 프레임을 확인해 밈 글자·워터마크가 없는 것만 썼다. 둥근 그로밋 마우스 포인터와 얼굴 아이콘(`gromit-*.png`)은 충북 페이지와 같은 파일을 쓴다. 그로밋을 그려 넣지 않았다. **애니메이션(2026-11-02 추가):** 반짝이는 전구 줄, 흔들리는 오너먼트, 깜빡이는 별과 달, 하늘을 나는 산타 썰매(SVG), 제목 단어별 등장과 금색 반짝임, 12/23·크리스마스 카운트다운, 화면 전체에 내리는 눈(`<canvas>`, 탭이 숨겨지면 멈춤), 스크롤 등장, 움직이는 사탕 줄무늬 제목선, '난다' 뱃지 맥박과 별 회전, 그로밋 둥실둥실, 클릭하면 터지는 반짝이. 전부 `prefers-reduced-motion`이면 꺼지고 내용은 그대로 보인다. **마우스 포인터(2026-11-02):** 브라우저는 움직이는 커서 파일을 지원하지 않아서(GIF를 커서로 지정해도 첫 장면만 나온다), 실제 커서를 숨기고 GIF가 따라오게 만들었다. 코드는 `assets/js/gromit-cursor.js`(저장소 루트) 하나에 있고 크리스마스 페이지와 충북 페이지가 같이 쓴다(그 두 페이지 `</body>` 앞에서 불러온다). 정확한 위치는 점(색은 페이지의 `--accent`), 그 오른쪽 아래를 Tenor의 달리는 그로밋(위대한 바지 열차 장면)이 늦게 따라오고, 멈추면 책 읽는 그로밋으로 바뀐다. 이동 방향에 따라 좌우가 뒤집힌다. 터치 기기와 동작 줄이기 설정에서는 쓰지 않고 `html, body { cursor }`의 정적 그로밋 커서로 돌아간다.
 - **데이터(2026-11-02 조회):** 항공은 Google 항공권 12/23→12/28 왕복 최저가(1인)이고 삿포로만 진에어 사이트에서 직접 조회한 값. 호텔은 Google 호텔 같은 날짜 목록에서 평점 4.0 이상의 1박 중앙값 × 5. 날씨는 2022~2025년 12/23~28 ERA5 평균(Open-Meteo). 현지 비용(나라별 1일 추정치)과 분위기 판단은 직접 쓴 값이고, 삿포로 마켓·일루미네이션(11/20–12/25)만 공식 일정을 확인했다.
 - **갱신:** 숫자와 문구는 생성 스크립트(조회 결과 JSON → HTML)로 만들었고 파일에는 결과 HTML만 남는다. 가격을 새로 보려면 같은 방법(`christmas-2026-trip`·`flight-price-lookup` 메모)으로 다시 조회해 행을 고친다. 항공사 사이트와 구글 값이 어긋난 사례가 있었다(매진 편이 목록에 남음).
 
@@ -243,7 +252,7 @@ GitHub Pages에 올라가면 그냥 동작한다.
 
 `grad_schools.html` — 종료 그룹에서 「함께」 그룹으로 되돌리고 AI·데이터·컴퓨터 국내 특수대학원 39개 프로그램에 **328개를 더했다**(보안 · 공학 · 경영·MBA · 행정·정책·법 · 보건·교육·예술·스포츠 · 국내 온라인(사이버대·방송대) · 해외 온라인·현지). 합계 367개, 120개 학교.
 
-- **데이터 파일:** 새 프로그램은 `assets/grad-programs.js`(`window.GRAD_EXTRA`, 자동 생성)에 있고 페이지가 기존 `RAW`에 이어 붙인다. 기존 39개의 장학(`SCH`)·수업 형태(`CLS`) 상세는 그대로이며 새 행은 「미조사」로 표시한다. 새 행의 키: `fld`(분야) `sc`(국내/국내 온라인/해외 온라인/해외 현지) `win`(2027 전기 접수 구간) `deg·gr·wt·rc`(학위·졸업·시간·인정) `src·ev·unk`(출처·원문 인용·확인 못 한 것) `fx`(외화 학비) `rs`(지원 자격 제한).
+- **데이터 파일:** 새 프로그램은 `data/grad-programs.js`(`window.GRAD_EXTRA`, 자동 생성)에 있고 페이지가 기존 `RAW`에 이어 붙인다. 기존 39개의 장학(`SCH`)·수업 형태(`CLS`) 상세는 그대로이며 새 행은 「미조사」로 표시한다. 새 행의 키: `fld`(분야) `sc`(국내/국내 온라인/해외 온라인/해외 현지) `win`(2027 전기 접수 구간) `deg·gr·wt·rc`(학위·졸업·시간·인정) `src·ev·unk`(출처·원문 인용·확인 못 한 것) `fx`(외화 학비) `rs`(지원 자격 제한).
 - **접수 상태:** `win`을 열 때의 오늘 날짜와 비교해 「접수 중 · ~M/D」 「곧 시작」 「이번 회차 마감」을 계산한다. `win`이 없는 행은 원문 문자열만 보여준다. 구간은 문자열에서 파서로 뽑고 안 맞는 12개는 손으로 고쳤다.
 - **근거 규칙:** 공식 홈페이지·모집요강·등록금 공지에서 확인한 값만, 못 찾으면 비움. 인용한 학비 숫자 210개를 자동 대조해 208개가 인용 페이지·PDF에서 발견됐다(나머지 2개는 이미지 요강). 해외 학비는 2026-11-02 환율로 환산(`origCost`에 적용 환율 표기).
 - **다각도 검토 섹션**(세액공제·학자금 대출·회사 지원·해외 학위 인정·학위 종류·질문 목록·확인 못 한 것)은 법령 원문과 정부·공공기관 자료로 조사한 내용이며 출처 링크가 붙어 있다.

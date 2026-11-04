@@ -5,7 +5,7 @@
 게시: 2026-09-10 21:11
 URL: https://cafe.naver.com/ktriathlonservice/68020
 
-이 폴더의 jpg는 위 글의 첨부 이미지를 1100px로 줄인 것. 거리표 엑셀 원본은 `../../구례 대회 정보 xlsx/`.
+코스도 jpg는 위 글의 첨부 이미지를 1100px로 줄인 것으로 저장소 루트 `assets/img/gurye/`에 있다. 거리표 엑셀 원본은 이 폴더의 `2026-distance-0815-korea.xlsx`(첨부 원래 파일명 `2026 distance-0815-korea.xlsx`).
 
 ---
 

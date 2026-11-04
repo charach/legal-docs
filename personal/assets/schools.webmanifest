@@ -9,12 +9,12 @@
  "theme_color": "#FAFDFD",
  "icons": [
   {
-   "src": "icons/schools-180.png",
+   "src": "../../assets/img/app-icons/schools-180.png",
    "sizes": "180x180",
    "type": "image/png"
   },
   {
-   "src": "icons/schools-512.png",
+   "src": "../../assets/img/app-icons/schools-512.png",
    "sizes": "512x512",
    "type": "image/png",
    "purpose": "any"
