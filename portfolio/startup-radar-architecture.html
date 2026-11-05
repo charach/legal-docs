@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<link rel="icon" href="../assets/img/favicon/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
+<title>해외 공인 스타트업 레이더 — 소프트웨어 설계</title>
+<meta name="description" content="투자 보도·공인 선정·수상작만 모아 한국에 없는 아이디어를 찾는 개인용 수집기. 집의 Mac mini에서 매주 자동 실행, 로컬 LLM으로 1차 거르기.">
+<link rel="stylesheet" href="../assets/css/summer.css">
+<style>
+:root{
+  --local:#FFF4DE;
+  --local-line:#D9B979;
+  --auto:#EAF3F4;
+  --code-bg:#F1F7F8;
+  --accent-soft:rgba(14,124,148,.10);
+  --warn-soft:#FFF4DE;
+}
+.hero{padding:72px 0 0}
+.hero .lead{max-width:62ch}
+.wrap-doc{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad) 96px}
+section{margin-top:56px;scroll-margin-top:72px}
+h2{font-size:1.3rem;font-weight:600;margin:0 0 16px;letter-spacing:-.02em}
+h2 .no{font-family:var(--mono);font-weight:500;color:var(--accent);margin-right:8px;font-size:1rem}
+h3{font-size:1rem;font-weight:600;margin:28px 0 8px}
+p{margin:0 0 12px;max-width:46em}
+.bul{margin:0 0 12px;padding-left:1.2em;max-width:46em}
+.bul li{margin:4px 0}
+.status{display:inline-block;font-size:.8rem;padding:3px 10px;border-radius:999px;background:var(--warn-soft);border:1px solid var(--local-line);margin-top:16px}
+.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:28px;max-width:60em}
+.toc a{font-size:.85rem;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2);text-decoration:none;background:#fff}
+.toc a:hover{color:var(--accent);border-color:var(--accent)}
+.diagram{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;box-shadow:var(--shadow)}
+.diagram svg{display:block;min-width:820px;width:100%;height:auto}
+.legend{display:flex;gap:20px;flex-wrap:wrap;color:var(--ink-2);font-size:.9rem;margin-top:10px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid var(--line)}
+.legend .l1::before{background:#fff;border:1.6px solid var(--accent)}
+.legend .l2::before{background:var(--auto)}
+.legend .l3::before{background:#fff;border:1px dashed var(--ink-2)}
+.flows{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.flow{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow)}
+.flow h3{color:var(--accent);margin-top:0}
+.flow ol,.flow ul{margin:0;padding-left:1.2em}
+.flow li{margin:4px 0;color:var(--ink);font-size:.95rem}
+.flow .crit{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.flow .crit b{display:block;font-size:.85rem;color:var(--ink-2);font-weight:600;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:.93rem}
+.tablewrap{overflow-x:auto;border-radius:10px;margin:0 0 12px}
+th,td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--accent-soft);color:var(--ink);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num{white-space:nowrap;font-family:var(--mono);font-size:.88rem}
+td.k{white-space:nowrap;font-weight:600}
+tr.pick td{background:var(--accent-soft)}
+code,pre{font-family:var(--mono)}
+code{background:var(--code-bg);padding:1px 6px;border-radius:4px;font-size:.88em}
+pre{background:var(--code-bg);border:1px solid var(--line);border-radius:10px;padding:16px 18px;overflow-x:auto;font-size:.84rem;line-height:1.55;margin:0 0 12px}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:4px 28px}
+.check{padding:14px 0;border-top:1px solid var(--line)}
+.check h3{margin:0 0 4px}
+.check p{margin:0;color:var(--ink-2);font-size:.93rem}
+.note{background:var(--accent-soft);border-radius:10px;padding:16px 20px;max-width:46em;margin:0 0 12px}
+.note p:last-child{margin:0}
+.note.warn{background:var(--warn-soft);border:1px solid var(--local-line)}
+.answer{border-left:3px solid var(--accent);padding:4px 0 4px 18px;max-width:46em;margin:0 0 16px}
+.answer p{margin:0 0 8px}
+.answer p:last-child{margin:0}
+footer.doc-foot{margin-top:64px;color:var(--ink-2);font-size:.85rem}
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:24px;align-items:start}
+@media (max-width:760px){.calc{grid-template-columns:1fr}}
+.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow)}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.field label{font-size:.9rem;color:var(--ink-2);display:flex;justify-content:space-between;gap:8px}
+.field label output{font-family:var(--mono);color:var(--ink);font-size:.9rem}
+.field input[type=range]{width:100%;accent-color:var(--accent);margin:2px 0}
+.field input[type=number]{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--code-bg);color:var(--ink);font-family:var(--mono);font-size:.9rem}
+.field input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.hint{font-size:.8rem;color:var(--ink-2)}
+.result-head{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--accent-soft);border-radius:8px;padding:12px 14px}
+.kpi small{display:block;color:var(--ink-2);font-size:.8rem}
+.kpi b{display:block;font-family:var(--mono);font-weight:500;font-size:1.2rem;margin-top:2px}
+.kpi b em{font-style:normal;font-size:.82rem;color:var(--ink-2);margin-left:6px}
+.small{color:var(--ink-2);font-size:.85rem;margin-top:10px}
+/* SVG */
+.band-auto{fill:var(--auto);stroke:none}
+.band-out{fill:none;stroke:var(--line);stroke-width:1.4;stroke-dasharray:5 4}
+.node rect{fill:#fff;stroke:var(--line);stroke-width:1.2}
+.node.you rect{stroke:var(--accent);stroke-width:1.6}
+.node.opt rect{stroke:var(--ink-2);stroke-dasharray:4 3}
+.node text{fill:var(--ink)}
+.node .t{font-size:14px;font-weight:600}
+.node .s{font-size:11.5px;fill:var(--ink-2)}
+.lane{font-size:12px;fill:var(--ink-2)}
+.bandlabel{font-size:12px;font-weight:600;fill:var(--ink-2)}
+.edge{stroke:var(--accent);stroke-width:1.6;fill:none;marker-end:url(#arr)}
+.edge.both{marker-start:url(#arr)}
+.edge.dim{stroke:var(--ink-2);stroke-dasharray:5 4;marker-end:url(#arrg)}
+.elabel{font-size:11px;fill:var(--ink-2)}
+@media (max-width:640px){ .hero{padding:48px 0 0} section{margin-top:44px} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <span class="crumb"><a class="home" href="../index.html">ttomstudio</a><span class="sep" aria-hidden="true">/</span><a class="brand" href="index.html">Portfolio</a></span>
+    <div class="links">
+      <a href="index.html">목록</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Software Design · Mac mini · 로컬 LLM</span>
+    <h1 style="margin-top:12px">해외 공인 스타트업 레이더</h1>
+    <p class="lead">17개국의 투자 보도, 정부·액셀러레이터 공인 명단, 피칭·해커톤 수상작만 모아서 한국에 없는데 될 만한 아이디어를 찾는다. 집에 있는 Mac mini가 매주 월요일 새벽에 혼자 수집하고 로컬 LLM으로 거른다. 나는 아침에 폰으로 시트를 열어 볼 만한 것에 체크만 한다.</p>
+    <span class="status">설계 검토 중 · 구현 전 · 2026-11-05</span>
+    <nav class="toc" aria-label="목차">
+      <a href="#decisions">확정된 결정</a><a href="#arch">1 아키텍처</a><a href="#schedule">자동 실행</a><a href="#data">2 데이터 모델</a><a href="#modules">3 모듈</a><a href="#pipeline">4 처리 흐름</a><a href="#fetch">5 수집 방식</a><a href="#winners">6 수상작</a><a href="#verify">7 피드 검증</a><a href="#llm">8 LLM</a><a href="#view">9 결과 화면</a><a href="#errors">10 에러·로그</a><a href="#plan">11 구현 계획</a><a href="#questions">12 열린 질문</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap-doc">
+
+<!-- ───────────────────────── 결정 ───────────────────────── -->
+<section id="decisions">
+  <h2>확정된 결정</h2>
+  <p>설계 전에 질문으로 정한 것들. 이후 설계는 전부 이 표를 전제로 한다.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>항목</th><th>결정</th></tr></thead>
+    <tbody>
+      <tr><td class="k">실행 환경</td><td>집의 Mac mini <b>M1 · 16GB</b>, 하루 종일 켜져 있음. launchd가 자동으로 깨운다. <b>사람이 실행하는 단계는 없다</b></td></tr>
+      <tr><td class="k">코드 위치</td><td>별도 <b>비공개</b> 레포 (<code>startup-radar</code>). 이 사이트에는 설계 페이지만 남기고, 설계 원본 md(<code>portfolio/startup_radar_design.md</code>)는 새 레포로 옮겨 거기서 이어간다. DB·로그·키는 레포에도 넣지 않는다</td></tr>
+      <tr><td class="k">처리 범위</td><td>최초 실행 때 최근 12개월치를 DB에 <b>적재만</b> 한다 (LLM을 거치지 않음). 매주는 <b>최신 1주일치만</b> 거르고 시트에 올린다</td></tr>
+      <tr><td class="k">LLM</td><td>로컬 Ollama가 기본 (비용 0). 품질이 모자란 단계만 Claude API로 바꿀 수 있게 설정으로 분리 (§8)</td></tr>
+      <tr><td class="k">paywall=partial</td><td>피드의 제목·요약만 보관하고 원문 페이지는 열지 않는다. DealStreetAsia(paywall=y)도 같은 방식의 예외로 허용</td></tr>
+      <tr><td class="k">signal</td><td><code>funding_db</code>는 보존 (accredited와 같은 취급). <code>report</code>(KOTRA)는 수집하지 않고 수동 참고만</td></tr>
+      <tr><td class="k">KR 소스</td><td>한국 유사 서비스를 찾는 비교 인덱스로만 쓴다. 검토 화면에는 나오지 않는다</td></tr>
+      <tr><td class="k">funding_news 폐기</td><td>금액·라운드·투자사가 <b>모두</b> 확인되지 않을 때만 폐기 (하나라도 있으면 보존)</td></tr>
+      <tr><td class="k">해커톤 수상작</td><td>참가 등록자 수나 총상금이 임계값을 넘는 대회의 수상작만. 값은 설정 파일</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ───────────────────────── 1 아키텍처 ───────────────────────── -->
+<section id="arch">
+  <h2><span class="no">1</span>전체 아키텍처</h2>
+  <div class="diagram">
+  <svg viewBox="0 0 1040 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="스타트업 레이더 아키텍처: 인터넷의 소스 사이트에서 Mac mini가 수집해 SQLite에 쌓고, 규칙 필터와 로컬 LLM으로 거른 결과를 Google Sheets에 올리면 폰으로 체크한다">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+      </marker>
+      <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-2)"/>
+      </marker>
+    </defs>
+
+    <!-- bands -->
+    <rect class="band-out" x="80" y="28" width="950" height="108" rx="10"/>
+    <text class="bandlabel" x="94" y="46">인터넷</text>
+    <rect class="band-auto" x="80" y="152" width="950" height="264" rx="10"/>
+    <text class="bandlabel" x="94" y="170">집 Mac mini · 상시 켜짐 · 16GB — 전부 자동</text>
+    <rect class="band-out" x="80" y="432" width="950" height="108" rx="10"/>
+    <text class="bandlabel" x="94" y="450">보는 곳</text>
+
+    <!-- lanes -->
+    <text class="lane" x="14" y="86">바깥</text>
+    <text class="lane" x="14" y="219">실행</text>
+    <text class="lane" x="14" y="359">거르기</text>
+    <text class="lane" x="14" y="499">보기</text>
+
+    <!-- row 1 -->
+    <g class="node you">
+      <rect x="100" y="56" width="180" height="60" rx="6"/>
+      <text class="t" x="190" y="80" text-anchor="middle">GitHub 레포</text>
+      <text class="s" x="190" y="99" text-anchor="middle">코드 · sources.csv (가끔 편집)</text>
+    </g>
+    <g class="node">
+      <rect x="560" y="56" width="180" height="60" rx="6"/>
+      <text class="t" x="650" y="80" text-anchor="middle">소스 사이트 90곳</text>
+      <text class="s" x="650" y="99" text-anchor="middle">RSS · Google News · 목록 페이지</text>
+    </g>
+
+    <!-- row 2 -->
+    <g class="node">
+      <rect x="100" y="186" width="180" height="60" rx="6"/>
+      <text class="t" x="190" y="210" text-anchor="middle">launchd</text>
+      <text class="s" x="190" y="229" text-anchor="middle">매일 03:00 · 부팅 시 깨움</text>
+    </g>
+    <g class="node">
+      <rect x="330" y="186" width="180" height="60" rx="6"/>
+      <text class="t" x="420" y="210" text-anchor="middle">radar run</text>
+      <text class="s" x="420" y="229" text-anchor="middle">이번 주 사이클 필요할 때만</text>
+    </g>
+    <g class="node">
+      <rect x="560" y="186" width="180" height="60" rx="6"/>
+      <text class="t" x="650" y="210" text-anchor="middle">수집기</text>
+      <text class="s" x="650" y="229" text-anchor="middle">rss · gnews · crawl · api</text>
+    </g>
+    <g class="node">
+      <rect x="790" y="186" width="180" height="60" rx="6"/>
+      <text class="t" x="880" y="210" text-anchor="middle">SQLite</text>
+      <text class="s" x="880" y="229" text-anchor="middle">radar.db · 12개월 적재</text>
+    </g>
+
+    <!-- row 3 -->
+    <g class="node">
+      <rect x="100" y="326" width="180" height="60" rx="6"/>
+      <text class="t" x="190" y="350" text-anchor="middle">시트 게시</text>
+      <text class="s" x="190" y="369" text-anchor="middle">이번 주 덮어쓰기 · ☑ 회수</text>
+    </g>
+    <g class="node">
+      <rect x="330" y="326" width="180" height="60" rx="6"/>
+      <text class="t" x="420" y="350" text-anchor="middle">판정</text>
+      <text class="s" x="420" y="369" text-anchor="middle">보존 · 폐기(사유) · KR</text>
+    </g>
+    <g class="node">
+      <rect x="560" y="326" width="180" height="60" rx="6"/>
+      <text class="t" x="650" y="350" text-anchor="middle">Ollama 로컬 LLM</text>
+      <text class="s" x="650" y="369" text-anchor="middle">A 추출·분류 · B 한국 비교</text>
+    </g>
+    <g class="node">
+      <rect x="790" y="326" width="180" height="60" rx="6"/>
+      <text class="t" x="880" y="350" text-anchor="middle">규칙 필터</text>
+      <text class="s" x="880" y="369" text-anchor="middle">중복 · 최근 7일 · 투자 키워드</text>
+    </g>
+
+    <!-- row 4 -->
+    <g class="node">
+      <rect x="100" y="466" width="180" height="60" rx="6"/>
+      <text class="t" x="190" y="490" text-anchor="middle">Google Sheets</text>
+      <text class="s" x="190" y="509" text-anchor="middle">이번 주 · 관심 · 소스 상태</text>
+    </g>
+    <g class="node you">
+      <rect x="330" y="466" width="180" height="60" rx="6"/>
+      <text class="t" x="420" y="490" text-anchor="middle">나 (폰)</text>
+      <text class="s" x="420" y="509" text-anchor="middle">월요일 아침 ☑ · 메모</text>
+    </g>
+    <g class="node opt">
+      <rect x="560" y="466" width="180" height="60" rx="6"/>
+      <text class="t" x="650" y="490" text-anchor="middle">Claude API (선택)</text>
+      <text class="s" x="650" y="509" text-anchor="middle">로컬 품질이 모자란 단계만</text>
+    </g>
+
+    <!-- edges -->
+    <path class="edge" d="M190 116 V150 H400 V181"/>
+    <text class="elabel" x="296" y="144" text-anchor="middle">git pull (주 1회)</text>
+    <path class="edge" d="M280 216 H325"/>
+    <path class="edge" d="M510 216 H555"/>
+    <path class="edge both" d="M650 186 V121"/>
+    <text class="elabel" x="658" y="146">robots 준수 · 3초 간격</text>
+    <path class="edge" d="M740 216 H785"/>
+    <path class="edge" d="M920 246 V321"/>
+    <path class="edge dim" d="M840 246 V290 H700 V321"/>
+    <text class="elabel" x="770" y="284" text-anchor="middle">KR 후보 검색</text>
+    <path class="edge" d="M790 356 H745"/>
+    <path class="edge" d="M560 356 H515"/>
+    <path class="edge" d="M330 356 H285"/>
+    <path class="edge both" d="M190 386 V461"/>
+    <path class="edge both" d="M280 496 H325"/>
+    <path class="edge dim" d="M650 386 V461"/>
+  </svg>
+  </div>
+  <div class="legend">
+    <span class="l1">내가 손대는 부분</span>
+    <span class="l2">Mac mini에서 자동으로 도는 부분</span>
+    <span class="l3">선택 (기본은 꺼짐)</span>
+  </div>
+
+  <h3>원칙</h3>
+  <ul class="bul">
+    <li><b>프로세스는 하나다.</b> <code>radar run</code>이라는 CLI가 전부 한다. 큐·워커·서버·컨테이너는 없다.</li>
+    <li><b>상태 기반으로 이어서 한다.</b> 각 단계는 "자기 입력 상태인 행"만 집어 처리한다. 정전이나 재시동으로 중간에 끊겨도 다음 실행이 이어서 한다.</li>
+    <li><b>바뀌는 건 설정 파일이다.</b> 소스가 수백 개로 늘어도 바뀌는 것은 <code>sources.csv</code>와 <code>adapters.yaml</code>이다.</li>
+    <li><b>의존성은 최소한으로 한다.</b> <code>requests</code>, <code>feedparser</code>, <code>PyYAML</code>, <code>beautifulsoup4</code>, <code>gspread</code> 다섯 개. Ollama는 HTTP로 부르므로 SDK가 필요 없다. Claude API를 켤 때만 <code>anthropic</code>을 추가한다. SQLite(FTS5 포함), robots.txt, 로그, 메일은 표준 라이브러리로 처리한다. 헤드리스 브라우저는 넣지 않는다.</li>
+  </ul>
+
+  <h3 id="flows">세 가지 흐름</h3>
+  <div class="flows">
+    <div class="flow">
+      <h3>매주 자동 · 월 03:00 ~ 06:00경</h3>
+      <ol>
+        <li>launchd가 <code>radar run</code>을 깨운다. 이번 주 사이클이 이미 끝났으면 바로 종료한다.</li>
+        <li>지난주 시트의 ☑·메모를 DB로 회수한다.</li>
+        <li>대상 소스를 수집하고 중복을 지운 뒤 <b>최근 7일 것만</b> 남긴다.</li>
+        <li>규칙으로 1차 폐기하고, 로컬 LLM이 추출·분류한다. 그다음 판정하고 한국 유사 서비스와 비교한다.</li>
+        <li>시트의 '이번 주' 탭을 새로 쓰고, 맨 위에 실행 요약 한 줄을 남긴다.</li>
+      </ol>
+    </div>
+    <div class="flow">
+      <h3>최초 1회 · 설치 날</h3>
+      <ol>
+        <li>Mac mini에 레포를 clone하고 Ollama와 모델을 설치한 뒤 <code>radar doctor</code>로 점검한다.</li>
+        <li><code>radar backfill</code>: 12개월치 공인 명단·수상작·피드 과거 페이지를 DB에 <b>적재만</b> 한다. LLM은 거치지 않는다. 몇 시간에서 하루 정도 걸리고, 끊겨도 이어서 한다.</li>
+        <li>KR 소스의 12개월치가 그대로 한국 비교 인덱스가 된다.</li>
+        <li><code>radar install</code>로 launchd를 등록하면 그다음부터는 자동이다.</li>
+      </ol>
+    </div>
+    <div class="flow">
+      <h3>내가 하는 일</h3>
+      <ol>
+        <li>월요일 아침에 폰에서 시트의 '이번 주' 탭을 연다.</li>
+        <li>볼 만한 회사에 ☑를 하고, 필요하면 메모를 남긴다.</li>
+        <li>체크한 것은 다음 실행 때 '관심' 탭에 쌓인다.</li>
+        <li>가끔 소스를 추가한다. <code>sources.csv</code>에 한 줄을 넣고 push하면 다음 사이클 시작 때 반영된다.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── 자동 실행 ───────────────────────── -->
+<section id="schedule">
+  <h2>자동 실행 · Mac mini</h2>
+  <div class="answer">
+    <p>설치가 끝나면 사람이 실행할 일은 없다. crontab과 같은 역할을 macOS의 <b>launchd</b>가 맡는다. 매일 03:00과 부팅 직후에 <code>radar run</code>을 깨우고, 스크립트는 <b>"이번 주(월요일 시작) 사이클이 끝났는가"</b>만 본다. 평소에는 월요일 03:00에 한 번 돌고, 나머지 날은 확인만 하고 바로 끝난다. 월요일에 정전이나 업데이트로 꺼져 있었다면 켜진 직후나 다음 날 03:00에 밀린 사이클을 돈다.</p>
+  </div>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th></th><th>launchd (채택)</th><th>cron</th></tr></thead>
+    <tbody>
+      <tr><td class="k">놓친 실행</td><td>잠자기 중에 놓친 실행은 깨어날 때 1회 실행한다. 부팅 직후 1회(<code>RunAtLoad</code>)도 가능</td><td>놓친 실행은 그냥 건너뛴다</td></tr>
+      <tr><td class="k">macOS 권한</td><td>사용자 에이전트라 추가 권한이 필요 없다</td><td>폴더에 따라 cron에 전체 디스크 접근 권한을 줘야 한다</td></tr>
+      <tr><td class="k">로그</td><td>stdout/stderr 파일 경로를 지정할 수 있다</td><td>로컬 메일로 간다 (따로 설정 필요)</td></tr>
+      <tr><td class="k">등록</td><td><code>radar install</code>이 plist를 만들고 등록한다</td><td><code>crontab -e</code> 한 줄</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Mac mini는 상시 켜져 있어서 둘의 차이가 작다. 다만 정전이나 업데이트로 재시동된 뒤 스스로 복구하는 것은 launchd가 더 깔끔하다. 같은 시각에 두 개가 겹쳐 돌지 않도록 잠금 파일(PID 기록)을 쓰고, 실행 중 잠자기를 막도록 <code>caffeinate -i</code>로 감싼다. 주간 사이클을 시작할 때 <code>git pull --ff-only</code>로 코드와 설정을 갱신하고, 실패하면 현재 버전으로 계속 돌며 로그를 남긴다.</p>
+
+  <h3>Mac mini 준비 체크리스트</h3>
+  <div class="checks">
+    <div class="check"><h3>잠자기 끄기</h3><p>시스템 설정 → 에너지에서 자동 잠자기 방지를 켠다 (<code>pmset sleep 0</code>). 디스플레이만 꺼지는 것은 상관없다.</p></div>
+    <div class="check"><h3>정전 후 자동 시동</h3><p>"정전 후 자동으로 시동"을 켠다 (<code>pmset autorestart 1</code>).</p></div>
+    <div class="check"><h3>자동 로그인</h3><p>launchd 사용자 에이전트와 Ollama는 로그인 세션 안에서 돈다. FileVault가 켜져 있으면 자동 로그인이 안 되므로 재시동 후 한 번 직접 로그인해야 한다 (열린 질문 1).</p></div>
+    <div class="check"><h3>원격 로그인 (SSH)</h3><p>노트북에서 <code>ssh mini radar status</code>로 상태를 확인하고 문제를 고친다.</p></div>
+    <div class="check"><h3>Ollama</h3><p><code>brew install ollama</code>와 <code>brew services start ollama</code>로 상시 실행한다. 모델은 하나만 받아 두고, 동시 처리 1개·컨텍스트 8K로 둔다.</p></div>
+    <div class="check"><h3>OS 업데이트</h3><p>보안 업데이트만 자동으로 받는다. 재시동이 필요한 업데이트는 월요일 새벽을 피한다.</p></div>
+  </div>
+</section>
+
+<!-- ───────────────────────── 2 데이터 ───────────────────────── -->
+<section id="data">
+  <h2><span class="no">2</span>데이터 모델</h2>
+
+  <h3>소스 설정 · <code>config/sources.csv</code></h3>
+  <p>기존 12개 열은 그대로 두고 3개만 더한다.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>추가 열</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td class="k"><code>source_id</code></td><td>고정 키 (예: <code>crunchbase-news</code>, <code>gnews-ko-funding</code>). DB가 이 값으로 소스를 알아보므로 이름을 바꿔도 이력이 유지된다</td></tr>
+      <tr><td class="k"><code>scope</code></td><td>비워 두면 paywall에서 정해진다: <code>n</code>→<code>full</code>, <code>partial</code>→<code>feed_only</code>, <code>y</code>→<code>skip</code>. 예외는 직접 적는다 (DealStreetAsia = <code>feed_only</code>)</td></tr>
+      <tr><td class="k"><code>adapter</code></td><td>crawl·api 소스가 쓸 어댑터 이름 (<code>devpost</code>, <code>list_diff_html</code> …). rss·gnews는 비워 둔다</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><b>수집 대상</b> = <code>active=y</code> · <code>tier ≤ max_tier</code>(처음은 1) · <code>fetch_type ≠ manual</code> · <code>signal ≠ report</code> · <code>scope ≠ skip</code> · 자동 비활성 아님 · (rss/gnews라면) 피드 검증 통과. <code>feed_only</code>인데 피드가 없는 소스(더브이씨, STARTUP DB News, Fortune Term Sheet)는 수집할 길이 없어 제외되고 로그에 남는다.</p>
+
+  <h3>테이블</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>테이블</th><th>한 행 =</th><th>주요 컬럼</th></tr></thead>
+    <tbody>
+      <tr><td class="k">sources</td><td>소스 1곳</td><td>CSV 열 전부 + <code>feed_status</code>, <code>feed_final_url</code>, <code>etag</code>, <code>last_modified</code>, <code>consecutive_failures</code>, <code>zero_item_runs</code>, <code>last_success_at</code>, <code>last_error</code>, <code>disabled_at</code>, <code>disabled_reason</code>, <code>next_probe_at</code>, <code>removed</code>. CSV에서 지운 행도 기록은 남긴다</td></tr>
+      <tr><td class="k">runs</td><td>실행 1회</td><td><code>started_at</code>, <code>ended_at</code>, <code>trigger</code>, <code>cycle_week</code>(2026-W46), <code>cycle_done</code>, <code>stats_json</code></td></tr>
+      <tr><td class="k">fetch_log</td><td>소스 × 실행</td><td><code>outcome</code>(ok / not_modified / http_error / timeout / parse_error / robots_blocked / skipped), <code>http_status</code>, <code>n_found</code>, <code>n_new</code>, <code>duration_ms</code>, <code>error</code></td></tr>
+      <tr><td class="k">crawl_state</td><td>어댑터 커서</td><td><code>source_id</code>, <code>key</code>, <code>value_json</code>. 수상 발표를 기다리는 해커톤 목록, 연간 결과 페이지의 해시 등. 어댑터가 늘어도 테이블은 늘지 않는다</td></tr>
+      <tr><td class="k">items</td><td>원문 1건</td><td><code>source_id</code>, <b><code>signal</code>(수집 시점 복사본)</b>, <code>signal_detail</code>(YC W26, Devpost 1st Place …), <code>country</code>, <code>lang</code>, <code>url</code>, <code>url_norm</code>, <code>url_hash</code>(유일), <code>external_id</code>, <code>title</code>, <code>title_key</code>, <code>summary</code>(2,000자), <code>body</code>(full만, 6,000자), <code>published_at</code>, <code>event_at</code>, <code>fetched_at</code>(수집일), <code>extra_json</code>, <code>status</code>, <code>dup_of</code></td></tr>
+      <tr><td class="k">items_fts</td><td>FTS5 색인</td><td>제목+요약 전문 검색. KR 소스 행이 곧 한국 비교 인덱스다. 과거 언급 조회에도 쓴다</td></tr>
+      <tr><td class="k">mentions</td><td>원문 안의 회사 1곳<br>(판정 단위)</td><td><code>company_name</code>, <code>company_name_native</code>, <code>website</code>, <code>country</code>, <code>one_liner_ko</code>, <code>target_customer_ko</code>, <code>customer_type</code>, <code>category</code>, <code>round</code>, <code>amount</code>, <code>currency</code>, <code>amount_usd</code>, <code>investors</code>, <code>award_prize</code>, <code>is_winner</code>, <code>evidence_quote</code>, <code>keywords_ko</code>, <code>decision</code>, <code>discard_reason</code>, <code>kr_similar</code>, <code>kr_matches</code>, <code>kr_reason</code>, <code>model</code>, <code>prompt_ver</code></td></tr>
+      <tr><td class="k">companies</td><td>묶인 회사 1곳<br>(검토 단위)</td><td><code>display_name</code>, <code>name_key</code>, <code>domain</code>, <code>country</code>, <code>first_seen_at</code>, <code>last_seen_at</code>, <code>signals</code>(집합 캐시)</td></tr>
+      <tr><td class="k">reviews</td><td>내 표시</td><td><code>company_id</code>, <code>interesting</code>(☑), <code>note</code>, <code>reviewed_week</code>, <code>synced_at</code></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>원문 1건에서 회사가 여러 곳 나올 수 있다 (주간 투자 라운드업 기사, 수상자 목록). 그래서 items와 mentions를 나눴다. 한국 비교 인덱스를 따로 만들지 않고 KR 소스 원문의 전문 검색으로 대신한다. KR 원문은 이미 한국어라 LLM을 거칠 필요가 없고, 12개월 적재분이 그대로 인덱스가 된다.</p>
+
+  <h3>signal 보관 방식 (3단)</h3>
+  <ol class="bul">
+    <li><b>items.signal</b>: 수집 시점의 소스 signal을 복사해 둔다. 나중에 CSV를 고쳐도 과거 근거는 그대로 남는다.</li>
+    <li><b>mentions</b>: <code>evidence_quote</code>(원문을 그대로 인용한 구절)와 투자·수상 필드가 그 signal이 실제로 확인됐다는 기록이다. 폐기 규칙은 이 필드만 보고 코드가 판정한다.</li>
+    <li><b>companies.signals</b>: 회사에 붙은 모든 signal의 집합. 시트에는 <code>accredited: YC W26 · funding_news: Series A $12M (Crunchbase News)</code>처럼 근거가 쌓여 보인다.</li>
+  </ol>
+</section>
+
+<!-- ───────────────────────── 3 모듈 ───────────────────────── -->
+<section id="modules">
+  <h2><span class="no">3</span>모듈과 책임</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>모듈</th><th>책임</th></tr></thead>
+    <tbody>
+      <tr><td class="k">cli</td><td><code>run</code> · <code>backfill</code> · <code>install</code> · <code>doctor</code> · <code>verify</code> · <code>status</code> · <code>export</code> · <code>rejudge</code> · <code>sources list|enable|add-gnews</code></td></tr>
+      <tr><td class="k">config</td><td>CSV·YAML을 읽고 검사한다 (필수 열, 중복 <code>source_id</code>, 허용값). 잘못된 행은 그 행만 건너뛰고 경고한다</td></tr>
+      <tr><td class="k">db</td><td>스키마와 마이그레이션(<code>PRAGMA user_version</code>), 주간 백업, 쿼리</td></tr>
+      <tr><td class="k">http</td><td><b>유일한 네트워크 출구.</b> UA, 호스트별 간격, robots.txt, 타임아웃·재시도, 조건부 GET, feed_only 원문 차단</td></tr>
+      <tr><td class="k">normalize</td><td>URL 정규화, 제목 키, 회사명 키, 등록 도메인, 통화 → USD 환산</td></tr>
+      <tr><td class="k">fetchers</td><td><code>rss</code> · <code>gnews</code> · <code>api</code>(범용 JSON) · <code>crawl/</code>(어댑터 등록부 + 범용 2종 + 전용 어댑터)</td></tr>
+      <tr><td class="k">verify</td><td>피드 검증과 자동 탐색, 보고서</td></tr>
+      <tr><td class="k">window · dedup</td><td>최근 7일 창 판정(<code>archived</code>), 기사 단위·회사 단위 중복 병합</td></tr>
+      <tr><td class="k">prefilter</td><td>LLM 전에 규칙으로 폐기한다 (<code>config/patterns.yaml</code>의 다국어 투자 키워드)</td></tr>
+      <tr><td class="k">llm</td><td>백엔드 인터페이스 하나에 구현체 <code>ollama</code> · <code>anthropic</code>. 프롬프트 파일, JSON 스키마, 재시도</td></tr>
+      <tr><td class="k">judge</td><td>추출 결과 → 보존·폐기·KR. 규칙은 여기 한 곳에만 있다. LLM 없이 다시 돌릴 수 있다 (<code>rejudge</code>)</td></tr>
+      <tr><td class="k">publish</td><td>시트 게시와 ☑ 회수, 소스 상태 탭, 폐기 샘플 탭</td></tr>
+      <tr><td class="k">notify</td><td>시트 요약 줄, (선택) 실패 시 메일 (<code>smtplib</code>)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>규칙: 네트워크는 <code>http</code>만 쓴다. 판정 규칙은 <code>judge</code>에만 둔다. 모델 호출은 <code>llm</code>만 한다. 그래서 모델을 바꿔도 다른 모듈은 그대로다.</p>
+</section>
+
+<!-- ───────────────────────── 4 흐름 ───────────────────────── -->
+<section id="pipeline">
+  <h2><span class="no">4</span>수집 → 중복제거 → 거르기 → 반영</h2>
+  <pre>items.status
+  (수집) ─▶ new ─┬─▶ dup           다른 소스에 같은 기사 → dup_of 기록, 끝
+                ├─▶ archived      최근 7일 창 밖 (최초 12개월 적재분, 놓친 주) → 검색용으로만 보관
+                ├─▶ prefiltered   규칙으로 확정 폐기 (투자 정보 0개 · 해커톤 규모 미달) → 끝
+                └─▶ llm_pending ─▶ extracted ─▶ mentions 생성     (3회 실패 시 llm_error)
+
+mentions.decision
+  ─┬─▶ kr_index    회사 국가 = KR → 검토에서 제외
+   ├─▶ discarded   사유 코드와 함께 보관 (화면에서만 빠짐)
+   └─▶ kept ─▶ 한국 비교(B단계) ─▶ 시트 '이번 주'</pre>
+
+  <h3>최근 1주일 창</h3>
+  <p>매주 다루는 것은 <code>event_at</code>이 최근 7일 안에 든 항목뿐이다. <code>event_at</code>은 뉴스라면 게시일이다. 목록·수상작처럼 날짜가 없거나 늦게 발표되는 항목은 <b>처음 본 날</b>이다 (예: 3주 전에 끝난 해커톤의 수상작이 이번 주에 공개되면 이번 주 항목). 사이클을 몇 주 놓쳤어도 처리하는 건 최신 7일치뿐이다. 나머지는 <code>archived</code>로 남아 검색으로만 볼 수 있다.</p>
+
+  <h3>중복 제거</h3>
+  <ul class="bul">
+    <li><b>기사 단위 (LLM 전):</b> 정규화한 URL이 같으면 중복이다. 정규화는 소문자화, <code>www.</code>·<code>m.</code>·AMP 경로 제거, <code>utm_*</code>·<code>fbclid</code>·<code>gclid</code>·<code>ref</code> 제거, 쿼리 정렬, 프래그먼트와 끝의 <code>/</code> 제거로 한다. 정규화한 제목이 같고 게시일이 3일 안이어도 중복이다 (Google News가 다른 매체 기사를 다시 실어 오는 경우). 대표 기사는 tier가 높고 본문이 있는 쪽으로 고른다.</li>
+    <li><b>회사 단위 (LLM 후):</b> 사이트의 등록 도메인이 같으면 같은 회사다. 도메인이 없으면 회사명 키로 비교한다. 회사명 키는 NFKC → 소문자 → 법인 접미사 제거(Inc, Ltd, GmbH, SAS, BV, Oy, AB, Pte, 株式会社, 有限公司, (주) …) → 공백·구두점 제거로 만든다. 이름이 같아도 양쪽 도메인이 서로 다르면 다른 회사로 본다. 잘못 묶인 것은 <code>aliases.yaml</code>에 한 줄로 바로잡는다.</li>
+  </ul>
+
+  <h3>판정 규칙 (<code>judge</code>, 위에서부터 처음 걸리는 규칙 적용)</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>#</th><th>조건</th><th>결과 · 사유 코드</th></tr></thead>
+    <tbody>
+      <tr><td class="num">0</td><td>(LLM 전) funding_news인데 원문에 금액·라운드·투자사 패턴이 하나도 없다</td><td><code>prefiltered / no_funding_detail</code></td></tr>
+      <tr><td class="num">1</td><td>회사명이 없다 (시장 동향, 칼럼, 인사, 행사 공지)</td><td><code>discarded / no_company</code></td></tr>
+      <tr><td class="num">2</td><td>회사명이 원문에 없다 (모델이 지어낸 이름 차단)</td><td><code>discarded / name_not_in_text</code></td></tr>
+      <tr><td class="num">3</td><td><code>evidence_quote</code>가 원문에 그대로 없다</td><td><code>discarded / evidence_mismatch</code></td></tr>
+      <tr><td class="num">4</td><td>회사 국가 = KR, 또는 KR 소스</td><td><code>kr_index</code></td></tr>
+      <tr><td class="num">5</td><td>funding_news인데 투자 사건이 아니다</td><td><code>discarded / not_funding_event</code></td></tr>
+      <tr><td class="num">6</td><td>funding_news인데 라운드·금액·투자사가 모두 null이다</td><td><code>discarded / no_funding_detail</code></td></tr>
+      <tr><td class="num">7</td><td>pitch_winner·hackathon_winner인데 <code>is_winner ≠ true</code>다</td><td><code>discarded / not_winner</code></td></tr>
+      <tr><td class="num">8</td><td>그 외 (accredited, funding_db 포함)</td><td><code>kept</code></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>규칙 0은 확실한 것만 미리 버리는 보수적인 필터다. 패턴이 하나라도 걸리면 LLM으로 넘긴다. 규칙 2·3은 작은 로컬 모델이 지어낸 내용을 코드로 막는 장치다. <b>폐기는 삭제가 아니다.</b> 규칙을 바꾸면 <code>radar rejudge</code>가 저장된 추출값으로 LLM 없이 다시 판정한다.</p>
+</section>
+
+<!-- ───────────────────────── 5 수집 ───────────────────────── -->
+<section id="fetch">
+  <h2><span class="no">5</span>fetch_type별 수집 방식</h2>
+
+  <h3>공통 · 수집 예절 (<code>http</code>)</h3>
+  <div class="tablewrap">
+  <table>
+    <tbody>
+      <tr><td class="k">User-Agent</td><td><code>StartupRadar/0.1 (personal research; +https://ttomstudio.com/portfolio/startup-radar-architecture.html)</code>. 연락처로 이메일 대신 이 페이지를 적는다</td></tr>
+      <tr><td class="k">robots.txt</td><td>호스트별로 24시간 캐시한다. 4xx면 전부 허용으로 본다. 5xx나 타임아웃이면 이번 실행에서 그 호스트를 건너뛴다. 금지된 경로는 요청하지 않고 <code>robots_blocked</code>로 기록한다. <code>Crawl-delay</code>를 따른다</td></tr>
+      <tr><td class="k">간격</td><td>같은 호스트는 최소 3초, 크롤링 어댑터는 5초. 다른 호스트끼리는 기다리지 않는다</td></tr>
+      <tr><td class="k">타임아웃·재시도</td><td>연결 10초, 읽기 20초. 5xx와 타임아웃은 최대 2회 지수 백오프로 재시도한다. 429는 <code>Retry-After</code>를 따르되 60초가 넘으면 이번 실행에서 포기한다</td></tr>
+      <tr><td class="k">조건부 GET</td><td>피드는 ETag와 If-Modified-Since를 보낸다. 304는 성공으로 친다</td></tr>
+      <tr><td class="k">유료</td><td><code>skip</code>이면 요청하지 않는다. <code>feed_only</code>면 피드 URL이 아닌 요청을 <code>http</code>가 직접 거부하므로, 어댑터가 실수해도 원문은 열리지 않는다</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>소스가 수백 개가 돼도 순차 처리로 충분하다. 다른 호스트끼리는 대기가 없기 때문이다. 같은 호스트(news.google.com)에 쿼리가 많아져도 3초 간격이면 100개에 5분이다.</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>fetch_type</th><th>방법</th></tr></thead>
+    <tbody>
+      <tr><td class="k">rss</td><td>조건부 GET으로 받아 <code>feedparser</code>로 읽는다. link는 url, guid는 external_id, summary는 HTML을 지운 2,000자, published는 게시일이 된다. 엔트리가 0개이거나 파싱에 실패하면 실패로 센다. 본문 보강(원문 읽기)은 기본으로 꺼 둔다. <b>12개월 적재</b>: 피드 첫 페이지에는 최근 글만 있다. WordPress 피드는 <code>?paged=2,3…</code>을 지원하는 곳이 많아, 적재 때 12개월 전에 닿거나 실패할 때까지 페이지를 넘긴다. 지원하지 않는 피드는 지금 보이는 만큼만 적재한다.</td></tr>
+      <tr><td class="k">gnews</td><td>rss와 같고, 제목 끝의 <code> - 매체명</code>을 떼어 출처로 둔다. 링크는 Google 리다이렉트라 풀지 않는다. 중복은 제목 키로 판정하고 원문은 열지 않는다. <b>복제</b>는 CSV에 한 줄을 추가하면 된다. <code>radar sources add-gnews --country DE --lang de --q "Startup Finanzierungsrunde"</code>가 URL을 조립해 행을 넣어 준다. 12개월 적재는 할 수 없다 (최근 약 100건만 나옴).</td></tr>
+      <tr><td class="k">api</td><td>범용 JSON 어댑터. <code>adapters.yaml</code>에 URL 템플릿, 결과 배열 경로, 필드 매핑, 페이지 넘김 방식을 적으면 코드 없이 추가된다. 로그인이나 키가 필요한 API는 <code>manual</code>로 돌린다.</td></tr>
+      <tr><td class="k">crawl</td><td>어댑터는 세 종류다 (아래 표). 사이트 구조가 바뀌면 오류 없이 0건이 나오므로, 전에 1건 이상이던 소스가 2회 연속 0건이면 실패로 센다. 어댑터마다 실제 응답 1개를 테스트 fixture로 저장해 둔다.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>crawl 어댑터</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>어댑터</th><th>쓰는 곳</th><th>동작</th></tr></thead>
+    <tbody>
+      <tr><td class="k">list_diff_html<br><small>범용</small></td><td>J-Startup, French Tech, EIC, Startup Estonia, TIPS, Startup India, Station F, 포트폴리오 6곳, MassChallenge, Venture Kick</td><td>목록 페이지를 YAML의 CSS 셀렉터로 읽어 이름·링크·설명·(선정 연도)를 뽑는다. <b>전에 본 적 없는 항목만</b> 새 item이 된다. 첫 적재분은 날짜가 있으면 12개월 창으로 나누고, 없으면 전부 <code>archived</code>로 둔다</td></tr>
+      <tr><td class="k">annual_winners_page<br><small>범용</small></td><td>연 1회 피칭대회 8곳 (Startup World Cup, CES, Hult, SXSW, Web Summit, Slush, SusHi Tech, IVS)</td><td>YAML에 연도별 결과 페이지 URL을 적어 둔다. <b>월 1회</b> 확인하고, 본문 해시가 바뀌면 페이지 텍스트에서 수상 기업만 LLM으로 뽑는다</td></tr>
+      <tr><td class="k">전용</td><td>YC Companies · YC Launches · Devpost · PR TIMES 資金調達 · Startup Nation Finder (+ tier 2 해커톤)</td><td>사이트가 화면에 쓰는 공개 데이터(내장 JSON 등)를 읽는다. 데이터 위치, robots, 로그인 벽 여부는 구현 전 <b>스파이크 1일</b>에서 확인한다. 안 되는 곳은 <code>manual</code>로 돌리고 기록한다</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ───────────────────────── 6 수상작 ───────────────────────── -->
+<section id="winners">
+  <h2><span class="no">6</span>수상작만 골라내기</h2>
+  <p>원칙: <b>구조로 거를 수 있으면 수집 단계에서 거른다</b> (LLM 비용과 시간이 0). 구조로 안 되면 LLM의 <code>is_winner</code>와 판정 규칙 7로 거른다. 일반 출품작은 아예 저장하지 않는다.</p>
+  <pre>hackathon:              # settings.yaml — 둘 중 하나만 넘으면 통과
+  min_registrants: 200
+  min_prize_usd: 5000
+  winners_wait_days: 45  # 마감 후 수상 발표를 기다리는 기간</pre>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>소스</th><th>tier</th><th>대회 고르기</th><th>수상 판별</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Devpost</td><td class="num">1</td><td>사이트가 쓰는 해커톤 목록 데이터에서 종료된 대회를 읽고, 참가자 수·상금으로 임계값을 검사한다 (필드 존재는 스파이크로 확인)</td><td>대회별 <code>/project-gallery</code>에서 <b>Winner 배지</b>가 붙은 카드만 고른다. 프로젝트 페이지에서 설명과 받은 상 이름을 <code>signal_detail</code>로 가져온다. 마감 직후에는 배지가 없으므로 <code>crawl_state</code>의 대기 목록에 넣고 45일 동안 매주 다시 본다</td></tr>
+      <tr><td class="k">Devfolio</td><td class="num">2</td><td>해커톤 목록 (내장 데이터)</td><td>prize 표시가 있는 프로젝트만</td></tr>
+      <tr><td class="k">ETHGlobal</td><td class="num">2</td><td>이벤트별 쇼케이스</td><td><b>Finalist만</b> (<code>prize_filter: finalist_only</code>). 이벤트마다 스폰서 상이 수십 개라 전부 받으면 양이 넘친다</td></tr>
+      <tr><td class="k">lablab.ai</td><td class="num">2</td><td>이벤트 목록</td><td>이벤트 페이지의 Winners 영역에 있는 제출물만</td></tr>
+      <tr><td class="k">DoraHacks</td><td class="num">3</td><td>해커톤 목록</td><td>Results 탭의 수상 BUIDL만</td></tr>
+      <tr><td class="k">Mashup Awards</td><td class="num">3</td><td>connpass 결과 공지</td><td><code>annual_winners_page</code> 방식으로 LLM이 추출</td></tr>
+      <tr><td class="k">TC Battlefield</td><td class="num">1</td><td>태그 RSS (참가사 소개 기사도 섞임)</td><td>LLM <code>is_winner</code> + 규칙 7. 인용 구절에 수상 사실이 있어야 한다</td></tr>
+      <tr><td class="k">연간 피칭대회 8곳</td><td class="num">2–3</td><td><code>annual_winners_page</code></td><td>결과 페이지에서 수상자만 뽑는다. CES는 Best of Innovation과 Honoree를 모두 수상으로 보되 <code>award_prize</code>로 구분한다</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>해커톤 수상팀은 아직 회사가 아닌 경우가 많다. 프로젝트명을 회사명 자리에 넣고 "프로젝트"로 표시해서 시트에서 걸러 볼 수 있게 한다.</p>
+</section>
+
+<!-- ───────────────────────── 7 검증 ───────────────────────── -->
+<section id="verify">
+  <h2><span class="no">7</span>feed_url 검증 절차</h2>
+  <p><code>radar verify [--all | --id …] [--apply]</code>: 새로 추가된(<code>unverified</code>) 소스는 매 실행에서, 전체는 월 1회 자동으로 검증한다.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>단계</th><th>검사</th><th>실패 시 상태</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>robots.txt가 피드 경로를 허용하는가</td><td><code>robots_blocked</code></td></tr>
+      <tr><td class="num">2</td><td>리다이렉트를 따라가 200이 오는가. 최종 URL을 기록한다</td><td><code>http_error</code> / <code>redirected</code></td></tr>
+      <tr><td class="num">3</td><td>RSS·Atom으로 파싱되는가 (200으로 HTML 페이지가 오는 경우를 거른다)</td><td><code>not_feed</code></td></tr>
+      <tr><td class="num">4</td><td>엔트리가 1개 이상인가</td><td><code>empty</code></td></tr>
+      <tr><td class="num">5</td><td>최신 엔트리가 30일 안인가</td><td><code>stale</code> (수집은 함)</td></tr>
+      <tr><td class="num">6</td><td>참고 지표: 최근 20개 중 투자 키워드 비율, feed_only 소스의 요약 길이</td><td>보고서에만 표시</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><b>피드 URL이 틀렸거나 비어 있을 때</b>는 홈페이지의 <code>&lt;link rel="alternate" type="application/rss+xml"&gt;</code>를 먼저 찾는다. 없으면 <code>/feed</code>, <code>/feed/</code>, <code>/rss</code>, <code>/rss.xml</code>, <code>/atom.xml</code>, <code>/index.xml</code> 순서로 시도해 1~5단계를 통과하는 후보를 찾는다. <b>CSV를 몰래 고치지 않는다.</b> 결과는 <code>verify_report.csv</code>로 내고, <code>--apply</code>를 줄 때만 후보를 CSV에 쓴다 (원본은 <code>.bak</code>). 수집 대상은 <code>ok</code>, <code>redirected</code>, <code>stale</code>뿐이다. 한 번도 작동한 적 없는 소스는 실패 횟수에 넣지 않는다.</p>
+</section>
+
+<!-- ───────────────────────── 8 LLM ───────────────────────── -->
+<section id="llm">
+  <h2><span class="no">8</span>LLM 1차 거르기</h2>
+
+  <h3>LLM은 꼭 필요한가</h3>
+  <div class="answer">
+    <p><b>수집과 폐기만이라면 없어도 된다. 요구한 추출 항목을 채우려면 필요하다.</b> 공인 명단과 해커톤처럼 구조가 있는 소스는 회사명·수상 여부·날짜가 데이터에 이미 있다. 투자 기사도 "금액·라운드·투자사가 하나라도 있는가"는 다국어 정규식으로 판정할 수 있다. 하지만 7개 언어로 된 자유 문장에서 회사명을 뽑는 일, 한국어 한 줄 설명·타깃·카테고리, 한국 유사 서비스 판단은 규칙으로 만들 수 없다.</p>
+    <p>그래서 <b>규칙이 먼저 걸러 LLM이 볼 양을 줄이고, LLM은 규칙이 못 하는 일만 한다.</b> 설정 <code>llm.backend: none</code>으로 LLM을 끄면 시트에는 원어 제목과 정규식으로 뽑은 금액·라운드만 올라간다. 파이프라인 자체는 그 상태로도 돈다.</p>
+  </div>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>작업</th><th>규칙만으로</th><th>LLM이 필요한 이유</th></tr></thead>
+    <tbody>
+      <tr><td>중복 제거, 최근 7일 창, 유료·robots</td><td>✔ 된다</td><td>—</td></tr>
+      <tr><td>공인 명단·해커톤의 회사명·수상 여부</td><td>✔ 된다 (구조화 데이터)</td><td>—</td></tr>
+      <tr><td>투자 정보 0개인 기사 폐기</td><td>✔ 된다 (다국어 패턴, 보수적으로)</td><td>—</td></tr>
+      <tr><td>자유 문장에서 회사명·금액·투자사 뽑기</td><td>△ 영어 제목은 일부만</td><td>독·불·중·일·스웨덴어 기사와 라운드업 기사(회사 여러 곳)</td></tr>
+      <tr><td>한국어 한 줄 설명, 타깃 고객, 카테고리</td><td>✗</td><td>요약과 번역이 필요</td></tr>
+      <tr><td>수상 기사인지 참가 소개 기사인지</td><td>△ 키워드는 오탐이 많음</td><td>문맥 판단</td></tr>
+      <tr><td>한국 유사 서비스 판단</td><td>△ 키워드 후보 검색까지만</td><td>후보 중 실제로 비슷한지 판단</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>16GB Mac mini에서 쓸 수 있는 로컬 모델</h3>
+  <p>Apple Silicon은 CPU와 GPU가 메모리를 나눠 쓴다. 16GB 중 GPU가 기본으로 쓸 수 있는 몫은 약 2/3(≈10.7GB)이다. 그래서 <b>4비트 양자화 기준 7GB 안팎의 8~10B급 모델</b>이 알맞다. 이 작업은 짧은 원문에서 정해진 칸을 채우는 일이라, 큰 모델의 추론력보다 다국어 독해와 JSON 형식 준수가 중요하다. Ollama는 JSON 스키마로 응답 형식을 강제할 수 있다 (<code>format</code> 인자).</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>후보 (Ollama 태그)</th><th>크기</th><th>판단</th></tr></thead>
+    <tbody>
+      <tr class="pick"><td class="k">qwen3.5:9b</td><td class="num">≈ 6.6 GB</td><td><b>1순위.</b> 중국어·일본어 원문이 많은 이 작업에 강하다. 사고(think) 모드는 끄고 쓴다</td></tr>
+      <tr><td class="k">gemma4:e4b</td><td class="num">≈ 7–10 GB</td><td>비교 후보. 실효 4B급이라 더 빠르지만 추출 정확도는 낮을 수 있다</td></tr>
+      <tr><td class="k">14B급 (Q4)</td><td class="num">≈ 9 GB</td><td>품질 상한 확인용. 메모리가 빠듯하고 속도는 절반 수준</td></tr>
+      <tr><td class="k">gpt-oss:20b</td><td class="num">≈ 14 GB</td><td>제외. GPU 몫을 넘는다</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small">태그와 크기는 2026-11 검색 기준이다. 구현할 때 Ollama 라이브러리에서 다시 확인한다. 모델은 Phase 3에서 정답을 단 50건으로 맞붙여 보고 고른다. 모델 이름은 <code>settings.yaml</code>의 한 줄이다.</p>
+
+  <h3>작은 모델용 안전장치</h3>
+  <ul class="bul">
+    <li>요청 1건 = 원문 1건. 출력 칸은 짧게 하고, 카테고리 같은 값은 고정 목록(enum)에서만 고르게 한다. 온도는 0.</li>
+    <li>회사명과 인용 구절이 원문에 실제로 있는지 코드가 검사한다 (판정 규칙 2·3). 지어낸 이름은 여기서 걸린다.</li>
+    <li>투자 금액·라운드·투자사는 "원문에 쓰인 것만, 없으면 null"로 한다. 판정은 LLM이 아니라 <code>judge</code>가 한다.</li>
+    <li>한국 비교는 <b>DB에서 찾은 후보</b>(KR 소스 12개월치 전문 검색 상위 8개)를 근거로만 판단한다. 작은 모델은 한국 스타트업을 잘 모르므로, "없음" 대신 <b>"DB에서 못 찾음"</b>이라고 정직하게 표시한다.</li>
+    <li>시스템 프롬프트를 고정해 두면 Ollama가 같은 앞부분의 계산을 재사용해서, 원문 부분만 새로 읽는다.</li>
+  </ul>
+
+  <h3>A단계 프롬프트 초안 · 추출·분류</h3>
+  <pre>[system]
+너는 스타트업 뉴스·명단에서 사실만 뽑아 JSON으로 정리하는 추출기다.
+입력은 원문 1건(제목, 요약 또는 본문, 출처, 출처의 공인 유형 signal)이다.
+
+규칙
+1. 원문에 쓰여 있는 사실만 적는다. 추측·배경지식으로 채우지 않는다. 없으면 null.
+   투자 금액·라운드·투자사는 원문에 명시된 경우에만. "undisclosed/비공개"는 금액 null.
+2. 원문에 회사가 여러 곳이면(라운드업 기사, 수상자 목록) mentions에 각각 넣는다.
+   특정 회사가 주인공이 아닌 글(시장 동향, 칼럼, 인사, 행사 공지)은 mentions = [].
+3. company_name 과 evidence_quote 는 원문의 글자를 그대로 복사한다.
+   evidence_quote 는 투자·선정·수상 사실을 보여 주는 30~200자 구절.
+4. is_winner: 실제로 상을 받았을 때만 true. 참가·결선 진출 예정·데모 발표는 false.
+   대회와 무관하면 null.
+5. one_liner_ko: 누구에게 무엇을 해 주는지 한국어 한 문장, 60자 이내, 수식어 없이.
+6. keywords_ko: 서비스 핵심을 나타내는 한국어 명사 3~6개. 조사·형용사 없이.
+7. category: 아래 목록에서 하나만.
+   AI·데이터 | 개발자도구·인프라 | 보안 | 핀테크 | 인슈어테크 | 헬스케어 | 바이오 |
+   커머스·리테일 | 푸드·농업 | 모빌리티 | 물류 | 에너지·기후 | 교육 | HR·업무툴 |
+   부동산·건설 | 미디어·콘텐츠 | 게임 | 여행·레저 | 하드웨어·로보틱스 | 생활·소비자앱 | 기타
+8. country: 본사 국가 ISO 2글자. 원문에서 알 수 없으면 null.
+
+[user]
+signal: {signal}   source: {source_name} ({source_country})   detail: {signal_detail}
+title: {title}
+published: {published_at}
+text: {summary 또는 body}
+
+[응답 스키마]
+{ "is_funding_event": bool,
+  "mentions": [{
+    "company_name": str, "company_name_native": str|null, "website": str|null,
+    "country": str|null, "one_liner_ko": str, "target_customer_ko": str,
+    "customer_type": "B2B"|"B2C"|"B2B2C"|"B2G"|"unknown", "category": enum,
+    "round": "pre-seed"|"seed"|"series_a"|…|"grant"|"other"|null,
+    "amount": number|null, "currency": str|null, "investors": [str],
+    "award_prize": str|null, "is_winner": bool|null,
+    "evidence_quote": str, "keywords_ko": [str] }] }</pre>
+  <p>연간 결과 페이지용 변형은 같은 스키마에 지시만 바꾼다: "이 페이지는 {event} {year} 결과 페이지다. 수상자만 넣고 심사위원·후원사·참가 기업은 넣지 마라."</p>
+
+  <h3>B단계 프롬프트 초안 · 한국 유사 서비스</h3>
+  <pre>[system]
+해외 회사 1곳과, 한국 스타트업 뉴스 DB에서 찾은 후보 기사 목록을 받는다.
+후보 중에 같은 문제를 같은 고객에게 푸는 한국 서비스가 있는지 판단한다.
+- 있음: 거의 같은 서비스가 후보에 있다
+- 비슷함: 같은 문제를 다른 방식·다른 고객으로 풀거나, 큰 서비스의 한 기능이다
+- DB에서 못 찾음: 후보 중에 해당하는 것이 없다
+규칙: 후보 목록에 없는 이름은 쓰지 마라. 근거는 후보 번호로 댄다. reason_ko 는 한 문장.
+
+[user]
+해외 회사: {display_name} ({country}) — {one_liner_ko}
+타깃: {target_customer_ko} / {customer_type}   카테고리: {category}   키워드: {keywords_ko}
+후보 (KR 전문 검색 상위 8):
+1. [{date} {source}] {title} — {summary 앞 150자}
+…
+
+[응답 스키마]
+{ "kr_similar": "있음"|"비슷함"|"DB에서 못 찾음", "match_ids": [int], "match_names": [str], "reason_ko": str }</pre>
+  <p>후보는 대상 회사의 <code>keywords_ko</code>를 접두 검색(<code>배달*</code>)으로 OR로 묶어 FTS5에서 찾는다. 조사가 붙은 원문 단어(배달앱을)도 잡힌다. Claude API로 바꾸면 "모델이 아는 한국 서비스"도 근거로 허용할 수 있다 (근거에 <code>from: knowledge</code> 표시).</p>
+
+  <h3 id="calc">처리 시간 · 비용 계산기</h3>
+  <p>로컬은 돈 대신 시간이 든다. Mac mini가 월요일 새벽에 몇 시간 일하면 되는 양인지, API로 바꾸면 얼마인지 비교한다. 기본값은 <b>M1 · 16GB</b> 기준 추정치다 (9B 모델 4비트: 생성 약 15~20, 프롬프트 처리 약 150~250 토큰/초). Phase 3 첫 실행에서 실측값으로 바꾼다.</p>
+  <div class="calc">
+    <div class="panel">
+      <div class="field">
+        <label>주당 수집 건수 (중복 제거 후, 최근 7일) <output id="o_items">700</output></label>
+        <input type="range" id="items" min="100" max="5000" step="50" value="700">
+      </div>
+      <div class="field">
+        <label>규칙으로 먼저 폐기되는 비율 <output id="o_pre">40%</output></label>
+        <input type="range" id="pre" min="0" max="70" step="5" value="40">
+      </div>
+      <div class="field">
+        <label>LLM 처리 후 보존 비율 <output id="o_keep">45%</output></label>
+        <input type="range" id="keep" min="10" max="90" step="5" value="45">
+      </div>
+      <div class="field">
+        <label>로컬 생성 속도 (토큰/초) <output id="o_gen">17</output></label>
+        <input type="range" id="gen" min="8" max="60" step="1" value="17">
+      </div>
+      <div class="field">
+        <label>로컬 프롬프트 처리 속도 (토큰/초) <output id="o_pp">200</output></label>
+        <input type="range" id="pp" min="50" max="1500" step="25" value="200">
+      </div>
+      <div class="field">
+        <label>환율 (원/달러)</label>
+        <input type="number" id="fx" value="1400" min="800" max="2500" step="10">
+      </div>
+      <p class="hint">가정: A단계 1건 = 새로 읽는 입력 800 + 출력 350 토큰 (로컬, 사고 끔). API는 시스템 프롬프트를 포함해 입력 2,600 + 출력 550. B단계는 로컬 900+200, API 1,900+400. API 가격은 Batch(50% 할인) 기준이다. Haiku 5.5는 $0.05/$0.25, Sonnet 5.5는 $1/$5 (100만 토큰당, 2026-10 공시가).</p>
+    </div>
+    <div>
+      <div class="result-head">
+        <div class="kpi"><small>LLM이 보는 건수 (A / B)</small><b id="k_n">420 / 189</b></div>
+        <div class="kpi"><small>로컬 처리 시간</small><b id="k_time">3.7시간</b></div>
+        <div class="kpi"><small>로컬 비용</small><b>0원<em>전기 주 0.1kWh 내외</em></b></div>
+      </div>
+      <div class="tablewrap">
+      <table id="combos">
+        <thead><tr><th>구성 (A추출 + B한국비교)</th><th>Mac mini 시간</th><th>주 비용</th><th>월 비용</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      </div>
+      <p class="small">추천 진행 순서: <b>로컬 + 로컬</b>로 시작한다. 50건 점검에서 B단계 품질이 모자라면 <b>로컬 + Sonnet</b>(B만 API)으로 바꾼다. 둘 다 모자라면 <b>Haiku + Sonnet</b>. 어느 경우든 바꾸는 것은 설정 두 줄이다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── 9 화면 ───────────────────────── -->
+<section id="view">
+  <h2><span class="no">9</span>결과 보기 방식</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th></th><th>Google Sheets (추천)</th><th>Notion</th><th>로컬 웹 UI</th></tr></thead>
+    <tbody>
+      <tr><td class="k">매주 할 일</td><td>폰으로 시트 열고 ☑</td><td>폰으로 Notion 열고 ☑</td><td>Mac mini 주소로 접속 (집 와이파이 또는 VPN)</td></tr>
+      <tr><td class="k">밖에서 보기</td><td>✔ 어디서나</td><td>✔ 어디서나</td><td>✗ 외부 접속을 따로 열어야 함</td></tr>
+      <tr><td class="k">초기 설정</td><td>서비스 계정 키 + 시트 공유 (1회 10분)</td><td>통합 토큰 + DB 공유 (1회 5분)</td><td>없음</td></tr>
+      <tr><td class="k">구현량</td><td>적음 (행 쓰기·셀 읽기)</td><td>중간 (속성 스키마, 페이지 ID 관리)</td><td>많음 (화면, 필터, 저장)</td></tr>
+      <tr><td class="k">필터·정렬·메모</td><td>기본 기능으로 충분</td><td>좋음 (뷰·보드)</td><td>직접 구현</td></tr>
+      <tr><td class="k">약점</td><td>모양이 투박함</td><td>API 초당 약 3회 제한, 행이 쌓이면 느려짐</td><td>밖에서 못 봄, 서버를 계속 띄워 둬야 함</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><b>추천: Google Sheets.</b> "손이 가장 덜 가는" 기준은 매주 확인할 때의 수고다. 폰에서 바로 열리고, 체크박스와 필터가 기본 기능이라 화면을 만들 필요가 없다. Notion은 보기는 더 좋지만 구현과 유지가 더 든다. 로컬 웹 UI는 Mac mini가 집에 있어서 밖에서 보기 어렵다. 키 파일은 Mac mini의 <code>~/.config/startup-radar/</code>에 두고 레포에는 넣지 않는다.</p>
+
+  <h3>시트 구성 · "최신 1주일치만"</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>탭</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td class="k">이번 주</td><td>매주 <b>통째로 새로 쓴다</b>. 쓰기 전에 지난 내용의 ☑·메모를 먼저 DB로 회수한다. 맨 위 1행은 실행 요약이다 (<code>W46 · 11/09 03:12 실행 · 신규 38곳 · 폐기 412 · 오류 0 · 비활성 소스 1</code>). 열: id(숨김) · ☑ 볼만함 · 메모 · 회사 · 국가 · 한 줄 설명 · 타깃 · 카테고리 · 공인 근거 · 투자(라운드/금액 USD/투자사) · 한국 유사 · 원문 링크(최대 3) · 과거 언급 수</td></tr>
+      <tr><td class="k">관심</td><td>☑한 회사가 쌓이는 곳. 주차와 메모가 함께 남는다. 스크립트는 행 추가만 하고 고치지 않는다</td></tr>
+      <tr><td class="k">소스 상태</td><td>소스별 상태, 마지막 성공, 연속 실패, 비활성 사유</td></tr>
+      <tr><td class="k">폐기 샘플</td><td>이번 주 폐기분 중 무작위 20건 (사유, 제목, 링크). 자동 폐기를 믿어도 되는지 가끔 훑어보는 용도다</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>지난주에 체크하지 못한 항목은 '이번 주' 탭에서 사라지지만 DB에는 남는다. 이전에 본 회사가 이번 주에 새 소식(예: YC 선정 뒤 시리즈 A)으로 다시 나오면 "과거 언급 수"와 공인 근거에 이전 기록이 함께 보인다.</p>
+</section>
+
+<!-- ───────────────────────── 10 에러 ───────────────────────── -->
+<section id="errors">
+  <h2><span class="no">10</span>에러 처리와 로깅</h2>
+  <h3>격리</h3>
+  <ul class="bul">
+    <li><b>소스 단위:</b> 소스 하나의 예외는 <code>fetch_log</code>에 남기고 다음 소스로 넘어간다.</li>
+    <li><b>단계 단위:</b> 수집이 통째로 실패해도 이미 쌓인 항목의 LLM 처리와 게시는 진행한다.</li>
+    <li><b>행 단위:</b> LLM 응답 1건이 스키마에 맞지 않으면 1회 재시도한다. 3회 실패하면 <code>llm_error</code>로 두고 다음 건으로 간다.</li>
+    <li><b>사이클 단위:</b> 게시까지 끝나야 <code>cycle_done</code>을 기록한다. 중간에 끊기면 다음 깨움(다음 날 03:00이나 부팅 직후)이 남은 단계부터 이어서 한다.</li>
+  </ul>
+  <h3>소스 장애와 자동 비활성화</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>상황</th><th>처리</th></tr></thead>
+    <tbody>
+      <tr><td>일시 오류 (타임아웃, 5xx, 429, DNS)</td><td>재시도 후에도 실패하면 이번 실행 실패 1회</td></tr>
+      <tr><td>영구 오류 (404, 410, 피드 아님, 파싱 실패)</td><td>실패 1회. 사이트 점검일 수 있어 바로 끄지 않는다</td></tr>
+      <tr><td>조용한 고장 (crawl 2회 연속 0건)</td><td>실패 1회</td></tr>
+      <tr><td>robots 차단</td><td>실패로 세지 않고 바로 제외한 뒤 소스 상태 탭에 표시</td></tr>
+      <tr><td><b>연속 실패 3회</b> (설정값)</td><td>자동 비활성화하고 WARNING 로그를 남긴다. 시트 요약 줄과 소스 상태 탭에 표시한다. CSV의 <code>active</code>는 건드리지 않는다</td></tr>
+      <tr><td>비활성 소스</td><td>30일마다 1회 시험 요청을 보내 성공하면 자동 복구한다. <code>radar sources enable &lt;id&gt;</code>로 직접 켤 수도 있다</td></tr>
+      <tr><td>Ollama 응답 없음</td><td>서비스를 1회 재시작한다. 그래도 안 되면 남은 항목은 <code>llm_pending</code>으로 두고 다음 깨움이 이어서 한다</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>로그와 알림</h3>
+  <ul class="bul">
+    <li><code>~/startup-radar/data/logs/radar.log</code>: 주 단위로 파일을 바꾸고 12주 보관한다. 한 줄 형식은 <code>시각 레벨 run_id 단계 source_id 메시지</code>.</li>
+    <li><code>radar status</code>: 최근 실행, 단계별 건수, 비활성 소스, 남은 LLM 작업. SSH로 확인한다.</li>
+    <li><b>DB 백업</b>: 주간 사이클 시작 전에 SQLite 백업 API로 만들고 8개를 보관한다.</li>
+    <li><b>알림</b>: Mac mini 앞에 사람이 없으므로 macOS 알림은 쓰지 않는다. 기본은 시트 맨 위 요약 줄이다. 선택으로 실패 때만 개인 Gmail로 메일을 보낸다 (앱 비밀번호, 표준 라이브러리). Mac mini가 통째로 죽으면 메일도 안 오므로, <b>요약 줄의 실행 날짜가 오래됐으면 이상 신호</b>로 본다.</li>
+  </ul>
+</section>
+
+<!-- ───────────────────────── 11 계획 ───────────────────────── -->
+<section id="plan">
+  <h2><span class="no">11</span>단계별 구현 계획</h2>
+  <p>각 Phase가 끝나면 그 상태로 Mac mini에서 매주 자동으로 끝까지 돈다. Phase 3까지의 결과는 <code>radar export</code>가 CSV로 만들어 iCloud Drive 폴더에 두므로 노트북이나 폰에서 연다. Phase 4부터는 시트로 본다.</p>
+  <div class="flows">
+    <div class="flow">
+      <h3>Phase 1 · tier 1 RSS·gnews → DB</h3>
+      <ul>
+        <li>새 레포, <code>sources.csv</code> 이전 (+3열)</li>
+        <li>config · db · http(예절 전부) · rss · gnews · verify</li>
+        <li>기사 중복, 최근 7일 창, 자동 비활성화</li>
+        <li><code>backfill</code>(WordPress 과거 페이지) · <code>install</code> · <code>doctor</code> · <code>status</code> · <code>export</code></li>
+        <li>대상: rss 18개(feed_only 5개 포함) + gnews 3개</li>
+      </ul>
+      <div class="crit"><b>완료 기준</b>
+        <ul>
+          <li>Mac mini에서 사람 손 없이 주간 사이클이 1회 끝났다</li>
+          <li>검증 보고서에 21개 소스의 상태가 모두 나온다</li>
+          <li>틀린 URL을 넣으면 3회 뒤 비활성화되고 나머지는 정상이다</li>
+          <li>두 번 돌려도 항목이 늘지 않는다</li>
+          <li>feed_only 원문 요청이 0건이다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow">
+      <h3>Phase 2 · crawl 소스</h3>
+      <ul>
+        <li>스파이크 1일: 6곳의 robots·데이터 위치·로그인 벽</li>
+        <li>어댑터 등록부, <code>list_diff_html</code>, <code>annual_winners_page</code>(LLM 연결 전까지는 텍스트만 저장)</li>
+        <li>전용: YC Companies · YC Launches · Devpost · J-Startup · PR TIMES · Startup Nation Finder</li>
+        <li>12개월 적재, 조용한 고장 감지, fixture 테스트</li>
+      </ul>
+      <div class="crit"><b>완료 기준</b>
+        <ul>
+          <li>6개 어댑터가 fixture와 실제 수집을 모두 통과한다</li>
+          <li>Devpost 비수상작이 DB에 0건이다</li>
+          <li>적재 뒤에는 매주 새 항목만 생긴다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow">
+      <h3>Phase 3 · 규칙 필터 + 로컬 LLM</h3>
+      <ul>
+        <li><code>patterns.yaml</code> 규칙 사전 폐기</li>
+        <li>Ollama 백엔드 (+ 같은 인터페이스의 Claude API 백엔드)</li>
+        <li>프롬프트 A·B, judge, mentions·companies, FTS5 KR 검색, 회사 병합, <code>rejudge</code></li>
+        <li>정답을 단 50건으로 qwen3.5:9b와 gemma4:e4b를 비교한다. 참고로 같은 50건을 Haiku로도 돌린다 (약 1센트)</li>
+      </ul>
+      <div class="crit"><b>완료 기준</b>
+        <ul>
+          <li>1주치가 M1에서 6시간 안에 사람 손 없이 판정까지 끝난다</li>
+          <li>50건 중 잘못 폐기 ≤ 2건, 회사명 오류 ≤ 3건</li>
+          <li>도중에 Ollama를 죽여도 다음 실행이 이어서 한다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow">
+      <h3>Phase 4 · 시트</h3>
+      <ul>
+        <li><code>radar sheet init</code>: 탭 4개, 체크박스, 필터 보기</li>
+        <li>'이번 주' 덮어쓰기 전에 ☑ 회수, '관심' 누적</li>
+        <li>소스 상태·폐기 샘플 탭, 요약 줄, (선택) 실패 메일</li>
+      </ul>
+      <div class="crit"><b>완료 기준</b>
+        <ul>
+          <li>월요일 아침 시트에 이번 주 결과가 있다</li>
+          <li>폰에서 ☑한 것이 다음 주 '관심' 탭에 있다</li>
+          <li>설치 이후 사람이 실행한 명령이 0개다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:16px">그 뒤 2주를 운영해 보고 <code>max_tier: 2</code>로 올린다. rss·gnews는 CSV만으로 늘어난다. crawl은 범용 어댑터 설정으로 먼저 해 보고, 안 되는 곳만 전용 어댑터를 만든다.</p>
+</section>
+
+<!-- ───────────────────────── 12 질문 ───────────────────────── -->
+<section id="questions">
+  <h2><span class="no">12</span>결정이 필요한 열린 질문</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>#</th><th>질문</th><th>설계상 기본값</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Mac mini는 하루 종일 켜져 있지만 정전·OS 업데이트로 재시동되는 경우가 남는다. FileVault를 끄고 자동 로그인을 켤까? 켜 두면 재시동 뒤 한 번 직접 로그인할 때까지 수집이 멈춘다</td><td>자동 로그인 (FileVault 끔). 키 파일은 권한 600</td></tr>
+      <tr><td class="num">2</td><td>로컬 모델이 품질 기준에 못 미치면 B단계만 Sonnet으로 바꿀까? (계산기 기본값 기준 월 약 4,500원)</td><td>예, B단계만</td></tr>
+      <tr><td class="num">3</td><td>더브이씨(partial, 피드 없음)가 빠진다. 로그인 없이 보이는 공개 목록만 읽는 것은 허용할까?</td><td>제외. KR 인덱스는 플래텀·벤처스퀘어·스타트업레시피·TIPS·Google News(ko)로 채운다</td></tr>
+      <tr><td class="num">4</td><td>해커톤 임계값 "등록자 200명 또는 상금 $5,000"이 괜찮은가?</td><td>그대로 시작하고, 2주 뒤 양을 보고 조정한다</td></tr>
+      <tr><td class="num">5</td><td>후기 단계·대형 라운드(Series C 이상 또는 $100M 이상)를 거를까?</td><td>거르지 않는다. 시트 필터로만 본다</td></tr>
+      <tr><td class="num">6</td><td>본문 보강(scope=full 소스에서 요약이 짧을 때 원문 앞부분 읽기)을 켤까?</td><td>끈다. Phase 3 점검 결과를 보고 정한다</td></tr>
+      <tr><td class="num">7</td><td>시트를 둘 Google 계정</td><td>개인 Gmail (회사 계정은 피한다)</td></tr>
+      <tr><td class="num">8</td><td>실패할 때 메일을 받을까?</td><td>받는다 (실패 때만)</td></tr>
+      <tr><td class="num">9</td><td>사이클을 몇 주 놓쳤을 때도 "최신 7일치만" 처리하고 나머지는 적재만 하는 게 맞는가?</td><td>맞다 (요청대로)</td></tr>
+      <tr><td class="num">10</td><td>주간 사이클 시작 때 <code>git pull</code>로 코드를 자동 갱신해도 되는가? (push한 코드가 바로 다음 주에 돈다)</td><td>된다. 실패하면 현재 버전으로 계속</td></tr>
+      <tr><td class="num">11</td><td>gnews 확장: 어떤 국가 × 키워드 조합을 넣을까? (지금 tier 1은 en·ja·ko 3개)</td><td>Phase 1은 기존 행만 쓴다</td></tr>
+      <tr><td class="num">12</td><td>해커톤 수상 프로젝트(아직 회사가 아닌 것)를 같은 탭에 둘까, 별도 탭으로 뺄까?</td><td>같은 탭, "프로젝트" 표시</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer class="doc-foot">API 가격은 2026년 10월 Anthropic 공시가, 로컬 모델 태그·크기는 2026년 11월 검색 기준이다. 구현을 시작할 때 다시 확인한다. 코드는 별도 비공개 레포에서 개발하며 이 페이지는 설계만 담는다. 같은 내용의 md 원본: <code>portfolio/startup_radar_design.md</code>.</footer>
+</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var T = { aInL:800, aOutL:350, bInL:900, bOutL:200, aIn:2600, aOut:550, bIn:1900, bOut:400 };
+  var P = { haiku:{i:0.05,o:0.25}, sonnet:{i:1.0,o:5.0} }; // Batch, $/MTok
+  function apiCost(m, n, tin, tout){ return n*(tin*P[m].i + tout*P[m].o)/1e6; }
+  function fmtN(n){ return Math.round(n).toLocaleString('ko-KR'); }
+  function fmtUSD(n){ return n === 0 ? '$0' : (n < 0.01 ? '<$0.01' : '$' + n.toFixed(2)); }
+  function fmtKRW(n){ return n === 0 ? '0원' : fmtN(n) + '원'; }
+  function fmtH(sec){ var h = sec/3600; return h < 1 ? Math.round(sec/60) + '분' : h.toFixed(1) + '시간'; }
+  function render(){
+    var items = +$('items').value, pre = +$('pre').value, keep = +$('keep').value;
+    var gen = +$('gen').value, pp = +$('pp').value, fx = +$('fx').value || 1400;
+    $('o_items').textContent = fmtN(items);
+    $('o_pre').textContent = pre + '%';
+    $('o_keep').textContent = keep + '%';
+    $('o_gen').textContent = gen;
+    $('o_pp').textContent = pp;
+    var nA = Math.round(items*(1-pre/100)), nB = Math.round(nA*keep/100);
+    var tA = nA*(T.aInL/pp + T.aOutL/gen), tB = nB*(T.bInL/pp + T.bOutL/gen);
+    $('k_n').textContent = fmtN(nA) + ' / ' + fmtN(nB);
+    $('k_time').textContent = fmtH(tA + tB);
+    var cHA = apiCost('haiku', nA, T.aIn, T.aOut), cHB = apiCost('haiku', nB, T.bIn, T.bOut);
+    var cSA = apiCost('sonnet', nA, T.aIn, T.aOut), cSB = apiCost('sonnet', nB, T.bIn, T.bOut);
+    var rows = [
+      { name:'로컬 + 로컬 (시작점)', time:fmtH(tA+tB), cost:0, pick:true },
+      { name:'로컬 + Sonnet 5.5', time:fmtH(tA) + ' + 배치 대기', cost:cSB },
+      { name:'Haiku 5.5 + Haiku 5.5', time:'배치 대기만 (보통 1시간 안)', cost:cHA+cHB },
+      { name:'Haiku 5.5 + Sonnet 5.5', time:'배치 대기만', cost:cHA+cSB },
+      { name:'Sonnet 5.5 + Sonnet 5.5', time:'배치 대기만', cost:cSA+cSB }
+    ];
+    var tb = $('combos').querySelector('tbody'); tb.innerHTML = '';
+    rows.forEach(function(r){
+      var tr = document.createElement('tr');
+      if (r.pick) tr.className = 'pick';
+      var month = r.cost*52/12;
+      tr.innerHTML = '<td>'+r.name+'</td><td style="color:var(--ink-2);font-size:.88rem">'+r.time+'</td><td class="num">'+fmtUSD(r.cost)+'</td><td class="num">'+fmtKRW(month*fx)+'</td>';
+      tb.appendChild(tr);
+    });
+  }
+  ['items','pre','keep','gen','pp','fx'].forEach(function(id){ $(id).addEventListener('input', render); });
+  render();
+})();
+</script>
+</body>
+</html>
