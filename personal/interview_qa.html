@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAFDFD">
+<link rel="icon" href="../assets/img/favicon/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
+<title>면접 질문 100 · 답 외우기</title>
+<link rel="stylesheet" href="../assets/css/summer.css">
+<style>
+  .stamp { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; }
+  .hero h1 { max-width: 18ch; }
+
+  /* 면접일 · 진행 */
+  .ddrow { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 20px 40px; align-items: end; margin-top: 36px; max-width: 880px; }
+  .ddrow .dd b { display: block; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+  .ddrow .dd span { font-size: 14px; color: var(--ink-2); }
+  .ddrow .prog .row { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-2); margin-bottom: 8px; }
+
+  .sec-body h3 { margin: 56px 0 14px; }
+  .sec-body h3:first-child { margin-top: 0; }
+  .sec-body h3 small { font-size: 13px; font-weight: 400; color: var(--ink-2); margin-left: 8px; letter-spacing: 0; }
+  .sec-body p.note { font-size: 14px; color: var(--ink-2); margin: 10px 0 0; max-width: 72ch; }
+  .sec-body p.body { max-width: 72ch; margin: 0 0 12px; }
+  .sec-body p.note b, .sec-body p.body b { color: var(--ink); }
+  .tbl td.k, .tbl th.k { white-space: nowrap; }
+  .tbl td.m { font-size: 14px; color: var(--ink-2); }
+  .tbl-scroll table { min-width: 640px; }
+
+  /* 도구줄 */
+  .tools { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-bottom: 22px; }
+  .tools .field { width: auto; min-width: 180px; }
+  .tools label.opt { font-size: 14px; color: var(--ink-2); display: inline-flex; gap: 8px; align-items: center; min-height: 36px; cursor: pointer; }
+  .tools .sp { flex: 1; }
+  .tools .shown { font-size: 13px; color: var(--ink-2); }
+
+  /* 카테고리 머리 */
+  .cat { display: flex; align-items: baseline; gap: 14px; margin: 44px 0 0; padding-bottom: 10px; border-bottom: 1px solid var(--ink); }
+  .cat:first-of-type { margin-top: 0; }
+  .cat b { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
+  .cat span { font-size: 13px; color: var(--ink-2); }
+  .cat .done { margin-left: auto; }
+
+  /* 문제 */
+  details.q { border-bottom: 1px solid var(--line); }
+  details.q > summary { list-style: none; cursor: pointer; padding: 15px 0; display: grid; grid-template-columns: 34px 1fr auto; gap: 6px 8px; min-height: 44px; align-items: baseline; }
+  details.q > summary::-webkit-details-marker { display: none; }
+  details.q > summary .n { font-size: 12px; color: var(--ink-2); padding-top: 3px; }
+  details.q > summary .qt { font-size: 16px; letter-spacing: -0.01em; }
+  details.q > summary .mk { font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+  details.q > summary .mk.real { color: var(--accent); }
+  details.q.got > summary .qt { color: var(--ink-2); }
+  details.q .a { padding: 0 0 20px 42px; max-width: 72ch; }
+  details.q .a p { margin: 0 0 10px; font-size: 15px; line-height: 1.8; }
+  details.q .a .fu { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-2); }
+  details.q .a .fu b { color: var(--ink); font-weight: 600; }
+  details.q .a .fu p { font-size: 14px; margin: 4px 0 0; color: var(--ink-2); }
+  details.q .a .got { display: inline-flex; gap: 8px; align-items: center; margin-top: 8px; font-size: 14px; color: var(--ink-2); cursor: pointer; min-height: 36px; }
+
+  .rule li { padding: 12px 0; font-size: 15px; border-bottom: 1px solid var(--line); }
+  .rule { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); max-width: 72ch; }
+  .rule li b { font-weight: 600; }
+
+  .wk { border-top: 1px solid var(--line); padding: 18px 0; display: grid; grid-template-columns: 148px 1fr; gap: 32px; }
+  .wk:last-of-type { border-bottom: 1px solid var(--line); }
+  .wk .h b { display: block; font-size: 16px; font-weight: 600; letter-spacing: -0.02em; }
+  .wk .h span { font-size: 13px; color: var(--ink-2); }
+  .wk p { margin: 0 0 6px; font-size: 15px; }
+  .wk p.m { font-size: 14px; color: var(--ink-2); }
+
+  .src { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .src li { padding: 10px 0; font-size: 14px; border-bottom: 1px solid var(--line); }
+
+  @media (max-width: 1024px) { .wk { grid-template-columns: 110px 1fr; gap: 24px; } }
+  @media (max-width: 760px) {
+    .ddrow { grid-template-columns: 1fr 1fr; }
+    .ddrow .prog { grid-column: 1 / -1; }
+    details.q .a { padding-left: 0; }
+  }
+  @media (max-width: 640px) {
+    .wk { grid-template-columns: 1fr; gap: 6px; }
+    .tools .sp { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <span class="crumb"><a class="home" href="../index.html">ttomstudio</a><span class="sep" aria-hidden="true">/</span><a class="brand" href="index.html">Personal</a></span>
+    <div class="links">
+      <a href="#how">쓰는 법</a>
+      <a href="#qa">질문 100</a>
+      <a href="#study">공부</a>
+      <a href="#plan">계획</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="stamp"><span class="eyebrow">AI 대학원 면접 · 서강 11/28 · 한양 12/5</span></div>
+    <h1>면접 질문 100<br>답까지 외우기</h1>
+    <p class="lead">후기에 나온 질문은 대부분 기본 개념이었다. 같은 결의 질문 100개를 일곱 묶음으로 나누고, 말하듯 외울 수 있는 답을 붙였다. 개인 이야기(1묶음)는 빈칸을 직접 채운다.</p>
+
+    <div class="ddrow">
+      <div class="dd"><b id="dd1">—</b><span>서강 면접 11/28</span></div>
+      <div class="dd"><b id="dd2">—</b><span>한양 면접 12/5</span></div>
+      <div class="prog">
+        <div class="row"><span>외운 질문</span><span class="tnum" id="allCnt">0 / 100</span></div>
+        <div class="meter"><i id="allBar"></i></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <svg class="hero-wave" viewBox="0 0 1080 64" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,42 C120,42 150,18 270,18 C390,18 420,42 540,42 C660,42 690,18 810,18 C930,18 960,42 1080,42"/>
+      <path class="accent" d="M0,52 C120,52 150,30 270,30 C390,30 420,52 540,52 C660,52 690,30 810,30 C930,30 960,52 1080,52"/>
+    </svg>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ 01 쓰는 법 ============================ -->
+<section class="band rise" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">01</div>
+      <div>
+        <h2>어떻게 외울까</h2>
+        <p class="lead">후기마다 면접은 짧고(팀당 5~10분) 개념 하나를 꼬리질문으로 파고드는 식이었다. 문장을 통째로 외우기보다 뼈대를 외운다.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <ul class="rule">
+        <li><b>질문만 보고 소리 내어 답한다.</b> 그다음 눌러서 답을 확인한다. 막히면 그 질문은 안 외운 것이다.</li>
+        <li><b>답의 첫 문장이 뼈대다.</b> 정의 한 문장 → 이유나 예시 한 문장 순서로 말한다. 길게 말하면 꼬리질문이 늘어난다.</li>
+        <li><b>꼬리질문까지 같이 외운다.</b> 답 아래 회색 칸에 후속 질문을 몇 개 달았다. 한 개념을 계속 파고든 후기가 있었다.</li>
+        <li><b>모르면 아는 데까지 말한다.</b> 외운 문장을 그대로 읊는지 정말 아는지 가려내는 면접이었다는 후기가 있다. 한 겹 더 풀어서 말할 수 있어야 한다.</li>
+        <li><b>“외움”을 누르면 이 브라우저에 저장된다.</b> 위의 막대가 차는 만큼이 진도다. “안 외운 것만”으로 걸러 두 번째 바퀴를 돈다.</li>
+      </ul>
+      <p class="note">“후기 출제” 표시는 실제 후기에서 같은 질문이 나온 것이다. 나머지는 같은 범위의 기본 개념으로 만들었다. 답은 일반 지식으로 썼고 교재와 한 줄씩 대조하지는 않았다. 출제 범위는 교수마다 다르다(학교 FAQ: “적성면접 및 전공(심화) 면접”).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 02 질문 ============================ -->
+<section class="band rise" id="qa">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">02</div>
+      <div>
+        <h2>질문 100개</h2>
+        <p class="lead">1묶음은 본인 이야기라 빈칸(___)을 채운다. 나머지 90개는 그대로 외우면 된다.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="tools">
+        <select id="catSel" class="field" aria-label="묶음 선택"></select>
+        <button class="btn btn-ghost btn-sm" id="btnShuffle" type="button">섞기</button>
+        <button class="btn btn-ghost btn-sm" id="btnOrder" type="button">순서대로</button>
+        <button class="btn btn-ghost btn-sm" id="btnToggle" type="button">모두 펼치기</button>
+        <label class="opt"><input type="checkbox" id="onlyTodo"> 안 외운 것만</label>
+        <span class="sp"></span>
+        <span class="shown tnum" id="shown"></span>
+      </div>
+      <div id="list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 03 공부 ============================ -->
+<section class="band rise" id="study">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">03</div>
+      <div>
+        <h2>따로 공부하면 좋을 과목</h2>
+        <p class="lead">면접용 암기가 끝나면 입학 후 첫 학기를 편하게 해 주는 순서다. 학교 공식 페이지에서 확인한 과목명에 맞췄다.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+
+      <h3>우선순위 표<small>링크는 열어서 제목을 확인한 것만 달았다</small></h3>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th class="k">순서</th><th class="k">과목</th><th>왜</th><th>자료</th></tr></thead>
+          <tbody>
+            <tr><td class="k">1</td><td class="k">확률·통계</td><td>후기에 독립사건이 실제로 나왔다. 서강 「인공지능을 위한 수학」, 한양 「데이터마이닝 및 통계」의 바탕이다.</td><td class="m"><a class="link-u" href="https://d2l.ai/chapter_preliminaries/probability.html" target="_blank" rel="noopener">D2L 확률 장</a> · Harvard Stat 110 공개 강의(사이트가 봇을 막아 링크를 열어 보지 못했다. 직접 검색)</td></tr>
+            <tr><td class="k">2</td><td class="k">선형대수</td><td>PCA의 기하학적 의미가 후기에 나왔다. 고유값·행렬 곱을 모르면 딥러닝 수업이 막힌다.</td><td class="m"><a class="link-u" href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank" rel="noopener">3Blue1Brown 선형대수의 본질</a>로 감을 잡고, <a class="link-u" href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" target="_blank" rel="noopener">MIT 18.06</a>으로 계산을 익힌다</td></tr>
+            <tr><td class="k">3</td><td class="k">Python · NumPy · pandas</td><td>서강 기본과목에 「파이썬 프로그래밍」이 있다. 면접에서 쓰는 언어와 이유를 묻는다.</td><td class="m"><a class="link-u" href="https://pytorch.org/tutorials/beginner/basics/intro.html" target="_blank" rel="noopener">PyTorch 기초 튜토리얼</a>을 따라 치면 텐서·학습 루프까지 한 번에 본다</td></tr>
+            <tr><td class="k">4</td><td class="k">머신러닝 기초</td><td>한양 종합시험 과목 「인공지능개론1」, 서강 「머신러닝 I·II」에 해당한다.</td><td class="m"><a class="link-u" href="https://www.coursera.org/specializations/machine-learning-introduction" target="_blank" rel="noopener">Coursera 머신러닝 전문 과정(앤드류 응)</a> · <a class="link-u" href="https://hunkim.github.io/ml/" target="_blank" rel="noopener">모두를 위한 머신러닝/딥러닝 강의</a>(한국어)</td></tr>
+            <tr><td class="k">5</td><td class="k">딥러닝</td><td>한양 종합시험 과목 「딥러닝개론」, 서강 「딥러닝 기초」. CNN의 receptive field 같은 질문이 나왔다.</td><td class="m"><a class="link-u" href="https://d2l.ai/" target="_blank" rel="noopener">Dive into Deep Learning</a> · <a class="link-u" href="https://cs231n.stanford.edu/" target="_blank" rel="noopener">CS231n</a> · <a class="link-u" href="https://karpathy.ai/zero-to-hero.html" target="_blank" rel="noopener">Karpathy Zero to Hero</a></td></tr>
+            <tr><td class="k">6</td><td class="k">자료구조 · 알고리즘</td><td>한양 종합시험 과목 「컴퓨터 알고리즘」. 후기에 자료구조(이진탐색)가 나왔다.</td><td class="m">백준(acmicpc.net)이나 프로그래머스에서 정렬·탐색·BFS/DFS·DP 기본 문제를 풀어 본다</td></tr>
+            <tr><td class="k">7</td><td class="k">LLM · 생성형 AI</td><td>최근 논문 주제가 LLM으로 쏠렸고(이 대학원 논문 목록), 면접 후기에는 아직 안 나왔다. 마지막 순서로 둔다.</td><td class="m"><a class="link-u" href="https://huggingface.co/learn/llm-course/chapter1/1" target="_blank" rel="noopener">Hugging Face LLM 코스</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>입학하면 바로 만나는 시험·과목<small>학교 공식 페이지</small></h3>
+      <dl class="dl">
+        <div><dt>한양</dt><dd>종합시험(논문 트랙)과 학위취득시험(과목추가이수 트랙) 모두 <b>인공지능개론1 · 컴퓨터 알고리즘 · 딥러닝개론 중 2과목</b>을 신청한다. 2기 안에 이 세 과목 중 두 개를 이수해야 응시할 수 있다. 전공필수는 12학점 이상이다.</dd></div>
+        <div><dt>서강</dt><dd>인공지능 전공 기본과목에 <b>인공지능을 위한 수학 · 파이썬 프로그래밍 · 머신러닝 I·II · 인공지능개론 · 딥러닝 기초</b>가 있다. 학위 요건은 총 30학점이고 논문(6학점) 또는 과제별 워크숍을 고른다.</dd></div>
+      </dl>
+      <p class="note">면접 합격 후 첫 학기까지 2~3개월이 있다. 위 표의 1~3번(수학·Python)을 끝내 두면 입학 후 수업이 훨씬 가볍다.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 04 계획 ============================ -->
+<section class="band rise" id="plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">04</div>
+      <div>
+        <h2>면접까지의 날짜</h2>
+        <p class="lead">서강 면접이 11/28이라 첫 마감이다. 서강을 기준으로 한 바퀴를 돌리고, 남은 일주일은 한양용 복습이다.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="wk"><div class="h"><b>11/13 – 11/14</b><span>접수와 서류</span></div><div>
+        <p>두 학교 접수·결제, 서강 자기소개서, 증명서 발급. 서류 마감(한양 11/16 소인, 서강 11/17 21:00 도착)이 먼저다.</p>
+        <p class="m">질문은 1묶음 “나를 설명하기” 중 자기소개·지원동기 두 개만 먼저 채운다. 자기소개서를 쓰는 내용과 같은 얘기다.</p></div></div>
+      <div class="wk"><div class="h"><b>11/15 – 11/18</b><span>수학</span></div><div>
+        <p>2묶음 확률·통계 15개 + 3묶음 선형대수 15개. 하루 7~8개.</p>
+        <p class="m">독립사건, 베이즈, p-value, PCA, 고유값은 소리 내어 답할 수 있을 때까지 반복한다.</p></div></div>
+      <div class="wk"><div class="h"><b>11/19 – 11/23</b><span>ML · 딥러닝</span></div><div>
+        <p>4묶음 머신러닝 20개 + 5묶음 딥러닝 15개. 하루 7개.</p>
+        <p class="m">지도/비지도, 과적합, 선형·로지스틱 회귀, CNN, 학습 vs 추론, GPU를 우선한다.</p></div></div>
+      <div class="wk"><div class="h"><b>11/24 – 11/26</b><span>코드 · 요즘 AI</span></div><div>
+        <p>6묶음 자료구조·코드 15개 + 7묶음 요즘 AI 10개. 이진탐색은 손으로 코드까지 써 본다.</p>
+        <p class="m">1묶음 빈칸 10개를 전부 채워 입으로 한 번씩 돌린다.</p></div></div>
+      <div class="wk"><div class="h"><b>11/27 – 11/28</b><span>서강 면접</span></div><div>
+        <p>“섞기”로 100개를 돌려 막히는 것만 표시한다. 11/28 면접.</p>
+        <p class="m">시간·장소는 서강이 개별 공지한다. 준비물은 안내문을 따른다.</p></div></div>
+      <div class="wk"><div class="h"><b>11/29 – 12/5</b><span>한양 면접</span></div><div>
+        <p>안 외운 것만 다시 돌리고, 꼬리질문 칸을 소리 내어 읽는다. 서강 면접에서 막힌 질문을 맨 먼저 고친다.</p>
+        <p class="m">한양 면접은 12/5 10:00, 서울캠퍼스 IT·BT관이다. 대기실은 3~4일 전에 문자와 공지로 안내된다.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 05 출처 ============================ -->
+<section class="band band-last rise" id="src">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">05</div>
+      <div>
+        <h2>근거와 한계</h2>
+        <p class="lead">“후기 출제” 표시와 면접 방식의 근거다.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+      <ul class="src">
+        <li><a class="link-u" href="https://blog.naver.com/skfnsid123/223574763566" target="_blank" rel="noopener">네이버 블로그 2024.9</a> — 한양 2:2 면접. 독립사건, GPU를 쓰는 이유, CNN의 receptive field, learning과 predict의 차이.</li>
+        <li><a class="link-u" href="https://blog.naver.com/tulipjihee/224118241742" target="_blank" rel="noopener">네이버 블로그 2025.12</a> — 한양 2:2 면접. 자기소개, 하는 일, 지원 이유, 프로젝트 역할(설계·기능·데이터 흐름·모델과 스택), 사용 언어와 이유, 지도/비지도.</li>
+        <li><a class="link-u" href="https://blog.naver.com/sul7018/224109430343" target="_blank" rel="noopener">네이버 블로그 2025.12</a> — 한 개념을 꼬리질문으로 파고드는 압박 면접이었다는 후기.</li>
+        <li><a class="link-u" href="https://velog.io/@arriinihh/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5-%ED%8A%B9%EC%88%98%EB%8C%80%ED%95%99%EC%9B%90-%EC%84%9C%EA%B0%95%EB%8C%80-AISW%EB%8C%80%ED%95%99%EC%9B%90-%ED%95%9C%EC%96%91%EB%8C%80%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%EC%9C%B5%ED%95%A9%EB%8C%80%ED%95%99%EC%9B%90" target="_blank" rel="noopener">velog 2025.12</a> — 알고리즘, 선형대수, 확률과 통계, 머신러닝 질문.</li>
+        <li><a class="link-u" href="https://phdkim.net/board/free/49823" target="_blank" rel="noopener">김박사넷 2023.11</a> · <a class="link-u" href="https://phdkim.net/board/graduate-review/82" target="_blank" rel="noopener">2025.11</a> — 자료구조(이진탐색), 선형·로지스틱 회귀, CNN, PCA의 기하학적 의미.</li>
+        <li><a class="link-u" href="https://gsai.hanyang.ac.kr/front/admissionguide/entFaq" target="_blank" rel="noopener">한양 입학 FAQ</a> · <a class="link-u" href="https://gsinfo.sogang.ac.kr/gsinfo/8547/subview.do" target="_blank" rel="noopener">서강 교과과정</a> — 시험 과목과 기본과목.</li>
+        <li class="muted">면접 질문 범위는 후기 몇 건이 근거라서 전수가 아니다. 공식 모집요강에는 질문과 평가 항목이 공개되어 있지 않다.</li>
+        <li class="muted">같은 목적의 질문 은행(힌트 위주 201문항)은 <a class="link-u" href="interview_prep.html">interview_prep.html</a>에 있다. 이 페이지는 답을 통째로 외우는 용도다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">개인용 · 검색 비노출 · 외움 표시는 이 브라우저에만 저장된다</div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var CATS = [
+    ["me", "나를 설명하기", "빈칸을 채워 말한다"],
+    ["prob", "확률 · 통계", "독립사건부터"],
+    ["la", "선형대수", "PCA · 고유값"],
+    ["ml", "머신러닝", "회귀 · 과적합 · 지표"],
+    ["dl", "딥러닝", "CNN · 학습 vs 추론 · GPU"],
+    ["cs", "자료구조 · 알고리즘 · 코드", "이진탐색"],
+    ["ai", "요즘 AI", "LLM · RAG"]
+  ];
+
+  /* c 묶음, q 질문, a 답, f [꼬리질문, 답] 목록, r 후기 출제 */
+  var QA = [
+    /* ---------- 1 나를 설명하기 ---------- */
+    { c: "me", r: 1, q: "1분 자기소개 해보세요.",
+      a: "저는 ___에서 ___ 일을 하는 ___입니다. 업무에서 ___ 문제를 만났는데 기존 방식으로는 ___가 한계였습니다. 그래서 AI로 풀어 보려고 지원했고, 대학원에서 ___를 배워 ___에 적용하고 싶습니다.",
+      f: [["방금 말한 문제를 더 구체적으로 말해 주세요.", "숫자 하나를 넣는다. 예: 하루 ___건을 사람이 수작업으로 ___한다."]] },
+    { c: "me", r: 1, q: "지원 동기가 무엇인가요?",
+      a: "AI가 유행이라서가 아니라 제 업무의 ___ 문제를 풀고 싶어서입니다. 혼자 공부해 보니 ___(수학 기초, 모델 평가 등)가 부족해 체계적인 과정이 필요했습니다. 이 대학원의 ___ 과목이 업무와 맞습니다." },
+    { c: "me", r: 1, q: "왜 이 학교, 이 학과인가요?",
+      a: "한양: 평일 저녁이고 온라인 수업이 80%라 일을 유지하며 다닐 수 있고, 인공지능개론·알고리즘·딥러닝개론으로 기초부터 이어지는 커리큘럼이 마음에 들었습니다. 서강: ___ 전공(데이터사이언스·인공지능 등)의 기본과목이 업무와 맞고, 위치가 ___라 병행이 가능합니다." },
+    { c: "me", q: "연구자가 되려는 게 아닌데 왜 일반대학원이 아니고 특수대학원인가요?",
+      a: "목적이 연구가 아니라 현업에서 쓰는 AI 역량이기 때문입니다. 일을 유지하면서 2년 안에 학위와 실무 적용을 함께 얻을 수 있는 길이 야간 특수대학원이라고 판단했습니다." },
+    { c: "me", q: "직장과 학업은 어떻게 병행할 건가요?",
+      a: "수업은 평일 저녁이고 한양은 온라인 비중이 높아 이동 부담이 적습니다. 주 ___시간을 복습과 과제에 고정하고, 야근이 잦은 시기는 일정을 미리 조율해 두었습니다. 팀에도 ___(협의 내용)를 말해 두었습니다.",
+      f: [["야근이 길어져서 결석이 잦아지면요?", "학기 초에 출석이 많이 필요한 과목을 피해서 신청하고, 한 학기 결석 가능 횟수를 먼저 확인한다고 답한다."]] },
+    { c: "me", r: 1, q: "지금 하는 일과 맡았던 프로젝트에서 본인 역할은 무엇인가요?",
+      a: "프로젝트는 ___입니다. 제가 맡은 부분은 ① 설계 ___ ② 기능 개발 ___ ③ 데이터 처리 흐름 ___ ④ 사용한 모델과 기술 ___입니다. 결과는 ___(수치)였고, 아쉬운 점은 ___입니다.",
+      f: [["그 부분을 직접 구현했나요, 지시만 했나요?", "본인이 직접 한 일에 초점을 맞춰 답한다. 추상적인 설명은 꼬리질문을 부른다."]] },
+    { c: "me", r: 1, q: "주로 쓰는 프로그래밍 언어는 무엇이고 왜 쓰나요?",
+      a: "Python입니다. NumPy, pandas, PyTorch 같은 AI 라이브러리가 가장 잘 갖춰져 있고 프로토타입을 빨리 만들 수 있기 때문입니다. 속도가 필요한 부분은 GPU나 C/C++로 만든 라이브러리가 맡습니다. 업무에서는 ___도 씁니다." },
+    { c: "me", q: "졸업하고 뭘 하고 싶고, 논문과 졸업시험 중 어느 쪽인가요?",
+      a: "졸업 후에는 ___에 AI를 적용하는 것이 목표입니다. 업무 문제를 주제로 쓸 수 있으면 논문 트랙을, 일정이 빠듯하면 과목을 추가로 듣는 쪽을 선택하겠습니다. 어느 쪽이든 2년 안에 졸업하는 게 우선입니다." },
+    { c: "me", q: "비전공이거나 기초가 부족한데 수업을 따라갈 수 있나요?",
+      a: "입학 전까지 Python, 선형대수, 확률통계를 ___ 수준까지 공부하겠습니다. 이미 ___(강의·과제·자격증)을 마쳤습니다. 모르는 부분은 질문과 스터디로 채우겠습니다." },
+    { c: "me", q: "마지막으로 하고 싶은 말이나 질문 있나요?",
+      a: "일과 학업을 병행할 각오가 되어 있고, 첫 학기부터 성실히 출석하겠습니다. 질문 하나 드리겠습니다. 입학 후 지도교수 컨택은 보통 어느 시기에, 어떤 방식으로 하나요?" },
+
+    /* ---------- 2 확률·통계 ---------- */
+    { c: "prob", r: 1, q: "독립사건이란 무엇인가요?",
+      a: "사건 A와 B가 독립이면 P(A∩B)=P(A)P(B)입니다. B가 일어났다는 사실이 A의 확률을 바꾸지 않는다는 뜻이고, P(A|B)=P(A)와 같습니다. 배반(동시에 일어날 수 없음, P(A∩B)=0)과는 다릅니다. 확률이 0이 아닌 두 사건이 배반이면 오히려 독립이 아닙니다.",
+      f: [["동전을 두 번 던져 둘 다 앞면일 확률은?", "서로 독립이므로 1/2×1/2=1/4."]] },
+    { c: "prob", q: "조건부확률을 설명해 주세요.",
+      a: "B가 일어났다는 조건에서 A가 일어날 확률로, P(A|B)=P(A∩B)/P(B)입니다(P(B)>0). 표본공간을 B로 좁혀서 다시 비율을 보는 것입니다." },
+    { c: "prob", q: "베이즈 정리와 쓰임을 설명해 주세요.",
+      a: "P(A|B)=P(B|A)P(A)/P(B)입니다. 사전확률 P(A)를 새 증거 B로 사후확률로 갱신하는 식입니다. 예를 들어 유병률 1%, 민감도 99%, 위양성률 5%인 검사에서 양성이 나와도 실제로 병일 확률은 약 17%입니다.",
+      f: [["왜 17%밖에 안 되나요?", "건강한 사람이 훨씬 많아서 위양성 5%가 진짜 양성(1%×99%)보다 더 많은 양성을 만들기 때문이다."]] },
+    { c: "prob", q: "기댓값과 분산은 무엇인가요?",
+      a: "기댓값은 확률로 가중한 평균 E[X]=Σx·P(x)입니다. 분산은 평균에서 퍼진 정도로 Var(X)=E[X²]−(E[X])²이고, 단위를 원래대로 돌린 것이 표준편차입니다." },
+    { c: "prob", q: "정규분포의 특징은?",
+      a: "평균 μ와 분산 σ² 두 값으로 정해지는 좌우대칭 종 모양입니다. 평균±1σ 안에 약 68%, ±2σ에 약 95%, ±3σ에 약 99.7%가 들어갑니다. 평균 0, 분산 1인 것이 표준정규분포입니다." },
+    { c: "prob", q: "중심극한정리를 설명해 주세요.",
+      a: "독립이고 분산이 유한한 표본의 평균은 표본 수 n이 커지면 모집단 분포와 상관없이 정규분포 N(μ, σ²/n)에 가까워집니다. 그래서 모집단이 정규가 아니어도 평균을 이용한 검정과 신뢰구간을 쓸 수 있습니다." },
+    { c: "prob", q: "큰 수의 법칙과 중심극한정리는 어떻게 다른가요?",
+      a: "큰 수의 법칙은 n이 커지면 표본평균이 모평균으로 수렴한다는 것(어디로 가는가)이고, 중심극한정리는 그 표본평균이 정규분포 모양으로 흩어진다는 것(어떤 모양인가)입니다." },
+    { c: "prob", q: "표준오차는 무엇이고 표본 수와 어떤 관계인가요?",
+      a: "표본평균의 표준편차로 σ/√n입니다. 표본을 4배로 늘리면 오차가 절반으로 줄어듭니다. σ를 모르면 표본표준편차 s로 대신합니다." },
+    { c: "prob", q: "p-value가 무엇인가요?",
+      a: "귀무가설이 참이라고 가정했을 때 지금 관측한 것만큼 또는 더 극단적인 결과가 나올 확률입니다. 귀무가설이 참일 확률이 아닙니다. 보통 0.05보다 작으면 귀무가설을 기각합니다.",
+      f: [["p-value가 0.03이면 효과가 있다는 뜻인가요?", "귀무가설 하에서는 드문 결과라는 뜻일 뿐, 효과의 크기나 실무적 중요성은 따로 봐야 한다."]] },
+    { c: "prob", q: "제1종 오류와 제2종 오류를 설명해 주세요.",
+      a: "제1종 오류(α)는 귀무가설이 참인데 기각하는 오류, 제2종 오류(β)는 귀무가설이 거짓인데 기각하지 못하는 오류입니다. 검정력은 1−β로 거짓인 귀무가설을 제대로 기각할 확률입니다." },
+    { c: "prob", q: "95% 신뢰구간의 의미는?",
+      a: "같은 방법으로 표본을 반복해서 구간을 만들면 그중 95%가 모수를 포함한다는 뜻입니다. 이 구간에 모수가 있을 확률이 95%라는 뜻은 아닙니다. 모수는 고정된 값이기 때문입니다." },
+    { c: "prob", q: "상관관계와 인과관계는 어떻게 다른가요?",
+      a: "상관계수는 두 변수의 선형 관계 정도(−1~1)일 뿐 원인을 말하지 않습니다. 제3의 교란변수가 둘 다에 영향을 줄 수 있습니다. 인과는 A/B 테스트 같은 통제된 실험으로 확인합니다." },
+    { c: "prob", q: "최대우도추정(MLE)이 무엇인가요?",
+      a: "관측한 데이터가 나올 가능성(우도)이 가장 큰 모수를 고르는 방법입니다. 곱을 합으로 바꾸기 위해 로그우도를 씁니다. 오차가 정규분포인 선형회귀에서는 최소제곱과 같고, 분류의 교차엔트로피 손실도 MLE에서 나옵니다." },
+    { c: "prob", q: "이항분포와 포아송분포는 어떻게 다른가요?",
+      a: "이항분포는 성공확률 p인 시행을 n번 했을 때의 성공 횟수이고 평균은 np입니다. 포아송분포는 단위 시간이나 공간에서 드물게 일어나는 사건의 횟수이고 평균과 분산이 모두 λ입니다." },
+    { c: "prob", q: "공분산과 상관계수는 어떻게 다른가요?",
+      a: "공분산 Cov(X,Y)=E[(X−μx)(Y−μy)]는 두 변수가 함께 움직이는 방향을 보여 주지만 단위에 따라 크기가 달라집니다. 상관계수는 이를 두 표준편차의 곱으로 나눠 −1~1로 맞춘 값입니다." },
+
+    /* ---------- 3 선형대수 ---------- */
+    { c: "la", q: "벡터의 내적은 무엇을 뜻하나요?",
+      a: "대응하는 원소를 곱해서 모두 더한 값이고 a·b=|a||b|cosθ입니다. 두 벡터가 얼마나 같은 방향을 보는지를 나타내고, 직교하면 0입니다. 한 벡터를 다른 벡터에 사영한 길이와도 연결됩니다." },
+    { c: "la", q: "행렬 곱셈의 조건과 성질은?",
+      a: "(m×n)과 (n×p)처럼 앞의 열 수와 뒤의 행 수가 같아야 하고 결과는 m×p입니다. 결합법칙은 성립하지만 교환법칙은 성립하지 않습니다(AB≠BA)." },
+    { c: "la", q: "역행렬은 언제 존재하나요?",
+      a: "정방행렬이고 행렬식이 0이 아닐 때, 같은 말로 full rank일 때 존재합니다. 행렬식이 0이면 변환이 차원을 찌그러뜨려 되돌릴 수 없습니다." },
+    { c: "la", q: "행렬의 rank는 무엇인가요?",
+      a: "선형독립인 행(또는 열)의 최대 개수입니다. 행렬이 실제로 담고 있는 정보의 차원이라고 볼 수 있고, rank가 작은 행렬은 저차원으로 압축할 수 있습니다." },
+    { c: "la", q: "고유값과 고유벡터를 설명해 주세요.",
+      a: "Av=λv를 만족하는 0이 아닌 벡터 v가 고유벡터, λ가 고유값입니다. 행렬 A로 변환해도 방향이 바뀌지 않고 크기만 λ배가 되는 벡터라는 뜻입니다." },
+    { c: "la", r: 1, q: "PCA의 기하학적 의미를 설명해 주세요.",
+      a: "데이터의 평균을 0으로 맞춘 뒤 분산이 가장 큰 방향을 첫 번째 주성분으로 잡고, 거기에 직교하는 방향 중 분산이 큰 순서로 다음 축을 잡습니다. 그 축들이 공분산 행렬의 고유벡터입니다. 상위 k개 축으로 사영하면 정보(분산) 손실을 최소로 하며 차원을 줄입니다. 한마디로 데이터가 가장 길게 퍼진 방향으로 좌표축을 돌리는 일입니다.",
+      f: [["몇 개의 주성분을 고르나요?", "고유값 비율로 계산한 설명 분산 비율의 누적이 목표치(예: 90~95%)가 되는 지점이나 스크리 플롯의 꺾이는 지점을 본다."]] },
+    { c: "la", q: "PCA에서 고유값은 무슨 의미인가요?",
+      a: "각 주성분 축 방향의 분산입니다. 고유값이 큰 순서대로 중요한 축이고, 고유값 합 대비 비율이 그 축이 설명하는 분산 비율입니다. PCA 전에는 변수 단위가 다르면 표준화해야 합니다." },
+    { c: "la", q: "특이값 분해(SVD)란?",
+      a: "임의의 행렬을 A=UΣVᵀ로 분해하는 것으로, U와 V는 직교행렬이고 Σ는 특이값이 큰 순서로 놓인 대각행렬입니다. 큰 특이값 몇 개만 남기면 저랭크 근사가 되어 압축, 잡음 제거, 추천 시스템, PCA 계산에 씁니다." },
+    { c: "la", q: "직교(orthogonal)란 무엇인가요?",
+      a: "두 벡터의 내적이 0이면 직교입니다. 직교행렬은 열벡터가 서로 직교하는 단위벡터라 QᵀQ=I이며, 벡터의 길이와 각도를 바꾸지 않습니다." },
+    { c: "la", q: "대칭행렬과 공분산 행렬의 성질은?",
+      a: "대칭행렬은 A=Aᵀ입니다. 공분산 행렬은 대칭이고 반양정치라 고유값이 모두 0 이상의 실수이며 고유벡터끼리 서로 직교합니다. 그래서 PCA에서 직교하는 축이 나옵니다." },
+    { c: "la", q: "행렬식(determinant)의 의미는?",
+      a: "선형변환이 면적이나 부피를 몇 배로 바꾸는지를 나타냅니다. 부호는 방향이 뒤집히는지를 보여 주고, 0이면 차원이 붕괴해 역행렬이 없습니다." },
+    { c: "la", q: "선형독립과 기저를 설명해 주세요.",
+      a: "벡터들의 선형결합이 0이 되는 방법이 모든 계수가 0인 경우뿐이면 선형독립입니다. 기저는 서로 선형독립이면서 그 공간 전체를 만들어 내는 벡터 집합이고, 그 개수가 차원입니다." },
+    { c: "la", q: "L1 노름과 L2 노름의 차이는?",
+      a: "L1은 절댓값의 합(맨해튼 거리), L2는 제곱합의 제곱근(유클리드 거리)입니다. 정규화에서 L1은 Lasso로 일부 가중치를 0으로 만들고, L2는 Ridge로 가중치를 전반적으로 줄입니다." },
+    { c: "la", q: "코사인 유사도는 무엇이고 언제 쓰나요?",
+      a: "두 벡터 사이 각도의 코사인으로 (a·b)/(|a||b|)입니다. 방향이 얼마나 비슷한지만 보고 크기는 무시합니다. 문서나 단어 임베딩 비교에 많이 씁니다." },
+    { c: "la", q: "신경망에서 선형대수는 어디에 쓰이나요?",
+      a: "한 층의 계산이 y=Wx+b이므로 가중치 W가 행렬이고, 배치 처리는 행렬 곱입니다. 그래서 GPU 같은 병렬 하드웨어가 행렬 곱을 빠르게 처리할수록 학습이 빨라집니다." },
+
+    /* ---------- 4 머신러닝 ---------- */
+    { c: "ml", r: 1, q: "지도학습과 비지도학습의 차이는?",
+      a: "지도학습은 정답(레이블)이 있는 데이터로 입력에서 출력으로 가는 규칙을 학습합니다(분류, 회귀). 비지도학습은 정답 없이 데이터의 구조를 찾습니다(군집화, 차원축소). 강화학습은 환경과 상호작용하며 보상을 최대로 하는 행동을 학습합니다.",
+      f: [["준지도학습은요?", "레이블이 적은 데이터와 많은 무레이블 데이터를 함께 쓴다."]] },
+    { c: "ml", q: "분류와 회귀는 어떻게 다른가요?",
+      a: "분류는 범주를 예측하고(스팸/정상), 회귀는 연속된 수치를 예측합니다(집값). 출력 층과 손실 함수가 다릅니다. 분류는 교차엔트로피, 회귀는 MSE를 주로 씁니다." },
+    { c: "ml", q: "과적합이란 무엇이고 어떻게 막나요?",
+      a: "훈련 데이터에는 잘 맞는데 새 데이터에서는 성능이 떨어지는 현상입니다. 데이터를 늘리고, 모델을 단순하게 하고, L1/L2 정규화, 드롭아웃, 조기 종료, 교차검증, 특성 줄이기로 막습니다." },
+    { c: "ml", q: "편향-분산 트레이드오프를 설명해 주세요.",
+      a: "편향은 모델이 너무 단순해서 생기는 체계적 오차(과소적합), 분산은 훈련 데이터가 조금만 달라져도 예측이 흔들리는 정도(과적합)입니다. 복잡도를 올리면 편향은 줄고 분산은 늘어서, 전체 오차가 가장 작은 지점을 찾습니다." },
+    { c: "ml", q: "훈련, 검증, 테스트 데이터를 왜 나누나요?",
+      a: "훈련 데이터로 학습하고, 검증 데이터로 하이퍼파라미터와 모델을 고르고, 테스트 데이터는 마지막에 한 번만 써서 일반화 성능을 잽니다. 테스트로 튜닝하면 정보가 새서 성능이 부풀려집니다." },
+    { c: "ml", q: "K-fold 교차검증은 무엇인가요?",
+      a: "데이터를 K조각으로 나눠 한 조각씩 검증용으로 쓰며 K번 학습하고 성능을 평균합니다. 데이터가 적을 때 성능 추정이 안정적이지만 K배 비용이 듭니다." },
+    { c: "ml", r: 1, q: "선형회귀를 설명해 주세요.",
+      a: "출력을 입력의 선형결합 y=wᵀx+b로 두고, 예측과 정답의 제곱오차 평균(MSE)을 최소화하도록 w를 찾습니다. 해는 정규방정식 (XᵀX)⁻¹Xᵀy로 구하거나 경사하강법으로 구합니다. 선형성, 오차의 독립성과 등분산성 같은 가정이 필요합니다." },
+    { c: "ml", r: 1, q: "로지스틱 회귀는 선형회귀와 무엇이 다른가요?",
+      a: "선형결합 값을 시그모이드 σ(z)=1/(1+e^−z)에 넣어 0~1의 확률로 바꾸고, 0.5를 기준으로 분류합니다. 손실은 로그손실(교차엔트로피)이고 결정경계는 선형입니다. 이름은 회귀지만 분류 모델입니다." },
+    { c: "ml", q: "경사하강법을 설명해 주세요.",
+      a: "손실의 기울기(그래디언트) 반대 방향으로 w ← w − η∇L처럼 조금씩 이동해 최솟값을 찾습니다. 학습률 η가 너무 크면 발산하고 너무 작으면 느립니다." },
+    { c: "ml", q: "배치, 확률적, 미니배치 경사하강법의 차이는?",
+      a: "배치는 전체 데이터로 기울기를 계산해 안정적이지만 느립니다. 확률적(SGD)은 샘플 하나씩 써서 빠르지만 흔들립니다. 미니배치는 그 중간이고, 실제 딥러닝은 대부분 미니배치입니다." },
+    { c: "ml", q: "L1(Lasso)과 L2(Ridge) 정규화의 차이는?",
+      a: "둘 다 손실에 가중치 크기에 대한 벌점을 더해 과적합을 막습니다. L1은 절댓값 합으로 일부 가중치를 정확히 0으로 만들어 특성 선택 효과가 있고, L2는 제곱합으로 가중치를 고르게 작게 만듭니다." },
+    { c: "ml", q: "결정트리는 어떻게 분할 기준을 정하나요?",
+      a: "분할 후 불순도가 가장 많이 줄어드는 특성과 기준을 고릅니다. 불순도는 지니 지수나 엔트로피로 재고, 엔트로피 감소량을 정보 이득이라고 합니다. 해석이 쉽지만 깊게 키우면 과적합됩니다." },
+    { c: "ml", q: "랜덤포레스트는 왜 잘 되나요?",
+      a: "부트스트랩 표본으로 여러 트리를 만들고 노드마다 특성을 무작위로 일부만 보게 해서 트리들이 서로 다르게 합니다. 여러 트리의 예측을 평균하거나 투표하면 분산이 줄어 과적합이 줄어듭니다." },
+    { c: "ml", q: "배깅과 부스팅의 차이는?",
+      a: "배깅은 모델을 독립적으로 병렬 학습해 평균내어 분산을 줄입니다(랜덤포레스트). 부스팅은 이전 모델이 틀린 부분을 다음 모델이 순차적으로 보완해 편향을 줄입니다(AdaBoost, Gradient Boosting, XGBoost)." },
+    { c: "ml", q: "SVM의 아이디어는?",
+      a: "두 클래스 사이의 마진이 최대가 되는 초평면을 찾습니다. 경계에 가장 가까운 점이 서포트 벡터이고, 커널 트릭으로 선형 분리가 안 되는 데이터도 고차원에서 분리합니다." },
+    { c: "ml", q: "k-NN은 어떻게 동작하고 주의할 점은?",
+      a: "새 점과 가장 가까운 k개 이웃의 다수결(또는 평균)로 예측하는 게으른 학습입니다. 거리 기반이라 특성 스케일을 맞춰야 하고, k가 작으면 과적합, 크면 과소적합이 됩니다. 데이터가 많으면 예측이 느립니다." },
+    { c: "ml", q: "k-means 알고리즘을 설명해 주세요.",
+      a: "① 중심 k개를 정하고 ② 각 점을 가장 가까운 중심에 할당하고 ③ 중심을 소속 점들의 평균으로 갱신하는 것을 수렴할 때까지 반복합니다. k를 미리 정해야 하고 초기값에 민감하며 구형 군집에 잘 맞습니다." },
+    { c: "ml", q: "정밀도, 재현율, F1은 무엇이고 왜 정확도만 보면 안 되나요?",
+      a: "정밀도는 양성이라 한 것 중 진짜 양성 TP/(TP+FP), 재현율은 진짜 양성 중 찾아낸 비율 TP/(TP+FN), F1은 둘의 조화평균입니다. 99%가 음성인 데이터는 전부 음성이라고 해도 정확도가 99%라서 불균형 데이터에서는 정확도가 속입니다." },
+    { c: "ml", q: "ROC 곡선과 AUC는 무엇인가요?",
+      a: "임계값을 바꿔 가며 거짓양성률(x)에 대한 진짜양성률(y)을 그린 곡선입니다. AUC는 그 아래 면적으로, 무작위 양성이 무작위 음성보다 높은 점수를 받을 확률입니다. 0.5면 무작위, 1이면 완벽합니다." },
+    { c: "ml", q: "클래스 불균형은 어떻게 다루나요?",
+      a: "지표를 정밀도·재현율·F1·AUC로 바꾸고, 소수 클래스를 오버샘플링(SMOTE)하거나 다수 클래스를 언더샘플링하고, 손실에 클래스 가중치를 줍니다. 임계값을 조정하는 방법도 있습니다." },
+
+    /* ---------- 5 딥러닝 ---------- */
+    { c: "dl", q: "신경망의 기본 구조를 설명해 주세요.",
+      a: "입력층, 은닉층, 출력층으로 이루어지고 각 뉴런은 입력의 가중합에 편향을 더한 뒤 활성화 함수를 통과시킵니다. 층을 깊게 쌓을수록 복잡한 표현을 학습합니다." },
+    { c: "dl", q: "활성화 함수는 왜 필요한가요?",
+      a: "비선형성을 넣기 위해서입니다. 활성화 함수가 없으면 층을 몇 개를 쌓아도 하나의 선형변환과 같습니다. ReLU(max(0,x))는 계산이 간단하고 기울기 소실이 덜하며, 시그모이드는 0~1 확률, 소프트맥스는 합이 1인 다중 클래스 확률을 냅니다." },
+    { c: "dl", q: "역전파(backpropagation)란?",
+      a: "출력에서 계산한 손실의 기울기를 연쇄법칙으로 뒤쪽 층에서 앞쪽 층으로 전달해 모든 가중치의 기울기를 효율적으로 구하는 방법입니다. 그 기울기로 경사하강법이 가중치를 갱신합니다." },
+    { c: "dl", q: "기울기 소실 문제와 해결법은?",
+      a: "깊은 망에서 시그모이드나 tanh의 미분값(시그모이드는 최대 0.25)이 층마다 곱해져 앞쪽 층의 기울기가 0에 가까워지는 현상입니다. ReLU, 잔차 연결(ResNet), 배치 정규화, 적절한 초기화, LSTM으로 완화합니다." },
+    { c: "dl", q: "CNN의 구조와 장점은?",
+      a: "합성곱 층, 풀링 층, 마지막 완전연결 층으로 구성됩니다. 작은 필터를 이미지 전체에 슬라이딩하며 가중치를 공유해서 파라미터 수가 적고, 지역적 패턴(에지, 질감)을 위치와 상관없이 잡아냅니다." },
+    { c: "dl", r: 1, q: "CNN의 receptive field가 무엇인가요?",
+      a: "출력 특징맵의 한 값이 영향을 받는 입력 영역의 크기입니다. 층을 쌓을수록, 커널이 클수록, 스트라이드와 풀링을 쓸수록 넓어집니다. stride 1에서 3×3 합성곱을 두 번 쌓으면 5×5, 세 번이면 7×7을 봅니다.",
+      f: [["receptive field를 넓히는 방법은?", "층을 더 쌓거나 커널을 키우거나 풀링·stride·dilated convolution을 쓴다."]] },
+    { c: "dl", q: "합성곱 출력 크기는 어떻게 계산하나요?",
+      a: "입력 N, 커널 K, 패딩 P, 스트라이드 S이면 출력은 ⌊(N+2P−K)/S⌋+1입니다. 예: N=32, K=3, P=1, S=1이면 32로 크기가 유지됩니다." },
+    { c: "dl", q: "풀링은 왜 하나요?",
+      a: "특징맵의 크기를 줄여 연산량과 파라미터를 줄이고, 작은 위치 이동에 강한 표현을 얻기 위해서입니다. 최대 풀링은 영역의 최댓값, 평균 풀링은 평균을 씁니다." },
+    { c: "dl", q: "RNN과 LSTM은 무엇인가요?",
+      a: "RNN은 순서가 있는 데이터를 은닉 상태에 이전 정보를 이어 받으며 처리하지만, 긴 시퀀스에서는 기울기 소실로 먼 정보를 잊습니다. LSTM은 입력·망각·출력 게이트와 셀 상태로 장기 의존성을 유지합니다." },
+    { c: "dl", q: "Transformer와 어텐션을 설명해 주세요.",
+      a: "Attention(Q,K,V)=softmax(QKᵀ/√d)V로, 각 위치가 시퀀스의 모든 위치를 얼마나 참고할지 가중치를 계산합니다. 순환 구조가 없어 병렬 학습이 가능하고 멀리 떨어진 단어 사이 관계를 잘 잡아서 LLM의 기반이 되었습니다." },
+    { c: "dl", q: "배치 정규화는 무엇인가요?",
+      a: "미니배치 단위로 각 층의 입력을 평균 0, 분산 1로 정규화한 뒤 학습 가능한 크기와 이동을 곱하고 더하는 기법입니다. 학습이 안정되고 빨라지며 약한 정규화 효과가 있습니다." },
+    { c: "dl", q: "드롭아웃은 무엇인가요?",
+      a: "학습 중에 뉴런을 확률 p로 무작위로 꺼서 특정 뉴런에 의존하지 않게 하는 정규화 기법입니다. 추론할 때는 모든 뉴런을 쓰고 출력 크기를 맞춥니다." },
+    { c: "dl", q: "SGD와 Adam은 어떻게 다른가요?",
+      a: "SGD는 기울기 방향으로만 이동하고(모멘텀을 더할 수 있음), Adam은 기울기의 이동평균(모멘텀)과 제곱의 이동평균으로 파라미터마다 학습률을 자동 조절합니다. Adam이 수렴이 빠르고 설정이 쉬워 기본값으로 많이 씁니다." },
+    { c: "dl", r: 1, q: "학습(learning)과 예측(predict)의 차이는?",
+      a: "학습은 데이터를 넣어 순전파로 손실을 계산하고 역전파로 파라미터를 갱신하는 과정입니다. 예측(추론)은 파라미터를 고정한 채 순전파만 해서 결과를 내는 것입니다. 그래서 추론은 훨씬 가볍고 학습 때만 쓰는 드롭아웃 같은 장치는 꺼집니다." },
+    { c: "dl", r: 1, q: "딥러닝에서 CPU 말고 GPU를 쓰는 이유는?",
+      a: "신경망 계산의 대부분이 행렬 곱 같은 단순 연산의 대량 반복이라서입니다. GPU는 수천 개의 코어로 이를 동시에 처리하고 메모리 대역폭도 커서 학습이 수십 배 빠릅니다. CPU는 코어 수는 적지만 복잡한 제어와 순차 처리에 강합니다." },
+
+    /* ---------- 6 자료구조·알고리즘·코드 ---------- */
+    { c: "cs", q: "배열과 연결 리스트의 차이는?",
+      a: "배열은 연속된 메모리라 인덱스로 O(1)에 접근하지만 중간 삽입·삭제는 O(n)입니다. 연결 리스트는 노드를 포인터로 이어서 위치만 알면 삽입·삭제가 O(1)이지만 접근은 O(n)입니다." },
+    { c: "cs", q: "스택과 큐를 설명해 주세요.",
+      a: "스택은 나중에 넣은 것이 먼저 나오는 LIFO로 함수 호출 스택, 되돌리기에 쓰입니다. 큐는 먼저 넣은 것이 먼저 나오는 FIFO로 BFS, 작업 대기열에 쓰입니다." },
+    { c: "cs", q: "해시 테이블은 어떻게 동작하나요?",
+      a: "키를 해시 함수로 인덱스로 바꿔 저장하므로 탐색·삽입·삭제가 평균 O(1)입니다. 서로 다른 키가 같은 칸에 들어가는 충돌은 체이닝이나 개방 주소법으로 해결하고, 최악은 O(n)입니다. 파이썬의 dict와 set이 이 구조입니다." },
+    { c: "cs", r: 1, q: "이진탐색을 설명해 주세요.",
+      a: "정렬된 배열에서 가운데 값과 찾는 값을 비교해, 작으면 왼쪽 절반, 크면 오른쪽 절반만 보는 일을 반복합니다. 매번 범위가 절반이 되므로 시간복잡도는 O(log n)이고, 정렬되어 있어야 한다는 전제가 필요합니다. lo, hi, mid=(lo+hi)//2로 범위를 좁히며 구현합니다.",
+      f: [["정렬 안 된 데이터면요?", "먼저 정렬(O(n log n))하거나 해시를 쓴다. 한 번만 찾을 거면 선형 탐색 O(n)이 낫다."]] },
+    { c: "cs", q: "시간복잡도와 Big-O 표기를 설명해 주세요.",
+      a: "입력 크기 n이 커질 때 연산 횟수가 증가하는 추세를 최악의 경우 기준으로 나타낸 것입니다. 상수와 낮은 차수는 버립니다. 빠른 순서로 O(1) < O(log n) < O(n) < O(n log n) < O(n²)입니다." },
+    { c: "cs", q: "대표적인 정렬 알고리즘과 복잡도는?",
+      a: "버블·삽입·선택 정렬은 O(n²)입니다. 병합 정렬은 항상 O(n log n)이고 추가 메모리가 필요하며, 퀵 정렬은 평균 O(n log n)이고 최악 O(n²)입니다. 파이썬 sorted는 Timsort로 O(n log n)입니다." },
+    { c: "cs", q: "이진 트리, 이진 탐색 트리, 힙은 어떻게 다른가요?",
+      a: "이진 트리는 자식이 최대 둘인 트리입니다. 이진 탐색 트리는 왼쪽 < 부모 < 오른쪽 규칙으로 탐색이 평균 O(log n)입니다. 힙은 부모가 항상 자식보다 크거나(최대 힙) 작은(최소 힙) 완전 이진 트리로 우선순위 큐에 쓰입니다." },
+    { c: "cs", q: "BFS와 DFS의 차이는?",
+      a: "BFS는 큐로 가까운 노드부터 층별로 탐색해서 최단 경로(간선 가중치가 같을 때)에 쓰입니다. DFS는 스택이나 재귀로 한 방향으로 끝까지 들어갔다가 돌아오며 경로 탐색, 사이클 검사, 백트래킹에 쓰입니다. 둘 다 O(V+E)입니다." },
+    { c: "cs", q: "동적 계획법(DP)이란?",
+      a: "큰 문제를 겹치는 작은 부분 문제로 나누고 한 번 푼 답을 저장(메모이제이션)해서 중복 계산을 없애는 방법입니다. 피보나치를 재귀로 풀면 지수 시간이지만 저장하면 O(n)입니다." },
+    { c: "cs", q: "파이썬 리스트, 튜플, 딕셔너리, 집합의 차이는?",
+      a: "리스트는 순서가 있고 수정 가능, 튜플은 순서가 있고 수정 불가, 딕셔너리는 키-값 쌍, 집합은 중복 없는 원소 모음입니다. 딕셔너리의 키와 집합 원소는 해시 가능해야 하고 탐색이 평균 O(1)입니다." },
+    { c: "cs", q: "NumPy 벡터화가 왜 빠른가요?",
+      a: "파이썬 for 루프 대신 C로 구현된 연산이 연속된 메모리의 배열 전체에 한 번에 적용되기 때문입니다. 인터프리터 오버헤드가 사라지고 SIMD와 캐시 효율을 쓸 수 있습니다." },
+    { c: "cs", q: "pandas에서 결측치는 어떻게 처리하나요?",
+      a: "먼저 isna로 얼마나 있는지와 왜 비었는지를 확인합니다. 적고 무작위면 dropna로 삭제하고, 아니면 fillna로 평균, 중앙값, 최빈값, 보간으로 채우거나 결측 여부 자체를 특성으로 둡니다. 값을 채울 때는 훈련 데이터의 통계로만 계산해 정보 누수를 피합니다." },
+    { c: "cs", q: "객체지향의 핵심 개념은?",
+      a: "클래스와 객체, 캡슐화(데이터와 메서드를 묶고 내부를 숨김), 상속(기존 클래스를 확장), 다형성(같은 인터페이스에 다른 동작)입니다. 모델, 데이터셋, 학습기를 클래스로 나누면 재사용이 쉬워집니다." },
+    { c: "cs", q: "SQL의 JOIN 종류를 설명해 주세요.",
+      a: "INNER JOIN은 양쪽에 모두 있는 행만, LEFT JOIN은 왼쪽 테이블 전체와 매칭되는 오른쪽 행을(없으면 NULL), RIGHT JOIN은 반대, FULL OUTER JOIN은 양쪽 전체를 가져옵니다." },
+    { c: "cs", q: "프로세스와 스레드의 차이는?",
+      a: "프로세스는 독립된 메모리 공간을 가진 실행 단위이고, 스레드는 한 프로세스 안에서 메모리를 공유하는 실행 흐름입니다. 파이썬은 GIL 때문에 CPU 연산에서는 스레드가 병렬 이득이 적어서 멀티프로세싱을 쓰거나 NumPy 같은 네이티브 라이브러리에 맡깁니다." },
+
+    /* ---------- 7 요즘 AI ---------- */
+    { c: "ai", q: "LLM(대규모 언어 모델)이란?",
+      a: "방대한 텍스트로 다음 토큰을 예측하도록 사전학습한 Transformer 기반 모델입니다. 이후 지시 튜닝과 사람 피드백 학습(RLHF) 등으로 사용자 지시를 따르도록 다듬습니다." },
+    { c: "ai", q: "토큰과 임베딩은 무엇인가요?",
+      a: "토큰은 모델이 처리하는 텍스트의 최소 단위(단어나 서브워드)이고, 임베딩은 토큰을 의미가 비슷하면 가깝도록 벡터로 바꾼 표현입니다. 벡터 간 거리나 코사인 유사도로 의미 유사성을 비교합니다." },
+    { c: "ai", q: "프롬프트 엔지니어링, RAG, 파인튜닝은 어떻게 구분하나요?",
+      a: "프롬프트는 모델을 바꾸지 않고 지시와 예시를 잘 쓰는 방법이고, RAG는 외부 문서를 검색해 프롬프트에 넣어 최신·사내 정보를 쓰게 하는 방법입니다. 파인튜닝은 추가 데이터로 모델 가중치를 직접 조정해 말투나 특정 작업을 익히게 하는 방법입니다. 비용은 보통 이 순서로 커집니다." },
+    { c: "ai", q: "RAG의 동작 방식을 설명해 주세요.",
+      a: "문서를 잘게 나눠 임베딩해 벡터 DB에 저장해 두고, 질문이 들어오면 비슷한 조각을 검색해 프롬프트에 붙여 모델이 답하게 합니다. 모델을 다시 학습하지 않고 최신 정보를 쓸 수 있고, 출처를 보여 줄 수 있으며 환각이 줄어듭니다." },
+    { c: "ai", q: "환각(hallucination)은 무엇이고 어떻게 줄이나요?",
+      a: "모델이 사실이 아닌 내용을 그럴듯하게 만들어 내는 현상입니다. 근거 문서를 주는 RAG, 출처 인용 요구, 모르면 모른다고 하게 하는 지시, 낮은 temperature, 결과 검증 단계를 두어 줄입니다." },
+    { c: "ai", q: "LoRA가 무엇인가요?",
+      a: "사전학습 가중치는 고정하고 가중치 변화량 ΔW를 저랭크 행렬 두 개의 곱(BA)으로 두어 그것만 학습하는 파인튜닝 방식입니다. 학습 파라미터와 메모리가 크게 줄어 개인 GPU에서도 큰 모델을 조정할 수 있습니다." },
+    { c: "ai", q: "전이학습이란?",
+      a: "큰 데이터로 미리 학습한 모델의 지식을 적은 데이터의 새 과제에 가져오는 것입니다. 앞쪽 층은 고정하고 뒤쪽만 학습하거나 전체를 작은 학습률로 미세조정합니다." },
+    { c: "ai", q: "GAN과 확산 모델은 어떻게 다른가요?",
+      a: "GAN은 생성기와 판별기가 서로 경쟁하며 학습해 빠르게 생성하지만 학습이 불안정하고 모드 붕괴가 생길 수 있습니다. 확산 모델은 데이터에 노이즈를 더하는 과정을 거꾸로 되돌리는 법을 학습해 품질과 안정성이 좋지만 샘플링이 느립니다." },
+    { c: "ai", q: "모델 경량화 기법에는 무엇이 있나요?",
+      a: "양자화(가중치를 32비트에서 8비트 등 낮은 정밀도로), 가지치기(불필요한 가중치나 뉴런 제거), 지식 증류(큰 모델의 출력을 작은 모델이 따라 배움)가 대표적입니다. 엣지나 모바일처럼 자원이 제한된 환경에서 씁니다." },
+    { c: "ai", q: "AI 활용에서 윤리와 편향 문제는 어떻게 다루나요?",
+      a: "학습 데이터의 편향은 결과의 편향으로 이어지고, 개인정보 노출과 설명 불가능성도 문제가 됩니다. 데이터 구성을 점검하고, 집단별 성능을 따로 평가하고, 중요한 결정에는 사람이 검토하는 절차와 설명 가능한 지표를 둡니다." }
+  ];
+
+  /* ---------- 저장 ---------- */
+  var KEY = "interviewQa.v1";
+  function rd() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function wr(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  var got = {};
+  try { (JSON.parse(rd() || "[]") || []).forEach(function (i) { got[i] = 1; }); } catch (e) {}
+
+  QA.forEach(function (x, i) { x.id = i + 1; });
+  var catName = {};
+  CATS.forEach(function (c) { catName[c[0]] = c[1]; });
+
+  var list = document.getElementById("list");
+  var sel = document.getElementById("catSel");
+  var onlyTodo = document.getElementById("onlyTodo");
+  var shownEl = document.getElementById("shown");
+  var order = QA.slice();   /* 현재 순서 */
+  var shuffled = false;
+
+  var all = document.createElement("option"); all.value = ""; all.textContent = "전체 100";
+  sel.appendChild(all);
+  CATS.forEach(function (c) {
+    var n = QA.filter(function (x) { return x.c === c[0]; }).length;
+    var o = document.createElement("option"); o.value = c[0]; o.textContent = c[1] + " " + n;
+    sel.appendChild(o);
+  });
+
+  function pad(n) { return n < 10 ? "00" + n : (n < 100 ? "0" + n : "" + n); }
+  function save() { wr(JSON.stringify(Object.keys(got).map(Number))); }
+
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+
+  function card(x) {
+    var d = el("details", "q" + (got[x.id] ? " got" : ""));
+    d.dataset.id = x.id;
+    var s = el("summary");
+    s.appendChild(el("span", "n tnum", pad(x.id)));
+    s.appendChild(el("span", "qt", x.q));
+    s.appendChild(el("span", "mk" + (x.r ? " real" : ""), x.r ? "후기 출제" : ""));
+    d.appendChild(s);
+    var a = el("div", "a");
+    a.appendChild(el("p", null, x.a));
+    if (x.f && x.f.length) {
+      x.f.forEach(function (f) {
+        var fu = el("div", "fu");
+        var b = el("b", null, "꼬리질문 "); fu.appendChild(b); fu.appendChild(document.createTextNode(f[0]));
+        fu.appendChild(el("p", null, f[1]));
+        a.appendChild(fu);
+      });
+    }
+    var lb = el("label", "got");
+    var cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = !!got[x.id];
+    cb.addEventListener("change", function () {
+      if (cb.checked) got[x.id] = 1; else delete got[x.id];
+      d.classList.toggle("got", cb.checked);
+      save(); progress();
+    });
+    lb.appendChild(cb); lb.appendChild(document.createTextNode(" 외움"));
+    a.appendChild(lb);
+    d.appendChild(a);
+    return d;
+  }
+
+  function render() {
+    var c = sel.value, todo = onlyTodo.checked;
+    list.textContent = "";
+    var rows = order.filter(function (x) { return (!c || x.c === c) && (!todo || !got[x.id]); });
+    if (shuffled) {
+      rows.forEach(function (x) { list.appendChild(card(x)); });
+    } else {
+      var last = null;
+      rows.forEach(function (x) {
+        if (x.c !== last) {
+          last = x.c;
+          var meta = CATS.filter(function (k) { return k[0] === x.c; })[0];
+          var tot = QA.filter(function (q) { return q.c === x.c; }).length;
+          var ok = QA.filter(function (q) { return q.c === x.c && got[q.id]; }).length;
+          var h = el("div", "cat");
+          h.appendChild(el("b", null, meta[1]));
+          h.appendChild(el("span", null, meta[2]));
+          h.appendChild(el("span", "done tnum", ok + " / " + tot));
+          list.appendChild(h);
+        }
+        list.appendChild(card(x));
+      });
+    }
+    shownEl.textContent = rows.length + "개 표시";
+    btnT.textContent = "모두 펼치기";
+    progress();
+  }
+
+  function progress() {
+    var n = Object.keys(got).length, t = QA.length;
+    document.getElementById("allCnt").textContent = n + " / " + t;
+    document.getElementById("allBar").style.width = Math.round(n / t * 100) + "%";
+    if (!shuffled) {
+      var heads = list.querySelectorAll(".cat");
+      [].forEach.call(heads, function (h) {
+        var nm = h.querySelector("b").textContent;
+        var key = CATS.filter(function (k) { return k[1] === nm; })[0][0];
+        h.querySelector(".done").textContent = QA.filter(function (q) { return q.c === key && got[q.id]; }).length + " / " + QA.filter(function (q) { return q.c === key; }).length;
+      });
+    }
+  }
+
+  var btnT = document.getElementById("btnToggle");
+  btnT.addEventListener("click", function () {
+    var ds = [].slice.call(list.querySelectorAll("details.q"));
+    var open = ds.some(function (d) { return !d.open; });
+    ds.forEach(function (d) { d.open = open; });
+    btnT.textContent = open ? "모두 접기" : "모두 펼치기";
+  });
+  document.getElementById("btnShuffle").addEventListener("click", function () {
+    order = QA.slice();
+    for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = order[i]; order[i] = order[j]; order[j] = t; }
+    shuffled = true; render();
+  });
+  document.getElementById("btnOrder").addEventListener("click", function () { order = QA.slice(); shuffled = false; render(); });
+  sel.addEventListener("change", render);
+  onlyTodo.addEventListener("change", render);
+  render();
+
+  /* ---------- 면접일 D-day ---------- */
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  function dd(id, ymd) {
+    var n = Math.round((new Date(ymd + "T00:00:00") - today) / 864e5);
+    document.getElementById(id).textContent = n > 0 ? "D-" + n : (n === 0 ? "오늘" : "D+" + (-n));
+  }
+  dd("dd1", "2026-11-28");
+  dd("dd2", "2026-12-05");
+
+  /* ---------- 스크롤 등장 ---------- */
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".rise").forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
