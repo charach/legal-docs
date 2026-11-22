@@ -377,7 +377,7 @@
   <header class="hero">
     <span class="kicker">RUN · STRENGTH · SWIM · BIKE</span>
     <h1>2027 군산 마라톤<br>24주 계획</h1>
-    <p class="sub">화·수·목 아침 러닝 · 월·금 아침 근력 · 월·수 저녁 수영 · 토 평로라 · 일 롱런<br><b>2026. 10. 12 ~ 2027. 3. 28</b> · 대회일은 3월 말~4월 초 가정, 확정되면 바꿀 것</p>
+    <p class="sub">화·수·목·토 아침 러닝 · 월·금 아침 근력 · 화·목·금 저녁 집 운동 · 월·수 저녁 수영 · 일 롱런<br><b>2026. 10. 12 ~ 2027. 3. 28</b> · 대회일은 3월 말~4월 초 가정, 확정되면 바꿀 것</p>
   </header>
 
   <div class="topbtns">
@@ -426,6 +426,30 @@ const DELOAD    = [4,8,12,16,20];
 
 const HOLIDAYS = { '2026-12-25':'성탄절', '2027-01-01':'신정', '2027-02-05':'설 연휴', '2027-02-06':'설날', '2027-02-07':'설 연휴', '2027-02-08':'설 대체휴일', '2027-03-01':'삼일절' };
 
+/* 2026-11-23부터 — 평로라를 타지 않아 토요일은 이지 러닝으로 바꾸고, 화·목·금 저녁에 집 운동(푸시업 바)을 넣는다.
+   그 전 날짜는 원래 계획(토 평로라) 그대로 남긴다 */
+const SAT_RUN_FROM = '2026-11-23', HOME_FROM = '2026-11-23';
+const SAT_RUN = { base:30, build:40, peak:40, taper:25 };   // 토 이지(분) · 디로드 주는 25
+/* 저녁 · 집 운동 · [이름, 처방, 요령] — 다리는 쓰지 않는다 (아침 러닝·일요일 롱런 보호) */
+const HOME = {
+  2: { t:'집 운동 · 밀기', min:15, note:'아침 인터벌 뒤라 다리는 쓰지 않는다. 마지막 2개가 힘든 횟수로 하고, 쉬워지면 다음 주에 1~2회 늘린다.', list:[
+    ['푸시업 바 푸시업',   '3×8~12',     '가슴이 손보다 아래로 내려가게. 몸은 일직선, 팔꿈치는 45도'],
+    ['파이크 푸시업',      '3×6~8',      '바를 잡고 엉덩이를 높이 든 채 정수리를 바 사이로. 어깨'],
+    ['푸시업 바 턱 홀드',  '3×10~15초',  '바 사이에 앉아 팔을 펴고 무릎을 가슴으로 당겨 발을 띄운다'],
+    ['플랭크',            '2×45초',     '엉덩이를 조이고 허리가 꺼지지 않게'] ] },
+  4: { t:'집 운동 · 코어·골반', min:15, note:'아침 템포·마라톤 페이스 뒤라 가볍게. 골반이 흔들리지 않게 버티는 것이 목적이다.', list:[
+    ['데드버그',              '3×8 / 쪽',     '허리를 바닥에 붙인 채'],
+    ['사이드 플랭크',          '2×40초 / 쪽',  ''],
+    ['버드독',                '2×8 / 쪽',     '뻗은 자세로 3초'],
+    ['한 다리 글루트 브리지',   '2×10 / 다리',  '위에서 1초. 햄스트링에 쥐가 나면 발을 엉덩이 쪽으로'],
+    ['푸시업 바 푸시업',       '2×8~12',      '가볍게, 실패 지점까지 가지 않는다'] ] },
+  5: { t:'집 운동 · 밀기 + 버티기', min:15, note:'아침 근력 B가 당기기 위주라 저녁에 밀기를 채운다. 토·일 러닝 전이라 다리는 쉰다.', list:[
+    ['푸시업 바 푸시업',   '3×6~10',     '3초에 걸쳐 내려가고 바로 민다'],
+    ['푸시업 바 니 턱',    '3×8',        '바를 잡고 몸을 띄운 채 무릎을 가슴으로 당겼다 내리기. 안 되면 발끝을 바닥에 스치게'],
+    ['플랭크 숄더 탭',     '3×10 / 쪽',  '골반이 좌우로 흔들리지 않게 발을 넓게'],
+    ['프론 YTW',          '2×8',        '밀기 뒤에 어깨 뒤쪽을 깨운다'] ] }
+};
+
 /* 홍콩 여행 10/16~18 — 러닝·헬스장 불가. 금 근력 B와 일 롱런은 만회하지 않고 건너뛰고, 토 아침은 야외 이지 40분 */
 const TRIP = {
   '2026-10-16': { title:'홍콩 이동 · 휴식', msg:'러닝·헬스장 없음. 금요일 근력 B는 건너뜀 (내일 아침은 야외 이지 러닝).',
@@ -444,7 +468,25 @@ const TRIP = {
   '2026-11-06': { label:'11월 여행', title:'여행 · 맨몸 근력 B', msg:'헬스장이 없어 맨몸으로 한다. 디로드 주라 세트 2. 종아리·코어에 무리하지 않고, 안 맞으면 건너뛰어도 된다.',
     am:['아침 · 숙소','맨몸 근력 B 6동작 · 세트 2 — 아래 목록'], pm:null, lines:['맨몸 근력 B 6동작 (아래 목록)'], str:'B', pre:'MOB', post:null, tag:'trip' },
   '2026-11-07': { label:'11월 여행', title:'여행 · 휴식', msg:'평로라를 못 해서 쉰다. 대신 러닝을 넣지 않는다. 많이 걷는 날이면 그걸로 충분.',
-    am:['낮 · 여행','운동 없음. 걷고 난 뒤 종아리 폼롤러 정도.'], pm:null, lines:['운동 없음 · 걷기'], pre:null, post:'ROLL', tag:'trip' }
+    am:['낮 · 여행','운동 없음. 걷고 난 뒤 종아리 폼롤러 정도.'], pm:null, lines:['운동 없음 · 걷기'], pre:null, post:'ROLL', tag:'trip' },
+  /* 부산 여행 12/23~28 — 헬스장·트레드밀·수영 없음. 야외 러닝 위주. 근력과 저녁 집 운동은 쉬고 만회하지 않는다.
+     코스는 여행 계획이 잡히면 다시 적는다 */
+  '2026-12-23': { label:'부산 여행', title:'부산 이동 · 이지 50분', msg:'이동하는 날. 계획 그대로 이지 50분을 밖에서 달린다 — 출발 전 집 근처든, 도착해서 저녁이든. 못 뛰면 건너뛰고 만회하지 않는다. 저녁 수영 레슨은 쉰다.',
+    am:['아침 또는 저녁 · 야외',null], pm:null, run:'E50', pre:'DYN', post:'STATIC', tag:'trip',
+    extra:'트레드밀 표는 쓰지 않는다. 페이스는 표 범위 안에서 편하게, 추우면 첫 10분은 더 천천히.' },
+  '2026-12-24': { label:'부산 여행', title:'부산 · 마라톤 페이스 8km', msg:'이번 주 목요일 세션은 그대로 밖에서 한다. 신호 없는 평지를 찾지 못하면 이지 40분 + 마무리 가속으로 바꾼다. 저녁 집 운동은 쉰다.',
+    am:['아침 · 야외 평지',null], pm:null, run:'M8', pre:'DYN', post:'STATIC', tag:'trip',
+    extra:'<b>코스</b>: 신호등 없는 평지(강변·해안 산책로)를 현지에서 고른다. 워밍업 15분 동안 왕복 구간을 정해 둔다.<br><b>추위</b>: 장갑과 귀마개. 바람이 세면 페이스 대신 호흡 기준으로.' },
+  '2026-12-25': { label:'부산 여행', title:'부산 · 이지 30분', msg:'헬스장이 없어 근력 B 대신 가볍게 달린다. 숙소에서 할 수 있으면 맨몸 근력 B를 2세트만(선택). 저녁 집 운동은 쉰다.',
+    am:['아침 · 야외',null], pm:null, run:'E30', pre:'DYN', post:'STATIC', tag:'trip',
+    extra:'회복 조깅. 어제 마라톤 페이스 다음 날이라 숨이 차지 않게 달린다.' },
+  '2026-12-26': { label:'부산 여행', title:'부산 · 휴식', msg:'토요일 이지 러닝은 쉰다. 많이 걷는 날이고 내일이 롱런이다.',
+    am:['낮 · 여행','운동 없음. 저녁에 종아리 폼롤러나 스트레칭 정도.'], pm:null, lines:['운동 없음 · 걷기'], pre:null, post:'ROLL', tag:'trip' },
+  '2026-12-27': { label:'부산 여행', title:'부산 · 롱런 130분', msg:'롱런은 그대로 밖에서 한다. 마지막 20분을 마라톤 페이스로 닫는다. 보급은 롱런 레시피 그대로 20분마다.',
+    am:['아침 · 야외 (약 2시간 30분)',null], pm:null, long:[130,20], pre:'DYN', post:'LONG', tag:'trip',
+    extra:'<b>코스</b>: 강변 산책로처럼 끊기지 않는 평지 왕복. 물은 들고 뛰거나 편의점에서 산다. 코스는 여행 계획이 잡히면 다시 정한다.' },
+  '2026-12-28': { label:'부산 여행', title:'귀가 · 휴식', msg:'돌아오는 날. 근력 A는 건너뛴다 — 디로드 주라 만회하지 않는다.',
+    am:['낮 · 이동','운동 없음.'], pm:'집에 일찍 도착하면 수영 레슨, 아니면 폼롤러 + 모빌리티 20분.', lines:['운동 없음 · 이동'], pre:'MOB', post:'ROLL', tag:'trip' }
 };
 
 /* 10/25·11/1은 구례 이후 롱런을 늘려 다리를 확인하고, 4~5주차는 가볍게 간 뒤 6주차부터 기본 처방으로 돌아간다.
@@ -459,6 +501,7 @@ const EVT = {
   '2026-11-12': { label:'가벼운 주', msg:'템포는 빼고 이지 + 마무리 가속으로. 다리를 가볍게 만드는 날.', run:'E30+B' },
   '2026-11-13': { label:'가벼운 주', msg:'근력 B는 건너뜀 (종아리·코어 피로 방지). 일찍 자기.', rest:true, title:'휴식 · 모빌리티', lines:['모빌리티 8분 (아래 목록) · 걷기 20분 · 폼롤러는 하지 않음'] },
   '2026-11-14': { label:'가벼운 주', msg:'이지 20분 + 마무리 가속. 내일 롱런 전에 다리를 가볍게.', run:'E20+B' },
+  '2026-12-05': { label:'측정 전날', msg:'내일 10km를 잰다. 20분만 가볍게 달리고 마무리 가속으로 다리를 깨운다.', run:'E20+B' },
   '2026-12-06': { label:'10km 기준 재측정', msg:'1단계 기초의 마지막 날, 디로드 주 끝에 10km를 최대 노력으로 잰다. 평지, 야외면 야외로(추우면 트레드밀 경사 1%). 결과를 알려주면 BASE_10K를 이 값으로 갱신한다.', run:'TT' }
 };
 
@@ -672,8 +715,12 @@ function day(s){
       title = dow===1 ? '근력 A · 하체·골반' : '근력 B · 상체·코어·종아리'; kind = 'str'; tags.push('gym');
       fix = dow===1 ? '구례 회고 1~4순위 — 중둔근 · 내전근 · 햄스트링 편심 · 대둔근. IT밴드와 좌우 비대칭의 처방이 이 여섯 동작이다.' : '손 압박 분산(등) · 골반 기준점(코어) · 런 후반 추진(종아리). 몬스터 워크는 중둔근 주 2회째.';
     }
-  } else if (dow === 6) {                                      // 토 · 평로라 (대회 주는 셰이크아웃)
+  } else if (dow === 6) {                                      // 토 · 이지 러닝 (11/22까지는 평로라, 대회 주는 셰이크아웃)
     if (raceWeek) { const r = expand('E15+B'); title = '셰이크아웃 ' + r.t; lines = r.l; km = r.km; tm = r.tm; tmNote = r.tmNote; kind = 'easy'; tags.push('easy'); }
+    else if (s >= SAT_RUN_FROM) {                               // 평로라 대신 이지 러닝
+      const r = expand('E' + (deload ? 25 : SAT_RUN[ph.id])); title = r.t; km = r.km; tm = r.tm || []; tmNote = r.tmNote || null; kind = 'easy'; tags.push('easy');
+      lines = r.l.concat(['평로라 대신 넣은 회복 조깅 · 숨이 차면 속도를 낮춘다. 다리가 무거우면 20분으로 줄인다.']);
+    }
     else { title = '평로라'; lines = [BIKE[ph.id], '러닝 다리 회복용 · 심박 올리지 않기']; kind = 'bike'; tags.push('bike'); }
   } else {                                                     // 화 · 수 · 목 · 러닝
     const code = dow===2 ? wk[0] : dow===4 ? wk[2] : 'E'+wk[1];
@@ -708,14 +755,18 @@ function day(s){
     title = T.title; lines = T.lines; km = 0; tm = []; tmNote = null; kind = 'rest'; tags = [T.tag]; fix = null;
     s4 = T.str ? STR[T.str][ph.id].map(x => [x[0], x[1]]) : [];
     if (T.run) { const r = expand(T.run); kind = 'easy'; tags = [T.tag, 'easy']; lines = r.l.concat([T.extra]); km = r.km; }
+    if (T.long) { const r = longRun(T.long); kind = 'long'; tags = [T.tag, 'long']; lines = r.l.concat([T.extra]); km = r.km; }
     pre  = T.pre === 'MOB' ? { t:'모빌리티', min:8, must:3, list:MOB, rule:RULE.mob } : T.pre === 'DYN' ? { t:'러닝 전 · 동적', min:7, must:3, list:DYN, rule:RULE.dynRun } : null;
-    post = T.post === 'STATIC' ? { t:'러닝 후 · 정적', min:10, must:3, list:STATIC, rule:RULE.statRun } : T.post === 'ROLL' ? { t:'폼롤러', min:4, must:2, list:ROLL, rule:RULE.long } : null;
+    post = T.post === 'STATIC' ? { t:'러닝 후 · 정적', min:10, must:3, list:STATIC, rule:RULE.statRun } : T.post === 'LONG' ? { t:'롱런 후 · 정적 + 폼롤러', min:14, must:5, list:STATIC.concat(ROLL), rule:RULE.long } : T.post === 'ROLL' ? { t:'폼롤러', min:4, must:2, list:ROLL, rule:RULE.long } : null;
   }
   const needsGym = kind === 'str' && !T;
   const closed = !!hol && needsGym;
   if (closed) { tags = tags.filter(t => t!=='gym'); tags.unshift('closed'); }
   if (pm && !closed && !hol && !T) tags.push('swim');
-  return { s, ph, week, dow, title, lines, s4, km, tags, kind, fix, hol, closed, deload, lite, evt: V || null, ttWeek, pm, raceWeek, tm, tmNote, pre, post, trip: T || null };
+  const HW = HOME[dow];                                        // 화·목·금 저녁 · 집 운동 (여행·대회 주는 쉼)
+  const home = (HW && s >= HOME_FROM && !raceWeek && !T) ? { t:HW.t, min:HW.min, note:HW.note, list:HW.list.map(x => [x[0], (deload || ph.id==='taper') ? two(x[1]) : x[1], x[2]]) } : null;
+  if (home) tags.push('home');
+  return { s, ph, week, dow, home, title, lines, s4, km, tags, kind, fix, hol, closed, deload, lite, evt: V || null, ttWeek, pm, raceWeek, tm, tmNote, pre, post, trip: T || null };
 }
 function weekKm(week){ let k = 0; for (let i=0;i<7;i++){ const d = day(ymd(new Date(pd(WEEK0).getTime() + ((week-1)*7+i)*86400000))); if (d) k += d.km; } return Math.round(k); }
 
@@ -727,6 +778,7 @@ const CAT = {
   gym:   { color:'#767677', label:'근력' },
   bike:  { color:'#767677', label:'평로라' },
   swim:  { color:'#767677', label:'수영' },
+  home:  { color:'#767677', label:'집 운동' },
   race:  { color:'#C8102E', label:'대회' },
   rest:  { color:'#E6E6E6', label:'휴식' },
   closed:{ color:'#000000', label:'공휴일 · 집운동' },
@@ -820,7 +872,7 @@ function openModal(ds){
   else if (d.kind === 'str') amTxt = d.s4.map(x => xn(EX[x[0]][0])+' '+x[1]).join('<br>');
   else amTxt = d.lines.join('<br>');
   h += '<div class="slot am"><div class="ic am"></div><div class="body"><div class="when">'+amLabel+'</div><div class="txt">'+amTxt+'</div></div></div>';
-  h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.trip ? (d.trip.pm || '—') : d.pm ? (d.hol ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : '—')+'</div></div></div>';
+  h += '<div class="slot pm"><div class="ic pm"></div><div class="body"><div class="when">저녁</div><div class="txt">'+(d.trip ? (d.trip.pm || '—') : d.pm ? (d.hol ? '<b>수영 레슨 휴무</b>' : '<b>'+d.pm+'</b>') : d.home ? '<b>'+d.home.t+'</b> · '+d.home.min+'분 — 아래 목록' : '—')+'</div></div></div>';
 
   if (d.tm && d.tm.length) {
     h += '<div class="m-tm"><div class="tm-head"><span>트레드밀</span><span class="t">속도 km/h · 경사</span></div><table>'+
@@ -829,6 +881,8 @@ function openModal(ds){
   }
   if (d.fix) h += '<div class="m-fix"><b>구례 보완</b> · '+d.fix+'</div>';
   if (d.s4.length) h += '<div class="m-routine"><div class="rt-head"><span>'+(d.closed ? '오늘은 이걸로 · 맨몸' : '헬스장 못 가는 날 · 맨몸')+'</span><span class="t">'+(d.closed ? '헬스장 휴무' : '집에서')+'</span></div><ul>'+homeRows(d).join('')+'</ul></div>';
+  if (d.home) h += '<div class="m-routine"><div class="rt-head"><span>저녁 · '+d.home.t+'</span><span class="t">'+d.home.min+'분 · 푸시업 바</span></div><ul>'+
+    d.home.list.map(x => '<li>'+xn(x[0])+' '+x[1]+(x[2] ? '<span class="h">'+x[2]+'</span>' : '')+'</li>').join('')+'</ul><div class="rt-note">'+d.home.note+(d.deload ? ' 디로드 주라 세트 2.' : '')+'</div></div>';
   if (d.pre || d.post) {
     const lab = b => b.t.indexOf('· ') >= 0 ? b.t.slice(b.t.indexOf('· ')+2) : b.t;
     const stars = b => b.list.filter(x => x[3]).map(x => x[0]).join(' · ');
@@ -871,6 +925,11 @@ paceBtn.addEventListener('click', () => setPanel(!panelWrap.classList.contains('
 setPanel(false);   // 초기 상태를 JS가 소유 — 마크업과 어긋나지 않게
 /* ---------- 운동 설명 팝업 · 이미지 free-exercise-db (Unlicense) ---------- */
 const GUIDE = {
+  '푸시업 바 푸시업':[null,'바를 어깨보다 조금 넓게 놓고 잡는다. 머리부터 발뒤꿈치까지 일직선으로 두고, 가슴이 손 높이 아래로 내려갈 때까지 내려간다. 손목이 꺾이지 않아 맨바닥보다 깊이 내려갈 수 있다. 팔꿈치는 몸통에서 45도.'],
+  '파이크 푸시업':[null,'바를 잡고 엉덩이를 높이 들어 몸을 ㅅ자로 만든다. 팔꿈치를 굽혀 정수리를 두 바 사이로 내렸다가 민다. 어깨로 미는 동작 — 허리가 아니라 어깨가 타야 한다.'],
+  '푸시업 바 턱 홀드':[null,'두 바 사이에 앉아 바를 잡고 팔을 편다. 어깨를 아래로 누르면서 무릎을 가슴으로 당겨 엉덩이와 발을 바닥에서 띄우고 버틴다. 발이 안 뜨면 엉덩이만 띄워도 된다.'],
+  '푸시업 바 니 턱':[null,'턱 홀드 자세에서 무릎을 가슴으로 당겼다가 다리를 앞으로 내리기를 반복한다. 발이 바닥에 닿지 않게 하는 것이 목표, 안 되면 발끝을 스치게.'],
+  '플랭크':[null,'팔꿈치를 어깨 아래에 두고 머리부터 발까지 일직선. 엉덩이를 조이고 배꼽을 당긴다. 허리가 꺼지면 거기서 멈춘다.'],
   '밴드 클램쉘':[null,'옆으로 누워 무릎 90도, 발은 붙인 채 위쪽 무릎만 조개처럼 벌리기. 골반이 뒤로 구르지 않게 — 엉덩이 옆(중둔근)이 타는 느낌이면 정답.'],
   '클램쉘 (밴드 없으면 맨몸)':'밴드 클램쉘',
   '바벨 힙 쓰러스트':['Barbell_Hip_Thrust','등 윗부분을 벤치에 기대고 바벨을 골반에 얹기. 턱을 당기고, 위에서 엉덩이를 2초 조이기. 허리가 아니라 엉덩이로 올라가기.'],
