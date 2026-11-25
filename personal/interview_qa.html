@@ -84,6 +84,8 @@
     .wk { grid-template-columns: 1fr; gap: 6px; }
     .tools .sp { display: none; }
   }
+  pre.code { margin: 0 0 6px; padding: 16px 18px; background: #F1F7F8; border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; font: 13px/1.7 var(--mono); color: var(--ink); tab-size: 4; -webkit-overflow-scrolling: touch; }
+  .sec-body p.body { max-width: 72ch; margin: 0 0 12px; }
 </style>
 </head>
 <body>
@@ -96,6 +98,7 @@
       <a href="#how">쓰는 법</a>
       <a href="#qa">질문 99</a>
       <a href="#study">공부</a>
+      <a href="#lab">실습</a>
       <a href="#plan">계획</a>
     </div>
   </div>
@@ -285,14 +288,120 @@
   </div>
 </section>
 
-<!-- ============================ 04 계획 ============================ -->
-<section class="band rise" id="plan">
+<!-- ============================ 05 실습 ============================ -->
+<section class="band rise" id="lab">
   <div class="wrap">
     <div class="sec-head">
       <div class="idx">05</div>
       <div>
+        <h2>직접 만들어 보기</h2>
+        <p class="lead">답을 읽기만 하면 개념이 붕 뜬다. 숫자를 바꿔 가며 결과가 달라지는 걸 보면 붙는다. 저녁 1시간씩, 면접 전까지.</p>
+      </div>
+    </div>
+    <div class="sec-body">
+
+      <h3>1. 경사하강법 직접 짜기<small>30분 · 미분, 그래디언트, 학습률, 손실, 선형회귀</small></h3>
+      <pre class="code">import numpy as np
+rng = np.random.default_rng(0)
+x = rng.uniform(0, 10, 100)
+y = 3 * x + 5 + rng.normal(0, 2, 100)      # 정답: 기울기 3, 절편 5
+
+w, b, lr = 0.0, 0.0, 0.01                   # 학습률을 0.1로 바꿔 보기
+for step in range(2001):
+    err = (w * x + b) - y
+    loss = (err ** 2).mean()                # 평균제곱오차
+    dw = 2 * (err * x).mean()               # 손실을 w로 미분
+    db = 2 * err.mean()                     # 손실을 b로 미분
+    w -= lr * dw                            # 기울기 반대 방향으로
+    b -= lr * db
+    if step % 500 == 0:
+        print(step, round(loss, 3), round(w, 3), round(b, 3))</pre>
+      <p class="note"><b>실제로 돌린 결과:</b> 학습률 0.01이면 손실이 538에서 3.76까지 내려가고 w 2.97, b 4.99로 정답에 다가간다. <b>0.1로 바꾸면 숫자가 넘쳐 발산한다.</b> 0.0001로도 돌려서 느리게 내려가는 것까지 보면 학습률 꼬리질문 세 개가 정리된다.</p>
+
+      <h3>2. micrograd 따라 만들기<small>주말 반나절 · 연쇄법칙, 역전파, 뉴런, 활성화, 기울기 소실</small></h3>
+      <p class="body">100줄 정도로 자동 미분 엔진과 작은 신경망을 만드는 과정이다(<a class="link-u" href="https://github.com/karpathy/micrograd" target="_blank" rel="noopener">GitHub</a>, 강의는 <a class="link-u" href="https://karpathy.ai/zero-to-hero.html" target="_blank" rel="noopener">Zero to Hero</a> 첫 편). 「출력에서 거꾸로 변화율을 곱해 간다」는 역전파 문장이 코드 한 줄씩으로 바뀐다. 붕 뜬 느낌을 없애는 데 가장 효과가 크다.</p>
+      <p class="note"><b>추가 실험:</b> 층을 깊게 쌓고 활성화를 tanh에서 시그모이드로 바꿔 앞쪽 층 기울기가 0에 가까워지는 기울기 소실을 직접 본다.</p>
+
+      <h3>3. 확률 시뮬레이션과 PCA<small>저녁 한 번 · 베이즈, 중심극한정리, 고유값, PCA</small></h3>
+      <pre class="code">import numpy as np
+rng = np.random.default_rng(0)
+
+# 베이즈: 유병률 1%, 환자 양성 99%, 건강한 사람 양성 5%
+n = 1_000_000
+sick = rng.random(n) &lt; 0.01
+pos = np.where(sick, rng.random(n) &lt; 0.99, rng.random(n) &lt; 0.05)
+print(&quot;양성일 때 실제 환자 비율:&quot;, round(sick[pos].mean(), 3))
+
+# 중심극한정리: 주사위 평균의 흩어짐
+for k in (1, 2, 30):
+    means = rng.integers(1, 7, size=(100_000, k)).mean(axis=1)
+    print(k, &quot;개 평균의 표준편차:&quot;, round(means.std(), 3))</pre>
+      <p class="note"><b>실제로 돌린 결과:</b> 양성일 때 실제 환자 비율 <b>0.167</b> — 답에 쓴 17%가 그대로 나온다. 주사위 평균의 표준편차는 1개 1.70 → 2개 1.21 → 30개 0.31. 1.70을 30의 제곱근으로 나누면 0.31이라 「표본 수의 제곱근에 반비례」가 숫자로 보인다.</p>
+      <p class="note"><b>PCA:</b> 비스듬한 2차원 데이터를 만들어 numpy로 공분산 행렬의 고유벡터를 구하고, sklearn PCA 결과와 비교한다. 고유값 비율과 설명 분산 비율이 같게 나오면 「고유값 = 그 축의 분산」이 붙는다.</p>
+
+      <h3>4. PyTorch 이미지 분류기<small>저녁 두 번 · Colab 무료 GPU · 핵심 질문이 가장 많이 걸린다</small></h3>
+      <p class="body"><a class="link-u" href="https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html" target="_blank" rel="noopener">PyTorch Quickstart</a>를 <a class="link-u" href="https://colab.research.google.com/" target="_blank" rel="noopener">Colab</a>에서 그대로 돌린 뒤 하나씩 바꿔 본다. CNN 부분은 <a class="link-u" href="https://d2l.ai/chapter_convolutional-neural-networks/index.html" target="_blank" rel="noopener">Dive into Deep Learning 7장</a>이 글과 코드로 설명한다.</p>
+      <ul class="rule">
+        <li><b>과적합</b> — 훈련 손실과 검증 손실을 매 에폭 같이 그려서 검증 손실이 다시 올라가는 지점을 찾는다.</li>
+        <li><b>드롭아웃</b> — 넣었을 때와 뺐을 때 그 곡선을 비교한다.</li>
+        <li><b>CNN과 파라미터 수</b> — 합성곱 층으로 바꾸고 파라미터 수를 손으로 계산한 뒤 <code>sum(p.numel() for p in model.parameters())</code>로 확인한다. MLP와 차이도 본다.</li>
+        <li><b>학습 vs 예측</b> — <code>model.train()</code>, <code>model.eval()</code>, <code>torch.no_grad()</code>가 각각 무엇을 끄고 켜는지 본다.</li>
+        <li><b>GPU</b> — 같은 학습을 CPU와 GPU로 한 번씩 돌려 시간을 비교한다.</li>
+        <li><b>평가</b> — 소프트맥스 확률을 출력해 보고, sklearn <code>classification_report</code>로 클래스별 정밀도와 재현율을 본다.</li>
+      </ul>
+
+      <h3>+ 내 하이브리드 검색 설명 시트<small>1시간 · 필수 · 이 페이지가 아니라 개인 메모에</small></h3>
+      <p class="body">「뭐 해 봤냐」에 하이브리드 검색을 말하면 꼬리질문이 거기로 몰린다. 직접 만든 걸 설명하다 막히면 기초 질문에서 막히는 것보다 크게 보인다. 아래 칸을 한두 줄씩 채워 둔다. 공개 저장소라 실제 내용은 여기 적지 않는다.</p>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th class="k">항목</th><th>채울 내용</th></tr></thead>
+          <tbody>
+            <tr><td class="k">한 줄 소개</td><td>어떤 문서를, 누가, 무엇을 찾으려고 쓰는지</td></tr>
+            <tr><td class="k">내가 한 부분</td><td>직접 만든 것과, 팀이나 라이브러리 기본값을 쓴 것을 구분</td></tr>
+            <tr><td class="k">문서 나누기</td><td>조각 크기와 겹침, 그렇게 정한 이유</td></tr>
+            <tr><td class="k">임베딩</td><td>어떤 종류의 모델을 왜 골랐는지(말해도 되는 수준까지만)</td></tr>
+            <tr><td class="k">키워드 검색</td><td>BM25인지, 형태소 분석을 했는지</td></tr>
+            <tr><td class="k">합치기</td><td>순위 역수 합(RRF)인지 가중합인지, 비중은 어떻게 정했는지</td></tr>
+            <tr><td class="k">평가</td><td>무엇으로 좋아졌다고 판단했는지. 안 했다면 「이렇게 했어야 했다」</td></tr>
+            <tr><td class="k">결과</td><td>말할 수 있는 수준의 개선 하나</td></tr>
+            <tr><td class="k">어려웠던 점</td><td>벡터 검색이 틀린 사례나 속도 문제 하나</td></tr>
+            <tr><td class="k">다시 한다면</td><td>리랭킹 추가, 평가 세트 만들기 등</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">다 채우면 위 질문 목록의 「하이브리드 검색이란」, 「BM25」, 「결과 합치기」와 그 꼬리질문을 이 시트 내용으로 바꿔 말해 본다. 사내 프로젝트명, 수치, 미공개 기능은 빼고 말할 수 있는 버전으로.</p>
+
+      <h3>+ 양자화 실험<small>저녁 한 번 · 선택</small></h3>
+      <p class="body">관심 분야를 「추론 최적화」라고 하면 「해 본 적 있어요?」가 따라올 수 있다. 작은 오픈 언어 모델 하나를 16비트와 4비트(또는 8비트)로 각각 돌려서 메모리 사용량, 초당 생성 토큰 수, 같은 질문 몇 개에 대한 답 품질을 비교한다. llama.cpp나 Ollama처럼 양자화 모델을 바로 받아 쓰는 도구면 노트북에서도 된다.</p>
+
+      <h3>순서<small>면접 12/5(토)까지</small></h3>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th class="k">날짜</th><th>실습</th><th>같이 할 것</th></tr></thead>
+          <tbody>
+            <tr><td class="k">11/25(수)</td><td>1. 경사하강법</td><td class="m">「핵심만」 한 바퀴</td></tr>
+            <tr><td class="k">11/26 – 27</td><td>3. 시뮬레이션 · PCA</td><td class="m">수학 질문</td></tr>
+            <tr><td class="k">11/28(토)</td><td>2. micrograd</td><td class="m">—</td></tr>
+            <tr><td class="k">11/29(일) – 12/1</td><td>4. 이미지 분류기</td><td class="m">머신러닝 · 딥러닝 질문</td></tr>
+            <tr><td class="k">12/2</td><td>하이브리드 검색 설명 시트</td><td class="m">서류와 자기소개</td></tr>
+            <tr><td class="k">12/3 – 4</td><td>(여유 있으면) 양자화 실험</td><td class="m">총복습</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note"><b>실습한 걸 답에 녹인다.</b> 「직접 해 보니 학습률을 0.1로 올리면 손실이 발산했습니다」 같은 한 문장이 외운 답보다 훨씬 강하게 들리고, 수업을 따라올 수 있는지 보는 면접관에게 가장 좋은 신호다. 시간이 모자라면 양자화 실험부터 빼고, 설명 시트는 남긴다.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 04 계획 ============================ -->
+<section class="band rise" id="plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx">06</div>
+      <div>
         <h2>면접까지의 날짜</h2>
-        <p class="lead">면접까지 12일이다. 후기에 많이 나온 기초부터 두 바퀴를 돌린다.</p>
+        <p class="lead">후기에 많이 나온 기초부터 두 바퀴를 돌린다. 저녁에는 05의 실습을 하나씩 같이 한다.</p>
       </div>
     </div>
     <div class="sec-body">
@@ -323,7 +432,7 @@
 <section class="band band-last rise" id="src">
   <div class="wrap">
     <div class="sec-head">
-      <div class="idx">06</div>
+      <div class="idx">07</div>
       <div>
         <h2>근거와 한계</h2>
         <p class="lead">후기 표시와 면접 방식의 근거다.</p>
